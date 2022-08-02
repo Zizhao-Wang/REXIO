@@ -32,14 +32,14 @@ uint64_t Pagedata[2050];
  */
 int erasechunk(uint64_t sectorno)
 {
-    
+
     int err;
     uint64_t chunkno = sectorno/4096;
     struct nvm_addr chunk_addrs[1];
     chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,chunkno);
     if(chunkusage[sectorno/4096]!= 4092)
     {
-        size_t ws_opt = 4;
+        size_t ws_opt = 8;
         for (size_t sectr = chunkusage[sectorno/4096]; sectr < bp->geo->l.nsectr; sectr += ws_opt) 
         {
 			struct nvm_addr addrs[ws_opt];

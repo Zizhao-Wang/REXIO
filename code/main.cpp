@@ -45,7 +45,7 @@ int main(int argc, char **argv)
     }
 
     /* select different indexes. line 49- */
-    //EXHashing1();
+    EXHashing1();
 
     //ExtendHashTableInitialize();
 

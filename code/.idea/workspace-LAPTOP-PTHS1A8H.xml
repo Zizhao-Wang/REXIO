@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeReloadState">
+    <option name="reloaded" value="true" />
+  </component>
+  <component name="CMakeRunConfigurationManager">
+    <generated>
+      <config projectName="Experiment1" targetName="Experiment1" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="fea6b644-c013-48fb-8544-568b38f5ba31" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="28B6B2ixBjnynETOwZcULqREF7v" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;cmake.loaded.for.project&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/81192/OneDrive/ZZ.WANG-Research of database/Research of Database/Experiment1&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\WLSYH\OneDrive\ZZ.WANG-Research of database\Research of Database\Experiment1\Backend\DiskWrite" />
+      <recent name="C:\Users\WLSYH\OneDrive\ZZ.WANG-Research of database\Research of Database\Experiment1\FrontEnd\GlobalVar" />
+      <recent name="C:\Users\WLSYH\OneDrive\ZZ.WANG-Research of database\Research of Database\Experiment1\FrontEnd" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Experiment1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Experiment1" TARGET_NAME="Experiment1" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Experiment1" RUN_TARGET_NAME="Experiment1">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fea6b644-c013-48fb-8544-568b38f5ba31" name="Changes" comment="" />
+      <created>1650677493324</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1650677493324</updated>
+      <workItem from="1650989846487" duration="15295000" />
+      <workItem from="1651076484436" duration="378000" />
+      <workItem from="1651076951904" duration="613000" />
+      <workItem from="1651077684162" duration="12000" />
+      <workItem from="1651132940395" duration="4737000" />
+      <workItem from="1651245266786" duration="604000" />
+      <workItem from="1651293827050" duration="3785000" />
+      <workItem from="1651983480745" duration="137000" />
+      <workItem from="1651983629746" duration="5241000" />
+      <workItem from="1652097228171" duration="16165000" />
+      <workItem from="1652198296855" duration="2037000" />
+      <workItem from="1652238816383" duration="17759000" />
+      <workItem from="1652411127996" duration="25239000" />
+      <workItem from="1652464973296" duration="25000" />
+      <workItem from="1652496586097" duration="8686000" />
+      <workItem from="1652579350957" duration="3634000" />
+      <workItem from="1654265940504" duration="300000" />
+      <workItem from="1654266585779" duration="1106000" />
+      <workItem from="1654500573311" duration="154000" />
+      <workItem from="1654787736474" duration="1000" />
+      <workItem from="1654860423822" duration="605000" />
+      <workItem from="1654960081134" duration="597000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

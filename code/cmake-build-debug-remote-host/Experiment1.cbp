@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Experiment1"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Experiment1">
+				<Option output="/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host/Experiment1" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host/Makefile&quot;  VERBOSE=1 Experiment1"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Experiment1/fast">
+				<Option output="/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host/Experiment1" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host/Makefile&quot;  VERBOSE=1 Experiment1/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/tmp/tmp.LyE3UOsA6f/cmake-build-debug-remote-host/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/tmp/tmp.LyE3UOsA6f/AuxizilaryFile/GlobalVariable.h">
+			<Option target="Experiment1"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.LyE3UOsA6f/Backend/BackendMain.h">
+			<Option target="Experiment1"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.LyE3UOsA6f/Backend/BlockManage/BlockInfo.cpp">
+			<Option target="Experiment1"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.LyE3UOsA6f/Backend/BlockManage/BlockInfo.h">
+			<Option target="Experiment1"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.LyE3UOsA6f/Backend/DiskRead/ReadDisk.cpp">
+			<Option target="Experiment1"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.LyE3UOsA6f/Backend/DiskRead/ReadDisk.h">
+			<Option target="Experiment1"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.LyE3UOsA6f/Backend/DiskWrite/WriteDisk.cpp">
+			<Option target="Experiment1"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.LyE3UOsA6f/Backend/DiskWrite/WriteDisk.h">
+			<Option target="Experiment1"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.LyE3UOsA6f/Exhashing/ExtendibleHash.cpp">
+			<Option target="Experiment1"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.LyE3UOsA6f/FrontEnd/FrontMain.cpp">
+			<Option target="Experiment1"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.LyE3UOsA6f/FrontEnd/FrontMain.h">
+			<Option target="Experiment1"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.LyE3UOsA6f/FrontEnd/GlobalVar/FrontGlobalVar.cpp">
+			<Option target="Experiment1"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.LyE3UOsA6f/FrontEnd/GlobalVar/FrontGlobalVar.h">
+			<Option target="Experiment1"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.LyE3UOsA6f/FrontEnd/HashTable/HashTable.cpp">
+			<Option target="Experiment1"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.LyE3UOsA6f/FrontEnd/HashTable/HashTable.h">
+			<Option target="Experiment1"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.LyE3UOsA6f/FrontEnd/MemoryAllocate/HashBlock.cpp">
+			<Option target="Experiment1"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.LyE3UOsA6f/FrontEnd/MemoryAllocate/HashBlock.h">
+			<Option target="Experiment1"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.LyE3UOsA6f/HashMethods.h">
+			<Option target="Experiment1"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.LyE3UOsA6f/main.cpp">
+			<Option target="Experiment1"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.LyE3UOsA6f/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

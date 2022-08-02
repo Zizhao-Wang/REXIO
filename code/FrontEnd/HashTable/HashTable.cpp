@@ -1,0 +1,271 @@
+/**
+ * @date 2022.4.29 11:46
+ * @author zz.wang
+ * @details
+ *          If this is the program's first run, the program will create a new special hash table in memory.
+ *          Otherwise, the process will read the hash table from the solid-state disk (SSD).
+ *
+ *         IDENTIFICATION
+ *   Experiment1/FrontEnd/HashTable/HashTableCreate.h
+ */
+
+
+#include "HashTable.h"
+#include "../MemoryAllocate/HashBlock.h"
+#include "../GlobalVar/FrontGlobalVar.h"
+#include <cstdlib>
+#include "../../Backend/DiskWrite/WriteDisk.h"
+#include <iostream>
+#include <ctime>
+#include "../../Backend/BlockManage/BlockInfo.h"
+#define N 9999
+
+using namespace std;
+
+
+/* =================Node initialization module==================== */
+   /*
+    * Node generation.
+    */
+bool LocalGeneration(GlobalHashNode * globalNode)
+{
+
+    auto * localHead =(LocalHeadNode*) malloc(LOCAL_HEAD_SIZE);
+    if(localHead!=nullptr || globalNode->local== nullptr)
+    {
+        localHead->depth  = Globaldepth;
+        localHead->Nodenumber = 0;
+        localHead->CurrentLevel = 1;
+
+        auto * localnodehead = Initialization();
+        localHead->HashNode = localnodehead;
+
+        globalNode->local = localHead;
+        return true;
+    }
+    else
+        return false;
+}
+
+/*
+ * Methods belong to Special-Hash-Table.
+ */
+bool DoubleHashtable()
+{
+    int nex = global.empty()?2:(int)global.size();
+
+    for(int i=0; i<nex; ++i)
+    {
+        auto * globalNode = (GlobalHashNode*) malloc(GLOBAL_HASH_SIZE);
+        if(!LocalGeneration(globalNode))
+            return false;
+        global.push_back(globalNode);
+    }
+    ++Globaldepth;
+
+    return true;
+}
+
+
+/*  =================Node Searching module====================  */
+    /*
+     * Node searching.
+     */
+LocalHashNode* SearchNode(LocalHeadNode* Head,unsigned int hashvalue)
+{
+    if(Head->CurrentLevel == 1)
+        return nullptr;
+    int curLevel = Head->CurrentLevel-1;
+    LocalHashNode *node = Head->HashNode ;
+    for(int i=curLevel; i>=0; --i)
+    {
+        while(node->next[i]->Hashvalue < hashvalue)
+        {
+            node = node->next[i];
+        }
+    }
+
+    node = node->next[0];
+    return node;
+}
+
+
+/*  =================Node Insertion module====================  */
+    /*
+     * Node Insertion.
+     */
+int RandomLevel()
+{
+
+    int v = 1;
+    srand ((unsigned int)(time (NULL)));
+    while(rand() % (N + 1) / (float)(N + 1) < pro && v< MaxLevel )
+    {
+        v++;
+    }
+#ifdef DEBUG
+
+#endif
+    return v;
+
+}
+
+/*LocalHeadNode * NodeSplit(LocalHeadNode * head)
+{
+
+
+}*/
+
+bool InsertNode(uint64_t hashvalue)
+{
+    /*
+     *  Local variables.
+     */
+    LocalHeadNode * head = global[hashvalue & (1<<Globaldepth)-1]->local;
+    //printf("%d\n",hashvalue&(1<<Globaldepth)-1);
+    LocalHashNode * temp = head->HashNode;
+    LocalHashNode * update[MaxLevel];
+
+    // level
+    int curLevel = head->CurrentLevel-1;
+
+
+    for(int i=curLevel; i>=0; --i)
+    {
+        while(temp->next[i]->Hashvalue < hashvalue)
+        {
+            temp = temp->next[i];
+        }
+        update[i] = temp;
+    }
+    temp = temp->next[0];
+
+    if(temp->Hashvalue == hashvalue)
+    {
+        if(temp->flag == 1)
+        {
+            return true;
+        }
+        else
+        {
+            temp->flag =1;
+            // write into disk
+            temp->offset = SSD_write(hashvalue);
+            //printf("%u\n",temp->offset);
+            ++head->Nodenumber;
+            return true;
+        }
+    }
+    else
+    {
+        int v=RandomLevel();
+        if(v > curLevel )
+        {
+            for(int i=curLevel+1; i<v; ++i )
+            {
+                update[i] = head->HashNode;
+            }
+            head->CurrentLevel = v+1;
+        }
+        //write into disk
+        uint_32 offset1 = SSD_write(hashvalue);
+        //printf("%u\n",temp->offset);
+        ++head->Nodenumber;
+        temp = Initialization(hashvalue,offset1);
+        if(temp == nullptr)
+            return false;
+        for(int i=0;i<v;++i)
+        {
+            temp->next[i] = update[i]->next[i];
+            update[i]->next[i] = temp;
+        }
+    }
+    return true;
+}
+
+int Insert(uint64_t hashvalue)
+{
+
+    /*
+     * Insert the hash value into special skip-list.
+     */
+    if(InsertNode(hashvalue))
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+
+}
+
+
+/*  =================Node deletion module====================  */
+    /*
+     * Node deletion method.
+     */
+bool DeleteNode(LocalHeadNode * Head, unsigned int hashvalue)
+{
+    LocalHashNode * node = SearchNode(Head,hashvalue);
+    if(node->flag!=0)
+    {
+        //write into disk(meta data).
+        node->flag=0;
+    }
+    return true;
+}
+
+
+/*  =================Hash table initialization module====================  */
+int ExtendHashTableInitialize()
+{
+    /*
+     * Initialize a special hash table and SSD backend processor!
+     */
+    clock_t startTime,endTime;
+
+    int failed=0, succeeded=0;
+    for(int i=0;i<20;i++)
+    {
+        DoubleHashtable();
+    }
+
+
+
+    /*printf("============== TEST & DEBUG: ==============\n");
+    for(int i=0;i<global.size();++i)
+    {
+        printf("Number of Global Node: %d current level: %d current number of nodes: %d  ",i+1,global[0]->local->CurrentLevel,global[0]->local->Nodenumber);
+        printf("NIL verification %u\n",global[i]->local->HashNode->next[9]->Hashvalue);
+    }*/
+
+    startTime = clock();
+    for(uint64_t i=1;i<=60000000;i++)
+    {
+        if(Insert(i)==0)
+            failed++;
+        else
+            succeeded++;
+    }
+    endTime = clock();
+
+    std::cout << "Total Time : " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s" << std::endl;
+    printf("Result:\nInsertion succeeded: %d;\nInsertion failed: %d\n",succeeded,failed);
+
+    //printf("\n%u\n",global.size());
+
+
+    printf("\nIndex information:\n");
+    for(int i=0;i<15;i++)
+    {
+        printf("Number of this list:%d\n",global[i]->local->Nodenumber);
+        printf("\tGlobal index \t Index value \t Index status \t Index offset\n");
+        for(LocalHashNode * temp = global[i]->local->HashNode->next[0];temp->Hashvalue!=UINT32_MAX; temp=temp->next[0])
+        {
+            printf("\t%d \t\t %u \t\t %d \t\t %u\n",i,temp->Hashvalue,temp->flag,temp->offset);
+        }
+    }
+
+    return 1;
+}

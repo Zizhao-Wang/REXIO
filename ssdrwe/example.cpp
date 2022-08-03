@@ -21,9 +21,14 @@ int sync_ex01_ewr_prp(struct nvm_bp *bp)
 	//	return -1;
 	//}
 
-    chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,0);
+	err = nvm_cmd_rprt_arbs(bp->dev, NVM_CHUNK_STATE_FREE, nchunks,chunk_addrs);
 
     printf("Pages: %lu blocks: %lu Sectors: %lu Planes: %lu\n", chunk_addrs[0].g.pg, chunk_addrs[0].g.blk,chunk_addrs[0].g.sec,chunk_addrs[0].g.pl);
+	printf("chunk: %lu pgrup: %lu Punit: %lu Sectors: %lu  %lu %lu\n", chunk_addrs[0].l.chunk, chunk_addrs[0].l.pugrp,chunk_addrs[0].l.punit,chunk_addrs[0].l.sectr, chunk_addrs[0].ppa, chunk_addrs[0].val);
+
+	chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,24576);
+
+	printf("Pages: %lu blocks: %lu Sectors: %lu Planes: %lu\n", chunk_addrs[0].g.pg, chunk_addrs[0].g.blk,chunk_addrs[0].g.sec,chunk_addrs[0].g.pl);
 	printf("chunk: %lu pgrup: %lu Punit: %lu Sectors: %lu  %lu %lu\n", chunk_addrs[0].l.chunk, chunk_addrs[0].l.pugrp,chunk_addrs[0].l.punit,chunk_addrs[0].l.sectr, chunk_addrs[0].ppa, chunk_addrs[0].val);
 
 	printf("# nvm_cmd_write\n");
@@ -41,7 +46,7 @@ int sync_ex01_ewr_prp(struct nvm_bp *bp)
 			addrs[aidx].l.sectr = sectr + aidx;
 		}
 
-		err = nvm_cmd_write(bp->dev, addrs, ws_opt,bp->bufs->write + buf_ofz, NULL,0x0, NULL);
+		// err = nvm_cmd_write(bp->dev, addrs, ws_opt,bp->bufs->write + buf_ofz, NULL,0x0, NULL);
 	}
 	nvm_cli_timer_stop();
 	nvm_cli_timer_bw_pr("nvm_cmd_write", bp->bufs->nbytes);

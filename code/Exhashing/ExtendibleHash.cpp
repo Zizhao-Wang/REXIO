@@ -23,7 +23,7 @@ void EXHashing1()
     /* Insert 10 values 
      */
     startTime = clock();
-    for(int i=1;i<=10;i++)
+    for(int i=1;i<=3;i++)
     {
         uint64_t value = i;
         d.insert(i,value,0);

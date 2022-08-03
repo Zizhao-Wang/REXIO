@@ -38,10 +38,12 @@ int CompenstaeFun(uint64_t chunkno)
     uint64_t sectors = chunkno*4096 + secofchunk;
     struct nvm_addr chunk_addrs[1];
     chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,sectors);
-    size_t ws_opt = nvm_dev_get_ws_opt(bp->dev);
+    size_t ws_opt = nvm_dev_get_ws_min(bp->dev);
 
+    int sum=0;
     for (size_t sectr = secofchunk; sectr < bp->geo->l.nsectr; sectr += ws_opt) 
     {
+        sum++;
         size_t buf_ofz = sectr * bp->geo->l.nbytes;
 		struct nvm_addr addrs[ws_opt];
 		for (size_t aidx = 0; aidx < ws_opt; ++aidx) 
@@ -56,8 +58,8 @@ int CompenstaeFun(uint64_t chunkno)
 			return -1;
 		}
     }
+    printf("After %d times compensation, compensation successful!\n",sum);
     
-    // printf("compensation successful!\n");
     return 0;
 
 }
@@ -76,7 +78,7 @@ int erasechunk(uint64_t sectorno)
     chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,chunkno);
     if(chunkusage[sectorno/4096]!= 4092)
     {
-        size_t ws_opt = 8;
+        size_t ws_opt = 4;
         for (size_t sectr = chunkusage[sectorno/4096]; sectr < bp->geo->l.nsectr; sectr += ws_opt) 
         {
 			struct nvm_addr addrs[ws_opt];
@@ -102,7 +104,7 @@ int erasepage(uint64_t pageno)
 {
 
     int err;
-    uint64_t chunkno = pageno/4096;
+    uint64_t chunkno = pageno%4096;
     uint64_t curseofchunk = chunkusage[pageno/4096];
     struct nvm_addr chunk_addrs[1];
     chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,pageno);
@@ -131,9 +133,11 @@ int erasepage(uint64_t pageno)
         printf("Read part 1 succeed!\n");
     }
 
+    int sum = 0;
     /* Read part 2. */
-    for (size_t sectr = chunkno+4; sectr < min(curseofchunk, bp->geo->l.nsectr); sectr += ws_min) 
+    for (size_t sectr = chunkno+4; sectr < curseofchunk; sectr += ws_min) 
     {
+        sum++;
         size_t buf_ofz = sectr * bp->geo->l.nbytes;
 		struct nvm_addr addrs[ws_min];
 		for (size_t aidx = 0; aidx < ws_min; ++aidx) 
@@ -146,13 +150,16 @@ int erasepage(uint64_t pageno)
         {
             bp->bufs->write[i] = bp->bufs->read[i];
         }
+        uint64_t *ML = (uint64_t*) bp->bufs->write;
+        printf("values :%ld\n", ML[0]);
+
 		if (err == -1) 
         {
 			printf("Read failure in part 2 of %ld page.\n",sectr);
 			return -1;
 		}
-        printf("Read part 2 succeed!\n");
     }
+    printf("After %d times read operation, Read part 2 succeed!\n",sum);
 
     /* Erase this chunck. */
     if(curseofchunk < bp->geo->l.nsectr)
@@ -164,12 +171,17 @@ int erasepage(uint64_t pageno)
         }
     }
     err = nvm_cmd_erase(bp->dev, chunk_addrs, 1, NULL, 0x0, NULL);
+    if(err == -1)
+    {
+        printf("chunk %lu erase failure.\n",pageno/4096);
+    }
 
     /* Re-write into this block. 
      * Write part 1.
      */
     for (size_t sectr = 0; sectr < chunkno; sectr += ws_min) 
     {
+        printf("Write start:\n");
         size_t buf_ofz = sectr * bp->geo->l.nbytes;
 		struct nvm_addr addrs[ws_min];
 		for (size_t aidx = 0; aidx < ws_min; ++aidx) 
@@ -187,8 +199,9 @@ int erasepage(uint64_t pageno)
     }
 
     /* Re-write part 2. */
-    for (size_t sectr = chunkno+4; sectr < min(curseofchunk, bp->geo->l.nsectr); sectr += ws_min) 
+    for (size_t sectr = chunkno+4; sectr < curseofchunk; sectr += ws_min) 
     {
+        printf("Re-write start: \n");
         size_t buf_ofz = sectr * bp->geo->l.nbytes;
 		struct nvm_addr addrs[ws_min];
 		for (size_t aidx = 0; aidx < ws_min; ++aidx) 
@@ -196,7 +209,8 @@ int erasepage(uint64_t pageno)
 			addrs[aidx].val = chunk_addrs[0].val;
 			addrs[aidx].l.sectr = sectr + aidx;
 		}
-		err = nvm_cmd_write(bp->dev, addrs, ws_min, bp->bufs->write+buf_ofz, NULL, 0x0, NULL);
+        printf("Re-write start:\n");
+		// err = nvm_cmd_write(bp->dev, addrs, ws_min, bp->bufs->write+buf_ofz, NULL, 0x0, NULL);
 		if (err == -1) 
         {
 			printf("Write failure in part 2 of %ld page.\n",sectr);
@@ -420,7 +434,7 @@ uint64_t SVwrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
     for (size_t aidx = 0; aidx < ws_min; ++aidx) 
     {
 		addrs[aidx].val = addrs_chunk.val;
-		addrs[aidx].l.sectr = pageno%4096+aidx;
+		addrs[aidx].l.sectr = (pageno%4096)+aidx;
 		/* printf("aidx: %lu addrs[aidx].val : %lu chunk_addrs[cidx].val %lu addrs[aidx].l.sectr %lu \n",aidx,addrs[aidx].val,chunk_addrs[cidx].val,addrs[aidx].l.sectr); */
 	}
 

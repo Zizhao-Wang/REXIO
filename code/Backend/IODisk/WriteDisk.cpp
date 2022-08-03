@@ -18,7 +18,7 @@
 #include <liblightnvm_spec.h>
 
 uint_32 blockoffset   = 0;
-uint64_t writepointer = 0;
+size_t writepointer = 0;
 size_t blockpointer = 0;
 /* sectorpointer means current write pointers. */
 size_t sectorpointer = 0;
@@ -63,10 +63,7 @@ int erasechunk(uint64_t sectorno)
 /* On success, 0 is returned. On error, -1 is returned. */
 int erasepage(uint64_t pageno)
 {
-    if(pageno%4096 == 0)
-    {
-        return 0;
-    }
+
     int err;
     uint64_t chunkno = pageno/4096;
     struct nvm_addr chunk_addrs[1];
@@ -162,6 +159,17 @@ int erasepage(uint64_t pageno)
     printf("# Erase completion in chunk: %ld\n", chunkno);
     return err;
     
+}
+
+
+/* function is used to update pointers. */
+int PointerRenew(size_t sectors)
+{
+
+    sectorpointer+=sectors; //update sector pointer.
+
+    return 0;
+
 }
 
 
@@ -368,6 +376,7 @@ uint64_t SVwrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
     if(flag != UINT64_MAX)
     {
         /* Read datum from page. */
+        // printf("pageno: %lu value: %lu \n",pageno,value);
         err = nvm_cmd_read(bp->dev, addrs, ws_min,bp->bufs->read, NULL,0x0, NULL);
         if(err == -1)
         {
@@ -375,11 +384,12 @@ uint64_t SVwrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
         }
         /* Update values in buffer.  */
         uint64_t *Read2Sectors = (uint64_t *) bp->bufs->read;
-        Read2Sectors[Cursize+1] = value;
+        Read2Sectors[Cursize] = value;
         for(int i=0;i<Cursize*8+10;i++)
         {
             bp->bufs->write[i] = bp->bufs->read[i];
         }
+        // printf("%lu %lu\n",Read2Sectors[0],Read2Sectors[1]);
     }
     else
     {
@@ -403,13 +413,18 @@ uint64_t SVwrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
     }
 
     /* Erase the block. */
-    erasepage(pageno);
+    if(flag != UINT64_MAX)
+        erasepage(pageno);
 
     /* Write value into page. */
-    err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
-    if(!err)
+    if(value != 3)
+        err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
+    if(err == 0)
     {
+        
         printf("Insert completion! Insert sectors: %ld\n",sectorpointer);
+        /* update pointers! */
+        PointerRenew(ws_min);
     }
     return pageno;
 }
@@ -432,7 +447,7 @@ int ReadfromPage(uint64_t pageno)
 		addrs[aidx].l.sectr = pageno%4096+aidx;
 		/* printf("aidx: %lu addrs[aidx].val : %lu chunk_addrs[cidx].val %lu addrs[aidx].l.sectr %lu \n",aidx,addrs[aidx].val,chunk_addrs[cidx].val,addrs[aidx].l.sectr); */
 	}
-    err = nvm_cmd_read(bp->dev, addrs, ws_min,bp->bufs->read, NULL,0x0, NULL);
+    //err = nvm_cmd_read(bp->dev, addrs, ws_min,bp->bufs->read, NULL,0x0, NULL);
     if(err == -1)
     {
         printf("Reading page %ld failure.\n",pageno);

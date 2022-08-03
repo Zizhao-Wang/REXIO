@@ -53,22 +53,17 @@ CMakeFiles/code.dir/Backend/BlockManage/BlockInfo.cpp.o
  /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h
  /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h
  /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h
- /usr/include/x86_64-linux-gnu/bits/select2.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h
  /usr/include/alloca.h
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h
- /usr/include/x86_64-linux-gnu/bits/stdlib.h
  /usr/include/c++/9/bits/std_abs.h
  /home/femu/liblightnvm/include/liblightnvm_util.h
  /usr/include/string.h
  /usr/include/strings.h
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h
  /usr/include/stdio.h
  /usr/lib/gcc/x86_64-linux-gnu/9/include/stdarg.h
  /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h
@@ -80,8 +75,6 @@ CMakeFiles/code.dir/Backend/BlockManage/BlockInfo.cpp.o
  /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h
  /usr/include/x86_64-linux-gnu/bits/sys_errlist.h
- /usr/include/x86_64-linux-gnu/bits/stdio.h
- /usr/include/x86_64-linux-gnu/bits/stdio2.h
  /home/femu/liblightnvm/include/liblightnvm_spec.h
  /usr/include/assert.h
  /home/femu/vldbexperimrnt/code/code/AuxizilaryFile/GlobalVariable.h
@@ -104,10 +97,10 @@ CMakeFiles/code.dir/Backend/DiskRead/ReadDisk.cpp.o
  /usr/include/stdc-predef.h
  /home/femu/vldbexperimrnt/code/code/Backend/DiskRead/ReadDisk.h
 
-CMakeFiles/code.dir/Backend/DiskWrite/WriteDisk.cpp.o
- /home/femu/vldbexperimrnt/code/code/Backend/DiskWrite/WriteDisk.cpp
+CMakeFiles/code.dir/Backend/IODisk/WriteDisk.cpp.o
+ /home/femu/vldbexperimrnt/code/code/Backend/IODisk/WriteDisk.cpp
  /usr/include/stdc-predef.h
- /home/femu/vldbexperimrnt/code/code/Backend/DiskWrite/WriteDisk.h
+ /home/femu/vldbexperimrnt/code/code/Backend/IODisk/WriteDisk.h
  /home/femu/vldbexperimrnt/code/code/Backend/BlockManage/BlockInfo.h
  /home/femu/liblightnvm/include/liblightnvm_cli.h
  /home/femu/liblightnvm/include/liblightnvm.h
@@ -157,22 +150,17 @@ CMakeFiles/code.dir/Backend/DiskWrite/WriteDisk.cpp.o
  /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h
  /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h
  /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h
- /usr/include/x86_64-linux-gnu/bits/select2.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h
  /usr/include/alloca.h
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h
- /usr/include/x86_64-linux-gnu/bits/stdlib.h
  /usr/include/c++/9/bits/std_abs.h
  /home/femu/liblightnvm/include/liblightnvm_util.h
  /usr/include/string.h
  /usr/include/strings.h
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h
  /usr/include/stdio.h
  /usr/lib/gcc/x86_64-linux-gnu/9/include/stdarg.h
  /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h
@@ -184,8 +172,6 @@ CMakeFiles/code.dir/Backend/DiskWrite/WriteDisk.cpp.o
  /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h
  /usr/include/x86_64-linux-gnu/bits/sys_errlist.h
- /usr/include/x86_64-linux-gnu/bits/stdio.h
- /usr/include/x86_64-linux-gnu/bits/stdio2.h
  /home/femu/liblightnvm/include/liblightnvm_spec.h
  /usr/include/assert.h
  /home/femu/vldbexperimrnt/code/code/AuxizilaryFile/GlobalVariable.h
@@ -249,7 +235,6 @@ CMakeFiles/code.dir/Backend/DiskWrite/WriteDisk.cpp.o
  /usr/include/wchar.h
  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h
  /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h
- /usr/include/x86_64-linux-gnu/bits/wchar2.h
  /usr/include/c++/9/bits/localefwd.h
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++locale.h
  /usr/include/c++/9/clocale
@@ -362,7 +347,6 @@ CMakeFiles/code.dir/Exhashing/ExtendibleHash.cpp.o
  /usr/include/x86_64-linux-gnu/bits/mathcalls.h
  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h
  /usr/include/x86_64-linux-gnu/bits/iscanonical.h
- /usr/include/x86_64-linux-gnu/bits/mathinline.h
  /usr/include/c++/9/bits/std_abs.h
  /usr/include/stdlib.h
  /usr/include/x86_64-linux-gnu/bits/waitflags.h
@@ -382,20 +366,16 @@ CMakeFiles/code.dir/Exhashing/ExtendibleHash.cpp.o
  /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h
  /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h
  /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h
- /usr/include/x86_64-linux-gnu/bits/select2.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h
  /usr/include/alloca.h
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h
- /usr/include/x86_64-linux-gnu/bits/stdlib.h
  /usr/include/c++/9/csetjmp
  /usr/include/setjmp.h
  /usr/include/x86_64-linux-gnu/bits/setjmp.h
- /usr/include/x86_64-linux-gnu/bits/setjmp2.h
  /usr/include/c++/9/csignal
  /usr/include/signal.h
  /usr/include/x86_64-linux-gnu/bits/signum.h
@@ -432,14 +412,10 @@ CMakeFiles/code.dir/Exhashing/ExtendibleHash.cpp.o
  /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h
  /usr/include/x86_64-linux-gnu/bits/sys_errlist.h
- /usr/include/x86_64-linux-gnu/bits/stdio.h
- /usr/include/x86_64-linux-gnu/bits/stdio2.h
  /usr/include/c++/9/cstdlib
  /usr/include/c++/9/cstring
  /usr/include/string.h
  /usr/include/strings.h
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h
  /usr/include/c++/9/ctime
  /usr/include/time.h
  /usr/include/x86_64-linux-gnu/bits/time.h
@@ -451,7 +427,6 @@ CMakeFiles/code.dir/Exhashing/ExtendibleHash.cpp.o
  /usr/include/x86_64-linux-gnu/bits/wchar.h
  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h
  /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h
- /usr/include/x86_64-linux-gnu/bits/wchar2.h
  /usr/include/c++/9/cwctype
  /usr/include/wctype.h
  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h
@@ -542,7 +517,6 @@ CMakeFiles/code.dir/Exhashing/ExtendibleHash.cpp.o
  /usr/include/c++/9/fenv.h
  /usr/include/fenv.h
  /usr/include/x86_64-linux-gnu/bits/fenv.h
- /usr/include/x86_64-linux-gnu/bits/fenvinline.h
  /usr/include/c++/9/cinttypes
  /usr/include/inttypes.h
  /usr/include/c++/9/cstdalign
@@ -675,7 +649,7 @@ CMakeFiles/code.dir/Exhashing/ExtendibleHash.cpp.o
  /usr/include/c++/9/unordered_set
  /usr/include/c++/9/bits/unordered_set.h
  /usr/include/c++/9/shared_mutex
- /home/femu/vldbexperimrnt/code/code/Backend/DiskWrite/WriteDisk.h
+ /home/femu/vldbexperimrnt/code/code/Backend/IODisk/WriteDisk.h
  /home/femu/vldbexperimrnt/code/code/Backend/BlockManage/BlockInfo.h
  /home/femu/liblightnvm/include/liblightnvm_cli.h
  /home/femu/liblightnvm/include/liblightnvm.h
@@ -857,18 +831,15 @@ CMakeFiles/code.dir/FrontEnd/HashTable/HashTable.cpp.o
  /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h
  /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h
  /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h
- /usr/include/x86_64-linux-gnu/bits/select2.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h
  /usr/include/alloca.h
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h
- /usr/include/x86_64-linux-gnu/bits/stdlib.h
  /usr/include/c++/9/bits/std_abs.h
- /home/femu/vldbexperimrnt/code/code/Backend/DiskWrite/WriteDisk.h
+ /home/femu/vldbexperimrnt/code/code/Backend/IODisk/WriteDisk.h
  /home/femu/vldbexperimrnt/code/code/Backend/BlockManage/BlockInfo.h
  /home/femu/liblightnvm/include/liblightnvm_cli.h
  /home/femu/liblightnvm/include/liblightnvm.h
@@ -877,8 +848,6 @@ CMakeFiles/code.dir/FrontEnd/HashTable/HashTable.cpp.o
  /home/femu/liblightnvm/include/liblightnvm_util.h
  /usr/include/string.h
  /usr/include/strings.h
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h
  /usr/include/stdio.h
  /usr/lib/gcc/x86_64-linux-gnu/9/include/stdarg.h
  /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h
@@ -890,8 +859,6 @@ CMakeFiles/code.dir/FrontEnd/HashTable/HashTable.cpp.o
  /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h
  /usr/include/x86_64-linux-gnu/bits/sys_errlist.h
- /usr/include/x86_64-linux-gnu/bits/stdio.h
- /usr/include/x86_64-linux-gnu/bits/stdio2.h
  /home/femu/liblightnvm/include/liblightnvm_spec.h
  /usr/include/assert.h
  /home/femu/vldbexperimrnt/code/code/AuxizilaryFile/GlobalVariable.h
@@ -914,7 +881,6 @@ CMakeFiles/code.dir/FrontEnd/HashTable/HashTable.cpp.o
  /usr/include/wchar.h
  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h
  /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h
- /usr/include/x86_64-linux-gnu/bits/wchar2.h
  /usr/include/c++/9/bits/localefwd.h
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++locale.h
  /usr/include/c++/9/clocale
@@ -1027,16 +993,13 @@ CMakeFiles/code.dir/FrontEnd/MemoryAllocate/HashBlock.cpp.o
  /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h
  /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h
  /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h
- /usr/include/x86_64-linux-gnu/bits/select2.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h
  /usr/include/alloca.h
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h
- /usr/include/x86_64-linux-gnu/bits/stdlib.h
  /usr/include/c++/9/bits/std_abs.h
  /usr/include/c++/9/climits
  /usr/lib/gcc/x86_64-linux-gnu/9/include/limits.h
@@ -1083,7 +1046,6 @@ CMakeFiles/code.dir/main.cpp.o
  /usr/include/x86_64-linux-gnu/bits/types/FILE.h
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h
- /usr/include/x86_64-linux-gnu/bits/wchar2.h
  /usr/include/c++/9/exception
  /usr/include/c++/9/bits/exception.h
  /usr/include/c++/9/bits/exception_ptr.h
@@ -1182,11 +1144,8 @@ CMakeFiles/code.dir/main.cpp.o
  /usr/include/x86_64-linux-gnu/bits/select.h
  /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h
  /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h
- /usr/include/x86_64-linux-gnu/bits/select2.h
  /usr/include/alloca.h
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h
- /usr/include/x86_64-linux-gnu/bits/stdlib.h
  /usr/include/c++/9/bits/std_abs.h
  /usr/include/c++/9/cstdio
  /usr/include/stdio.h
@@ -1196,8 +1155,6 @@ CMakeFiles/code.dir/main.cpp.o
  /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h
  /usr/include/x86_64-linux-gnu/bits/sys_errlist.h
- /usr/include/x86_64-linux-gnu/bits/stdio.h
- /usr/include/x86_64-linux-gnu/bits/stdio2.h
  /usr/include/c++/9/cerrno
  /usr/include/errno.h
  /usr/include/x86_64-linux-gnu/bits/errno.h
@@ -1240,7 +1197,6 @@ CMakeFiles/code.dir/main.cpp.o
  /usr/include/x86_64-linux-gnu/bits/mathcalls.h
  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h
  /usr/include/x86_64-linux-gnu/bits/iscanonical.h
- /usr/include/x86_64-linux-gnu/bits/mathinline.h
  /usr/include/c++/9/limits
  /usr/include/c++/9/bits/random.h
  /usr/include/c++/9/vector
@@ -1260,8 +1216,6 @@ CMakeFiles/code.dir/main.cpp.o
  /home/femu/liblightnvm/include/liblightnvm_util.h
  /usr/include/string.h
  /usr/include/strings.h
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h
  /home/femu/liblightnvm/include/liblightnvm_spec.h
  /usr/include/assert.h
  /home/femu/vldbexperimrnt/code/code/FrontEnd/MemoryAllocate/HashBlock.h
@@ -1285,7 +1239,6 @@ CMakeFiles/code.dir/main.cpp.o
  /usr/include/x86_64-linux-gnu/bits/uio_lim.h
  /usr/include/c++/9/csetjmp
  /usr/include/setjmp.h
- /usr/include/x86_64-linux-gnu/bits/setjmp2.h
  /usr/include/c++/9/csignal
  /usr/include/signal.h
  /usr/include/x86_64-linux-gnu/bits/signum.h
@@ -1319,7 +1272,6 @@ CMakeFiles/code.dir/main.cpp.o
  /usr/include/c++/9/fenv.h
  /usr/include/fenv.h
  /usr/include/x86_64-linux-gnu/bits/fenv.h
- /usr/include/x86_64-linux-gnu/bits/fenvinline.h
  /usr/include/c++/9/cinttypes
  /usr/include/c++/9/cstdalign
  /usr/lib/gcc/x86_64-linux-gnu/9/include/stdalign.h
@@ -1436,7 +1388,7 @@ CMakeFiles/code.dir/main.cpp.o
  /usr/include/c++/9/unordered_set
  /usr/include/c++/9/bits/unordered_set.h
  /usr/include/c++/9/shared_mutex
- /home/femu/vldbexperimrnt/code/code/Backend/DiskWrite/WriteDisk.h
+ /home/femu/vldbexperimrnt/code/code/Backend/IODisk/WriteDisk.h
  /home/femu/vldbexperimrnt/code/code/Backend/BlockManage/BlockInfo.h
  /home/femu/liblightnvm/include/liblightnvm_cli.h
  /home/femu/vldbexperimrnt/code/code/AuxizilaryFile/GlobalVariable.h

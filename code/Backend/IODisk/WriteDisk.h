@@ -27,7 +27,7 @@ using namespace std;
  * Global variables for SSD write definition. 
  */
 extern uint_32 blockoffset;
-extern uint64_t writepointer;
+extern size_t writepointer;
 extern size_t sectorpointer ;
 extern size_t blockpointer ;
 extern int indexs;
@@ -45,6 +45,10 @@ int erasechunk(uint64_t sectorno);
 
 // Erase a specific page.
 int erasepage(uint64_t pageno);
+
+
+/* function is used to update pointers.  */
+int PointerRenew(size_t sectors);
 
 
 

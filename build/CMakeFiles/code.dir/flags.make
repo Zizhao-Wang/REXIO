@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/home/femu/vldbexperimrnt/code/code/../../../liblightnvm/include
 
-CXX_FLAGS =  -fopenmp -O3 -DNDEBUG -std=gnu++14
+CXX_FLAGS =  -fopenmp -g -std=gnu++14
 

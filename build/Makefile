@@ -177,29 +177,29 @@ Backend/DiskRead/ReadDisk.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/Backend/DiskRead/ReadDisk.cpp.s
 .PHONY : Backend/DiskRead/ReadDisk.cpp.s
 
-Backend/DiskWrite/WriteDisk.o: Backend/DiskWrite/WriteDisk.cpp.o
-.PHONY : Backend/DiskWrite/WriteDisk.o
+Backend/IODisk/WriteDisk.o: Backend/IODisk/WriteDisk.cpp.o
+.PHONY : Backend/IODisk/WriteDisk.o
 
 # target to build an object file
-Backend/DiskWrite/WriteDisk.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/Backend/DiskWrite/WriteDisk.cpp.o
-.PHONY : Backend/DiskWrite/WriteDisk.cpp.o
+Backend/IODisk/WriteDisk.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/Backend/IODisk/WriteDisk.cpp.o
+.PHONY : Backend/IODisk/WriteDisk.cpp.o
 
-Backend/DiskWrite/WriteDisk.i: Backend/DiskWrite/WriteDisk.cpp.i
-.PHONY : Backend/DiskWrite/WriteDisk.i
+Backend/IODisk/WriteDisk.i: Backend/IODisk/WriteDisk.cpp.i
+.PHONY : Backend/IODisk/WriteDisk.i
 
 # target to preprocess a source file
-Backend/DiskWrite/WriteDisk.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/Backend/DiskWrite/WriteDisk.cpp.i
-.PHONY : Backend/DiskWrite/WriteDisk.cpp.i
+Backend/IODisk/WriteDisk.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/Backend/IODisk/WriteDisk.cpp.i
+.PHONY : Backend/IODisk/WriteDisk.cpp.i
 
-Backend/DiskWrite/WriteDisk.s: Backend/DiskWrite/WriteDisk.cpp.s
-.PHONY : Backend/DiskWrite/WriteDisk.s
+Backend/IODisk/WriteDisk.s: Backend/IODisk/WriteDisk.cpp.s
+.PHONY : Backend/IODisk/WriteDisk.s
 
 # target to generate assembly for a file
-Backend/DiskWrite/WriteDisk.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/Backend/DiskWrite/WriteDisk.cpp.s
-.PHONY : Backend/DiskWrite/WriteDisk.cpp.s
+Backend/IODisk/WriteDisk.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/Backend/IODisk/WriteDisk.cpp.s
+.PHONY : Backend/IODisk/WriteDisk.cpp.s
 
 Exhashing/ExtendibleHash.o: Exhashing/ExtendibleHash.cpp.o
 .PHONY : Exhashing/ExtendibleHash.o
@@ -360,9 +360,9 @@ help:
 	@echo "... Backend/DiskRead/ReadDisk.o"
 	@echo "... Backend/DiskRead/ReadDisk.i"
 	@echo "... Backend/DiskRead/ReadDisk.s"
-	@echo "... Backend/DiskWrite/WriteDisk.o"
-	@echo "... Backend/DiskWrite/WriteDisk.i"
-	@echo "... Backend/DiskWrite/WriteDisk.s"
+	@echo "... Backend/IODisk/WriteDisk.o"
+	@echo "... Backend/IODisk/WriteDisk.i"
+	@echo "... Backend/IODisk/WriteDisk.s"
 	@echo "... Exhashing/ExtendibleHash.o"
 	@echo "... Exhashing/ExtendibleHash.i"
 	@echo "... Exhashing/ExtendibleHash.s"

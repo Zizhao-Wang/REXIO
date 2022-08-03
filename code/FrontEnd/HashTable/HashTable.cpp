@@ -14,7 +14,7 @@
 #include "../MemoryAllocate/HashBlock.h"
 #include "../GlobalVar/FrontGlobalVar.h"
 #include <cstdlib>
-#include "../../Backend/DiskWrite/WriteDisk.h"
+#include "../../Backend/IODisk/WriteDisk.h"
 #include <iostream>
 #include <ctime>
 #include "../../Backend/BlockManage/BlockInfo.h"

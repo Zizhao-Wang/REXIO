@@ -199,7 +199,7 @@ int erasepage(uint64_t pageno)
     }
 
     /* Re-write part 2. */
-    for (size_t sectr = chunkno+4; sectr < curseofchunk; sectr += ws_min) 
+    for (size_t sectr = chunkno; sectr < curseofchunk; sectr += ws_min) 
     {
         printf("Re-write start: \n");
         size_t buf_ofz = sectr * bp->geo->l.nbytes;
@@ -210,7 +210,7 @@ int erasepage(uint64_t pageno)
 			addrs[aidx].l.sectr = sectr + aidx;
 		}
         printf("Re-write start:\n");
-		// err = nvm_cmd_write(bp->dev, addrs, ws_min, bp->bufs->write+buf_ofz, NULL, 0x0, NULL);
+		err = nvm_cmd_write(bp->dev, addrs, ws_min, bp->bufs->write, NULL, 0x0, NULL);
 		if (err == -1) 
         {
 			printf("Write failure in part 2 of %ld page.\n",sectr);
@@ -487,6 +487,7 @@ uint64_t SVwrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
         
 
     /* Write value into page. */
+    if(value != 3)
     err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
  
     if(err == 0)

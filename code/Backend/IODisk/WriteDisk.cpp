@@ -27,6 +27,43 @@ bool flag = false;
 uint64_t Pagedata[2050];
 
 
+/* 
+ * other compensate functions.
+ */
+int CompenstaeFun(uint64_t chunkno)
+{
+
+    int err; // flag of nvm function.
+    uint64_t secofchunk = chunkusage[chunkno];
+    uint64_t sectors = chunkno*4096 + secofchunk;
+    struct nvm_addr chunk_addrs[1];
+    chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,sectors);
+    size_t ws_opt = nvm_dev_get_ws_opt(bp->dev);
+
+    for (size_t sectr = secofchunk; sectr < bp->geo->l.nsectr; sectr += ws_opt) 
+    {
+        size_t buf_ofz = sectr * bp->geo->l.nbytes;
+		struct nvm_addr addrs[ws_opt];
+		for (size_t aidx = 0; aidx < ws_opt; ++aidx) 
+        {
+			addrs[aidx].val = chunk_addrs[0].val;
+			addrs[aidx].l.sectr = sectr + aidx;
+		}
+		err = nvm_cmd_write(bp->dev, addrs, ws_opt, bp->bufs->write+buf_ofz, NULL, 0x0, NULL);  
+		if (err == -1) 
+        {
+			printf("Write failure in %ld sector of chunk %lu.\n",sectr,sectors/4096);
+			return -1;
+		}
+    }
+    
+    // printf("compensation successful!\n");
+    return 0;
+
+}
+
+
+
 /*
  *  Erase functions. 
  */
@@ -66,11 +103,10 @@ int erasepage(uint64_t pageno)
 
     int err;
     uint64_t chunkno = pageno/4096;
+    uint64_t curseofchunk = chunkusage[pageno/4096];
     struct nvm_addr chunk_addrs[1];
     chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,pageno);
     size_t ws_min = nvm_dev_get_ws_min(bp->dev);
-    char * part1 = new char[2050*8];
-    char * part2 = new char[2050*8];
 
     /* Read part 1. */
     for (size_t sectr = 0; sectr < chunkno; sectr += ws_min) 
@@ -92,10 +128,11 @@ int erasepage(uint64_t pageno)
 			printf("Read failure in part 1 of %ld page.\n",sectr);
 			return -1;
 		}
+        printf("Read part 1 succeed!\n");
     }
 
     /* Read part 2. */
-    for (size_t sectr = pageno+4; sectr < bp->geo->l.nbytes; sectr += ws_min) 
+    for (size_t sectr = chunkno+4; sectr < min(curseofchunk, bp->geo->l.nsectr); sectr += ws_min) 
     {
         size_t buf_ofz = sectr * bp->geo->l.nbytes;
 		struct nvm_addr addrs[ws_min];
@@ -114,9 +151,18 @@ int erasepage(uint64_t pageno)
 			printf("Read failure in part 2 of %ld page.\n",sectr);
 			return -1;
 		}
+        printf("Read part 2 succeed!\n");
     }
 
     /* Erase this chunck. */
+    if(curseofchunk < bp->geo->l.nsectr)
+    {
+        if(CompenstaeFun(chunkno) == -1)
+        {
+            printf("Compensation failure in chunk %lu!\n",chunkno);
+            return -1;
+        }
+    }
     err = nvm_cmd_erase(bp->dev, chunk_addrs, 1, NULL, 0x0, NULL);
 
     /* Re-write into this block. 
@@ -137,10 +183,11 @@ int erasepage(uint64_t pageno)
 			printf("Write failure in part 1 of %ld page.\n",sectr);
 			return -1;
 		}
+        printf("Re-write part 1 succeed!\n");
     }
 
     /* Re-write part 2. */
-    for (size_t sectr = pageno+4; sectr < bp->geo->l.nbytes; sectr += ws_min) 
+    for (size_t sectr = chunkno+4; sectr < min(curseofchunk, bp->geo->l.nsectr); sectr += ws_min) 
     {
         size_t buf_ofz = sectr * bp->geo->l.nbytes;
 		struct nvm_addr addrs[ws_min];
@@ -155,6 +202,7 @@ int erasepage(uint64_t pageno)
 			printf("Write failure in part 2 of %ld page.\n",sectr);
 			return -1;
 		}
+        printf("Re-write part 2 succeed!\n");
     }
     printf("# Erase completion in chunk: %ld\n", chunkno);
     return err;
@@ -168,6 +216,9 @@ int PointerRenew(size_t sectors)
 
     sectorpointer+=sectors; //update sector pointer.
 
+    chunkusage[sectorpointer/4096]= chunkusage[sectorpointer/4096] + sectors; //update chunk pointer.
+
+    printf("values after renewed: sector pointer: %lu,chunk pointer: %lu \n",sectorpointer,chunkusage[sectorpointer/4096]);
     return 0;
 
 }
@@ -413,12 +464,17 @@ uint64_t SVwrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
     }
 
     /* Erase the block. */
+    
     if(flag != UINT64_MAX)
+    {
+        printf("Page %lu need to modify.\n",pageno);
         erasepage(pageno);
+    }
+        
 
     /* Write value into page. */
-    if(value != 3)
-        err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
+    err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
+ 
     if(err == 0)
     {
         
@@ -427,6 +483,7 @@ uint64_t SVwrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
         PointerRenew(ws_min);
     }
     return pageno;
+
 }
 
 

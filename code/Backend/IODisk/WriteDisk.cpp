@@ -76,17 +76,19 @@ int erasechunk(uint64_t sectorno)
     uint64_t chunkno = sectorno/4096;
     struct nvm_addr chunk_addrs[1];
     chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,chunkno);
+    size_t ws_min = nvm_dev_get_ws_min(bp->dev);
+
     if(chunkusage[sectorno/4096]!= 4092)
     {
-        size_t ws_min = nvm_dev_get_ws_min(bp->dev);
+        
         for (size_t sectr = chunkusage[sectorno/4096]; sectr < bp->geo->l.nsectr; sectr += ws_min) 
         {
-			struct nvm_addr addrs[ws_opt];
-			for (size_t aidx = 0; aidx < ws_opt; ++aidx) {
+			struct nvm_addr addrs[ws_min];
+			for (size_t aidx = 0; aidx < ws_min; ++aidx) {
 				addrs[aidx].val = chunk_addrs[0].val;
 				addrs[aidx].l.sectr = sectr + aidx;
 			}
-			err = nvm_cmd_write(bp->dev, addrs, ws_opt, bp->bufs->write , NULL, 0x0, NULL);
+			err = nvm_cmd_write(bp->dev, addrs, ws_min, bp->bufs->write , NULL, 0x0, NULL);
 			if (err) {
 				perror("nvm_cmd_write");
 				return -1;
@@ -100,22 +102,6 @@ int erasechunk(uint64_t sectorno)
 }
 
 /* On success, 0 is returned. On error, -1 is returned. */
-int erasepage(uint64_t pageno)
-{
-    printf("After %d times read operation, Read part 2 succeed!\n",sum);
-
-    /* Erase this chunck. */
-    
-    
-
-    
-
-    
-    
-    printf("# Erase completion in chunk: %ld\n", chunkno);
-    return err;
-    
-}
 
 
 /* function is used to update pointers. */
@@ -139,14 +125,15 @@ int PageUpdate(size_t pageno)
     /* Step 1: Read all datum from original block. */
 
     int err;
-    uint64_t chunkno = pageno%4096;
-    uint64_t curseofchunk = chunkusage[pageno/4096];
+    uint64_t chunkno = pageno/4096;
+    uint64_t updatesec = pageno%4096;
+    uint64_t curseofchunk = chunkusage[chunkno];
     struct nvm_addr chunk_addrs[1];
     chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,pageno);
     size_t ws_min = nvm_dev_get_ws_min(bp->dev);
 
     // Read part 1 
-    for (size_t sectr = 0; sectr < chunkno; sectr += ws_min) 
+    for (size_t sectr = 0; sectr < updatesec; sectr += ws_min) 
     {
         size_t buf_ofz = sectr * bp->geo->l.nbytes;
 		struct nvm_addr addrs[ws_min];
@@ -170,7 +157,7 @@ int PageUpdate(size_t pageno)
 
     int sum = 0;
     // Read part 2
-    for (size_t sectr = chunkno+4; sectr < curseofchunk; sectr += ws_min) 
+    for (size_t sectr = updatesec+4; sectr < curseofchunk; sectr += ws_min) 
     {
         sum++;
         size_t buf_ofz = sectr * bp->geo->l.nbytes;
@@ -214,10 +201,26 @@ int PageUpdate(size_t pageno)
     /* Step 2: update datum that generate from step 1. */
 
     /* Step 3: find a free block */
+    // for(auto& chunk : chunkusage)
+    unordered_map<uint64_t,uint64_t>::iterator it;
+    for( it = chunkusage.begin();it!= chunkusage.end();it++)
+    {
+        if((*it).second == 0)
+        {
+            break;
+        }
+    }
+    if((*it).first != chunkno)
+    {
+        chunkno = (*it).first;
+        curseofchunk = chunkusage[chunkno];
+        pageno = chunkno * (bp->geo->l.nsectr) + curseofchunk;
+        chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,pageno);
+    }
 
     /* Step 4: Write datum to another free-block. */
     // Write part 1.
-    for (size_t sectr = 0; sectr < chunkno; sectr += ws_min) 
+    for (size_t sectr = 0; sectr < updatesec; sectr += ws_min) 
     {
         printf("Write start:\n");
         size_t buf_ofz = sectr * bp->geo->l.nbytes;
@@ -237,7 +240,7 @@ int PageUpdate(size_t pageno)
     }
 
     // Re-write part 2. 
-    for (size_t sectr = chunkno; sectr < curseofchunk; sectr += ws_min) 
+    for (size_t sectr = updatesec; sectr < curseofchunk; sectr += ws_min) 
     {
         printf("Re-write start: \n");
         size_t buf_ofz = sectr * bp->geo->l.nbytes;
@@ -262,6 +265,9 @@ int PageUpdate(size_t pageno)
     /* Step 5: update values in the in-memory hash table*/
 
 
+
+    printf("# Update completion in chunk: %ld\n", chunkno);
+    return err;
 }
 
 
@@ -509,7 +515,7 @@ uint64_t SVwrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
     if(flag != UINT64_MAX)
     {
         printf("Page %lu need to modify.\n",pageno);
-        erasepage(pageno);
+        PageUpdate(pageno);
     }
         
 

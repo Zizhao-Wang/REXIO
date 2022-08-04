@@ -78,8 +78,8 @@ int erasechunk(uint64_t sectorno)
     chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,chunkno);
     if(chunkusage[sectorno/4096]!= 4092)
     {
-        size_t ws_opt = 4;
-        for (size_t sectr = chunkusage[sectorno/4096]; sectr < bp->geo->l.nsectr; sectr += ws_opt) 
+        size_t ws_min = nvm_dev_get_ws_min(bp->dev);
+        for (size_t sectr = chunkusage[sectorno/4096]; sectr < bp->geo->l.nsectr; sectr += ws_min) 
         {
 			struct nvm_addr addrs[ws_opt];
 			for (size_t aidx = 0; aidx < ws_opt; ++aidx) {
@@ -93,7 +93,7 @@ int erasechunk(uint64_t sectorno)
 			}
         }
     }
-    printf("# nvm_cmd_erase, chunk number %ld\n", chunkno);
+    printf("# chunk %ld will be erased!\n", chunkno);
     err = nvm_cmd_erase(bp->dev, chunk_addrs, 1, NULL, 0x0, NULL);
     return err;
 
@@ -102,6 +102,41 @@ int erasechunk(uint64_t sectorno)
 /* On success, 0 is returned. On error, -1 is returned. */
 int erasepage(uint64_t pageno)
 {
+    printf("After %d times read operation, Read part 2 succeed!\n",sum);
+
+    /* Erase this chunck. */
+    
+    
+
+    
+
+    
+    
+    printf("# Erase completion in chunk: %ld\n", chunkno);
+    return err;
+    
+}
+
+
+/* function is used to update pointers. */
+int PointerRenew(size_t sectors)
+{
+
+    sectorpointer+=sectors; //update sector pointer.
+
+    chunkusage[sectorpointer/4096]= chunkusage[sectorpointer/4096] + sectors; //update chunk pointer.
+
+    printf("values after renewed: sector pointer: %lu,chunk pointer: %lu \n",sectorpointer,chunkusage[sectorpointer/4096]);
+    return 0;
+
+}
+
+
+
+int PageUpdate(size_t pageno)
+{
+
+    /* Step 1: Read all datum from original block. */
 
     int err;
     uint64_t chunkno = pageno%4096;
@@ -110,7 +145,7 @@ int erasepage(uint64_t pageno)
     chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,pageno);
     size_t ws_min = nvm_dev_get_ws_min(bp->dev);
 
-    /* Read part 1. */
+    // Read part 1 
     for (size_t sectr = 0; sectr < chunkno; sectr += ws_min) 
     {
         size_t buf_ofz = sectr * bp->geo->l.nbytes;
@@ -134,7 +169,7 @@ int erasepage(uint64_t pageno)
     }
 
     int sum = 0;
-    /* Read part 2. */
+    // Read part 2
     for (size_t sectr = chunkno+4; sectr < curseofchunk; sectr += ws_min) 
     {
         sum++;
@@ -159,9 +194,9 @@ int erasepage(uint64_t pageno)
 			return -1;
 		}
     }
-    printf("After %d times read operation, Read part 2 succeed!\n",sum);
 
-    /* Erase this chunck. */
+    /* Step 2: Erase original block. */
+    
     if(curseofchunk < bp->geo->l.nsectr)
     {
         if(CompenstaeFun(chunkno) == -1)
@@ -176,9 +211,12 @@ int erasepage(uint64_t pageno)
         printf("chunk %lu erase failure.\n",pageno/4096);
     }
 
-    /* Re-write into this block. 
-     * Write part 1.
-     */
+    /* Step 2: update datum that generate from step 1. */
+
+    /* Step 3: find a free block */
+
+    /* Step 4: Write datum to another free-block. */
+    // Write part 1.
     for (size_t sectr = 0; sectr < chunkno; sectr += ws_min) 
     {
         printf("Write start:\n");
@@ -198,7 +236,7 @@ int erasepage(uint64_t pageno)
         printf("Re-write part 1 succeed!\n");
     }
 
-    /* Re-write part 2. */
+    // Re-write part 2. 
     for (size_t sectr = chunkno; sectr < curseofchunk; sectr += ws_min) 
     {
         printf("Re-write start: \n");
@@ -219,22 +257,10 @@ int erasepage(uint64_t pageno)
 		}
         printf("Re-write part 2 succeed!\n");
     }
-    printf("# Erase completion in chunk: %ld\n", chunkno);
-    return err;
-    
-}
 
 
-/* function is used to update pointers. */
-int PointerRenew(size_t sectors)
-{
+    /* Step 5: update values in the in-memory hash table*/
 
-    sectorpointer+=sectors; //update sector pointer.
-
-    chunkusage[sectorpointer/4096]= chunkusage[sectorpointer/4096] + sectors; //update chunk pointer.
-
-    printf("values after renewed: sector pointer: %lu,chunk pointer: %lu \n",sectorpointer,chunkusage[sectorpointer/4096]);
-    return 0;
 
 }
 

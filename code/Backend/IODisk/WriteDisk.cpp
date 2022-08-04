@@ -210,6 +210,7 @@ int erasepage(uint64_t pageno)
 			addrs[aidx].l.sectr = sectr + aidx;
 		}
         printf("Re-write start:\n");
+        if(sectr != 0)
 		err = nvm_cmd_write(bp->dev, addrs, ws_min, bp->bufs->write, NULL, 0x0, NULL);
 		if (err == -1) 
         {
@@ -487,10 +488,10 @@ uint64_t SVwrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
         
 
     /* Write value into page. */
-    if(value != 3)
+    if(value == 2)
     err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
  
-    if(err == 0)
+    if(1)
     {
         
         printf("Insert completion! Insert sectors: %ld\n",sectorpointer);

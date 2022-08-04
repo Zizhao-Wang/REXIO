@@ -59,6 +59,12 @@ int PointerRenew(size_t sectors);
 
 
 
+/* out-of-place update */
+int 
+
+
+
+
 /* 
  * Write functions declartion. 
  */

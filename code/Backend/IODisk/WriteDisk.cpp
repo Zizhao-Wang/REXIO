@@ -28,7 +28,6 @@ uint64_t Pagedata[2050];
 
 
 
-/* On success, 0 is returned. On error, -1 is returned. */
 /* function is used to update pointers. */
 int PointerRenew(size_t sectors)
 {
@@ -44,9 +43,9 @@ int PointerRenew(size_t sectors)
 
 
 
-
 /* 
- * other compensate functions.
+ * A compensate function is used to erase a specific chunk.
+ * On success, 0 is returned. On error, -1 is returned.
  */
 int CompenstaeFun(uint64_t chunkno)
 {
@@ -87,10 +86,13 @@ int CompenstaeFun(uint64_t chunkno)
 /*
  *  Erase a specific chunk/block. 
  */
-int erasechunk(uint64_t chunkno)
+int erasechunk(size_t pageno, uint64_t chunkno)
 {
-    
+
     uint64_t curseofchunk = chunkusage[chunkno];
+    struct nvm_addr chunk_addrs[1];
+    chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,pageno);
+
     if(curseofchunk < bp->geo->l.nsectr)
     {
         if(CompenstaeFun(chunkno) == -1)
@@ -99,25 +101,25 @@ int erasechunk(uint64_t chunkno)
             return -1;
         }
     }
-    err = nvm_cmd_erase(bp->dev, chunk_addrs, 1, NULL, 0x0, NULL);
+    int err = nvm_cmd_erase(bp->dev, chunk_addrs, 1, NULL, 0x0, NULL);
     if(err == -1)
     {
-        printf("chunk %lu erase failure.\n",pageno/4096);
+        printf("chunk %lu erase failure.\n",chunkno);
     }
     return err;
 
 }
 
 
-
 /*
  *  this function is used to implement out-of-place update.
  */
-
-int PageUpdate(size_t pageno)
+int BlockUpdate(size_t pageno, uint64_t value, uint64_t Cursize)
 {
 
-    /* Step 1: Read all datum from original block. */
+   /* 
+    * Step 1: Read all datum from original block. 
+    */
     int err;
     uint64_t chunkno = pageno/4096;
     uint64_t updatesec = pageno%4096;
@@ -126,8 +128,8 @@ int PageUpdate(size_t pageno)
     chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,pageno);
     size_t ws_min = nvm_dev_get_ws_min(bp->dev);
 
-    // Read part 1 
-    for (size_t sectr = 0; sectr < updatesec; sectr += ws_min) 
+    // Read datum from original block/chunk.
+    for (size_t sectr = 0; sectr < curseofchunk; sectr += ws_min) 
     {
         size_t buf_ofz = sectr * bp->geo->l.nbytes;
 		struct nvm_addr addrs[ws_min];
@@ -149,45 +151,29 @@ int PageUpdate(size_t pageno)
         printf("Read part 1 succeed!\n");
     }
 
-    int sum = 0;
-    // Read part 2
-    for (size_t sectr = updatesec+4; sectr < curseofchunk; sectr += ws_min) 
+   /* 
+    * Step 2: Erase original block. 
+    */
+    int eraseflag = erasechunk(pageno, chunkno);
+    if(eraseflag == -1)
     {
-        sum++;
-        size_t buf_ofz = sectr * bp->geo->l.nbytes;
-		struct nvm_addr addrs[ws_min];
-		for (size_t aidx = 0; aidx < ws_min; ++aidx) 
-        {
-			addrs[aidx].val = chunk_addrs[0].val;
-			addrs[aidx].l.sectr = sectr + aidx;
-		}
-		err = nvm_cmd_read(bp->dev, addrs, ws_min, bp->bufs->read+buf_ofz, NULL, 0x0, NULL);
-        for(size_t i=sectr*bp->geo->l.nbytes;i<ws_min * bp->geo->l.nbytes;i++)
-        {
-            bp->bufs->write[i] = bp->bufs->read[i];
-        }
-        uint64_t *ML = (uint64_t*) bp->bufs->write;
-        printf("values :%ld\n", ML[0]);
-
-		if (err == -1) 
-        {
-			printf("Read failure in part 2 of %ld page.\n",sectr);
-			return -1;
-		}
-    }
-
-    /* Step 2: Erase original block. */
-    int eraseflag = erasechunk(chunkno);
-    if(eraseflag == -1){
         printf("chunk %lu erase failure.\n",pageno/4096);
     }
 
-    /* Step 2: update datum that generate from step 1. */
+   /*
+    * Step 3: Update datum that generate from step 1.
+    */
+    char * temp = new char[100];
+    int i=bp->geo->l.nbytes * updatesec;
+    temp = &(bp->bufs->write[i]); 
+    uint64_t *ML = (uint64_t*) temp;
+    ML[Cursize] = value;
 
-    /* Step 3: find a free block */
-    // for(auto& chunk : chunkusage)
+   /* 
+    * Step 4: Find a free block.
+    */
     unordered_map<uint64_t,uint64_t>::iterator it;
-    for( it = chunkusage.begin();it!= chunkusage.end();it++)
+    for( it = chunkusage.begin();it!= chunkusage.end();it++) // for(auto& chunk : chunkusage)
     {
         if((*it).second == 0)
         {
@@ -202,9 +188,8 @@ int PageUpdate(size_t pageno)
         chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,pageno);
     }
 
-    /* Step 4: Write datum to another free-block. */
-    // Write part 1.
-    for (size_t sectr = 0; sectr < updatesec; sectr += ws_min) 
+    /* Step 4: Write datum to the free-block. */
+    for (size_t sectr = 0; sectr < curseofchunk; sectr += ws_min) 
     {
         printf("Write start:\n");
         size_t buf_ofz = sectr * bp->geo->l.nbytes;
@@ -223,10 +208,32 @@ int PageUpdate(size_t pageno)
         printf("Re-write part 1 succeed!\n");
     }
 
-    // Re-write part 2. 
-    for (size_t sectr = updatesec; sectr < curseofchunk; sectr += ws_min) 
+   /* 
+    * Step 5: update values in the in-memory hash table
+    */
+
+    printf("# Update completion in chunk: %ld\n", chunkno);
+    return err;
+
+}
+
+
+int PageUpdate(size_t pageno, uint64_t value, uint64_t Cursize)
+{
+    /* 
+    * Step 1: Read all datum from original block. 
+    */
+    int err;
+    uint64_t chunkno = pageno/4096;
+    uint64_t updatesec = pageno%4096;
+    uint64_t curseofchunk = chunkusage[chunkno];
+    struct nvm_addr chunk_addrs[1];
+    chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,pageno);
+    size_t ws_min = nvm_dev_get_ws_min(bp->dev);
+
+    // Read datum from original block/chunk.
+    for (size_t sectr = 0; sectr < curseofchunk; sectr += ws_min) 
     {
-        printf("Re-write start: \n");
         size_t buf_ofz = sectr * bp->geo->l.nbytes;
 		struct nvm_addr addrs[ws_min];
 		for (size_t aidx = 0; aidx < ws_min; ++aidx) 
@@ -234,26 +241,60 @@ int PageUpdate(size_t pageno)
 			addrs[aidx].val = chunk_addrs[0].val;
 			addrs[aidx].l.sectr = sectr + aidx;
 		}
-        printf("Re-write start:\n");
-        if(sectr != 0)
-		err = nvm_cmd_write(bp->dev, addrs, ws_min, bp->bufs->write, NULL, 0x0, NULL);
+		err = nvm_cmd_read(bp->dev, addrs, ws_min, bp->bufs->read+buf_ofz, NULL, 0x0, NULL);
+        for(size_t i=sectr*bp->geo->l.nbytes;i<ws_min * bp->geo->l.nbytes;i++)
+        {
+            bp->bufs->write[i] = bp->bufs->read[i];
+        }  
 		if (err == -1) 
         {
-			printf("Write failure in part 2 of %ld page.\n",sectr);
+			printf("Read failure in part 1 of %ld page.\n",sectr);
 			return -1;
 		}
-        printf("Re-write part 2 succeed!\n");
+        printf("Read part 1 succeed!\n");
     }
 
+   /* 
+    * Step 2: Erase original block. 
+    */
+    int eraseflag = erasechunk(pageno, chunkno);
+    if(eraseflag == -1)
+    {
+        printf("chunk %lu erase failure.\n",pageno/4096);
+    }
 
-    /* Step 5: update values in the in-memory hash table*/
+   /*
+    * Step 3: Update datum that generate from step 1.
+    */
+    char * temp = new char[100];
+    int i=bp->geo->l.nbytes * updatesec;
+    temp = &(bp->bufs->write[i]); 
+    uint64_t *ML = (uint64_t*) temp;
+    ML[Cursize] = value;
 
-
+    /* Step 4: Write datum to the free-block. */
+    for (size_t sectr = 0; sectr < curseofchunk; sectr += ws_min) 
+    {
+        printf("Write start:\n");
+        size_t buf_ofz = sectr * bp->geo->l.nbytes;
+		struct nvm_addr addrs[ws_min];
+		for (size_t aidx = 0; aidx < ws_min; ++aidx) 
+        {
+			addrs[aidx].val = chunk_addrs[0].val;
+			addrs[aidx].l.sectr = sectr + aidx;
+		}
+		err = nvm_cmd_write(bp->dev, addrs, ws_min, bp->bufs->write+buf_ofz, NULL, 0x0, NULL);  
+		if (err == -1) 
+        {
+			printf("Write failure in part 1 of %ld page.\n",sectr);
+			return -1;
+		}
+        printf("Re-write part 1 succeed!\n");
+    }
 
     printf("# Update completion in chunk: %ld\n", chunkno);
     return err;
 }
-
 
 
 /* 
@@ -432,7 +473,7 @@ uint64_t SSD_write2(uint64_t values)
 /*
  * This function is used for single value insert. 
  */
-uint64_t SVwrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
+uint64_t SingleValueWrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
 {
 
     /* Function flag. */
@@ -499,7 +540,7 @@ uint64_t SVwrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
     if(flag != UINT64_MAX)
     {
         printf("Page %lu need to modify.\n",pageno);
-        PageUpdate(pageno);
+        PageUpdate(pageno,value,Cursize);
     }
         
 

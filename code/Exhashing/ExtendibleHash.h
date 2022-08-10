@@ -83,7 +83,7 @@ inline int Bucket::insert(int key,uint64_t value)
         return 0;
     }
     //printf("%ld \n",pageno);
-    this->pageno = SVwrite(value,this->pageno,this->CurSize);
+    this->pageno = SingleValueWrite(value,this->pageno,this->CurSize);
     values[key] = value;
     this->CurSize++;
     return 1;

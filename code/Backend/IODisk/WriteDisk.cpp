@@ -27,6 +27,24 @@ bool flag = false;
 uint64_t Pagedata[2050];
 
 
+
+/* On success, 0 is returned. On error, -1 is returned. */
+/* function is used to update pointers. */
+int PointerRenew(size_t sectors)
+{
+
+    sectorpointer+=sectors; //update sector pointer.
+
+    chunkusage[sectorpointer/4096]= chunkusage[sectorpointer/4096] + sectors; //update chunk pointer.
+
+    printf("values after renewed: sector pointer: %lu,chunk pointer: %lu \n",sectorpointer,chunkusage[sectorpointer/4096]);
+    return 0;
+
+}
+
+
+
+
 /* 
  * other compensate functions.
  */
@@ -67,63 +85,39 @@ int CompenstaeFun(uint64_t chunkno)
 
 
 /*
- *  Erase functions. 
+ *  Erase a specific chunk/block. 
  */
-int erasechunk(uint64_t sectorno)
+int erasechunk(uint64_t chunkno)
 {
-
-    int err;
-    uint64_t chunkno = sectorno/4096;
-    struct nvm_addr chunk_addrs[1];
-    chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,chunkno);
-    size_t ws_min = nvm_dev_get_ws_min(bp->dev);
-
-    if(chunkusage[sectorno/4096]!= 4092)
+    
+    uint64_t curseofchunk = chunkusage[chunkno];
+    if(curseofchunk < bp->geo->l.nsectr)
     {
-        
-        for (size_t sectr = chunkusage[sectorno/4096]; sectr < bp->geo->l.nsectr; sectr += ws_min) 
+        if(CompenstaeFun(chunkno) == -1)
         {
-			struct nvm_addr addrs[ws_min];
-			for (size_t aidx = 0; aidx < ws_min; ++aidx) {
-				addrs[aidx].val = chunk_addrs[0].val;
-				addrs[aidx].l.sectr = sectr + aidx;
-			}
-			err = nvm_cmd_write(bp->dev, addrs, ws_min, bp->bufs->write , NULL, 0x0, NULL);
-			if (err) {
-				perror("nvm_cmd_write");
-				return -1;
-			}
+            printf("Compensation failure in chunk %lu!\n",chunkno);
+            return -1;
         }
     }
-    printf("# chunk %ld will be erased!\n", chunkno);
     err = nvm_cmd_erase(bp->dev, chunk_addrs, 1, NULL, 0x0, NULL);
+    if(err == -1)
+    {
+        printf("chunk %lu erase failure.\n",pageno/4096);
+    }
     return err;
 
 }
 
-/* On success, 0 is returned. On error, -1 is returned. */
 
 
-/* function is used to update pointers. */
-int PointerRenew(size_t sectors)
-{
-
-    sectorpointer+=sectors; //update sector pointer.
-
-    chunkusage[sectorpointer/4096]= chunkusage[sectorpointer/4096] + sectors; //update chunk pointer.
-
-    printf("values after renewed: sector pointer: %lu,chunk pointer: %lu \n",sectorpointer,chunkusage[sectorpointer/4096]);
-    return 0;
-
-}
-
-
+/*
+ *  this function is used to implement out-of-place update.
+ */
 
 int PageUpdate(size_t pageno)
 {
 
     /* Step 1: Read all datum from original block. */
-
     int err;
     uint64_t chunkno = pageno/4096;
     uint64_t updatesec = pageno%4096;
@@ -183,18 +177,8 @@ int PageUpdate(size_t pageno)
     }
 
     /* Step 2: Erase original block. */
-    
-    if(curseofchunk < bp->geo->l.nsectr)
-    {
-        if(CompenstaeFun(chunkno) == -1)
-        {
-            printf("Compensation failure in chunk %lu!\n",chunkno);
-            return -1;
-        }
-    }
-    err = nvm_cmd_erase(bp->dev, chunk_addrs, 1, NULL, 0x0, NULL);
-    if(err == -1)
-    {
+    int eraseflag = erasechunk(chunkno);
+    if(eraseflag == -1){
         printf("chunk %lu erase failure.\n",pageno/4096);
     }
 

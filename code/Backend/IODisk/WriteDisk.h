@@ -48,7 +48,7 @@ int CompenstaeFun(uint64_t chunkno);
  * Erase functions declartion.
  */
 // Erase a sprcific chunck.
-int erasechunk(uint64_t sectorno);
+int erasechunk(size_t pageno, uint64_t chunkno);
 
 
 
@@ -58,8 +58,9 @@ int PointerRenew(size_t sectors);
 
 
 /* out-of-place update */
-int PageUpdate(size_t pageno);
+int BlockUpdate(size_t pageno, uint64_t value, uint64_t Cursize);
 
+int PageUpdate(size_t pageno, uint64_t value, uint64_t Cursize);
 
 
 
@@ -76,7 +77,7 @@ uint_32 SSD_write(uint64_t value);
 uint64_t SSD_write2(uint64_t values);
 
 //Signle value insert into physicals.
-uint64_t SVwrite(uint64_t value, uint64_t pageno,uint64_t Cursize);
+uint64_t SingleValueWrite(uint64_t value, uint64_t pageno,uint64_t Cursize);
 
 
 

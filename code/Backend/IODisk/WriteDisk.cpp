@@ -476,8 +476,8 @@ uint64_t SSD_write2(uint64_t values)
 uint64_t SingleValueWrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
 {
 
-    /* Function flag. */
-    int err;
+    /* Function flag, default value equals 0(successful flag). */
+    int err = 0;
 
     /* Get chunkno, judge sector pointer of this block. */
     uint64_t  flag = pageno;
@@ -486,75 +486,43 @@ uint64_t SingleValueWrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
         pageno = sectorpointer;
     }
 
-    struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, pageno);
-    size_t ws_min = nvm_dev_get_ws_min(bp->dev);
-    struct nvm_addr addrs[ws_min];
-    for (size_t aidx = 0; aidx < ws_min; ++aidx) 
+   /* 
+    * Step 1 : 
+    * Step 2 : 
+    */
+    if(flag == UINT64_MAX && Cursize ==0)
     {
-		addrs[aidx].val = addrs_chunk.val;
-		addrs[aidx].l.sectr = (pageno%4096)+aidx;
-		/* printf("aidx: %lu addrs[aidx].val : %lu chunk_addrs[cidx].val %lu addrs[aidx].l.sectr %lu \n",aidx,addrs[aidx].val,chunk_addrs[cidx].val,addrs[aidx].l.sectr); */
-	}
-
-    if(flag != UINT64_MAX)
-    {
-        /* Read datum from page. */
-        // printf("pageno: %lu value: %lu \n",pageno,value);
-        err = nvm_cmd_read(bp->dev, addrs, ws_min,bp->bufs->read, NULL,0x0, NULL);
-        if(err == -1)
+        struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, pageno);
+        size_t ws_min = nvm_dev_get_ws_min(bp->dev);
+        struct nvm_addr addrs[ws_min];
+        for (size_t aidx = 0; aidx < ws_min; ++aidx) 
         {
-            printf("NVM read failure in %ld page.\n",pageno);
-        }
-        /* Update values in buffer.  */
-        uint64_t *Read2Sectors = (uint64_t *) bp->bufs->read;
-        Read2Sectors[Cursize] = value;
-        for(int i=0;i<Cursize*8+10;i++)
-        {
-            bp->bufs->write[i] = bp->bufs->read[i];
-        }
-        // printf("%lu %lu\n",Read2Sectors[0],Read2Sectors[1]);
-    }
-    else
-    {
+		    addrs[aidx].val = addrs_chunk.val;
+		    addrs[aidx].l.sectr = (pageno%4096)+aidx;
+		    /* printf("aidx: %lu addrs[aidx].val : %lu chunk_addrs[cidx].val %lu addrs[aidx].l.sectr %lu \n",aidx,addrs[aidx].val,chunk_addrs[cidx].val,addrs[aidx].l.sectr); */
+	    }
         char * temp = new char[100];
-        for(int i=0;i<Cursize*8+10;i++)
-        {
-            temp[i] = bp->bufs->write[i]; 
-        }
         uint64_t *ML = (uint64_t*) temp;
         ML[Cursize] = value;
-        printf("values :%ld\n", ML[0]);
+        printf("Value :%ld has been inserted!\n", ML[0]);
         for(int i=0;i<Cursize*8+10;i++)
         {
             bp->bufs->write[i] = temp[i]; 
         }
-        for(int i=0;i<Cursize*8+10;i++)
+        // Write value into page. 
+        err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
+        if(err == 0) 
         {
-            temp[i] = bp->bufs->write[i]; 
+            printf("Insert completion! Insert sectors: %ld\n",sectorpointer);
+            /* update pointers! */
+            PointerRenew(ws_min);
         }
-        printf("values :%ld\n", ML[0]);
     }
-
-    /* Erase the block. */
-    
-    if(flag != UINT64_MAX)
+    else
     {
-        printf("Page %lu need to modify.\n",pageno);
         PageUpdate(pageno,value,Cursize);
-    }
-        
+    }  
 
-    /* Write value into page. */
-    if(value == 2)
-    err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
- 
-    if(1)
-    {
-        
-        printf("Insert completion! Insert sectors: %ld\n",sectorpointer);
-        /* update pointers! */
-        PointerRenew(ws_min);
-    }
     return pageno;
 
 }

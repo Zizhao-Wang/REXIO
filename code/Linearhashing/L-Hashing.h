@@ -15,4 +15,11 @@ public:
     virtual int getMaxCollisions() const = 0;
 };
 
+
+
+/* Declaration of L-Hashing functions */
+void LinearHashing(); // port of L-Hashing
+
+
+
 #endif //CLASSWORK_HEADER_H

@@ -43,5 +43,10 @@
   "directory": "/home/femu/vldbexperimrnt/code/build",
   "command": "/usr/bin/g++  -I/home/femu/vldbexperimrnt/code/code/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/code.dir/Backend/BlockManage/BlockInfo.cpp.o -c /home/femu/vldbexperimrnt/code/code/Backend/BlockManage/BlockInfo.cpp",
   "file": "/home/femu/vldbexperimrnt/code/code/Backend/BlockManage/BlockInfo.cpp"
+},
+{
+  "directory": "/home/femu/vldbexperimrnt/code/build",
+  "command": "/usr/bin/g++  -I/home/femu/vldbexperimrnt/code/code/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/code.dir/Linearhashing/L-Hashing.cpp.o -c /home/femu/vldbexperimrnt/code/code/Linearhashing/L-Hashing.cpp",
+  "file": "/home/femu/vldbexperimrnt/code/code/Linearhashing/L-Hashing.cpp"
 }
 ]

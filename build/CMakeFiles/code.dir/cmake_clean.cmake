@@ -15,6 +15,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/code.dir/FrontEnd/HashTable/HashTable.cpp.o.d"
   "CMakeFiles/code.dir/FrontEnd/MemoryAllocate/HashBlock.cpp.o"
   "CMakeFiles/code.dir/FrontEnd/MemoryAllocate/HashBlock.cpp.o.d"
+  "CMakeFiles/code.dir/Linearhashing/L-Hashing.cpp.o"
+  "CMakeFiles/code.dir/Linearhashing/L-Hashing.cpp.o.d"
   "CMakeFiles/code.dir/main.cpp.o"
   "CMakeFiles/code.dir/main.cpp.o.d"
   "code"

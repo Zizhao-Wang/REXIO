@@ -6,6 +6,7 @@
 #include "FrontEnd/MemoryAllocate/HashBlock.h"
 #include "FrontEnd/HashTable/HashTable.h"
 #include "Exhashing/ExtendibleHash.h"
+#include "Linearhashing/L-Hashing.h"
 
 
 /* Define some global variables. */
@@ -45,9 +46,12 @@ int main(int argc, char **argv)
     }
 
     /* select different indexes. line 49- */
+
     EXHashing1();
 
     //ExtendHashTableInitialize();
+
+    LinearHashing();
 
     return 0;
 

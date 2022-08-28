@@ -1,6 +1,15 @@
-//Kyokai no Kanata //
-#include<bits/stdc++.h>
+/*
+ * @Author: Zizhao Wang
+ * @E-mail: zz.wang@siat.ac.cn
+ * @Date: 10/8/2022
+ * @name: Implementation of Linear-Hashing.
+ */
 
+/*
+ * Some useful header files. 
+ */
+#include<iostream>
+#include<vector>
 using namespace std;
 
 typedef pair<int,int> II;
@@ -9,6 +18,7 @@ typedef vector<int> VI;
 typedef vector< VI > VVI;
 typedef long long int LL;
 
+#define BucketSize 100  // size of a bucket
 #define PB push_back
 #define MP make_pair
 #define F first
@@ -38,16 +48,28 @@ void __f(const char* names,Arg1&& arg1,Args&&... args){
 #else
 #define trace(...)
 #endif
-class Hash{
+
+class Hash
+{
+  /*
+   * Some private variables. 
+   */
+  private:
+    vector<uint64_t[BucketSize]> Buckets;  //In-memeory buckets table with fixed bucket size.
+
   public:
+
     int bufsize,marker,mod;
-    vector<set<int>> Bucket;
+    
     vector<set<int>> Overflow;
-    Hash(int sz,int bufsz){
+
+    Hash(int sz,int bufsz)
+    {
       bufsize = bufsz,mod= sz;
       Bucket.resize(sz);marker=0;
       Overflow.resize(sz);
     }
+
     void split(int val)
     {
       Bucket.PB(set<int>());Overflow.PB(set<int>());
@@ -56,10 +78,13 @@ class Hash{
       for(auto v:Overflow[val]) if(v%(2*mod)==val+mod)  Overflow[val+mod].insert(v);
       for(auto v:Overflow[val+mod]) Overflow[val].erase(v);
     }
-    void changemod(){
+
+    void changemod()
+    {
       for(int i=0;i<mod;i++) Bucket.PB(set<int>()),Overflow.PB(set<int>());
       mod*=2;marker=0;
     }
+
     int insert(int x)
     {
       int bucketno = x%mod;
@@ -75,6 +100,7 @@ class Hash{
       return 1;
     }
 };
+
 const int VV = int(1e9)+5;
 vector<int> Input;
 vector<int> Output;
@@ -89,6 +115,8 @@ void emptyOutput()
       }
       fflush(stdout);
 }
+
+
 int main(int argc,char *argv[])
 {
   if(argc<4) cerr<<"Invalid input" <<endl;

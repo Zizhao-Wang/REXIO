@@ -48,106 +48,6 @@ void __f(const char* names,Arg1&& arg1,Args&&... args){
 #define trace(...)
 #endif
 
-class Bucket
-{
-  public:
-    vector<uint64_t>  bucket;
-    uint64_t  BucketNo;  
-}
-
-class LinearHashTable
-{
-  /*
-   * Private variables. 
-   */
-  private:
-    vector<vector<Bucket>> BucketTable;  //In-memeory buckets table with fixed bucket size.
-
-    uint64_t Tablesize;
-    uint64_t mod;
-    // vector<set<int>> Overflow;
-
-  public:
-  /*
-   * some public function to manipulate private variables. 
-   */
-    LinearHashTable(int sz)
-    {
-      /*
-       * Constructive function is used to initialize private variables. 
-       */
-      Tablesize = Tablebase;
-      for(int i = 0; i<TableSize;i++)
-      {
-        Bucket TempBucket;
-        Buckets.push_bakc(TempBucket);
-      }
-    }
-
-    void split(int val)
-    {
-      Bucket.PB(set<int>());
-      Overflow.PB(set<int>());
-      for(auto v:Bucket[val])
-      {
-        if(v%(2*mod)==val+mod)
-        {
-          Bucket[val+mod].insert(v);
-        }  
-      }
-        
-      for(auto v:Bucket[val+mod])
-      {
-        Bucket[val].erase(v);
-      }
-        
-      for(auto v:Overflow[val])
-      if(v%(2*mod)==val+mod)  Overflow[val+mod].insert(v);
-      for(auto v:Overflow[val+mod]) Overflow[val].erase(v);
-    }
-
-    void changemod()
-    {
-      for(int i=0;i<mod;i++) Bucket.PB(set<int>()),Overflow.PB(set<int>());
-      mod*=2;marker=0;
-    }
-
-    int insert(int value)
-    {
-
-      /*
-       * This function is implemented to insert a special value into a bucket according to
-       * a special rule that usually is called “Linear Hashing method”. 
-       * The following source code contains three steps:
-       *  1. Find a proper bucket
-       *  2. Insert this value into this in-memory bucket 
-       *  4. Synchronize the value with Disk
-       *  3. update in-memory table 
-       */
-
-      /*
-       * step 1. Find a proper bucket for a specific value 
-       */
-      int bucketno = value % mod;  
-      if(Buckets[bucketno].size() >= BucketSize)
-      {
-        bucketno = value % (mod*2);
-      }
-      if(Buckets[bucketno].count(x)+ Overflow[bucketno].count(x))
-      {
-        return 0;
-      } 
-      if(Bucket[bucketno].size()==bufsize) 
-      {
-        Overflow[bucketno].insert(x);
-        split(marker++);
-        if(marker==mod) changemod();
-      }
-      else Bucket[bucketno].insert(x);
-      return 1;
-    }
-};
-
 const int VV = int(1e9)+5;
 vector<int> Input;
 vector<int> Output;
@@ -168,14 +68,14 @@ void LHashPort()
 {
   
     clock_t startTime,endTime;  // Definition of timestamp
-    HashTable hashtable;        // initialize a in-memory hash table
+     hashtable;        // initialize a in-memory hash table
   
     /* Write datum */
     startTime = clock();
     for(int i=1;i<=3;i++)
     {
       uint64_t value = i;
-      // d.insert(i,value,0);
+        hash.insert(i,value,0);
     }
     endTime = clock();
     std::cout << "Total Time of inserting: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
@@ -200,5 +100,5 @@ void LHashPort()
     }
     endTime = clock();
     std::cout << "Total Time of datum update: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-    
+
 }

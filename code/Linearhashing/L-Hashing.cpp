@@ -1,5 +1,7 @@
-#include "L-Hashing.h"
 #include <ctime>
+#include <iostream>
+#include "L-Hashing.h"
+
 using namespace std;
 
 /* In-memory hash table */

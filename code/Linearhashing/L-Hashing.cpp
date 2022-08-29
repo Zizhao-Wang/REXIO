@@ -5,7 +5,7 @@
 using namespace std;
 
 /* In-memory hash table */
-class HashTable:public Hash 
+class HashTable1:public Hash 
 {
     int max_col;
     vector<string> _vec;
@@ -19,12 +19,12 @@ public:
     * 3. Searching one or more specific value entries. 
     */
 
-    int insertion(uint64_t value)
-    {
+    // int insertion(uint64_t value)
+    // {
         
-    }
+    // }
 
-    HashTable() : _vec(100), max_col(0) {}
+    // HashTable() : _vec(100), max_col(0) {}
 
     void add(std::string &val) {
         int tmp = 0;
@@ -89,42 +89,4 @@ public:
 //     }
 
 //     std::cout << "Maximal collisions count " << hashTable->getMaxCollisions() << std::endl;
-// }
-
-void LinearHashing()
-{
-
-    /* Definition of timestamp */
-    clock_t startTime,endTime;
-
-    /* Write datum */
-    startTime = clock();
-    for(int i=1;i<=3;i++)
-    {
-        uint64_t value = i;
-        // d.insert(i,value,0);
-    }
-    endTime = clock();
-    std::cout << "Total Time of inserting: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-
-
-    /* Read datum */
-    startTime = clock();
-    for(int i=1;i<=3;i++)
-    {
-        uint64_t value = i;
-        // d.insert(i,value,0);
-    }
-    endTime = clock();
-    std::cout << "Total Time of reading data: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-
-    /* data update */
-    startTime = clock();
-    for(int i=1;i<=3;i++)
-    {
-        uint64_t value = i;
-        // d.insert(i,value,0);
-    }
-    endTime = clock();
-    std::cout << "Total Time of datum update: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-}
+//

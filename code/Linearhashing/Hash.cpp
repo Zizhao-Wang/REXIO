@@ -56,8 +56,9 @@ class Hash
    */
   private:
     vector<uint64_t[BucketSize]> Buckets;  //In-memeory buckets table with fixed bucket size.
+    uint64_t mod;
     // vector<set<int>> Overflow;
-    int marker,mod;
+    int marker;
 
   public:
   /*
@@ -104,7 +105,16 @@ class Hash
 
     int insert(int value)
     {
-      int bucketno = x%mod;
+      /*
+       * This function is implemented to insert a special value into a bucket according to
+       * a special rule that usually is called “Linear Hashing method”. 
+       * The following source code contains three steps:
+       *  1. Find a proper bucket
+       *  2. Insert this value into this in-memory bucket 
+       *  4. Synchronize the value with Disk
+       *  3. update in-memory table 
+       */
+      int bucket = value % mod;  
       if(bucketno < marker) bucketno = x%(2*mod);
       if (Bucket[bucketno].count(x)+ Overflow[bucketno].count(x)) return 0;
       if(Bucket[bucketno].size()==bufsize) 

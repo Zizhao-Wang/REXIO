@@ -6,7 +6,7 @@
 #include "FrontEnd/MemoryAllocate/HashBlock.h"
 #include "FrontEnd/HashTable/HashTable.h"
 #include "Exhashing/ExtendibleHash.h"
-#include "Linearhashing/L-Hashing.h"
+#include "Linearhashing/LHash.h"
 
 
 /* Define some global variables. */

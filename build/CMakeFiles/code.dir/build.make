@@ -195,19 +195,19 @@ CMakeFiles/code.dir/Backend/BlockManage/BlockInfo.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/code.dir/Backend/BlockManage/BlockInfo.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/femu/experiment/code2/code/Backend/BlockManage/BlockInfo.cpp -o CMakeFiles/code.dir/Backend/BlockManage/BlockInfo.cpp.s
 
-CMakeFiles/code.dir/Linearhashing/L-Hashing.cpp.o: CMakeFiles/code.dir/flags.make
-CMakeFiles/code.dir/Linearhashing/L-Hashing.cpp.o: /home/femu/experiment/code2/code/Linearhashing/L-Hashing.cpp
-CMakeFiles/code.dir/Linearhashing/L-Hashing.cpp.o: CMakeFiles/code.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/femu/experiment/code2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/code.dir/Linearhashing/L-Hashing.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/code.dir/Linearhashing/L-Hashing.cpp.o -MF CMakeFiles/code.dir/Linearhashing/L-Hashing.cpp.o.d -o CMakeFiles/code.dir/Linearhashing/L-Hashing.cpp.o -c /home/femu/experiment/code2/code/Linearhashing/L-Hashing.cpp
+CMakeFiles/code.dir/Linearhashing/LHash.cpp.o: CMakeFiles/code.dir/flags.make
+CMakeFiles/code.dir/Linearhashing/LHash.cpp.o: /home/femu/experiment/code2/code/Linearhashing/LHash.cpp
+CMakeFiles/code.dir/Linearhashing/LHash.cpp.o: CMakeFiles/code.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/femu/experiment/code2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/code.dir/Linearhashing/LHash.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/code.dir/Linearhashing/LHash.cpp.o -MF CMakeFiles/code.dir/Linearhashing/LHash.cpp.o.d -o CMakeFiles/code.dir/Linearhashing/LHash.cpp.o -c /home/femu/experiment/code2/code/Linearhashing/LHash.cpp
 
-CMakeFiles/code.dir/Linearhashing/L-Hashing.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/code.dir/Linearhashing/L-Hashing.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/femu/experiment/code2/code/Linearhashing/L-Hashing.cpp > CMakeFiles/code.dir/Linearhashing/L-Hashing.cpp.i
+CMakeFiles/code.dir/Linearhashing/LHash.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/code.dir/Linearhashing/LHash.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/femu/experiment/code2/code/Linearhashing/LHash.cpp > CMakeFiles/code.dir/Linearhashing/LHash.cpp.i
 
-CMakeFiles/code.dir/Linearhashing/L-Hashing.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/code.dir/Linearhashing/L-Hashing.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/femu/experiment/code2/code/Linearhashing/L-Hashing.cpp -o CMakeFiles/code.dir/Linearhashing/L-Hashing.cpp.s
+CMakeFiles/code.dir/Linearhashing/LHash.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/code.dir/Linearhashing/LHash.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/femu/experiment/code2/code/Linearhashing/LHash.cpp -o CMakeFiles/code.dir/Linearhashing/LHash.cpp.s
 
 # Object files for target code
 code_OBJECTS = \
@@ -220,7 +220,7 @@ code_OBJECTS = \
 "CMakeFiles/code.dir/Backend/DiskRead/ReadDisk.cpp.o" \
 "CMakeFiles/code.dir/Exhashing/ExtendibleHash.cpp.o" \
 "CMakeFiles/code.dir/Backend/BlockManage/BlockInfo.cpp.o" \
-"CMakeFiles/code.dir/Linearhashing/L-Hashing.cpp.o"
+"CMakeFiles/code.dir/Linearhashing/LHash.cpp.o"
 
 # External object files for target code
 code_EXTERNAL_OBJECTS =
@@ -234,7 +234,7 @@ code: CMakeFiles/code.dir/Backend/IODisk/WriteDisk.cpp.o
 code: CMakeFiles/code.dir/Backend/DiskRead/ReadDisk.cpp.o
 code: CMakeFiles/code.dir/Exhashing/ExtendibleHash.cpp.o
 code: CMakeFiles/code.dir/Backend/BlockManage/BlockInfo.cpp.o
-code: CMakeFiles/code.dir/Linearhashing/L-Hashing.cpp.o
+code: CMakeFiles/code.dir/Linearhashing/LHash.cpp.o
 code: CMakeFiles/code.dir/build.make
 code: CMakeFiles/code.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/femu/experiment/code2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable code"

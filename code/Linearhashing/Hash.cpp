@@ -52,30 +52,47 @@ void __f(const char* names,Arg1&& arg1,Args&&... args){
 class Hash
 {
   /*
-   * Some private variables. 
+   * Private variables. 
    */
   private:
     vector<uint64_t[BucketSize]> Buckets;  //In-memeory buckets table with fixed bucket size.
+    // vector<set<int>> Overflow;
+    int marker,mod;
 
   public:
-
-    int bufsize,marker,mod;
-    
-    vector<set<int>> Overflow;
-
-    Hash(int sz,int bufsz)
+  /*
+   * some public function to manipulate private variables. 
+   */
+    Hash(int sz)
     {
-      bufsize = bufsz,mod= sz;
-      Bucket.resize(sz);marker=0;
+      /*
+       * Constructive function is used to initialize private variables. 
+       */
+      mod = sz;
+      marker = 0;
+      Bucket.resize(sz);
       Overflow.resize(sz);
     }
 
     void split(int val)
     {
-      Bucket.PB(set<int>());Overflow.PB(set<int>());
-      for(auto v:Bucket[val]) if(v%(2*mod)==val+mod)  Bucket[val+mod].insert(v);
-      for(auto v:Bucket[val+mod]) Bucket[val].erase(v);
-      for(auto v:Overflow[val]) if(v%(2*mod)==val+mod)  Overflow[val+mod].insert(v);
+      Bucket.PB(set<int>());
+      Overflow.PB(set<int>());
+      for(auto v:Bucket[val])
+      {
+        if(v%(2*mod)==val+mod)
+        {
+          Bucket[val+mod].insert(v);
+        }  
+      }
+        
+      for(auto v:Bucket[val+mod])
+      {
+        Bucket[val].erase(v);
+      }
+        
+      for(auto v:Overflow[val])
+      if(v%(2*mod)==val+mod)  Overflow[val+mod].insert(v);
       for(auto v:Overflow[val+mod]) Overflow[val].erase(v);
     }
 
@@ -85,7 +102,7 @@ class Hash
       mod*=2;marker=0;
     }
 
-    int insert(int x)
+    int insert(int value)
     {
       int bucketno = x%mod;
       if(bucketno < marker) bucketno = x%(2*mod);

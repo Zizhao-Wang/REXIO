@@ -321,29 +321,29 @@ FrontEnd/MemoryAllocate/HashBlock.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/FrontEnd/MemoryAllocate/HashBlock.cpp.s
 .PHONY : FrontEnd/MemoryAllocate/HashBlock.cpp.s
 
-Linearhashing/L-Hashing.o: Linearhashing/L-Hashing.cpp.o
-.PHONY : Linearhashing/L-Hashing.o
+Linearhashing/LHash.o: Linearhashing/LHash.cpp.o
+.PHONY : Linearhashing/LHash.o
 
 # target to build an object file
-Linearhashing/L-Hashing.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/Linearhashing/L-Hashing.cpp.o
-.PHONY : Linearhashing/L-Hashing.cpp.o
+Linearhashing/LHash.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/Linearhashing/LHash.cpp.o
+.PHONY : Linearhashing/LHash.cpp.o
 
-Linearhashing/L-Hashing.i: Linearhashing/L-Hashing.cpp.i
-.PHONY : Linearhashing/L-Hashing.i
+Linearhashing/LHash.i: Linearhashing/LHash.cpp.i
+.PHONY : Linearhashing/LHash.i
 
 # target to preprocess a source file
-Linearhashing/L-Hashing.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/Linearhashing/L-Hashing.cpp.i
-.PHONY : Linearhashing/L-Hashing.cpp.i
+Linearhashing/LHash.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/Linearhashing/LHash.cpp.i
+.PHONY : Linearhashing/LHash.cpp.i
 
-Linearhashing/L-Hashing.s: Linearhashing/L-Hashing.cpp.s
-.PHONY : Linearhashing/L-Hashing.s
+Linearhashing/LHash.s: Linearhashing/LHash.cpp.s
+.PHONY : Linearhashing/LHash.s
 
 # target to generate assembly for a file
-Linearhashing/L-Hashing.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/Linearhashing/L-Hashing.cpp.s
-.PHONY : Linearhashing/L-Hashing.cpp.s
+Linearhashing/LHash.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/Linearhashing/LHash.cpp.s
+.PHONY : Linearhashing/LHash.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -402,9 +402,9 @@ help:
 	@echo "... FrontEnd/MemoryAllocate/HashBlock.o"
 	@echo "... FrontEnd/MemoryAllocate/HashBlock.i"
 	@echo "... FrontEnd/MemoryAllocate/HashBlock.s"
-	@echo "... Linearhashing/L-Hashing.o"
-	@echo "... Linearhashing/L-Hashing.i"
-	@echo "... Linearhashing/L-Hashing.s"
+	@echo "... Linearhashing/LHash.o"
+	@echo "... Linearhashing/LHash.i"
+	@echo "... Linearhashing/LHash.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

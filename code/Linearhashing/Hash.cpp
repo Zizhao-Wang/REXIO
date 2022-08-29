@@ -1,13 +1,10 @@
-/*
- * @Author: Zizhao Wang
+/* @Author: Zizhao Wang
  * @E-mail: zz.wang@siat.ac.cn
  * @Date: 10/8/2022
  * @name: Implementation of Linear-Hashing.
- */
+*/
 
-/*
- * Some useful header files. 
- */
+//Some useful header files. 
 #include<iostream>
 #include<vector>
 using namespace std;
@@ -19,6 +16,8 @@ typedef vector< VI > VVI;
 typedef long long int LL;
 
 #define BucketSize 100  // size of a bucket
+#define Tablebase  100  // In-memory table size
+
 #define PB push_back
 #define MP make_pair
 #define F first
@@ -49,30 +48,40 @@ void __f(const char* names,Arg1&& arg1,Args&&... args){
 #define trace(...)
 #endif
 
-class Hash
+class Bucket
+{
+  public:
+    vector<uint64_t>  bucket;
+    uint64_t  BucketNo;  
+}
+
+class LinearHashTable
 {
   /*
    * Private variables. 
    */
   private:
-    vector<uint64_t[BucketSize]> Buckets;  //In-memeory buckets table with fixed bucket size.
+    vector<vector<Bucket>> BucketTable;  //In-memeory buckets table with fixed bucket size.
+
+    uint64_t Tablesize;
     uint64_t mod;
     // vector<set<int>> Overflow;
-    int marker;
 
   public:
   /*
    * some public function to manipulate private variables. 
    */
-    Hash(int sz)
+    LinearHashTable(int sz)
     {
       /*
        * Constructive function is used to initialize private variables. 
        */
-      mod = sz;
-      marker = 0;
-      Bucket.resize(sz);
-      Overflow.resize(sz);
+      Tablesize = Tablebase;
+      for(int i = 0; i<TableSize;i++)
+      {
+        Bucket TempBucket;
+        Buckets.push_bakc(TempBucket);
+      }
     }
 
     void split(int val)
@@ -105,6 +114,7 @@ class Hash
 
     int insert(int value)
     {
+
       /*
        * This function is implemented to insert a special value into a bucket according to
        * a special rule that usually is called “Linear Hashing method”. 
@@ -114,9 +124,19 @@ class Hash
        *  4. Synchronize the value with Disk
        *  3. update in-memory table 
        */
-      int bucket = value % mod;  
-      if(bucketno < marker) bucketno = x%(2*mod);
-      if (Bucket[bucketno].count(x)+ Overflow[bucketno].count(x)) return 0;
+
+      /*
+       * step 1. Find a proper bucket for a specific value 
+       */
+      int bucketno = value % mod;  
+      if(Buckets[bucketno].size() >= BucketSize)
+      {
+        bucketno = value % (mod*2);
+      }
+      if(Buckets[bucketno].count(x)+ Overflow[bucketno].count(x))
+      {
+        return 0;
+      } 
       if(Bucket[bucketno].size()==bufsize) 
       {
         Overflow[bucketno].insert(x);
@@ -144,25 +164,41 @@ void emptyOutput()
 }
 
 
-int main(int argc,char *argv[])
+void LHashPort()
 {
-  if(argc<4) cerr<<"Invalid input" <<endl;
-  int M = atoi(argv[1]); 
-  int B = atoi(argv[2]);freopen(argv[3],"r",stdin);
-  Hash H = Hash(M-1,B);
-  int x;
-  while(1)
-  {
-    while(Input.size()<((M-1)*B) && si(x)!=EOF) Input.PB(x+VV);         
-    if(!Input.size()) {emptyOutput();break;}
-    reverse(ALL(Input)); 
-    while(Input.size())
+  
+    clock_t startTime,endTime;  // Definition of timestamp
+    HashTable hashtable;        // initialize a in-memory hash table
+  
+    /* Write datum */
+    startTime = clock();
+    for(int i=1;i<=3;i++)
     {
-      auto x = Input.back(); 
-      Input.pop_back(); 
-      if(H.insert(x)) Output.PB(x);
-      if(Output.size()==B) emptyOutput();
+      uint64_t value = i;
+      // d.insert(i,value,0);
     }
-  }
-  return 0;
+    endTime = clock();
+    std::cout << "Total Time of inserting: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+
+
+    /* Read datum */
+    startTime = clock();
+    for(int i=1;i<=3;i++)
+    {
+      uint64_t value = i;
+      // d.insert(i,value,0);
+    }
+    endTime = clock();
+    std::cout << "Total Time of reading data: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+
+    /* data update */
+    startTime = clock();
+    for(int i=1;i<=3;i++)
+    {
+        uint64_t value = i;
+        // d.insert(i,value,0);
+    }
+    endTime = clock();
+    std::cout << "Total Time of datum update: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+    
 }

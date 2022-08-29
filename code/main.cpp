@@ -51,7 +51,7 @@ int main(int argc, char **argv)
 
     //ExtendHashTableInitialize();
 
-    LinearHashing();
+    LHashPort();
 
     return 0;
 

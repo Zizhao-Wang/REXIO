@@ -68,14 +68,14 @@ void LHashPort()
 {
   
     clock_t startTime,endTime;  // Definition of timestamp
-            // initialize a in-memory hash table
+    LinearHashTable hashtable;        // initialize a in-memory hash table
   
     /* Write datum */
     startTime = clock();
     for(int i=1;i<=3;i++)
     {
       uint64_t value = i;
-        // hash.insert(i,value,0);
+      hashtable.insert(i,value);
     }
     endTime = clock();
     std::cout << "Total Time of inserting: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";

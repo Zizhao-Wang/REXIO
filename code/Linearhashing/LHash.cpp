@@ -12,6 +12,8 @@
 
 using namespace std;
 
+uint64_t BucketAllocate = 0;
+
 // typedef pair<int,int> II;
 // typedef vector<II> VII;
 // typedef vector<int> VI;
@@ -72,7 +74,7 @@ void LHashPort()
   
     /* Write datum */
     startTime = clock();
-    for(int i=1;i<=3;i++)
+    for(int i=1;i<=10;i++)
     {
       uint64_t value = i;
       hashtable.insert(i,value);

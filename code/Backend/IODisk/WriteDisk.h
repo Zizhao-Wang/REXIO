@@ -28,8 +28,8 @@ using namespace std;
  */
 extern uint_32 blockoffset;
 extern size_t writepointer;
-extern size_t sectorpointer ;
-extern size_t blockpointer ;
+extern size_t sectorpointer;
+extern size_t blockpointer;
 extern int indexs;
 extern struct nvm_bp* bp;
 extern bool flag;

@@ -104,8 +104,9 @@ class LinearHashTable
       if(BucketTable[bucketno].size() >= BucketSize)
       {
         int err = 0;
+        mod = mod *2;
         err = split(bucketno);
-        bucketno = value % (mod*2);
+        bucketno = value % mod;
         BucketTable[bucketno].Insert(key);
         SingleValueWrite(value,bucketno,BucketTable[bucketno].size());
       }

@@ -14,7 +14,7 @@
 /*  Some pre-define variables   */
 #define BucketSize 100  // size of a bucket
 #define Tablebase  100  // In-memory table size
-
+extern uint64_t BucketAllocate; 
 
 class LBucket
 {
@@ -23,14 +23,26 @@ class LBucket
     uint64_t  BucketNo;
 
   public:
+    LBucket()
+    {
+      BucketNo = BucketAllocate;
+    }
     int Insert(uint64_t key1)
     {
 
-      bucket.insert(key1);
+      bucket.push_back(key1);
       return 0;
 
     }
 
+    int BucketErase()
+    {
+      bucket.clear();
+    }
+    std::vector<uint64_t> GetBucket()
+    {
+      return bucket;
+    }
 };
 
 class LinearHashTable
@@ -39,6 +51,7 @@ class LinearHashTable
   private:
     std::vector<LBucket> BucketTable;  //In-memeory buckets table with fixed bucket size.
     uint64_t Tablesize;
+    const uint64_t BucketBase;
     uint64_t mod;    // vector<set<int>> Overflow;
 
   public:
@@ -56,34 +69,28 @@ class LinearHashTable
 
     int split(int val)
     {
-    //   LBucket.push_back();
-    //   for(auto v:Bucket[val])
-    //   {
-    //     if(v%(2*mod)==val+mod)
-    //     {
-    //       Bucket[val+mod].insert(v);
-    //     }  
-    //   }
-        
-    //   for(auto v:Bucket[val+mod])
-    //   {
-    //     Bucket[val].erase(v);
-    //   }
-        
-    //   for(auto v:Overflow[val])
-    //   if(v%(2*mod)==val+mod)  Overflow[val+mod].insert(v);
-    //   for(auto v:Overflow[val+mod]) Overflow[val].erase(v);
-    // }
+      std::vector<uint64_t> TempBucket;
+      LBucket NewBucket = new LBucket();
+
+      TempBucket = BucketTable[val].GetBucket();
+      for(int i=0;i<TempBucket.size();i++)
+      {
+        int err = 0;
+        err = insert(TempBucket[i],TempBucket[i]);
+      }
+      
+    }
 
     // void changemod()
     // {
     //   for(int i=0;i<mod;i++) Bucket.PB(set<int>()),Overflow.PB(set<int>());
     //   mod*=2;marker=0;
-    }
+    //}
 
     int insert(uint64_t key, uint64_t value)
     {
-    /* This function is implemented to insert a special value into a bucket according to
+
+     /* This function is implemented to insert a special value into a bucket according to
       * a special rule that usually is called “Linear Hashing method”. 
       * The following source code contains three steps:
       *  1. Find a proper bucket
@@ -107,18 +114,17 @@ class LinearHashTable
         BucketTable[bucketno].Insert(key);
         SingleValueWrite(value,bucketno,BucketTable[bucketno].size());
       }
-      // if(Buckets[bucketno].count(x)+ Overflow[bucketno].count(x))
-      // {
-      //   return 0;
-      // } 
-      // if(Bucket[bucketno].size()==bufsize) 
-      // {
-      //   Overflow[bucketno].insert(x);
-      //   split(marker++);
-      //   if(marker==mod) changemod();
-      // }
-      // else Bucket[bucketno].insert(x);
       return 1;
+    }
+
+    int Search(uint64_t key)
+    {
+
+    }
+
+    int Delete(uint64_t value)
+    {
+
     }
 };
 

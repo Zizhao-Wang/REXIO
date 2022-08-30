@@ -11,9 +11,7 @@
 #include <vector>
 #include "../Backend/IODisk/WriteDisk.h"
 
-/*  Some pre-define variables   */
-#define BucketSize 100  // size of a bucket
-#define Tablebase  100  // In-memory table size
+/*  Global variables   */
 extern uint64_t BucketAllocate; 
 
 class LBucket
@@ -21,28 +19,58 @@ class LBucket
   private:
     std::vector<uint64_t>  bucket;
     uint64_t  BucketNo;
+    uint64_t  BucketMax;
 
   public:
     LBucket()
     {
-      BucketNo = BucketAllocate;
+      /*  Initialize some necessary in-class variables */
+      BucketNo = BucketAllocate;     //Bucket number = page number 
+      BucketMax = 2048;              //The capacity of a bucket 
     }
-    int Insert(uint64_t key1)
+
+    /* Insert key into vector! */
+    void Insert(uint64_t key1)
     {
 
+      size_t cursize = bucket.size();
       bucket.push_back(key1);
-      return 0;
+      size_t nowsize = bucket.size();
+      if (nowsize - cursize)
+      {
+        printf("Insert key %u successful, size of the bucket is %u after inserting.", key1,nowsize);
+      }
+      else
+      {
+        printf("Because some unknown reasons, insertion failure!\n");
+      }
 
     }
 
-    int BucketErase()
+    /* Erase the bucket but not give up the memory space. */
+    void BucketErase()
     {
+
       bucket.clear();
+      if (bucket.size() == 0) 
+      {
+        printf("Successful removed!");
+      }
+      else
+      {
+        printf("Clear failure");
+      }
+      
     }
+
+    /* Return the vector that represents the specific page! */
     std::vector<uint64_t> GetBucket()
     {
+
       return bucket;
+
     }
+
 };
 
 class LinearHashTable
@@ -58,13 +86,15 @@ class LinearHashTable
     /* some public function to manipulate private variables. */
     LinearHashTable()
     {
+      BucketBase = 2048;
       /*  Constructive function is used to initialize private variables. */
-      Tablesize = Tablebase;
+      mod = 100;
+      Tablesize = 100;
       for(int i = 0; i<Tablesize;i++)
       {
         LBucket TempBucket;
         BucketTable.push_back(TempBucket);
-      }
+      } 
     }
 
     int split(int val)
@@ -108,7 +138,7 @@ class LinearHashTable
         err = split(bucketno);
         bucketno = value % mod;
         BucketTable[bucketno].Insert(key);
-        SingleValueWrite(value,bucketno,BucketTable[bucketno].size());
+        //SingleValueWrite(value,bucketno,BucketTable[bucketno].size());
       }
       else
       {

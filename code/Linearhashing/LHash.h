@@ -21,6 +21,7 @@ class LBucket
     uint64_t  BucketNo;
     uint64_t  BucketMax;
 
+
   public:
     LBucket()
     {
@@ -71,6 +72,12 @@ class LBucket
 
     }
 
+    /* Return the current size of bucket. */
+    size_t GetBucketSize()
+    {
+      return bucket.size();
+    }
+
 };
 
 class LinearHashTable
@@ -79,14 +86,16 @@ class LinearHashTable
   private:
     std::vector<LBucket> BucketTable;  //In-memeory buckets table with fixed bucket size.
     uint64_t Tablesize;
-    const uint64_t BucketBase;
+    const uint64_t BucketBase = 2048;
+    const size_t tablebase = 100;
     uint64_t mod;    // vector<set<int>> Overflow;
 
   public:
+
+
     /* some public function to manipulate private variables. */
     LinearHashTable()
     {
-      BucketBase = 2048;
       /*  Constructive function is used to initialize private variables. */
       mod = 100;
       Tablesize = 100;
@@ -97,10 +106,33 @@ class LinearHashTable
       } 
     }
 
+    /* Doubling hash table  */
+    int TableDouble()
+    {
+
+      for(size_t i=1;i<=tablebase;i++)
+      {
+        LBucket TempBucket;
+        BucketTable.push_back(TempBucket);
+      }
+      if (BucketTable.size() - Tablesize == tablebase)
+      {
+        Tablesize += tablebase;
+      }
+      else
+      {
+        printf("Because of unknoen reason, Hash table double failure!\n");
+        return -1;
+      }
+      
+      return 0;
+
+    }
+
     int split(int val)
     {
       std::vector<uint64_t> TempBucket;
-      LBucket NewBucket = new LBucket();
+      LBucket NewBucket;
 
       TempBucket = BucketTable[val].GetBucket();
       for(int i=0;i<TempBucket.size();i++)
@@ -131,7 +163,7 @@ class LinearHashTable
 
       /* step 1. Find a proper bucket for a specific value */
       int bucketno = key % mod;  
-      if(BucketTable[bucketno].size() >= BucketSize)
+      if(BucketTable[bucketno].GetBucketSize() >= BucketBase)
       {
         int err = 0;
         mod = mod *2;
@@ -143,7 +175,7 @@ class LinearHashTable
       else
       {
         BucketTable[bucketno].Insert(key);
-        SingleValueWrite(value,bucketno,BucketTable[bucketno].size());
+        SingleValueWrite(value,bucketno,BucketTable[bucketno].GetBucketSize());
       }
       return 1;
     }

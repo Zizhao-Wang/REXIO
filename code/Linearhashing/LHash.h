@@ -170,7 +170,7 @@ class LinearHashTable
         err = split(bucketno);
         bucketno = value % mod;
         BucketTable[bucketno].Insert(key);
-        SingleValueWrite(value,bucketno,BucketTable[bucketno].size());
+        SingleValueWrite(value,bucketno,BucketTable[bucketno].GetBucketSize());
       }
       else
       {

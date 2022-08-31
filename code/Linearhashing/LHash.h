@@ -175,7 +175,7 @@ class LinearHashTable
       else
       {
         BucketTable[bucketno].Insert(key);
-        SingleValueWrite(value,bucketno,BucketTable[bucketno].GetBucketSize());
+        //SingleValueWrite(value,bucketno,BucketTable[bucketno].GetBucketSize());
       }
       return 1;
     }

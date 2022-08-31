@@ -170,19 +170,19 @@ class LinearHashTable
         err = split(bucketno);
         bucketno = value % mod;
         BucketTable[bucketno].Insert(key);
-        //SingleValueWrite(value,bucketno,BucketTable[bucketno].size());
+        SingleValueWrite(value,bucketno,BucketTable[bucketno].size());
       }
       else
       {
         BucketTable[bucketno].Insert(key);
-        //SingleValueWrite(value,bucketno,BucketTable[bucketno].GetBucketSize());
+        SingleValueWrite(value,bucketno,BucketTable[bucketno].GetBucketSize());
       }
       return 1;
     }
 
     int Search(uint64_t key)
     {
-
+      
     }
 
     int Delete(uint64_t value)

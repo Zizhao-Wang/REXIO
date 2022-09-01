@@ -139,9 +139,10 @@ class LinearHashTable
     /* Return 0 if suucess, */
     int split(int val)
     {
-      std::vector<uint64_t> TempBucket;
-      LBucket NewBucket(AllocatorUse());
-
+      if(TableDouble() == -1)
+      {
+        printf("Doubling hash table failure when spliting bucket %lu because unknown reaon.",val);
+      }
       TempBucket = BucketTable[val].GetBucket();
       for(int i=0;i<TempBucket.size();i++)
       {

@@ -60,7 +60,7 @@ class LBucket
     void BucketErase()
     {
 
-      bucket.clear();
+      bucket.swap();
       if (bucket.size() == 0) 
       {
         printf("Successful removed!");
@@ -75,9 +75,7 @@ class LBucket
     /* Return the vector that represents the specific page! */
     std::vector<uint64_t> GetBucket()
     {
-
       return bucket;
-
     }
 
     /* Return the current size of bucket. */
@@ -137,8 +135,10 @@ class LinearHashTable
     }
 
     /* Return 0 if suucess, */
-    int split(int val)
+    int split(uint64_t val)
     {
+      
+      std::vector<uint64_t> TempBucket;  /* Intermediate varible definition */
 
       if(TableDouble() == -1)
       {
@@ -146,12 +146,12 @@ class LinearHashTable
         exit(103);
       }
       TempBucket = BucketTable[val].GetBucket();
+      BucketTable[val].BucketErase();
       for(int i=0;i<TempBucket.size();i++)
       {
         int err = 0;
         err = insert(TempBucket[i],TempBucket[i]);
       }
-
       return 0;
       
     }

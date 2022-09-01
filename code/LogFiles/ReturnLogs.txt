@@ -1,1 +1,2 @@
-Bucket allocator failure. Return code: 102;    @idetification: code/Linearhashing/LHash.h
+Bucket allocator failure; Return code: 102;    @idetification: code/Linearhashing/LHash.h LBucket(uint64_t BucketAllocated) in class LBucket
+Doubling bucket failure; Return code: 103;    @idetification: code/Linearhashing/LHash.h  int split(int val) in class LinearHashTable;

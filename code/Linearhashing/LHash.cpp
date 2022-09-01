@@ -39,7 +39,7 @@ void LHashPort()
   
     /* Write datum */
     startTime = clock();
-    for(int i=1;i<=1000000;i++)
+    for(int i=1;i<=2000000;i++)
     {
       uint64_t value = i;
       hashtable.insert(i,value);

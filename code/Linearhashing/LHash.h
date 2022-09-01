@@ -182,12 +182,14 @@ class LinearHashTable
         err = split(bucketno);
         bucketno = value % mod;
         BucketTable[bucketno].Insert(key);
-        SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize());
+        printf("Test: Pageno %lu\n",BucketTable[bucketno].GetBucketNo());
+        //SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize());
       }
       else
       {
         BucketTable[bucketno].Insert(key);
-        SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize());
+        printf("Test: Pageno %lu\n",BucketTable[bucketno].GetBucketNo());
+        //SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize());
       }
       return 1;
     }

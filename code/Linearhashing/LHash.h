@@ -34,27 +34,26 @@ class LBucket
         printf("Unknow reasons! Bucket allocator failure!\n");
         exit(102);
       }
+      //printf("Allocated Number %lu\n",BucketAllocated);
       /*  Initialize some necessary in-class variables */
       BucketNo = BucketAllocated;     //Bucket number = page number 
       BucketMax = 2048;              //The capacity of a bucket 
     }
 
-    /* Insert key into vector! */
+    /* Insert key into specific vector! */
     void Insert(uint64_t key1)
     {
-
       size_t cursize = bucket.size();
       bucket.push_back(key1);
       size_t nowsize = bucket.size();
-      if (nowsize - cursize)
+      if (nowsize - cursize > 0)
       {
-        printf("Insert key %lu successful, size of the bucket is %lu after inserting.", key1,nowsize);
+        printf("Insert key %lu into bucket %lu successful, size of the bucket is %lu after inserting.\n", key1,BucketNo,nowsize);
       }
       else
       {
         printf("Because some unknown reasons, insertion failure!\n");
       }
-
     }
 
     /* Erase the bucket but not give up the memory space. */
@@ -174,12 +173,12 @@ class LinearHashTable
         err = split(bucketno);
         bucketno = value % mod;
         BucketTable[bucketno].Insert(key);
-        SingleValueWrite(value,bucketno,BucketTable[bucketno].GetBucketSize());
+        //SingleValueWrite(value,bucketno,BucketTable[bucketno].GetBucketSize());
       }
       else
       {
         BucketTable[bucketno].Insert(key);
-        SingleValueWrite(value,bucketno,BucketTable[bucketno].GetBucketSize());
+        //SingleValueWrite(value,bucketno,BucketTable[bucketno].GetBucketSize());
       }
       return 1;
     }

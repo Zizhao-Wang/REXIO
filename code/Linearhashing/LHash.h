@@ -31,7 +31,7 @@ class LBucket
     {
       if(BucketAllocated == -1)
       {
-        printf("Unknow reasons! Bucket allocator failure!\n")
+        printf("Unknow reasons! Bucket allocator failure!\n");
         exit(102);
       }
       /*  Initialize some necessary in-class variables */
@@ -48,7 +48,7 @@ class LBucket
       size_t nowsize = bucket.size();
       if (nowsize - cursize)
       {
-        printf("Insert key %u successful, size of the bucket is %u after inserting.", key1,nowsize);
+        printf("Insert key %lu successful, size of the bucket is %lu after inserting.", key1,nowsize);
       }
       else
       {
@@ -120,7 +120,7 @@ class LinearHashTable
 
       for(size_t i=1;i<=tablebase;i++)
       {
-        LBucket TempBucket;
+        LBucket TempBucket(AllocatorUse());
         BucketTable.push_back(TempBucket);
       }
       if (BucketTable.size() - Tablesize == tablebase)
@@ -137,10 +137,11 @@ class LinearHashTable
 
     }
 
+    /* Return 0 if suucess, */
     int split(int val)
     {
       std::vector<uint64_t> TempBucket;
-      LBucket NewBucket;
+      LBucket NewBucket(AllocatorUse());
 
       TempBucket = BucketTable[val].GetBucket();
       for(int i=0;i<TempBucket.size();i++)
@@ -148,6 +149,8 @@ class LinearHashTable
         int err = 0;
         err = insert(TempBucket[i],TempBucket[i]);
       }
+
+      return 0;
       
     }
 
@@ -183,36 +186,14 @@ class LinearHashTable
 
     int Search(uint64_t key)
     {
-      
+      return 0;
     }
 
     int Delete(uint64_t value)
     {
-
+      return 0;
     }
 };
-
-
-
-// class HashTable:public Hash 
-// {
-
-//     int max_col;
-//     // vector<string> _vec;
-
-// public:
-
-//    /* 
-//     * Here are some useful functions for updating hash table:
-//     * 1. Inserting a new key/value data pair.
-//     * 2. Deleting a Key/Value item.
-//     * 3. Searching one or more specific value entries. 
-//     */
-
-// };
-
-// /* Declaration of L-Hashing functions */
-// void LinearHashing(); // port of L-Hashing
 
 
 /* All function declaration!*/

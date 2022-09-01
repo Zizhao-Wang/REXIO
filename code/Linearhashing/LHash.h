@@ -11,8 +11,12 @@
 #include <vector>
 #include "../Backend/IODisk/WriteDisk.h"
 
-/*  Global variables   */
-extern uint64_t BucketAllocate; 
+/* Global variables declaration */
+extern uint64_t BucketAllocator;
+
+
+uint64_t AllocatorUse();
+
 
 class LBucket
 {
@@ -23,10 +27,15 @@ class LBucket
 
 
   public:
-    LBucket()
+    LBucket(uint64_t BucketAllocated)
     {
+      if(BucketAllocated == -1)
+      {
+        printf("Unknow reasons! Bucket allocator failure!\n")
+        exit(102);
+      }
       /*  Initialize some necessary in-class variables */
-      BucketNo = BucketAllocate;     //Bucket number = page number 
+      BucketNo = BucketAllocated;     //Bucket number = page number 
       BucketMax = 2048;              //The capacity of a bucket 
     }
 
@@ -85,11 +94,10 @@ class LinearHashTable
   /* Private variables. */
   private:
     std::vector<LBucket> BucketTable;  //In-memeory buckets table with fixed bucket size.
-    uint64_t Tablesize;
+    uint64_t Tablesize, mod;
     const uint64_t BucketBase = 2048;
     const size_t tablebase = 100;
-    uint64_t mod;    // vector<set<int>> Overflow;
-
+  
   public:
 
 
@@ -101,7 +109,7 @@ class LinearHashTable
       Tablesize = 100;
       for(int i = 0; i<Tablesize;i++)
       {
-        LBucket TempBucket;
+        LBucket TempBucket(AllocatorUse());
         BucketTable.push_back(TempBucket);
       } 
     }
@@ -143,12 +151,6 @@ class LinearHashTable
       
     }
 
-    // void changemod()
-    // {
-    //   for(int i=0;i<mod;i++) Bucket.PB(set<int>()),Overflow.PB(set<int>());
-    //   mod*=2;marker=0;
-    //}
-
     int insert(uint64_t key, uint64_t value)
     {
 
@@ -161,7 +163,6 @@ class LinearHashTable
       *  3. update in-memory table 
       */
 
-      /* step 1. Find a proper bucket for a specific value */
       int bucketno = key % mod;  
       if(BucketTable[bucketno].GetBucketSize() >= BucketBase)
       {

@@ -10,10 +10,26 @@
 #include<vector>
 #include "./LHash.h"
 
-using namespace std;
 
-uint64_t BucketAllocate = 0;
 
+/* Global variables definition and utilization  */
+uint64_t BucketAllocator = 0;
+
+uint64_t AllocatorUse()
+{
+  if(BucketAllocator == 0x0000000000000000)
+  {
+    ++BucketAllocator;
+    return 0x0000000000000000;
+  }
+  else
+  {
+    return BucketAllocator++;
+  }
+
+  return -1;
+
+}
 
 void LHashPort()
 {

@@ -79,6 +79,8 @@ uint64_t SSD_write2(uint64_t values);
 //Signle value insert into physicals.
 uint64_t SingleValueWrite(uint64_t value, uint64_t pageno,uint64_t Cursize);
 
+//Signle value insert into physicals for linear hashing.
+uint64_t SingleValueWrite4Linear(uint64_t value, uint64_t pageno, uint64_t Cursize)
 
 
 /* 

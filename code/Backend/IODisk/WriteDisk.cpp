@@ -535,6 +535,61 @@ uint64_t SingleValueWrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
 }
 
 
+uint64_t SingleValueWrite4Linear(uint64_t value, uint64_t pageno, uint64_t Cursize)
+{
+
+    /* Function flag, default value equals 0(successful flag). */
+    int err = 0;
+
+    /* Get chunkno, judge sector pointer of this block. */
+    uint64_t  flag = pageno;
+    if(pageno == UINT64_MAX)
+    {
+        pageno = sectorpointer;
+    }
+
+   /* 
+    * Step 1 : 
+    * Step 2 : 
+    */
+    if(flag == UINT64_MAX && Cursize ==0)
+    {
+        struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, pageno);
+        size_t ws_min = nvm_dev_get_ws_min(bp->dev);
+        struct nvm_addr addrs[ws_min];
+        for (size_t aidx = 0; aidx < ws_min; ++aidx) 
+        {
+		    addrs[aidx].val = addrs_chunk.val;
+		    addrs[aidx].l.sectr = (pageno%4096)+aidx;
+		    /* printf("aidx: %lu addrs[aidx].val : %lu chunk_addrs[cidx].val %lu addrs[aidx].l.sectr %lu \n",aidx,addrs[aidx].val,chunk_addrs[cidx].val,addrs[aidx].l.sectr); */
+	    }
+        char * temp = new char[100];
+        uint64_t *ML = (uint64_t*) temp;
+        ML[Cursize] = value;
+        printf("Value :%ld has been inserted!\n", ML[0]);
+        for(int i=0;i<Cursize*8+10;i++)
+        {
+            bp->bufs->write[i] = temp[i]; 
+        }
+        // Write value into page. 
+        err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
+        if(err == 0) 
+        {
+            printf("Insert completion! Insert sectors: %ld\n",sectorpointer);
+            /* update pointers! */
+            PointerRenew(ws_min);
+        }
+    }
+    else
+    {
+        PageUpdate(pageno,value,Cursize);
+    }  
+
+    return pageno;
+
+}
+
+
 
 /*
  * Read functions. 

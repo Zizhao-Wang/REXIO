@@ -471,7 +471,10 @@ uint64_t SSD_write2(uint64_t values)
 
 
 /*
- * This function is used for single value insert. 
+ * This function is used for single value insert. Thre are three parameters in this function:
+ * @pageno
+ * @Cursize
+ * @value
  */
 uint64_t SingleValueWrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
 {

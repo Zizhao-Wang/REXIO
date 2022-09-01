@@ -59,29 +59,35 @@ class LBucket
     /* Erase the bucket but not give up the memory space. */
     void BucketErase()
     {
-
-      bucket.swap();
+      bucket.clear();
       if (bucket.size() == 0) 
       {
-        printf("Successful removed!");
+        printf("Bucket %lu clear succeed!\n",BucketNo);
       }
       else
       {
-        printf("Clear failure");
+        printf("Bucket %lu clear failure.\n",BucketNo);
       }
-      
+
     }
 
-    /* Return the vector that represents the specific page! */
-    std::vector<uint64_t> GetBucket()
+    /*
+     * Some Get() function is used to 
+     */
+    
+    std::vector<uint64_t> GetBucket() /* Return the vector that represents the specific page! */
     {
       return bucket;
     }
-
-    /* Return the current size of bucket. */
-    size_t GetBucketSize()
+    
+    size_t GetBucketSize() /* Return the current size of bucket. */
     {
       return bucket.size();
+    }
+
+    uint64_t GetBucketNo()
+    {
+      return BucketNo;
     }
 
 };
@@ -168,20 +174,20 @@ class LinearHashTable
       *  3. update in-memory table 
       */
 
-      int bucketno = key % mod;  
+      uint64_t bucketno = key % mod;  
       if(BucketTable[bucketno].GetBucketSize() >= BucketBase)
       {
         int err = 0;
-        mod = mod *2;
+        mod = mod + 100;
         err = split(bucketno);
         bucketno = value % mod;
         BucketTable[bucketno].Insert(key);
-        //SingleValueWrite(value,bucketno,BucketTable[bucketno].GetBucketSize());
+        SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize());
       }
       else
       {
         BucketTable[bucketno].Insert(key);
-        //SingleValueWrite(value,bucketno,BucketTable[bucketno].GetBucketSize());
+        SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize());
       }
       return 1;
     }

@@ -547,6 +547,11 @@ uint64_t SingleValueWrite4Linear(uint64_t value, uint64_t pageno, uint64_t Cursi
     {
         pageno = sectorpointer;
     }
+    if (Cursize == 0) // "Cursize == 0 is true means t "
+    {
+        /* code */
+    }
+    
 
    /* 
     * Step 1 : 

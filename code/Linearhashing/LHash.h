@@ -12,10 +12,6 @@
 #include "../Backend/IODisk/WriteDisk.h"
 
 /* Global variables declaration */
-extern uint64_t BucketAllocator;
-
-
-uint64_t AllocatorUse();
 
 
 class LBucket
@@ -27,16 +23,10 @@ class LBucket
     bool  IsFirst;
 
   public:
-    LBucket(uint64_t BucketAllocated)
+    LBucket()
     {
-      if(BucketAllocated == -1)
-      {
-        printf("Unknow reasons! Bucket allocator failure!\n");
-        exit(102);
-      }
-      //printf("Allocated Number %lu\n",BucketAllocated);
       /*  Initialize some necessary in-class variables */
-      BucketNo = BucketAllocated;     //Bucket number = page number 
+      BucketNo = UINT64_MAX;     //Bucket number = page number 
       BucketMax = 2048;              //The capacity of a bucket
       IsFirst = true;
     }
@@ -77,7 +67,7 @@ class LBucket
     }
 
     /*
-     * Some Get() function is used to 
+     * Some Get() function is used to get private variables.
      */
     
     std::vector<uint64_t> GetBucket() /* Return the vector that represents the specific page! */
@@ -97,6 +87,22 @@ class LBucket
     bool GetFlag()
     {
       return IsFirst;
+    }
+
+    /*
+     * Some set() functions is used to set private variables.
+     */
+    void SetBucketNo(uint64_t bucketno)
+    {
+      if(BucketNo == UINT64_MAX)
+      {
+        BucketNo = bucketno;
+      }
+      else
+      {
+        printf("Set bucket number failure, %lu can not be setted!\n",bucketno);
+        exit(104);
+      }
     }
 
 };
@@ -121,7 +127,7 @@ class LinearHashTable
       Tablesize = 100;
       for(int i = 0; i<Tablesize;i++)
       {
-        LBucket TempBucket(AllocatorUse());
+        LBucket TempBucket;
         BucketTable.push_back(TempBucket);
       } 
     }
@@ -132,7 +138,7 @@ class LinearHashTable
 
       for(size_t i=1;i<=tablebase;i++)
       {
-        LBucket TempBucket(AllocatorUse());
+        LBucket TempBucket;
         BucketTable.push_back(TempBucket);
       }
       if (BucketTable.size() - Tablesize == tablebase)
@@ -186,19 +192,39 @@ class LinearHashTable
       uint64_t bucketno = key % mod;  
       if(BucketTable[bucketno].GetBucketSize() >= BucketBase)
       {
+        uint64_t pageno;
         int err = 0;
         mod = mod + 100;
         err = split(bucketno);
         bucketno = value % mod;
         BucketTable[bucketno].Insert(key);
         //printf("Test: Pageno %lu\n",BucketTable[bucketno].GetBucketNo());
-        SingleValueWrite4Linear(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize(),BucketTable[bucketno].GetFlag());
+        if(BucketTable[bucketno].GetBucketNo() == UINT64_MAX)
+        {
+          pageno = SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize());
+          BucketTable[bucketno].SetBucketNo(pageno);
+        }
+        else
+        {
+          SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize());
+        }
+
+          
       }
       else
       {
         BucketTable[bucketno].Insert(key);
-        //printf("Test: Pageno %lu\n",BucketTable[bucketno].GetBucketNo());
-        SingleValueWrite4Linear(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize(),BucketTable[bucketno].GetFlag());
+        uint64_t pageno;
+        //printf("Value:%lu; Pageno %lu; Current size:%lu; bool flag: %lu\n",value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize(),BucketTable[bucketno].GetFlag());
+        if(BucketTable[bucketno].GetBucketNo() == UINT64_MAX)
+        {
+          pageno = SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize());
+          BucketTable[bucketno].SetBucketNo(pageno);
+        }
+        else
+        {
+          SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize());
+        }
       }
       return 1;
     }

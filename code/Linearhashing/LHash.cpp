@@ -12,24 +12,7 @@
 
 
 
-/* Global variables definition and utilization  */
-uint64_t BucketAllocator = 0;
-
-uint64_t AllocatorUse()
-{
-  if(BucketAllocator == 0x0000000000000000)
-  {
-    ++BucketAllocator;
-    return 0x0000000000000000;
-  }
-  else
-  {
-    return BucketAllocator++;
-  }
-
-  return -1;
-
-}
+/* Global variables definition and utilization, coming soon...  */
 
 void LHashPort()
 {
@@ -39,7 +22,7 @@ void LHashPort()
   
     /* Write datum */
     startTime = clock();
-    for(int i=1;i<=10000;i++)
+    for(int i=1;i<=1;i++)
     {
       uint64_t value = i;
       hashtable.insert(i,value);
@@ -50,7 +33,7 @@ void LHashPort()
 
     /* Read datum */
     startTime = clock();
-    for(int i=1;i<=100;i++)
+    for(int i=1;i<=1000000;i++)
     {
       uint64_t value = i;
       // d.insert(i,value,0);

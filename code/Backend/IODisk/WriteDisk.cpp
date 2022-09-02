@@ -548,6 +548,11 @@ uint64_t SingleValueWrite4Linear(uint64_t value, uint64_t pageno, uint64_t Cursi
     /* Function flag, default value equals 0(successful flag). */
     int err = 0;    
     Cursize = Cursize - 1;
+    printf("pageno:%lu  ",pageno);
+    pageno == 0? : pageno-=1;
+    printf("pageno:%lu \n", pageno);
+
+    return 0;
    /* 
     * Step 1 : 
     * Step 2 : 
@@ -567,7 +572,7 @@ uint64_t SingleValueWrite4Linear(uint64_t value, uint64_t pageno, uint64_t Cursi
         char * temp = new char[100];
         uint64_t *ML = (uint64_t*) temp;
         ML[Cursize] = value;
-        printf("Value :%ld has been inserted!\n", ML[Cursize]);
+        //printf("Value :%ld has been inserted!\n", ML[Cursize]);
         for(int i=0;i<Cursize*8+10;i++)
         {
             bp->bufs->write[i] = temp[i]; 

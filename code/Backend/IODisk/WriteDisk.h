@@ -50,7 +50,7 @@ int CompenstaeFun(uint64_t chunkno);
 // Erase a sprcific chunck.
 int erasechunk(size_t pageno, uint64_t chunkno);
 
-
+int erasepage(size_t pageno);
 
 /* function is used to update pointers.  */
 int PointerRenew(size_t sectors);
@@ -80,7 +80,7 @@ uint64_t SSD_write2(uint64_t values);
 uint64_t SingleValueWrite(uint64_t value, uint64_t pageno,uint64_t Cursize);
 
 //Signle value insert into physicals for linear hashing.
-uint64_t SingleValueWrite4Linear(uint64_t value, uint64_t pageno, uint64_t Cursize)
+uint64_t SingleValueWrite4Linear(uint64_t value, uint64_t pageno, uint64_t Cursize,  bool IsFirst);
 
 
 /* 

@@ -20,8 +20,7 @@
 uint_32 blockoffset   = 0;
 size_t writepointer = 0;
 size_t blockpointer = 0;
-/* sectorpointer means current write pointers. */
-size_t sectorpointer = 0;
+size_t sectorpointer = 0;  /* sectorpointer means current write pointers. */
 int indexs=0;
 bool flag = false;
 uint64_t Pagedata[2050];
@@ -107,6 +106,14 @@ int erasechunk(size_t pageno, uint64_t chunkno)
         printf("chunk %lu erase failure.\n",chunkno);
     }
     return err;
+
+}
+
+
+int erasepage(size_t pageno, uint64_t chunkno)
+{
+
+    return 0;
 
 }
 
@@ -497,7 +504,7 @@ uint64_t SingleValueWrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
     * Step 1 : 
     * Step 2 : 
     */
-    if(flag == UINT64_MAX && Cursize ==0)
+    if(flag == UINT64_MAX && Cursize == 0)
     {
         struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, pageno);
         size_t ws_min = nvm_dev_get_ws_min(bp->dev);
@@ -535,29 +542,18 @@ uint64_t SingleValueWrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
 }
 
 
-uint64_t SingleValueWrite4Linear(uint64_t value, uint64_t pageno, uint64_t Cursize)
+uint64_t SingleValueWrite4Linear(uint64_t value, uint64_t pageno, uint64_t Cursize, bool IsFirst)
 {
 
     /* Function flag, default value equals 0(successful flag). */
-    int err = 0;
-
-    /* Get chunkno, judge sector pointer of this block. */
-    uint64_t  flag = pageno;
-    if(pageno == UINT64_MAX)
-    {
-        pageno = sectorpointer;
-    }
-    if (Cursize == 0) // "Cursize == 0 is true means t "
-    {
-        /* code */
-    }
-    
-
+    int err = 0;    
+    Cursize = Cursize - 1;
    /* 
     * Step 1 : 
     * Step 2 : 
     */
-    if(flag == UINT64_MAX && Cursize ==0)
+
+    if(IsFirst == true)
     {
         struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, pageno);
         size_t ws_min = nvm_dev_get_ws_min(bp->dev);
@@ -571,7 +567,7 @@ uint64_t SingleValueWrite4Linear(uint64_t value, uint64_t pageno, uint64_t Cursi
         char * temp = new char[100];
         uint64_t *ML = (uint64_t*) temp;
         ML[Cursize] = value;
-        printf("Value :%ld has been inserted!\n", ML[0]);
+        printf("Value :%ld has been inserted!\n", ML[Cursize]);
         for(int i=0;i<Cursize*8+10;i++)
         {
             bp->bufs->write[i] = temp[i]; 
@@ -580,9 +576,7 @@ uint64_t SingleValueWrite4Linear(uint64_t value, uint64_t pageno, uint64_t Cursi
         err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
         if(err == 0) 
         {
-            printf("Insert completion! Insert sectors: %ld\n",sectorpointer);
-            /* update pointers! */
-            PointerRenew(ws_min);
+            printf("Insert completion! Inserted page number: %lu\n",pageno);
         }
     }
     else

@@ -24,7 +24,7 @@ class LBucket
     std::vector<uint64_t>  bucket;
     uint64_t  BucketNo;
     uint64_t  BucketMax;
-
+    bool  IsFirst;
 
   public:
     LBucket(uint64_t BucketAllocated)
@@ -37,7 +37,8 @@ class LBucket
       //printf("Allocated Number %lu\n",BucketAllocated);
       /*  Initialize some necessary in-class variables */
       BucketNo = BucketAllocated;     //Bucket number = page number 
-      BucketMax = 2048;              //The capacity of a bucket 
+      BucketMax = 2048;              //The capacity of a bucket
+      IsFirst = true;
     }
 
     /* Insert key into specific vector! */
@@ -46,6 +47,10 @@ class LBucket
       size_t cursize = bucket.size();
       bucket.push_back(key1);
       size_t nowsize = bucket.size();
+      if(nowsize == 2)
+      {
+        IsFirst = false;
+      }
       if (nowsize - cursize > 0)
       {
         printf("Insert key %lu into bucket %lu successful, size of the bucket is %lu after inserting.\n", key1,BucketNo,nowsize);
@@ -88,6 +93,10 @@ class LBucket
     uint64_t GetBucketNo()
     {
       return BucketNo;
+    }
+    bool GetFlag()
+    {
+      return IsFirst;
     }
 
 };
@@ -182,14 +191,14 @@ class LinearHashTable
         err = split(bucketno);
         bucketno = value % mod;
         BucketTable[bucketno].Insert(key);
-        printf("Test: Pageno %lu\n",BucketTable[bucketno].GetBucketNo());
-        //SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize());
+        //printf("Test: Pageno %lu\n",BucketTable[bucketno].GetBucketNo());
+        SingleValueWrite4Linear(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize(),BucketTable[bucketno].GetFlag());
       }
       else
       {
         BucketTable[bucketno].Insert(key);
-        printf("Test: Pageno %lu\n",BucketTable[bucketno].GetBucketNo());
-        //SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize());
+        //printf("Test: Pageno %lu\n",BucketTable[bucketno].GetBucketNo());
+        SingleValueWrite4Linear(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize(),BucketTable[bucketno].GetFlag());
       }
       return 1;
     }

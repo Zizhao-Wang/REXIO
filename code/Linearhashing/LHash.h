@@ -28,7 +28,6 @@ class LBucket
       /*  Initialize some necessary in-class variables */
       BucketNo = UINT64_MAX;     //Bucket number = page number 
       BucketMax = 2048;              //The capacity of a bucket
-      IsFirst = true;
     }
 
     /* Insert key into specific vector! */
@@ -37,10 +36,6 @@ class LBucket
       size_t cursize = bucket.size();
       bucket.push_back(key1);
       size_t nowsize = bucket.size();
-      if(nowsize == 2)
-      {
-        IsFirst = false;
-      }
       if (nowsize - cursize > 0)
       {
         //printf("Insert key %lu into bucket %lu successful, size of the bucket is %lu after inserting.\n", key1,BucketNo,nowsize);
@@ -63,7 +58,6 @@ class LBucket
       {
         printf("Bucket %lu clear failure.\n",BucketNo);
       }
-
     }
 
     /*
@@ -111,10 +105,10 @@ class LinearHashTable
 {
   /* Private variables. */
   private:
-    std::vector<LBucket> BucketTable;  //In-memeory buckets table with fixed bucket size.
-    uint64_t Tablesize, mod;
-    const uint64_t BucketBase = 2048;
-    const size_t tablebase = 100;
+    std::vector<LBucket> BucketTable;  // In-memeory buckets table with fixed bucket size.
+    uint64_t Tablesize, mod;           // Size of hash table and number is used to operate "mod" 
+    const uint64_t BucketBase = 2048;  // maximum of bucket in hash table
+    const size_t tablebase = 100;      
   
   public:
     /* some public function to manipulate private variables. */
@@ -123,7 +117,7 @@ class LinearHashTable
       /*  Constructive function is used to initialize private variables. */
       mod = 100;
       Tablesize = 100;
-      for(int i = 0; i<Tablesize;i++)
+      for(uint64_t i = 0; i<Tablesize;++i)
       {
         LBucket TempBucket;
         BucketTable.push_back(TempBucket);
@@ -133,7 +127,6 @@ class LinearHashTable
     /* Doubling hash table  */
     int TableDouble()
     {
-
       for(size_t i=1;i<=tablebase;i++)
       {
         LBucket TempBucket;
@@ -141,14 +134,14 @@ class LinearHashTable
       }
       if (BucketTable.size() - Tablesize == tablebase)
       {
-        Tablesize += tablebase;
+        Tablesize = Tablesize + tablebase;
+        mod = mod + tablebase;
       }
       else
       {
         printf("Because of unknoen reason, Hash table double failure!\n");
         return -1;
       }
-      
       return 0;
 
     }
@@ -158,18 +151,17 @@ class LinearHashTable
     {
       
       std::vector<uint64_t> TempBucket;  /* Intermediate varible definition */
-
       if(TableDouble() == -1)
       {
         printf("Doubling hash table failure when spliting bucket %lu because unknown reaon.",val);
+        return -1;
         exit(103);
       }
       TempBucket = BucketTable[val].GetBucket();
       BucketTable[val].BucketErase();
       for(int i=0;i<TempBucket.size();i++)
       {
-        int err = 0;
-        err = insert(TempBucket[i],TempBucket[i]);
+        insert(TempBucket[i],TempBucket[i]);
       }
       return 0;
       
@@ -192,40 +184,44 @@ class LinearHashTable
       if(BucketTable[bucketno].GetBucketSize() >= BucketBase)
       {
         //printf("Split Parameter testing: mod:%lu bucketno:%lu key:%lu value:%lu\n",mod,bucketno,key,value); 
-        uint64_t pageno;
         int err = 0;
-        mod = mod + 100;
+
         err = split(bucketno);
-        bucketno = value % mod;
+        if(err == -1)
+        {
+          printf("Bucket spliting failure!\n");
+        }
+
         BucketTable[bucketno].Insert(key);
         //printf("Test: Pageno %lu\n",BucketTable[bucketno].GetBucketNo());
-        // if(BucketTable[bucketno].GetBucketNo() == UINT64_MAX)
-        // {
-        //   //pageno = SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize()-1);
-        //   BucketTable[bucketno].SetBucketNo(pageno);
-        // }
-        // else
-        // {
-        //   //SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize()-1);
-        // }
+        if(BucketTable[bucketno].GetBucketNo() == UINT64_MAX)
+        {
+          uint64_t pageno;
+          pageno = SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize()-1);
+          BucketTable[bucketno].SetBucketNo(pageno);
+        }
+        else
+        {
+          SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize()-1);
+        }
       }
       else
       {
 
         //printf("Unsplit Parameter testing: mod:%lu bucketno:%lu key:%lu value:%lu\n",mod,bucketno,key,value);
-        BucketTable[bucketno].Insert(key);
-        // uint64_t pageno;
-        // //printf("Value:%lu; Pageno %lu; Current size:%lu; bool flag: %lu\n",value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize(),BucketTable[bucketno].GetFlag());
-        // if(BucketTable[bucketno].GetBucketNo() == UINT64_MAX)
-        // {
 
-        //   //pageno = SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize()-1);
-        //   BucketTable[bucketno].SetBucketNo(pageno);
-        // }
-        // else
-        // {
-        //   //SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize()-1);
-        // }
+        BucketTable[bucketno].Insert(key);
+        // //printf("Value:%lu; Pageno %lu; Current size:%lu; bool flag: %lu\n",value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize(),BucketTable[bucketno].GetFlag());
+        if(BucketTable[bucketno].GetBucketNo() == UINT64_MAX)
+        {
+          uint64_t pageno;
+          pageno = SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize()-1);
+          BucketTable[bucketno].SetBucketNo(pageno);
+        }
+        else
+        {
+          SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize()-1);
+        }
 
       }
       return 1;

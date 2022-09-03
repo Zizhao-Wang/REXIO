@@ -201,30 +201,31 @@ class LinearHashTable
         //printf("Test: Pageno %lu\n",BucketTable[bucketno].GetBucketNo());
         if(BucketTable[bucketno].GetBucketNo() == UINT64_MAX)
         {
-          pageno = SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize());
+          pageno = SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize()-1);
           BucketTable[bucketno].SetBucketNo(pageno);
         }
         else
         {
-          SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize());
+          SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize()-1);
         }
-
-          
       }
       else
       {
+        
         BucketTable[bucketno].Insert(key);
         uint64_t pageno;
         //printf("Value:%lu; Pageno %lu; Current size:%lu; bool flag: %lu\n",value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize(),BucketTable[bucketno].GetFlag());
         if(BucketTable[bucketno].GetBucketNo() == UINT64_MAX)
         {
-          pageno = SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize());
+
+          pageno = SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize()-1);
           BucketTable[bucketno].SetBucketNo(pageno);
         }
         else
         {
-          SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize());
+          SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize()-1);
         }
+
       }
       return 1;
     }

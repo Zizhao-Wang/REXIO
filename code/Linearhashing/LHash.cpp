@@ -22,8 +22,14 @@ void LHashPort()
   
     /* Write datum */
     startTime = clock();
-    for(int i=0;i<=1000000;i++)
+    for(uint64_t i=1;i<=1000000;i++)
     {
+      if(i>=10000 && i%10000 ==0)
+      {
+        printf("Value:%lu \n",i);
+        endTime = clock();
+        std::cout << "Total Time of inserting: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+      } 
       uint64_t value = i;
       hashtable.insert(i,value);
     }

@@ -35,7 +35,7 @@ int PointerRenew(size_t sectors)
 
     chunkusage[sectorpointer/4096]= chunkusage[sectorpointer/4096] + sectors; //update chunk pointer.
 
-    printf("values after renewed: sector pointer: %lu,chunk pointer: %lu \n",sectorpointer,chunkusage[sectorpointer/4096]);
+    //printf("values after renewed: sector pointer: %lu,chunk pointer: %lu \n",sectorpointer,chunkusage[sectorpointer/4096]);
     return 0;
 
 }
@@ -74,10 +74,9 @@ int CompenstaeFun(uint64_t chunkno)
 			return -1;
 		}
     }
-    printf("After %d times compensation, compensation successful!\n",sum);
+    //printf("After %d times compensation, compensation successful!\n",sum);
     
     return 0;
-
 }
 
 
@@ -433,7 +432,7 @@ int PageUpdate(size_t pageno, uint64_t value, uint64_t Cursize)
 			printf("Read failure in part 1 of %ld page.\n",sectr);
 			return -1;
 		}
-        printf("Read part 1 succeed!\n");
+        //printf("Read part 1 succeed!\n");
     }
 
    /* 
@@ -457,7 +456,7 @@ int PageUpdate(size_t pageno, uint64_t value, uint64_t Cursize)
     /* Step 4: Write datum to the free-block. */
     for (size_t sectr = 0; sectr < curseofchunk; sectr += ws_min) 
     {
-        printf("Write start:\n");
+        //printf("Write start:\n");
         size_t buf_ofz = sectr * bp->geo->l.nbytes;
 		struct nvm_addr addrs[ws_min];
 		for (size_t aidx = 0; aidx < ws_min; ++aidx) 
@@ -471,10 +470,10 @@ int PageUpdate(size_t pageno, uint64_t value, uint64_t Cursize)
 			printf("Write failure in part 1 of %ld page.\n",sectr);
 			return -1;
 		}
-        printf("Re-write part 1 succeed!\n");
+        //printf("Re-write part 1 succeed!\n");
     }
 
-    printf("# Update completion in chunk: %ld\n", chunkno);
+    //printf("# Update completion in chunk: %ld\n", chunkno);
     return err;
 }
 
@@ -518,7 +517,7 @@ uint64_t SingleValueWrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
         char * temp = new char[100];
         uint64_t *ML = (uint64_t*) temp;
         ML[Cursize] = value;
-        printf("Value :%ld has been inserted!\n", ML[0]);
+        //printf("Value :%ld has been inserted!\n", ML[0]);
         for(int i=0;i<Cursize*8+10;i++)
         {
             bp->bufs->write[i] = temp[i]; 
@@ -527,7 +526,7 @@ uint64_t SingleValueWrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
         err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
         if(err == 0) 
         {
-            printf("Insert completion! Insert sectors: %ld\n",sectorpointer);
+            //printf("Insert completion! Insert sectors: %ld\n",sectorpointer);
             /* update pointers! */
             PointerRenew(ws_min);
         }

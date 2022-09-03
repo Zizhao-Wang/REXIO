@@ -185,44 +185,52 @@ class LinearHashTable
       {
         //printf("Split Parameter testing: mod:%lu bucketno:%lu key:%lu value:%lu\n",mod,bucketno,key,value); 
         int err = 0;
+        uint64_t pageno;
 
         err = split(bucketno);
         if(err == -1)
         {
           printf("Bucket spliting failure!\n");
         }
-
         BucketTable[bucketno].Insert(key);
         //printf("Test: Pageno %lu\n",BucketTable[bucketno].GetBucketNo());
         if(BucketTable[bucketno].GetBucketNo() == UINT64_MAX)
         {
-          uint64_t pageno;
           pageno = SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize()-1);
           BucketTable[bucketno].SetBucketNo(pageno);
         }
         else
         {
-          SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize()-1);
+          pageno = SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize()-1);
+          if(pageno != BucketTable[bucketno].GetBucketNo())
+          {
+            printf("Fatal error in spliting: Bucket number don't matching!\n");
+            return -1;
+          }
         }
       }
       else
       {
-
+        uint64_t pageno;
+        
         //printf("Unsplit Parameter testing: mod:%lu bucketno:%lu key:%lu value:%lu\n",mod,bucketno,key,value);
-
         BucketTable[bucketno].Insert(key);
         // //printf("Value:%lu; Pageno %lu; Current size:%lu; bool flag: %lu\n",value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize(),BucketTable[bucketno].GetFlag());
         if(BucketTable[bucketno].GetBucketNo() == UINT64_MAX)
         {
-          uint64_t pageno;
+          
           pageno = SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize()-1);
           BucketTable[bucketno].SetBucketNo(pageno);
         }
         else
         {
-          SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize()-1);
+          pageno = SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize()-1);
+          if(pageno != BucketTable[bucketno].GetBucketNo())
+          {
+            printf("Fatal error: Bucket number don't matching!\n");
+            return -1;
+          }
         }
-
       }
       return 1;
     }

@@ -33,13 +33,18 @@ int PointerRenew(size_t sectors)
 
     sectorpointer+=sectors; //update sector pointer.
 
-    chunkusage[sectorpointer/4096]= chunkusage[sectorpointer/4096] + sectors; //update chunk pointer.
-
+    if(sectorpointer >= 4096 && sectorpointer % 4096 == 0)
+    {
+        chunkusage[sectorpointer/4096 -1]= 4096; //update chunk pointer.
+    }
+    else
+    {
+        chunkusage[sectorpointer/4096]= chunkusage[sectorpointer/4096] + sectors;
+    } 
     //printf("values after renewed: sector pointer: %lu,chunk pointer: %lu \n",sectorpointer,chunkusage[sectorpointer/4096]);
     return 0;
 
 }
-
 
 
 /* 
@@ -70,7 +75,7 @@ int CompenstaeFun(uint64_t chunkno)
 		err = nvm_cmd_write(bp->dev, addrs, ws_opt, bp->bufs->write+buf_ofz, NULL, 0x0, NULL);  
 		if (err == -1) 
         {
-			printf("Write failure in %ld sector of chunk %lu.\n",sectr,sectors/4096);
+			printf("Write failure in %ld sector of chunk %lu. Error information: secofchunk:%lu sectors:%lu\n",sectr,sectors/4096,secofchunk,sectors);
 			return -1;
 		}
     }
@@ -441,7 +446,7 @@ int PageUpdate(size_t pageno, uint64_t value, uint64_t Cursize)
     int eraseflag = erasechunk(pageno, chunkno);
     if(eraseflag == -1)
     {
-        printf("chunk %lu erase failure.\n",pageno/4096);
+        printf("Fatal error: chunk %lu erase failure.\n Error information: pageno:%lu chunkno:%lu value:%lu Cursize:%lu ",pageno/4096,pageno,chunkno,value,Cursize);
     }
 
    /*
@@ -517,7 +522,7 @@ uint64_t SingleValueWrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
         char * temp = new char[100];
         uint64_t *ML = (uint64_t*) temp;
         ML[Cursize] = value;
-        //printf("Value :%ld has been inserted!\n", ML[0]);
+        //printf("Value :%ld has been inserted!\n", ML[Cursize]);
         for(int i=0;i<Cursize*8+10;i++)
         {
             bp->bufs->write[i] = temp[i]; 
@@ -527,8 +532,7 @@ uint64_t SingleValueWrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
         if(err == 0) 
         {
             //printf("Insert completion! Insert sectors: %ld\n",sectorpointer);
-            /* update pointers! */
-            PointerRenew(ws_min);
+            PointerRenew(ws_min);   /* update pointers! */
         }
     }
     else
@@ -537,7 +541,6 @@ uint64_t SingleValueWrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
     }  
 
     return pageno;
-
 }
 
 

@@ -43,11 +43,11 @@ class LBucket
       }
       if (nowsize - cursize > 0)
       {
-        printf("Insert key %lu into bucket %lu successful, size of the bucket is %lu after inserting.\n", key1,BucketNo,nowsize);
+        //printf("Insert key %lu into bucket %lu successful, size of the bucket is %lu after inserting.\n", key1,BucketNo,nowsize);
       }
       else
       {
-        printf("Because some unknown reasons, insertion failure!\n");
+        //printf("Because some unknown reasons, insertion failure!\n");
       }
     }
 
@@ -117,8 +117,6 @@ class LinearHashTable
     const size_t tablebase = 100;
   
   public:
-
-
     /* some public function to manipulate private variables. */
     LinearHashTable()
     {
@@ -189,9 +187,11 @@ class LinearHashTable
       *  3. update in-memory table 
       */
 
-      uint64_t bucketno = key % mod;  
+      uint64_t bucketno = key % mod; 
+      //printf("Parameter testing: mod:%lu bucketno:%lu key:%lu value:%lu\n",mod,bucketno,key,value); 
       if(BucketTable[bucketno].GetBucketSize() >= BucketBase)
       {
+        //printf("Split Parameter testing: mod:%lu bucketno:%lu key:%lu value:%lu\n",mod,bucketno,key,value); 
         uint64_t pageno;
         int err = 0;
         mod = mod + 100;
@@ -211,7 +211,8 @@ class LinearHashTable
       }
       else
       {
-        
+
+        //printf("Unsplit Parameter testing: mod:%lu bucketno:%lu key:%lu value:%lu\n",mod,bucketno,key,value);
         BucketTable[bucketno].Insert(key);
         uint64_t pageno;
         //printf("Value:%lu; Pageno %lu; Current size:%lu; bool flag: %lu\n",value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize(),BucketTable[bucketno].GetFlag());

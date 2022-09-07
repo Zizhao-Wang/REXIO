@@ -1588,8 +1588,11 @@ CMakeFiles/code.dir/main.cpp.o: /home/femu/experiment/code2/code/main.cpp \
   /home/femu/liblightnvm/include/liblightnvm_cli.h \
   /home/femu/experiment/code2/code/Auxizilary/GlobalVariable.h \
   /home/femu/experiment/code2/code/Linearhashing/LHash.h \
-  /home/femu/experiment/code2/code/Backend/IODisk/WriteDisk.h
+  /home/femu/experiment/code2/code/Backend/IODisk/WriteDisk.h \
+  /home/femu/experiment/code2/code/Auxizilary/logo.h
 
+
+/home/femu/experiment/code2/code/Auxizilary/logo.h:
 
 /home/femu/experiment/code2/code/Linearhashing/LHash.cpp:
 

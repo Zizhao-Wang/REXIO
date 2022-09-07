@@ -321,6 +321,30 @@ FrontEnd/MemoryAllocate/HashBlock.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/FrontEnd/MemoryAllocate/HashBlock.cpp.s
 .PHONY : FrontEnd/MemoryAllocate/HashBlock.cpp.s
 
+LSM-Tree/LsmTree.o: LSM-Tree/LsmTree.cpp.o
+.PHONY : LSM-Tree/LsmTree.o
+
+# target to build an object file
+LSM-Tree/LsmTree.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/LSM-Tree/LsmTree.cpp.o
+.PHONY : LSM-Tree/LsmTree.cpp.o
+
+LSM-Tree/LsmTree.i: LSM-Tree/LsmTree.cpp.i
+.PHONY : LSM-Tree/LsmTree.i
+
+# target to preprocess a source file
+LSM-Tree/LsmTree.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/LSM-Tree/LsmTree.cpp.i
+.PHONY : LSM-Tree/LsmTree.cpp.i
+
+LSM-Tree/LsmTree.s: LSM-Tree/LsmTree.cpp.s
+.PHONY : LSM-Tree/LsmTree.s
+
+# target to generate assembly for a file
+LSM-Tree/LsmTree.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/LSM-Tree/LsmTree.cpp.s
+.PHONY : LSM-Tree/LsmTree.cpp.s
+
 Linearhashing/LHash.o: Linearhashing/LHash.cpp.o
 .PHONY : Linearhashing/LHash.o
 
@@ -402,6 +426,9 @@ help:
 	@echo "... FrontEnd/MemoryAllocate/HashBlock.o"
 	@echo "... FrontEnd/MemoryAllocate/HashBlock.i"
 	@echo "... FrontEnd/MemoryAllocate/HashBlock.s"
+	@echo "... LSM-Tree/LsmTree.o"
+	@echo "... LSM-Tree/LsmTree.i"
+	@echo "... LSM-Tree/LsmTree.s"
 	@echo "... Linearhashing/LHash.o"
 	@echo "... Linearhashing/LHash.i"
 	@echo "... Linearhashing/LHash.s"

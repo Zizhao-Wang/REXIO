@@ -23,6 +23,11 @@ istream& operator>>(istream& stream, entry_t& entry)
 
 /*
  * LSM Tree
+ * @buffer_max_entries
+ * @depth
+ * @fanout
+ * @num_threads
+ * @bf_bits_per_entry
  */
 
 LSMTree::LSMTree(int buffer_max_entries, int depth, int fanout, int num_threads, float bf_bits_per_entry) :

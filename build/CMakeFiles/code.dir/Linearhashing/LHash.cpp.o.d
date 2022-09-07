@@ -150,7 +150,7 @@ CMakeFiles/code.dir/Linearhashing/LHash.cpp.o: \
  /usr/include/string.h /usr/include/strings.h \
  /home/femu/experiment/code2/code/../../../liblightnvm/include/liblightnvm_spec.h \
  /usr/include/assert.h \
- /home/femu/experiment/code2/code/Linearhashing/./../Backend/IODisk/../BlockManage/../../AuxizilaryFile/GlobalVariable.h \
+ /home/femu/experiment/code2/code/Linearhashing/./../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
  /usr/include/c++/9/unordered_map /usr/include/c++/9/ext/aligned_buffer.h \
  /usr/include/c++/9/bits/hashtable.h \
  /usr/include/c++/9/bits/hashtable_policy.h /usr/include/c++/9/tuple \

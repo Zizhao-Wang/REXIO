@@ -66,7 +66,7 @@ CMakeFiles/code.dir/Backend/BlockManage/BlockInfo.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
  /home/femu/experiment/code2/code/../../../liblightnvm/include/liblightnvm_spec.h \
  /usr/include/assert.h \
- /home/femu/experiment/code2/code/Backend/BlockManage/../../AuxizilaryFile/GlobalVariable.h \
+ /home/femu/experiment/code2/code/Backend/BlockManage/../../Auxizilary/GlobalVariable.h \
  /usr/include/c++/9/cstdint /usr/include/time.h \
  /usr/include/x86_64-linux-gnu/bits/time.h \
  /usr/include/x86_64-linux-gnu/bits/timex.h \

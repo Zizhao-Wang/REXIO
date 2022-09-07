@@ -67,7 +67,7 @@ CMakeFiles/code.dir/Backend/IODisk/WriteDisk.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
  /home/femu/experiment/code2/code/../../../liblightnvm/include/liblightnvm_spec.h \
  /usr/include/assert.h \
- /home/femu/experiment/code2/code/Backend/IODisk/../BlockManage/../../AuxizilaryFile/GlobalVariable.h \
+ /home/femu/experiment/code2/code/Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
  /usr/include/c++/9/cstdint /usr/include/c++/9/vector \
  /usr/include/c++/9/bits/stl_algobase.h \
  /usr/include/c++/9/bits/functexcept.h \
@@ -145,5 +145,5 @@ CMakeFiles/code.dir/Backend/IODisk/WriteDisk.cpp.o: \
  /usr/include/c++/9/bits/invoke.h /usr/include/c++/9/limits \
  /usr/include/c++/9/bits/unordered_map.h \
  /usr/include/c++/9/bits/erase_if.h \
- /home/femu/experiment/code2/code/Backend/IODisk/../../AuxizilaryFile/GlobalVariable.h \
+ /home/femu/experiment/code2/code/Backend/IODisk/../../Auxizilary/GlobalVariable.h \
  /home/femu/experiment/code2/code/Backend/IODisk/../BackendMain.h

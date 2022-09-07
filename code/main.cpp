@@ -7,18 +7,7 @@
 #include "FrontEnd/HashTable/HashTable.h"
 #include "Exhashing/ExtendibleHash.h"
 #include "Linearhashing/LHash.h"
-
-
-#define logo "\e[31m\
- _   _   _____       ___   _____        _____   _       ___   _____  \n\
-| | | | /  ___|     /   | /  ___/      /  ___/ | |     /   | |_   _| \n\
-| | | | | |        / /| | | |___       | |___  | |    / /| |   | |   \n\
-| | | | | |       / / | | \___  \      \___  \ | |   / / | |   | |   \n\
-| |_| | | |___   / /  | |  ___| |       ___| | | |  / /  | |   | |   \n\
-\_____/ \_____| /_/   |_| /_____/      /_____/ |_| /_/   |_|   |_|   \n\e[0m\
-"
-
-
+#include "Auxizilary/logo.h"
 
 /* Define some global variables. */
 struct nvm_bp* bp = nullptr;
@@ -48,6 +37,7 @@ int GlobalInitialize(int argc, char **argv)
 int main(int argc, char **argv)
 {
     printf(logo);
+    printf(name);
     /* initialize some global variables and SSD components initialization. */ 
     int result = GlobalInitialize(argc,argv);
     if(result != 0)
@@ -62,7 +52,7 @@ int main(int argc, char **argv)
 
     // ExtendHashTableInitialize();
 
-    LHashPort();
+    //LHashPort();
 
     //LSMTreeInit();
 

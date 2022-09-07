@@ -29,15 +29,14 @@ int GlobalInitialize(int argc, char **argv)
     {
         chunkusage[i] = 0;
     }
-
+    printf(UCAS_SIAT);
+    printf(Name);
     return 0;
     
 }
 
 int main(int argc, char **argv)
 {
-    printf(logo);
-    printf(name);
     /* initialize some global variables and SSD components initialization. */ 
     int result = GlobalInitialize(argc,argv);
     if(result != 0)

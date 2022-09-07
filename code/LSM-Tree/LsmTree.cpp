@@ -2,7 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <map>
-#include "lsm_tree.h"
+#include "LsmTree.h"
 #include "merge.h"
 #include "sys.h"
 

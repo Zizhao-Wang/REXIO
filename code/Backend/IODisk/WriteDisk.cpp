@@ -11,7 +11,7 @@
  *   Experiment1/Backend/BackendMain.h
  */
 #include "WriteDisk.h"
-#include "../../AuxizilaryFile/GlobalVariable.h"
+#include "../../Auxizilary/GlobalVariable.h"
 #include "../BackendMain.h"
 #include <unordered_map>
 #include <liblightnvm_cli.h>

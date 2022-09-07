@@ -103,7 +103,7 @@ CMakeFiles/code.dir/FrontEnd/HashTable/HashTable.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
  /home/femu/experiment/code2/code/../../../liblightnvm/include/liblightnvm_spec.h \
  /usr/include/assert.h \
- /home/femu/experiment/code2/code/FrontEnd/HashTable/../../Backend/IODisk/../BlockManage/../../AuxizilaryFile/GlobalVariable.h \
+ /home/femu/experiment/code2/code/FrontEnd/HashTable/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
  /usr/include/c++/9/unordered_map /usr/include/c++/9/ext/aligned_buffer.h \
  /usr/include/c++/9/bits/stl_function.h \
  /usr/include/c++/9/backward/binders.h \

@@ -17,7 +17,7 @@
 #define EXPERIMENT1_BLOCKINFO_H
 
 #include <liblightnvm_cli.h>
-#include "../../AuxizilaryFile/GlobalVariable.h"
+#include "../../Auxizilary/GlobalVariable.h"
 
 
 typedef struct PageInfo

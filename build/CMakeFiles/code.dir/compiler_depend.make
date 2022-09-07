@@ -76,7 +76,7 @@ CMakeFiles/code.dir/Backend/BlockManage/BlockInfo.cpp.o: /home/femu/experiment/c
   /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
   /home/femu/liblightnvm/include/liblightnvm_spec.h \
   /usr/include/assert.h \
-  /home/femu/experiment/code2/code/AuxizilaryFile/GlobalVariable.h \
+  /home/femu/experiment/code2/code/Auxizilary/GlobalVariable.h \
   /usr/include/c++/9/cstdint \
   /usr/include/time.h \
   /usr/include/x86_64-linux-gnu/bits/time.h \
@@ -171,7 +171,7 @@ CMakeFiles/code.dir/Backend/IODisk/WriteDisk.cpp.o: /home/femu/experiment/code2/
   /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
   /home/femu/liblightnvm/include/liblightnvm_spec.h \
   /usr/include/assert.h \
-  /home/femu/experiment/code2/code/AuxizilaryFile/GlobalVariable.h \
+  /home/femu/experiment/code2/code/Auxizilary/GlobalVariable.h \
   /usr/include/c++/9/cstdint \
   /usr/include/c++/9/vector \
   /usr/include/c++/9/bits/stl_algobase.h \
@@ -274,7 +274,7 @@ CMakeFiles/code.dir/Backend/IODisk/WriteDisk.cpp.o: /home/femu/experiment/code2/
   /usr/include/c++/9/limits \
   /usr/include/c++/9/bits/unordered_map.h \
   /usr/include/c++/9/bits/erase_if.h \
-  /home/femu/experiment/code2/code/AuxizilaryFile/GlobalVariable.h \
+  /home/femu/experiment/code2/code/Auxizilary/GlobalVariable.h \
   /home/femu/experiment/code2/code/Backend/BackendMain.h
 
 CMakeFiles/code.dir/Exhashing/ExtendibleHash.cpp.o: /home/femu/experiment/code2/code/Exhashing/ExtendibleHash.cpp \
@@ -652,7 +652,7 @@ CMakeFiles/code.dir/Exhashing/ExtendibleHash.cpp.o: /home/femu/experiment/code2/
   /usr/include/c++/9/stdlib.h \
   /home/femu/liblightnvm/include/liblightnvm_util.h \
   /home/femu/liblightnvm/include/liblightnvm_spec.h \
-  /home/femu/experiment/code2/code/AuxizilaryFile/GlobalVariable.h
+  /home/femu/experiment/code2/code/Auxizilary/GlobalVariable.h
 
 CMakeFiles/code.dir/FrontEnd/FrontMain.cpp.o: /home/femu/experiment/code2/code/FrontEnd/FrontMain.cpp \
   /usr/include/stdc-predef.h \
@@ -854,7 +854,7 @@ CMakeFiles/code.dir/FrontEnd/HashTable/HashTable.cpp.o: /home/femu/experiment/co
   /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
   /home/femu/liblightnvm/include/liblightnvm_spec.h \
   /usr/include/assert.h \
-  /home/femu/experiment/code2/code/AuxizilaryFile/GlobalVariable.h \
+  /home/femu/experiment/code2/code/Auxizilary/GlobalVariable.h \
   /usr/include/c++/9/unordered_map \
   /usr/include/c++/9/ext/aligned_buffer.h \
   /usr/include/c++/9/bits/stl_function.h \
@@ -1193,7 +1193,7 @@ CMakeFiles/code.dir/Linearhashing/LHash.cpp.o: /home/femu/experiment/code2/code/
   /usr/include/strings.h \
   /home/femu/liblightnvm/include/liblightnvm_spec.h \
   /usr/include/assert.h \
-  /home/femu/experiment/code2/code/AuxizilaryFile/GlobalVariable.h \
+  /home/femu/experiment/code2/code/Auxizilary/GlobalVariable.h \
   /usr/include/c++/9/unordered_map \
   /usr/include/c++/9/ext/aligned_buffer.h \
   /usr/include/c++/9/bits/hashtable.h \
@@ -1586,7 +1586,7 @@ CMakeFiles/code.dir/main.cpp.o: /home/femu/experiment/code2/code/main.cpp \
   /home/femu/experiment/code2/code/Backend/IODisk/WriteDisk.h \
   /home/femu/experiment/code2/code/Backend/BlockManage/BlockInfo.h \
   /home/femu/liblightnvm/include/liblightnvm_cli.h \
-  /home/femu/experiment/code2/code/AuxizilaryFile/GlobalVariable.h \
+  /home/femu/experiment/code2/code/Auxizilary/GlobalVariable.h \
   /home/femu/experiment/code2/code/Linearhashing/LHash.h \
   /home/femu/experiment/code2/code/Backend/IODisk/WriteDisk.h
 
@@ -1821,11 +1821,19 @@ CMakeFiles/code.dir/main.cpp.o: /home/femu/experiment/code2/code/main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
 
+/usr/include/linux/errno.h:
+
 /usr/include/c++/9/cstdbool:
 
 /usr/include/errno.h:
 
 /usr/include/x86_64-linux-gnu/bits/floatn.h:
+
+/usr/include/c++/9/debug/assertions.h:
+
+/usr/include/x86_64-linux-gnu/bits/locale.h:
+
+/usr/include/x86_64-linux-gnu/bits/time64.h:
 
 /usr/include/c++/9/bits/hash_bytes.h:
 
@@ -1835,15 +1843,13 @@ CMakeFiles/code.dir/main.cpp.o: /home/femu/experiment/code2/code/main.cpp \
 
 /usr/include/c++/9/bits/allocator.h:
 
-/usr/include/c++/9/debug/assertions.h:
+/home/femu/experiment/code2/code/Auxizilary/GlobalVariable.h:
 
-/usr/include/x86_64-linux-gnu/bits/locale.h:
+/usr/include/c++/9/thread:
 
-/usr/include/x86_64-linux-gnu/bits/time64.h:
+/usr/include/c++/9/bits/quoted_string.h:
 
-/usr/include/linux/errno.h:
-
-/home/femu/experiment/code2/code/AuxizilaryFile/GlobalVariable.h:
+/usr/include/x86_64-linux-gnu/c++/9/bits/error_constants.h:
 
 /usr/include/c++/9/bits/forward_list.h:
 
@@ -2362,12 +2368,6 @@ CMakeFiles/code.dir/main.cpp.o: /home/femu/experiment/code2/code/main.cpp \
 /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
 
 /usr/include/c++/9/bits/locale_classes.tcc:
-
-/usr/include/c++/9/thread:
-
-/usr/include/c++/9/bits/quoted_string.h:
-
-/usr/include/x86_64-linux-gnu/c++/9/bits/error_constants.h:
 
 /usr/include/x86_64-linux-gnu/bits/sched.h:
 

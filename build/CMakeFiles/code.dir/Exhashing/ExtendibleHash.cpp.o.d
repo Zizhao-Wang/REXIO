@@ -284,4 +284,4 @@ CMakeFiles/code.dir/Exhashing/ExtendibleHash.cpp.o: \
  /usr/include/c++/9/stdlib.h \
  /home/femu/experiment/code2/code/../../../liblightnvm/include/liblightnvm_util.h \
  /home/femu/experiment/code2/code/../../../liblightnvm/include/liblightnvm_spec.h \
- /home/femu/experiment/code2/code/Exhashing/../Backend/IODisk/../BlockManage/../../AuxizilaryFile/GlobalVariable.h
+ /home/femu/experiment/code2/code/Exhashing/../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h

@@ -51,7 +51,9 @@ int main(int argc, char **argv)
 
     // ExtendHashTableInitialize();
 
-    LHashPort();
+    //LHashPort();
+
+    void LSMTreeInit();
 
     return 0;
 

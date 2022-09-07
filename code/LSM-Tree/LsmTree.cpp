@@ -2,12 +2,10 @@
 #include <fstream>
 #include <iostream>
 #include <map>
-
 #include "lsm_tree.h"
 #include "merge.h"
 #include "sys.h"
 
-using namespace std;
 
 ostream& operator<<(ostream& stream, const entry_t& entry) 
 {
@@ -27,11 +25,8 @@ istream& operator>>(istream& stream, entry_t& entry)
  * LSM Tree
  */
 
-LSMTree::LSMTree(int buffer_max_entries, int depth, int fanout,
-                 int num_threads, float bf_bits_per_entry) :
-                 bf_bits_per_entry(bf_bits_per_entry),
-                 buffer(buffer_max_entries),
-                 worker_pool(num_threads)
+LSMTree::LSMTree(int buffer_max_entries, int depth, int fanout, int num_threads, float bf_bits_per_entry) :
+                bf_bits_per_entry(bf_bits_per_entry),buffer(buffer_max_entries),worker_pool(num_threads)
 {
     long max_run_size;
 
@@ -308,4 +303,49 @@ void LSMTree::load(string file_path) {
     } else {
         die("Could not locate file '" + file_path + "'.");
     }
+}
+
+
+
+void LSMTreeInit()
+{
+    clock_t startTime,endTime;        // Definition of timestamp
+    LSMTree Lsmtree;                  // Initialize a LSM-tree structure
+
+    /* Write datum */
+    startTime = clock();
+    for(uint64_t i=1;i<=10000000;i++)
+    {
+      if(i>=10000 && i%10000 ==0)
+      {
+        printf("Value:%lu \n",i);
+        endTime = clock();
+        std::cout << "Total Time of inserting: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+      } 
+      uint64_t value = i;
+      hashtable.insert(i,value);
+    }
+    endTime = clock();
+    std::cout << "Total Time of inserting: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+
+
+    /* Read datum */
+    startTime = clock();
+    for(int i=1;i<=1000000;i++)
+    {
+      uint64_t value = i;
+      // d.insert(i,value,0);
+    }
+    endTime = clock();
+    std::cout << "Total Time of reading data: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+
+    /* data update */
+    startTime = clock();
+    for(int i=1;i<=3;i++)
+    {
+        uint64_t value = i;
+        // d.insert(i,value,0);
+    }
+    endTime = clock();
+    std::cout << "Total Time of datum update: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 }

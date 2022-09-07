@@ -15,7 +15,7 @@
 #include "utils/buffer.h"
 #include "utils/level.h"
 #include "spin_lock.h"
-#include "types.h"
+#include "../Auxizilary/VariablesTypes.h"
 #include "worker_pool.h"
 #include <vector>
 

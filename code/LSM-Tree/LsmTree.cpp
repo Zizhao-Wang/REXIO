@@ -3,8 +3,8 @@
 #include <iostream>
 #include <map>
 #include "LsmTree.h"
-#include "merge.h"
-#include "sys.h"
+#include "utils/merge.h"
+#include "utils/sys.h"
 
 
 ostream& operator<<(ostream& stream, const entry_t& entry) 
@@ -33,11 +33,12 @@ istream& operator>>(istream& stream, entry_t& entry)
 LSMTree::LSMTree(int BufferSize, int depth, int fanout, int NumThreads, float BitsPerEntry) :
                 bf_bits_per_entry(BitsPerEntry),buffer(BufferSize),worker_pool(NumThreads)
 {
+
     long max_run_size;
+    max_run_size = BufferSize;
 
-    max_run_size = buffer_max_entries;
-
-    while ((depth--) > 0) {
+    while ((depth--) > 0) 
+    {
         levels.emplace_back(fanout, max_run_size);
         max_run_size *= fanout;
     }

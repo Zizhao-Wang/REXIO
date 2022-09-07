@@ -30,8 +30,8 @@ istream& operator>>(istream& stream, entry_t& entry)
  * @bf_bits_per_entry
  */
 
-LSMTree::LSMTree(int buffer_max_entries, int depth, int fanout, int num_threads, float bf_bits_per_entry) :
-                bf_bits_per_entry(bf_bits_per_entry),buffer(buffer_max_entries),worker_pool(num_threads)
+LSMTree::LSMTree(int BufferSize, int depth, int fanout, int NumThreads, float BitsPerEntry) :
+                bf_bits_per_entry(BitsPerEntry),buffer(BufferSize),worker_pool(NumThreads)
 {
     long max_run_size;
 
@@ -315,11 +315,11 @@ void LSMTree::load(string file_path) {
 void LSMTreeInit()
 {
     clock_t startTime,endTime;        // Definition of timestamp
-    LSMTree Lsmtree;                  // Initialize a LSM-tree structure
+    LSMTree Lsmtree(64,5,10,1,0.5);                  // Initialize a LSM-tree structure
 
     /* Write datum */
     startTime = clock();
-    for(uint64_t i=1;i<=10000000;i++)
+    for(uint64_t i=1;i<=70000000;i++)
     {
       if(i>=10000 && i%10000 ==0)
       {
@@ -328,7 +328,7 @@ void LSMTreeInit()
         std::cout << "Total Time of inserting: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
       } 
       uint64_t value = i;
-      hashtable.insert(i,value);
+      Lsmtree.put(i,value);
     }
     endTime = clock();
     std::cout << "Total Time of inserting: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";

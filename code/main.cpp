@@ -8,6 +8,7 @@
 #include "Exhashing/ExtendibleHash.h"
 #include "Linearhashing/LHash.h"
 #include "Auxizilary/logo.h"
+#include "LSM-Tree/LsmTree.h"
 
 /* Define some global variables. */
 struct nvm_bp* bp = nullptr;
@@ -53,7 +54,7 @@ int main(int argc, char **argv)
 
     //LHashPort();
 
-    //LSMTreeInit();
+    LSMTreeInit();
 
     return 0;
 

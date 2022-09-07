@@ -22,9 +22,9 @@
 
 #define DEFAULT_TREE_DEPTH 5
 #define DEFAULT_TREE_FANOUT 10
-#define DEFAULT_BUFFER_NUM_PAGES 1000
-#define DEFAULT_THREAD_COUNT 4
-#define DEFAULT_BF_BITS_PER_ENTRY 0.5
+#define DEFAULT_BUFFER_NUM_PAGES 64     // 64 pages = 1MBytes
+#define DEFAULT_THREAD_COUNT 1          // Single thread query
+#define DEFAULT_BF_BITS_PER_ENTRY 0.5   // bloom filter bits
 
 
 class LSMTree 

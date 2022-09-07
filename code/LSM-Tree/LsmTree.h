@@ -1,9 +1,8 @@
 /**
- * @date   0:32, 7/9/2022
+ * @date   0:32 7/9/2022
  * @author zz.wang
  * @details
- *          If this is the program's first run, the program will create a new special hash table in memory.
- *          Otherwise, the process will read the hash table from the solid-state disk (SSD).
+ *          This file shows how to construct a LSM-Tree.
  *
  * IDENTIFICATION:
  *          code2/code/LSM-Tree/lsm_tree.h
@@ -13,7 +12,7 @@
 #define EXPERIMENT1_LSMTREE_H
 
 
-#include "buffer.h"
+#include "utils/buffer.h"
 #include "level.h"
 #include "spin_lock.h"
 #include "types.h"

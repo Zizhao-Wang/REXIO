@@ -3,9 +3,9 @@
 
 using namespace std;
 
-void die(string error_msg) 
+void EMessageOutput(string error_msg, int ExitCode) 
 {
     cerr << error_msg << endl;
     cerr << "Exiting..." << endl;
-    exit(EXIT_FAILURE);
+    exit(ExitCode);
 }

@@ -7,7 +7,7 @@
 #include "FrontEnd/HashTable/HashTable.h"
 #include "Exhashing/ExtendibleHash.h"
 #include "Linearhashing/LHash.h"
-#include "Auxizilary/logo.h"
+#include "Auxizilary/Logo.h"
 #include "LSM-Tree/LsmTree.h"
 
 /* Define some global variables. */

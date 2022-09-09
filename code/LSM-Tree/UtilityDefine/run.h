@@ -1,13 +1,13 @@
 #include <vector>
-
-#include "types.h"
+#include "../../Auxizilary/VariablesTypes.h"
 #include "bloom_filter.h"
 
 #define TMP_FILE_PATTERN "/tmp/lsm-XXXXXX"
 
 using namespace std;
 
-class Run {
+class Run 
+{
     BloomFilter bloom_filter;
     vector<KEY_t> fence_pointers;
     KEY_t max_key;

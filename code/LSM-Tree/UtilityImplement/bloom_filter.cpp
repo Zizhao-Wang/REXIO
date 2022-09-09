@@ -1,11 +1,12 @@
-#include "bloom_filter.h"
+#include "../UtilityDefine/bloom_filter.h"
 
 /*
  * Hash functions taken from https://gist.github.com/badboy/6267743
  * and modified for the C++ environment.
  */
 
-uint64_t BloomFilter::hash_1(KEY_t k) const {
+uint64_t BloomFilter::hash_1(KEY_t k) const 
+{
     uint64_t key;
 
     key = k;
@@ -19,7 +20,8 @@ uint64_t BloomFilter::hash_1(KEY_t k) const {
     return key % table.size();
 }
 
-uint64_t BloomFilter::hash_2(KEY_t k) const {
+uint64_t BloomFilter::hash_2(KEY_t k) const 
+{
     uint64_t key;
 
     key = k;
@@ -33,7 +35,8 @@ uint64_t BloomFilter::hash_2(KEY_t k) const {
     return key % table.size();
 }
 
-uint64_t BloomFilter::hash_3(KEY_t k) const {
+uint64_t BloomFilter::hash_3(KEY_t k) const 
+{
     uint64_t key;
 
     key = k;
@@ -46,13 +49,15 @@ uint64_t BloomFilter::hash_3(KEY_t k) const {
     return key % table.size();
 }
 
-void BloomFilter::set(KEY_t key) {
+void BloomFilter::set(KEY_t key) 
+{
     table.set(hash_1(key));
     table.set(hash_2(key));
     table.set(hash_3(key));
 }
 
-bool BloomFilter::is_set(KEY_t key) const {
+bool BloomFilter::is_set(KEY_t key) const 
+{
     return (table.test(hash_1(key))
          && table.test(hash_2(key))
          && table.test(hash_3(key)));

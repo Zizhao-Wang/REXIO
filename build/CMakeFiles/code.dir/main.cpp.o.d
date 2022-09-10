@@ -290,7 +290,7 @@ CMakeFiles/code.dir/main.cpp.o: /home/femu/experiment/code2/code/main.cpp \
  /home/femu/experiment/code2/code/Auxizilary/Logo.h \
  /home/femu/experiment/code2/code/LSM-Tree/LsmTree.h \
  /home/femu/experiment/code2/code/LSM-Tree/UtilityDefine/buffer.h \
- /home/femu/experiment/code2/code/LSM-Tree/UtilityDefine/types.h \
+ /home/femu/experiment/code2/code/LSM-Tree/UtilityDefine/../../Auxizilary/GlobalVariable.h \
  /home/femu/experiment/code2/code/LSM-Tree/UtilityDefine/level.h \
  /home/femu/experiment/code2/code/LSM-Tree/UtilityDefine/run.h \
  /home/femu/experiment/code2/code/LSM-Tree/UtilityDefine/../../Auxizilary/VariablesTypes.h \

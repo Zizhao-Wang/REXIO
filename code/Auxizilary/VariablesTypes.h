@@ -28,9 +28,18 @@ struct entry
 {
     KEY_t key;
     VAL_t val;
-    bool operator==(const entry& other) const {return key == other.key;}
-    bool operator<(const entry& other) const {return key < other.key;}
-    bool operator>(const entry& other) const {return key > other.key;}
+    bool operator==(const entry& other) const 
+    {
+        return key == other.key;
+    }
+    bool operator<(const entry& other) const 
+    {
+        return key < other.key;
+    }
+    bool operator>(const entry& other) const 
+    {
+        return key > other.key;
+    }
 };
 
 typedef struct entry entry_t;

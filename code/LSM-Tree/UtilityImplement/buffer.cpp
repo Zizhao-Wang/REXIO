@@ -1,20 +1,21 @@
 #include <iostream>
-
 #include "buffer.h"
 
-using namespace std;
 
-VAL_t * Buffer::get(KEY_t key) const {
-    entry_t search_entry;
-    set<entry_t>::iterator entry;
+VAL_t * Buffer::GetValue(KEY_t key) const 
+{
+    entry_t SearchEntry;
+    set<entry_t>::iterator EntryItor;
     VAL_t *val;
 
     search_entry.key = key;
     entry = entries.find(search_entry);
 
-    if (entry == entries.end()) {
+    if (entry == entries.end()) 
+    {
         return nullptr;
-    } else {
+    } else 
+    {
         val = new VAL_t;
         *val = entry->val;
         return val;

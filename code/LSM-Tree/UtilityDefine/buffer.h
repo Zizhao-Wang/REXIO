@@ -1,18 +1,21 @@
-
 #include <set>
 #include <vector>
+#include "../../Auxizilary/GlobalVariable.h"
 
-#include "types.h"
 
-using namespace std;
+/*
+ * Level 0 
+ */
+class Buffer 
+{
 
-class Buffer {
 public:
-    int max_size;
-    set<entry_t> entries;
-    Buffer(int max_size) : max_size(max_size) {};
+    int MaxSize;
+    set<entry_t> Entries;
+    Buffer(int maxsize) : MaxSize(maxsize) {};
     VAL_t * get(KEY_t) const;
     vector<entry_t> * range(KEY_t, KEY_t) const;
     bool put(KEY_t, VAL_t val);
     void empty(void);
+
 };

@@ -36,11 +36,10 @@ std::vector<entry_t> * Buffer::GetRange(KEY_t start, KEY_t end) const
     return new std::vector<entry_t>(SubRangeStart, SubRangeEnd);
 }
 
-bool Buffer::put(KEY_t key, VAL_t val) 
+bool Buffer::PutValue(KEY_t key, VAL_t val) 
 {
     entry_t SingleEntry;
     std::set<entry_t>::iterator itor;
-    bool found;
 
     if (Entries.size() == MaxSize) 
     {
@@ -53,7 +52,7 @@ bool Buffer::put(KEY_t key, VAL_t val)
         SingleEntry.val = val;
         Tempair = Entries.insert(SingleEntry);
         
-        if (found == false)  // Update the entry if it already exists
+        if (Tempair.second == false)  // Update the entry if it already exists
         {
             Entries.erase(itor);
             Entries.insert(SingleEntry);

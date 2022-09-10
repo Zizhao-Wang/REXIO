@@ -1,6 +1,6 @@
 #include <set>
 #include <vector>
-#include "../../Auxizilary/GlobalVariable.h"
+#include "../../Auxizilary/VariablesTypes.h"
 
 
 /*
@@ -11,10 +11,10 @@ class Buffer
 
 public:
     int MaxSize;
-    set<entry_t> Entries;
+    std::set<entry_t> Entries;
     Buffer(int maxsize) : MaxSize(maxsize) {};
-    VAL_t * get(KEY_t) const;
-    vector<entry_t> * range(KEY_t, KEY_t) const;
+    VAL_t * GetValue(KEY_t) const;
+    std::vector<entry_t> * GetRange(KEY_t, KEY_t) const;
     bool put(KEY_t, VAL_t val);
     void empty(void);
 

@@ -315,7 +315,7 @@ void LSMTree::load(string file_path) {
 
 void LSMTreeInit()
 {
-    clock_t startTime,endTime;        // Definition of timestamp
+    clock_t startTime,endTime;                        // Definition of timestamp
     LSMTree Lsmtree(64,5,10,1,0.5);                  // Initialize a LSM-tree structure
 
     /* Write datum */

@@ -53,5 +53,10 @@
   "directory": "/home/femu/experiment/code2/build",
   "command": "/usr/bin/c++  -I/home/femu/experiment/code2/code/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/code.dir/LSM-Tree/LsmTree.cpp.o -c /home/femu/experiment/code2/code/LSM-Tree/LsmTree.cpp",
   "file": "/home/femu/experiment/code2/code/LSM-Tree/LsmTree.cpp"
+},
+{
+  "directory": "/home/femu/experiment/code2/build",
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/code/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/code.dir/LSM-Tree/UtilityImplement/buffer.cpp.o -c /home/femu/experiment/code2/code/LSM-Tree/UtilityImplement/buffer.cpp",
+  "file": "/home/femu/experiment/code2/code/LSM-Tree/UtilityImplement/buffer.cpp"
 }
 ]

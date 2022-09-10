@@ -11,53 +11,58 @@ VAL_t * Buffer::GetValue(KEY_t key) const
     SearchEntry.key = key;
     EntryItor = Entries.find(SearchEntry);
 
-    if (EntryItor == entries.end()) 
+    if (EntryItor == Entries.end()) 
     {
         return nullptr;
     } else 
     {
         value = new VAL_t;
-        (*value) = entry->val;
+        (*value) = EntryItor->val;
         return value;
     }
 }
 
-vector<entry_t> * Buffer::range(KEY_t start, KEY_t end) const {
-    entry_t search_entry;
-    set<entry_t>::iterator subrange_start, subrange_end;
+std::vector<entry_t> * Buffer::GetRange(KEY_t start, KEY_t end) const 
+{
+    entry_t SearchEntry;
+    std::set<entry_t>::iterator SubRangeStart, SubRangeEnd;
 
-    search_entry.key = start;
-    subrange_start = entries.lower_bound(search_entry);
+    SearchEntry.key = start;
+    SubRangeStart = Entries.lower_bound(SearchEntry);
 
-    search_entry.key = end;
-    subrange_end = entries.upper_bound(search_entry);
+    SearchEntry.key = end;
+    SubRangeEnd = Entries.upper_bound(SearchEntry);
 
-    return new vector<entry_t>(subrange_start, subrange_end);
+    return new std::vector<entry_t>(SubRangeStart, SubRangeEnd);
 }
 
-bool Buffer::put(KEY_t key, VAL_t val) {
-    entry_t entry;
-    set<entry_t>::iterator it;
+bool Buffer::put(KEY_t key, VAL_t val) 
+{
+    entry_t SingleEntry;
+    std::set<entry_t>::iterator itor;
     bool found;
 
-    if (entries.size() == max_size) {
+    if (Entries.size() == MaxSize) 
+    {
         return false;
-    } else {
-        entry.key = key;
-        entry.val = val;
-
-        tie(it, found) = entries.insert(entry);
-
-        // Update the entry if it already exists
-        if (found == false) {
-            entries.erase(it);
-            entries.insert(entry);
+    } 
+    else 
+    {
+        std::pair<std::set<entry_t>::iterator,bool> Tempair;
+        SingleEntry.key = key;
+        SingleEntry.val = val;
+        Tempair = Entries.insert(SingleEntry);
+        
+        if (found == false)  // Update the entry if it already exists
+        {
+            Entries.erase(itor);
+            Entries.insert(SingleEntry);
         }
-
         return true;
     }
 }
 
-void Buffer::empty(void) {
-    entries.clear();
+void Buffer::empty(void) 
+{
+    Entries.clear();
 }

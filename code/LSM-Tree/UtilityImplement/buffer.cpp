@@ -1,24 +1,24 @@
 #include <iostream>
-#include "buffer.h"
+#include "../UtilityDefine/buffer.h"
 
 
 VAL_t * Buffer::GetValue(KEY_t key) const 
 {
     entry_t SearchEntry;
-    set<entry_t>::iterator EntryItor;
-    VAL_t *val;
+    std::set<entry_t>::iterator EntryItor;
+    VAL_t *value;
 
-    search_entry.key = key;
-    entry = entries.find(search_entry);
+    SearchEntry.key = key;
+    EntryItor = Entries.find(SearchEntry);
 
-    if (entry == entries.end()) 
+    if (EntryItor == entries.end()) 
     {
         return nullptr;
     } else 
     {
-        val = new VAL_t;
-        *val = entry->val;
-        return val;
+        value = new VAL_t;
+        (*value) = entry->val;
+        return value;
     }
 }
 

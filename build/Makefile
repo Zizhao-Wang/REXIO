@@ -129,6 +129,30 @@ code/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/build
 .PHONY : code/fast
 
+AuxizilaryImplement/GlobalVariable.o: AuxizilaryImplement/GlobalVariable.cpp.o
+.PHONY : AuxizilaryImplement/GlobalVariable.o
+
+# target to build an object file
+AuxizilaryImplement/GlobalVariable.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/AuxizilaryImplement/GlobalVariable.cpp.o
+.PHONY : AuxizilaryImplement/GlobalVariable.cpp.o
+
+AuxizilaryImplement/GlobalVariable.i: AuxizilaryImplement/GlobalVariable.cpp.i
+.PHONY : AuxizilaryImplement/GlobalVariable.i
+
+# target to preprocess a source file
+AuxizilaryImplement/GlobalVariable.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/AuxizilaryImplement/GlobalVariable.cpp.i
+.PHONY : AuxizilaryImplement/GlobalVariable.cpp.i
+
+AuxizilaryImplement/GlobalVariable.s: AuxizilaryImplement/GlobalVariable.cpp.s
+.PHONY : AuxizilaryImplement/GlobalVariable.s
+
+# target to generate assembly for a file
+AuxizilaryImplement/GlobalVariable.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/AuxizilaryImplement/GlobalVariable.cpp.s
+.PHONY : AuxizilaryImplement/GlobalVariable.cpp.s
+
 Backend/BlockManage/BlockInfo.o: Backend/BlockManage/BlockInfo.cpp.o
 .PHONY : Backend/BlockManage/BlockInfo.o
 
@@ -369,6 +393,30 @@ LSM-Tree/UtilityImplement/buffer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/LSM-Tree/UtilityImplement/buffer.cpp.s
 .PHONY : LSM-Tree/UtilityImplement/buffer.cpp.s
 
+LSM-Tree/UtilityImplement/level.o: LSM-Tree/UtilityImplement/level.cpp.o
+.PHONY : LSM-Tree/UtilityImplement/level.o
+
+# target to build an object file
+LSM-Tree/UtilityImplement/level.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/LSM-Tree/UtilityImplement/level.cpp.o
+.PHONY : LSM-Tree/UtilityImplement/level.cpp.o
+
+LSM-Tree/UtilityImplement/level.i: LSM-Tree/UtilityImplement/level.cpp.i
+.PHONY : LSM-Tree/UtilityImplement/level.i
+
+# target to preprocess a source file
+LSM-Tree/UtilityImplement/level.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/LSM-Tree/UtilityImplement/level.cpp.i
+.PHONY : LSM-Tree/UtilityImplement/level.cpp.i
+
+LSM-Tree/UtilityImplement/level.s: LSM-Tree/UtilityImplement/level.cpp.s
+.PHONY : LSM-Tree/UtilityImplement/level.s
+
+# target to generate assembly for a file
+LSM-Tree/UtilityImplement/level.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/LSM-Tree/UtilityImplement/level.cpp.s
+.PHONY : LSM-Tree/UtilityImplement/level.cpp.s
+
 Linearhashing/LHash.o: Linearhashing/LHash.cpp.o
 .PHONY : Linearhashing/LHash.o
 
@@ -426,6 +474,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... code"
+	@echo "... AuxizilaryImplement/GlobalVariable.o"
+	@echo "... AuxizilaryImplement/GlobalVariable.i"
+	@echo "... AuxizilaryImplement/GlobalVariable.s"
 	@echo "... Backend/BlockManage/BlockInfo.o"
 	@echo "... Backend/BlockManage/BlockInfo.i"
 	@echo "... Backend/BlockManage/BlockInfo.s"
@@ -456,6 +507,9 @@ help:
 	@echo "... LSM-Tree/UtilityImplement/buffer.o"
 	@echo "... LSM-Tree/UtilityImplement/buffer.i"
 	@echo "... LSM-Tree/UtilityImplement/buffer.s"
+	@echo "... LSM-Tree/UtilityImplement/level.o"
+	@echo "... LSM-Tree/UtilityImplement/level.i"
+	@echo "... LSM-Tree/UtilityImplement/level.s"
 	@echo "... Linearhashing/LHash.o"
 	@echo "... Linearhashing/LHash.i"
 	@echo "... Linearhashing/LHash.s"

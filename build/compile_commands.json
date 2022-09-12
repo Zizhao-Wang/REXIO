@@ -6,6 +6,11 @@
 },
 {
   "directory": "/home/femu/experiment/code2/build",
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/code/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/code.dir/AuxizilaryImplement/GlobalVariable.cpp.o -c /home/femu/experiment/code2/code/AuxizilaryImplement/GlobalVariable.cpp",
+  "file": "/home/femu/experiment/code2/code/AuxizilaryImplement/GlobalVariable.cpp"
+},
+{
+  "directory": "/home/femu/experiment/code2/build",
   "command": "/usr/bin/c++  -I/home/femu/experiment/code2/code/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/code.dir/FrontEnd/FrontMain.cpp.o -c /home/femu/experiment/code2/code/FrontEnd/FrontMain.cpp",
   "file": "/home/femu/experiment/code2/code/FrontEnd/FrontMain.cpp"
 },
@@ -58,5 +63,10 @@
   "directory": "/home/femu/experiment/code2/build",
   "command": "/usr/bin/c++  -I/home/femu/experiment/code2/code/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/code.dir/LSM-Tree/UtilityImplement/buffer.cpp.o -c /home/femu/experiment/code2/code/LSM-Tree/UtilityImplement/buffer.cpp",
   "file": "/home/femu/experiment/code2/code/LSM-Tree/UtilityImplement/buffer.cpp"
+},
+{
+  "directory": "/home/femu/experiment/code2/build",
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/code/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/code.dir/LSM-Tree/UtilityImplement/level.cpp.o -c /home/femu/experiment/code2/code/LSM-Tree/UtilityImplement/level.cpp",
+  "file": "/home/femu/experiment/code2/code/LSM-Tree/UtilityImplement/level.cpp"
 }
 ]

@@ -1,4 +1,11 @@
-
+/*
+ * @date     7/9/2022
+ * @author   zz.wang
+ * @details: This code is used to merge 
+ *
+ * IDENTIFICATION:
+ *          code/LSM-Tree/UtilityDefine/merge.h
+ */
 #ifndef EXPERIMENT1_LSMTREE_H
 #define EXPERIMENT1_LSMTREE_H
 
@@ -8,7 +15,8 @@
 
 using namespace std;
 
-struct merge_entry {
+struct merge_entry 
+{
     int precedence;
     entry_t *entries;
     long num_entries;
@@ -28,7 +36,8 @@ struct merge_entry {
 
 typedef struct merge_entry merge_entry_t;
 
-class MergeContext {
+class MergeContext 
+{
     priority_queue<merge_entry_t, vector<merge_entry_t>, greater<merge_entry_t>> queue;
 public:
     void add(entry_t *, long);

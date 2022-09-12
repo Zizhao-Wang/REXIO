@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/code.dir/AuxizilaryImplement/GlobalVariable.cpp.o"
+  "CMakeFiles/code.dir/AuxizilaryImplement/GlobalVariable.cpp.o.d"
   "CMakeFiles/code.dir/Backend/BlockManage/BlockInfo.cpp.o"
   "CMakeFiles/code.dir/Backend/BlockManage/BlockInfo.cpp.o.d"
   "CMakeFiles/code.dir/Backend/DiskRead/ReadDisk.cpp.o"
@@ -19,6 +21,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/code.dir/LSM-Tree/LsmTree.cpp.o.d"
   "CMakeFiles/code.dir/LSM-Tree/UtilityImplement/buffer.cpp.o"
   "CMakeFiles/code.dir/LSM-Tree/UtilityImplement/buffer.cpp.o.d"
+  "CMakeFiles/code.dir/LSM-Tree/UtilityImplement/level.cpp.o"
+  "CMakeFiles/code.dir/LSM-Tree/UtilityImplement/level.cpp.o.d"
   "CMakeFiles/code.dir/Linearhashing/LHash.cpp.o"
   "CMakeFiles/code.dir/Linearhashing/LHash.cpp.o.d"
   "CMakeFiles/code.dir/main.cpp.o"

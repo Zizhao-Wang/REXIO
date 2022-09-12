@@ -47,4 +47,7 @@ public:
 };
 
 
+/* Portable function declaration */
+void LSMTreeInit();
+
 #endif //EXPERIMENT1_LSMTREE_H

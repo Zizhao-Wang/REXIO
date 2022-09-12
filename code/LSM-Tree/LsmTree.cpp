@@ -7,20 +7,6 @@
 #include "../Auxizilary/SysOutput.h"
 
 
-ostream& operator<<(ostream& stream, const entry_t& entry) 
-{
-    stream.write((char *)&entry.key, sizeof(KEY_t));
-    stream.write((char *)&entry.val, sizeof(VAL_t));
-    return stream;
-}
-
-istream& operator>>(istream& stream, entry_t& entry) 
-{
-    stream.read((char *)&entry.key, sizeof(KEY_t));
-    stream.read((char *)&entry.val, sizeof(VAL_t));
-    return stream;
-}
-
 /*
  * LSM Tree
  * @BufferSize
@@ -31,20 +17,9 @@ istream& operator>>(istream& stream, entry_t& entry)
  */
 
 LSMTree::LSMTree(int BufferSize, int depth, int fanout, int NumThreads, float BitsPerEntry) :
-                bf_bits_per_entry(BitsPerEntry),buffer(BufferSize),worker_pool(NumThreads)
-{
+                bf_bits_per_entry(BitsPerEntry),buffer(BufferSize),worker_pool(NumThreads){}
 
-    long max_run_size;
-    max_run_size = BufferSize;
-
-    while ((depth--) > 0) 
-    {
-        levels.emplace_back(fanout, max_run_size);
-        max_run_size *= fanout;
-    }
-}
-
-void LSMTree::merge_down(vector<Level>::iterator current) 
+void LSMTree::FlushInto(vector<Level>::iterator current) 
 {
     vector<Level>::iterator next;
     MergeContext merge_ctx;

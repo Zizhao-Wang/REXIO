@@ -1,7 +1,10 @@
+
+#ifndef EXPERIMENT1_LSMTREE_H
+#define EXPERIMENT1_LSMTREE_H
+
 #include <cassert>
 #include <queue>
-
-#include "types.h"
+#include "../../Auxizilary/VariablesTypes.h"
 
 using namespace std;
 

@@ -3,8 +3,6 @@
 #include <iostream>
 #include <map>
 #include "LsmTree.h"
-#include "UtilityDefine/merge.h"
-#include "../Auxizilary/SysOutput.h"
 
 
 /*
@@ -16,22 +14,29 @@
  * @bf_bits_per_entry
  */
 
-LSMTree::LSMTree(int BufferSize, int depth, int fanout, int NumThreads, float BitsPerEntry) :
+LSMTree::LSMTree(int BufferSize, int NumThreads, float BitsPerEntry) :
                 bf_bits_per_entry(BitsPerEntry),buffer(BufferSize),worker_pool(NumThreads){}
 
 void LSMTree::FlushInto(vector<Level>::iterator current) 
 {
+    long maxsize = buffer.GetMaxSize();
+    Level Templevel(maxsize);
     vector<Level>::iterator next;
-    MergeContext merge_ctx;
+    //MergeContext merge_ctx;
     entry_t entry;
+    assert(current >= Levels.begin());
 
-    assert(current >= levels.begin());
-
-    if (current->remaining() > 0) {
+    
+    if (current->remaining() > 0) 
+    {
         return;
-    } else if (current >= levels.end() - 1) {
+    } 
+    else if (current >= levels.end() - 1) 
+    {
         die("No more space in tree.");
-    } else {
+    } 
+    else 
+    {
         next = current + 1;
     }
 
@@ -40,7 +45,8 @@ void LSMTree::FlushInto(vector<Level>::iterator current)
      * recursively merge the next level downwards to create some
      */
 
-    if (next->remaining() == 0) {
+    if (next->remaining() == 0) 
+    {
         merge_down(next);
         assert(next->remaining() > 0);
     }
@@ -80,57 +86,44 @@ void LSMTree::FlushInto(vector<Level>::iterator current)
     current->runs.clear();
 }
 
+/*
+ * "Put" operation can be divided into three step:
+* 1.Put the value into buffer if buffer is not full
+ * 2.Flush all datum witin buffer into level 1
+ * 3.Put the value into empty buffer
+ */
+
 int LSMTree::PutValue(KEY_t key, VAL_t value) 
 {
-    /*
-    * "Put" operation can be divided into three step:
-    * 1.Put the value into buffer if buffer is not full
-    * 2.Flush all datum witin buffer into level 1
-    * 3.Check whether level "2"(In-disk part) overflows. If overflows, compacting parts within disk.
-    * 4.Put the value into empty buffer
-    */
-    if(buffer.PutValue(key, value))
+    //Step 1
+    if(buffer.PutValue(key, value))  
     {
         return 1;
-    } 
-    
-    
-    
-    merge_down(levels.begin());
-
-    /*
-    * Flush the buffer to level 0
-    */
-
-    levels.front().runs.emplace_front(levels.front().max_run_size, bf_bits_per_entry);
-    levels.front().runs.front().map_write();
-
-    for (const auto& entry : buffer.entries) {
-        levels.front().runs.front().put(entry);
     }
 
-    levels.front().runs.front().unmap();
+    /* Step 2: Flush the buffer to level 0 */
+    FlushInto(Levels.begin());
+    Levels.front().Runs.emplace_front(Levels.front().MaxRunSize, bf_bits_per_entry);
+    Levels.front().Runs.front().map_write();
 
-    /*
-    * Empty the buffer and insert the key/value pair
-    */
+    for (const auto& entry : ) 
+    {
+        Levels.front().Runs.front().put(entry);
+    }
 
+    Levels.front().Runs.front().unmap();
+
+    // Step 3
     buffer.empty();
-    assert(buffer.put(key, val));
+    assert(buffer.PutValue(key, value));
 
-    
-
-    /*
-     * If the buffer is full, flush level 0 if necessary
-     * to create space
-     */
 
     return 0;
 }
 
 Run * LSMTree::get_run(int index) 
 {
-    for (const auto& level : levels) 
+    for (const auto& level : Levels) 
     {
         if (index < level.runs.size()) 
         {
@@ -145,7 +138,7 @@ Run * LSMTree::get_run(int index)
     return nullptr;
 };
 
-void LSMTree::get(KEY_t key) {
+void LSMTree::GetValue(KEY_t key) {
     VAL_t *buffer_val;
     VAL_t latest_val;
     int latest_run;
@@ -210,7 +203,8 @@ void LSMTree::get(KEY_t key) {
     cout << endl;
 }
 
-void LSMTree::range(KEY_t start, KEY_t end) {
+void LSMTree::GetRange(KEY_t start, KEY_t end) 
+{
     vector<entry_t> *buffer_range;
     map<int, vector<entry_t> *> ranges;
     SpinLock lock;
@@ -284,11 +278,13 @@ void LSMTree::range(KEY_t start, KEY_t end) {
     }
 }
 
-void LSMTree::del(KEY_t key) {
-    put(key, VAL_TOMBSTONE);
+void LSMTree::DeleteValue(KEY_t key) 
+{
+    PutValue(key, VAL_TOMBSTONE);
 }
 
-void LSMTree::load(string file_path) {
+void LSMTree::load(string file_path) 
+{
     ifstream stream;
     entry_t entry;
 
@@ -308,7 +304,7 @@ void LSMTree::load(string file_path) {
 void LSMTreeInit()
 {
     clock_t startTime,endTime;                        // Definition of timestamp
-    LSMTree Lsmtree(64,5,10,1,0.5);                  // Initialize a LSM-tree structure
+    LSMTree Lsmtree(64,5,1,0.5);                  // Initialize a LSM-tree structure
 
     /* Write datum */
     startTime = clock();
@@ -316,13 +312,12 @@ void LSMTreeInit()
     {
       if(i>=10000 && i%10000 ==0)
       {
-        Lsmtree.put(i,i);
         printf("Value:%lu \n",i);
         endTime = clock();
         std::cout << "Total Time of inserting: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
       } 
       uint64_t value = i;
-      Lsmtree.put(i,value);
+      Lsmtree.PutValue(i,value);
     }
     endTime = clock();
     std::cout << "Total Time of inserting: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";

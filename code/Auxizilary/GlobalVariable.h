@@ -15,8 +15,11 @@
 #include <cstdint>
 
 
-/* Global variables are used to LSM-tree. */
+/* Global variables and functions that manipulate global variables in LSM-tree. */
 extern int LevelNum;
+
+int LevelAlloctor();
+
 
 /* The page size is defined as a pre-define variable, because different SSD usually have different page size and block size. */
 

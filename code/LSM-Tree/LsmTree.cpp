@@ -23,7 +23,7 @@ istream& operator>>(istream& stream, entry_t& entry)
 
 /*
  * LSM Tree
- * @buffer_max_entries
+ * @BufferSize
  * @depth
  * @fanout
  * @num_threads
@@ -44,7 +44,8 @@ LSMTree::LSMTree(int BufferSize, int depth, int fanout, int NumThreads, float Bi
     }
 }
 
-void LSMTree::merge_down(vector<Level>::iterator current) {
+void LSMTree::merge_down(vector<Level>::iterator current) 
+{
     vector<Level>::iterator next;
     MergeContext merge_ctx;
     entry_t entry;
@@ -104,25 +105,27 @@ void LSMTree::merge_down(vector<Level>::iterator current) {
     current->runs.clear();
 }
 
-void LSMTree::put(KEY_t key, VAL_t val) {
+int LSMTree::PutValue(KEY_t key, VAL_t value) 
+{
     /*
-     * Try inserting the key into the buffer
-     */
-
-    if (buffer.put(key, val)) {
-        return;
-    }
-
-    /*
-     * If the buffer is full, flush level 0 if necessary
-     * to create space
-     */
-
+    * "Put" operation can be divided into three step:
+    * 1.Put the value into buffer if buffer is not full
+    * 2.Flush all datum witin buffer into level 1
+    * 3.Check whether level "2"(In-disk part) overflows. If overflows, compacting parts within disk.
+    * 4.Put the value into empty buffer
+    */
+    if(buffer.PutValue(key, value))
+    {
+        return 1;
+    } 
+    
+    
+    
     merge_down(levels.begin());
 
     /*
-     * Flush the buffer to level 0
-     */
+    * Flush the buffer to level 0
+    */
 
     levels.front().runs.emplace_front(levels.front().max_run_size, bf_bits_per_entry);
     levels.front().runs.front().map_write();
@@ -134,11 +137,20 @@ void LSMTree::put(KEY_t key, VAL_t val) {
     levels.front().runs.front().unmap();
 
     /*
-     * Empty the buffer and insert the key/value pair
-     */
+    * Empty the buffer and insert the key/value pair
+    */
 
     buffer.empty();
     assert(buffer.put(key, val));
+
+    
+
+    /*
+     * If the buffer is full, flush level 0 if necessary
+     * to create space
+     */
+
+    return 0;
 }
 
 Run * LSMTree::get_run(int index) {
@@ -324,6 +336,7 @@ void LSMTreeInit()
     {
       if(i>=10000 && i%10000 ==0)
       {
+        Lsmtree.put(i,i);
         printf("Value:%lu \n",i);
         endTime = clock();
         std::cout << "Total Time of inserting: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";

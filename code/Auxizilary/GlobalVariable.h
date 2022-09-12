@@ -15,10 +15,10 @@
 #include <cstdint>
 
 
-/*
- * The page size is defined as a pre-define variable, because different SSD usually have different page size and block size.
- */
+/* Global variables are used to LSM-tree. */
+extern int LevelNum;
 
+/* The page size is defined as a pre-define variable, because different SSD usually have different page size and block size. */
 
 #define  pagesize   16
 #define  blocksize  256

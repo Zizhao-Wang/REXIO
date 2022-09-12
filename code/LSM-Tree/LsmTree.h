@@ -35,10 +35,11 @@ private:
     float bf_bits_per_entry;
     vector<Level> levels;
     Run * get_run(int);
-    void merge_down(vector<Level>::iterator);
+    void FlushInto(vector<Level>::iterator);
 
 public:
-    LSMTree(int, int, int, int, float);
+    LSMTree(int BufferSize, int fanout, int NumThreads, float BitsPerEntry):
+        bf_bits_per_entry(BitsPerEntry),buffer(BufferSize),worker_pool(NumThreads);
     int PutValue(KEY_t, VAL_t);
     void GetValue(KEY_t);
     void GetRange(KEY_t, KEY_t);

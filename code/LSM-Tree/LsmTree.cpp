@@ -153,11 +153,16 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
     return 0;
 }
 
-Run * LSMTree::get_run(int index) {
-    for (const auto& level : levels) {
-        if (index < level.runs.size()) {
+Run * LSMTree::get_run(int index) 
+{
+    for (const auto& level : levels) 
+    {
+        if (index < level.runs.size()) 
+        {
             return (Run *) &level.runs[index];
-        } else {
+        }
+        else 
+        {
             index -= level.runs.size();
         }
     }

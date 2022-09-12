@@ -1,6 +1,5 @@
 #include <vector>
 #include "../../Auxizilary/VariablesTypes.h"
-#include "bloom_filter.h"
 
 #define TMP_FILE_PATTERN "/tmp/lsm-XXXXXX"
 
@@ -8,13 +7,14 @@ using namespace std;
 
 class Run 
 {
-    BloomFilter bloom_filter;
+private:
     vector<KEY_t> fence_pointers;
     KEY_t max_key;
     entry_t *mapping;
     size_t mapping_length;
     int mapping_fd;
     long file_size() {return max_size * sizeof(entry_t);}
+    
 public:
     long size, max_size;
     string tmp_file;

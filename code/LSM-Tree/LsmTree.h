@@ -39,10 +39,10 @@ private:
 
 public:
     LSMTree(int, int, int, int, float);
-    void put(KEY_t, VAL_t);
-    void get(KEY_t);
-    void range(KEY_t, KEY_t);
-    void del(KEY_t);
+    int PutValue(KEY_t, VAL_t);
+    void GetValue(KEY_t);
+    void GetRange(KEY_t, KEY_t);
+    void DeleteValue(KEY_t);
     void load(std::string);
 };
 

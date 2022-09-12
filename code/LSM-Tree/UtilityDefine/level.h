@@ -1,10 +1,10 @@
 #include <queue>
-
 #include "run.h"
 
 class Level 
 {
 public:
+    int LevelNumber;
     int max_runs;
     long max_run_size;
     std::deque<Run> runs;

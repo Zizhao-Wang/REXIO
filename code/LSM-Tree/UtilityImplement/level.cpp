@@ -9,7 +9,6 @@
 #include <cmath>
 #include "../UtilityDefine/level.h"
 #include "../../Auxizilary/GlobalVariable.h"
-#include "../UtilityDefine/run.h"
 
 using namespace std;
 
@@ -20,16 +19,11 @@ Level::Level(long MaxRunSize)
 	this->MaxRunSize = MaxRunSize;
 }
 
-Run::Run(long maxsize, float bf_bits_per_entry)
+Run::Run(long maxsize)
 {
     this->MaxSize = maxsize;
-    char *tmp_fn;
+    memset(PagePointers,PAGE_MAX,sizeof(PagePointers)); //Initialize all page pointers as  uint32_MAX
     size = 0;
-    fence_pointers.reserve(max_size / getpagesize());
-
-    tmp_fn = strdup(TMP_FILE_PATTERN);
-    tmp_file = mktemp(tmp_fn);
-
     mapping = nullptr;
     mapping_fd = -1;
 }
@@ -40,10 +34,15 @@ uint64_t Run::RunWrite()
 }
 
 
+entry_t * Run::RunRead()
+{
+
+
+}
+
 Run::~Run(void) 
 {
     assert(mapping == nullptr);
-    remove(tmp_file.c_str());
 }
 
 entry_t * Run::map_read(size_t len, off_t offset) 
@@ -180,8 +179,6 @@ vector<entry_t> * Run::range(KEY_t start, KEY_t end)
 void Run::put(entry_t entry) 
 {
     assert(size < max_size);
-
-    bloom_filter.set(entry.key);
 
     if (size % getpagesize() == 0) {
         fence_pointers.push_back(entry.key);

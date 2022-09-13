@@ -1,0 +1,38 @@
+Date : 2022-09-13 13:14:00
+Directory : /home/femu/experiment/code2/
+Total : 9 files,  639 codes, 0 comments, 144 blanks, all 783 lines
+
+Languages
++-------------+------------+------------+------------+------------+------------+
+| language    | files      | code       | comment    | blank      | total      |
++-------------+------------+------------+------------+------------+------------+
+| CMake Cache |          1 |        343 |          0 |         72 |        415 |
+| CMake       |          8 |        296 |          0 |         72 |        368 |
++-------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                         | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                            |          9 |        639 |          0 |        144 |        783 |
+| build                                                                        |          9 |        639 |          0 |        144 |        783 |
+| build/CMakeFiles                                                             |          7 |        250 |          0 |         63 |        313 |
+| build/CMakeFiles/3.23.3                                                      |          3 |        129 |          0 |         44 |        173 |
+| build/CMakeFiles/code.dir                                                    |          2 |         63 |          0 |          8 |         71 |
++------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------+-------------+------------+------------+------------+------------+
+| filename                                                                     | language    | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------+-------------+------------+------------+------------+------------+
+| /home/femu/experiment/code2/build/CMakeCache.txt                             | CMake Cache |        343 |          0 |         72 |        415 |
+| /home/femu/experiment/code2/build/CMakeFiles/3.23.3/CMakeCCompiler.cmake     | CMake       |         55 |          0 |         18 |         73 |
+| /home/femu/experiment/code2/build/CMakeFiles/3.23.3/CMakeCXXCompiler.cmake   | CMake       |         64 |          0 |         20 |         84 |
+| /home/femu/experiment/code2/build/CMakeFiles/3.23.3/CMakeSystem.cmake        | CMake       |         10 |          0 |          6 |         16 |
+| /home/femu/experiment/code2/build/CMakeFiles/CMakeDirectoryInformation.cmake | CMake       |         12 |          0 |          5 |         17 |
+| /home/femu/experiment/code2/build/CMakeFiles/Makefile.cmake                  | CMake       |         46 |          0 |          6 |         52 |
+| /home/femu/experiment/code2/build/CMakeFiles/code.dir/DependInfo.cmake       | CMake       |         27 |          0 |          6 |         33 |
+| /home/femu/experiment/code2/build/CMakeFiles/code.dir/cmake_clean.cmake      | CMake       |         36 |          0 |          2 |         38 |
+| /home/femu/experiment/code2/build/cmake_install.cmake                        | CMake       |         46 |          0 |          9 |         55 |
+| Total                                                                        |             |        639 |          0 |        144 |        783 |
++------------------------------------------------------------------------------+-------------+------------+------------+------------+------------+

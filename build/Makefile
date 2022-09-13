@@ -153,6 +153,30 @@ AuxizilaryImplement/GlobalVariable.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/AuxizilaryImplement/GlobalVariable.cpp.s
 .PHONY : AuxizilaryImplement/GlobalVariable.cpp.s
 
+AuxizilaryImplement/SysOutput.o: AuxizilaryImplement/SysOutput.cpp.o
+.PHONY : AuxizilaryImplement/SysOutput.o
+
+# target to build an object file
+AuxizilaryImplement/SysOutput.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/AuxizilaryImplement/SysOutput.cpp.o
+.PHONY : AuxizilaryImplement/SysOutput.cpp.o
+
+AuxizilaryImplement/SysOutput.i: AuxizilaryImplement/SysOutput.cpp.i
+.PHONY : AuxizilaryImplement/SysOutput.i
+
+# target to preprocess a source file
+AuxizilaryImplement/SysOutput.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/AuxizilaryImplement/SysOutput.cpp.i
+.PHONY : AuxizilaryImplement/SysOutput.cpp.i
+
+AuxizilaryImplement/SysOutput.s: AuxizilaryImplement/SysOutput.cpp.s
+.PHONY : AuxizilaryImplement/SysOutput.s
+
+# target to generate assembly for a file
+AuxizilaryImplement/SysOutput.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/AuxizilaryImplement/SysOutput.cpp.s
+.PHONY : AuxizilaryImplement/SysOutput.cpp.s
+
 Backend/BlockManage/BlockInfo.o: Backend/BlockManage/BlockInfo.cpp.o
 .PHONY : Backend/BlockManage/BlockInfo.o
 
@@ -477,6 +501,9 @@ help:
 	@echo "... AuxizilaryImplement/GlobalVariable.o"
 	@echo "... AuxizilaryImplement/GlobalVariable.i"
 	@echo "... AuxizilaryImplement/GlobalVariable.s"
+	@echo "... AuxizilaryImplement/SysOutput.o"
+	@echo "... AuxizilaryImplement/SysOutput.i"
+	@echo "... AuxizilaryImplement/SysOutput.s"
 	@echo "... Backend/BlockManage/BlockInfo.o"
 	@echo "... Backend/BlockManage/BlockInfo.i"
 	@echo "... Backend/BlockManage/BlockInfo.s"

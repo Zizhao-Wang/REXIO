@@ -1,2 +1,3 @@
 Bucket allocator failure; Return code: 102;    @idetification: code/Linearhashing/LHash.h LBucket(uint64_t BucketAllocated) in class LBucket
-Doubling bucket failure; Return code: 103;    @idetification: code/Linearhashing/LHash.h  int split(int val) in class LinearHashTable;
+Doubling bucket failure; Return code: 103;     @idetification: code/Linearhashing/LHash.h  int split(int val) in class LinearHashTable;
+Run datawriting failure; Return code: 104;     @idetification: code/LSM-Tree/UtilityImplement/level.cpp  RunDataWrite(void) in "class" Run;

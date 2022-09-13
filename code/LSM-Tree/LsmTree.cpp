@@ -102,7 +102,7 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
     }
 
     /* Step 2: Flush the buffer to level 0 */
-    FlushInto(Levels.begin());  //Judge whether level 1 is full and flush it if level 1 is full 
+    //FlushInto(Levels.begin());  //Judge whether level 1 is full and flush it if level 1 is full 
 
 
     // Step 3

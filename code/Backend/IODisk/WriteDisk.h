@@ -15,11 +15,13 @@
 #define EXPERIMENT1_WRITEDISK_H
 
 
-#include "../BlockManage/BlockInfo.h"
+
 #include <stdint.h>
 #include <vector>
 #include <unordered_map>
 #include <liblightnvm.h>
+#include "../BlockManage/BlockInfo.h"
+#include "../../Auxizilary/VariablesTypes.h"
 using namespace std;
 
 
@@ -76,11 +78,11 @@ uint_32 SSD_write(uint64_t value);
 // write pages into SSD
 uint64_t SSD_write2(uint64_t values);
 
-//Signle value insert into physicals.
+// Insert signle value into physicals.
 uint64_t SingleValueWrite(uint64_t value, uint64_t pageno,uint64_t Cursize);
 
-//Signle value insert into physicals for linear hashing.
-uint64_t SingleValueWrite4Linear(uint64_t value, uint64_t pageno, uint64_t Cursize,  bool IsFirst);
+// Insert page-level key-value pairs into physicals for linear hashing.
+uint64_t PageDataWrite(std::vector<entry_t> Entries, uint64_t pageno);
 
 
 /* 

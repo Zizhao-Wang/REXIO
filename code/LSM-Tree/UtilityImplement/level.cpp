@@ -17,20 +17,25 @@ Level::Level(long MaxRunSize)
 {
 	this->LevelNumber = LevelAlloctor();
 	this->MaxRuns = pow(2,LevelNumber);
-	this->MaxRunSize = MaxRunSize;
+	this->MaxRunSize = MaxRunSize * MaxRuns;
 }
 
 Run::Run(long maxsize)
 {
     this->MaxSize = maxsize;
-    memset(PagePointers,PAGE_MAX,sizeof(PagePointers)); //Initialize all page pointers as  uint32_MAX
-    size = 0;
-    mapping = nullptr;
-    mapping_fd = -1;
+    //Initialize all page pointers as  uint32_MAX
+    for(int i=0;i<this->MaxSize;i++)
+    {
+        PagePointers.emplace_back(UINT64_MAX);
+    }
+    Size = 0;
 }
 
-uint64_t Run::RunWrite()
+uint64_t Run::RunDataWrite()
 {
+
+    
+
 
 }
 
@@ -180,6 +185,9 @@ vector<entry_t> * Run::range(KEY_t start, KEY_t end)
 void Run::PutValue(entry_t entry) 
 {
     assert(Size < MaxSize);
+
+    Rundata.push_back(entry);    
     MaxKey = max(entry.key, max_key);
+    if(Rundata.size() % )
     size++;
 }

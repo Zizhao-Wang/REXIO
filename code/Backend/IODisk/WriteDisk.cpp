@@ -622,3 +622,9 @@ int ReadfromPage(uint64_t pageno)
     return 0;
 
 }
+
+
+uint64_t GetPagesize(void)
+{
+    return bp->geo->page_nbytes;
+}

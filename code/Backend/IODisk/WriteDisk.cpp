@@ -600,7 +600,7 @@ uint64_t PageDataWrite(std::vector<entry_t> Entries, uint64_t pageno)
 /*
  * Read functions. 
  */
-int ReadfromPage(uint64_t pageno)
+int PageDataRead(uint64_t pageno)
 {
 
     int err;
@@ -623,6 +623,20 @@ int ReadfromPage(uint64_t pageno)
 
 }
 
+
+vector<entry_t> RunReadFromPage(uint64_t PageNum)
+{
+    int flag;
+    vector<entry_t> data;
+    flag = PageDataRead(PageNum);
+    if(flag != -1)
+    {
+
+    }
+
+    return data;
+
+}
 
 uint64_t GetPagesize(void)
 {

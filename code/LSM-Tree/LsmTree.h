@@ -38,7 +38,7 @@ private:
     vector<Level> Levels;
 
 public:
-    LSMTree(int, int, float);
+    LSMTree(int, int);
     int PutValue(KEY_t, VAL_t);
     void GetValue(KEY_t);
     void GetRange(KEY_t, KEY_t);

@@ -12,9 +12,6 @@
 
 using namespace std;
 
-
-
-
 Level::Level(long MaxRunSize)
 {
 	this->LevelNumber = LevelAlloctor();
@@ -22,13 +19,10 @@ Level::Level(long MaxRunSize)
 	this->MaxRunSize = MaxRunSize;
 }
 
-
-
-Run::Run(long max_size, float bf_bits_per_entry) :
-         max_size(max_size)
+Run::Run(long maxsize, float bf_bits_per_entry)
 {
+    this->MaxSize = maxsize;
     char *tmp_fn;
-
     size = 0;
     fence_pointers.reserve(max_size / getpagesize());
 

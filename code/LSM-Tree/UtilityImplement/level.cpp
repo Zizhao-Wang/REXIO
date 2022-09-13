@@ -5,6 +5,7 @@
 #include <sys/mman.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <cstring>
 #include <cmath>
 #include "../UtilityDefine/level.h"
 #include "../../Auxizilary/GlobalVariable.h"
@@ -33,12 +34,20 @@ Run::Run(long maxsize, float bf_bits_per_entry)
     mapping_fd = -1;
 }
 
-Run::~Run(void) {
+uint64_t Run::RunWrite()
+{
+
+}
+
+
+Run::~Run(void) 
+{
     assert(mapping == nullptr);
     remove(tmp_file.c_str());
 }
 
-entry_t * Run::map_read(size_t len, off_t offset) {
+entry_t * Run::map_read(size_t len, off_t offset) 
+{
     assert(mapping == nullptr);
 
     mapping_length = len;
@@ -52,12 +61,14 @@ entry_t * Run::map_read(size_t len, off_t offset) {
     return mapping;
 }
 
-entry_t * Run::map_read(void) {
+entry_t * Run::map_read(void) 
+{
     map_read(max_size * sizeof(entry_t), 0);
     return mapping;
 }
 
-entry_t * Run::map_write(void) {
+entry_t * Run::map_write(void) 
+{
     assert(mapping == nullptr);
     int result;
 
@@ -78,7 +89,8 @@ entry_t * Run::map_write(void) {
     return mapping;
 }
 
-void Run::unmap(void) {
+void Run::unmap(void) 
+{
     assert(mapping != nullptr);
 
     munmap(mapping, mapping_length);
@@ -89,7 +101,8 @@ void Run::unmap(void) {
     mapping_fd = -1;
 }
 
-VAL_t * Run::get(KEY_t key) {
+VAL_t * Run::get(KEY_t key) 
+{
     vector<KEY_t>::iterator next_page;
     long page_index;
     VAL_t *val;
@@ -119,7 +132,8 @@ VAL_t * Run::get(KEY_t key) {
     return val;
 }
 
-vector<entry_t> * Run::range(KEY_t start, KEY_t end) {
+vector<entry_t> * Run::range(KEY_t start, KEY_t end) 
+{
     vector<entry_t> *subrange;
     vector<KEY_t>::iterator next_page;
     long subrange_page_start, subrange_page_end, num_pages, num_entries, i;
@@ -163,7 +177,8 @@ vector<entry_t> * Run::range(KEY_t start, KEY_t end) {
     return subrange;
 }
 
-void Run::put(entry_t entry) {
+void Run::put(entry_t entry) 
+{
     assert(size < max_size);
 
     bloom_filter.set(entry.key);

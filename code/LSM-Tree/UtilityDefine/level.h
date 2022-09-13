@@ -39,7 +39,7 @@ public:
     Run(long);
     int  RunDataWrite();
     void put(entry_t);
-    entry_t * RunDataRead();
+    std::vector<entry_t> RunDataRead();
     entry_t * map_read(size_t, off_t);
     entry_t * map_read(void);
     entry_t * map_write(void);

@@ -1,0 +1,11 @@
+"filename", "language", "CMake", "CMake Cache", "comment", "blank", "total"
+"/home/femu/experiment/code2/build/CMakeCache.txt", "CMake Cache", 0, -343, 0, -72, -415
+"/home/femu/experiment/code2/build/CMakeFiles/3.23.3/CMakeCCompiler.cmake", "CMake", -55, 0, 0, -18, -73
+"/home/femu/experiment/code2/build/CMakeFiles/3.23.3/CMakeCXXCompiler.cmake", "CMake", -64, 0, 0, -20, -84
+"/home/femu/experiment/code2/build/CMakeFiles/3.23.3/CMakeSystem.cmake", "CMake", -10, 0, 0, -6, -16
+"/home/femu/experiment/code2/build/CMakeFiles/CMakeDirectoryInformation.cmake", "CMake", -12, 0, 0, -5, -17
+"/home/femu/experiment/code2/build/CMakeFiles/Makefile.cmake", "CMake", -46, 0, 0, -6, -52
+"/home/femu/experiment/code2/build/CMakeFiles/code.dir/DependInfo.cmake", "CMake", -27, 0, 0, -6, -33
+"/home/femu/experiment/code2/build/CMakeFiles/code.dir/cmake_clean.cmake", "CMake", -36, 0, 0, -2, -38
+"/home/femu/experiment/code2/build/cmake_install.cmake", "CMake", -46, 0, 0, -9, -55
+"Total", "-", -296, -343, 0, -144, -783

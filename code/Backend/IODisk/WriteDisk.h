@@ -88,8 +88,9 @@ uint64_t PageDataWrite(std::vector<entry_t> Entries, uint64_t pageno);
 /* 
  * Read functions declartion. 
  */
-int ReadfromPage(uint64_t pageno);
+int PageDataRead(uint64_t pageno);
 
+vector<entry_t> RunReadFromPage(uint64_t PageNum);
 
 /* Some other auxizilary functions. */
 uint64_t GetPagesize(void);

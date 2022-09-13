@@ -41,7 +41,7 @@ int Run::RunDataWrite(void)
         if(Pointer = PageDataWrite(Rundata,PagePointers[Size]) != -1)
         {
             printf("Datum of Run in Level write succeed!\n");
-            PagePointers[Size] = Pointer
+            PagePointers[Size] = Pointer;
             return 0;
         }
         else
@@ -57,8 +57,10 @@ int Run::RunDataWrite(void)
 }
 
 
-std::vector<entry_t> Run::RunDataRead()
+std::vector<entry_t> Run::RunDataRead(uint64_t PageNum)
 {
+    
+
 
 
 }

@@ -9,6 +9,7 @@
 #include <cmath>
 #include "../UtilityDefine/level.h"
 #include "../../Auxizilary/GlobalVariable.h"
+#include "../../Backend/IODisk/WriteDisk.h"
 
 using namespace std;
 
@@ -176,18 +177,9 @@ vector<entry_t> * Run::range(KEY_t start, KEY_t end)
     return subrange;
 }
 
-void Run::put(entry_t entry) 
+void Run::PutValue(entry_t entry) 
 {
-    assert(size < max_size);
-
-    if (size % getpagesize() == 0) {
-        fence_pointers.push_back(entry.key);
-    }
-
-    // Set a final fence pointer to establish an upper
-    // bound on the last page range.
-    max_key = max(entry.key, max_key);
-
-    mapping[size] = entry;
+    assert(Size < MaxSize);
+    MaxKey = max(entry.key, max_key);
     size++;
 }

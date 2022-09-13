@@ -27,8 +27,9 @@ class Run
 
 private:
     long Size, MaxSize;
-    uint64_t PagePointers[64];
-    KEY_t MaxKey;
+    uint64_t MaxKey;
+    std::vector<uint64_t> PagePointers;
+    std::vector<entry_t> Rundata;
     std::vector<KEY_t> fence_pointers;
     entry_t *mapping;
     size_t mapping_length;
@@ -37,7 +38,7 @@ private:
 public:
     Run(long);
     ~Run(void);
-    uint64_t  RunWrite();
+    uint64_t  RunDataWrite();
     entry_t * RunRead();
     entry_t * map_read(size_t, off_t);
     entry_t * map_read(void);

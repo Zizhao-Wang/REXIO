@@ -10,12 +10,12 @@
  *         IDENTIFICATION
  *   Experiment1/Backend/BackendMain.h
  */
-#include "WriteDisk.h"
-#include "../../Auxizilary/GlobalVariable.h"
-#include "../BackendMain.h"
 #include <unordered_map>
 #include <liblightnvm_cli.h>
 #include <liblightnvm_spec.h>
+#include "WriteDisk.h"
+#include "../../Auxizilary/GlobalVariable.h"
+#include "../BackendMain.h"
 
 uint_32 blockoffset   = 0;
 size_t writepointer = 0;
@@ -544,7 +544,7 @@ uint64_t SingleValueWrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
 }
 
 
-uint64_t SingleValueWrite4Linear(uint64_t value, uint64_t pageno, uint64_t Cursize, bool IsFirst)
+uint64_t PageDataWrite(std::vector<entry_t> Entries, uint64_t pageno)
 {
 
     /* Function flag, default value equals 0(successful flag). */

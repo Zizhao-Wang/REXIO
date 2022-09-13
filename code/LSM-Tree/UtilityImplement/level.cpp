@@ -57,7 +57,7 @@ int Run::RunDataWrite(void)
 }
 
 
-entry_t * Run::RunRead()
+std::vector<entry_t> Run::RunDataRead()
 {
 
 

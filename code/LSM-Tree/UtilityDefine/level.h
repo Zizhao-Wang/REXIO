@@ -33,7 +33,7 @@ private:
     long file_size() {return max_size * sizeof(entry_t);}
     
 public:
-    long size, max_size;
+    long size, MaxSize;
     std::string tmp_file;
     Run(long, float);
     ~Run(void);

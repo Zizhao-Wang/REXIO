@@ -21,6 +21,9 @@
 #include <vector>
 #include <queue>
 #include "../../Auxizilary/VariablesTypes.h"
+#include "../../Auxizilary/GlobalVariable.h"
+#include "../../Backend/IODisk/WriteDisk.h"
+#include "../../Auxizilary/SysOutput.h"
 
 class Run 
 {
@@ -30,24 +33,16 @@ private:
     uint64_t MaxKey;
     std::vector<uint64_t> PagePointers;
     std::vector<entry_t> Rundata;
-    std::vector<KEY_t> fence_pointers;
-    entry_t *mapping;
-    size_t mapping_length;
-    int mapping_fd;
+    std::vector<KEY_t> FencePointers;
     
 public:
     Run(long);
     int  RunDataWrite();
-    void put(entry_t);
-    std::vector<entry_t> RunDataRead();
-    entry_t * map_read(size_t, off_t);
-    entry_t * map_read(void);
-    entry_t * map_write(void);
-    void unmap(void);
-    VAL_t * get(KEY_t);
-    std::vector<entry_t> * range(KEY_t, KEY_t);
-    
-    ~Run(void);
+    void PutValue(entry_t entry);
+    VAL_t* RunValueRead(uint64_t PageNum);
+    VAL_t * GetValue(KEY_t key);
+    std::vector<entry_t> * GetRange(KEY_t, KEY_t);
+
 };
 
 

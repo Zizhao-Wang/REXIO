@@ -44,3 +44,5 @@ public:
     entry_t next(void);
     bool done(void);
 };
+
+#endif

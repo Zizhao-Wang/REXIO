@@ -2,7 +2,14 @@
  * @date   0:32 7/9/2022
  * @author zz.wang
  * @details
- *          This file shows how to construct a LSM-Tree.
+ *          The following code define "Level" class and "Run" class. 
+ *          The first class storing datum from "buffer" or last "Level", every "level" has 2 or 2^i(i=2,3,4...) 
+ *          "Runs" where the size equals size of buffer.
+ *          Every Level has three parameters:
+ *          LevelNumber: Number of a se4pecific Level.
+ *          MaxRus: Maximum of Runs in a specific Level, it equals "2^LevelNumber(LevelNumber= 1,2,3,4...)" 
+ *          MaxRunSize: Size of Run, it equals buffer size(In this OC-SSD mode(FEMU), the default value is 64(that means every Run can store 1MB datum)). 
+ *          
  *
  * IDENTIFICATION:
  *          code2/code/LSM-Tree/lsm_tree.h

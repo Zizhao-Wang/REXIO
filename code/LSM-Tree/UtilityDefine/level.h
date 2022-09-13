@@ -26,17 +26,16 @@ class Run
 {
 
 private:
-    long size, MaxSize;
+    long Size, MaxSize;
     uint64_t PagePointers[64];
+    KEY_t MaxKey;
     std::vector<KEY_t> fence_pointers;
-    KEY_t max_key;
     entry_t *mapping;
     size_t mapping_length;
     int mapping_fd;
     
 public:
-    std::string tmp_file;
-    Run(long, float);
+    Run(long);
     ~Run(void);
     uint64_t  RunWrite();
     entry_t * RunRead();

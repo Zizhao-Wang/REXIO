@@ -88,4 +88,8 @@ uint64_t SingleValueWrite4Linear(uint64_t value, uint64_t pageno, uint64_t Cursi
  */
 int ReadfromPage(uint64_t pageno);
 
+
+
+uint64_t GetPagesize(void);
+
 #endif //EXPERIMENT1_WRITEDISK_H

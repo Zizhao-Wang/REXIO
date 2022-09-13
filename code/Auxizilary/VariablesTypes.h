@@ -1,8 +1,8 @@
 /**
- * @date   11:05 7/9/2022
+ * @date   7/9/2022
  * @author zz.wang
  * @details
- *          This file shows how to construct a LSM-Tree.
+ *         This file shows how to construct a LSM-Tree.
  *
  * IDENTIFICATION:
  *          code/Auxizilary/VariablesTypes.h
@@ -23,6 +23,9 @@ typedef uint64_t VAL_t;
 #define VAL_MAX 2147483647
 #define VAL_MIN -2147483647
 #define VAL_TOMBSTONE -2147483648
+
+
+#define PAGE_MAX 4294967295
 
 struct entry 
 {

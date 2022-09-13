@@ -1,0 +1,30 @@
+"filename", "language", "CMake", "CMake Cache", "comment", "blank", "total"
+"/home/femu/experiment/code2/build/CMakeCache.txt", "CMake Cache", 0, 343, 0, 72, 415
+"/home/femu/experiment/code2/build/CMakeFiles/3.23.3/CMakeCCompiler.cmake", "CMake", 55, 0, 0, 18, 73
+"/home/femu/experiment/code2/build/CMakeFiles/3.23.3/CMakeCXXCompiler.cmake", "CMake", 64, 0, 0, 20, 84
+"/home/femu/experiment/code2/build/CMakeFiles/3.23.3/CMakeSystem.cmake", "CMake", 10, 0, 0, 6, 16
+"/home/femu/experiment/code2/build/CMakeFiles/CMakeDirectoryInformation.cmake", "CMake", 12, 0, 0, 5, 17
+"/home/femu/experiment/code2/build/CMakeFiles/Makefile.cmake", "CMake", 46, 0, 0, 6, 52
+"/home/femu/experiment/code2/build/CMakeFiles/code.dir/DependInfo.cmake", "CMake", 27, 0, 0, 6, 33
+"/home/femu/experiment/code2/build/CMakeFiles/code.dir/cmake_clean.cmake", "CMake", 36, 0, 0, 2, 38
+"/home/femu/experiment/code2/build/cmake_install.cmake", "CMake", 46, 0, 0, 9, 55
+"/home/femu/experiment/code2/code/cmake-build-debug-remote-host/CMakeCache.txt", "CMake Cache", 0, 332, 0, 72, 404
+"/home/femu/experiment/code2/code/cmake-build-debug-remote-host/CMakeFiles/3.24.0-rc1/CMakeCCompiler.cmake", "CMake", 55, 0, 0, 18, 73
+"/home/femu/experiment/code2/code/cmake-build-debug-remote-host/CMakeFiles/3.24.0-rc1/CMakeCXXCompiler.cmake", "CMake", 64, 0, 0, 20, 84
+"/home/femu/experiment/code2/code/cmake-build-debug-remote-host/CMakeFiles/3.24.0-rc1/CMakeSystem.cmake", "CMake", 10, 0, 0, 6, 16
+"/home/femu/experiment/code2/code/cmake-build-debug-remote-host/CMakeFiles/CMakeDirectoryInformation.cmake", "CMake", 12, 0, 0, 5, 17
+"/home/femu/experiment/code2/code/cmake-build-debug-remote-host/CMakeFiles/Experiment1.dir/DependInfo.cmake", "CMake", 22, 0, 0, 6, 28
+"/home/femu/experiment/code2/code/cmake-build-debug-remote-host/CMakeFiles/Experiment1.dir/cmake_clean.cmake", "CMake", 26, 0, 0, 2, 28
+"/home/femu/experiment/code2/code/cmake-build-debug-remote-host/CMakeFiles/Makefile.cmake", "CMake", 124, 0, 0, 6, 130
+"/home/femu/experiment/code2/code/cmake-build-debug-remote-host/cmake_install.cmake", "CMake", 46, 0, 0, 9, 55
+"/home/femu/experiment/code2/code/cmake-build-debug/CMakeCache.txt", "CMake Cache", 0, 347, 0, 77, 424
+"/home/femu/experiment/code2/code/cmake-build-debug/CMakeFiles/3.22.3/CMakeCCompiler.cmake", "CMake", 55, 0, 0, 18, 73
+"/home/femu/experiment/code2/code/cmake-build-debug/CMakeFiles/3.22.3/CMakeCXXCompiler.cmake", "CMake", 64, 0, 0, 20, 84
+"/home/femu/experiment/code2/code/cmake-build-debug/CMakeFiles/3.22.3/CMakeRCCompiler.cmake", "CMake", 6, 0, 0, 1, 7
+"/home/femu/experiment/code2/code/cmake-build-debug/CMakeFiles/3.22.3/CMakeSystem.cmake", "CMake", 10, 0, 0, 6, 16
+"/home/femu/experiment/code2/code/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake", "CMake", 12, 0, 0, 5, 17
+"/home/femu/experiment/code2/code/cmake-build-debug/CMakeFiles/Experiment1.dir/DependInfo.cmake", "CMake", 22, 0, 0, 6, 28
+"/home/femu/experiment/code2/code/cmake-build-debug/CMakeFiles/Experiment1.dir/cmake_clean.cmake", "CMake", 28, 0, 0, 2, 30
+"/home/femu/experiment/code2/code/cmake-build-debug/CMakeFiles/Makefile.cmake", "CMake", 50, 0, 0, 6, 56
+"/home/femu/experiment/code2/code/cmake-build-debug/cmake_install.cmake", "CMake", 42, 0, 0, 8, 50
+"Total", "-", 944, 1022, 0, 437, 2403

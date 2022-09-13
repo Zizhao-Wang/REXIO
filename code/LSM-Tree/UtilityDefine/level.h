@@ -37,17 +37,17 @@ private:
     
 public:
     Run(long);
-    ~Run(void);
-    uint64_t  RunDataWrite();
-    entry_t * RunRead();
+    int  RunDataWrite();
+    void put(entry_t);
+    entry_t * RunDataRead();
     entry_t * map_read(size_t, off_t);
     entry_t * map_read(void);
     entry_t * map_write(void);
     void unmap(void);
     VAL_t * get(KEY_t);
     std::vector<entry_t> * range(KEY_t, KEY_t);
-    void put(entry_t);
-    long file_size() {return MaxSize * sizeof(entry_t);}
+    
+    ~Run(void);
 };
 
 

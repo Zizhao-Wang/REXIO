@@ -91,7 +91,9 @@ uint64_t PageDataWrite(std::vector<entry_t> Entries, uint64_t pageno);
 int ReadfromPage(uint64_t pageno);
 
 
-
+/* Some other auxizilary functions. */
 uint64_t GetPagesize(void);
+
+uint64_t CalculatePageCapacity(size_t KVsize);
 
 #endif //EXPERIMENT1_WRITEDISK_H

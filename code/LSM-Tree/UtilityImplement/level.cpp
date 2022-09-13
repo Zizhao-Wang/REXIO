@@ -31,11 +31,28 @@ Run::Run(long maxsize)
     Size = 0;
 }
 
-uint64_t Run::RunDataWrite()
+int Run::RunDataWrite(void)
 {
 
+    uint64_t pagesize = CalculatePageCapacity(sizeof(KEY_t)+sizeof(VAL_t));
+    uint64_t Pointer;
+    if(pagesize == Rundata.size())
+    {
+        if(Pointer = PageDataWrite(Rundata,PagePointers[Size]) != -1)
+        {
+            printf("Datum of Run in Level write succeed!\n");
+            PagePointers[Size] = Pointer
+            return 0;
+        }
+        else
+        {
+            printf("Datum of Run in Level write failed!\n");
+            return -1;
+        }
+    }
     
-
+    printf("Datum size of Run doesn't matching, check again!");
+    return -1;
 
 }
 

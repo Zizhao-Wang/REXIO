@@ -54,7 +54,7 @@ int main(int argc, char **argv)
 
     // LHashPort();
 
-    //LSMTreeInit();
+    LSMTreeInit();
 
     return 0;
 

@@ -17,74 +17,74 @@
 LSMTree::LSMTree(int BufferSize, int NumThreads) :
         buffer(BufferSize),worker_pool(NumThreads){}
 
-// void LSMTree::FlushInto(vector<Level>::iterator current) 
-// {
-//     long maxsize = buffer.GetMaxSize();
-//     Level Templevel(maxsize);
-//     vector<Level>::iterator next;
-//     //MergeContext merge_ctx;
-//     entry_t entry;
-//     assert(current >= Levels.begin());
+void LSMTree::FlushInto(vector<Level>::iterator current) 
+{
+    long maxsize = buffer.GetMaxSize();
+    Level Templevel(maxsize);
+    vector<Level>::iterator next;
+    //MergeContext merge_ctx;
+    entry_t entry;
+    assert(current >= Levels.begin());
 
     
-//     if (current->remaining() > 0) 
-//     {
-//         return;
-//     } 
-//     else if (current >= levels.end() - 1) 
-//     {
-//         die("No more space in tree.");
-//     } 
-//     else 
-//     {
-//         next = current + 1;
-//     }
+    if (current->remaining() > 0) 
+    {
+        return;
+    } 
+    else if (current >= levels.end() - 1) 
+    {
+        die("No more space in tree.");
+    } 
+    else 
+    {
+        next = current + 1;
+    }
 
-//     /*
-//      * If the next level does not have space for the current level,
-//      * recursively merge the next level downwards to create some
-//      */
+    /*
+     * If the next level does not have space for the current level,
+     * recursively merge the next level downwards to create some
+     */
 
-//     if (next->remaining() == 0) 
-//     {
-//         merge_down(next);
-//         assert(next->remaining() > 0);
-//     }
+    if (next->remaining() == 0) 
+    {
+        merge_down(next);
+        assert(next->remaining() > 0);
+    }
 
-//     /*
-//      * Merge all runs in the current level into the first
-//      * run in the next level
-//      */
+    /*
+     * Merge all runs in the current level into the first
+     * run in the next level
+     */
 
-//     for (auto& run : current->runs) {
-//         merge_ctx.add(run.map_read(), run.size);
-//     }
+    for (auto& run : current->runs) {
+        merge_ctx.add(run.map_read(), run.size);
+    }
 
-//     next->runs.emplace_front(next->max_run_size, bf_bits_per_entry);
-//     next->runs.front().map_write();
+    next->runs.emplace_front(next->max_run_size, bf_bits_per_entry);
+    next->runs.front().map_write();
 
-//     while (!merge_ctx.done()) {
-//         entry = merge_ctx.next();
+    while (!merge_ctx.done()) {
+        entry = merge_ctx.next();
 
-//         // Remove deleted keys from the final level
-//         if (!(next == levels.end() - 1 && entry.val == VAL_TOMBSTONE)) {
-//             next->runs.front().put(entry);
-//         }
-//     }
+        // Remove deleted keys from the final level
+        if (!(next == levels.end() - 1 && entry.val == VAL_TOMBSTONE)) {
+            next->runs.front().put(entry);
+        }
+    }
 
-//     next->runs.front().unmap();
+    next->runs.front().unmap();
 
-//     for (auto& run : current->runs) {
-//         run.unmap();
-//     }
+    for (auto& run : current->runs) {
+        run.unmap();
+    }
 
-//     /*
-//      * Clear the current level to delete the old (now
-//      * redundant) entry files.
-//      */
+    /*
+     * Clear the current level to delete the old (now
+     * redundant) entry files.
+     */
 
-//     current->runs.clear();
-// }
+    current->runs.clear();
+}
 
 /*
  * "Put" operation can be divided into three step:

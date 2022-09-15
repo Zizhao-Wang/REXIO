@@ -17,23 +17,18 @@
 LSMTree::LSMTree(int BufferSize, int NumThreads) :
         buffer(BufferSize),worker_pool(NumThreads){}
 
-void LSMTree::FlushInto(vector<Level>::iterator current) 
+int LSMTree::FlushInto(vector<Level>::iterator current) 
 {
+    vector<Level>::iterator next;
     long maxsize = buffer.GetMaxSize();
     Level Templevel(maxsize);
-    vector<Level>::iterator next;
     //MergeContext merge_ctx;
     entry_t entry;
-    assert(current >= Levels.begin());
 
-    
+    AssertCondition(current >= Levels.begin());
     if (current->remaining() > 0) 
     {
-        return;
-    } 
-    else if (current >= levels.end() - 1) 
-    {
-        die("No more space in tree.");
+        return 0;
     } 
     else 
     {
@@ -47,7 +42,7 @@ void LSMTree::FlushInto(vector<Level>::iterator current)
 
     if (next->remaining() == 0) 
     {
-        merge_down(next);
+        FlushInto(next);
         assert(next->remaining() > 0);
     }
 

@@ -44,7 +44,7 @@ public:
     void GetRange(KEY_t, KEY_t);
     void DeleteValue(KEY_t);
     void load(std::string);
-    void FlushInto(vector<Level>::iterator);
+    int FlushInto(vector<Level>::iterator);
     Run * get_run(int);
 };
 

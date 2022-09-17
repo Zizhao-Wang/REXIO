@@ -42,7 +42,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : " -fopenmp -O3 -DNDEBUG"
+					"fragment" : " -fopenmp -g"
 				},
 				{
 					"fragment" : "-std=gnu++14"
@@ -52,7 +52,7 @@
 			[
 				{
 					"backtrace" : 2,
-					"path" : "/home/femu/experiment/code2/code/../../../liblightnvm/include"
+					"path" : "/home/femu/experiment1/code2/code/../../../liblightnvm/include"
 				}
 			],
 			"language" : "CXX",
@@ -91,7 +91,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-fopenmp -O3 -DNDEBUG",
+				"fragment" : "-fopenmp -g",
 				"role" : "flags"
 			},
 			{

@@ -640,7 +640,7 @@ vector<entry_t> RunReadFromPage(uint64_t PageNum)
 
 uint64_t GetPagesize(void)
 {
-    return bp->geo->page_nbytes;
+    return bp->geo->l.nbytes * nvm_dev_get_ws_min(bp->dev);
 }
 
 uint64_t CalculatePageCapacity(size_t KVsize)

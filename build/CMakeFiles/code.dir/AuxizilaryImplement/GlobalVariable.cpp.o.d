@@ -1,7 +1,7 @@
 CMakeFiles/code.dir/AuxizilaryImplement/GlobalVariable.cpp.o: \
- /home/femu/experiment/code2/code/AuxizilaryImplement/GlobalVariable.cpp \
+ /home/femu/experiment1/code2/code/AuxizilaryImplement/GlobalVariable.cpp \
  /usr/include/stdc-predef.h \
- /home/femu/experiment/code2/code/AuxizilaryImplement/../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment1/code2/code/AuxizilaryImplement/../Auxizilary/GlobalVariable.h \
  /usr/include/c++/9/cstdint \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h \

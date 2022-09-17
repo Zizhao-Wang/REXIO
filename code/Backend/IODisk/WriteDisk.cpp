@@ -572,14 +572,15 @@ uint64_t PageDataWrite(std::vector<entry_t> Entries, uint64_t pageno)
 		    addrs[aidx].l.sectr = (pageno%4096)+aidx;
 		    /* printf("aidx: %lu addrs[aidx].val : %lu chunk_addrs[cidx].val %lu addrs[aidx].l.sectr %lu \n",aidx,addrs[aidx].val,chunk_addrs[cidx].val,addrs[aidx].l.sectr); */
 	    }
+        char * temp = new char[20];
         for (size_t i = 0; i < Entries.size(); i++)
         {
-            /* code */
+            uint64_t *ML = (uint64_t*) temp;
+            ML[0] = Entries[i].key, ML[1] = Entries[i].val;
+            for(size_t j= i*sizeof(entry_t)*8,k=0;j<i*sizeof(entry_t)*8+sizeof(entry_t)*8;j++,k++)
         }
         
-        char * temp = new char[100];
-        uint64_t *ML = (uint64_t*) temp;
-        ML[Cursize] = value;
+        
         //printf("Value :%ld has been inserted!\n", ML[Cursize]);
         for(int i=0;i<Cursize*8+10;i++)
         {

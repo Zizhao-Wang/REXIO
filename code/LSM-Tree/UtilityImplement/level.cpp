@@ -54,14 +54,18 @@ VAL_t* Run::RunValuesRead(uint64_t PageNum)
 {
     VAL_t * value = nullptr;
     std::vector<entry_t> reads;
-    reads = RunReadFromPage(PageNum);
+    RunReadFromPage(PageNum,CalculatePageCapacity(sizeof(entry_t)));
     return value;
 }
 
 entry_t* Run::SingleRunRead()
 {
     entry_t * entries;
-    
+    for(int i=0; i<PagePointers[i];i++)
+    {
+        entries = RunReadFromPage(PagePointers[i],CalculatePageCapacity(sizeof(entry_t)));
+        
+    }
     return entries;
 
 }

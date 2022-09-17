@@ -604,21 +604,21 @@ uint64_t PageDataWrite(std::vector<entry_t> Entries, uint64_t pageno)
  */
 int PageDataRead(uint64_t pageno)
 {
-
     int err;
     struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, pageno);
     size_t ws_min = nvm_dev_get_ws_min(bp->dev);
     struct nvm_addr addrs[ws_min];
+
     for (size_t aidx = 0; aidx < ws_min; ++aidx) 
     {
 		addrs[aidx].val = addrs_chunk.val;
-		addrs[aidx].l.sectr = pageno%4096+aidx;
-		/* printf("aidx: %lu addrs[aidx].val : %lu chunk_addrs[cidx].val %lu addrs[aidx].l.sectr %lu \n",aidx,addrs[aidx].val,chunk_addrs[cidx].val,addrs[aidx].l.sectr); */
+		addrs[aidx].l.sectr = pageno % bp->geo->l.nsectr + aidx;
 	}
-    //err = nvm_cmd_read(bp->dev, addrs, ws_min,bp->bufs->read, NULL,0x0, NULL);
+    err = nvm_cmd_read(bp->dev, addrs, ws_min,bp->bufs->read, NULL,0x0, NULL);
     if(err == -1)
     {
         printf("Reading page %ld failure.\n",pageno);
+        return -1;
     }
     
     return 0;
@@ -626,20 +626,45 @@ int PageDataRead(uint64_t pageno)
 }
 
 
-vector<entry_t> RunReadFromPage(uint64_t PageNum)
+entry_t * RunReadFromPage(uint64_t PageNum, size_t Runsize)
 {
     int flag;
-    vector<entry_t> data;
+    entry_t* data;
     flag = PageDataRead(PageNum);
+    data = (entry_t*)malloc(sizeof(entry_t)*(Runsize+5));
+    if(data == nullptr)
+    {
+        EMessageOutput("Memory allocating failure in RunReadFromPage function!",578);
+    }
     if(flag != -1)
     {
-
+        char * temp = new char[20];
+        entry_t TempEntry;
+        for (size_t i = 0; i < Runsize; i++)
+        {
+            // printf("Value :%ld has been inserted!\n", ML[Cursize]);
+            for(size_t j = i*sizeof(entry_t)*8,k=0;j<i*sizeof(entry_t)*8+sizeof(entry_t)*8;j++,k++)
+            {
+                temp[k] = bp->bufs->write[i];
+            }
+            uint64_t *ML = (uint64_t*) temp;
+            TempEntry.key = ML[0], TempEntry.val = ML[1];
+            data[i] = TempEntry;
+        }
+        // TODO: 
+    }
+    else
+    {
+        EMessageOutput("Run data read failure in page"+ Uint64toString(PageNum)+"\n",106);
     }
 
     return data;
 
 }
 
+/**
+ * Some other auxizilary functions.
+ **/
 uint64_t GetPagesize(void)
 {
     return bp->geo->l.nbytes * nvm_dev_get_ws_min(bp->dev);

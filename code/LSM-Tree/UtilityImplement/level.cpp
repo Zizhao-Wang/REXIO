@@ -15,8 +15,7 @@
 Run::Run(long maxsize)
 {
     this->MaxSize = maxsize;
-    //Initialize all page pointers as  uint32_MAX
-    for(int i=0;i<this->MaxSize;i++)
+    for(int i=0;i<this->MaxSize;i++) //Initialize all page pointers as UINT64_MAX
     {
         PagePointers.emplace_back(UINT64_MAX);
     }
@@ -26,11 +25,13 @@ Run::Run(long maxsize)
 int Run::RunDataWrite(void)
 {
 
-    uint64_t pagesize = CalculatePageCapacity(sizeof(KEY_t)+sizeof(VAL_t));
+    uint64_t pagesize = CalculatePageCapacity(sizeof(entry_t));
     uint64_t Pointer;
-    if(pagesize == Rundata.size())
+    
+    printf("Rundata size: %lu Page size: %lu, Size: %lu\n",Rundata.size(),pagesize,Size);
+    if(Rundata.size() == pagesize)
     {
-        if(Pointer = PageDataWrite(Rundata,PagePointers[Size]) != -1)
+        if(Pointer = PageDataWrite(Rundata,PagePointers[(Size/pagesize)-1]) != -1)
         {
             printf("Datum of Run in Level write succeed!\n");
             PagePointers[Size] = Pointer;
@@ -68,9 +69,10 @@ entry_t* Run::SingleRunRead()
 void Run::PutValue(entry_t entry) 
 {
     assert(Size < MaxSize);
-    Rundata.push_back(entry);    
+    Rundata.push_back(entry);
+    Size++;    
     MaxKey = max(entry.key,MaxKey);
-    if(Size % CalculatePageCapacity(sizeof(KEY_t)+sizeof(VAL_t)) == 0)
+    if(Size % CalculatePageCapacity(sizeof(entry_t)) == 0)
     {
         FencePointers.emplace_back(entry.key);
         int err = RunDataWrite();
@@ -84,7 +86,6 @@ void Run::PutValue(entry_t entry)
             EMessageOutput("Run failed!",104);
         }
     }
-    Size++;
 }
 
 VAL_t * Run::GetValue(KEY_t key)  
@@ -170,7 +171,11 @@ Level::Level(long buffersize)
 {
 	this->MaxRuns = 2;
 	this->MaxRunSize = buffersize * pow(2,LevelAlloctor());
-
+    for(int i=0;i<MaxRuns;i++)
+    {
+        Run run(MaxRunSize);
+        Runs.emplace_back(run);
+    }
 }
 
 bool Level::IsEmpty(void) const

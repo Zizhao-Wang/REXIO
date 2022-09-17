@@ -45,7 +45,6 @@ public:
     std::vector<entry_t> * GetRange(KEY_t, KEY_t);
     void Unbind();
     long GetNowSize();
-    
 };
 
 

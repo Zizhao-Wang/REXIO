@@ -100,7 +100,6 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
 
     /* Clear the current level to delete the old (now redundant) entry files.*/
     current->Runs.clear();
-
 }
 
 /*
@@ -316,7 +315,7 @@ void LSMTreeInit()
 
     /* Write datum */
     startTime = clock();
-    for(uint64_t i=1;i<=70000000;i++)
+    for(uint64_t i=1;i<=1000;i++)
     {
       if(i>=10000 && i%10000 ==0)
       {

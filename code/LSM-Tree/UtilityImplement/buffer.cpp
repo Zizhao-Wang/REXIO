@@ -3,6 +3,13 @@
 
 
 
+Buffer::Buffer(int maxpage)
+{
+    uint64_t capacity =  CalculatePageCapacity(sizeof(entry_t));
+    MaxSize = capacity * maxpage;
+    //printf("Test successful! Size of entry:%lu, Page capacity: %lu, Buffer size:%u\n",sizeof(entry_t),capacity,MaxSize);
+}
+
 
 bool Buffer::PutValue(KEY_t key, VAL_t val) 
 {

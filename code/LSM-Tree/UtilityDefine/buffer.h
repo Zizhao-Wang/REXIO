@@ -9,15 +9,15 @@
 class Buffer 
 {
 private:
-    int MaxSize;
+    uint64_t MaxSize;
     std::set<entry_t> Entries;
 
 public:
-    Buffer(int maxpage);
+    Buffer(size_t maxpage);
     bool PutValue(KEY_t, VAL_t val);
     VAL_t * GetValue(KEY_t) const;
     std::vector<entry_t> * GetRange(KEY_t, KEY_t) const;
-    void empty(void);
-    int GetMaxSize();
+    void AllClear(void);
+    uint64_t GetMaxSize();
     std::set<entry_t> GetEntries();
 };

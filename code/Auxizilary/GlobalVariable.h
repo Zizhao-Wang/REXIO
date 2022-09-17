@@ -13,7 +13,7 @@
 #ifndef EXPERIMENT1_GLOBALVARIABLE_H
 #define EXPERIMENT1_GLOBALVARIABLE_H
 #include <cstdint>
-
+#include <iostream>
 
 /* Global variables and functions that manipulate global variables in LSM-tree. */
 extern int LevelNum;

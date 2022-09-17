@@ -165,11 +165,11 @@ long Run::GetNowSize()
     return Size;
 }
 
-Level::Level(long MaxRunSize)
+Level::Level(long buffersize)
 {
-	this->LevelNumber = LevelAlloctor();
-	this->MaxRuns = pow(2,LevelNumber);
-	this->MaxRunSize = MaxRunSize * MaxRuns;
+	this->MaxRuns = 2;
+	this->MaxRunSize = buffersize * pow(2,LevelAlloctor());
+    
 }
 
 bool Level::IsEmpty(void) const

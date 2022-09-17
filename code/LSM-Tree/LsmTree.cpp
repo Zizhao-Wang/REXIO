@@ -24,20 +24,24 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
     entry_t entry;
 
     AssertCondition(current >= Levels.begin());
-    if (current->IsEmpty()) 
+    if (!current->IsFull()) 
     {
         return 0;
-    } 
-    else 
+    }
+    else
     {
+        if(current+1 == Levels.end())
+        {
+            Level temp(buffer.GetMaxSize());
+            Levels.emplace_back(temp);
+        }
         next = current + 1;
     }
 
-    /*
-     * If the next level does not have space for the current level,
-     * recursively merge the next level downwards to create some
-     */
-
+   /**
+    * If the next level does not have space for the current level,
+    * recursively merge the next level downwards to create some
+    **/
     if (next->IsFull()) 
     {
         FlushInto(next);
@@ -118,14 +122,24 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
     }
 
     /* Step 2: Flush the buffer to level 0 */
+    if(Levels.size()==0)
+    {
+        Level temp(buffer.GetMaxSize());
+        Levels.emplace_back(temp);
+    }
     FlushInto(Levels.begin());  //Judge whether level 1 is full and flush it if level 1 is full 
 
 
     // Step 3
-    buffer.empty();
+    std::set<entry_t> bufferdata = buffer.GetEntries();
+    for(auto& kv : bufferdata)
+    {
+        Levels[0].Runs.front().PutValue(kv);
+    }
+    buffer.AllClear();
     AssertCondition(buffer.PutValue(key, value));
-    return 0;
 
+    return 0;
 }
 
 // Run * LSMTree::get_run(int index) 

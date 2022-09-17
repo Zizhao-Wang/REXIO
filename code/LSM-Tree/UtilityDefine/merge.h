@@ -26,10 +26,13 @@ struct merge_entry
     bool operator>(const merge_entry& other) const 
     {
         // Order first by keys, then by precedence
-        if (head() == other.head()) {
+        if (head() == other.head()) 
+        {
             assert(precedence != other.precedence);
             return precedence > other.precedence;
-        } else {
+        } 
+        else 
+        {
             return head() > other.head();
         }
     }

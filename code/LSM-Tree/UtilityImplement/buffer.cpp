@@ -3,7 +3,7 @@
 
 
 
-Buffer::Buffer(int maxpage)
+Buffer::Buffer(size_t maxpage)
 {
     uint64_t capacity =  CalculatePageCapacity(sizeof(entry_t));
     MaxSize = capacity * maxpage;
@@ -71,12 +71,12 @@ std::vector<entry_t> * Buffer::GetRange(KEY_t start, KEY_t end) const
 }
 
 
-void Buffer::empty(void) 
+void Buffer::AllClear(void) 
 {
     Entries.clear();
 }
 
-int Buffer::GetMaxSize()
+uint64_t Buffer::GetMaxSize()
 {
     return MaxSize;
 }

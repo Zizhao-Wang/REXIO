@@ -51,7 +51,7 @@ public:
 class Level 
 {
 private:
-    int LevelNumber, MaxRuns;
+    int  MaxRuns;
     long MaxRunSize;
 
 public:

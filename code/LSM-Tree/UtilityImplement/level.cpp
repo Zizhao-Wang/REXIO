@@ -49,7 +49,7 @@ int Run::RunDataWrite(void)
 }
 
 
-VAL_t* Run::RunValueRead(uint64_t PageNum)
+VAL_t* Run::RunValuesRead(uint64_t PageNum)
 {
     VAL_t * value = nullptr;
     std::vector<entry_t> reads;
@@ -57,6 +57,12 @@ VAL_t* Run::RunValueRead(uint64_t PageNum)
     return value;
 }
 
+entry_t* Run::SingleRunRead()
+{
+    entry_t * entries;
+    return entries;
+
+}
 
 void Run::PutValue(entry_t entry) 
 {
@@ -95,7 +101,7 @@ VAL_t * Run::GetValue(KEY_t key)
     PageIndex = (NextPage - FencePointers.begin()) - 1;
     assert(PageIndex >= 0);
 
-    value = RunValueRead(PagePointers[PageIndex]);
+    value = RunValuesRead(PagePointers[PageIndex]);
 
     return value;
 }
@@ -148,6 +154,17 @@ VAL_t * Run::GetValue(KEY_t key)
 //     return subrange;
 // }
 
+void Run::Unbind()
+{
+    PagePointers.clear();
+    AssertCondition(PagePointers.size()==0);
+}
+
+long Run::GetNowSize()
+{
+    return Size;
+}
+
 Level::Level(long MaxRunSize)
 {
 	this->LevelNumber = LevelAlloctor();
@@ -163,4 +180,9 @@ bool Level::IsEmpty(void) const
 bool Level::IsFull(void) const
 {
     return Runs.size()== MaxRunSize;
+}
+
+long Level::GetMRunSize(void) const
+{
+    return MaxRunSize;
 }

@@ -26,7 +26,7 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
     entry_t entry;
 
     AssertCondition(current >= Levels.begin());
-    if (current->remaining() > 0) 
+    if (current->Remaining() > 0) 
     {
         return 0;
     } 
@@ -40,18 +40,18 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
      * recursively merge the next level downwards to create some
      */
 
-    if (next->remaining() == 0) 
+    if (next->Remaining() == 0) 
     {
         FlushInto(next);
-        assert(next->remaining() > 0);
+        AssertCondition(next->Remaining() > 0);
     }
 
     /*
      * Merge all runs in the current level into the first
      * run in the next level
      */
-
-    for (auto& run : current->runs) {
+    for (auto& run : current->Runs) 
+    {
         merge_ctx.add(run.map_read(), run.size);
     }
 
@@ -78,7 +78,7 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
      * redundant) entry files.
      */
 
-    current->runs.clear();
+    current->Runs.clear();
 }
 
 /*

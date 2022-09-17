@@ -46,10 +46,14 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
         AssertCondition(next->Remaining() > 0);
     }
 
-    /*
-     * Merge all runs in the current level into the first
-     * run in the next level
-     */
+   /**
+    * Merge operation:
+    * Merage all runs in the current level into the first run of next level.
+    * There are three steps to merge datum of this level into the next level:
+    * 1.Get the size of runs in the next level
+    * 2.check if the size is greater than 0 
+    * 3.Flush directly if the size equals 0, or merge all datum of next run and flush    
+    **/
     for (auto& run : current->Runs) 
     {
         merge_ctx.add(run.map_read(), run.size);
@@ -58,7 +62,8 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
     next->runs.emplace_front(next->max_run_size, bf_bits_per_entry);
     next->runs.front().map_write();
 
-    while (!merge_ctx.done()) {
+    while (!merge_ctx.done()) 
+    {
         entry = merge_ctx.next();
 
         // Remove deleted keys from the final level

@@ -6,8 +6,8 @@
  * IDENTIFICATION:
  *          code/LSM-Tree/UtilityDefine/merge.h
  */
-#ifndef EXPERIMENT1_LSMTREE_H
-#define EXPERIMENT1_LSMTREE_H
+#ifndef EXPERIMENT1_MERGE_H
+#define EXPERIMENT1_MERGE_H
 
 #include <cassert>
 #include <queue>
@@ -23,7 +23,8 @@ struct merge_entry
     int current_index = 0;
     entry_t head(void) const {return entries[current_index];}
     bool done(void) const {return current_index == num_entries;}
-    bool operator>(const merge_entry& other) const {
+    bool operator>(const merge_entry& other) const 
+    {
         // Order first by keys, then by precedence
         if (head() == other.head()) {
             assert(precedence != other.precedence);

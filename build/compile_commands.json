@@ -73,5 +73,10 @@
   "directory": "/home/femu/experiment/code2/build",
   "command": "/usr/bin/c++  -I/home/femu/experiment/code2/code/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/code.dir/LSM-Tree/UtilityImplement/level.cpp.o -c /home/femu/experiment/code2/code/LSM-Tree/UtilityImplement/level.cpp",
   "file": "/home/femu/experiment/code2/code/LSM-Tree/UtilityImplement/level.cpp"
+},
+{
+  "directory": "/home/femu/experiment/code2/build",
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/code/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/code.dir/LSM-Tree/UtilityImplement/merge.cpp.o -c /home/femu/experiment/code2/code/LSM-Tree/UtilityImplement/merge.cpp",
+  "file": "/home/femu/experiment/code2/code/LSM-Tree/UtilityImplement/merge.cpp"
 }
 ]

@@ -441,6 +441,30 @@ LSM-Tree/UtilityImplement/level.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/LSM-Tree/UtilityImplement/level.cpp.s
 .PHONY : LSM-Tree/UtilityImplement/level.cpp.s
 
+LSM-Tree/UtilityImplement/merge.o: LSM-Tree/UtilityImplement/merge.cpp.o
+.PHONY : LSM-Tree/UtilityImplement/merge.o
+
+# target to build an object file
+LSM-Tree/UtilityImplement/merge.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/LSM-Tree/UtilityImplement/merge.cpp.o
+.PHONY : LSM-Tree/UtilityImplement/merge.cpp.o
+
+LSM-Tree/UtilityImplement/merge.i: LSM-Tree/UtilityImplement/merge.cpp.i
+.PHONY : LSM-Tree/UtilityImplement/merge.i
+
+# target to preprocess a source file
+LSM-Tree/UtilityImplement/merge.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/LSM-Tree/UtilityImplement/merge.cpp.i
+.PHONY : LSM-Tree/UtilityImplement/merge.cpp.i
+
+LSM-Tree/UtilityImplement/merge.s: LSM-Tree/UtilityImplement/merge.cpp.s
+.PHONY : LSM-Tree/UtilityImplement/merge.s
+
+# target to generate assembly for a file
+LSM-Tree/UtilityImplement/merge.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/LSM-Tree/UtilityImplement/merge.cpp.s
+.PHONY : LSM-Tree/UtilityImplement/merge.cpp.s
+
 Linearhashing/LHash.o: Linearhashing/LHash.cpp.o
 .PHONY : Linearhashing/LHash.o
 
@@ -537,6 +561,9 @@ help:
 	@echo "... LSM-Tree/UtilityImplement/level.o"
 	@echo "... LSM-Tree/UtilityImplement/level.i"
 	@echo "... LSM-Tree/UtilityImplement/level.s"
+	@echo "... LSM-Tree/UtilityImplement/merge.o"
+	@echo "... LSM-Tree/UtilityImplement/merge.i"
+	@echo "... LSM-Tree/UtilityImplement/merge.s"
 	@echo "... Linearhashing/LHash.o"
 	@echo "... Linearhashing/LHash.i"
 	@echo "... Linearhashing/LHash.s"

@@ -123,7 +123,7 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
 
     // Step 3
     buffer.empty();
-    assert(buffer.PutValue(key, value));
+    AssertCondition(buffer.PutValue(key, value));
     return 0;
 
 }
@@ -315,7 +315,7 @@ void LSMTreeInit()
 
     /* Write datum */
     startTime = clock();
-    for(uint64_t i=1;i<=1000;i++)
+    for(uint64_t i=1;i<=1000000;i++)
     {
       if(i>=10000 && i%10000 ==0)
       {

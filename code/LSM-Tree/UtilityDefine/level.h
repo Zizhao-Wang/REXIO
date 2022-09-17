@@ -49,14 +49,14 @@ public:
 class Level 
 {
 private:
-    int LevelNumber;
-    int MaxRuns;
+    int LevelNumber, MaxRuns;
     long MaxRunSize;
 
 public:
     std::deque<Run> Runs;
     Level(long s);
-    bool Remaining(void) const; 
+    bool IsEmpty(void) const;
+    bool IsFull (void)  const;
 };
 
 

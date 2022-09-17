@@ -20,9 +20,7 @@ LSMTree::LSMTree(int BufferSize, int NumThreads) :
 int LSMTree::FlushInto(vector<Level>::iterator current) 
 {
     vector<Level>::iterator next;
-    long maxsize = buffer.GetMaxSize();
-    Level Templevel(maxsize);
-    //MergeContext merge_ctx;
+    MergeContext merge_ctx;
     entry_t entry;
 
     AssertCondition(current >= Levels.begin());
@@ -56,42 +54,53 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
     **/
     if(next->IsEmpty())
     {
-
+        
+        for (auto& run : current->Runs) 
+        {
+            merge_ctx.add(run.SingleRunRead(), run.GetNowSize());
+        }
+        next->Runs.emplace_front(next->GetMRunSize());
+        next->Runs.front().RunDataWrite();
+        while(!merge_ctx.done())
+        {
+            entry = merge_ctx.next();
+            // Remove deleted keys from the final level
+            if (!(next == Levels.end() - 1 && entry.val == VAL_TOMBSTONE)) 
+            {
+                next->Runs.front().PutValue(entry);
+            }
+        }
+        for (auto& run : current->Runs) 
+        {
+            run.Unbind();
+        }
     }
     else
     {
-
-    }
-    for (auto& run : current->Runs) 
-    {
-        merge_ctx.add(run.map_read(), run.size);
-    }
-
-    next->runs.emplace_front(next->max_run_size, bf_bits_per_entry);
-    next->runs.front().map_write();
-
-    while (!merge_ctx.done()) 
-    {
-        entry = merge_ctx.next();
-
-        // Remove deleted keys from the final level
-        if (!(next == levels.end() - 1 && entry.val == VAL_TOMBSTONE)) {
-            next->runs.front().put(entry);
+        for (auto& run : current->Runs) 
+        {
+            merge_ctx.add(run.SingleRunRead(), run.GetNowSize());
         }
+        next->Runs.emplace_front(next->GetMRunSize());
+        next->Runs.front().RunDataWrite();
+        while(!merge_ctx.done())
+        {
+            entry = merge_ctx.next();
+            // Remove deleted keys from the final level
+            if (!(next == Levels.end() - 1 && entry.val == VAL_TOMBSTONE)) 
+            {
+                next->Runs.front().PutValue(entry);
+            }
+        }
+        for (auto& run : current->Runs) 
+        {
+            run.Unbind();
+        }   
     }
 
-    next->runs.front().unmap();
-
-    for (auto& run : current->runs) {
-        run.unmap();
-    }
-
-    /*
-     * Clear the current level to delete the old (now
-     * redundant) entry files.
-     */
-
+    /* Clear the current level to delete the old (now redundant) entry files.*/
     current->Runs.clear();
+
 }
 
 /*
@@ -110,7 +119,7 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
     }
 
     /* Step 2: Flush the buffer to level 0 */
-    //FlushInto(Levels.begin());  //Judge whether level 1 is full and flush it if level 1 is full 
+    FlushInto(Levels.begin());  //Judge whether level 1 is full and flush it if level 1 is full 
 
 
     // Step 3

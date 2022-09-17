@@ -39,10 +39,13 @@ public:
     Run(long);
     int  RunDataWrite();
     void PutValue(entry_t entry);
-    VAL_t* RunValueRead(uint64_t PageNum);
+    VAL_t* RunValuesRead(uint64_t PageNum);
+    entry_t* SingleRunRead();
     VAL_t * GetValue(KEY_t key);
     std::vector<entry_t> * GetRange(KEY_t, KEY_t);
-
+    void Unbind();
+    long GetNowSize();
+    
 };
 
 
@@ -57,6 +60,7 @@ public:
     Level(long s);
     bool IsEmpty(void) const;
     bool IsFull (void)  const;
+    long GetMRunSize(void) const;
 };
 
 

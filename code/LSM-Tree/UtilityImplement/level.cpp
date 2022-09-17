@@ -155,7 +155,12 @@ Level::Level(long MaxRunSize)
 	this->MaxRunSize = MaxRunSize * MaxRuns;
 }
 
-bool Level::Remaining(void) const 
-{ 
-    return MaxRuns - Runs.size();
+bool Level::IsEmpty(void) const
+{
+    return Runs.size()==0;
+}
+
+bool Level::IsFull(void) const
+{
+    return Runs.size()== MaxRunSize;
 }

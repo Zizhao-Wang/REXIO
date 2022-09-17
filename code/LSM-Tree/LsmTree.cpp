@@ -26,7 +26,7 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
     entry_t entry;
 
     AssertCondition(current >= Levels.begin());
-    if (current->Remaining() > 0) 
+    if (current->IsEmpty()) 
     {
         return 0;
     } 
@@ -40,10 +40,10 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
      * recursively merge the next level downwards to create some
      */
 
-    if (next->Remaining() == 0) 
+    if (next->IsFull()) 
     {
         FlushInto(next);
-        AssertCondition(next->Remaining() > 0);
+        AssertCondition(next->IsFull()==false);
     }
 
    /**
@@ -54,6 +54,14 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
     * 2.check if the size is greater than 0 
     * 3.Flush directly if the size equals 0, or merge all datum of next run and flush    
     **/
+    if(next->IsEmpty())
+    {
+
+    }
+    else
+    {
+
+    }
     for (auto& run : current->Runs) 
     {
         merge_ctx.add(run.map_read(), run.size);

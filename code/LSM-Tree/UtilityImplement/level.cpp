@@ -148,7 +148,6 @@ VAL_t * Run::GetValue(KEY_t key)
 //     return subrange;
 // }
 
-
 Level::Level(long MaxRunSize)
 {
 	this->LevelNumber = LevelAlloctor();

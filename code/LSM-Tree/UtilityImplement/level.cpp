@@ -12,13 +12,6 @@
 #include "../UtilityDefine/level.h"
 
 
-Level::Level(long MaxRunSize)
-{
-	this->LevelNumber = LevelAlloctor();
-	this->MaxRuns = pow(2,LevelNumber);
-	this->MaxRunSize = MaxRunSize * MaxRuns;
-}
-
 Run::Run(long maxsize)
 {
     this->MaxSize = maxsize;
@@ -154,3 +147,16 @@ VAL_t * Run::GetValue(KEY_t key)
 
 //     return subrange;
 // }
+
+
+Level::Level(long MaxRunSize)
+{
+	this->LevelNumber = LevelAlloctor();
+	this->MaxRuns = pow(2,LevelNumber);
+	this->MaxRunSize = MaxRunSize * MaxRuns;
+}
+
+bool Level::Remaining(void) const 
+{ 
+    return MaxRuns - Runs.size();
+}

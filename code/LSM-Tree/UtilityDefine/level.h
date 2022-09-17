@@ -56,11 +56,7 @@ private:
 public:
     std::deque<Run> Runs;
     Level(long s);
-    bool remaining(void) const 
-    { 
-        return MaxRuns - Runs.size();
-    }
-
+    bool Remaining(void) const; 
 };
 
 

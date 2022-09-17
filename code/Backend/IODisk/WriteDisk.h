@@ -22,6 +22,7 @@
 #include <liblightnvm.h>
 #include "../BlockManage/BlockInfo.h"
 #include "../../Auxizilary/VariablesTypes.h"
+#include "../../Auxizilary/SysOutput.h"
 using namespace std;
 
 
@@ -90,7 +91,7 @@ uint64_t PageDataWrite(std::vector<entry_t> Entries, uint64_t pageno);
  */
 int PageDataRead(uint64_t pageno);
 
-vector<entry_t> RunReadFromPage(uint64_t PageNum);
+entry_t* RunReadFromPage(uint64_t PageNum, size_t Runsize);
 
 /* Some other auxizilary functions. */
 uint64_t GetPagesize(void);

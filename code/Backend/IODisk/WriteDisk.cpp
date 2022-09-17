@@ -11,6 +11,7 @@
  *   Experiment1/Backend/BackendMain.h
  */
 #include <unordered_map>
+#include <stdlib.h>
 #include <liblightnvm_cli.h>
 #include <liblightnvm_spec.h>
 #include "WriteDisk.h"

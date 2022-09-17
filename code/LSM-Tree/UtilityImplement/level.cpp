@@ -60,6 +60,7 @@ VAL_t* Run::RunValuesRead(uint64_t PageNum)
 entry_t* Run::SingleRunRead()
 {
     entry_t * entries;
+    
     return entries;
 
 }
@@ -169,7 +170,7 @@ Level::Level(long buffersize)
 {
 	this->MaxRuns = 2;
 	this->MaxRunSize = buffersize * pow(2,LevelAlloctor());
-    
+
 }
 
 bool Level::IsEmpty(void) const

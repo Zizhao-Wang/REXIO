@@ -6,9 +6,10 @@
  * IDENTIFICATION:
  *          src/LSM-Tree/UtilityDefine/merge.h
  **/
-#include <cassert>
+
+#include "../UtilityDefine/merge.h" // Related header file
 #include <iostream>
-#include "../UtilityDefine/merge.h"
+
 
 void MergeContext::Insert(entry_t *entries, size_t EntryNum) 
 {

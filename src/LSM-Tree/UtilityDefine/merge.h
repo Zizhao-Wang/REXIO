@@ -9,11 +9,10 @@
 #ifndef EXPERIMENT1_MERGE_H
 #define EXPERIMENT1_MERGE_H
 
-#include <cassert>
-#include <queue>
-#include "../../Auxizilary/VariablesTypes.h"
-
-using namespace std;
+#include <cassert>  //C library file
+#include <functional> // C++
+#include <queue>      // Library file
+#include "../../Auxizilary/VariablesTypes.h" //header files in this project
 
 struct MergeEntry 
 {
@@ -31,7 +30,7 @@ struct MergeEntry
         return Current == NumEntry;
     }
 
-    bool operator>(const MergeEntry& other) const 
+    bool operator > (const MergeEntry& other) const 
     {
         // Order first by keys, then by precedence
         if (head() == other.head()) 
@@ -52,7 +51,7 @@ class MergeContext
 {
 private:
 
-    priority_queue<MergeEntryt, vector<MergeEntryt>, greater<MergeEntryt>> queue;
+    std::priority_queue<MergeEntryt, std::vector<MergeEntryt>, std::greater<MergeEntryt>> queue;
 
 public:
     void Insert(entry_t *, size_t);

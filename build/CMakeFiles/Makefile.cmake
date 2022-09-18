@@ -10,7 +10,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.23.3/CMakeCCompiler.cmake"
   "CMakeFiles/3.23.3/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.23.3/CMakeSystem.cmake"
-  "/home/femu/experiment1/code2/code/CMakeLists.txt"
+  "/home/femu/experiment1/code2/src/CMakeLists.txt"
   "/usr/local/share/cmake-3.23/Modules/CMakeCInformation.cmake"
   "/usr/local/share/cmake-3.23/Modules/CMakeCXXInformation.cmake"
   "/usr/local/share/cmake-3.23/Modules/CMakeCommonLanguageInclude.cmake"
@@ -47,5 +47,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/code.dir/DependInfo.cmake"
+  "CMakeFiles/src.dir/DependInfo.cmake"
   )

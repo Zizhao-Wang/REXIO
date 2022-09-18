@@ -21,7 +21,6 @@
 #include <vector>
 #include <queue>
 #include "../../Auxizilary/VariablesTypes.h"
-#include "../../Auxizilary/GlobalVariable.h"
 #include "../../Backend/IODisk/WriteDisk.h"
 #include "../../Auxizilary/SysOutput.h"
 
@@ -43,6 +42,10 @@ public:
     entry_t* SingleRunRead();
     VAL_t * GetValue(KEY_t key);
     std::vector<entry_t> * GetRange(KEY_t, KEY_t);
+    std::vector<uint64_t> GetPagePointers(void);
+    std::vector<KEY_t> GetFencePointers(void);
+    uint64_t GetMaxKey(void);
+    int SetPagePointers(std::vector<uint64_t>);
     void Unbind();
     long GetNowSize();
 };
@@ -53,6 +56,7 @@ class Level
 private:
     int  MaxRuns;
     long MaxRunSize;
+    long LevelNumber;
 
 public:
     std::deque<Run> Runs;
@@ -60,6 +64,8 @@ public:
     bool IsEmpty(void) const;
     bool IsFull (void)  const;
     long GetMRunSize(void) const;
+    long GetLevelNumber(void) const;
+
 };
 
 

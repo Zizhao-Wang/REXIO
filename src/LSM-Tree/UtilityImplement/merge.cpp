@@ -2,20 +2,20 @@
 #include <iostream>
 #include "../UtilityDefine/merge.h"
 
-void MergeContext::add(entry_t *entries, long num_entries) 
+void MergeContext::Insert(entry_t *entries, size_t EntryNum) 
 {
-    merge_entry_t merge_entry;
+    MergeEntryt merge_entry;
 
-    if (num_entries > 0) 
+    if (EntryNum > 0) 
     {
         merge_entry.entries = entries;
-        merge_entry.num_entries = num_entries;
+        merge_entry.NumEntry = EntryNum;
         merge_entry.precedence = queue.size();
         queue.push(merge_entry);
     }
 }
 
-entry_t MergeContext::next(void) 
+entry_t MergeContext::Contextpop(void) 
 {
     merge_entry_t current, next;
     entry_t entry;

@@ -1,11 +1,11 @@
-/*
+/**
  * @date     7/9/2022
  * @author   zz.wang
  * @details: This code is used to merge 
  *
  * IDENTIFICATION:
  *          code/LSM-Tree/UtilityDefine/merge.h
- */
+ **/
 #ifndef EXPERIMENT1_MERGE_H
 #define EXPERIMENT1_MERGE_H
 
@@ -15,23 +15,23 @@
 
 using namespace std;
 
-struct merge_entry 
+struct MergeEntry 
 {
     int precedence;
     entry_t *entries;
-    long num_entries;
-    int current_index = 0;
+    long NumEntry;
+    int Current = 0;
     
     entry_t head(void) const 
     {
-        return entries[current_index];
+        return entries[Current];
     }
     bool done(void) const 
     {
-        return current_index == num_entries;
+        return Current == NumEntry;
     }
 
-    bool operator>(const merge_entry& other) const 
+    bool operator>(const MergeEntry& other) const 
     {
         // Order first by keys, then by precedence
         if (head() == other.head()) 
@@ -46,16 +46,17 @@ struct merge_entry
     }
 };
 
-typedef struct merge_entry merge_entry_t;
+typedef struct MergeEntry MergeEntryt;
 
 class MergeContext 
 {
 private:
-    priority_queue<merge_entry_t, vector<merge_entry_t>, greater<merge_entry_t>> queue;
+
+    priority_queue<MergeEntryt, vector<MergeEntryt>, greater<MergeEntryt>> queue;
 
 public:
-    void add(entry_t *, long);
-    entry_t next(void);
+    void Insert(entry_t *, size_t);
+    entry_t Contextpop(void);
     bool IsEmpty(void) const;
     
 };

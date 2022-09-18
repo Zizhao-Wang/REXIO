@@ -10,6 +10,7 @@
 #include <cstring>
 #include <cmath>
 #include "../UtilityDefine/level.h"
+#include "../../Auxizilary/GlobalVariable.h"
 
 
 Run::Run(long maxsize)
@@ -173,6 +174,38 @@ VAL_t * Run::GetValue(KEY_t key)
 //     return subrange;
 // }
 
+std::vector<uint64_t> Run::GetPagePointers(void)
+{
+    return PagePointers;
+}
+
+std::vector<KEY_t> Run::GetFencePointers(void)
+{
+    return FencePointers;
+}
+
+uint64_t Run::GetMaxKey(void)
+{
+    return MaxKey;
+}
+
+
+int Run::SetPagePointers(std::vector<uint64_t> pointers)
+{
+    size_t FirstSize = PagePointers.size();
+
+    PagePointers.insert(PagePointers.end(),PagePointers.begin(),PagePointers.end());
+
+    size_t MergeSize = PagePointers.size();
+
+    if(MergeSize - FirstSize != pointers.size())
+    {
+        return -1;
+    }
+
+    return 0;
+}
+
 void Run::Unbind()
 {
     PagePointers.clear();
@@ -189,13 +222,16 @@ long Run::GetNowSize()
 
 Level::Level(long buffersize)
 {
+
+    this->LevelNumber = LevelAlloctor();
 	this->MaxRuns = 2;
-	this->MaxRunSize = buffersize * pow(2,LevelAlloctor());
+	this->MaxRunSize = buffersize * pow(2,LevelNumber);
     for(int i=0;i<MaxRuns;i++)
     {
         Run run(MaxRunSize);
         Runs.emplace_back(run);
     }
+
 }
 
 bool Level::IsEmpty(void) const
@@ -211,4 +247,9 @@ bool Level::IsFull(void) const
 long Level::GetMRunSize(void) const
 {
     return MaxRunSize;
+}
+
+long Level::GetLevelNumber(void) const
+{
+    return LevelNumber;
 }

@@ -1,8 +1,8 @@
 #include "../Auxizilary/GlobalVariable.h"
 
-int LevelNum = 1;
+long LevelNum = 1;
 
-int LevelAlloctor()
+long LevelAlloctor()
 {
 	return LevelNum++;
 }

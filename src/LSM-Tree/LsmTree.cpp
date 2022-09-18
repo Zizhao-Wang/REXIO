@@ -60,7 +60,11 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
     {
         for (auto& run : current->Runs) 
         {
-            mergecon.Insert(run.SingleRunRead(), run.GetNowSize());
+            int err;
+            if(err = next->Runs.front().SetPagePointers(run.GetPagePointers()) == -1)
+            {
+                EMessageOutput("Page pointers merging failure in Level"+ Uint64toString(current->GetLevelNumber())+ "is trying to merging into Level"+ Uint64toString(next->GetLevelNumber())+"\n",110);
+            }
         }
         next->Runs.emplace_front(next->GetMRunSize());
         next->Runs.front().RunDataWrite();

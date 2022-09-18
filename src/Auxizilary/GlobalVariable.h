@@ -16,9 +16,9 @@
 #include <iostream>
 
 /* Global variables and functions that manipulate global variables in LSM-tree. */
-extern int LevelNum;
+extern long LevelNum;
 
-int LevelAlloctor();
+long LevelAlloctor();
 
 
 /* The page size is defined as a pre-define variable, because different SSD usually have different page size and block size. */

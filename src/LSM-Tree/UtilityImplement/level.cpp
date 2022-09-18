@@ -34,7 +34,7 @@ int Run:: RunDataWrite(void)
         if(Pointer = PageDataWrite(Rundata,PagePointers[(Size/pagesize)-1]) != -1)
         {
             printf("Datum of Run in Level write succeed!\n");
-            PagePointers[Size] = Pointer;shenm
+            PagePointers[Size] = Pointer;
             Rundata.clear();
             return 0;
         }
@@ -176,6 +176,9 @@ VAL_t * Run::GetValue(KEY_t key)
 void Run::Unbind()
 {
     PagePointers.clear();
+    Rundata.clear();
+    FencePointers.clear();
+    Size = 0;
     AssertCondition(PagePointers.size()==0);
 }
 

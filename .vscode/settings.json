@@ -1,5 +1,5 @@
 {
-    "cmake.sourceDirectory": "${workspaceFolder}/code",
+    "cmake.sourceDirectory": "${workspaceFolder}/src",
     "C_Cpp.errorSquiggles": "Disabled",
     "files.associations": {
         "new": "cpp",

@@ -1,4 +1,4 @@
-# Install script for directory: /home/femu/experiment1/code2/code
+# Install script for directory: /home/femu/experiment1/code2/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

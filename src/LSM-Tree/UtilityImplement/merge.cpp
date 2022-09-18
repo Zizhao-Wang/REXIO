@@ -1,3 +1,11 @@
+/**
+ * @date     18/9/2022
+ * @author   zz.wang
+ * @details: This code is used to merge 
+ *
+ * IDENTIFICATION:
+ *          src/LSM-Tree/UtilityDefine/merge.h
+ **/
 #include <cassert>
 #include <iostream>
 #include "../UtilityDefine/merge.h"

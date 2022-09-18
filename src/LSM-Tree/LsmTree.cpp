@@ -61,13 +61,13 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
         
         for (auto& run : current->Runs) 
         {
-            mergecon.add(run.SingleRunRead(), run.GetNowSize());
+            mergecon.Insert(run.SingleRunRead(), run.GetNowSize());
         }
         next->Runs.emplace_front(next->GetMRunSize());
         next->Runs.front().RunDataWrite();
         while(!mergecon.IsEmpty())
         {
-            entry = mergecon.next();
+            entry = mergecon.Contextpop();
             // Remove deleted keys from the final level
             if (!(next == Levels.end() - 1 && entry.val == VAL_TOMBSTONE)) 
             {
@@ -85,20 +85,20 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
         {
             if(run.GetNowSize() != 0)
             {
-                mergecon.add(run.SingleRunRead(), run.GetNowSize());
+                mergecon.Insert(run.SingleRunRead(), run.GetNowSize());
             }
         }
         for(auto& run : next->Runs)
         {
             if(run.GetNowSize() != 0)
             {
-                mergecon.add(run.SingleRunRead(), run.GetNowSize());
+                mergecon.Insert(run.SingleRunRead(), run.GetNowSize());
             }
         }
 
         while(!mergecon.IsEmpty())
         {
-            entry = mergecon.next();
+            entry = mergecon.Contextpop();
             // Remove deleted keys from the final level
             if (!(next == Levels.end() - 1 && entry.val == VAL_TOMBSTONE)) 
             {

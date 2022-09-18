@@ -17,7 +17,7 @@ void MergeContext::Insert(entry_t *entries, size_t EntryNum)
 
 entry_t MergeContext::Contextpop(void) 
 {
-    merge_entry_t current, next;
+    MergeEntryt current, next;
     entry_t entry;
 
     current = queue.top();
@@ -28,7 +28,7 @@ entry_t MergeContext::Contextpop(void)
     {
         queue.pop();
 
-        next.current_index++;
+        next.Current++;
         if (!next.done()) queue.push(next);
 
         next = queue.top();

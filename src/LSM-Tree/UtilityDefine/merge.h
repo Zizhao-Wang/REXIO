@@ -1,10 +1,10 @@
 /**
- * @date     7/9/2022
+ * @date     18/9/2022
  * @author   zz.wang
  * @details: This code is used to merge 
  *
  * IDENTIFICATION:
- *          code/LSM-Tree/UtilityDefine/merge.h
+ *          src/LSM-Tree/UtilityDefine/merge.h
  **/
 #ifndef EXPERIMENT1_MERGE_H
 #define EXPERIMENT1_MERGE_H

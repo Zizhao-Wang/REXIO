@@ -27,7 +27,7 @@ typedef uint64_t VAL_t;
 
 #define PAGE_MAX 4294967295
  
-struct entry 
+typedef struct entry 
 {
     KEY_t key;
     VAL_t val;
@@ -43,8 +43,6 @@ struct entry
     {
         return key > other.key;
     }
-};
-
-typedef struct entry entry_t;
+}entry_t;
 
 #endif  // EXPERIMENT1_VARIABLESTYPES_H

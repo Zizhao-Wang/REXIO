@@ -22,7 +22,7 @@ Run::Run(long maxsize)
     Size = 0;
 }
 
-int Run::RunDataWrite(void)
+int Run:: RunDataWrite(void)
 {
 
     uint64_t pagesize = CalculatePageCapacity(sizeof(entry_t));
@@ -34,7 +34,8 @@ int Run::RunDataWrite(void)
         if(Pointer = PageDataWrite(Rundata,PagePointers[(Size/pagesize)-1]) != -1)
         {
             printf("Datum of Run in Level write succeed!\n");
-            PagePointers[Size] = Pointer;
+            PagePointers[Size] = Pointer;shenm
+            Rundata.clear();
             return 0;
         }
         else

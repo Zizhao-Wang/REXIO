@@ -13,14 +13,14 @@
 
 void MergeContext::Insert(entry_t *entries, size_t EntryNum) 
 {
-    MergeEntryt merge_entry;
+    MergeEntryt MergeItem;
 
-    if (EntryNum > 0) 
+    if(EntryNum > 0) 
     {
-        merge_entry.entries = entries;
-        merge_entry.NumEntry = EntryNum;
-        merge_entry.precedence = queue.size();
-        queue.push(merge_entry);
+        MergeItem.entries = entries;
+        MergeItem.NumEntry = EntryNum;
+        MergeItem.precedence = queue.size();
+        queue.push(MergeItem);
     }
 }
 
@@ -38,11 +38,12 @@ entry_t MergeContext::Contextpop(void)
         queue.pop();
 
         next.Current++;
-        if (!next.done()) queue.push(next);
-
+        if (!next.done()) 
+        {
+            queue.push(next);
+        }
         next = queue.top();
     }
-
     return current.head();
 }
 

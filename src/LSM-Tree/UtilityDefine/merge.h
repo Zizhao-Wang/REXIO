@@ -14,9 +14,9 @@
 #include <queue>      // Library file
 #include "../../Auxizilary/VariablesTypes.h" //header files in this project
 
-struct MergeEntry 
+typedef struct MergeEntry 
 {
-    int precedence;
+    int precedence; //priority
     entry_t *entries;
     long NumEntry;
     int Current = 0;
@@ -25,6 +25,7 @@ struct MergeEntry
     {
         return entries[Current];
     }
+
     bool done(void) const 
     {
         return Current == NumEntry;
@@ -43,9 +44,8 @@ struct MergeEntry
             return head() > other.head();
         }
     }
-};
 
-typedef struct MergeEntry MergeEntryt;
+}MergeEntryt;
 
 class MergeContext 
 {

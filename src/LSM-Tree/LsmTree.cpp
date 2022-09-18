@@ -45,7 +45,7 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
     if (next->IsFull()) 
     {
         FlushInto(next);
-        AssertCondition(next->IsFull()==false);
+        AssertCondition(next->IsEmpty());
     }
 
    /**
@@ -58,7 +58,6 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
     **/
     if(next->IsEmpty())
     {
-        
         for (auto& run : current->Runs) 
         {
             mergecon.Insert(run.SingleRunRead(), run.GetNowSize());
@@ -151,6 +150,7 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
     AssertCondition(buffer.PutValue(key, value));
 
     return 0;
+    
 }
 
 // Run * LSMTree::get_run(int index) 

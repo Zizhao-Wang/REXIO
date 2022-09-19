@@ -4,7 +4,6 @@
 #include <map>
 #include "LsmTree.h"
 
-
 /*
  * LSM Tree
  * @BufferSize
@@ -58,25 +57,17 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
     **/
     if(next->IsEmpty())
     {
+        long sizecount = 0;
+        AssertCondition(next->Runs.front().GetNowSize() == 0);
         for (auto& run : current->Runs) 
         {
-            int err;
-            if(err = next->Runs.front().SetPagePointers(run.GetPagePointers()) == -1)
+            if(next->Runs.front().SetPagePointers(run.GetPagePointers()) == -1 && next->Runs.front().SetFencePointers(run.GetFencePointers()) == -1)
             {
                 EMessageOutput("Page pointers merging failure in Level"+ Uint64toString(current->GetLevelNumber())+ "is trying to merging into Level"+ Uint64toString(next->GetLevelNumber())+"\n",110);
             }
+            sizecount += run.GetNowSize();
         }
-        next->Runs.emplace_front(next->GetMRunSize());
-        next->Runs.front().RunDataWrite();
-        while(!mergecon.IsEmpty())
-        {
-            entry = mergecon.Contextpop();
-            // Remove deleted keys from the final level
-            if (!(next == Levels.end() - 1 && entry.val == VAL_TOMBSTONE)) 
-            {
-                next->Runs.front().PutValue(entry);
-            }
-        }
+        AssertCondition(sizecount == next->Runs.front().GetNowSize());
         for (auto& run : current->Runs) 
         {
             run.Unbind();
@@ -99,15 +90,17 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
             }
         }
 
+        std::vector<entry_t> values;
         while(!mergecon.IsEmpty())
         {
-            entry = mergecon.Contextpop();
+            entry_t entry = mergecon.Contextpop();
             // Remove deleted keys from the final level
-            if (!(next == Levels.end() - 1 && entry.val == VAL_TOMBSTONE)) 
+            if ( entry.val != VAL_TOMBSTONE) 
             {
-                next->Runs.front().PutValue(entry);
+                values.emplace_back(entry);
             }
         }
+        next->PutEntries(values);
         for (auto& run : current->Runs) 
         {
             run.Unbind();

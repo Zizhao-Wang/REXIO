@@ -20,6 +20,7 @@
 #include "UtilityDefine/level.h"
 #include "../Auxizilary/SysOutput.h"
 #include "UtilityDefine/merge.h"
+#include "UtilityDefine/run.h"
 
 
 #define DEFAULT_TREE_DEPTH 5

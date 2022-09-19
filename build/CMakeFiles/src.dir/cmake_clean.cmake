@@ -27,6 +27,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.o.d"
   "CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.o"
   "CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.o.d"
+  "CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o"
+  "CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o.d"
   "CMakeFiles/src.dir/Linearhashing/LHash.cpp.o"
   "CMakeFiles/src.dir/Linearhashing/LHash.cpp.o.d"
   "CMakeFiles/src.dir/main.cpp.o"

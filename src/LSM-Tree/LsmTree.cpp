@@ -23,11 +23,7 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
     entry_t entry;
 
     AssertCondition(current >= Levels.begin());
-    if (!current->IsFull()) 
-    {
-        return 0;
-    }
-    else
+    if (current->IsFull()) 
     {
         if(current+1 == Levels.end())
         {
@@ -35,6 +31,10 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
             Levels.emplace_back(temp);
         }
         next = current + 1;
+    }
+    else
+    {
+        return 0;
     }
 
    /**
@@ -134,7 +134,7 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
         Level temp(buffer.GetMaxSize());
         Levels.emplace_back(temp);
     }
-    FlushInto(Levels.begin());  //Judge whether level 1 is full and flush it if level 1 is full 
+    FlushInto(Levels.begin());  //check whether level 1 is full and flush it if level 1 is full 
 
 
     // Step 3

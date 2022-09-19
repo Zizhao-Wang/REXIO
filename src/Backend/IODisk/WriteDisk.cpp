@@ -642,6 +642,7 @@ uint64_t SinglePageWrite(std::vector<entry_t> Entries, uint64_t pageno)
     int err = 0;
 
     /* Get chunkno, judge sector pointer of this block. */
+    //printf("pageno: %lu, sectorpointer: %lu\n",pageno,sectorpointer);
     uint64_t  flag = pageno;
     if(pageno == UINT64_MAX)
     {

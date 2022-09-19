@@ -27,11 +27,12 @@ int Run::RunDataWrite(void)
     
     if(Rundata.size() == pagesize)
     {
-        Pointer = SinglePageWrite(Rundata,PagePointers[(Size/pagesize)-1]);
+        //printf("Rundata size: %lu Page number: %lu, Size: %lu\n",Rundata.size(),Pointer,Size);
+        Pointer = SinglePageWrite(Rundata,PagePointers[Size/pagesize-1]);
         {
             printf("Rundata size: %lu Page number: %lu, Size: %lu\n",Rundata.size(),Pointer,Size);
             printf("Datum of Run in Level write succeed!\n");
-            PagePointers[Size] = Pointer;
+            PagePointers[Size/pagesize-1] = Pointer;
             Rundata.clear();
             return 0;
         }
@@ -77,7 +78,8 @@ entry_t* Run::SingleRunRead()
 void Run::PutValue(entry_t entry) 
 {
     assert(Size < MaxSize);
-    Rundata.emplace_back(entry);    
+    Rundata.emplace_back(entry);
+    Size++;    
     MaxKey = max(entry.key,MaxKey);
     if(Rundata.size() % CalculatePageCapacity(sizeof(entry_t)) == 0 && Size != 0)
     {
@@ -93,7 +95,6 @@ void Run::PutValue(entry_t entry)
             EMessageOutput("Run failed!",104);
         }
     }
-    Size++;
 }
 
 VAL_t * Run::GetValue(KEY_t key)  

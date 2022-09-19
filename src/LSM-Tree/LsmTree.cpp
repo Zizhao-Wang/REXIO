@@ -104,9 +104,6 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
             run.Unbind();
         }   
     }
-
-    /* Clear the current level to delete the old (now redundant) entry files.*/
-    current->Runs.clear();
     
     return 0;
 }
@@ -139,7 +136,7 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
     std::set<entry_t> bufferdata = buffer.GetEntries();
     for(auto& kv : bufferdata)
     {
-        Levels[0].Runs.front().PutValue(kv);
+        Levels[0].PutValue(kv);
     }
     buffer.AllClear();
     AssertCondition(buffer.PutValue(key, value));

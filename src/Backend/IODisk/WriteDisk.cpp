@@ -648,10 +648,6 @@ uint64_t SinglePageWrite(std::vector<entry_t> Entries, uint64_t pageno)
         pageno = sectorpointer;
     }
 
-   /** 
-    * Step 1 : 
-    * Step 2 : 
-    **/
     if(flag == UINT64_MAX )
     {
         struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, pageno);
@@ -682,6 +678,10 @@ uint64_t SinglePageWrite(std::vector<entry_t> Entries, uint64_t pageno)
         {
             //printf("Insert completion! Insert sectors: %ld\n",sectorpointer);
             PointerRenew(ws_min);   /* update pointers! */
+        }
+        else
+        {
+            EMessageOutput("Page writing failed in "+ Uint64toString(pageno)+"\n", 4598);
         }
     }
 

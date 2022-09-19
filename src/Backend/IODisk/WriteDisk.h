@@ -23,6 +23,7 @@
 #include "../BlockManage/BlockInfo.h"
 #include "../../Auxizilary/VariablesTypes.h"
 #include "../../Auxizilary/SysOutput.h"
+#include "../../Auxizilary/GlobalVariable.h"
 using namespace std;
 
 

@@ -73,6 +73,7 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
     }
     else
     {
+
         for (auto& run : current->Runs) 
         {
             if(run.GetNowSize() != 0)
@@ -133,11 +134,38 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
 
 
     // Step 3
-    std::set<entry_t> bufferdata = buffer.GetEntries();
-    for(auto& kv : bufferdata)
+    std::vector<entry_t> bufferdata = buffer.GetEntries();
+    if(Levels[0].IsEmpty())
     {
-        Levels[0].PutValue(kv);
+        for(auto& kv : bufferdata)
+        {
+            Levels[0].PutValue(kv);
+        }
     }
+    else
+    {
+        MergeContext mergecon;
+        mergecon.Insert(bufferdata);
+        for(auto& run : Levels[0].Runs)
+        {
+            if(run.GetNowSize()!= 0)
+            {
+                mergecon.Insert(run.SingleRunRead(), run.GetNowSize());
+            }
+        }
+        std::vector<entry_t> values;
+        while(!mergecon.IsEmpty())
+        {
+            entry_t entry = mergecon.Contextpop();
+            // Remove deleted keys from the final level
+            if ( entry.val != VAL_TOMBSTONE) 
+            {
+                values.emplace_back(entry);
+            }
+        }
+        Levels[0].PutEntries(values);
+    }
+    
     buffer.AllClear();
     AssertCondition(buffer.PutValue(key, value));
 

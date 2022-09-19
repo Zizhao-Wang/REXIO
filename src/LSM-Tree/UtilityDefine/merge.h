@@ -11,6 +11,7 @@
 
 #include <cassert>  //C library file
 #include <functional> // C++
+#include <vector>
 #include <queue>      // Library file
 #include "../../Auxizilary/VariablesTypes.h" //header files in this project
 
@@ -42,6 +43,7 @@ private:
 
 public:
     void Insert(entry_t *, size_t);
+    void Insert(std::vector<entry_t> entries); 
     entry_t Contextpop(void);
     bool IsEmpty(void) const;
     

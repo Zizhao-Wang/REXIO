@@ -150,6 +150,7 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
         {
             if(run.GetNowSize()!= 0)
             {
+                printf("Run size: %ld from GetNowSize()",run.GetNowSize());
                 mergecon.Insert(run.SingleRunRead(), run.GetNowSize());
             }
         }
@@ -358,6 +359,7 @@ void LSMTreeInit()
     LSMTree Lsmtree(64,5);                  // Initialize a LSM-tree structure
 
     /* Write datum */
+    //printf("long size:%lu \n",sizeof(long));
     startTime = clock();
     for(uint64_t i=1;i<=1000000;i++)
     {

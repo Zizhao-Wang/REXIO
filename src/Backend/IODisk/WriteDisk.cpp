@@ -750,8 +750,7 @@ entry_t * RunReadFromPage(uint64_t PageNum, size_t Runsize)
             uint64_t *ML = (uint64_t*) temp;
             TempEntry.key = ML[0], TempEntry.val = ML[1];
             data[i] = TempEntry;
-        }
-        // TODO: 
+        } 
     }
     else
     {

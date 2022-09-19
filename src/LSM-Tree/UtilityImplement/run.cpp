@@ -9,7 +9,7 @@
 #include <cmath>
 #include "../../Backend/IODisk/WriteDisk.h"
 
-Run::Run(long maxsize)
+Run::Run(unsigned long maxsize)
 {
     this->MaxSize = maxsize;
     for(int i=0;i<this->MaxSize;i++) //Initialize all page pointers as UINT64_MAX
@@ -25,11 +25,11 @@ int Run::RunDataWrite(void)
     uint64_t pagesize = CalculatePageCapacity(sizeof(entry_t));
     uint64_t Pointer;
     
-    printf("Rundata size: %lu Page size: %lu, Size: %lu\n",Rundata.size(),pagesize,Size);
     if(Rundata.size() == pagesize)
     {
         Pointer = SinglePageWrite(Rundata,PagePointers[(Size/pagesize)-1]);
         {
+            printf("Rundata size: %lu Page number: %lu, Size: %lu\n",Rundata.size(),Pointer,Size);
             printf("Datum of Run in Level write succeed!\n");
             PagePointers[Size] = Pointer;
             Rundata.clear();
@@ -224,7 +224,7 @@ int Run::DataClear(std::vector<entry_t> MergeEntries)
     return 0;
 }
 
-long Run::GetNowSize()
+unsigned long Run::GetNowSize()
 {
     return Size;
 }

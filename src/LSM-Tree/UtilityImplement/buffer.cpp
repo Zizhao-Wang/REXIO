@@ -2,7 +2,6 @@
 #include "../UtilityDefine/buffer.h"
 
 
-
 Buffer::Buffer(size_t maxpage)
 {
     uint64_t capacity =  CalculatePageCapacity(sizeof(entry_t));

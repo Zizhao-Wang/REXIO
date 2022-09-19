@@ -483,6 +483,96 @@ int PageUpdate(size_t pageno, uint64_t value, uint64_t Cursize)
     return err;
 }
 
+int PageUpdate(std::vector<uint64_t> pagelist, std::vector<entry_t> values)
+{
+    /* 
+    * Step 1: Read all datum from original block. 
+    */
+    int err;
+    struct nvm_addr chunk_addrs[1];
+
+    uint64_t chunkno = pagelist[0]/4096;
+    uint64_t updatesec = pagelist[0]%4096;
+    uint64_t curseofchunk = chunkusage[chunkno];
+    chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,pagelist[0]);
+    size_t ws_min = nvm_dev_get_ws_min(bp->dev);
+    uint64_t index = CalculatePageCapacity(sizeof(entry_t));
+
+    // Read datum from original block/chunk.
+    for (size_t sectr = 0; sectr < curseofchunk; sectr += ws_min) 
+    {
+        size_t buf_ofz = sectr * bp->geo->l.nbytes;
+		struct nvm_addr addrs[ws_min];
+		for (size_t aidx = 0; aidx < ws_min; ++aidx) 
+        {
+			addrs[aidx].val = chunk_addrs[0].val;
+			addrs[aidx].l.sectr = sectr + aidx;
+		}
+		err = nvm_cmd_read(bp->dev, addrs, ws_min, bp->bufs->read+buf_ofz, NULL, 0x0, NULL);
+        for(size_t i=sectr*bp->geo->l.nbytes;i<ws_min * bp->geo->l.nbytes;i++)
+        {
+            bp->bufs->write[i] = bp->bufs->read[i];
+        }  
+		if (err == -1) 
+        {
+			printf("Read failure in part 1 of %ld page.\n",sectr);
+			return -1;
+		}
+        //printf("Read part 1 succeed!\n");
+    }
+
+   /* 
+    * Step 2: Erase original block. 
+    */
+    int eraseflag = erasechunk(pagelist[0], chunkno);
+    if(eraseflag == -1)
+    {
+        printf("Fatal error: chunk %lu erase failure.\n Error information: pageno:%lu chunkno:%lu ",pagelist[0]/4096,pagelist[0],chunkno);
+    }
+
+   /*
+    * Step 3: Update datum that generate from step 1.
+    */
+    for(size_t i=0;i<pagelist.size();i++)
+    {
+        size_t buf_ofz = (i%4096) *bp->geo->l.nbytes;
+        for (size_t j = 0; j < index; j++)
+        {
+            char * temp = new char[20];
+            uint64_t *ML = (uint64_t*) temp;
+            ML[0] = values[i*index+j].key, ML[1] = values[i*index+j].val; 
+            for(size_t k=buf_ofz+j*sizeof(entry_t),m=0;k<buf_ofz+j*sizeof(entry_t)+sizeof(entry_t);k++,m++)
+            {
+                bp->bufs->write[k] = temp[m];
+            }
+        }
+    }
+
+    /* Step 4: Write datum to the free-block. */
+    for (size_t sectr = 0; sectr < curseofchunk; sectr += ws_min) 
+    {
+        //printf("Write start:\n");
+        size_t buf_ofz = sectr * bp->geo->l.nbytes;
+		struct nvm_addr addrs[ws_min];
+		for (size_t aidx = 0; aidx < ws_min; ++aidx) 
+        {
+			addrs[aidx].val = chunk_addrs[0].val;
+			addrs[aidx].l.sectr = sectr + aidx;
+		}
+		err = nvm_cmd_write(bp->dev, addrs, ws_min, bp->bufs->write+buf_ofz, NULL, 0x0, NULL);  
+		if (err == -1) 
+        {
+			printf("Write failure in part 1 of %ld page.\n",sectr);
+			return -1;
+		}
+        //printf("Re-write part 1 succeed!\n");
+    }
+
+    //printf("# Update completion in chunk: %ld\n", chunkno);
+    return err;
+}
+
+
 
 
 
@@ -545,7 +635,7 @@ uint64_t SingleValueWrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
 }
 
 
-uint64_t PageDataWrite(std::vector<entry_t> Entries, uint64_t pageno)
+uint64_t SinglePageWrite(std::vector<entry_t> Entries, uint64_t pageno)
 {
 
     /* Function flag, default value equals 0(successful flag). */
@@ -573,6 +663,7 @@ uint64_t PageDataWrite(std::vector<entry_t> Entries, uint64_t pageno)
 		    addrs[aidx].l.sectr = (pageno%4096)+aidx;
 		    /* printf("aidx: %lu addrs[aidx].val : %lu chunk_addrs[cidx].val %lu addrs[aidx].l.sectr %lu \n",aidx,addrs[aidx].val,chunk_addrs[cidx].val,addrs[aidx].l.sectr); */
 	    }
+
         char * temp = new char[20];
         for (size_t i = 0; i < Entries.size(); i++)
         {
@@ -596,6 +687,14 @@ uint64_t PageDataWrite(std::vector<entry_t> Entries, uint64_t pageno)
 
     return pageno;
 
+}
+
+int MultiPageWrite(std::vector<entry_t> entries, std::vector<uint64_t> pagelist)
+{
+    /* Function flag, default value equals 0(successful flag). */
+    int err = 0;
+    PageUpdate(pagelist,entries);
+    return 0;
 }
 
 
@@ -662,6 +761,21 @@ entry_t * RunReadFromPage(uint64_t PageNum, size_t Runsize)
     return data;
 
 }
+
+int RunDataErase(std::vector<uint64_t> pageno)
+{
+    unordered_map<uint64_t,vector<uint64_t>> pagelist;
+    for(size_t i=0;i<pageno.size();i++)
+    {
+        pagelist[pageno[i]/4096].emplace_back(pageno[i]);
+    }
+
+
+
+
+}
+
+
 
 /**
  * Some other auxizilary functions.

@@ -14,14 +14,14 @@
 void MergeContext::Insert(entry_t *entries, size_t EntryNum) 
 {
     MergeEntryt MergeItem;
-
-    if(EntryNum > 0) 
+    size_t index = 0;
+    while(index < EntryNum) 
     {
-        MergeItem.entries = entries;
-        MergeItem.NumEntry = EntryNum;
-        MergeItem.precedence = queue.size();
+        MergeItem.SingleEntry = entries[index];
         queue.push(MergeItem);
+        index++;
     }
+    free(entries);
 }
 
 entry_t MergeContext::Contextpop(void) 
@@ -32,19 +32,14 @@ entry_t MergeContext::Contextpop(void)
     current = queue.top();
     next = current;
 
-    // Only release the most recent value for a given key
-    while (next.head().key == current.head().key && !queue.empty()) 
+    while (next.SingleEntry.key == current.SingleEntry.key && !queue.empty())  // Only release the most recent value for a given key
     {
         queue.pop();
-
-        next.Current++;
-        if (!next.done()) 
-        {
-            queue.push(next);
-        }
         next = queue.top();
+
     }
-    return current.head();
+
+    return current.SingleEntry;
 }
 
 bool MergeContext::IsEmpty(void) const 

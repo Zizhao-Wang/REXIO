@@ -157,8 +157,7 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
         while(!mergecon.IsEmpty())
         {
             entry_t entry = mergecon.Contextpop();
-            // Remove deleted keys from the final level
-            if ( entry.val != VAL_TOMBSTONE) 
+            if (entry.val != VAL_TOMBSTONE) 
             {
                 values.emplace_back(entry);
             }

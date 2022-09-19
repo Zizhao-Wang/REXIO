@@ -17,7 +17,7 @@ Level::Level(long buffersize)
 
     this->LevelNumber = LevelAlloctor();
 	this->MaxRuns = 2;
-	this->MaxRunSize = buffersize * pow(2,LevelNumber);
+	this->MaxRunSize = buffersize * pow(2,LevelNumber-1);
     for(int i=0;i<MaxRuns;i++)
     {
         Run run(MaxRunSize);

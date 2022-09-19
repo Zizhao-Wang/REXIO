@@ -24,6 +24,19 @@ void MergeContext::Insert(entry_t *entries, size_t EntryNum)
     free(entries);
 }
 
+void MergeContext::Insert(std::vector<entry_t> entries) 
+{
+    
+    MergeEntryt MergeItem;
+    size_t index = 0;
+    while(index++ < entries.size()) 
+    {
+        MergeItem.SingleEntry = entries[index];
+        queue.push(MergeItem);
+    }
+
+}
+
 entry_t MergeContext::Contextpop(void) 
 {
     MergeEntryt current, next;

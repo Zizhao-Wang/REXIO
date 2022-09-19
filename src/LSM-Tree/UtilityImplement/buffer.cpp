@@ -80,7 +80,12 @@ uint64_t Buffer::GetMaxSize()
     return MaxSize;
 }
 
-std::set<entry_t> Buffer::GetEntries()
+std::vector<entry_t> Buffer::GetEntries()
 {
-    return Entries;
+    std::vector<entry_t> values;
+    for(auto entry : Entries)
+    {
+        values.emplace_back(entry);
+    }
+    return values;
 }

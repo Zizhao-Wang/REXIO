@@ -19,5 +19,5 @@ public:
     std::vector<entry_t> * GetRange(KEY_t, KEY_t) const;
     void AllClear(void);
     uint64_t GetMaxSize();
-    std::set<entry_t> GetEntries();
+    std::vector<entry_t> GetEntries();
 };

@@ -37,17 +37,8 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
         return 0;
     }
 
-   /**
-    * If the next level does not have space for the current level,
-    * recursively merge the next level downwards to create some
-    **/
-    if (next->IsFull()) 
-    {
-        FlushInto(next);
-        AssertCondition(next->IsEmpty());
-    }
 
-   /**
+    /**
     * Merge operation:
     * Merage all runs in the current level into the first run of next level.
     * There are three steps to merge datum of this level into the next level:
@@ -55,8 +46,15 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
     * 2.check if the size is greater than 0 
     * 3.Flush directly if the size equals 0, or merge all datum of next run and flush    
     **/
-    if(next->IsEmpty())
+    if (next->IsFull()) 
     {
+       /**
+        * If the next level does not have space for the current level,
+        * recursively merge the next level downwards to create some
+        **/
+        FlushInto(next);
+        AssertCondition(next->IsEmpty());
+
         long sizecount = 0;
         AssertCondition(next->Runs.front().GetNowSize() == 0);
         for (auto& run : current->Runs) 

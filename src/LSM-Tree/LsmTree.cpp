@@ -78,14 +78,14 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
         {
             if(run.GetNowSize() != 0)
             {
-                mergecon.Insert(run.SingleRunRead(), run.GetNowSize());
+                mergecon.Insert(run.SingleRunRead());
             }
         }
         for(auto& run : next->Runs)
         {
             if(run.GetNowSize() != 0)
             {
-                mergecon.Insert(run.SingleRunRead(), run.GetNowSize());
+                mergecon.Insert(run.SingleRunRead());
             }
         }
 
@@ -150,8 +150,8 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
         {
             if(run.GetNowSize()!= 0)
             {
-                printf("Run size: %ld from GetNowSize()",run.GetNowSize());
-                mergecon.Insert(run.SingleRunRead(), run.GetNowSize());
+                printf("Run size: %ld from GetNowSize()\n",run.GetNowSize());
+                mergecon.Insert(run.SingleRunRead());
             }
         }
         std::vector<entry_t> values;
@@ -361,7 +361,7 @@ void LSMTreeInit()
     /* Write datum */
     //printf("long size:%lu \n",sizeof(long));
     startTime = clock();
-    for(uint64_t i=1;i<=1000000;i++)
+    for(uint64_t i=1;i<=10000000;i++)
     {
       if(i>=10000 && i%10000 ==0)
       {

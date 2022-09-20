@@ -1,3 +1,16 @@
+/**
+ * @date:   8/9/2022
+ * @author: zz.wang
+ * @details:
+ *          This file shows how to construct a disk-based LSM-Tree.
+ *
+ * IDENTIFICATION:
+ *          src/LSM-Tree/UtilityDefine/buffer.h
+ **/
+
+#ifndef EXPERIMENT1_LSMTREE_BUFFER_H
+#define EXPERIMENT1_LSMTREE_BUFFER_H
+
 #include <set>
 #include <vector>
 #include "../../Auxizilary/VariablesTypes.h"
@@ -21,3 +34,5 @@ public:
     uint64_t GetMaxSize();
     std::vector<entry_t> GetEntries();
 };
+
+#endif //EXPERIMENT1_LSMTREE_BUFFER_H

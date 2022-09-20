@@ -1,11 +1,12 @@
 /**
- * @date   0:32 7/9/2022
- * @author zz.wang
- * @details
- *          This file shows how to construct a LSM-Tree.
+ * @date:   7/9/2022
+ * @author: zz.wang
+ * @email:  zz.wang@siat.ac.cn
+ * @details:
+ *          This file shows how to construct a disk-based LSM-Tree.
  *
  * IDENTIFICATION:
- *          code2/code/LSM-Tree/lsm_tree.h
+ *          src/LSM-Tree/LSMTree.h
  **/
 
 #ifndef EXPERIMENT1_LSMTREE_H

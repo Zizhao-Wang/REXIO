@@ -35,7 +35,7 @@ public:
     int  RunDataWrite();
     void PutValue(entry_t entry);
     VAL_t* RunValuesRead(uint64_t PageNum);
-    entry_t* SingleRunRead();
+    std::vector<entry_t> SingleRunRead();
     VAL_t * GetValue(KEY_t key);
     std::vector<entry_t> * GetRange(KEY_t, KEY_t);
     std::vector<uint64_t> GetPagePointers(void);

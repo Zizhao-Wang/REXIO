@@ -94,7 +94,7 @@ int MultiPageWrite(std::vector<entry_t> entries, std::vector<uint64_t> pagelist)
  */
 int PageDataRead(uint64_t pageno);
 
-entry_t* RunReadFromPage(uint64_t PageNum, size_t Runsize);
+std::vector<entry_t> RunReadFromPage(uint64_t PageNum, size_t Runsize);
 
 int RunDataErase(std::vector<uint64_t> pageno);
 

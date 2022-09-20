@@ -719,6 +719,7 @@ int PageDataRead(uint64_t pageno)
     if(err == -1)
     {
         printf("Reading page %ld failure.\n",pageno);
+        EMessageOutput("Run data read failure in page"+ Uint64toString(pageno)+"\n",106);
         return -1;
     }
     
@@ -727,36 +728,35 @@ int PageDataRead(uint64_t pageno)
 }
 
 
-entry_t * RunReadFromPage(uint64_t PageNum, size_t Runsize)
+std::vector<entry_t> RunReadFromPage(uint64_t PageNum, size_t Runsize)
 {
-    int flag;
-    entry_t* data;
-    flag = PageDataRead(PageNum);
-    data = (entry_t*)malloc(sizeof(entry_t)*(Runsize+5));
-    if(data == nullptr)
+
+    std::vector<entry_t> data ;
+    PageDataRead(PageNum);
+
+    /**
+    *size_t pagebytes = sizeof(entry_t)*(Runsize+5);
+    *data = (entry_t*)malloc(pagebytes);
+    *if(data == NULL)
+    
     {
-        EMessageOutput("Memory allocating failure in RunReadFromPage function!",578);
+        EMessageOutput("Memory allocating failure in RunReadFromPage function when reaading page "+Uint64toString(PageNum)+"\n",578);
     }
-    if(flag != -1)
+    **/
+    char * temp = new char[20];
+    entry_t TempEntry;
+    for (size_t i = 0; i < Runsize; i++)
     {
-        char * temp = new char[20];
-        entry_t TempEntry;
-        for (size_t i = 0; i < Runsize; i++)
+        // printf("Value :%ld has been inserted!\n", ML[Cursize]);
+        for(size_t j = i*sizeof(entry_t),k=0;j<i*sizeof(entry_t)+sizeof(entry_t);j++,k++)
         {
-            // printf("Value :%ld has been inserted!\n", ML[Cursize]);
-            for(size_t j = i*sizeof(entry_t)*8,k=0;j<i*sizeof(entry_t)*8+sizeof(entry_t)*8;j++,k++)
-            {
-                temp[k] = bp->bufs->write[i];
-            }
-            uint64_t *ML = (uint64_t*) temp;
-            TempEntry.key = ML[0], TempEntry.val = ML[1];
-            data[i] = TempEntry;
-        } 
-    }
-    else
-    {
-        EMessageOutput("Run data read failure in page"+ Uint64toString(PageNum)+"\n",106);
-    }
+            temp[k] = bp->bufs->write[i];
+        }
+        uint64_t *ML = (uint64_t*) temp;
+        TempEntry.key = ML[0], TempEntry.val = ML[1];
+        data.emplace_back(TempEntry);
+    }  
+    printf("%lu data entries have beed read!\n",data.size());
 
     return data;
 

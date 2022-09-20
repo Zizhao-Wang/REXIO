@@ -12,7 +12,7 @@
 Run::Run(unsigned long maxsize)
 {
     this->MaxSize = maxsize;
-    for(int i=0;i<this->MaxSize;i++) //Initialize all page pointers as UINT64_MAX
+    for(int i=0;i<this->MaxSize/CalculatePageCapacity(sizeof(entry_t));i++) //Initialize all page pointers as UINT64_MAX
     {
         PagePointers.emplace_back(UINT64_MAX);
     }
@@ -51,9 +51,22 @@ VAL_t* Run::RunValuesRead(uint64_t PageNum)
     return value;
 }
 
-entry_t* Run::SingleRunRead()
+std::vector<entry_t> Run::SingleRunRead()
 {
-    entry_t * entries1 = nullptr; 
+    std::vector<entry_t> entries1; 
+    size_t Pagecapacity = CalculatePageCapacity(sizeof(entry_t));
+
+    printf("Test 1 : size of page pointers:%lu\n",PagePointers.size());
+    for(size_t i=0; i<PagePointers.size();i++)
+    {
+        std::vector<entry_t> temp;
+        temp = RunReadFromPage(PagePointers[i],Pagecapacity);
+        entries1.insert(entries1.end(),temp.begin(),temp.end());
+    }
+    printf("Test 3");
+    return entries1;
+
+    /** entry_t * entries1 = nullptr; 
     entry_t * head = nullptr;
     size_t Pagecapacity = CalculatePageCapacity(sizeof(entry_t));
     size_t PageBytes = Pagecapacity * sizeof(entry_t);
@@ -61,18 +74,19 @@ entry_t* Run::SingleRunRead()
     entries1 = RunReadFromPage(PagePointers[0],Pagecapacity);
     head = entries1;
     head += Pagecapacity;
+
+    printf("Test 1");
     for(size_t i=1; i<PagePointers[i];i++)
     {
         head = RunReadFromPage(PagePointers[i],Pagecapacity);
+        printf("Test 2");
         entries1  = (entry_t *)realloc(entries1, PageBytes+100);
         if(entries1 == NULL)
         {
             EMessageOutput("Memory allocating failure in SingleRunRead",578);
         }
         head = entries1 + Pagecapacity*(i+1);
-    }
-    
-    return entries1;
+    } **/
 }
 
 void Run::PutValue(entry_t entry) 

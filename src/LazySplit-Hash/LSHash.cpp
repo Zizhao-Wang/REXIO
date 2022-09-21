@@ -1,8 +1,9 @@
+#include "LSHash.h"
 
 
-
-
-LSHash::LSHash(/* args */)
+LSHash::LSHash()
 {
+
+
 }
 

@@ -14,11 +14,13 @@
 
 class LSHash
 {
+
 private:
 	/* data */
 public:
 	LSHash(/* args */);
 	~LSHash();
+	
 };
 
 

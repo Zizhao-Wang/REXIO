@@ -1,0 +1,8 @@
+
+
+
+
+LSHash::LSHash(/* args */)
+{
+}
+

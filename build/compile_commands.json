@@ -56,8 +56,8 @@
 },
 {
   "directory": "/home/femu/experiment1/code2/build",
-  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Linearhashing/LHash.cpp.o -c /home/femu/experiment1/code2/src/Linearhashing/LHash.cpp",
-  "file": "/home/femu/experiment1/code2/src/Linearhashing/LHash.cpp"
+  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/MultipleHash/Linearhashing/LHash.cpp.o -c /home/femu/experiment1/code2/src/MultipleHash/Linearhashing/LHash.cpp",
+  "file": "/home/femu/experiment1/code2/src/MultipleHash/Linearhashing/LHash.cpp"
 },
 {
   "directory": "/home/femu/experiment1/code2/build",

@@ -6,7 +6,7 @@
 #include "FrontEnd/MemoryAllocate/HashBlock.h"
 #include "FrontEnd/HashTable/HashTable.h"
 #include "Exhashing/ExtendibleHash.h"
-#include "Linearhashing/LHash.h"
+#include "Multi Linearhashing/LHash.h"
 #include "Auxizilary/Logo.h"
 #include "LSM-Tree/LsmTree.h"
 

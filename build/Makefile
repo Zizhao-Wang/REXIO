@@ -489,29 +489,29 @@ LSM-Tree/UtilityImplement/run.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.s
 .PHONY : LSM-Tree/UtilityImplement/run.cpp.s
 
-Linearhashing/LHash.o: Linearhashing/LHash.cpp.o
-.PHONY : Linearhashing/LHash.o
+MultipleHash/Linearhashing/LHash.o: MultipleHash/Linearhashing/LHash.cpp.o
+.PHONY : MultipleHash/Linearhashing/LHash.o
 
 # target to build an object file
-Linearhashing/LHash.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Linearhashing/LHash.cpp.o
-.PHONY : Linearhashing/LHash.cpp.o
+MultipleHash/Linearhashing/LHash.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/MultipleHash/Linearhashing/LHash.cpp.o
+.PHONY : MultipleHash/Linearhashing/LHash.cpp.o
 
-Linearhashing/LHash.i: Linearhashing/LHash.cpp.i
-.PHONY : Linearhashing/LHash.i
+MultipleHash/Linearhashing/LHash.i: MultipleHash/Linearhashing/LHash.cpp.i
+.PHONY : MultipleHash/Linearhashing/LHash.i
 
 # target to preprocess a source file
-Linearhashing/LHash.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Linearhashing/LHash.cpp.i
-.PHONY : Linearhashing/LHash.cpp.i
+MultipleHash/Linearhashing/LHash.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/MultipleHash/Linearhashing/LHash.cpp.i
+.PHONY : MultipleHash/Linearhashing/LHash.cpp.i
 
-Linearhashing/LHash.s: Linearhashing/LHash.cpp.s
-.PHONY : Linearhashing/LHash.s
+MultipleHash/Linearhashing/LHash.s: MultipleHash/Linearhashing/LHash.cpp.s
+.PHONY : MultipleHash/Linearhashing/LHash.s
 
 # target to generate assembly for a file
-Linearhashing/LHash.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Linearhashing/LHash.cpp.s
-.PHONY : Linearhashing/LHash.cpp.s
+MultipleHash/Linearhashing/LHash.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/MultipleHash/Linearhashing/LHash.cpp.s
+.PHONY : MultipleHash/Linearhashing/LHash.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -591,9 +591,9 @@ help:
 	@echo "... LSM-Tree/UtilityImplement/run.o"
 	@echo "... LSM-Tree/UtilityImplement/run.i"
 	@echo "... LSM-Tree/UtilityImplement/run.s"
-	@echo "... Linearhashing/LHash.o"
-	@echo "... Linearhashing/LHash.i"
-	@echo "... Linearhashing/LHash.s"
+	@echo "... MultipleHash/Linearhashing/LHash.o"
+	@echo "... MultipleHash/Linearhashing/LHash.i"
+	@echo "... MultipleHash/Linearhashing/LHash.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

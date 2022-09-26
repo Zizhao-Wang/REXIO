@@ -17,7 +17,7 @@
 
 #include <iostream>
 
-class Bucket 
+class bucket 
 {
 
 private:
@@ -29,7 +29,7 @@ public:
 
     int depth; 
     map<int, uint64_t> values;
-    Bucket(int depth, int size);
+    bucket(int depth, int size);
 
    /**
 	* As a rule, a complete index structure should at least include the methods for CURD and crash recovery.

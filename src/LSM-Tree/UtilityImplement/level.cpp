@@ -1,4 +1,8 @@
+#include "../UtilityDefine/level.h"
 #include <cassert>
+#include <unistd.h>
+#include <cstring>
+#include <cmath>
 #include <cstdio>
 #include <vector>
 #include <algorithm>
@@ -6,11 +10,7 @@
 #include <cstdlib>
 #include <sys/mman.h>
 #include <sys/types.h>
-#include <unistd.h>
-#include <cstring>
-#include <cmath>
-#include "../UtilityDefine/level.h"
-#include "../../Auxizilary/GlobalVariable.h"
+
 
 Level::Level(long buffersize)
 {

@@ -13,14 +13,15 @@
  *          src/LSM-Tree/UtilityDefine/level.h
  **/
 
-#ifndef EXPERIMENT1_LEVEL_H
-#define EXPERIMENT1_LEVEL_H
+#ifndef EXPERIMENT1_LSMTREE_LEVEL_H
+#define EXPERIMENT1_LSMTREE_LEVEL_H
 
 #include <vector>
 #include <queue>
 #include "../../Auxizilary/VariablesTypes.h"
 #include "../../Backend/IODisk/WriteDisk.h"
 #include "../../Auxizilary/SysOutput.h"
+#include "ResAllocate.h"
 #include "run.h"
 
 class Level 

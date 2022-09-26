@@ -13,6 +13,8 @@
 #define EXPERIMENT1_LAZYSPLITHASH_H
 
 #include <iostream>
+#include "MultipleHash/Bucket.h"
+
 
 class LSHash
 {

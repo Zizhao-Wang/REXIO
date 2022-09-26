@@ -9,15 +9,26 @@
  *          src/MultipleHash/Bucket.h
  **/
 
+
+
+
+#ifndef EXPERIMENT1_LAZYSPLITHASH_H
+#define EXPERIMENT1_LAZYSPLITHASH_H
+
+#include <iostream>
+
 class Bucket 
 {
+
 private:
+	uint16_t CurrentSize, MaxSize; //page number and current size 
+	uint64_t PageNo;
+	
 
 public:
-    int depth,size; 
-    uint64_t pageno, CurSize; //page number and current size 
+
+    int depth; 
     map<int, uint64_t> values;
-    
     Bucket(int depth, int size);
 
    /**
@@ -31,7 +42,7 @@ public:
 
     int isFull(void);
     int isEmpty(void);
-	
+
     int getDepth(void);
     int increaseDepth(void);
     int decreaseDepth(void);
@@ -41,3 +52,6 @@ public:
     int  PageWrite();
 
 };
+
+
+#endif //EXPERIMENT1_LAZYSPLITHASH_H

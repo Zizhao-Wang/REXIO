@@ -249,30 +249,6 @@ Backend/IODisk/WriteDisk.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.s
 .PHONY : Backend/IODisk/WriteDisk.cpp.s
 
-Exhashing/ExtendibleHash.o: Exhashing/ExtendibleHash.cpp.o
-.PHONY : Exhashing/ExtendibleHash.o
-
-# target to build an object file
-Exhashing/ExtendibleHash.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Exhashing/ExtendibleHash.cpp.o
-.PHONY : Exhashing/ExtendibleHash.cpp.o
-
-Exhashing/ExtendibleHash.i: Exhashing/ExtendibleHash.cpp.i
-.PHONY : Exhashing/ExtendibleHash.i
-
-# target to preprocess a source file
-Exhashing/ExtendibleHash.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Exhashing/ExtendibleHash.cpp.i
-.PHONY : Exhashing/ExtendibleHash.cpp.i
-
-Exhashing/ExtendibleHash.s: Exhashing/ExtendibleHash.cpp.s
-.PHONY : Exhashing/ExtendibleHash.s
-
-# target to generate assembly for a file
-Exhashing/ExtendibleHash.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Exhashing/ExtendibleHash.cpp.s
-.PHONY : Exhashing/ExtendibleHash.cpp.s
-
 FrontEnd/FrontMain.o: FrontEnd/FrontMain.cpp.o
 .PHONY : FrontEnd/FrontMain.o
 
@@ -489,6 +465,30 @@ LSM-Tree/UtilityImplement/run.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.s
 .PHONY : LSM-Tree/UtilityImplement/run.cpp.s
 
+MultipleHash/Exhashing/ExtendibleHash.o: MultipleHash/Exhashing/ExtendibleHash.cpp.o
+.PHONY : MultipleHash/Exhashing/ExtendibleHash.o
+
+# target to build an object file
+MultipleHash/Exhashing/ExtendibleHash.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/MultipleHash/Exhashing/ExtendibleHash.cpp.o
+.PHONY : MultipleHash/Exhashing/ExtendibleHash.cpp.o
+
+MultipleHash/Exhashing/ExtendibleHash.i: MultipleHash/Exhashing/ExtendibleHash.cpp.i
+.PHONY : MultipleHash/Exhashing/ExtendibleHash.i
+
+# target to preprocess a source file
+MultipleHash/Exhashing/ExtendibleHash.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/MultipleHash/Exhashing/ExtendibleHash.cpp.i
+.PHONY : MultipleHash/Exhashing/ExtendibleHash.cpp.i
+
+MultipleHash/Exhashing/ExtendibleHash.s: MultipleHash/Exhashing/ExtendibleHash.cpp.s
+.PHONY : MultipleHash/Exhashing/ExtendibleHash.s
+
+# target to generate assembly for a file
+MultipleHash/Exhashing/ExtendibleHash.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/MultipleHash/Exhashing/ExtendibleHash.cpp.s
+.PHONY : MultipleHash/Exhashing/ExtendibleHash.cpp.s
+
 MultipleHash/Linearhashing/LHash.o: MultipleHash/Linearhashing/LHash.cpp.o
 .PHONY : MultipleHash/Linearhashing/LHash.o
 
@@ -561,9 +561,6 @@ help:
 	@echo "... Backend/IODisk/WriteDisk.o"
 	@echo "... Backend/IODisk/WriteDisk.i"
 	@echo "... Backend/IODisk/WriteDisk.s"
-	@echo "... Exhashing/ExtendibleHash.o"
-	@echo "... Exhashing/ExtendibleHash.i"
-	@echo "... Exhashing/ExtendibleHash.s"
 	@echo "... FrontEnd/FrontMain.o"
 	@echo "... FrontEnd/FrontMain.i"
 	@echo "... FrontEnd/FrontMain.s"
@@ -591,6 +588,9 @@ help:
 	@echo "... LSM-Tree/UtilityImplement/run.o"
 	@echo "... LSM-Tree/UtilityImplement/run.i"
 	@echo "... LSM-Tree/UtilityImplement/run.s"
+	@echo "... MultipleHash/Exhashing/ExtendibleHash.o"
+	@echo "... MultipleHash/Exhashing/ExtendibleHash.i"
+	@echo "... MultipleHash/Exhashing/ExtendibleHash.s"
 	@echo "... MultipleHash/Linearhashing/LHash.o"
 	@echo "... MultipleHash/Linearhashing/LHash.i"
 	@echo "... MultipleHash/Linearhashing/LHash.s"

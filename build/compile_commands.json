@@ -46,8 +46,8 @@
 },
 {
   "directory": "/home/femu/experiment1/code2/build",
-  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Exhashing/ExtendibleHash.cpp.o -c /home/femu/experiment1/code2/src/Exhashing/ExtendibleHash.cpp",
-  "file": "/home/femu/experiment1/code2/src/Exhashing/ExtendibleHash.cpp"
+  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/MultipleHash/Exhashing/ExtendibleHash.cpp.o -c /home/femu/experiment1/code2/src/MultipleHash/Exhashing/ExtendibleHash.cpp",
+  "file": "/home/femu/experiment1/code2/src/MultipleHash/Exhashing/ExtendibleHash.cpp"
 },
 {
   "directory": "/home/femu/experiment1/code2/build",

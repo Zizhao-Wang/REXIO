@@ -5,7 +5,7 @@
 #include <liblightnvm.h>
 #include "FrontEnd/MemoryAllocate/HashBlock.h"
 #include "FrontEnd/HashTable/HashTable.h"
-#include "Exhashing/ExtendibleHash.h"
+#include "MultipleHash/Exhashing/ExtendibleHash.h"
 #include "MultipleHash/LazySplit-Hash/LSHash.h"
 #include "Auxizilary/Logo.h"
 #include "LSM-Tree/LsmTree.h"

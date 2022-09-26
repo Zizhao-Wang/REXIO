@@ -3,7 +3,7 @@
  * @author: zz.wang
  * @email:  zz.wang@siat.ac.cn
  * @details:
- *          This file is the port of this project.
+ *          This file is the unique port of this project.
  * IDENTIFICATION:
  *          src/main.cpp
  *

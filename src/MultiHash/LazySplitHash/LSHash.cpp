@@ -1,14 +1,12 @@
 #include "LSHash.h"
 
 
-Bucket::Bucket(/* args */)
-{
-}
-
-Bucket::~Bucket()
+LSBbucket::LSBbucket(/* args */)
 {
 	
 }
+
+
 
 
 

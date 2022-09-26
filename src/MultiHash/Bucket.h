@@ -13,6 +13,7 @@
 #define EXPERIMENT1_Multi_BUCKET_H
 
 #include <iostream>
+#include "../Auxizilary/GlobalVariable.h"
 
 class bucket 
 {
@@ -20,32 +21,23 @@ class bucket
 private:
 	uint16_t CurrentSize, MaxSize; //page number and current size 
 	uint64_t PageNo;
-	
 
 public:
-
-    int depth; 
-    map<int, uint64_t> values;
     bucket(int depth, int size);
 
    /**
 	* As a rule, a complete index structure should at least include the methods for CURD and crash recovery.
 	* Create, update, retrieval, delete and crash recovery.
 	**/
-    int insert(int key,uint64_t value);
-    int remove(int key);
-    int update(int key, uint64_t value);
-    void search(int key);
+    int Insert(SKey key, SValue value);
+    int Delete(SKey key);
+    int Update(SKey key, SValue value);
+    SValue Retrieval(SKey key);
 
-    int isFull(void);
-    int isEmpty(void);
+    bool IsFull(void) const;
+    bool IsEmpty(void) const;
 
-    int getDepth(void);
-    int increaseDepth(void);
-    int decreaseDepth(void);
-    std::map<int, uint64_t> copy(void);
-    void clear(void);
-    void display(void);
+    void AllClear(void);
     int  PageWrite();
 
 };

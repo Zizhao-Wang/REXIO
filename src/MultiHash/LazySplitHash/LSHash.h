@@ -16,12 +16,21 @@
 
 #include "../Bucket.h"
 
+class LSbucket : public bucket
+{
+
+public:
+	LSbucket();
+
+
+};
+
 
 class LSHash
 {
 
 private:
-	/* data */
+	std::vector<LSbucket> bucketList;
 public:
 	LSHash(/* args */);
 

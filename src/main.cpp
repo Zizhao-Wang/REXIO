@@ -1,9 +1,23 @@
-/*  Header files reference!  */
-#include <iostream>
-#include <ctime>
-#include <random>
-#include <liblightnvm.h>
-#include "FrontEnd/MemoryAllocate/HashBlock.h"
+/**
+ * @date:   8/4/2022
+ * @author: zz.wang
+ * @email:  zz.wang@siat.ac.cn
+ * @details:
+ *          This file is the port of this project.
+ * IDENTIFICATION:
+ *          src/main.cpp
+ *
+ * According to the Google CPP style guide, header file reference should follow the following order:
+ * (To avoid hidden dependencies)
+ * 1. directly related header 2. C library 3. C++ library,
+ * 4. other libraries'.h  5. your project's .h.  
+ **/
+
+#include <ctime> //C system files
+#include <iostream>//C++ system files 
+#include <random> 
+#include <liblightnvm.h> // other project's .h files
+#include "FrontEnd/MemoryAllocate/HashBlock.h"//your project's .h files
 #include "FrontEnd/HashTable/HashTable.h"
 #include "MultipleHash/Exhashing/ExtendibleHash.h"
 #include "MultipleHash/LazySplit-Hash/LSHash.h"
@@ -13,7 +27,6 @@
 /* Define some global variables. */
 struct nvm_bp* bp = nullptr;
 std::unordered_map<uint64_t,uint64_t> chunkusage;
-
 
 int GlobalInitialize(int argc, char **argv)
 {

@@ -19,8 +19,9 @@
 #include <liblightnvm.h> // other project's .h files
 #include "FrontEnd/MemoryAllocate/HashBlock.h"//your project's .h files
 #include "FrontEnd/HashTable/HashTable.h"
-#include "MultipleHash/Exhashing/ExtendibleHash.h"
-#include "MultipleHash/LazySplit-Hash/LSHash.h"
+#include "MultiHash/ExtendibleHash/ExHash.h"
+#include "MultiHash/LazySplitHash/LSHash.h"
+#include "MultiHash/LinearHash/LiHash.h"
 #include "Auxizilary/Logo.h"
 #include "LSM-Tree/LsmTree.h"
 

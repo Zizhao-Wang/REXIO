@@ -12,8 +12,8 @@
 
 
 
-#ifndef EXPERIMENT1_LAZYSPLITHASH_H
-#define EXPERIMENT1_LAZYSPLITHASH_H
+#ifndef EXPERIMENT1_BUCKET_H
+#define EXPERIMENT1_Multi_BUCKET_H
 
 #include <iostream>
 

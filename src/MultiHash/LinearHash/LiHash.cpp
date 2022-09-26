@@ -6,9 +6,10 @@
 
 //Some useful header files.
 
+#include "LiHash.h"
 #include<iostream>
 #include<vector>
-#include "./LHash.h"
+
 
 /* Global variables definition and utilization, coming soon...  */
 

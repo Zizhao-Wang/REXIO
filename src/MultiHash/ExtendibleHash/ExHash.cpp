@@ -1,5 +1,5 @@
 /* header files references. */
-#include "ExtendibleHash.h"
+#include "ExHash.h"
 #include <ctime>
 
 

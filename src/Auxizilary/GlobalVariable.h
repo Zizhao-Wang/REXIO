@@ -4,9 +4,8 @@
  * @details
  *          This file contains some global variables, such as page size, block size and so on.
  *
- *
- *         IDENTIFICATION
- *   Experiment1/AuxizilaryFile/GlobalVariable.h
+ * IDENTIFICATION
+ *   src/AuxizilaryFile/GlobalVariable.h
  */
 
 
@@ -34,6 +33,7 @@ typedef unsigned int uint_32;
 /**
  *  
  */
-typedef uint64_t key
+typedef uint64_t keys;
+typedef uint64_t values;
 
 #endif //EXPERIMENT1_GLOBALVARIABLE_H

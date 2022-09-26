@@ -32,8 +32,8 @@ typedef unsigned int uint_32;
  * "macro" is used to declarative the type of key-value pair with all indexes.
  * (e.g., LSM-Tree, Extendible hash, Linear hash, Lazy-split hash, Two-tier index)
  **/
-typedef uint64_t key;
-typedef uint64_t value;
+typedef uint64_t SKey;
+typedef uint64_t SValue;
 
 
 #endif //EXPERIMENT1_GLOBALVARIABLE_H

@@ -10,16 +10,14 @@
 
 #ifndef EXPERIMENT1_LSMTREE_RESALLOCATE_H
 #define EXPERIMENT1_LSMTREE_RESALLOCATE_H
+#include <cstdint>
+#include <iostream>
 
-/**
- * Global variable declaration. 
- **/
+/* Global variable declaration. */
 extern long LevelNum;
 
 
-/**
- * Global level number allocator. 
- **/
+/* Global level number allocator. */
 long LevelAlloctor();
 
 

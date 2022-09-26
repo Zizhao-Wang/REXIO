@@ -9,9 +9,6 @@
  *          src/MultipleHash/Bucket.h
  **/
 
-
-
-
 #ifndef EXPERIMENT1_BUCKET_H
 #define EXPERIMENT1_Multi_BUCKET_H
 

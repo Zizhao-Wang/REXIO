@@ -25,12 +25,15 @@ long LevelAlloctor();
 
 // #define  pagesize   16
 // #define  blocksize  256
-//#define localNodesize 4
-
+// #define localNodesize 4
 
 
 typedef uintptr_t Datum;
 typedef unsigned int uint_32;
 
+/**
+ *  
+ */
+typedef uint64_t key
 
 #endif //EXPERIMENT1_GLOBALVARIABLE_H

@@ -2,7 +2,8 @@
 
 #include "worker_pool.h"
 
-void WorkerPool::launch(worker_task& task) {
+void WorkerPool::launch(worker_task& task) 
+{
     assert(futures.size() == 0);
 
     for (int i = 0; i < workers.size(); i++) {
@@ -10,7 +11,8 @@ void WorkerPool::launch(worker_task& task) {
     }
 }
 
-void WorkerPool::wait_all(void) {
+void WorkerPool::wait_all(void) 
+{
     for (auto& future : futures) {
         future.wait();
     }
@@ -18,13 +20,15 @@ void WorkerPool::wait_all(void) {
     futures.clear();
 }
 
-void DynamicWorkerPool::launch(worker_task& task) {
+void DynamicWorkerPool::launch(worker_task& task) 
+{
     for (int i = 0; i < workers.size(); i++) {
         workers.emplace_back(task);
     }
 }
 
-void DynamicWorkerPool::wait_all(void) {
+void DynamicWorkerPool::wait_all(void) 
+{
     for (auto& worker : workers) {
         worker.join();
     }

@@ -1,5 +1,4 @@
-#include "LSM-Tree/UtilityImplement/ResAllocate.cpp"
-
+#include "LSM-Tree/UtilityDefine/ResAllocate.h"
 
 long LevelNum = 1;
 

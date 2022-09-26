@@ -31,9 +31,9 @@ typedef uintptr_t Datum;
 typedef unsigned int uint_32;
 
 /**
- *  
- */
-typedef uint64_t keys;
-typedef uint64_t values;
+ * Globle define key
+ **/
+typedef uint64_t key;
+typedef uint64_t value;
 
 #endif //EXPERIMENT1_GLOBALVARIABLE_H

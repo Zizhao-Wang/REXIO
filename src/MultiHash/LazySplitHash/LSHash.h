@@ -19,6 +19,8 @@
 
 class LSbucket : public bucket
 {
+protected:
+	std::vector<SEntry> BucketEntries;
 
 public:
 	LSbucket(uint16_t maxsize);

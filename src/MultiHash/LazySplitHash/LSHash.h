@@ -45,18 +45,17 @@ class LSHash
 
 private:
 	std::vector<LSbucket> bucketList;
-public:
-	LSHash(/* args */);
 
-	int Insert(uint64_t key, uint64_t value);
-	uint64_t Search(uint64_t key);
-	int Delete(uint64_t key);
-	~LSHash();
+public:
+	LSHash();
+	int Insert(SKey key, SValue value);
+	SValue Search(SKey key);
+	int Delete(SKey key);
 	
 };
 
 
-
+void LSHashPort();
 
 
 

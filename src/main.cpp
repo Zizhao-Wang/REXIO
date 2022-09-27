@@ -68,7 +68,9 @@ int main(int argc, char **argv)
 
     // LHashPort();
 
-    LSMTreeInit();
+    //LSMTreeInit();
+
+    LSHashPort();
 
     return 0;
 

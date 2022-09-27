@@ -24,11 +24,11 @@ int LSbucket::Insert(SKey key, SValue value)
 	return 0;
 }
 
-SValue LSbucket::Retrieval(SKey key)
+SEntry LSbucket::Retrieval(SKey key)
 {
-	SValue val;
+	SEntry entry;
 
-	return val;
+	return entry;
 
 }
 
@@ -134,6 +134,11 @@ void LSHash::Split(size_t BucketNo)
 
 }
 
+double LSHash::IFCompute()
+{
+	return Allsize/(bucketList.size()*bmaxsize);
+}
+
 int LSHash::Insert(SKey key, SValue value)
 {
   this->Allsize++;
@@ -156,20 +161,32 @@ int LSHash::Insert(SKey key, SValue value)
 
 }
 
-
-
-
-
-double LSHash::IFCompute()
+SValue LSHash::Retrieval(SKey key)
 {
-	return Allsize/(bucketList.size()*bmaxsize);
+  SValue val;
+  uint8_t i = GetBits(bucketList.size());
+  SKey tmp = BitHashfunc(key,i);
+
+  if(tmp >= bucketList.size())
+  {
+    tmp = BitHashfunc(BitHashfunc(key,i), GetBits(BitHashfunc(key,i))-1);
+  }
+
+  val = bucketList[tmp].Retrieval(key).val;
+  return val;
+
 }
+int LSHash::Delete(SKey key)
+{
+  SValue val = Retrieval(key);
+  if(val == DELETEVALUE)
+  {
+    return 0;
+  }
 
 
-
-
-
-
+}
+int Update(SKey key, SValue value);
 
 
 

@@ -32,7 +32,7 @@ public:
 	LSbucket(uint16_t maxsize);
 
 	int Insert(SKey key, SValue value);
-	SValue Retrieval(SKey key);
+	SEntry Retrieval(SKey key);
     int Delete(SKey key);
     int Update(SKey key, SValue value);
     
@@ -58,15 +58,16 @@ private:
 
 public:
 	LSHash(uint16_t , uint16_t, double ifth);
+
 	SKey BitHashfunc(SKey, uint8_t);
 	uint8_t  GetBits(SKey);
 	void Split(size_t BucketNo);
+
+	double IFCompute();
 	int Insert(SKey key, SValue value);
 	SValue Retrieval(SKey key);
     int Delete(SKey key);
     int Update(SKey key, SValue value);
-
-	double IFCompute();
 	
 };
 

@@ -36,7 +36,7 @@ public:
     virtual int Insert(SKey key, SValue value) = 0;
     virtual int Delete(SKey key) = 0;
     virtual int Update(SKey key, SValue value) = 0;
-    virtual SValue Retrieval(SKey key) = 0;
+    virtual SEntry Retrieval(SKey key) = 0;
 
     virtual bool IsFull(void) const = 0;
     virtual bool IsEmpty(void) const = 0;

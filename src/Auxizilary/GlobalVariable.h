@@ -41,4 +41,5 @@ typedef struct SEntry
 	SValue val;
 }SEntry;
 
+
 #endif //EXPERIMENT1_GLOBALVARIABLE_H

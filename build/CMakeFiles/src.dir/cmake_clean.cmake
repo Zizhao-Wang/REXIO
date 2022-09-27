@@ -1,6 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/src.dir/AuxizilaryImplement/GlobalVariable.cpp.o"
-  "CMakeFiles/src.dir/AuxizilaryImplement/GlobalVariable.cpp.o.d"
   "CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o"
   "CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o.d"
   "CMakeFiles/src.dir/Backend/BlockManage/BlockInfo.cpp.o"

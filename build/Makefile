@@ -129,30 +129,6 @@ src/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/build
 .PHONY : src/fast
 
-AuxizilaryImplement/GlobalVariable.o: AuxizilaryImplement/GlobalVariable.cpp.o
-.PHONY : AuxizilaryImplement/GlobalVariable.o
-
-# target to build an object file
-AuxizilaryImplement/GlobalVariable.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/AuxizilaryImplement/GlobalVariable.cpp.o
-.PHONY : AuxizilaryImplement/GlobalVariable.cpp.o
-
-AuxizilaryImplement/GlobalVariable.i: AuxizilaryImplement/GlobalVariable.cpp.i
-.PHONY : AuxizilaryImplement/GlobalVariable.i
-
-# target to preprocess a source file
-AuxizilaryImplement/GlobalVariable.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/AuxizilaryImplement/GlobalVariable.cpp.i
-.PHONY : AuxizilaryImplement/GlobalVariable.cpp.i
-
-AuxizilaryImplement/GlobalVariable.s: AuxizilaryImplement/GlobalVariable.cpp.s
-.PHONY : AuxizilaryImplement/GlobalVariable.s
-
-# target to generate assembly for a file
-AuxizilaryImplement/GlobalVariable.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/AuxizilaryImplement/GlobalVariable.cpp.s
-.PHONY : AuxizilaryImplement/GlobalVariable.cpp.s
-
 AuxizilaryImplement/SysOutput.o: AuxizilaryImplement/SysOutput.cpp.o
 .PHONY : AuxizilaryImplement/SysOutput.o
 
@@ -594,9 +570,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... src"
-	@echo "... AuxizilaryImplement/GlobalVariable.o"
-	@echo "... AuxizilaryImplement/GlobalVariable.i"
-	@echo "... AuxizilaryImplement/GlobalVariable.s"
 	@echo "... AuxizilaryImplement/SysOutput.o"
 	@echo "... AuxizilaryImplement/SysOutput.i"
 	@echo "... AuxizilaryImplement/SysOutput.s"

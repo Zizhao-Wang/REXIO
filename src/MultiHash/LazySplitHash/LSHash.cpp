@@ -72,10 +72,35 @@ LSHash::LSHash(uint16_t bucketmsize = DEFAULT_BUCKETMAXSIZE, uint16_t tablebsize
 
 int LSHash::Insert(SKey key, SValue value)
 {
+  this->Allsize++;
+  if()
 
 
 	return 0;
 }
+
+double LSHash::IFCompute()
+{
+  
+	return n/(bucketList.size()*)
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

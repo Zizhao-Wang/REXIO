@@ -35,8 +35,9 @@ public:
     int Update(SKey key, SValue value);
     
 
-    bool IsFull(void) const ;
-    bool IsEmpty(void) const ;
+    bool IsFull(void) const;
+    bool IsEmpty(void) const;
+	
 
     void AllClear(void) ;
     int PageWrite() ;
@@ -54,8 +55,11 @@ private:
 public:
 	LSHash(uint16_t , uint16_t);
 	int Insert(SKey key, SValue value);
-	SValue Search(SKey key);
-	int Delete(SKey key);
+	SValue Retrieval(SKey key);
+    int Delete(SKey key);
+    int Update(SKey key, SValue value);
+
+	double IFCompute();
 	
 };
 

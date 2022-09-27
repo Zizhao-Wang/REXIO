@@ -161,9 +161,9 @@ int LSHash::Insert(SKey key, SValue value)
 
 }
 
-SValue LSHash::Retrieval(SKey key)
+SEntry LSHash::Retrieval(SKey key)
 {
-  SValue val;
+  SEntry entry;
   uint8_t i = GetBits(bucketList.size());
   SKey tmp = BitHashfunc(key,i);
 
@@ -172,29 +172,47 @@ SValue LSHash::Retrieval(SKey key)
     tmp = BitHashfunc(BitHashfunc(key,i), GetBits(BitHashfunc(key,i))-1);
   }
 
-  val = bucketList[tmp].Retrieval(key).val;
-  return val;
+  entry = bucketList[tmp].Retrieval(key);
+
+  return entry;
 
 }
 int LSHash::Delete(SKey key)
 {
-  SValue val = Retrieval(key);
-  if(val == DELETEVALUE)
+  int err = 0;
+  SEntry entry = Retrieval(key);
+  if(entry.val == DELETEVALUE)
   {
     return 0;
   }
 
+  if(Insert(entry.key1, DELETEVALUE) == 0)
+  {
+    return 0;
+  }
+
+  return -1;
 
 }
-int Update(SKey key, SValue value);
 
+int LSHash::Update(SKey key, SValue value)
+{
 
+  uint8_t i = GetBits(bucketList.size());
+  SKey tmp = BitHashfunc(key,i);
 
+  if(tmp >= bucketList.size())
+  {
+    tmp = BitHashfunc(BitHashfunc(key,i), GetBits(BitHashfunc(key,i))-1);
+  }
 
+  if(bucketList[tmp].Update(key,value) == 0)
+  {
+    return 0;
+  }
 
-
-
-
+  return -1;
+}
 
 
 

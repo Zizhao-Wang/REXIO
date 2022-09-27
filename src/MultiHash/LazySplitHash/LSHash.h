@@ -65,7 +65,7 @@ public:
 
 	double IFCompute();
 	int Insert(SKey key, SValue value);
-	SValue Retrieval(SKey key);
+	SEntry Retrieval(SKey key);
     int Delete(SKey key);
     int Update(SKey key, SValue value);
 	

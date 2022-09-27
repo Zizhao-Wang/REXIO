@@ -17,6 +17,10 @@
 #include "../Bucket.h"
 #include "../../Auxizilary/GlobalVariable.h"
 
+
+#define DEFAULT_BUCKETMAXSIZE 100
+#define DEFAULT_TABLEBASESIZE 100
+
 class LSbucket : public bucket
 {
 protected:
@@ -45,9 +49,10 @@ class LSHash
 
 private:
 	std::vector<LSbucket> bucketList;
+	uint64_t Allsize;
 
 public:
-	LSHash();
+	LSHash(uint16_t , uint16_t);
 	int Insert(SKey key, SValue value);
 	SValue Search(SKey key);
 	int Delete(SKey key);

@@ -62,8 +62,11 @@ int LSbucket::PageWrite()
 LSHash::LSHash(uint16_t bucketmsize = DEFAULT_BUCKETMAXSIZE, uint16_t tablebsize = DEFAULT_TABLEBASESIZE)
 {
   for(uint16_t i = 0;i<tablebsize;i++)
-
-
+  {
+    LSbucket temp(bucketmsize);
+    bucketList.emplace_back(temp);
+  }
+  this->Allsize = 0;
 }
 
 

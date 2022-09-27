@@ -34,13 +34,12 @@ public:
     int Delete(SKey key);
     int Update(SKey key, SValue value);
     
-
     bool IsFull(void) const;
     bool IsEmpty(void) const;
-	
 
-    void AllClear(void) ;
-    int PageWrite() ;
+    void AllClear(void);
+	uint16_t GetMaxSize() const;
+    int PageWrite();
 
 };
 
@@ -51,6 +50,8 @@ class LSHash
 private:
 	std::vector<LSbucket> bucketList;
 	uint64_t Allsize;
+	uint16_t bmaxsize;
+	double  IFthreshold;
 
 public:
 	LSHash(uint16_t , uint16_t);

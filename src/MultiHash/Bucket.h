@@ -23,7 +23,11 @@ protected:
 	uint64_t PageNo;
 
 public:
-    bucket(uint16_t maxsize):MaxSize(maxsize){};
+    bucket(uint16_t maxsize):MaxSize(maxsize)
+    {
+        this->CurrentSize = 0;
+        this->PageNo = UINT64_MAX;
+    };
    /**
 	* As a rule, a complete index structure should at least include the methods for CURD and crash recovery.
 	* Create, update, retrieval, delete and crash recovery.

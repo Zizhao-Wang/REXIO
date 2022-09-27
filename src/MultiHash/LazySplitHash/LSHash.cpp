@@ -55,16 +55,13 @@ void LSbucket::AllClear(void)
 }
 int LSbucket::PageWrite()
 {
-
-	return 0;
-
-
+  
+  return 0;
 }
 
-LSHash::LSHash()
+LSHash::LSHash(uint16_t bucketmsize = DEFAULT_BUCKETMAXSIZE, uint16_t tablebsize = DEFAULT_TABLEBASESIZE)
 {
-
-
+  for(uint16_t i = 0;i<tablebsize;i++)
 
 
 }
@@ -72,6 +69,7 @@ LSHash::LSHash()
 
 int LSHash::Insert(SKey key, SValue value)
 {
+
 
 	return 0;
 }

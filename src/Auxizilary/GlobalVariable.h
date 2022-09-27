@@ -29,8 +29,8 @@ typedef unsigned int uint_32;
 /**
  * "macro" is used to declarative the type of key-value pair with all indexes.
  * (e.g., LSM-Tree, Extendible hash, Linear hash, Lazy-split hash, Two-tier index)
- * 
- * 
+ * In the meantime, we use "typedef" define the entry for data storage.
+ * All inserted data will be stored in SSD blocks in units of entries. 
  **/
 typedef uint64_t SKey;
 typedef uint64_t SValue;

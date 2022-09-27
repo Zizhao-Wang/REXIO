@@ -80,16 +80,21 @@ LSHash::LSHash(uint16_t bucketmsize = DEFAULT_BUCKETMAXSIZE, uint16_t tablebsize
 int LSHash::Insert(SKey key, SValue value)
 {
   this->Allsize++;
+  uint8_t i = GetBits(bucketList.size());
   if(IFCompute()>IFthreshold)
   {
     LSbucket temp(bmaxsize);
     bucketList.emplace_back(temp);
-    uint8_t i = GetBits(bucketList.size());
     //split
+    uint8_t i = GetBits(bucketList.size());
     BitHashfunc(bucketList.size()-1,GetBits(bucketList.size()-1)-1);
   }
-
-
+  uint64_t tmp = BitHashfunc(key,GetBits(bucketList.size()-1)-1);
+  if(tmp >= bucketList.size())
+  {
+    tmp = BitHashfunc(BitHashfunc(key,i),GetBits(BitHashfunc(key,i))-1);
+  }
+  bucketList[tmp].Insert(key,value);
 	return 0;
 }
 

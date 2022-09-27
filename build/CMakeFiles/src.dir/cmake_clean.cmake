@@ -19,6 +19,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/src.dir/FrontEnd/MemoryAllocate/HashBlock.cpp.o.d"
   "CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o"
   "CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o.d"
+  "CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o"
+  "CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o.d"
   "CMakeFiles/src.dir/LSM-Tree/UtilityImplement/buffer.cpp.o"
   "CMakeFiles/src.dir/LSM-Tree/UtilityImplement/buffer.cpp.o.d"
   "CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.o"

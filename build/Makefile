@@ -369,6 +369,30 @@ LSM-Tree/LsmTree.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.s
 .PHONY : LSM-Tree/LsmTree.cpp.s
 
+LSM-Tree/UtilityImplement/ResAllocate.o: LSM-Tree/UtilityImplement/ResAllocate.cpp.o
+.PHONY : LSM-Tree/UtilityImplement/ResAllocate.o
+
+# target to build an object file
+LSM-Tree/UtilityImplement/ResAllocate.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o
+.PHONY : LSM-Tree/UtilityImplement/ResAllocate.cpp.o
+
+LSM-Tree/UtilityImplement/ResAllocate.i: LSM-Tree/UtilityImplement/ResAllocate.cpp.i
+.PHONY : LSM-Tree/UtilityImplement/ResAllocate.i
+
+# target to preprocess a source file
+LSM-Tree/UtilityImplement/ResAllocate.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.i
+.PHONY : LSM-Tree/UtilityImplement/ResAllocate.cpp.i
+
+LSM-Tree/UtilityImplement/ResAllocate.s: LSM-Tree/UtilityImplement/ResAllocate.cpp.s
+.PHONY : LSM-Tree/UtilityImplement/ResAllocate.s
+
+# target to generate assembly for a file
+LSM-Tree/UtilityImplement/ResAllocate.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.s
+.PHONY : LSM-Tree/UtilityImplement/ResAllocate.cpp.s
+
 LSM-Tree/UtilityImplement/buffer.o: LSM-Tree/UtilityImplement/buffer.cpp.o
 .PHONY : LSM-Tree/UtilityImplement/buffer.o
 
@@ -600,6 +624,9 @@ help:
 	@echo "... LSM-Tree/LsmTree.o"
 	@echo "... LSM-Tree/LsmTree.i"
 	@echo "... LSM-Tree/LsmTree.s"
+	@echo "... LSM-Tree/UtilityImplement/ResAllocate.o"
+	@echo "... LSM-Tree/UtilityImplement/ResAllocate.i"
+	@echo "... LSM-Tree/UtilityImplement/ResAllocate.s"
 	@echo "... LSM-Tree/UtilityImplement/buffer.o"
 	@echo "... LSM-Tree/UtilityImplement/buffer.i"
 	@echo "... LSM-Tree/UtilityImplement/buffer.s"

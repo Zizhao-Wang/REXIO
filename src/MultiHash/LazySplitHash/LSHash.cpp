@@ -64,14 +64,16 @@ int LSbucket::PageWrite()
   return 0;
 }
 
-LSHash::LSHash(uint16_t bucketmsize = DEFAULT_BUCKETMAXSIZE, uint16_t tablebsize = DEFAULT_TABLEBASESIZE)
+LSHash::LSHash(uint16_t bucketmsize = DEFAULT_BUCKETMAXSIZE, uint16_t tablebsize = DEFAULT_TABLEBASESIZE, double ifth = DEFAULT_IFTHRESHOLD)
 {
   for(uint16_t i = 0;i<tablebsize;i++)
   {
     LSbucket temp(bucketmsize);
     bucketList.emplace_back(temp);
   }
+  this->bmaxsize = bucketmsize;
   this->Allsize = 0;
+  this->IFthreshold = ifth;
 }
 
 
@@ -80,7 +82,11 @@ int LSHash::Insert(SKey key, SValue value)
   this->Allsize++;
   if(IFCompute()>IFthreshold)
   {
-    
+    LSbucket temp(bmaxsize);
+    bucketList.emplace_back(temp);
+    uint8_t i = GetBits(bucketList.size());
+    //split
+    BitHashfunc(bucketList.size()-1,GetBits(bucketList.size()-1)-1);
   }
 
 

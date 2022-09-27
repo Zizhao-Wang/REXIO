@@ -20,6 +20,7 @@
 
 #define DEFAULT_BUCKETMAXSIZE 100
 #define DEFAULT_TABLEBASESIZE 100
+#define DEFAULT_IFTHRESHOLD   0.9
 
 class LSbucket : public bucket
 {
@@ -54,7 +55,10 @@ private:
 	double  IFthreshold;
 
 public:
-	LSHash(uint16_t , uint16_t);
+	LSHash(uint16_t , uint16_t, double ifth);
+	uint64_t BitHashfunc(SKey key, uint8_t bits);
+	uint8_t  GetBits(SKey key);
+	void split(size_t BucketNo);
 	int Insert(SKey key, SValue value);
 	SValue Retrieval(SKey key);
     int Delete(SKey key);

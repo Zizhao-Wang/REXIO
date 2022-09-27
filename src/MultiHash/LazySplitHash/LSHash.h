@@ -16,6 +16,7 @@
 #include <vector>
 #include "../Bucket.h"
 #include "../../Auxizilary/GlobalVariable.h"
+#include "../../Auxizilary/SysOutput.h"
 
 
 #define DEFAULT_BUCKETMAXSIZE 100
@@ -40,6 +41,7 @@ public:
 
     void AllClear(void);
 	uint16_t GetMaxSize() const;
+	std::vector<SEntry> Getdata() const;
     int PageWrite();
 
 };
@@ -56,9 +58,9 @@ private:
 
 public:
 	LSHash(uint16_t , uint16_t, double ifth);
-	uint64_t BitHashfunc(SKey key, uint8_t bits);
-	uint8_t  GetBits(SKey key);
-	void split(size_t BucketNo);
+	SKey BitHashfunc(SKey, uint8_t);
+	uint8_t  GetBits(SKey);
+	void Split(size_t BucketNo);
 	int Insert(SKey key, SValue value);
 	SValue Retrieval(SKey key);
     int Delete(SKey key);

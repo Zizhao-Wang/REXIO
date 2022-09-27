@@ -23,7 +23,17 @@ class LSbucket : public bucket
 public:
 	LSbucket(uint16_t maxsize);
 
-	
+	int Insert(SKey key, SValue value);
+	SValue Retrieval(SKey key);
+    int Delete(SKey key);
+    int Update(SKey key, SValue value);
+    
+
+    bool IsFull(void) const ;
+    bool IsEmpty(void) const ;
+
+    void AllClear(void) ;
+    int PageWrite() ;
 
 };
 

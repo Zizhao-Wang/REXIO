@@ -18,13 +18,12 @@
 class bucket 
 {
 
-private:
+protected:
 	uint16_t CurrentSize, MaxSize; //page number and current size 
 	uint64_t PageNo;
 
 public:
-    bucket(uint16_t maxsize);
-
+    bucket(uint16_t maxsize):MaxSize(maxsize){};
    /**
 	* As a rule, a complete index structure should at least include the methods for CURD and crash recovery.
 	* Create, update, retrieval, delete and crash recovery.

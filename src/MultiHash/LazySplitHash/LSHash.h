@@ -23,6 +23,7 @@ class LSbucket : public bucket
 public:
 	LSbucket(uint16_t maxsize);
 
+	
 
 };
 

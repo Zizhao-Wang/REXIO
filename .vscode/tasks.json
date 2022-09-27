@@ -11,7 +11,7 @@
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}",
                 "-I",
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/src/"
             ],
             "options": {
                 "cwd": "${fileDirname}"
@@ -34,7 +34,9 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-I",
+                "${workspaceFolder}/src/"
             ],
             "options": {
                 "cwd": "${fileDirname}"
@@ -54,7 +56,9 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-I",
+                "${workspaceFolder}/src/"
             ],
             "options": {
                 "cwd": "${fileDirname}"

@@ -489,6 +489,30 @@ MultiHash/ExtendibleHash/ExHash.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.s
 .PHONY : MultiHash/ExtendibleHash/ExHash.cpp.s
 
+MultiHash/LazySplitHash/LSHash.o: MultiHash/LazySplitHash/LSHash.cpp.o
+.PHONY : MultiHash/LazySplitHash/LSHash.o
+
+# target to build an object file
+MultiHash/LazySplitHash/LSHash.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o
+.PHONY : MultiHash/LazySplitHash/LSHash.cpp.o
+
+MultiHash/LazySplitHash/LSHash.i: MultiHash/LazySplitHash/LSHash.cpp.i
+.PHONY : MultiHash/LazySplitHash/LSHash.i
+
+# target to preprocess a source file
+MultiHash/LazySplitHash/LSHash.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.i
+.PHONY : MultiHash/LazySplitHash/LSHash.cpp.i
+
+MultiHash/LazySplitHash/LSHash.s: MultiHash/LazySplitHash/LSHash.cpp.s
+.PHONY : MultiHash/LazySplitHash/LSHash.s
+
+# target to generate assembly for a file
+MultiHash/LazySplitHash/LSHash.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.s
+.PHONY : MultiHash/LazySplitHash/LSHash.cpp.s
+
 MultiHash/LinearHash/LiHash.o: MultiHash/LinearHash/LiHash.cpp.o
 .PHONY : MultiHash/LinearHash/LiHash.o
 
@@ -591,6 +615,9 @@ help:
 	@echo "... MultiHash/ExtendibleHash/ExHash.o"
 	@echo "... MultiHash/ExtendibleHash/ExHash.i"
 	@echo "... MultiHash/ExtendibleHash/ExHash.s"
+	@echo "... MultiHash/LazySplitHash/LSHash.o"
+	@echo "... MultiHash/LazySplitHash/LSHash.i"
+	@echo "... MultiHash/LazySplitHash/LSHash.s"
 	@echo "... MultiHash/LinearHash/LiHash.o"
 	@echo "... MultiHash/LinearHash/LiHash.i"
 	@echo "... MultiHash/LinearHash/LiHash.s"

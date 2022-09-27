@@ -13,7 +13,7 @@
 #define EXPERIMENT1_Multi_BUCKET_H
 
 #include <iostream>
-#include "../Auxizilary/GlobalVariable.h"
+#include "Auxizilary/GlobalVariable.h"
 
 class bucket 
 {

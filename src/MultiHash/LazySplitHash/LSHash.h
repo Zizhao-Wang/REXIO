@@ -13,8 +13,9 @@
 #define EXPERIMENT1_LAZYSPLITHASH_H
 
 #include <iostream>
-
+#include <vector>
 #include "../Bucket.h"
+#include "../../Auxizilary/GlobalVariable.h"
 
 class LSbucket : public bucket
 {

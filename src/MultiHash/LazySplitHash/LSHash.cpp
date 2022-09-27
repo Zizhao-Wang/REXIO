@@ -49,6 +49,11 @@ bool LSbucket::IsEmpty(void) const
 	return CurrentSize == 0;
 }
 
+uint16_t LSbucket::GetMaxSize() const
+{
+  return MaxSize;
+}
+
 void LSbucket::AllClear(void)
 {
 
@@ -73,7 +78,10 @@ LSHash::LSHash(uint16_t bucketmsize = DEFAULT_BUCKETMAXSIZE, uint16_t tablebsize
 int LSHash::Insert(SKey key, SValue value)
 {
   this->Allsize++;
-  if()
+  if(IFCompute()>IFthreshold)
+  {
+    
+  }
 
 
 	return 0;
@@ -81,9 +89,7 @@ int LSHash::Insert(SKey key, SValue value)
 
 double LSHash::IFCompute()
 {
-  
-	return n/(bucketList.size()*)
-	
+	return Allsize/(bucketList.size()*bmaxsize);
 }
 
 

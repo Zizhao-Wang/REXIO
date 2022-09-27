@@ -99,7 +99,7 @@ LSHash::LSHash(uint16_t bucketmsize = DEFAULT_BUCKETMAXSIZE, uint16_t tablebsize
 SKey LSHash::BitHashfunc(SKey Number, uint8_t bits)
 {
   SKey BitNumber;
-  BitNumber = Number &  (SKey)(1<<bits);
+  BitNumber = Number & (SKey)(1<<bits);
   return BitNumber;
 }
 
@@ -119,9 +119,18 @@ uint8_t LSHash::GetBits(SKey Number)
 void LSHash::Split(size_t BucketNo)
 {
   std::vector<SEntry> tempdata;
+  tempdata = bucketList[BucketNo].Getdata();
+  
+  for(size_t i =0;i<tempdata.size();i++)
+  {
+    if(Insert(tempdata[i].key1,tempdata[i].val)!=0)
+    {
+      EMessageOutput("Split failure in data re-allocating in LSHash!",754);
+    }
+  }
 
-
-
+  bucketList[BucketNo].AllClear();
+  AssertCondition(bucketList.size()==0);
 
 }
 
@@ -146,6 +155,10 @@ int LSHash::Insert(SKey key, SValue value)
 	return 0;
 
 }
+
+
+
+
 
 double LSHash::IFCompute()
 {

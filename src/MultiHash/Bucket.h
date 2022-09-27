@@ -28,20 +28,21 @@ public:
         this->CurrentSize = 0;
         this->PageNo = UINT64_MAX;
     };
+
    /**
 	* As a rule, a complete index structure should at least include the methods for CURD and crash recovery.
 	* Create, update, retrieval, delete and crash recovery.
 	**/
-    int Insert(SKey key, SValue value);
-    int Delete(SKey key);
-    int Update(SKey key, SValue value);
-    SValue Retrieval(SKey key);
+    virtual int Insert(SKey key, SValue value) = 0;
+    virtual int Delete(SKey key) = 0;
+    virtual int Update(SKey key, SValue value) = 0;
+    virtual SValue Retrieval(SKey key) = 0;
 
-    bool IsFull(void) const;
-    bool IsEmpty(void) const;
+    virtual bool IsFull(void) const = 0;
+    virtual bool IsEmpty(void) const = 0;
 
-    void AllClear(void);
-    int  PageWrite();
+    virtual void AllClear(void) = 0;
+    virtual int PageWrite() = 0;
 
 };
 

@@ -13,7 +13,7 @@
 #define EXPERIMENT1_Multi_BUCKET_H
 
 #include <iostream>
-#include "Auxizilary/GlobalVariable.h"
+#include "../Auxizilary/GlobalVariable.h"
 
 class bucket 
 {
@@ -23,7 +23,7 @@ private:
 	uint64_t PageNo;
 
 public:
-    bucket(int depth, int size);
+    bucket(uint16_t maxsize);
 
    /**
 	* As a rule, a complete index structure should at least include the methods for CURD and crash recovery.

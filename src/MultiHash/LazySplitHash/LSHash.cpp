@@ -1,7 +1,8 @@
 #include "LSHash.h"
 
 
-LSbucket::LSbucket(/* args */)
+LSbucket::LSbucket(uint16_t maxsize)
+	:bucket(maxsize)
 {
 
 }

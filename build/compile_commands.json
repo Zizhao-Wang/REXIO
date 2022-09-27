@@ -61,6 +61,11 @@
 },
 {
   "directory": "/home/femu/experiment1/code2/build",
+  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o -c /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/LSHash.cpp",
+  "file": "/home/femu/experiment1/code2/src/MultiHash/LazySplitHash/LSHash.cpp"
+},
+{
+  "directory": "/home/femu/experiment1/code2/build",
   "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o -c /home/femu/experiment1/code2/src/LSM-Tree/LsmTree.cpp",
   "file": "/home/femu/experiment1/code2/src/LSM-Tree/LsmTree.cpp"
 },

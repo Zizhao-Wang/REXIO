@@ -9,6 +9,7 @@ LSbucket::LSbucket(uint16_t maxsize)
 
 int LSbucket::Insert(SKey key, SValue value)
 {
+
 	SEntry entry;
 	entry.key1 = key;
 	entry.val  = value;
@@ -16,9 +17,13 @@ int LSbucket::Insert(SKey key, SValue value)
 	BucketEntries.emplace_back(entry);
 	CurrentSize++;
 
-	
+  if(CurrentSize == MaxSize)
+  {
+    PageWrite();
+  }
 	return 0;
 }
+
 SValue LSbucket::Retrieval(SKey key)
 {
 	SValue val;
@@ -26,19 +31,23 @@ SValue LSbucket::Retrieval(SKey key)
 	return val;
 
 }
+
 int LSbucket::Delete(SKey key)
 {
-
+  if(!Insert(key, DELETEVALUE))
+  {
+    return -1;
+  }
 	return 0;
-
-
 }
+
 int LSbucket::Update(SKey key, SValue value)
 {
 
-	return 0;
 
+	return 0;
 }
+
 bool LSbucket::IsFull(void) const
 {
 	return CurrentSize == MaxSize;
@@ -54,15 +63,26 @@ uint16_t LSbucket::GetMaxSize() const
   return MaxSize;
 }
 
+std::vector<SEntry> LSbucket::Getdata() const
+{
+  return BucketEntries;
+}
+
 void LSbucket::AllClear(void)
 {
-
+  BucketEntries.clear();
+  AssertCondition(BucketEntries.size()==0);
 }
+
+
+
 int LSbucket::PageWrite()
 {
   
   return 0;
 }
+
+
 
 LSHash::LSHash(uint16_t bucketmsize = DEFAULT_BUCKETMAXSIZE, uint16_t tablebsize = DEFAULT_TABLEBASESIZE, double ifth = DEFAULT_IFTHRESHOLD)
 {
@@ -76,6 +96,34 @@ LSHash::LSHash(uint16_t bucketmsize = DEFAULT_BUCKETMAXSIZE, uint16_t tablebsize
   this->IFthreshold = ifth;
 }
 
+SKey LSHash::BitHashfunc(SKey Number, uint8_t bits)
+{
+  SKey BitNumber;
+  BitNumber = Number &  (SKey)(1<<bits);
+  return BitNumber;
+}
+
+uint8_t LSHash::GetBits(SKey Number)
+{
+  uint8_t bits = 0;
+  while(Number)
+  {
+    Number = Number>>1;
+    bits++;
+  }
+
+  return bits;
+}
+
+
+void LSHash::Split(size_t BucketNo)
+{
+  std::vector<SEntry> tempdata;
+
+
+
+
+}
 
 int LSHash::Insert(SKey key, SValue value)
 {
@@ -96,6 +144,7 @@ int LSHash::Insert(SKey key, SValue value)
   }
   bucketList[tmp].Insert(key,value);
 	return 0;
+
 }
 
 double LSHash::IFCompute()

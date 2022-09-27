@@ -32,8 +32,11 @@ typedef unsigned int uint_32;
  * In the meantime, we use "typedef" define the entry for data storage.
  * All inserted data will be stored in SSD blocks in units of entries. 
  **/
+
 typedef uint64_t SKey;
 typedef uint64_t SValue;
+
+#define DELETEVALUE UINT64_MAX
 
 typedef struct SEntry
 {

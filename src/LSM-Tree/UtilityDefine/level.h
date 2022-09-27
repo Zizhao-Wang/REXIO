@@ -21,7 +21,6 @@
 #include "../../Auxizilary/VariablesTypes.h"
 #include "../../Backend/IODisk/WriteDisk.h"
 #include "../../Auxizilary/SysOutput.h"
-#include "ResAllocate.h"
 #include "run.h"
 
 class Level 

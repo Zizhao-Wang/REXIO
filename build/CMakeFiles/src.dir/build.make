@@ -279,10 +279,24 @@ CMakeFiles/src.dir/LSM-Tree/UtilityImplement/buffer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/LSM-Tree/UtilityImplement/buffer.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/femu/experiment1/code2/src/LSM-Tree/UtilityImplement/buffer.cpp -o CMakeFiles/src.dir/LSM-Tree/UtilityImplement/buffer.cpp.s
 
+CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o: CMakeFiles/src.dir/flags.make
+CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o: /home/femu/experiment1/code2/src/LSM-Tree/UtilityImplement/ResAllocate.cpp
+CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/femu/experiment1/code2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o -MF CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o.d -o CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o -c /home/femu/experiment1/code2/src/LSM-Tree/UtilityImplement/ResAllocate.cpp
+
+CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/femu/experiment1/code2/src/LSM-Tree/UtilityImplement/ResAllocate.cpp > CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.i
+
+CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/femu/experiment1/code2/src/LSM-Tree/UtilityImplement/ResAllocate.cpp -o CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.s
+
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.o: /home/femu/experiment1/code2/src/LSM-Tree/UtilityImplement/level.cpp
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/femu/experiment1/code2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/femu/experiment1/code2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.o -MF CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.o.d -o CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.o -c /home/femu/experiment1/code2/src/LSM-Tree/UtilityImplement/level.cpp
 
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.i: cmake_force
@@ -296,7 +310,7 @@ CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.s: cmake_force
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.o: /home/femu/experiment1/code2/src/LSM-Tree/UtilityImplement/merge.cpp
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/femu/experiment1/code2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/femu/experiment1/code2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.o -MF CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.o.d -o CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.o -c /home/femu/experiment1/code2/src/LSM-Tree/UtilityImplement/merge.cpp
 
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.i: cmake_force
@@ -310,7 +324,7 @@ CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.s: cmake_force
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o: /home/femu/experiment1/code2/src/LSM-Tree/UtilityImplement/run.cpp
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/femu/experiment1/code2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/femu/experiment1/code2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o -MF CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o.d -o CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o -c /home/femu/experiment1/code2/src/LSM-Tree/UtilityImplement/run.cpp
 
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.i: cmake_force
@@ -338,6 +352,7 @@ src_OBJECTS = \
 "CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o" \
 "CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o" \
 "CMakeFiles/src.dir/LSM-Tree/UtilityImplement/buffer.cpp.o" \
+"CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o" \
 "CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.o" \
 "CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.o" \
 "CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o"
@@ -360,12 +375,13 @@ src: CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o
 src: CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o
 src: CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o
 src: CMakeFiles/src.dir/LSM-Tree/UtilityImplement/buffer.cpp.o
+src: CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o
 src: CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.o
 src: CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.o
 src: CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o
 src: CMakeFiles/src.dir/build.make
 src: CMakeFiles/src.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/femu/experiment1/code2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Linking CXX executable src"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/femu/experiment1/code2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Linking CXX executable src"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/src.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

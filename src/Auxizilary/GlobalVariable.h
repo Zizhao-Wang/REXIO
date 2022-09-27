@@ -32,10 +32,13 @@ typedef unsigned int uint_32;
  * 
  * 
  **/
-
 typedef uint64_t SKey;
 typedef uint64_t SValue;
 
-struct 
+typedef struct SEntry
+{
+	SKey key1;
+	SValue val;
+}SEntry;
 
 #endif //EXPERIMENT1_GLOBALVARIABLE_H

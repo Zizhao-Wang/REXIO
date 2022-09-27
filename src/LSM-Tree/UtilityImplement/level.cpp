@@ -10,7 +10,7 @@
 #include <cstdlib>
 #include <sys/mman.h>
 #include <sys/types.h>
-
+#include "../UtilityDefine/ResAllocate.h"
 
 Level::Level(long buffersize)
 {

@@ -1,9 +1,8 @@
 /**
  * @date:   28/9/2022
  * @author: zz.wang
- * @email:  zz.wang@siat.ac.cn
  * @details:
- *          This file shows how to construct a Lazy-split Hash.
+ *          This file shows how to construct a Eager-Split Hash.
  *
  * IDENTIFICATION:
  *          src/MultiHash/EagerSplitHash/ESHash.h

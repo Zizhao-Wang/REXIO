@@ -8,8 +8,8 @@
  *          src/MultiHash/EagerSplitHash/ESHash.h
  **/
 
-#ifndef EXPERIMENT1_LAZYSPLITHASH_H
-#define EXPERIMENT1_LAZYSPLITHASH_H
+#ifndef EXPERIMENT1_EAGERSPLITHASH_ESHASH_H
+#define EXPERIMENT1_EAGERSPLITHASH_ESHASH_H
 
 #include <iostream>
 #include <vector>

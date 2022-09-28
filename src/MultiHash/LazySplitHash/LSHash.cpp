@@ -204,8 +204,8 @@ int LSHash::Update(SKey key, SValue value)
   if(tmp >= bucketList.size())
   {
     tmp = BitHashfunc(BitHashfunc(key,i), GetBits(BitHashfunc(key,i))-1);
-  }+
-
+  }
+  
   if(bucketList[tmp].Update(key,value) == 0)
   {
     return 0;

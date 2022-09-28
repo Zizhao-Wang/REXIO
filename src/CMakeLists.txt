@@ -1,11 +1,18 @@
 cmake_minimum_required(VERSION 3.20)
+
+
 project(src)
 
+
+# set the project name
 set(CMAKE_CXX_STANDARD 14)
+
 
 include_directories("../../../liblightnvm/include/")
 
+
 link_libraries(-llightnvm_cli -llightnvm)
+
 
 FIND_PACKAGE( OpenMP REQUIRED)
 if(OPENMP_FOUND)
@@ -15,4 +22,16 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 set(CMAKE_EXE_LINKER_FLAGS"${CMAKE_EXE_LINKER_FLAGS}${OpenMP_EXE_LINKER_FLAGS}")
 endif()
 
-add_executable(src main.cpp HashMethods.h FrontEnd/HashTable/HashTable.h FrontEnd/MemoryAllocate/HashBlock.h Backend/IODisk/WriteDisk.h FrontEnd/FrontMain.h Backend/BackendMain.h Auxizilary/GlobalVariable.h Auxizilary/VariablesTypes.h Auxizilary/SysOutput.h AuxizilaryImplement/SysOutput.cpp FrontEnd/FrontMain.cpp FrontEnd/HashTable/HashTable.cpp FrontEnd/GlobalVar/FrontGlobalVar.h FrontEnd/GlobalVar/FrontGlobalVar.cpp FrontEnd/MemoryAllocate/HashBlock.cpp Backend/IODisk/WriteDisk.cpp Backend/DiskRead/ReadDisk.cpp Backend/DiskRead/ReadDisk.h MultiHash/ExtendibleHash/ExHash.h MultiHash/ExtendibleHash/ExHash.cpp Backend/BlockManage/BlockInfo.cpp Backend/BlockManage/BlockInfo.h MultiHash/LinearHash/LiHash.h MultiHash/LinearHash/LiHash.cpp MultiHash/Bucket.h MultiHash/LazySplitHash/LSHash.h MultiHash/LazySplitHash/LSHash.cpp LSM-Tree/LsmTree.h LSM-Tree/LsmTree.cpp LSM-Tree/UtilityDefine/buffer.h LSM-Tree/UtilityImplement/buffer.cpp LSM-Tree/UtilityDefine/ResAllocate.h LSM-Tree/UtilityImplement/ResAllocate.cpp LSM-Tree/UtilityDefine/level.h LSM-Tree/UtilityImplement/level.cpp LSM-Tree/UtilityDefine/merge.h LSM-Tree/UtilityImplement/merge.cpp LSM-Tree/UtilityDefine/run.h LSM-Tree/UtilityImplement/run.cpp)
+
+# add the executable
+add_executable(src main.cpp 
+				TNCTree/TNCtree.h 
+				Backend/IODisk/WriteDisk.h Backend/BackendMain.h Backend/IODisk/WriteDisk.cpp Backend/DiskRead/ReadDisk.cpp 
+				Backend/DiskRead/ReadDisk.h Backend/BlockManage/BlockInfo.cpp Backend/BlockManage/BlockInfo.h
+				Auxizilary/GlobalVariable.h Auxizilary/VariablesTypes.h Auxizilary/SysOutput.h AuxizilaryImplement/SysOutput.cpp 
+				MultiHash/ExtendibleHash/ExHash.h MultiHash/ExtendibleHash/ExHash.cpp MultiHash/LinearHash/LiHash.h 
+				MultiHash/LinearHash/LiHash.cpp MultiHash/Bucket.h MultiHash/LazySplitHash/LSHash.h MultiHash/LazySplitHash/LSHash.cpp 
+				LSM-Tree/LsmTree.h LSM-Tree/LsmTree.cpp LSM-Tree/UtilityDefine/buffer.h LSM-Tree/UtilityImplement/buffer.cpp 
+				LSM-Tree/UtilityDefine/ResAllocate.h LSM-Tree/UtilityImplement/ResAllocate.cpp LSM-Tree/UtilityDefine/level.h 
+				LSM-Tree/UtilityImplement/level.cpp LSM-Tree/UtilityDefine/merge.h LSM-Tree/UtilityImplement/merge.cpp 
+				LSM-Tree/UtilityDefine/run.h LSM-Tree/UtilityImplement/run.cpp)

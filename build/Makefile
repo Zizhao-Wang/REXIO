@@ -57,10 +57,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/femu/experiment1/code2/src
+CMAKE_SOURCE_DIR = /home/femu/experiment/code2/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/femu/experiment1/code2/build
+CMAKE_BINARY_DIR = /home/femu/experiment/code2/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/femu/experiment1/code2/build/CMakeFiles /home/femu/experiment1/code2/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/femu/experiment/code2/build/CMakeFiles /home/femu/experiment/code2/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/femu/experiment1/code2/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/femu/experiment/code2/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -224,102 +224,6 @@ Backend/IODisk/WriteDisk.s: Backend/IODisk/WriteDisk.cpp.s
 Backend/IODisk/WriteDisk.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.s
 .PHONY : Backend/IODisk/WriteDisk.cpp.s
-
-FrontEnd/FrontMain.o: FrontEnd/FrontMain.cpp.o
-.PHONY : FrontEnd/FrontMain.o
-
-# target to build an object file
-FrontEnd/FrontMain.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/FrontEnd/FrontMain.cpp.o
-.PHONY : FrontEnd/FrontMain.cpp.o
-
-FrontEnd/FrontMain.i: FrontEnd/FrontMain.cpp.i
-.PHONY : FrontEnd/FrontMain.i
-
-# target to preprocess a source file
-FrontEnd/FrontMain.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/FrontEnd/FrontMain.cpp.i
-.PHONY : FrontEnd/FrontMain.cpp.i
-
-FrontEnd/FrontMain.s: FrontEnd/FrontMain.cpp.s
-.PHONY : FrontEnd/FrontMain.s
-
-# target to generate assembly for a file
-FrontEnd/FrontMain.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/FrontEnd/FrontMain.cpp.s
-.PHONY : FrontEnd/FrontMain.cpp.s
-
-FrontEnd/GlobalVar/FrontGlobalVar.o: FrontEnd/GlobalVar/FrontGlobalVar.cpp.o
-.PHONY : FrontEnd/GlobalVar/FrontGlobalVar.o
-
-# target to build an object file
-FrontEnd/GlobalVar/FrontGlobalVar.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/FrontEnd/GlobalVar/FrontGlobalVar.cpp.o
-.PHONY : FrontEnd/GlobalVar/FrontGlobalVar.cpp.o
-
-FrontEnd/GlobalVar/FrontGlobalVar.i: FrontEnd/GlobalVar/FrontGlobalVar.cpp.i
-.PHONY : FrontEnd/GlobalVar/FrontGlobalVar.i
-
-# target to preprocess a source file
-FrontEnd/GlobalVar/FrontGlobalVar.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/FrontEnd/GlobalVar/FrontGlobalVar.cpp.i
-.PHONY : FrontEnd/GlobalVar/FrontGlobalVar.cpp.i
-
-FrontEnd/GlobalVar/FrontGlobalVar.s: FrontEnd/GlobalVar/FrontGlobalVar.cpp.s
-.PHONY : FrontEnd/GlobalVar/FrontGlobalVar.s
-
-# target to generate assembly for a file
-FrontEnd/GlobalVar/FrontGlobalVar.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/FrontEnd/GlobalVar/FrontGlobalVar.cpp.s
-.PHONY : FrontEnd/GlobalVar/FrontGlobalVar.cpp.s
-
-FrontEnd/HashTable/HashTable.o: FrontEnd/HashTable/HashTable.cpp.o
-.PHONY : FrontEnd/HashTable/HashTable.o
-
-# target to build an object file
-FrontEnd/HashTable/HashTable.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/FrontEnd/HashTable/HashTable.cpp.o
-.PHONY : FrontEnd/HashTable/HashTable.cpp.o
-
-FrontEnd/HashTable/HashTable.i: FrontEnd/HashTable/HashTable.cpp.i
-.PHONY : FrontEnd/HashTable/HashTable.i
-
-# target to preprocess a source file
-FrontEnd/HashTable/HashTable.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/FrontEnd/HashTable/HashTable.cpp.i
-.PHONY : FrontEnd/HashTable/HashTable.cpp.i
-
-FrontEnd/HashTable/HashTable.s: FrontEnd/HashTable/HashTable.cpp.s
-.PHONY : FrontEnd/HashTable/HashTable.s
-
-# target to generate assembly for a file
-FrontEnd/HashTable/HashTable.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/FrontEnd/HashTable/HashTable.cpp.s
-.PHONY : FrontEnd/HashTable/HashTable.cpp.s
-
-FrontEnd/MemoryAllocate/HashBlock.o: FrontEnd/MemoryAllocate/HashBlock.cpp.o
-.PHONY : FrontEnd/MemoryAllocate/HashBlock.o
-
-# target to build an object file
-FrontEnd/MemoryAllocate/HashBlock.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/FrontEnd/MemoryAllocate/HashBlock.cpp.o
-.PHONY : FrontEnd/MemoryAllocate/HashBlock.cpp.o
-
-FrontEnd/MemoryAllocate/HashBlock.i: FrontEnd/MemoryAllocate/HashBlock.cpp.i
-.PHONY : FrontEnd/MemoryAllocate/HashBlock.i
-
-# target to preprocess a source file
-FrontEnd/MemoryAllocate/HashBlock.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/FrontEnd/MemoryAllocate/HashBlock.cpp.i
-.PHONY : FrontEnd/MemoryAllocate/HashBlock.cpp.i
-
-FrontEnd/MemoryAllocate/HashBlock.s: FrontEnd/MemoryAllocate/HashBlock.cpp.s
-.PHONY : FrontEnd/MemoryAllocate/HashBlock.s
-
-# target to generate assembly for a file
-FrontEnd/MemoryAllocate/HashBlock.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/FrontEnd/MemoryAllocate/HashBlock.cpp.s
-.PHONY : FrontEnd/MemoryAllocate/HashBlock.cpp.s
 
 LSM-Tree/LsmTree.o: LSM-Tree/LsmTree.cpp.o
 .PHONY : LSM-Tree/LsmTree.o
@@ -582,18 +486,6 @@ help:
 	@echo "... Backend/IODisk/WriteDisk.o"
 	@echo "... Backend/IODisk/WriteDisk.i"
 	@echo "... Backend/IODisk/WriteDisk.s"
-	@echo "... FrontEnd/FrontMain.o"
-	@echo "... FrontEnd/FrontMain.i"
-	@echo "... FrontEnd/FrontMain.s"
-	@echo "... FrontEnd/GlobalVar/FrontGlobalVar.o"
-	@echo "... FrontEnd/GlobalVar/FrontGlobalVar.i"
-	@echo "... FrontEnd/GlobalVar/FrontGlobalVar.s"
-	@echo "... FrontEnd/HashTable/HashTable.o"
-	@echo "... FrontEnd/HashTable/HashTable.i"
-	@echo "... FrontEnd/HashTable/HashTable.s"
-	@echo "... FrontEnd/MemoryAllocate/HashBlock.o"
-	@echo "... FrontEnd/MemoryAllocate/HashBlock.i"
-	@echo "... FrontEnd/MemoryAllocate/HashBlock.s"
 	@echo "... LSM-Tree/LsmTree.o"
 	@echo "... LSM-Tree/LsmTree.i"
 	@echo "... LSM-Tree/LsmTree.s"

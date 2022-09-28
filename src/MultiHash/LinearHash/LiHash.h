@@ -1,11 +1,15 @@
-/* @author          zz.wang
- * @date            4/8/2022
- * @note            This is header file of "Lhash.cpp".
- * @description     This file contains all fuction declaration and definition of class used in "Lhash.cpp". 
- * @idetification   code/Linearhashing/LHash.h
- */
-#ifndef EXPERIMENT1_HEADER_H
-#define EXPERIMENT1_HEADER_H
+/**
+ * @date:   4/8/2022
+ * @author: zz.wang
+ * @details:
+ *          This file contains all fuction declaration and definition of class used in "Lhash.cpp". 
+ *
+ * IDENTIFICATION:
+ *          src/MultipleHash/Bucket.h
+ **/
+
+#ifndef EXPERIMENT1_LINEARHASH_LIHash_H
+#define EXPERIMENT1_LINEARHASH_LIHash_H
 
 #include <iostream>
 #include <vector>

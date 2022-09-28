@@ -9,8 +9,8 @@
  *          src/LazySplit-Hash/LSHash.h
  **/
 
-#ifndef EXPERIMENT1_LAZYSPLITHASH_H
-#define EXPERIMENT1_LAZYSPLITHASH_H
+#ifndef EXPERIMENT1_LAZYSPLITHASH_LSHASH_H
+#define EXPERIMENT1_LAZYSPLITHASH_LSHASH_H
 
 #include <iostream>
 #include <vector>

@@ -1,5 +1,15 @@
-#ifndef EXPERIMENT1_EXTENDIBLEHASH_H
-#define EXPERIMENT1_EXTENDIBLEHASH_H
+/**
+ * @date:   5/8/2022
+ * @author: zz.wang
+ * @details:
+ *          This file contains all fuction declaration and definition of class used in "Lhash.cpp". 
+ *
+ * IDENTIFICATION:
+ *          src/MultiHash/ExtendibleHash/ExHash.h
+ **/
+
+#ifndef EXPERIMENT1_EXTENDIBLEHASH_EXHASH_H
+#define EXPERIMENT1_EXTENDIBLEHASH_EXHASH_H
 
 #include <bits/stdc++.h>
 #include "../../Backend/IODisk/WriteDisk.h"
@@ -9,7 +19,8 @@ using namespace std;
 void EXHashing1();
 
 
-class Bucket {
+class Bucket 
+{
     public:
         int depth,size; 
         uint64_t pageno, CurSize; //page number and current size 

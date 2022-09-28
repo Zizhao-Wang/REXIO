@@ -1,92 +1,72 @@
 [
 {
-  "directory": "/home/femu/experiment1/code2/build",
-  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/main.cpp.o -c /home/femu/experiment1/code2/src/main.cpp",
-  "file": "/home/femu/experiment1/code2/src/main.cpp"
+  "directory": "/home/femu/experiment/code2/build",
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/main.cpp.o -c /home/femu/experiment/code2/src/main.cpp",
+  "file": "/home/femu/experiment/code2/src/main.cpp"
 },
 {
-  "directory": "/home/femu/experiment1/code2/build",
-  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o -c /home/femu/experiment1/code2/src/AuxizilaryImplement/SysOutput.cpp",
-  "file": "/home/femu/experiment1/code2/src/AuxizilaryImplement/SysOutput.cpp"
+  "directory": "/home/femu/experiment/code2/build",
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o -c /home/femu/experiment/code2/src/Backend/IODisk/WriteDisk.cpp",
+  "file": "/home/femu/experiment/code2/src/Backend/IODisk/WriteDisk.cpp"
 },
 {
-  "directory": "/home/femu/experiment1/code2/build",
-  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/FrontEnd/FrontMain.cpp.o -c /home/femu/experiment1/code2/src/FrontEnd/FrontMain.cpp",
-  "file": "/home/femu/experiment1/code2/src/FrontEnd/FrontMain.cpp"
+  "directory": "/home/femu/experiment/code2/build",
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/Backend/DiskRead/ReadDisk.cpp.o -c /home/femu/experiment/code2/src/Backend/DiskRead/ReadDisk.cpp",
+  "file": "/home/femu/experiment/code2/src/Backend/DiskRead/ReadDisk.cpp"
 },
 {
-  "directory": "/home/femu/experiment1/code2/build",
-  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/FrontEnd/HashTable/HashTable.cpp.o -c /home/femu/experiment1/code2/src/FrontEnd/HashTable/HashTable.cpp",
-  "file": "/home/femu/experiment1/code2/src/FrontEnd/HashTable/HashTable.cpp"
+  "directory": "/home/femu/experiment/code2/build",
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/Backend/BlockManage/BlockInfo.cpp.o -c /home/femu/experiment/code2/src/Backend/BlockManage/BlockInfo.cpp",
+  "file": "/home/femu/experiment/code2/src/Backend/BlockManage/BlockInfo.cpp"
 },
 {
-  "directory": "/home/femu/experiment1/code2/build",
-  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/FrontEnd/GlobalVar/FrontGlobalVar.cpp.o -c /home/femu/experiment1/code2/src/FrontEnd/GlobalVar/FrontGlobalVar.cpp",
-  "file": "/home/femu/experiment1/code2/src/FrontEnd/GlobalVar/FrontGlobalVar.cpp"
+  "directory": "/home/femu/experiment/code2/build",
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o -c /home/femu/experiment/code2/src/AuxizilaryImplement/SysOutput.cpp",
+  "file": "/home/femu/experiment/code2/src/AuxizilaryImplement/SysOutput.cpp"
 },
 {
-  "directory": "/home/femu/experiment1/code2/build",
-  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/FrontEnd/MemoryAllocate/HashBlock.cpp.o -c /home/femu/experiment1/code2/src/FrontEnd/MemoryAllocate/HashBlock.cpp",
-  "file": "/home/femu/experiment1/code2/src/FrontEnd/MemoryAllocate/HashBlock.cpp"
+  "directory": "/home/femu/experiment/code2/build",
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o -c /home/femu/experiment/code2/src/MultiHash/ExtendibleHash/ExHash.cpp",
+  "file": "/home/femu/experiment/code2/src/MultiHash/ExtendibleHash/ExHash.cpp"
 },
 {
-  "directory": "/home/femu/experiment1/code2/build",
-  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o -c /home/femu/experiment1/code2/src/Backend/IODisk/WriteDisk.cpp",
-  "file": "/home/femu/experiment1/code2/src/Backend/IODisk/WriteDisk.cpp"
+  "directory": "/home/femu/experiment/code2/build",
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o -c /home/femu/experiment/code2/src/MultiHash/LinearHash/LiHash.cpp",
+  "file": "/home/femu/experiment/code2/src/MultiHash/LinearHash/LiHash.cpp"
 },
 {
-  "directory": "/home/femu/experiment1/code2/build",
-  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Backend/DiskRead/ReadDisk.cpp.o -c /home/femu/experiment1/code2/src/Backend/DiskRead/ReadDisk.cpp",
-  "file": "/home/femu/experiment1/code2/src/Backend/DiskRead/ReadDisk.cpp"
+  "directory": "/home/femu/experiment/code2/build",
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o -c /home/femu/experiment/code2/src/MultiHash/LazySplitHash/LSHash.cpp",
+  "file": "/home/femu/experiment/code2/src/MultiHash/LazySplitHash/LSHash.cpp"
 },
 {
-  "directory": "/home/femu/experiment1/code2/build",
-  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o -c /home/femu/experiment1/code2/src/MultiHash/ExtendibleHash/ExHash.cpp",
-  "file": "/home/femu/experiment1/code2/src/MultiHash/ExtendibleHash/ExHash.cpp"
+  "directory": "/home/femu/experiment/code2/build",
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o -c /home/femu/experiment/code2/src/LSM-Tree/LsmTree.cpp",
+  "file": "/home/femu/experiment/code2/src/LSM-Tree/LsmTree.cpp"
 },
 {
-  "directory": "/home/femu/experiment1/code2/build",
-  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Backend/BlockManage/BlockInfo.cpp.o -c /home/femu/experiment1/code2/src/Backend/BlockManage/BlockInfo.cpp",
-  "file": "/home/femu/experiment1/code2/src/Backend/BlockManage/BlockInfo.cpp"
+  "directory": "/home/femu/experiment/code2/build",
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/LSM-Tree/UtilityImplement/buffer.cpp.o -c /home/femu/experiment/code2/src/LSM-Tree/UtilityImplement/buffer.cpp",
+  "file": "/home/femu/experiment/code2/src/LSM-Tree/UtilityImplement/buffer.cpp"
 },
 {
-  "directory": "/home/femu/experiment1/code2/build",
-  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o -c /home/femu/experiment1/code2/src/MultiHash/LinearHash/LiHash.cpp",
-  "file": "/home/femu/experiment1/code2/src/MultiHash/LinearHash/LiHash.cpp"
+  "directory": "/home/femu/experiment/code2/build",
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o -c /home/femu/experiment/code2/src/LSM-Tree/UtilityImplement/ResAllocate.cpp",
+  "file": "/home/femu/experiment/code2/src/LSM-Tree/UtilityImplement/ResAllocate.cpp"
 },
 {
-  "directory": "/home/femu/experiment1/code2/build",
-  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o -c /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/LSHash.cpp",
-  "file": "/home/femu/experiment1/code2/src/MultiHash/LazySplitHash/LSHash.cpp"
+  "directory": "/home/femu/experiment/code2/build",
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.o -c /home/femu/experiment/code2/src/LSM-Tree/UtilityImplement/level.cpp",
+  "file": "/home/femu/experiment/code2/src/LSM-Tree/UtilityImplement/level.cpp"
 },
 {
-  "directory": "/home/femu/experiment1/code2/build",
-  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o -c /home/femu/experiment1/code2/src/LSM-Tree/LsmTree.cpp",
-  "file": "/home/femu/experiment1/code2/src/LSM-Tree/LsmTree.cpp"
+  "directory": "/home/femu/experiment/code2/build",
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.o -c /home/femu/experiment/code2/src/LSM-Tree/UtilityImplement/merge.cpp",
+  "file": "/home/femu/experiment/code2/src/LSM-Tree/UtilityImplement/merge.cpp"
 },
 {
-  "directory": "/home/femu/experiment1/code2/build",
-  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LSM-Tree/UtilityImplement/buffer.cpp.o -c /home/femu/experiment1/code2/src/LSM-Tree/UtilityImplement/buffer.cpp",
-  "file": "/home/femu/experiment1/code2/src/LSM-Tree/UtilityImplement/buffer.cpp"
-},
-{
-  "directory": "/home/femu/experiment1/code2/build",
-  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o -c /home/femu/experiment1/code2/src/LSM-Tree/UtilityImplement/ResAllocate.cpp",
-  "file": "/home/femu/experiment1/code2/src/LSM-Tree/UtilityImplement/ResAllocate.cpp"
-},
-{
-  "directory": "/home/femu/experiment1/code2/build",
-  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.o -c /home/femu/experiment1/code2/src/LSM-Tree/UtilityImplement/level.cpp",
-  "file": "/home/femu/experiment1/code2/src/LSM-Tree/UtilityImplement/level.cpp"
-},
-{
-  "directory": "/home/femu/experiment1/code2/build",
-  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.o -c /home/femu/experiment1/code2/src/LSM-Tree/UtilityImplement/merge.cpp",
-  "file": "/home/femu/experiment1/code2/src/LSM-Tree/UtilityImplement/merge.cpp"
-},
-{
-  "directory": "/home/femu/experiment1/code2/build",
-  "command": "/usr/bin/c++  -I/home/femu/experiment1/code2/src/../../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o -c /home/femu/experiment1/code2/src/LSM-Tree/UtilityImplement/run.cpp",
-  "file": "/home/femu/experiment1/code2/src/LSM-Tree/UtilityImplement/run.cpp"
+  "directory": "/home/femu/experiment/code2/build",
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o -c /home/femu/experiment/code2/src/LSM-Tree/UtilityImplement/run.cpp",
+  "file": "/home/femu/experiment/code2/src/LSM-Tree/UtilityImplement/run.cpp"
 }
 ]

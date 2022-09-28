@@ -15,21 +15,15 @@
 #include "HashTable/HashTable.h"
 
 
-/*int FrontMain()
+int TNCtreeInit();
 {
-
      int CreateResult;
 
 
-
-
-    // CreateResult=ExtendHashTableCreate();
+     // CreateResult=ExtendHashTableCreate();
      if(CreateResult==1)
      {
 
      }
 
-
-
-
-}*/
+}

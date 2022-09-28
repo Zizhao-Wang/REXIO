@@ -15,7 +15,7 @@
 #ifndef EXPERIMENT1_FRONTMAIN_H
 #define EXPERIMENT1_FRONTMAIN_H
 
-int FrontMain();
+int TNCtreeInit();
 
 
 

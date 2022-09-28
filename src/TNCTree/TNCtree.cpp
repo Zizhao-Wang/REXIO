@@ -12,18 +12,18 @@
  */
 
 
-#include "HashTable/HashTable.h"
+#include "TNCtree.h"
 
 
-int TNCtreeInit();
+int TNCtreeInit()
 {
+
      int CreateResult;
-
-
      // CreateResult=ExtendHashTableCreate();
      if(CreateResult==1)
      {
 
      }
+     return 0;
 
 }

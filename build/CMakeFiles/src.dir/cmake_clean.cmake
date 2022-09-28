@@ -25,6 +25,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o.d"
   "CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o"
   "CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o.d"
+  "CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o"
+  "CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o.d"
   "CMakeFiles/src.dir/main.cpp.o"
   "CMakeFiles/src.dir/main.cpp.o.d"
   "src"

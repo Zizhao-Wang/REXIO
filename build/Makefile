@@ -441,6 +441,30 @@ MultiHash/LinearHash/LiHash.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.s
 .PHONY : MultiHash/LinearHash/LiHash.cpp.s
 
+TNCTree/TNCtree.o: TNCTree/TNCtree.cpp.o
+.PHONY : TNCTree/TNCtree.o
+
+# target to build an object file
+TNCTree/TNCtree.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o
+.PHONY : TNCTree/TNCtree.cpp.o
+
+TNCTree/TNCtree.i: TNCTree/TNCtree.cpp.i
+.PHONY : TNCTree/TNCtree.i
+
+# target to preprocess a source file
+TNCTree/TNCtree.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/TNCtree.cpp.i
+.PHONY : TNCTree/TNCtree.cpp.i
+
+TNCTree/TNCtree.s: TNCTree/TNCtree.cpp.s
+.PHONY : TNCTree/TNCtree.s
+
+# target to generate assembly for a file
+TNCTree/TNCtree.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/TNCtree.cpp.s
+.PHONY : TNCTree/TNCtree.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -513,6 +537,9 @@ help:
 	@echo "... MultiHash/LinearHash/LiHash.o"
 	@echo "... MultiHash/LinearHash/LiHash.i"
 	@echo "... MultiHash/LinearHash/LiHash.s"
+	@echo "... TNCTree/TNCtree.o"
+	@echo "... TNCTree/TNCtree.i"
+	@echo "... TNCTree/TNCtree.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

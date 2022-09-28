@@ -1,23 +1,19 @@
 /**
- * @date 2022.4.27 20:18
+ * @date   27/4/2022
  * @author zz.wang
  * @details
- *          The front has a primary process used to reply to requests from users, including
- *          read, write and delete. In the meantime, frontend calls the backend process to read/write data
- *          from disk!
- *
- *          Backend write process:
- *
- *         IDENTIFICATION
- *   Experiment1/FrontEnd/FrontendMain.h
+ *         
+ * IDENTIFICATION:
+ *         src/TNCTree/TNCtree.h
  */
 
-#ifndef EXPERIMENT1_FRONTMAIN_H
-#define EXPERIMENT1_FRONTMAIN_H
+#ifndef EXPERIMENT1_TNCTREE_H
+#define EXPERIMENT1_TNCTREE_H
+
+
+/* ================= 2-Tier None-Coupling module ==================== */
 
 int TNCtreeInit();
-
-
 
 
 #endif //EXPERIMENT1_FRONTMAIN_H

@@ -25,7 +25,7 @@ endif()
 
 # add the executable
 add_executable(src main.cpp 
-				TNCTree/TNCtree.h 
+				TNCTree/TNCtree.h TNCTree/TNCtree.cpp
 				Backend/IODisk/WriteDisk.h Backend/BackendMain.h Backend/IODisk/WriteDisk.cpp Backend/DiskRead/ReadDisk.cpp 
 				Backend/DiskRead/ReadDisk.h Backend/BlockManage/BlockInfo.cpp Backend/BlockManage/BlockInfo.h
 				Auxizilary/GlobalVariable.h Auxizilary/VariablesTypes.h Auxizilary/SysOutput.h AuxizilaryImplement/SysOutput.cpp 

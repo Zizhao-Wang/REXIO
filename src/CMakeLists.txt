@@ -30,7 +30,8 @@ add_executable(src main.cpp
 				Backend/DiskRead/ReadDisk.h Backend/BlockManage/BlockInfo.cpp Backend/BlockManage/BlockInfo.h
 				Auxizilary/GlobalVariable.h Auxizilary/VariablesTypes.h Auxizilary/SysOutput.h AuxizilaryImplement/SysOutput.cpp 
 				MultiHash/ExtendibleHash/ExHash.h MultiHash/ExtendibleHash/ExHash.cpp MultiHash/LinearHash/LiHash.h 
-				MultiHash/LinearHash/LiHash.cpp MultiHash/Bucket.h MultiHash/LazySplitHash/LSHash.h MultiHash/LazySplitHash/LSHash.cpp 
+				MultiHash/LinearHash/LiHash.cpp MultiHash/Bucket.h MultiHash/LazySplitHash/LSHash.h MultiHash/LazySplitHash/LSHash.cpp
+				MultiHash/EagerSplitHash/ESHash.h MultiHash/EagerSplitHash/ESHash.cpp
 				LSM-Tree/LsmTree.h LSM-Tree/LsmTree.cpp LSM-Tree/UtilityDefine/buffer.h LSM-Tree/UtilityImplement/buffer.cpp 
 				LSM-Tree/UtilityDefine/ResAllocate.h LSM-Tree/UtilityImplement/ResAllocate.cpp LSM-Tree/UtilityDefine/level.h 
 				LSM-Tree/UtilityImplement/level.cpp LSM-Tree/UtilityDefine/merge.h LSM-Tree/UtilityImplement/merge.cpp 

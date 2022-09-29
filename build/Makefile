@@ -513,6 +513,30 @@ TNCTree/MemoryTier/MemTier.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.s
 .PHONY : TNCTree/MemoryTier/MemTier.cpp.s
 
+TNCTree/MemoryTier/Node.o: TNCTree/MemoryTier/Node.cpp.o
+.PHONY : TNCTree/MemoryTier/Node.o
+
+# target to build an object file
+TNCTree/MemoryTier/Node.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.o
+.PHONY : TNCTree/MemoryTier/Node.cpp.o
+
+TNCTree/MemoryTier/Node.i: TNCTree/MemoryTier/Node.cpp.i
+.PHONY : TNCTree/MemoryTier/Node.i
+
+# target to preprocess a source file
+TNCTree/MemoryTier/Node.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.i
+.PHONY : TNCTree/MemoryTier/Node.cpp.i
+
+TNCTree/MemoryTier/Node.s: TNCTree/MemoryTier/Node.cpp.s
+.PHONY : TNCTree/MemoryTier/Node.s
+
+# target to generate assembly for a file
+TNCTree/MemoryTier/Node.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.s
+.PHONY : TNCTree/MemoryTier/Node.cpp.s
+
 TNCTree/TNCtree.o: TNCTree/TNCtree.cpp.o
 .PHONY : TNCTree/TNCtree.o
 
@@ -618,6 +642,9 @@ help:
 	@echo "... TNCTree/MemoryTier/MemTier.o"
 	@echo "... TNCTree/MemoryTier/MemTier.i"
 	@echo "... TNCTree/MemoryTier/MemTier.s"
+	@echo "... TNCTree/MemoryTier/Node.o"
+	@echo "... TNCTree/MemoryTier/Node.i"
+	@echo "... TNCTree/MemoryTier/Node.s"
 	@echo "... TNCTree/TNCtree.o"
 	@echo "... TNCTree/TNCtree.i"
 	@echo "... TNCTree/TNCtree.s"

@@ -1977,7 +1977,6 @@ CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o: /home/femu/experiment/co
   /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h \
   /home/femu/experiment/code2/src/Auxizilary/VariablesTypes.h \
   /home/femu/experiment/code2/src/Auxizilary/SysOutput.h \
-  /usr/include/c++/9/cstring \
   /usr/include/c++/9/algorithm \
   /usr/include/c++/9/bits/stl_algo.h \
   /usr/include/c++/9/bits/algorithmfwd.h \
@@ -1993,6 +1992,7 @@ CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o: /home/femu/experiment/co
   /usr/include/linux/falloc.h \
   /usr/include/x86_64-linux-gnu/bits/stat.h \
   /usr/include/x86_64-linux-gnu/bits/fcntl2.h \
+  /usr/include/c++/9/cstring \
   /usr/include/c++/9/cmath \
   /usr/include/math.h \
   /usr/include/x86_64-linux-gnu/bits/math-vector.h \
@@ -3122,8 +3122,7 @@ CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.o: /home/femu/experiment/code2/sr
 CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: /home/femu/experiment/code2/src/TNCTree/TNCtree.cpp \
   /usr/include/stdc-predef.h \
   /home/femu/experiment/code2/src/TNCTree/TNCtree.h \
-  /home/femu/experiment/code2/src/Auxizilary/SysOutput.h \
-  /usr/include/c++/9/string \
+  /usr/include/c++/9/iostream \
   /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \
   /usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h \
   /usr/include/features.h \
@@ -3133,26 +3132,11 @@ CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: /home/femu/experiment/code2/src/TNCTre
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
   /usr/include/x86_64-linux-gnu/c++/9/bits/cpu_defines.h \
+  /usr/include/c++/9/ostream \
+  /usr/include/c++/9/ios \
+  /usr/include/c++/9/iosfwd \
   /usr/include/c++/9/bits/stringfwd.h \
   /usr/include/c++/9/bits/memoryfwd.h \
-  /usr/include/c++/9/bits/char_traits.h \
-  /usr/include/c++/9/bits/stl_algobase.h \
-  /usr/include/c++/9/bits/functexcept.h \
-  /usr/include/c++/9/bits/exception_defines.h \
-  /usr/include/c++/9/bits/cpp_type_traits.h \
-  /usr/include/c++/9/ext/type_traits.h \
-  /usr/include/c++/9/ext/numeric_traits.h \
-  /usr/include/c++/9/bits/stl_pair.h \
-  /usr/include/c++/9/bits/move.h \
-  /usr/include/c++/9/bits/concept_check.h \
-  /usr/include/c++/9/type_traits \
-  /usr/include/c++/9/bits/stl_iterator_base_types.h \
-  /usr/include/c++/9/bits/stl_iterator_base_funcs.h \
-  /usr/include/c++/9/debug/assertions.h \
-  /usr/include/c++/9/bits/stl_iterator.h \
-  /usr/include/c++/9/bits/ptr_traits.h \
-  /usr/include/c++/9/debug/debug.h \
-  /usr/include/c++/9/bits/predefined_ops.h \
   /usr/include/c++/9/bits/postypes.h \
   /usr/include/c++/9/cwchar \
   /usr/include/wchar.h \
@@ -3170,6 +3154,32 @@ CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: /home/femu/experiment/code2/src/TNCTre
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/wchar2.h \
+  /usr/include/c++/9/exception \
+  /usr/include/c++/9/bits/exception.h \
+  /usr/include/c++/9/bits/exception_ptr.h \
+  /usr/include/c++/9/bits/exception_defines.h \
+  /usr/include/c++/9/bits/cxxabi_init_exception.h \
+  /usr/include/c++/9/typeinfo \
+  /usr/include/c++/9/bits/hash_bytes.h \
+  /usr/include/c++/9/new \
+  /usr/include/c++/9/bits/nested_exception.h \
+  /usr/include/c++/9/bits/move.h \
+  /usr/include/c++/9/bits/concept_check.h \
+  /usr/include/c++/9/type_traits \
+  /usr/include/c++/9/bits/char_traits.h \
+  /usr/include/c++/9/bits/stl_algobase.h \
+  /usr/include/c++/9/bits/functexcept.h \
+  /usr/include/c++/9/bits/cpp_type_traits.h \
+  /usr/include/c++/9/ext/type_traits.h \
+  /usr/include/c++/9/ext/numeric_traits.h \
+  /usr/include/c++/9/bits/stl_pair.h \
+  /usr/include/c++/9/bits/stl_iterator_base_types.h \
+  /usr/include/c++/9/bits/stl_iterator_base_funcs.h \
+  /usr/include/c++/9/debug/assertions.h \
+  /usr/include/c++/9/bits/stl_iterator.h \
+  /usr/include/c++/9/bits/ptr_traits.h \
+  /usr/include/c++/9/debug/debug.h \
+  /usr/include/c++/9/bits/predefined_ops.h \
   /usr/include/c++/9/cstdint \
   /usr/lib/gcc/x86_64-linux-gnu/9/include/stdint.h \
   /usr/include/stdint.h \
@@ -3179,34 +3189,16 @@ CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: /home/femu/experiment/code2/src/TNCTre
   /usr/include/x86_64-linux-gnu/bits/time64.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
-  /usr/include/c++/9/bits/allocator.h \
-  /usr/include/x86_64-linux-gnu/c++/9/bits/c++allocator.h \
-  /usr/include/c++/9/ext/new_allocator.h \
-  /usr/include/c++/9/new \
-  /usr/include/c++/9/exception \
-  /usr/include/c++/9/bits/exception.h \
-  /usr/include/c++/9/bits/exception_ptr.h \
-  /usr/include/c++/9/bits/cxxabi_init_exception.h \
-  /usr/include/c++/9/typeinfo \
-  /usr/include/c++/9/bits/hash_bytes.h \
-  /usr/include/c++/9/bits/nested_exception.h \
   /usr/include/c++/9/bits/localefwd.h \
   /usr/include/x86_64-linux-gnu/c++/9/bits/c++locale.h \
   /usr/include/c++/9/clocale \
   /usr/include/locale.h \
   /usr/include/x86_64-linux-gnu/bits/locale.h \
-  /usr/include/c++/9/iosfwd \
   /usr/include/c++/9/cctype \
   /usr/include/ctype.h \
   /usr/include/x86_64-linux-gnu/bits/endian.h \
   /usr/include/x86_64-linux-gnu/bits/endianness.h \
-  /usr/include/c++/9/bits/ostream_insert.h \
-  /usr/include/c++/9/bits/cxxabi_forced.h \
-  /usr/include/c++/9/bits/stl_function.h \
-  /usr/include/c++/9/backward/binders.h \
-  /usr/include/c++/9/bits/range_access.h \
-  /usr/include/c++/9/initializer_list \
-  /usr/include/c++/9/bits/basic_string.h \
+  /usr/include/c++/9/bits/ios_base.h \
   /usr/include/c++/9/ext/atomicity.h \
   /usr/include/x86_64-linux-gnu/c++/9/bits/gthr.h \
   /usr/include/x86_64-linux-gnu/c++/9/bits/gthr-default.h \
@@ -3233,6 +3225,18 @@ CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: /home/femu/experiment/code2/src/TNCTre
   /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
   /usr/include/x86_64-linux-gnu/bits/setjmp.h \
   /usr/include/x86_64-linux-gnu/c++/9/bits/atomic_word.h \
+  /usr/include/c++/9/bits/locale_classes.h \
+  /usr/include/c++/9/string \
+  /usr/include/c++/9/bits/allocator.h \
+  /usr/include/x86_64-linux-gnu/c++/9/bits/c++allocator.h \
+  /usr/include/c++/9/ext/new_allocator.h \
+  /usr/include/c++/9/bits/ostream_insert.h \
+  /usr/include/c++/9/bits/cxxabi_forced.h \
+  /usr/include/c++/9/bits/stl_function.h \
+  /usr/include/c++/9/backward/binders.h \
+  /usr/include/c++/9/bits/range_access.h \
+  /usr/include/c++/9/initializer_list \
+  /usr/include/c++/9/bits/basic_string.h \
   /usr/include/c++/9/ext/alloc_traits.h \
   /usr/include/c++/9/bits/alloc_traits.h \
   /usr/include/c++/9/ext/string_conversions.h \
@@ -3274,6 +3278,32 @@ CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: /home/femu/experiment/code2/src/TNCTre
   /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
   /usr/include/c++/9/bits/functional_hash.h \
   /usr/include/c++/9/bits/basic_string.tcc \
+  /usr/include/c++/9/bits/locale_classes.tcc \
+  /usr/include/c++/9/system_error \
+  /usr/include/x86_64-linux-gnu/c++/9/bits/error_constants.h \
+  /usr/include/c++/9/stdexcept \
+  /usr/include/c++/9/streambuf \
+  /usr/include/c++/9/bits/streambuf.tcc \
+  /usr/include/c++/9/bits/basic_ios.h \
+  /usr/include/c++/9/bits/locale_facets.h \
+  /usr/include/c++/9/cwctype \
+  /usr/include/wctype.h \
+  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h \
+  /usr/include/x86_64-linux-gnu/c++/9/bits/ctype_base.h \
+  /usr/include/c++/9/bits/streambuf_iterator.h \
+  /usr/include/x86_64-linux-gnu/c++/9/bits/ctype_inline.h \
+  /usr/include/c++/9/bits/locale_facets.tcc \
+  /usr/include/c++/9/bits/basic_ios.tcc \
+  /usr/include/c++/9/bits/ostream.tcc \
+  /usr/include/c++/9/istream \
+  /usr/include/c++/9/bits/istream.tcc \
+  /usr/include/c++/9/vector \
+  /usr/include/c++/9/bits/stl_construct.h \
+  /usr/include/c++/9/bits/stl_uninitialized.h \
+  /usr/include/c++/9/bits/stl_vector.h \
+  /usr/include/c++/9/bits/stl_bvector.h \
+  /usr/include/c++/9/bits/vector.tcc \
+  /home/femu/experiment/code2/src/Auxizilary/SysOutput.h \
   /usr/include/c++/9/algorithm \
   /usr/include/c++/9/utility \
   /usr/include/c++/9/bits/stl_relops.h \
@@ -3281,9 +3311,10 @@ CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: /home/femu/experiment/code2/src/TNCTre
   /usr/include/c++/9/bits/algorithmfwd.h \
   /usr/include/c++/9/bits/stl_heap.h \
   /usr/include/c++/9/bits/stl_tempbuf.h \
-  /usr/include/c++/9/bits/stl_construct.h \
   /usr/include/c++/9/bits/uniform_int_dist.h \
-  /usr/include/c++/9/limits
+  /usr/include/c++/9/limits \
+  /home/femu/experiment/code2/src/TNCTree/MemoryTier/MemTier.h \
+  /home/femu/experiment/code2/src/TNCTree/MemoryTier/Node.h
 
 CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment/code2/src/main.cpp \
   /usr/include/stdc-predef.h \

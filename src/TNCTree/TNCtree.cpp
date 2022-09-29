@@ -10,16 +10,33 @@
  **/
 
 #include "TNCtree.h"
+#include "../Auxizilary/SysOutput.h"
 
 int TNCtreeInit()
 {
 
      int Createflag;
      Createflag=ExtendHashTableCreate();
-     if(CreateResult==1)
+     if(Createflag != 0)
      {
-
+          return -1;
      }
      return 0;
+
+}
+
+
+void TNCtreeStart()
+{
+     int flag = 0;
+     flag = TNCtreeInit();
+
+     if(flag!=0)
+     {
+          EMessageOutput("Memeory tier(first tier) create failure",370);
+     }
+
+
+     
 
 }

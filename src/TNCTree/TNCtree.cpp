@@ -10,10 +10,10 @@
  **/
 
 #include "TNCtree.h"
-
 #include <iostream>
-
+#include <vector>
 #include "../Auxizilary/SysOutput.h"
+#include "MemoryTier/MemTier.h"
 
 int TNCtreeInit(void)
 {
@@ -38,9 +38,10 @@ void TNCtreeStart(void)
      }
 
 
-    clock_t startTime,endTime;                        // Definition of timestamp
+     clock_t startTime,endTime;                        // Definition of timestamp
+     std::vector<GlobalHashNode*> global;
 
-    /* Write datum */
+     /* Write datum */
     //printf("long size:%lu \n",sizeof(long));
     startTime = clock();
     for(uint64_t i=1;i<=10000000;i++)

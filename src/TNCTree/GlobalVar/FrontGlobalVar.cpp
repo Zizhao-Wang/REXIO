@@ -16,7 +16,7 @@
 /*
  * Global variables initialization.
  */
-std::vector<GlobalHashNode*> global;
+
 
 
 int Globaldepth=0;

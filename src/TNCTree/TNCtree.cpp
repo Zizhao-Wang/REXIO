@@ -1,5 +1,5 @@
 /**
- * @date    29/4/2022
+ * @date    28/4/2022
  * @author  zz.wang
  * @details
  *          The front has a primary process used to reply to requests from users, including
@@ -7,17 +7,15 @@
  *          from disk!
  * IDENTIFICATION:
  *             src/TNCTree/TNCtree.cpp
- */
-
+ **/
 
 #include "TNCtree.h"
-
 
 int TNCtreeInit()
 {
 
-     int CreateResult;
-     // CreateResult=ExtendHashTableCreate();
+     int Createflag;
+     Createflag=ExtendHashTableCreate();
      if(CreateResult==1)
      {
 

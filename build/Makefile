@@ -177,30 +177,6 @@ Backend/BlockManage/BlockInfo.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/BlockManage/BlockInfo.cpp.s
 .PHONY : Backend/BlockManage/BlockInfo.cpp.s
 
-Backend/DiskRead/ReadDisk.o: Backend/DiskRead/ReadDisk.cpp.o
-.PHONY : Backend/DiskRead/ReadDisk.o
-
-# target to build an object file
-Backend/DiskRead/ReadDisk.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/DiskRead/ReadDisk.cpp.o
-.PHONY : Backend/DiskRead/ReadDisk.cpp.o
-
-Backend/DiskRead/ReadDisk.i: Backend/DiskRead/ReadDisk.cpp.i
-.PHONY : Backend/DiskRead/ReadDisk.i
-
-# target to preprocess a source file
-Backend/DiskRead/ReadDisk.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/DiskRead/ReadDisk.cpp.i
-.PHONY : Backend/DiskRead/ReadDisk.cpp.i
-
-Backend/DiskRead/ReadDisk.s: Backend/DiskRead/ReadDisk.cpp.s
-.PHONY : Backend/DiskRead/ReadDisk.s
-
-# target to generate assembly for a file
-Backend/DiskRead/ReadDisk.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/DiskRead/ReadDisk.cpp.s
-.PHONY : Backend/DiskRead/ReadDisk.cpp.s
-
 Backend/IODisk/WriteDisk.o: Backend/IODisk/WriteDisk.cpp.o
 .PHONY : Backend/IODisk/WriteDisk.o
 
@@ -224,6 +200,54 @@ Backend/IODisk/WriteDisk.s: Backend/IODisk/WriteDisk.cpp.s
 Backend/IODisk/WriteDisk.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.s
 .PHONY : Backend/IODisk/WriteDisk.cpp.s
+
+Backend/SSDRead/reader.o: Backend/SSDRead/reader.cpp.o
+.PHONY : Backend/SSDRead/reader.o
+
+# target to build an object file
+Backend/SSDRead/reader.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o
+.PHONY : Backend/SSDRead/reader.cpp.o
+
+Backend/SSDRead/reader.i: Backend/SSDRead/reader.cpp.i
+.PHONY : Backend/SSDRead/reader.i
+
+# target to preprocess a source file
+Backend/SSDRead/reader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.i
+.PHONY : Backend/SSDRead/reader.cpp.i
+
+Backend/SSDRead/reader.s: Backend/SSDRead/reader.cpp.s
+.PHONY : Backend/SSDRead/reader.s
+
+# target to generate assembly for a file
+Backend/SSDRead/reader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.s
+.PHONY : Backend/SSDRead/reader.cpp.s
+
+Backend/SSDWrite/writer.o: Backend/SSDWrite/writer.cpp.o
+.PHONY : Backend/SSDWrite/writer.o
+
+# target to build an object file
+Backend/SSDWrite/writer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o
+.PHONY : Backend/SSDWrite/writer.cpp.o
+
+Backend/SSDWrite/writer.i: Backend/SSDWrite/writer.cpp.i
+.PHONY : Backend/SSDWrite/writer.i
+
+# target to preprocess a source file
+Backend/SSDWrite/writer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.i
+.PHONY : Backend/SSDWrite/writer.cpp.i
+
+Backend/SSDWrite/writer.s: Backend/SSDWrite/writer.cpp.s
+.PHONY : Backend/SSDWrite/writer.s
+
+# target to generate assembly for a file
+Backend/SSDWrite/writer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.s
+.PHONY : Backend/SSDWrite/writer.cpp.s
 
 LSM-Tree/LsmTree.o: LSM-Tree/LsmTree.cpp.o
 .PHONY : LSM-Tree/LsmTree.o
@@ -465,6 +489,30 @@ MultiHash/LinearHash/LiHash.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.s
 .PHONY : MultiHash/LinearHash/LiHash.cpp.s
 
+TNCTree/MemoryTier/MemTier.o: TNCTree/MemoryTier/MemTier.cpp.o
+.PHONY : TNCTree/MemoryTier/MemTier.o
+
+# target to build an object file
+TNCTree/MemoryTier/MemTier.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o
+.PHONY : TNCTree/MemoryTier/MemTier.cpp.o
+
+TNCTree/MemoryTier/MemTier.i: TNCTree/MemoryTier/MemTier.cpp.i
+.PHONY : TNCTree/MemoryTier/MemTier.i
+
+# target to preprocess a source file
+TNCTree/MemoryTier/MemTier.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.i
+.PHONY : TNCTree/MemoryTier/MemTier.cpp.i
+
+TNCTree/MemoryTier/MemTier.s: TNCTree/MemoryTier/MemTier.cpp.s
+.PHONY : TNCTree/MemoryTier/MemTier.s
+
+# target to generate assembly for a file
+TNCTree/MemoryTier/MemTier.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.s
+.PHONY : TNCTree/MemoryTier/MemTier.cpp.s
+
 TNCTree/TNCtree.o: TNCTree/TNCtree.cpp.o
 .PHONY : TNCTree/TNCtree.o
 
@@ -528,12 +576,15 @@ help:
 	@echo "... Backend/BlockManage/BlockInfo.o"
 	@echo "... Backend/BlockManage/BlockInfo.i"
 	@echo "... Backend/BlockManage/BlockInfo.s"
-	@echo "... Backend/DiskRead/ReadDisk.o"
-	@echo "... Backend/DiskRead/ReadDisk.i"
-	@echo "... Backend/DiskRead/ReadDisk.s"
 	@echo "... Backend/IODisk/WriteDisk.o"
 	@echo "... Backend/IODisk/WriteDisk.i"
 	@echo "... Backend/IODisk/WriteDisk.s"
+	@echo "... Backend/SSDRead/reader.o"
+	@echo "... Backend/SSDRead/reader.i"
+	@echo "... Backend/SSDRead/reader.s"
+	@echo "... Backend/SSDWrite/writer.o"
+	@echo "... Backend/SSDWrite/writer.i"
+	@echo "... Backend/SSDWrite/writer.s"
 	@echo "... LSM-Tree/LsmTree.o"
 	@echo "... LSM-Tree/LsmTree.i"
 	@echo "... LSM-Tree/LsmTree.s"
@@ -564,6 +615,9 @@ help:
 	@echo "... MultiHash/LinearHash/LiHash.o"
 	@echo "... MultiHash/LinearHash/LiHash.i"
 	@echo "... MultiHash/LinearHash/LiHash.s"
+	@echo "... TNCTree/MemoryTier/MemTier.o"
+	@echo "... TNCTree/MemoryTier/MemTier.i"
+	@echo "... TNCTree/MemoryTier/MemTier.s"
 	@echo "... TNCTree/TNCtree.o"
 	@echo "... TNCTree/TNCtree.i"
 	@echo "... TNCTree/TNCtree.s"

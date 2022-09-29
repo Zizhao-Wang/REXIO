@@ -25,9 +25,11 @@ endif()
 
 # add the executable
 add_executable(src main.cpp 
-				TNCTree/TNCtree.h TNCTree/TNCtree.cpp
-				Backend/IODisk/WriteDisk.h Backend/BackendMain.h Backend/IODisk/WriteDisk.cpp Backend/DiskRead/ReadDisk.cpp 
-				Backend/DiskRead/ReadDisk.h Backend/BlockManage/BlockInfo.cpp Backend/BlockManage/BlockInfo.h
+				TNCTree/TNCtree.h TNCTree/TNCtree.cpp TNCTree/MemoryTier/MemTier.h
+				TNCTree/MemoryTier/MemTier.cpp
+				Backend/IODisk/WriteDisk.h Backend/BackendMain.h Backend/IODisk/WriteDisk.cpp  
+				Backend/BlockManage/BlockInfo.cpp Backend/BlockManage/BlockInfo.h
+				Backend/SSDWrite/writer.h Backend/SSDWrite/writer.cpp Backend/SSDRead/reader.h Backend/SSDRead/reader.cpp
 				Auxizilary/GlobalVariable.h Auxizilary/VariablesTypes.h Auxizilary/SysOutput.h AuxizilaryImplement/SysOutput.cpp 
 				MultiHash/ExtendibleHash/ExHash.h MultiHash/ExtendibleHash/ExHash.cpp MultiHash/LinearHash/LiHash.h 
 				MultiHash/LinearHash/LiHash.cpp MultiHash/Bucket.h MultiHash/LazySplitHash/LSHash.h MultiHash/LazySplitHash/LSHash.cpp

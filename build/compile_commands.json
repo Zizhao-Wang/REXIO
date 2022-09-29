@@ -11,18 +11,28 @@
 },
 {
   "directory": "/home/femu/experiment/code2/build",
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o -c /home/femu/experiment/code2/src/TNCTree/MemoryTier/MemTier.cpp",
+  "file": "/home/femu/experiment/code2/src/TNCTree/MemoryTier/MemTier.cpp"
+},
+{
+  "directory": "/home/femu/experiment/code2/build",
   "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o -c /home/femu/experiment/code2/src/Backend/IODisk/WriteDisk.cpp",
   "file": "/home/femu/experiment/code2/src/Backend/IODisk/WriteDisk.cpp"
 },
 {
   "directory": "/home/femu/experiment/code2/build",
-  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/Backend/DiskRead/ReadDisk.cpp.o -c /home/femu/experiment/code2/src/Backend/DiskRead/ReadDisk.cpp",
-  "file": "/home/femu/experiment/code2/src/Backend/DiskRead/ReadDisk.cpp"
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/Backend/BlockManage/BlockInfo.cpp.o -c /home/femu/experiment/code2/src/Backend/BlockManage/BlockInfo.cpp",
+  "file": "/home/femu/experiment/code2/src/Backend/BlockManage/BlockInfo.cpp"
 },
 {
   "directory": "/home/femu/experiment/code2/build",
-  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/Backend/BlockManage/BlockInfo.cpp.o -c /home/femu/experiment/code2/src/Backend/BlockManage/BlockInfo.cpp",
-  "file": "/home/femu/experiment/code2/src/Backend/BlockManage/BlockInfo.cpp"
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o -c /home/femu/experiment/code2/src/Backend/SSDWrite/writer.cpp",
+  "file": "/home/femu/experiment/code2/src/Backend/SSDWrite/writer.cpp"
+},
+{
+  "directory": "/home/femu/experiment/code2/build",
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o -c /home/femu/experiment/code2/src/Backend/SSDRead/reader.cpp",
+  "file": "/home/femu/experiment/code2/src/Backend/SSDRead/reader.cpp"
 },
 {
   "directory": "/home/femu/experiment/code2/build",

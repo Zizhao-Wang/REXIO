@@ -10,8 +10,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/femu/experiment/code2/src/AuxizilaryImplement/SysOutput.cpp" "CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o" "gcc" "CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o.d"
   "/home/femu/experiment/code2/src/Backend/BlockManage/BlockInfo.cpp" "CMakeFiles/src.dir/Backend/BlockManage/BlockInfo.cpp.o" "gcc" "CMakeFiles/src.dir/Backend/BlockManage/BlockInfo.cpp.o.d"
-  "/home/femu/experiment/code2/src/Backend/DiskRead/ReadDisk.cpp" "CMakeFiles/src.dir/Backend/DiskRead/ReadDisk.cpp.o" "gcc" "CMakeFiles/src.dir/Backend/DiskRead/ReadDisk.cpp.o.d"
   "/home/femu/experiment/code2/src/Backend/IODisk/WriteDisk.cpp" "CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o" "gcc" "CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o.d"
+  "/home/femu/experiment/code2/src/Backend/SSDRead/reader.cpp" "CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o" "gcc" "CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o.d"
+  "/home/femu/experiment/code2/src/Backend/SSDWrite/writer.cpp" "CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o" "gcc" "CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o.d"
   "/home/femu/experiment/code2/src/LSM-Tree/LsmTree.cpp" "CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o" "gcc" "CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o.d"
   "/home/femu/experiment/code2/src/LSM-Tree/UtilityImplement/ResAllocate.cpp" "CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o" "gcc" "CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o.d"
   "/home/femu/experiment/code2/src/LSM-Tree/UtilityImplement/buffer.cpp" "CMakeFiles/src.dir/LSM-Tree/UtilityImplement/buffer.cpp.o" "gcc" "CMakeFiles/src.dir/LSM-Tree/UtilityImplement/buffer.cpp.o.d"
@@ -22,6 +23,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/femu/experiment/code2/src/MultiHash/ExtendibleHash/ExHash.cpp" "CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o" "gcc" "CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o.d"
   "/home/femu/experiment/code2/src/MultiHash/LazySplitHash/LSHash.cpp" "CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o" "gcc" "CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o.d"
   "/home/femu/experiment/code2/src/MultiHash/LinearHash/LiHash.cpp" "CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o" "gcc" "CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o.d"
+  "/home/femu/experiment/code2/src/TNCTree/MemoryTier/MemTier.cpp" "CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o" "gcc" "CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o.d"
   "/home/femu/experiment/code2/src/TNCTree/TNCtree.cpp" "CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o" "gcc" "CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o.d"
   "/home/femu/experiment/code2/src/main.cpp" "CMakeFiles/src.dir/main.cpp.o" "gcc" "CMakeFiles/src.dir/main.cpp.o.d"
   )

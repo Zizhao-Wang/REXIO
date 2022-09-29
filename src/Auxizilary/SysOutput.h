@@ -11,7 +11,7 @@
 #ifndef EXPERIMENT1_SYSOUTPUT_H
 #define EXPERIMENT1_SYSOUTPUT_H
 
-#include <cstring>
+#include <string>
 #include <algorithm>
 
 std::string Uint64toString(uint64_t value);

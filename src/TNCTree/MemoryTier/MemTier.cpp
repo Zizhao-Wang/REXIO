@@ -10,8 +10,7 @@
  */
 
 
-#include "HashTable.h"
-#include "../MemoryAllocate/HashBlock.h"
+#include "MemTier.h"
 #include "../GlobalVar/FrontGlobalVar.h"
 #include <cstdlib>
 #include <unistd.h>

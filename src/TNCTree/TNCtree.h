@@ -18,4 +18,6 @@
 int TNCtreeInit();
 
 
+void TNCtreeStart();
+
 #endif //EXPERIMENT1_FRONTMAIN_H

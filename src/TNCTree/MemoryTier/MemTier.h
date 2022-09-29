@@ -12,8 +12,7 @@
 #define EXPERIMENT1_HASHTABLE_H
 
 #include <cstdint> 
-#include "../MemoryAllocate/HashBlock.h"
-
+#include "Node.h"
 
 /* ================= Node initialization module ==================== */
 bool LocalGeneration(GlobalHashNode * global);

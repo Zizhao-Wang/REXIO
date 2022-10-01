@@ -16,21 +16,17 @@
 #include "../MemoryTier/Node.h"
 #include <vector>
 
-
 #define LOCAL_TABLE_SIZE 100000
-
 
 extern int Globaldepth;
 
-
-/*
+/**
  *  Hash table
- */
+ **/
 extern std::vector<GlobalHashNode *> global;
-
 
 extern float pro;
 
 
-#define DEBUG true
+
 #endif //EXPERIMENT1_FRONTGLOBALVAR_H

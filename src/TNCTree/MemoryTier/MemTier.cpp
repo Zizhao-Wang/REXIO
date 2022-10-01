@@ -68,10 +68,10 @@ bool DoubleHashtable()
 }
 
 
-/*  =================Node Searching module====================  */
-    /*
-     * Node searching.
-     */
+/**  
+ * =================Node Searching module====================  
+ **/
+
 LocalHashNode* SearchNode(LocalHeadNode* Head,unsigned int hashvalue)
 {
     if(Head->CurrentLevel == 1)

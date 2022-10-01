@@ -8,18 +8,14 @@
  *   Experiment1/FrontEnd/GlobalVar/FrontGlobalVar.cpp
  */
 
+#include "types.h"
 
-#include "../MemoryAllocate/HashBlock.h"
-#include <vector>
-
-
-/*
- * Global variables initialization.
- */
-
+/*  Global variables initialization. */
 
 
 int Globaldepth=0;
 
+
+std::vector<GlobalHashNode*> global;
 
 float pro=0.5;

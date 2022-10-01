@@ -42,7 +42,6 @@ void TNCtreeStart(void)
      std::vector<GlobalHashNode*> global;
 
      /* Write datum */
-    //printf("long size:%lu \n",sizeof(long));
     startTime = clock();
     for(uint64_t i=1;i<=10000000;i++)
     {

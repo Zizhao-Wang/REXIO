@@ -561,6 +561,30 @@ TNCTree/TNCtree.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/TNCtree.cpp.s
 .PHONY : TNCTree/TNCtree.cpp.s
 
+TNCTree/utility/types.o: TNCTree/utility/types.cpp.o
+.PHONY : TNCTree/utility/types.o
+
+# target to build an object file
+TNCTree/utility/types.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/utility/types.cpp.o
+.PHONY : TNCTree/utility/types.cpp.o
+
+TNCTree/utility/types.i: TNCTree/utility/types.cpp.i
+.PHONY : TNCTree/utility/types.i
+
+# target to preprocess a source file
+TNCTree/utility/types.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/utility/types.cpp.i
+.PHONY : TNCTree/utility/types.cpp.i
+
+TNCTree/utility/types.s: TNCTree/utility/types.cpp.s
+.PHONY : TNCTree/utility/types.s
+
+# target to generate assembly for a file
+TNCTree/utility/types.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/utility/types.cpp.s
+.PHONY : TNCTree/utility/types.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -648,6 +672,9 @@ help:
 	@echo "... TNCTree/TNCtree.o"
 	@echo "... TNCTree/TNCtree.i"
 	@echo "... TNCTree/TNCtree.s"
+	@echo "... TNCTree/utility/types.o"
+	@echo "... TNCTree/utility/types.i"
+	@echo "... TNCTree/utility/types.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

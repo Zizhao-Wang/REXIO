@@ -27,6 +27,7 @@ endif()
 add_executable(src main.cpp 
 				TNCTree/TNCtree.h TNCTree/TNCtree.cpp TNCTree/MemoryTier/MemTier.h
 				TNCTree/MemoryTier/MemTier.cpp TNCTree/MemoryTier/Node.h TNCTree/MemoryTier/Node.cpp
+				TNCTree/utility/types.h TNCTree/utility/types.cpp
 				Backend/IODisk/WriteDisk.h Backend/BackendMain.h Backend/IODisk/WriteDisk.cpp  
 				Backend/BlockManage/BlockInfo.cpp Backend/BlockManage/BlockInfo.h
 				Backend/SSDWrite/writer.h Backend/SSDWrite/writer.cpp Backend/SSDRead/reader.h Backend/SSDRead/reader.cpp

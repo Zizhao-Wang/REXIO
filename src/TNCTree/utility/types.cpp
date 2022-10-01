@@ -15,7 +15,6 @@
 
 int Globaldepth=0;
 
-
 std::vector<GlobalHashNode*> global;
 
 float pro=0.5;

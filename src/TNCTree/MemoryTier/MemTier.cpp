@@ -71,7 +71,11 @@ bool DoubleHashtable()
 
 
 /**  
- * =================Node Searching module====================  
+ * =================Node Searching module====================
+ * There are 3 steps for searching whether a kv pair in the TNC-tree: 
+ * 1. check whether the page in memory or not
+ * 2. return value if data is not flushed into physical page, or read from physical page
+ * 3. return value if data is in the physical block   
  **/
 
 LocalHashNode* SearchNode(LocalHeadNode* Head,unsigned int hashvalue)

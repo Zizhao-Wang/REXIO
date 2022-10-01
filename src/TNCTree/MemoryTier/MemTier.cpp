@@ -11,22 +11,24 @@
 
 
 #include "MemTier.h"
-#include "../GlobalVar/FrontGlobalVar.h"
-#include <cstdlib>
+
+#include <stdlib.h>
 #include <unistd.h>
-#include "../../Backend/IODisk/WriteDisk.h"
+#include <time.h>
 #include <iostream>
-#include <ctime>
+#include "../utility/types.h"
+#include "../../Backend/IODisk/WriteDisk.h"
 #include "../../Backend/BlockManage/BlockInfo.h"
+
 #define N 9999
 
 using namespace std;
 
 
-/* =================Node initialization module==================== */
-   /*
-    * Node generation.
-    */
+/**
+ *  =================Node initialization module==================== 
+ **/
+
 bool LocalGeneration(GlobalHashNode * globalNode)
 {
 
@@ -91,10 +93,10 @@ LocalHashNode* SearchNode(LocalHeadNode* Head,unsigned int hashvalue)
 }
 
 
-/*  =================Node Insertion module====================  */
-    /*
-     * Node Insertion.
-     */
+/**
+ *  =================Node Insertion module====================  
+ **/
+
 int RandomLevel()
 {
 
@@ -202,10 +204,10 @@ int Insert(uint64_t hashvalue)
 }
 
 
-/*  =================Node deletion module====================  */
-    /*
-     * Node deletion method.
-     */
+/**
+ *   =================Node deletion module====================  
+ **/
+
 bool DeleteNode(LocalHeadNode * Head, unsigned int hashvalue)
 {
     LocalHashNode * node = SearchNode(Head,hashvalue);
@@ -218,55 +220,34 @@ bool DeleteNode(LocalHeadNode * Head, unsigned int hashvalue)
 }
 
 
-/*  =================Hash table initialization module====================  */
+/**
+ *  =================Hash table initialization module====================  
+ **/
+
 int ExtendHashTableInitialize()
 {
-    /*
-     * Initialize a special hash table and SSD backend processor!
-     */
-    clock_t startTime,endTime;
 
-    int failed=0, succeeded=0;
+    /* Initialize a special hash table and SSD backend processor! */
+
     for(int i=0;i<20;i++)
     {
-        DoubleHashtable();
-    }
-
-
-
-    /*printf("============== TEST & DEBUG: ==============\n");
-    for(int i=0;i<global.size();++i)
-    {
-        printf("Number of Global Node: %d current level: %d current number of nodes: %d  ",i+1,global[0]->local->CurrentLevel,global[0]->local->Nodenumber);
-        printf("NIL verification %u\n",global[i]->local->HashNode->next[9]->Hashvalue);
-    }*/
-
-    startTime = clock();
-    for(uint64_t i=1;i<=60000000;i++)
-    {
-        if(Insert(i)==0)
-            failed++;
-        else
-            succeeded++;
-    }
-    endTime = clock();
-
-    std::cout << "Total Time : " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s" << std::endl;
-    printf("Result:\nInsertion succeeded: %d;\nInsertion failed: %d\n",succeeded,failed);
-
-    //printf("\n%u\n",global.size());
-
-
-    printf("\nIndex information:\n");
-    for(int i=0;i<15;i++)
-    {
-        printf("Number of this list:%d\n",global[i]->local->Nodenumber);
-        printf("\tGlobal index \t Index value \t Index status \t Index offset\n");
-        for(LocalHashNode * temp = global[i]->local->HashNode->next[0];temp->Hashvalue!=UINT32_MAX; temp=temp->next[0])
+        if(! DoubleHashtable() )
         {
-            printf("\t%d \t\t %u \t\t %d \t\t %u\n",i,temp->Hashvalue,temp->flag,temp->offset);
+            printf("Memory tier of TNC-tree initialized failure!");
+            exit(5735);
         }
     }
+
+    /**
+     * printf("============== TEST & DEBUG: ==============\n");
+     * for(int i=0;i<global.size();++i){
+     * printf("Number of Global Node: %d current level: %d current number of nodes: %d  ",i+1,global[0]->local->CurrentLevel,global[0]->local->Nodenumber);
+     * printf("NIL verification %u\n",global[i]->local->HashNode->next[9]->Hashvalue);
+     * }
+     **/
+    
+    printf("\n========Index information========:\n");
+    
 
     return 1;
 }

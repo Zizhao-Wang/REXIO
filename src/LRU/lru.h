@@ -13,37 +13,41 @@
 
 #include <vector>
 #include <unordered_map>
-#include "../MemoryTier/Node.h"
+#include <list>
+#include "../TNCTree/MemoryTier/Node.h"
 
 
 typedef struct ReadNode
 {
-	TNCEntry * data;
 	PageType   PageId;
+	TNCEntry * data;
 }ReadNode;
-
 
 
 class LRUCache 
 {
 
 private:
-    int capacity;
-    // 双链表：装着 (key, value) 元组
-    list<> cache;
+    uint16_t capacity;
+    std::list<ReadNode> cache;
     // 哈希表：key 映射到 (key, value) 在 cache 中的位置
-    unordered_map<int, list<pair<int, int>>::iterator> map;
+    std::unordered_map<int, std::list<ReadNode>::iterator> HashMap;
 
 public:
-    LRUCache(int capacity) {
-        this->cap = capacity; 
+    LRUCache(uint16_t cap) 
+	{
+        this->capacity = cap; 
     }
     
-    int get(int key) {
-        auto it = map.find(key);
+    int get(PageType page) 
+	{
+        auto it = HashMap.find(page);
         // 访问的 key 不存在
-        if (it == map.end()) return -1;
-        // key 存在，把 (k, v) 换到队头
+        if (it == map.end())
+		{
+			return -1;
+		} 
+			
         pair<int, int> kv = *map[key];
         cache.erase(map[key]);
         cache.push_front(kv);

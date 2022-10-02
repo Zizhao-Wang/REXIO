@@ -15,15 +15,23 @@
 #include <iostream>
 #include "../../Auxizilary/GlobalVariable.h"
 
+/* Global variable declaration! */
 extern uint32_t offset;
 
-uint32_t SyncWrite(SKey key1, SValue value); 
+/**
+ *  ================= Synchronous write module====================  
+ **/
+uint32_t SyncWrite(SKey key1, SValue value);
 
-int      SyncDelete(SKey key1, uint32_t offset);
+/**
+ *  ================= Synchronous delete module====================  
+ **/
+int      SyncDelete(uint32_t offset);
 
+/**
+ *  ================= Synchronous read module====================  
+ **/
 SValue   syncRead(uint32_t offset);
-
-
 
 #endif
 

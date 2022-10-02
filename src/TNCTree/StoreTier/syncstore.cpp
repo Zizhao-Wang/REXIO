@@ -27,3 +27,12 @@ uint32_t SyncWrite(SKey key1, SValue value)
 
     return offset;
 }
+
+int  SyncDelete(uint32_t offset)
+{
+    uint64_t curblock = offset >> 22;
+    
+    
+
+    return 0;
+}

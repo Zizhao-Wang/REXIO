@@ -15,6 +15,7 @@
 #include <iostream>
 #include "../../Auxizilary/GlobalVariable.h"
 
+extern uint32_t offset;
 
 uint32_t SyncWrite(SKey key1, SValue value); 
 

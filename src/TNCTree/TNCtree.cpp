@@ -22,7 +22,7 @@ void TNCtreeInit(void)
 
      int Createflag = ExtendHashTableInitialize();
 
-     Pagedata = (uint64_t *)malloc(bp->geo->l.nbytes);
+     Pagedata = (TNCEntry *)malloc(bp->geo->l.nbytes+10);
      if (Pagedata == nullptr)
      {
           EMessageOutput("Index initialized failure!",1578);

@@ -25,7 +25,7 @@
 /*  Global variables for SSD write definition.  */
 extern uint32_t blockoffset;
 extern int indexs;
-extern std::vector<TNCEntry> Pagedata;
+extern uint64_t * Pagedata;
 
 
 
@@ -33,7 +33,7 @@ extern std::vector<TNCEntry> Pagedata;
  *  Function declartion for writing data into one or more pages:
  **/
 
-uint64_t SinglePageWrite(); // Insert page-level key-value pairs into physicals for TNC-tree.
+int SinglePageWrite(); // Insert page-level key-value pairs into physicals for TNC-tree.
 
 
 

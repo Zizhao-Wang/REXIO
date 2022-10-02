@@ -561,6 +561,30 @@ TNCTree/StoreTier/asyncstore.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.s
 .PHONY : TNCTree/StoreTier/asyncstore.cpp.s
 
+TNCTree/StoreTier/syncstore.o: TNCTree/StoreTier/syncstore.cpp.o
+.PHONY : TNCTree/StoreTier/syncstore.o
+
+# target to build an object file
+TNCTree/StoreTier/syncstore.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o
+.PHONY : TNCTree/StoreTier/syncstore.cpp.o
+
+TNCTree/StoreTier/syncstore.i: TNCTree/StoreTier/syncstore.cpp.i
+.PHONY : TNCTree/StoreTier/syncstore.i
+
+# target to preprocess a source file
+TNCTree/StoreTier/syncstore.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.i
+.PHONY : TNCTree/StoreTier/syncstore.cpp.i
+
+TNCTree/StoreTier/syncstore.s: TNCTree/StoreTier/syncstore.cpp.s
+.PHONY : TNCTree/StoreTier/syncstore.s
+
+# target to generate assembly for a file
+TNCTree/StoreTier/syncstore.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.s
+.PHONY : TNCTree/StoreTier/syncstore.cpp.s
+
 TNCTree/TNCtree.o: TNCTree/TNCtree.cpp.o
 .PHONY : TNCTree/TNCtree.o
 
@@ -696,6 +720,9 @@ help:
 	@echo "... TNCTree/StoreTier/asyncstore.o"
 	@echo "... TNCTree/StoreTier/asyncstore.i"
 	@echo "... TNCTree/StoreTier/asyncstore.s"
+	@echo "... TNCTree/StoreTier/syncstore.o"
+	@echo "... TNCTree/StoreTier/syncstore.i"
+	@echo "... TNCTree/StoreTier/syncstore.s"
 	@echo "... TNCTree/TNCtree.o"
 	@echo "... TNCTree/TNCtree.i"
 	@echo "... TNCTree/TNCtree.s"

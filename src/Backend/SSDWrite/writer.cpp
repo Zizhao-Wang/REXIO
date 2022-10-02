@@ -19,9 +19,9 @@
 #include "../../Auxizilary/GlobalVariable.h"
 
 
-uint_32 blockoffset   = 0;
+uint_32 blockoffset = 0;
 int indexs=0;
-std::vector<TNCEntry> Pagedata;
+uint64_t * Pagedata = (uint64_t *)malloc(bp->geo->l.nbytes);
 
 
 
@@ -53,7 +53,7 @@ int WriteintoSector()
 		//printf("aidx: %lu addrs[aidx].val : %lu chunk_addrs[cidx].val %lu addrs[aidx].l.sectr %lu \n",aidx,addrs[aidx].val,chunk_addrs[cidx].val,addrs[aidx].l.sectr);
 	}
 
-	char * databuffer;
+	char * databuffer = (char*) Pagedata;
     for(int i=0;i<2048*8;i++)
         bp->bufs->write[i] = databuffer[i];
     err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
@@ -84,7 +84,7 @@ int WriteintoSector()
 /**
  *  
  **/
-int SinglePageWrite(uint64_t pageno)
+int SinglePageWrite()
 {
 
     /* Function flag, default value equals 0(successful flag). */

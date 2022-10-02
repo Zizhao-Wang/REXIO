@@ -1,7 +1,7 @@
-CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o: \
- /home/femu/experiment/code2/src/TNCTree/MemoryTier/MemTier.cpp \
+CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o: \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/syncstore.cpp \
  /usr/include/stdc-predef.h \
- /home/femu/experiment/code2/src/TNCTree/MemoryTier/MemTier.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/syncstore.h \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
@@ -16,16 +16,15 @@ CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
- /home/femu/experiment/code2/src/TNCTree/MemoryTier/../../Auxizilary/GlobalVariable.h \
- /usr/include/c++/9/cstdint \
+ /usr/include/c++/9/iostream \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/cpu_defines.h \
- /usr/include/c++/9/iostream /usr/include/c++/9/ostream \
- /usr/include/c++/9/ios /usr/include/c++/9/iosfwd \
- /usr/include/c++/9/bits/stringfwd.h /usr/include/c++/9/bits/memoryfwd.h \
- /usr/include/c++/9/bits/postypes.h /usr/include/c++/9/cwchar \
- /usr/include/wchar.h /usr/include/x86_64-linux-gnu/bits/floatn.h \
+ /usr/include/c++/9/ostream /usr/include/c++/9/ios \
+ /usr/include/c++/9/iosfwd /usr/include/c++/9/bits/stringfwd.h \
+ /usr/include/c++/9/bits/memoryfwd.h /usr/include/c++/9/bits/postypes.h \
+ /usr/include/c++/9/cwchar /usr/include/wchar.h \
+ /usr/include/x86_64-linux-gnu/bits/floatn.h \
  /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/stdarg.h \
@@ -56,7 +55,7 @@ CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o: \
  /usr/include/c++/9/debug/assertions.h \
  /usr/include/c++/9/bits/stl_iterator.h \
  /usr/include/c++/9/bits/ptr_traits.h /usr/include/c++/9/debug/debug.h \
- /usr/include/c++/9/bits/predefined_ops.h \
+ /usr/include/c++/9/bits/predefined_ops.h /usr/include/c++/9/cstdint \
  /usr/include/c++/9/bits/localefwd.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++locale.h \
  /usr/include/c++/9/clocale /usr/include/locale.h \
@@ -144,20 +143,46 @@ CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o: \
  /usr/include/c++/9/bits/basic_ios.tcc \
  /usr/include/c++/9/bits/ostream.tcc /usr/include/c++/9/istream \
  /usr/include/c++/9/bits/istream.tcc \
- /home/femu/experiment/code2/src/TNCTree/MemoryTier/Node.h \
- /usr/include/c++/9/stdlib.h /usr/include/unistd.h \
- /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
- /usr/include/x86_64-linux-gnu/bits/environments.h \
- /usr/include/x86_64-linux-gnu/bits/confname.h \
- /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
- /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
- /usr/include/x86_64-linux-gnu/bits/unistd.h \
- /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
- /home/femu/experiment/code2/src/TNCTree/MemoryTier/../utility/types.h \
- /home/femu/experiment/code2/src/TNCTree/MemoryTier/../utility/../MemoryTier/Node.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDWrite/writer.h \
  /usr/include/c++/9/vector /usr/include/c++/9/bits/stl_construct.h \
  /usr/include/c++/9/bits/stl_uninitialized.h \
  /usr/include/c++/9/bits/stl_vector.h \
  /usr/include/c++/9/bits/stl_bvector.h /usr/include/c++/9/bits/vector.tcc \
- /home/femu/experiment/code2/src/TNCTree/MemoryTier/../StoreTier/syncstore.h \
- /home/femu/experiment/code2/src/TNCTree/MemoryTier/../StoreTier/../../Auxizilary/GlobalVariable.h
+ /usr/include/c++/9/unordered_map /usr/include/c++/9/ext/aligned_buffer.h \
+ /usr/include/c++/9/bits/hashtable.h \
+ /usr/include/c++/9/bits/hashtable_policy.h /usr/include/c++/9/tuple \
+ /usr/include/c++/9/utility /usr/include/c++/9/bits/stl_relops.h \
+ /usr/include/c++/9/array /usr/include/c++/9/bits/uses_allocator.h \
+ /usr/include/c++/9/bits/invoke.h /usr/include/c++/9/limits \
+ /usr/include/c++/9/bits/unordered_map.h \
+ /usr/include/c++/9/bits/erase_if.h \
+ /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm.h \
+ /usr/include/inttypes.h /usr/include/c++/9/stdlib.h \
+ /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm_util.h \
+ /usr/include/string.h /usr/include/strings.h \
+ /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
+ /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
+ /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm_spec.h \
+ /usr/include/assert.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDWrite/../../TNCTree/MemoryTier/Node.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDWrite/../../TNCTree/MemoryTier/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDWrite/../../Auxizilary/VariablesTypes.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDWrite/../../Auxizilary/SysOutput.h \
+ /usr/include/c++/9/algorithm /usr/include/c++/9/bits/stl_algo.h \
+ /usr/include/c++/9/bits/algorithmfwd.h \
+ /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
+ /usr/include/c++/9/bits/uniform_int_dist.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDRead/reader.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDRead/../BlockManage/BlockInfo.h \
+ /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm_cli.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDRead/../BlockManage/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDRead/../../Auxizilary/VariablesTypes.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDRead/../../Auxizilary/SysOutput.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDRead/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/IODisk/WriteDisk.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/IODisk/../BlockManage/BlockInfo.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h

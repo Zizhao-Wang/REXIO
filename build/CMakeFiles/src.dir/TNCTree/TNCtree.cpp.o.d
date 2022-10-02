@@ -155,4 +155,30 @@ CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: \
  /usr/include/c++/9/bits/uniform_int_dist.h /usr/include/c++/9/limits \
  /home/femu/experiment/code2/src/TNCTree/MemoryTier/MemTier.h \
  /home/femu/experiment/code2/src/TNCTree/MemoryTier/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment/code2/src/TNCTree/MemoryTier/Node.h
+ /home/femu/experiment/code2/src/TNCTree/MemoryTier/Node.h \
+ /home/femu/experiment/code2/src/TNCTree/../Backend/SSDWrite/writer.h \
+ /usr/include/c++/9/unordered_map /usr/include/c++/9/ext/aligned_buffer.h \
+ /usr/include/c++/9/bits/hashtable.h \
+ /usr/include/c++/9/bits/hashtable_policy.h /usr/include/c++/9/tuple \
+ /usr/include/c++/9/array /usr/include/c++/9/bits/uses_allocator.h \
+ /usr/include/c++/9/bits/invoke.h /usr/include/c++/9/bits/unordered_map.h \
+ /usr/include/c++/9/bits/erase_if.h \
+ /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm.h \
+ /usr/include/inttypes.h /usr/include/c++/9/stdlib.h \
+ /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm_util.h \
+ /usr/include/string.h /usr/include/strings.h \
+ /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
+ /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
+ /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm_spec.h \
+ /usr/include/assert.h \
+ /home/femu/experiment/code2/src/TNCTree/../Backend/SSDWrite/../../TNCTree/MemoryTier/Node.h \
+ /home/femu/experiment/code2/src/TNCTree/../Backend/SSDWrite/../../Auxizilary/VariablesTypes.h \
+ /home/femu/experiment/code2/src/TNCTree/../Backend/SSDWrite/../../Auxizilary/SysOutput.h \
+ /home/femu/experiment/code2/src/TNCTree/../Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/TNCTree/../Backend/IODisk/WriteDisk.h \
+ /home/femu/experiment/code2/src/TNCTree/../Backend/IODisk/../BlockManage/BlockInfo.h \
+ /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm_cli.h \
+ /home/femu/experiment/code2/src/TNCTree/../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/TNCTree/../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
+ /home/femu/experiment/code2/src/TNCTree/../Backend/IODisk/../../Auxizilary/SysOutput.h \
+ /home/femu/experiment/code2/src/TNCTree/../Backend/IODisk/../../Auxizilary/GlobalVariable.h

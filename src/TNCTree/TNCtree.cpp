@@ -14,11 +14,22 @@
 #include <vector>
 #include "../Auxizilary/SysOutput.h"
 #include "MemoryTier/MemTier.h"
+#include "../Backend/SSDWrite/writer.h"
+#include "../Backend/IODisk/WriteDisk.h"
 
 void TNCtreeInit(void)
 {
 
      int Createflag = ExtendHashTableInitialize();
+
+     Pagedata = (uint64_t *)malloc(bp->geo->l.nbytes);
+     if (Pagedata == nullptr)
+     {
+          EMessageOutput("Index initialized failure!",1578);
+     }
+        
+     
+
      if(Createflag == 0)
      {
           printf("\n ================ Index information ================: \
@@ -40,7 +51,7 @@ void TNCtreePort(void)
     startTime = clock();
     for(uint64_t i=1;i<=100000;i++)
     {
-     InsertNode(i,i);
+     //InsertNode(i,i);
     }
     endTime = clock();
     std::cout << "Total Time of inserting: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
@@ -65,7 +76,5 @@ void TNCtreePort(void)
     }
     endTime = clock();
     std::cout << "Total Time of datum update: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-
-
 
 }

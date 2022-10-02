@@ -1,16 +1,17 @@
 /**
- * @date 2022.4.27 15:01
- * @author zz.wang
+ * @date    27/9/2022 
+ * @author  zz.wang
  * @details
  *          This file implemented the data structure of the node in Hash Table!
  *
- *         IDENTIFICATION
- *   Experiment1/FrontEnd/MemoryAllocate/HashBlock.h
+ * IDENTIFICATION:
+ *          src/TNCTree/MemoryTier/Node.h
  */
 
 #ifndef EXPERIMENT1_HASHBLOCK_H
 #define EXPERIMENT1_HASHBLOCK_H
 
+#include "../../Auxizilary/GlobalVariable.h"
 
 #define LOCAL_HASH_SIZE  sizeof (LocalHashNode)
 #define GLOBAL_HASH_SIZE sizeof (GlobalHashNode)
@@ -51,6 +52,17 @@ typedef struct GlobalHashNode
     unsigned int bit;
     LocalHeadNode * local;
 }GlobalHashNode;
+
+/**
+ *  Definition of key-value pair
+ **/
+typedef struct TNCEntry
+{
+    SKey key;
+    SValue val;
+}TNCEntry;
+
+
 
 
 /*  =================Node initialization module==================== */

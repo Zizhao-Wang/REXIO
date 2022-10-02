@@ -282,7 +282,6 @@ int WriteintoSector()
         blockpointer++;
         writepointer = 0;
     }
-
     
     return bpn;
 }

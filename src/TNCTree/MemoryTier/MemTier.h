@@ -28,7 +28,7 @@ bool DoubleHashtable();
  **/
 
 LocalHashNode* SearchNode(LocalHeadNode* Head,unsigned int hashvalue);
-
+SValue Search(SKey key1);
 
 /**  
  * ================= Insertion module ====================  
@@ -41,6 +41,10 @@ LocalHeadNode * NodeSplit(LocalHeadNode * head);
 int InsertNode(SKey hashkey, SValue hashvalue);
 
 
+/**  
+ * ================= Insertion module ====================  
+ **/
+int Update(SKey key1, SValue val);
 
 /**
  *  ================= deletion module====================  

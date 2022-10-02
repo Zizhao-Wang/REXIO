@@ -63,7 +63,7 @@ SValue  SyncRead(uint32_t offset)
     if(got == ReadBuffer.end() && ReadBuffer.size()<10)
     {
         TNCEntry* data = TNCEntryRead(PageId);
-        ReadBuffer.insert(PageId,data);    
+        ReadBuffer[PageId] = data;    
     }
     else if(got == ReadBuffer.end() && ReadBuffer.size()>=10)
     {

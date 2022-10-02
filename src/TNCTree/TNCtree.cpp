@@ -44,37 +44,36 @@ void TNCtreePort(void)
      
      TNCtreeInit();
 
-
      clock_t startTime,endTime;                        // Definition of timestamp
 
-    /* Write datum */
-    startTime = clock();
-    for(uint64_t i=1;i<=1000000;i++)
-    {
-     InsertNode(i,i);
-    }
-    endTime = clock();
-    std::cout << "Total Time of inserting: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+     /* Write datum */
+     startTime = clock();
+     for(uint64_t i=1;i<=1000000;i++)
+     {
+          InsertNode(i,i);
+     }
+     endTime = clock();
+     std::cout << "Total Time of inserting: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
 
-    /* Read datum */
-    startTime = clock();
-    for(int i=1;i<=1000000;i++)
-    {
-      uint64_t value = i;
-      // d.insert(i,value,0);
-    }
-    endTime = clock();
-    std::cout << "Total Time of reading data: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+     /* Read datum */
+     startTime = clock();
+     for(int i=1;i<=1000000;i++)
+     {
+          uint64_t value = i;
+          // d.insert(i,value,0);
+     }
+     endTime = clock();
+     std::cout << "Total Time of reading data: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
-    /* data update */
-    startTime = clock();
-    for(int i=1;i<=3;i++)
-    {
-        uint64_t value = i;
-        // d.insert(i,value,0);
-    }
-    endTime = clock();
-    std::cout << "Total Time of datum update: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-
+     /* data update */
+     startTime = clock();
+     for(int i=1;i<=3;i++)
+     {
+          uint64_t value = i;
+          // d.insert(i,value,0);
+     }
+     endTime = clock();
+     std::cout << "Total Time of datum update: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+     
 }

@@ -20,7 +20,7 @@
 /* Global variable declaration! */
 extern uint32_t offset;
 extern std::unordered_map<uint64_t, std::vector<char>> BufferLog;
-
+extern std::unordered_map<uint64_t, std::vector<char>> ReadBuffer;
 
 /**
  *  ================= Synchronous write module====================  
@@ -35,7 +35,7 @@ int      SyncDelete(uint32_t offset);
 /**
  *  ================= Synchronous read module====================  
  **/
-SValue   syncRead(uint32_t offset);
+SValue   SyncRead(uint32_t offset);
 
 #endif
 

@@ -45,4 +45,10 @@ typedef struct SEntry
 }SEntry;
 
 
+/**
+ *  
+ **/
+typedef uint64_t PageType;
+typedef uint64_t BlockType;
+
 #endif //EXPERIMENT1_GLOBALVARIABLE_H

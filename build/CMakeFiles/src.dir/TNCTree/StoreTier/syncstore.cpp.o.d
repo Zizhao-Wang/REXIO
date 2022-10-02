@@ -176,14 +176,16 @@ CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o: \
  /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
  /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDWrite/../../TNCTree/StoreTier/syncstore.h \
  /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDRead/reader.h \
- /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDRead/../BlockManage/BlockInfo.h \
- /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm_cli.h \
- /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDRead/../BlockManage/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDRead/../../Auxizilary/VariablesTypes.h \
  /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDRead/../../Auxizilary/SysOutput.h \
- /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDRead/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDRead/../../TNCTree/StoreTier/syncstore.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDRead/../../TNCTree/StoreTier/asyncstore.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDRead/../../TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDRead/../../TNCTree/utility/types.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDRead/../../TNCTree/utility/../MemoryTier/Node.h \
  /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/IODisk/WriteDisk.h \
  /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/IODisk/../BlockManage/BlockInfo.h \
+ /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm_cli.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
  /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
  /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
  /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h

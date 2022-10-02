@@ -17,11 +17,12 @@
 #include <vector>
 #include "../../Auxizilary/GlobalVariable.h"
 #include "../MemoryTier/Node.h"
+#include "../../LRU/lru.h"
 
 /* Global variable declaration! */
 extern uint32_t offset;
 extern std::unordered_map<uint64_t, std::vector<char>> BufferLog;
-
+extern LRUCache lrucache;
 
 /**
  *  ================= Synchronous write module====================  
@@ -36,7 +37,7 @@ int      SyncDelete(uint32_t offset);
 /**
  *  ================= Synchronous read module====================  
  **/
-SValue   SyncRead(uint32_t offset);
+TNCEntry   SyncRead(uint32_t offset);
 
 #endif
 

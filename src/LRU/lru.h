@@ -39,52 +39,12 @@ public:
         this->capacity = cap; 
     }
     
-    TNCEntry* get(PageType page) 
-	{
-
-        auto it = HashMap.find(page);
-        // 访问的 key 不存在
-        if (it == HashMap.end())
-		{
-			return -1;
-		} 
-			
-        ReadNode temp = *HashMap[page];
-        cache.erase(HashMap[page]);
-        cache.push_front(temp);
-        // 更新 (key, value) 在 cache 中的位置
-        HashMap[page] = cache.begin();
-        return temp.data; 
-
-    }
-    
-    void put(int key, int value) 
-	{
-
-        /* 要先判断 key 是否已经存在 */ 
-        auto it = map.find(key);
-        if (it == map.end()) {
-            /* key 不存在，判断 cache 是否已满 */ 
-            if (cache.size() == cap) {
-                // cache 已满，删除尾部的键值对腾位置
-                // cache 和 map 中的数据都要删除
-                auto lastPair = cache.back();
-                int lastKey = lastPair.first;
-                map.erase(lastKey);
-                cache.pop_back();
-            }
-            // cache 没满，可以直接添加
-            cache.push_front(make_pair(key, value));
-            map[key] = cache.begin();
-        } else {
-            /* key 存在，更改 value 并换到队头 */
-            cache.erase(map[key]);
-            cache.push_front(make_pair(key, value));
-            map[key] = cache.begin();
-        }
-    }
-
+    TNCEntry* get(PageType page); 
+    void put(PageType page, ReadNode node);
 	bool IsLRUPosition(void);
+	bool IsLRUFull(void);
+	bool IsLRUPage(PageType);
+
 };
 
 

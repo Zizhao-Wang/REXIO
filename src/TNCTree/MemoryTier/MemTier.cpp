@@ -98,7 +98,7 @@ LocalHashNode* SearchNode(LocalHeadNode* Head,SKey hashkey)
 
 SValue Search(SKey key1)
 {
-    SValue val;
+    TNCEntry entry;
     LocalHeadNode * head = global[key1 & (1<<Globaldepth)-1]->local;
     LocalHashNode* node =  SearchNode(head, key1);
     if(node == nullptr)
@@ -106,9 +106,13 @@ SValue Search(SKey key1)
         return UINT64_MAX;
     }
 
-    val = SyncRead(node->offset);
+    entry = SyncRead(node->offset);
+    if(entry.key == key1)
+    {
+        return entry.val;
+    }
 
-    return val;
+    return UINT64_MAX;
 }
 
 

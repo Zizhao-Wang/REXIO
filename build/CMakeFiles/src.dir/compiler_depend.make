@@ -820,6 +820,12 @@ CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o: /home/femu/experiment/code2/src
   /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h \
   /home/femu/experiment/code2/src/TNCTree/MemoryTier/Node.h \
   /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h \
+  /home/femu/experiment/code2/src/LRU/lru.h \
+  /usr/include/c++/9/list \
+  /usr/include/c++/9/bits/stl_list.h \
+  /usr/include/c++/9/bits/allocated_ptr.h \
+  /usr/include/c++/9/bits/list.tcc \
+  /home/femu/experiment/code2/src/TNCTree/MemoryTier/Node.h \
   /home/femu/experiment/code2/src/TNCTree/StoreTier/asyncstore.h \
   /home/femu/experiment/code2/src/TNCTree/utility/types.h \
   /home/femu/experiment/code2/src/TNCTree/MemoryTier/Node.h \
@@ -1051,6 +1057,12 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: /home/femu/experiment/code2/sr
   /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h \
   /home/femu/experiment/code2/src/TNCTree/StoreTier/syncstore.h \
   /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h \
+  /home/femu/experiment/code2/src/TNCTree/MemoryTier/Node.h \
+  /home/femu/experiment/code2/src/LRU/lru.h \
+  /usr/include/c++/9/list \
+  /usr/include/c++/9/bits/stl_list.h \
+  /usr/include/c++/9/bits/allocated_ptr.h \
+  /usr/include/c++/9/bits/list.tcc \
   /home/femu/experiment/code2/src/TNCTree/MemoryTier/Node.h \
   /home/femu/liblightnvm/include/liblightnvm_cli.h \
   /home/femu/experiment/code2/src/Backend/IODisk/WriteDisk.h \
@@ -3689,6 +3701,12 @@ CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o: /home/femu/experiment/code2
   /usr/include/c++/9/bits/erase_if.h \
   /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h \
   /home/femu/experiment/code2/src/TNCTree/MemoryTier/Node.h \
+  /home/femu/experiment/code2/src/LRU/lru.h \
+  /usr/include/c++/9/list \
+  /usr/include/c++/9/bits/stl_list.h \
+  /usr/include/c++/9/bits/allocated_ptr.h \
+  /usr/include/c++/9/bits/list.tcc \
+  /home/femu/experiment/code2/src/TNCTree/MemoryTier/Node.h \
   /home/femu/experiment/code2/src/Auxizilary/SysOutput.h \
   /usr/include/c++/9/algorithm \
   /usr/include/c++/9/bits/stl_algo.h \
@@ -4275,6 +4293,12 @@ CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o: /home/femu/experiment/code
   /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h \
   /home/femu/experiment/code2/src/TNCTree/MemoryTier/Node.h \
   /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h \
+  /home/femu/experiment/code2/src/LRU/lru.h \
+  /usr/include/c++/9/list \
+  /usr/include/c++/9/bits/stl_list.h \
+  /usr/include/c++/9/bits/allocated_ptr.h \
+  /usr/include/c++/9/bits/list.tcc \
+  /home/femu/experiment/code2/src/TNCTree/MemoryTier/Node.h \
   /home/femu/experiment/code2/src/Backend/SSDWrite/writer.h \
   /home/femu/liblightnvm/include/liblightnvm.h \
   /usr/include/inttypes.h \
@@ -4536,6 +4560,12 @@ CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: /home/femu/experiment/code2/src/TNCTre
   /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h \
   /home/femu/experiment/code2/src/TNCTree/StoreTier/syncstore.h \
   /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h \
+  /home/femu/experiment/code2/src/TNCTree/MemoryTier/Node.h \
+  /home/femu/experiment/code2/src/LRU/lru.h \
+  /usr/include/c++/9/list \
+  /usr/include/c++/9/bits/stl_list.h \
+  /usr/include/c++/9/bits/allocated_ptr.h \
+  /usr/include/c++/9/bits/list.tcc \
   /home/femu/experiment/code2/src/TNCTree/MemoryTier/Node.h \
   /home/femu/experiment/code2/src/Backend/IODisk/WriteDisk.h \
   /home/femu/experiment/code2/src/Backend/BlockManage/BlockInfo.h \
@@ -5982,6 +6012,10 @@ CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment/code2/src/main.cpp \
 
 /home/femu/experiment/code2/src/Backend/SSDRead/reader.h:
 
+/usr/include/c++/9/forward_list:
+
+/usr/include/c++/9/bits/allocated_ptr.h:
+
 /usr/include/x86_64-linux-gnu/c++/9/bits/messages_members.h:
 
 /home/femu/experiment/code2/src/Backend/IODisk/WriteDisk.h:
@@ -6007,10 +6041,6 @@ CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment/code2/src/main.cpp \
 /usr/include/c++/9/bits/stl_heap.h:
 
 /home/femu/experiment/code2/src/LRU/lru.cpp:
-
-/usr/include/c++/9/forward_list:
-
-/usr/include/c++/9/bits/allocated_ptr.h:
 
 /usr/include/features.h:
 

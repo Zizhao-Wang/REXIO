@@ -167,19 +167,19 @@ CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/femu/experiment/code2/src/TNCTree/StoreTier/syncstore.cpp -o CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.s
 
-CMakeFiles/src.dir/TNCTree/StoreTier/LRU.cpp.o: CMakeFiles/src.dir/flags.make
-CMakeFiles/src.dir/TNCTree/StoreTier/LRU.cpp.o: /home/femu/experiment/code2/src/TNCTree/StoreTier/LRU.cpp
-CMakeFiles/src.dir/TNCTree/StoreTier/LRU.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/femu/experiment/code2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/src.dir/TNCTree/StoreTier/LRU.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/TNCTree/StoreTier/LRU.cpp.o -MF CMakeFiles/src.dir/TNCTree/StoreTier/LRU.cpp.o.d -o CMakeFiles/src.dir/TNCTree/StoreTier/LRU.cpp.o -c /home/femu/experiment/code2/src/TNCTree/StoreTier/LRU.cpp
+CMakeFiles/src.dir/LRU/lru.cpp.o: CMakeFiles/src.dir/flags.make
+CMakeFiles/src.dir/LRU/lru.cpp.o: /home/femu/experiment/code2/src/LRU/lru.cpp
+CMakeFiles/src.dir/LRU/lru.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/femu/experiment/code2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/src.dir/LRU/lru.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/LRU/lru.cpp.o -MF CMakeFiles/src.dir/LRU/lru.cpp.o.d -o CMakeFiles/src.dir/LRU/lru.cpp.o -c /home/femu/experiment/code2/src/LRU/lru.cpp
 
-CMakeFiles/src.dir/TNCTree/StoreTier/LRU.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/TNCTree/StoreTier/LRU.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/femu/experiment/code2/src/TNCTree/StoreTier/LRU.cpp > CMakeFiles/src.dir/TNCTree/StoreTier/LRU.cpp.i
+CMakeFiles/src.dir/LRU/lru.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/LRU/lru.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/femu/experiment/code2/src/LRU/lru.cpp > CMakeFiles/src.dir/LRU/lru.cpp.i
 
-CMakeFiles/src.dir/TNCTree/StoreTier/LRU.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/TNCTree/StoreTier/LRU.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/femu/experiment/code2/src/TNCTree/StoreTier/LRU.cpp -o CMakeFiles/src.dir/TNCTree/StoreTier/LRU.cpp.s
+CMakeFiles/src.dir/LRU/lru.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/LRU/lru.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/femu/experiment/code2/src/LRU/lru.cpp -o CMakeFiles/src.dir/LRU/lru.cpp.s
 
 CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o: /home/femu/experiment/code2/src/Backend/IODisk/WriteDisk.cpp
@@ -400,7 +400,7 @@ src_OBJECTS = \
 "CMakeFiles/src.dir/TNCTree/utility/types.cpp.o" \
 "CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.o" \
 "CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o" \
-"CMakeFiles/src.dir/TNCTree/StoreTier/LRU.cpp.o" \
+"CMakeFiles/src.dir/LRU/lru.cpp.o" \
 "CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o" \
 "CMakeFiles/src.dir/Backend/BlockManage/BlockInfo.cpp.o" \
 "CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o" \
@@ -427,7 +427,7 @@ src: CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.o
 src: CMakeFiles/src.dir/TNCTree/utility/types.cpp.o
 src: CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.o
 src: CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o
-src: CMakeFiles/src.dir/TNCTree/StoreTier/LRU.cpp.o
+src: CMakeFiles/src.dir/LRU/lru.cpp.o
 src: CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o
 src: CMakeFiles/src.dir/Backend/BlockManage/BlockInfo.cpp.o
 src: CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o

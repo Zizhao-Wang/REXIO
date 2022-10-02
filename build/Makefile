@@ -249,6 +249,30 @@ Backend/SSDWrite/writer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.s
 .PHONY : Backend/SSDWrite/writer.cpp.s
 
+LRU/lru.o: LRU/lru.cpp.o
+.PHONY : LRU/lru.o
+
+# target to build an object file
+LRU/lru.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LRU/lru.cpp.o
+.PHONY : LRU/lru.cpp.o
+
+LRU/lru.i: LRU/lru.cpp.i
+.PHONY : LRU/lru.i
+
+# target to preprocess a source file
+LRU/lru.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LRU/lru.cpp.i
+.PHONY : LRU/lru.cpp.i
+
+LRU/lru.s: LRU/lru.cpp.s
+.PHONY : LRU/lru.s
+
+# target to generate assembly for a file
+LRU/lru.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LRU/lru.cpp.s
+.PHONY : LRU/lru.cpp.s
+
 LSM-Tree/LsmTree.o: LSM-Tree/LsmTree.cpp.o
 .PHONY : LSM-Tree/LsmTree.o
 
@@ -537,30 +561,6 @@ TNCTree/MemoryTier/Node.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.s
 .PHONY : TNCTree/MemoryTier/Node.cpp.s
 
-TNCTree/StoreTier/LRU.o: TNCTree/StoreTier/LRU.cpp.o
-.PHONY : TNCTree/StoreTier/LRU.o
-
-# target to build an object file
-TNCTree/StoreTier/LRU.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/StoreTier/LRU.cpp.o
-.PHONY : TNCTree/StoreTier/LRU.cpp.o
-
-TNCTree/StoreTier/LRU.i: TNCTree/StoreTier/LRU.cpp.i
-.PHONY : TNCTree/StoreTier/LRU.i
-
-# target to preprocess a source file
-TNCTree/StoreTier/LRU.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/StoreTier/LRU.cpp.i
-.PHONY : TNCTree/StoreTier/LRU.cpp.i
-
-TNCTree/StoreTier/LRU.s: TNCTree/StoreTier/LRU.cpp.s
-.PHONY : TNCTree/StoreTier/LRU.s
-
-# target to generate assembly for a file
-TNCTree/StoreTier/LRU.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/StoreTier/LRU.cpp.s
-.PHONY : TNCTree/StoreTier/LRU.cpp.s
-
 TNCTree/StoreTier/asyncstore.o: TNCTree/StoreTier/asyncstore.cpp.o
 .PHONY : TNCTree/StoreTier/asyncstore.o
 
@@ -705,6 +705,9 @@ help:
 	@echo "... Backend/SSDWrite/writer.o"
 	@echo "... Backend/SSDWrite/writer.i"
 	@echo "... Backend/SSDWrite/writer.s"
+	@echo "... LRU/lru.o"
+	@echo "... LRU/lru.i"
+	@echo "... LRU/lru.s"
 	@echo "... LSM-Tree/LsmTree.o"
 	@echo "... LSM-Tree/LsmTree.i"
 	@echo "... LSM-Tree/LsmTree.s"
@@ -741,9 +744,6 @@ help:
 	@echo "... TNCTree/MemoryTier/Node.o"
 	@echo "... TNCTree/MemoryTier/Node.i"
 	@echo "... TNCTree/MemoryTier/Node.s"
-	@echo "... TNCTree/StoreTier/LRU.o"
-	@echo "... TNCTree/StoreTier/LRU.i"
-	@echo "... TNCTree/StoreTier/LRU.s"
 	@echo "... TNCTree/StoreTier/asyncstore.o"
 	@echo "... TNCTree/StoreTier/asyncstore.i"
 	@echo "... TNCTree/StoreTier/asyncstore.s"

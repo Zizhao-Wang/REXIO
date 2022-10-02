@@ -20,8 +20,10 @@
 
 
 int indexs=0;
+int LogIndex = 0;
 TNCEntry * Pagedata = nullptr;
 std::unordered_map<uint64_t,uint64_t> ChunkLog;
+uint64_t * LogPage;
 
 /* function is used to update pointers. */
 int InfoRenew(size_t scale)
@@ -37,9 +39,6 @@ int InfoRenew(size_t scale)
     //printf("values after renewed: sector pointer: %lu,chunk pointer: %lu \n",sectorpointer,chunkusage[sectorpointer/4096]);
     return 0;
 }
-
-
-
 
 
 /* 
@@ -69,8 +68,7 @@ int SinglePageWrite()
     err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
     if(err == 0) 
     {
-        //printf("Insert completion! Insert sectors: %ld\n",sectorpointer);
-        InfoRenew(ws_min);   /* update pointers! */
+        PointerRenew(ws_min);   /* update pointers! */
     }
     else
     {
@@ -98,13 +96,13 @@ int PageLogWrite(uint64_t BlockId)
     char * databuffer = (char*) Pagedata;
     for(int i=0;i<2048*8;i++)
     {
-        bp->bufs->write[i] = databuffer[i];
+        bp->bufs->write[i] = BufferLog[BlockId][i];
     }
     err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
     if(err == 0) 
     {
-        //printf("Insert completion! Insert sectors: %ld\n",sectorpointer);
-        InfoRenew(ws_min);   /* update pointers! */
+        LogPage[LogIndex++] = sectorpointer;
+        PointerRenew(ws_min);   /* update pointers! */
     }
     else
     {

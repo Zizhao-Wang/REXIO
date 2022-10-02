@@ -21,7 +21,8 @@
 /* Global variable declaration! */
 extern uint32_t offset;
 extern std::unordered_map<uint64_t, std::vector<char>> BufferLog;
-extern std::unordered_map<uint64_t, TNCEntry*> ReadBuffer;
+extern ReadNode* ReadBuffer;
+
 
 /**
  *  ================= Synchronous write module====================  

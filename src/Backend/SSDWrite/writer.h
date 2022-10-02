@@ -29,7 +29,11 @@ extern TNCEntry * Pagedata;
 
 
 
+int InfoRenew(size_t scale);
+
+
 /**
+ * ============= writer methods module ===============
  *  Function declartion for writing data into one or more pages:
  **/
 

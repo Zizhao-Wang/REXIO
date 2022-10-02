@@ -130,7 +130,7 @@ int RandomLevel()
 int InsertNode(SKey hashkey, SValue hashvalue)
 {
     /*  Insert the hash value into special skip-list. */
-    LocalHeadNode * head = global[hashvalue & (1<<Globaldepth)-1]->local;
+    LocalHeadNode * head = global[hashkey & (1<<Globaldepth)-1]->local;
     LocalHashNode * temp = head->HashNode;
     LocalHashNode * update[MaxLevel];
 
@@ -193,7 +193,7 @@ int InsertNode(SKey hashkey, SValue hashvalue)
  *   =================Node deletion module====================  
  **/
 
-bool DeleteNode(LocalHeadNode * Head, unsigned int hashvalue)
+bool DeleteValue(LocalHeadNode * Head, unsigned int hashvalue)
 {
     LocalHashNode * node = SearchNode(Head,hashvalue);
     if(node->flag!=0)
@@ -204,6 +204,12 @@ bool DeleteNode(LocalHeadNode * Head, unsigned int hashvalue)
     return true;
 }
 
+int Delete(SKey key1)
+{
+    LocalHeadNode * head = global[key1 & (1<<Globaldepth)-1]->local;
+    bool fl;
+    return 0;
+}
 
 /**
  *  =================Hash table initialization module====================  

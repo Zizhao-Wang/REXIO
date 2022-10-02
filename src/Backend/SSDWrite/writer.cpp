@@ -24,6 +24,24 @@ int indexs=0;
 TNCEntry * Pagedata = nullptr;
 
 
+/* function is used to update pointers. */
+int InfoRenew(size_t scale)
+{
+
+    sectorpointer+=scale; //update sector pointer.
+    chunkusage[sectorpointer/4096]= chunkusage[sectorpointer/4096] + scale;
+    
+    if(sectorpointer%4096 == 3536)
+    {
+        sectorpointer += 140*4; 
+    } 
+    //printf("values after renewed: sector pointer: %lu,chunk pointer: %lu \n",sectorpointer,chunkusage[sectorpointer/4096]);
+    return 0;
+}
+
+
+
+
 
 /* 
  * Write functions. 
@@ -54,7 +72,7 @@ int SinglePageWrite()
     if(err == 0) 
     {
         //printf("Insert completion! Insert sectors: %ld\n",sectorpointer);
-        PointerRenew(ws_min);   /* update pointers! */
+        InfoRenew(ws_min);   /* update pointers! */
     }
     else
     {

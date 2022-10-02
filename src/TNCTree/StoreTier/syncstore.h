@@ -19,6 +19,8 @@ extern uint32_t offset;
 
 uint32_t SyncWrite(SKey key1, SValue value); 
 
+int      SyncDelete(SKey key1, uint32_t offset);
+
 SValue   syncRead(uint32_t offset);
 
 

@@ -255,9 +255,10 @@ int ExtendHashTableInitialize()
      * }
      **/
     
-    printf("\n ========Index information========: \
-            \n Initialization successful! ");
+    printf("\n ================ Index information ================: \
+            \n ---- Initialization successful!   \
+            \n ---- 20 nodes tree has been initialized!\n");
     
 
-    return 1;
+    return 0;
 }

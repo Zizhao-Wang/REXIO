@@ -18,7 +18,7 @@
 int TNCtreeInit(void)
 {
 
-     int Createflag;
+     int Createflag = ExtendHashTableInitialize();
      if(Createflag != 0)
      {
           return -1;

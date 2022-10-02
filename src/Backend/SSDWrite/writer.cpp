@@ -21,7 +21,7 @@
 
 uint_32 blockoffset = 0;
 int indexs=0;
-uint64_t * Pagedata = (uint64_t *)malloc(bp->geo->l.nbytes);
+uint64_t * Pagedata = nullptr;
 
 
 

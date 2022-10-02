@@ -10,7 +10,8 @@ uint32_t SyncWrite(SKey key1, SValue value)
     uint32_t offset = 0;
     uint32_t curblock = 0;
     uint32_t curpage = 0;
-	if(indexs >= CalculatePageCapacity(sizeof(TNCEntry)))
+
+	if(indexs >= 2048)
     {
         curblock = sectorpointer%4096>0?sectorpointer%4096<<21:0;
         curpage  = sectorpointer/4096 << 11; 

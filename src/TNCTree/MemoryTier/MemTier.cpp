@@ -156,8 +156,7 @@ int InsertNode(SKey hashkey, SValue hashvalue)
         {
             temp->flag =1;
             // write into disk
-            temp->offset = SyncWrite(hashkey,hashvalue);
-            //printf("%u\n",temp->offset);
+            temp->offset = SyncWrite(hashkey,hashvalue); //printf("%u\n",temp->offset);
             ++head->Nodenumber;
             return 0;
         }

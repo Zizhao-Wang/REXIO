@@ -25,7 +25,7 @@
 /*  Global variables for SSD write definition.  */
 extern uint32_t blockoffset;
 extern int indexs;
-extern uint64_t * Pagedata;
+extern TNCEntry * Pagedata;
 
 
 

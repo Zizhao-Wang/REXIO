@@ -8,24 +8,22 @@ uint32_t SyncWrite(SKey key1, SValue value)
 
     /* Returned offset */
     uint32_t offset = 0;
-    uint32_t curblock = 0;
-    uint32_t curpage = 0;
 
-	if(indexs >= 2048)
+
+	if(indexs >= CalculatePageCapacity(sizeof(TNCEntry)))
     {
-        curblock = sectorpointer%4096>0?sectorpointer%4096<<21:0;
-        curpage  = sectorpointer/4096 << 11; 
+
         SinglePageWrite();
+        offset += sectorpointer%4096==0 && sectorpointer!=0?0x400000:0x00000000 ;
+        offset += 0x1000; 
         indexs = 0;
     }
 	 
-	Pagedata[indexs++] = key1;
-	Pagedata[indexs++] = value;
-	
+	Pagedata[indexs].key = key1;
+	Pagedata[indexs].val = value;
+	++indexs;
 
-    offset = indexs;
-    curblock == 0 ? : offset & curblock;
-    offset &= curpage;
+    ++offset;
 
     return offset;
 }

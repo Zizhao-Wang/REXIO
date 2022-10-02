@@ -36,9 +36,7 @@ extern size_t blockpointer;
 extern struct nvm_bp* bp;
 extern bool flag;
 
-extern uint_32 blockoffset;
-extern int indexs;
-extern uint64_t Pagedata[2050];
+
 
 /* Initialize the global block pointer */
 extern std::unordered_map<uint64_t,uint64_t> chunkusage;

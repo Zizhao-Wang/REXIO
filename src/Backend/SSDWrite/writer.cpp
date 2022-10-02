@@ -21,28 +21,7 @@
 
 uint_32 blockoffset   = 0;
 int indexs=0;
-uint64_t Pagedata[2050];
-
-
-
-/* function is used to update pointers. */
-int PointerRenew(size_t sectors)
-{
-
-    sectorpointer+=sectors; //update sector pointer.
-
-    if(sectorpointer >= 4096 && sectorpointer % 4096 == 0)
-    {
-        chunkusage[sectorpointer/4096 -1]= 4096; //update chunk pointer.
-    }
-    else
-    {
-        chunkusage[sectorpointer/4096]= chunkusage[sectorpointer/4096] + sectors;
-    } 
-    //printf("values after renewed: sector pointer: %lu,chunk pointer: %lu \n",sectorpointer,chunkusage[sectorpointer/4096]);
-    return 0;
-
-}
+std::vector<TNCEntry> Pagedata;
 
 
 
@@ -74,7 +53,7 @@ int WriteintoSector()
 		//printf("aidx: %lu addrs[aidx].val : %lu chunk_addrs[cidx].val %lu addrs[aidx].l.sectr %lu \n",aidx,addrs[aidx].val,chunk_addrs[cidx].val,addrs[aidx].l.sectr);
 	}
 
-    char * databuffer = (char*)Pagedata;
+	char * databuffer;
     for(int i=0;i<2048*8;i++)
         bp->bufs->write[i] = databuffer[i];
     err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
@@ -99,52 +78,6 @@ int WriteintoSector()
     }
     
     return bpn;
-}
-
-
-uint_32 SSD_write(uint64_t value) 
-{
-    int err = EXIT_FAILURE;   
-
-    if(indexs >= 2048)
-    {
-        WriteintoSector();
-        indexs = 0;
-    }
-
-
-    if(indexs <= 2047)
-    {
-        Pagedata [indexs++] = value;
-    }
-
-    /*
-     * Return offset;
-     */
-    uint_32 ID = 0;
-
-    /*
-     * Block ID and page ID.
-     * Current offset of block and page.
-     */
-    uint_32 curblock = 0x01;
-    uint_32 curpage = 0x01;
-
-
-    /* Maximum of page and block! */
-    uint_32 bs = 256*1024;
-    uint_32 ps = 16*1024;
-
-    uint_32 size= sizeof(value);
-    blockoffset+=size;
-
-    if(blockoffset >= bs)
-    {
-        curblock++;
-        blockoffset=0x00;
-    }
-
-    return blockoffset;
 }
 
 

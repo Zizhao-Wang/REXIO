@@ -1,15 +1,23 @@
 #include "syncstore.h"
 #include "../../Backend/SSDWrite/writer.h"
 #include "../../Backend/SSDRead/reader.h"
+#include "../../Backend/IODisk/WriteDisk.h"
 
-uint32_t syncWrite(Skey key, SValue value)
+uint32_t syncWrite(Skey key1, SValue value)
 {
 
-	if(indexs >= 2048)
+	if(indexs >= CalculatePageCapacity(sizeof()))
     {
         WriteintoSector();
         indexs = 0;
     }
+	else
+	{
+		TNCEntry entry;
+		entry.key = key1;
+		entry.val = value;
+		Pagedata.emplace_back(entry);
+	}
 
 
     if(indexs <= 2047)

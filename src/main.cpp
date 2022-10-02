@@ -63,7 +63,7 @@ int main(int argc, char **argv)
 
     // EXHashing1();
 
-       TNCtreeStart();
+       TNCtreePort();
 
     // LHashPort();
 

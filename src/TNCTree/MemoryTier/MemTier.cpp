@@ -128,19 +128,14 @@ int RandomLevel()
 
 }*/
 
-bool InsertNode(uint64_t hashvalue)
+int InsertNode(SKey hashkey, SValue hashvalue)
 {
-    /*
-     *  Local variables.
-     */
+    /*  Insert the hash value into special skip-list. */
     LocalHeadNode * head = global[hashvalue & (1<<Globaldepth)-1]->local;
-    //printf("%d\n",hashvalue&(1<<Globaldepth)-1);
     LocalHashNode * temp = head->HashNode;
     LocalHashNode * update[MaxLevel];
 
-    // level
     int curLevel = head->CurrentLevel-1;
-
 
     for(int i=curLevel; i>=0; --i)
     {
@@ -156,7 +151,7 @@ bool InsertNode(uint64_t hashvalue)
     {
         if(temp->flag == 1)
         {
-            return true;
+            return 0;
         }
         else
         {
@@ -165,7 +160,7 @@ bool InsertNode(uint64_t hashvalue)
             temp->offset = SSD_write(hashvalue);
             //printf("%u\n",temp->offset);
             ++head->Nodenumber;
-            return true;
+            return 0;
         }
     }
     else
@@ -185,28 +180,15 @@ bool InsertNode(uint64_t hashvalue)
         ++head->Nodenumber;
         temp = Initialization(hashvalue,offset1);
         if(temp == nullptr)
-            return false;
+            return -1;
         for(int i=0;i<v;++i)
         {
             temp->next[i] = update[i]->next[i];
             update[i]->next[i] = temp;
         }
     }
-    return true;
-}
-
-int Insert(SKey hashvalue, SValue val)
-{
-
-    /*  Insert the hash value into special skip-list. */
-    if(InsertNode(hashvalue))
-    {
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
+    
+    return 0;
 }
 
 

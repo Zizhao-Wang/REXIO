@@ -38,9 +38,8 @@ int RandomLevel();
 
 LocalHeadNode * NodeSplit(LocalHeadNode * head);
 
-bool InsertNode(uint64_t hashvalue);
+int InsertNode(SKey hashkey, SValue hashvalue);
 
-int Insert(SKey hashvalue, SValue);
 
 
 /**

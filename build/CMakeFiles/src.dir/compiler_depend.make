@@ -4075,6 +4075,13 @@ CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: /home/femu/experiment/code2/src/TNCTre
   /home/femu/experiment/code2/src/TNCTree/MemoryTier/Node.h \
   /home/femu/experiment/code2/src/Auxizilary/VariablesTypes.h \
   /home/femu/experiment/code2/src/Auxizilary/SysOutput.h \
+  /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h \
+  /home/femu/experiment/code2/src/Backend/IODisk/WriteDisk.h \
+  /home/femu/experiment/code2/src/Backend/BlockManage/BlockInfo.h \
+  /home/femu/liblightnvm/include/liblightnvm_cli.h \
+  /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h \
+  /home/femu/experiment/code2/src/Auxizilary/VariablesTypes.h \
+  /home/femu/experiment/code2/src/Auxizilary/SysOutput.h \
   /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h
 
 CMakeFiles/src.dir/TNCTree/utility/types.cpp.o: /home/femu/experiment/code2/src/TNCTree/utility/types.cpp \

@@ -174,8 +174,7 @@ int InsertNode(SKey hashkey, SValue hashvalue)
             head->CurrentLevel = v+1;
         }
         //write into disk
-        uint_32 offset1 = SyncWrite(hashkey,hashvalue);
-        //printf("%u\n",temp->offset);
+        uint_32 offset1 = SyncWrite(hashkey,hashvalue);  //printf("%u\n",temp->offset);
         ++head->Nodenumber;
         temp = Initialization(hashvalue,offset1);
         if(temp == nullptr)

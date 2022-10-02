@@ -16,7 +16,7 @@
 #include <vector>
 #include <unordered_map>
 #include <liblightnvm.h>
-#include "../BlockManage/BlockInfo.h"
+#include "../../TNCTree/MemoryTier/Node.h"
 #include "../../Auxizilary/VariablesTypes.h"
 #include "../../Auxizilary/SysOutput.h"
 #include "../../Auxizilary/GlobalVariable.h"
@@ -25,11 +25,7 @@
 /*  Global variables for SSD write definition.  */
 extern uint32_t blockoffset;
 extern int indexs;
-extern uint64_t Pagedata[2050];
-
-
-/* function is used to update pointers.  */
-int PointerRenew(size_t sectors);
+extern std::vector<TNCEntry> Pagedata;
 
 
 
@@ -37,8 +33,7 @@ int PointerRenew(size_t sectors);
  *  Function declartion for writing data into one or more pages:
  **/
 
-// Insert page-level key-value pairs into physicals for TNC-tree.
-uint64_t SinglePageWrite();
+uint64_t SinglePageWrite(); // Insert page-level key-value pairs into physicals for TNC-tree.
 
 
 

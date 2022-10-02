@@ -195,12 +195,10 @@ bool InsertNode(uint64_t hashvalue)
     return true;
 }
 
-int Insert(uint64_t hashvalue)
+int Insert(SKey hashvalue, SValue val)
 {
 
-    /*
-     * Insert the hash value into special skip-list.
-     */
+    /*  Insert the hash value into special skip-list. */
     if(InsertNode(hashvalue))
     {
         return 1;
@@ -209,7 +207,6 @@ int Insert(uint64_t hashvalue)
     {
         return 0;
     }
-
 }
 
 
@@ -254,11 +251,6 @@ int ExtendHashTableInitialize()
      * printf("NIL verification %u\n",global[i]->local->HashNode->next[9]->Hashvalue);
      * }
      **/
-    
-    printf("\n ================ Index information ================: \
-            \n ---- Initialization successful!   \
-            \n ---- 20 nodes tree has been initialized!\n");
-    
-
     return 0;
+
 }

@@ -11,7 +11,8 @@
 #ifndef EXPERIMENT1_HASHTABLE_H
 #define EXPERIMENT1_HASHTABLE_H
 
-#include <cstdint> 
+#include <stdint.h>
+#include "../../Auxizilary/GlobalVariable.h" 
 #include "Node.h"
 
 /**
@@ -39,7 +40,7 @@ LocalHeadNode * NodeSplit(LocalHeadNode * head);
 
 bool InsertNode(uint64_t hashvalue);
 
-int Insert(uint64_t hashvalue);
+int Insert(SKey hashvalue, SValue);
 
 
 /**

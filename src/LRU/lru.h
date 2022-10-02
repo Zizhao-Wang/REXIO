@@ -39,21 +39,23 @@ public:
         this->capacity = cap; 
     }
     
-    int get(PageType page) 
+    TNCEntry* get(PageType page) 
 	{
+
         auto it = HashMap.find(page);
         // 访问的 key 不存在
-        if (it == map.end())
+        if (it == HashMap.end())
 		{
 			return -1;
 		} 
 			
-        pair<int, int> kv = *map[key];
-        cache.erase(map[key]);
-        cache.push_front(kv);
+        ReadNode temp = *HashMap[page];
+        cache.erase(HashMap[page]);
+        cache.push_front(temp);
         // 更新 (key, value) 在 cache 中的位置
-        map[key] = cache.begin();
-        return kv.second; // value
+        HashMap[page] = cache.begin();
+        return temp.data; 
+
     }
     
     void put(int key, int value) 

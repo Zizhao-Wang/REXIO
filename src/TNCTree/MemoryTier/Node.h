@@ -62,15 +62,7 @@ typedef struct TNCEntry
     SValue val;
 }TNCEntry;
 
-typedef struct ReadNode
-{
 
-	TNCEntry * data;
-	PageType   PageId;
-    struct ReadNode *pre;
-	struct ReadNode *next;
-
-}ReadNode;
 
 
 

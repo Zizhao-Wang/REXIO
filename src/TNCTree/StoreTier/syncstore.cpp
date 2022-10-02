@@ -5,8 +5,6 @@
 
 uint32_t offset = 0;
 std::unordered_map<uint64_t, std::vector<char>> BufferLog;
-ReadNode* ReadBuffer;
-
 
 uint32_t SyncWrite(SKey key1, SValue value)
 {
@@ -55,6 +53,7 @@ int  SyncDelete(uint32_t offset)
 }
 
 
+
 SValue  SyncRead(uint32_t offset)
 {
     uint64_t PageId = (uint64_t)((offset>>12)&0x3FF);
@@ -63,7 +62,7 @@ SValue  SyncRead(uint32_t offset)
     if(got == ReadBuffer.end() && ReadBuffer.size()<10)
     {
         TNCEntry* data = TNCEntryRead(PageId);
-        ReadBuffer[PageId] = data;    
+        LRUPut(data);    
     }
     else if(got == ReadBuffer.end() && ReadBuffer.size()>=10)
     {

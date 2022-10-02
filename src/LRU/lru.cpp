@@ -2,6 +2,9 @@
 
 std::unordered_map<uint64_t, ReadNode*> ReadBuffer;
 
+
+
+
 int LRUPut(TNCEntry * data)
 {
 
@@ -11,11 +14,11 @@ int LRUPut(TNCEntry * data)
 
 int LRUGet(PageType PageId)
 {
-    return 0;
 
+    return 0;
 }
 
-bool IsLRUPosition()
+bool LRUCache::IsLRUPosition(void)
 {
-	return Read
+	return ReadBuffer.size()<LRUCAPACITY;
 }

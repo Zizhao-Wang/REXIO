@@ -36,6 +36,11 @@
 },
 {
   "directory": "/home/femu/experiment/code2/build",
+  "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/TNCTree/StoreTier/LRU.cpp.o -c /home/femu/experiment/code2/src/TNCTree/StoreTier/LRU.cpp",
+  "file": "/home/femu/experiment/code2/src/TNCTree/StoreTier/LRU.cpp"
+},
+{
+  "directory": "/home/femu/experiment/code2/build",
   "command": "/usr/bin/c++  -I/home/femu/experiment/code2/src/../../../liblightnvm/include  -fopenmp -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o -c /home/femu/experiment/code2/src/Backend/IODisk/WriteDisk.cpp",
   "file": "/home/femu/experiment/code2/src/Backend/IODisk/WriteDisk.cpp"
 },

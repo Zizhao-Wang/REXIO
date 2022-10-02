@@ -14,23 +14,25 @@
 #include <cstdint> 
 #include "Node.h"
 
-/* ================= Node initialization module ==================== */
+/**
+ *  ================= Node initialization module ==================== 
+ **/
 bool LocalGeneration(GlobalHashNode * global);
 
 bool DoubleHashtable();
 
 
-/* ================= Node Searching module ==================== */
-   /*
-    *  Searching
-    */
+/**
+ *  =================  Search module  ==================== 
+ **/
+
 LocalHashNode* SearchNode(LocalHeadNode* Head,unsigned int hashvalue);
 
 
-/*  ================= Node Insertion module ====================  */
-    /*
-     * Insertation
-     */
+/**  
+ * ================= Insertion module ====================  
+ **/
+
 int RandomLevel();
 
 LocalHeadNode * NodeSplit(LocalHeadNode * head);
@@ -40,11 +42,15 @@ bool InsertNode(uint64_t hashvalue);
 int Insert(uint64_t hashvalue);
 
 
-/*  =================Node deletion module====================  */
+/**
+ *  ================= deletion module====================  
+ **/
 bool DeleteNode(LocalHeadNode * Head, unsigned int hashvalue);
 
 
-/*  =================Hash table initialization module====================  */
+/**  
+ * ================= Memory-tier initialization module ====================  
+ **/
 int ExtendHashTableInitialize();
 
 

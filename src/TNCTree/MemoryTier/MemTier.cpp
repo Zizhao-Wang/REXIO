@@ -78,6 +78,11 @@ bool DoubleHashtable()
  * 3. return value if data is in the physical block   
  **/
 
+int Search()
+{
+    return 0;
+}
+
 LocalHashNode* SearchNode(LocalHeadNode* Head,unsigned int hashvalue)
 {
     if(Head->CurrentLevel == 1)
@@ -250,7 +255,8 @@ int ExtendHashTableInitialize()
      * }
      **/
     
-    printf("\n========Index information========:\n");
+    printf("\n ========Index information========: \
+            \n Initialization successful! ");
     
 
     return 1;

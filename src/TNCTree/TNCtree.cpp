@@ -43,7 +43,7 @@ void TNCtreeStart(void)
 
      /* Write datum */
     startTime = clock();
-    for(uint64_t i=1;i<=10000000;i++)
+    for(uint64_t i=1;i<=100000;i++)
     {
       if(i>=10000 && i%10000 ==0)
       {

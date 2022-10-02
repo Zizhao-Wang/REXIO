@@ -15,7 +15,6 @@
 #define EXPERIMENT1_WRITEDISK_H
 
 
-
 #include <stdint.h>
 #include <vector>
 #include <unordered_map>
@@ -30,15 +29,18 @@ using namespace std;
 /* 
  * Global variables for SSD write definition. 
  */
-extern uint_32 blockoffset;
 extern size_t writepointer;
 extern size_t sectorpointer;
 extern size_t blockpointer;
-extern int indexs;
+
 extern struct nvm_bp* bp;
 extern bool flag;
+
+extern uint_32 blockoffset;
+extern int indexs;
 extern uint64_t Pagedata[2050];
-// Initialize the global block pointer
+
+/* Initialize the global block pointer */
 extern std::unordered_map<uint64_t,uint64_t> chunkusage;
 
 

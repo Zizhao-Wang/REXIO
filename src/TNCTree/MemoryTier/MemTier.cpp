@@ -85,7 +85,7 @@ LocalHashNode* SearchNode(LocalHeadNode* Head,SKey hashkey)
     LocalHashNode *node = Head->HashNode ;
     for(int i=curLevel; i>=0; --i)
     {
-        while(node->next[i]->Hashkey < hashkey)
+        while(node->next[i]->Hashvalue < hashkey)
         {
             node = node->next[i];
         }
@@ -97,6 +97,7 @@ LocalHashNode* SearchNode(LocalHeadNode* Head,SKey hashkey)
 
 SValue Search(SKey key1)
 {
+    SValue val;
     LocalHeadNode * head = global[key1 & (1<<Globaldepth)-1]->local;
     LocalHashNode* node =  SearchNode(head, key1);
     if(node == nullptr)
@@ -104,8 +105,9 @@ SValue Search(SKey key1)
         return UINT64_MAX;
     }
 
-    
-    return ;
+    val = SyncRead(node->offset);
+
+    return val;
 }
 
 

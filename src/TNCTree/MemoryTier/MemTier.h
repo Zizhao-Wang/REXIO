@@ -45,8 +45,8 @@ int InsertNode(SKey hashkey, SValue hashvalue);
 /**
  *  ================= deletion module====================  
  **/
-bool DeleteNode(LocalHeadNode * Head, unsigned int hashvalue);
-
+bool DeleteValue(LocalHeadNode * Head, unsigned int hashvalue);
+int Delete(SKey key1);
 
 /**  
  * ================= Memory-tier initialization module ====================  

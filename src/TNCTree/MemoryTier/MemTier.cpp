@@ -77,12 +77,7 @@ bool DoubleHashtable()
  * 3. return value if data is in the physical block   
  **/
 
-int Search()
-{
-    return 0;
-}
-
-LocalHashNode* SearchNode(LocalHeadNode* Head,unsigned int hashvalue)
+LocalHashNode* SearchNode(LocalHeadNode* Head,SKey hashkey)
 {
     if(Head->CurrentLevel == 1)
         return nullptr;
@@ -90,7 +85,7 @@ LocalHashNode* SearchNode(LocalHeadNode* Head,unsigned int hashvalue)
     LocalHashNode *node = Head->HashNode ;
     for(int i=curLevel; i>=0; --i)
     {
-        while(node->next[i]->Hashvalue < hashvalue)
+        while(node->next[i]->Hashkey < hashkey)
         {
             node = node->next[i];
         }
@@ -99,6 +94,21 @@ LocalHashNode* SearchNode(LocalHeadNode* Head,unsigned int hashvalue)
     node = node->next[0];
     return node;
 }
+
+SValue Search(SKey key1)
+{
+    LocalHeadNode * head = global[key1 & (1<<Globaldepth)-1]->local;
+    LocalHashNode* node =  SearchNode(head, key1);
+    if(node == nullptr)
+    {
+        return UINT64_MAX;
+    }
+
+    
+    return ;
+}
+
+
 
 
 /**
@@ -198,18 +208,23 @@ bool DeleteValue(LocalHeadNode * Head, unsigned int hashvalue)
     LocalHashNode * node = SearchNode(Head,hashvalue);
     if(node->flag!=0)
     {
-        //write into disk(meta data).
+        SyncDelete(node->offset);   //write into disk(meta data).
         node->flag=0;
     }
-    
+
     return true;
 }
 
 int Delete(SKey key1)
 {
     LocalHeadNode * head = global[key1 & (1<<Globaldepth)-1]->local;
-    bool fl;
-    return 0;
+    bool flag = DeleteValue(head, key1);
+    if(flag)
+    {
+        return 0;
+    }
+    return -1;
+    
 }
 
 /**

@@ -5,6 +5,8 @@
 
 uint32_t offset = 0;
 std::unordered_map<uint64_t, std::vector<char>> BufferLog;
+std::unordered_map<uint64_t, std::vector<char>> ReadBuffer;
+
 
 uint32_t SyncWrite(SKey key1, SValue value)
 {
@@ -42,6 +44,27 @@ int  SyncDelete(uint32_t offset)
         BufferLog[BlockId].emplace_back(*temp);
     }
     delete(temp);
+
+    if(BufferLog[BlockId].size() == CalculatePageCapacity(4))
+    {
+        PageLogWrite(BlockId);
+        BufferLog.clear();    
+    }
+
+    return 0;
+}
+
+
+SValue  SyncRead(uint32_t offset)
+{
+    uint64_t PageId = (uint64_t)((offset>>12)&0x3FF);
+
+    std::unordered_map<uint64_t, std::vector<char>> got = ReadBuffer.find(PageId);
+    if(got == ReadBuffer.end())
+    {
+        
+    }
+
 
     if(BufferLog[BlockId].size() == CalculatePageCapacity(4))
     {

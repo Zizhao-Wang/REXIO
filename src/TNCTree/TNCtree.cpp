@@ -16,6 +16,7 @@
 #include "MemoryTier/MemTier.h"
 #include "../Backend/SSDWrite/writer.h"
 #include "../Backend/IODisk/WriteDisk.h"
+#include "StoreTier/syncstore.h"
 
 void TNCtreeInit(void)
 {
@@ -28,10 +29,12 @@ void TNCtreeInit(void)
           EMessageOutput("Index initialized failure!",1578);
      }
         
-     for(int i=0;i<100;i++)
+     for(size_t i=0;i<100;i++)
      {
-        ChunkLog[i] = 0;
+          ChunkLog[i] = 0;
      }
+
+     LogPage = new uint64_t[205];
 
      if(Createflag == 0)
      {

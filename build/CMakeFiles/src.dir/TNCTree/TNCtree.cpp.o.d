@@ -175,10 +175,13 @@ CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: \
  /home/femu/experiment/code2/src/TNCTree/../Backend/SSDWrite/../../Auxizilary/VariablesTypes.h \
  /home/femu/experiment/code2/src/TNCTree/../Backend/SSDWrite/../../Auxizilary/SysOutput.h \
  /home/femu/experiment/code2/src/TNCTree/../Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/TNCTree/../Backend/SSDWrite/../../TNCTree/StoreTier/syncstore.h \
+ /home/femu/experiment/code2/src/TNCTree/../Backend/SSDWrite/../../TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
  /home/femu/experiment/code2/src/TNCTree/../Backend/IODisk/WriteDisk.h \
  /home/femu/experiment/code2/src/TNCTree/../Backend/IODisk/../BlockManage/BlockInfo.h \
  /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm_cli.h \
  /home/femu/experiment/code2/src/TNCTree/../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
  /home/femu/experiment/code2/src/TNCTree/../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
  /home/femu/experiment/code2/src/TNCTree/../Backend/IODisk/../../Auxizilary/SysOutput.h \
- /home/femu/experiment/code2/src/TNCTree/../Backend/IODisk/../../Auxizilary/GlobalVariable.h
+ /home/femu/experiment/code2/src/TNCTree/../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/syncstore.h

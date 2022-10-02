@@ -39,7 +39,7 @@ int GlobalInitialize(int argc, char **argv)
     }
 
     /* Initialize chunk information. */
-    for(int i=0;i<100;i++)
+    for(size_t i=0;i<100;i++)
     {
         chunkusage[i] = 0;
     }

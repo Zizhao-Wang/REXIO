@@ -20,12 +20,14 @@
 #include "../../Auxizilary/VariablesTypes.h"
 #include "../../Auxizilary/SysOutput.h"
 #include "../../Auxizilary/GlobalVariable.h"
-
+#include "../../TNCTree/StoreTier/syncstore.h"
 
 /*  Global variables for SSD write definition.  */
 extern int indexs;
+extern int LogIndex;
 extern TNCEntry * Pagedata;
 extern std::unordered_map<uint64_t,uint64_t> ChunkLog;
+extern uint64_t * LogPage;
 
 /**
  * ============= writer methods module ===============

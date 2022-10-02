@@ -823,6 +823,8 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: /home/femu/experiment/code2/sr
   /usr/include/c++/9/bits/stl_tempbuf.h \
   /usr/include/c++/9/bits/uniform_int_dist.h \
   /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h \
+  /home/femu/experiment/code2/src/TNCTree/StoreTier/syncstore.h \
+  /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h \
   /home/femu/liblightnvm/include/liblightnvm_cli.h \
   /home/femu/experiment/code2/src/Backend/IODisk/WriteDisk.h \
   /home/femu/experiment/code2/src/Backend/BlockManage/BlockInfo.h \
@@ -3241,6 +3243,19 @@ CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o: /home/femu/experiment/code2
   /usr/include/c++/9/bits/stl_bvector.h \
   /usr/include/c++/9/bits/vector.tcc \
   /home/femu/experiment/code2/src/TNCTree/StoreTier/syncstore.h \
+  /usr/include/c++/9/unordered_map \
+  /usr/include/c++/9/ext/aligned_buffer.h \
+  /usr/include/c++/9/bits/hashtable.h \
+  /usr/include/c++/9/bits/hashtable_policy.h \
+  /usr/include/c++/9/tuple \
+  /usr/include/c++/9/utility \
+  /usr/include/c++/9/bits/stl_relops.h \
+  /usr/include/c++/9/array \
+  /usr/include/c++/9/bits/uses_allocator.h \
+  /usr/include/c++/9/bits/invoke.h \
+  /usr/include/c++/9/limits \
+  /usr/include/c++/9/bits/unordered_map.h \
+  /usr/include/c++/9/bits/erase_if.h \
   /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h
 
 CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.o: /home/femu/experiment/code2/src/TNCTree/MemoryTier/Node.cpp \
@@ -3799,14 +3814,6 @@ CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o: /home/femu/experiment/code
   /usr/include/c++/9/bits/ostream.tcc \
   /usr/include/c++/9/istream \
   /usr/include/c++/9/bits/istream.tcc \
-  /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h \
-  /home/femu/experiment/code2/src/Backend/SSDWrite/writer.h \
-  /usr/include/c++/9/vector \
-  /usr/include/c++/9/bits/stl_construct.h \
-  /usr/include/c++/9/bits/stl_uninitialized.h \
-  /usr/include/c++/9/bits/stl_vector.h \
-  /usr/include/c++/9/bits/stl_bvector.h \
-  /usr/include/c++/9/bits/vector.tcc \
   /usr/include/c++/9/unordered_map \
   /usr/include/c++/9/ext/aligned_buffer.h \
   /usr/include/c++/9/bits/hashtable.h \
@@ -3820,6 +3827,14 @@ CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o: /home/femu/experiment/code
   /usr/include/c++/9/limits \
   /usr/include/c++/9/bits/unordered_map.h \
   /usr/include/c++/9/bits/erase_if.h \
+  /usr/include/c++/9/vector \
+  /usr/include/c++/9/bits/stl_construct.h \
+  /usr/include/c++/9/bits/stl_uninitialized.h \
+  /usr/include/c++/9/bits/stl_vector.h \
+  /usr/include/c++/9/bits/stl_bvector.h \
+  /usr/include/c++/9/bits/vector.tcc \
+  /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h \
+  /home/femu/experiment/code2/src/Backend/SSDWrite/writer.h \
   /home/femu/liblightnvm/include/liblightnvm.h \
   /usr/include/inttypes.h \
   /usr/include/c++/9/stdlib.h \
@@ -3841,6 +3856,7 @@ CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o: /home/femu/experiment/code
   /usr/include/c++/9/bits/stl_tempbuf.h \
   /usr/include/c++/9/bits/uniform_int_dist.h \
   /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h \
+  /home/femu/experiment/code2/src/TNCTree/StoreTier/syncstore.h \
   /home/femu/experiment/code2/src/Backend/SSDRead/reader.h \
   /home/femu/experiment/code2/src/Backend/BlockManage/BlockInfo.h \
   /home/femu/liblightnvm/include/liblightnvm_cli.h \
@@ -4076,13 +4092,16 @@ CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: /home/femu/experiment/code2/src/TNCTre
   /home/femu/experiment/code2/src/Auxizilary/VariablesTypes.h \
   /home/femu/experiment/code2/src/Auxizilary/SysOutput.h \
   /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h \
+  /home/femu/experiment/code2/src/TNCTree/StoreTier/syncstore.h \
+  /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h \
   /home/femu/experiment/code2/src/Backend/IODisk/WriteDisk.h \
   /home/femu/experiment/code2/src/Backend/BlockManage/BlockInfo.h \
   /home/femu/liblightnvm/include/liblightnvm_cli.h \
   /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h \
   /home/femu/experiment/code2/src/Auxizilary/VariablesTypes.h \
   /home/femu/experiment/code2/src/Auxizilary/SysOutput.h \
-  /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h
+  /home/femu/experiment/code2/src/Auxizilary/GlobalVariable.h \
+  /home/femu/experiment/code2/src/TNCTree/StoreTier/syncstore.h
 
 CMakeFiles/src.dir/TNCTree/utility/types.cpp.o: /home/femu/experiment/code2/src/TNCTree/utility/types.cpp \
   /usr/include/stdc-predef.h \
@@ -5020,6 +5039,10 @@ CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment/code2/src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/c++/9/bits/basic_file.h:
 
+/home/femu/experiment/code2/src/LSM-Tree/UtilityDefine/thread_pool.h:
+
+/usr/include/c++/9/ext/atomicity.h:
+
 /usr/include/c++/9/cwchar:
 
 /usr/include/c++/9/bits/range_access.h:
@@ -5051,12 +5074,6 @@ CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment/code2/src/main.cpp \
 /usr/include/x86_64-linux-gnu/gnu/stubs.h:
 
 /usr/include/c++/9/bits/move.h:
-
-/home/femu/experiment/code2/src/TNCTree/StoreTier/syncstore.h:
-
-/home/femu/experiment/code2/src/LSM-Tree/UtilityImplement/run.cpp:
-
-/usr/include/c++/9/atomic:
 
 /usr/include/c++/9/bits/gslice.h:
 
@@ -5167,10 +5184,6 @@ CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment/code2/src/main.cpp \
 /usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
 
 /home/femu/experiment/code2/src/Auxizilary/VariablesTypes.h:
-
-/usr/include/c++/9/ext/atomicity.h:
-
-/home/femu/experiment/code2/src/LSM-Tree/UtilityDefine/thread_pool.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:
 
@@ -5331,6 +5344,12 @@ CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment/code2/src/main.cpp \
 /usr/include/c++/9/type_traits:
 
 /usr/include/c++/9/bits/stl_algo.h:
+
+/home/femu/experiment/code2/src/LSM-Tree/UtilityImplement/run.cpp:
+
+/usr/include/c++/9/atomic:
+
+/home/femu/experiment/code2/src/TNCTree/StoreTier/syncstore.h:
 
 /usr/include/c++/9/bits/regex_compiler.h:
 

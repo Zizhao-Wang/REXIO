@@ -13,10 +13,14 @@
 
 #include <stdint.h>
 #include <iostream>
+#include <unordered_map>
+#include <vector>
 #include "../../Auxizilary/GlobalVariable.h"
 
 /* Global variable declaration! */
 extern uint32_t offset;
+extern std::unordered_map<uint64_t, std::vector<char>> BufferLog;
+
 
 /**
  *  ================= Synchronous write module====================  

@@ -173,6 +173,8 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: \
  /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
  /usr/include/c++/9/bits/uniform_int_dist.h \
  /home/femu/experiment/code2/src/Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../TNCTree/StoreTier/syncstore.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
  /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm_cli.h \
  /home/femu/experiment/code2/src/Backend/SSDWrite/../IODisk/WriteDisk.h \
  /home/femu/experiment/code2/src/Backend/SSDWrite/../IODisk/../BlockManage/BlockInfo.h \

@@ -59,7 +59,7 @@ SValue  SyncRead(uint32_t offset)
 {
     uint64_t PageId = (uint64_t)((offset>>12)&0x3FF);
 
-    std::unordered_map<uint64_t, std::vector<char>>::iterator got = ReadBuffer.find(PageId);
+    std::unordered_map<uint64_t, TNCEntry*>::iterator got = ReadBuffer.find(PageId);
     if(got == ReadBuffer.end() && ReadBuffer.size()<10)
     {
         TNCEntry* data = TNCEntryRead(PageId);

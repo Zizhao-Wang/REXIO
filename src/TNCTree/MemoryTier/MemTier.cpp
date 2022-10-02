@@ -17,8 +17,7 @@
 #include <time.h>
 #include <iostream>
 #include "../utility/types.h"
-#include "../../Backend/IODisk/WriteDisk.h"
-#include "../../Backend/BlockManage/BlockInfo.h"
+#include "../StoreTier/syncstore.h"
 
 #define N 9999
 
@@ -157,7 +156,7 @@ int InsertNode(SKey hashkey, SValue hashvalue)
         {
             temp->flag =1;
             // write into disk
-            temp->offset = SSD_write(hashvalue);
+            temp->offset = SyncWrite(hashkey,hashvalue);
             //printf("%u\n",temp->offset);
             ++head->Nodenumber;
             return 0;
@@ -175,7 +174,7 @@ int InsertNode(SKey hashkey, SValue hashvalue)
             head->CurrentLevel = v+1;
         }
         //write into disk
-        uint_32 offset1 = SSD_write(hashvalue);
+        uint_32 offset1 = SyncWrite(hashkey,hashvalue);
         //printf("%u\n",temp->offset);
         ++head->Nodenumber;
         temp = Initialization(hashvalue,offset1);

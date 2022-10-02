@@ -201,6 +201,7 @@ bool DeleteValue(LocalHeadNode * Head, unsigned int hashvalue)
         //write into disk(meta data).
         node->flag=0;
     }
+    
     return true;
 }
 

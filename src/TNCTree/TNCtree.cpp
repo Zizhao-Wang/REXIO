@@ -28,7 +28,10 @@ void TNCtreeInit(void)
           EMessageOutput("Index initialized failure!",1578);
      }
         
-     
+     for(int i=0;i<100;i++)
+     {
+        ChunkLog[i] = 0;
+     }
 
      if(Createflag == 0)
      {

@@ -23,14 +23,9 @@
 
 
 /*  Global variables for SSD write definition.  */
-extern uint32_t blockoffset;
 extern int indexs;
 extern TNCEntry * Pagedata;
-
-
-
-int InfoRenew(size_t scale);
-
+extern std::unordered_map<uint64_t,uint64_t> ChunkLog;
 
 /**
  * ============= writer methods module ===============
@@ -39,6 +34,7 @@ int InfoRenew(size_t scale);
 
 int SinglePageWrite(); // Insert page-level key-value pairs into physicals for TNC-tree.
 
+int PageLogWrite(uint64_t BlockId);
 
 
 #endif //EXPERIMENT1_WRITEDISK_H

@@ -5,7 +5,7 @@
 
 uint32_t offset = 0;
 std::unordered_map<uint64_t, std::vector<char>> BufferLog;
-std::unordered_map<uint64_t, std::vector<char>> ReadBuffer;
+std::unordered_map<uint64_t, TNCEntry*> ReadBuffer;
 
 
 uint32_t SyncWrite(SKey key1, SValue value)
@@ -65,16 +65,14 @@ SValue  SyncRead(uint32_t offset)
         TNCEntry* data = TNCEntryRead(PageId);
         ReadBuffer.insert(PageId,data);    
     }
-    else if()
+    else if(got == ReadBuffer.end() && ReadBuffer.size()>=10)
     {
+
 
     }
-
-
-    if(BufferLog[BlockId].size() == CalculatePageCapacity(4))
+    else
     {
-        PageLogWrite(BlockId);
-        BufferLog.clear();    
+
     }
 
     return 0;

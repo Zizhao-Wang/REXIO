@@ -177,6 +177,7 @@ CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: \
  /home/femu/experiment/code2/src/TNCTree/../Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
  /home/femu/experiment/code2/src/TNCTree/../Backend/SSDWrite/../../TNCTree/StoreTier/syncstore.h \
  /home/femu/experiment/code2/src/TNCTree/../Backend/SSDWrite/../../TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/TNCTree/../Backend/SSDWrite/../../TNCTree/StoreTier/../MemoryTier/Node.h \
  /home/femu/experiment/code2/src/TNCTree/../Backend/IODisk/WriteDisk.h \
  /home/femu/experiment/code2/src/TNCTree/../Backend/IODisk/../BlockManage/BlockInfo.h \
  /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm_cli.h \

@@ -170,6 +170,10 @@ CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o: \
  /usr/include/c++/9/bits/erase_if.h \
  /home/femu/experiment/code2/src/TNCTree/MemoryTier/../StoreTier/../../Auxizilary/GlobalVariable.h \
  /home/femu/experiment/code2/src/TNCTree/MemoryTier/../StoreTier/../MemoryTier/Node.h \
+ /home/femu/experiment/code2/src/TNCTree/MemoryTier/../StoreTier/../../LRU/lru.h \
+ /usr/include/c++/9/list /usr/include/c++/9/bits/stl_list.h \
+ /usr/include/c++/9/bits/allocated_ptr.h /usr/include/c++/9/bits/list.tcc \
+ /home/femu/experiment/code2/src/TNCTree/MemoryTier/../StoreTier/../../LRU/../TNCTree/MemoryTier/Node.h \
  /home/femu/experiment/code2/src/TNCTree/MemoryTier/../../Auxizilary/SysOutput.h \
  /usr/include/c++/9/algorithm /usr/include/c++/9/bits/stl_algo.h \
  /usr/include/c++/9/bits/algorithmfwd.h \

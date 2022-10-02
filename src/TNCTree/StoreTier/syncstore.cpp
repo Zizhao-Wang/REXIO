@@ -5,6 +5,7 @@
 
 uint32_t offset = 0;
 std::unordered_map<uint64_t, std::vector<char>> BufferLog;
+LRUCache lrucache(10);
 
 uint32_t SyncWrite(SKey key1, SValue value)
 {
@@ -54,26 +55,24 @@ int  SyncDelete(uint32_t offset)
 
 
 
-SValue  SyncRead(uint32_t offset)
+TNCEntry  SyncRead(uint32_t offset)
 {
     uint64_t PageId = (uint64_t)((offset>>12)&0x3FF);
+    size_t Position = offset & 0x00000FFF;
 
-    std::unordered_map<uint64_t, TNCEntry*>::iterator got = ReadBuffer.find(PageId);
-    if(got == ReadBuffer.end() && ReadBuffer.size()<10)
+    bool IsFlag = lrucache.IsLRUPage(PageId);
+    if(!IsFlag)
     {
-        TNCEntry* data = TNCEntryRead(PageId);
-        LRUPut(data);    
-    }
-    else if(got == ReadBuffer.end() && ReadBuffer.size()>=10)
-    {
-
-
+        ReadNode temp;
+        TNCEntry* ReadData = TNCEntryRead(PageId);
+        temp.data = ReadData;
+        lrucache.put(PageId, temp);
+        return ReadData[Position];    
     }
     else
     {
-
+        TNCEntry *values = lrucache.get(PageId);
+        return values[Position];
     }
-
-    return 0;
 
 }

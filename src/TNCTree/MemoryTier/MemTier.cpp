@@ -233,9 +233,9 @@ int Update(SKey key1, SValue val)
  *   =================Node deletion module====================  
  **/
 
-bool DeleteValue(LocalHeadNode * Head, unsigned int hashvalue)
+bool DeleteValue(LocalHeadNode * Head, SKey hashkey)
 {
-    LocalHashNode * node = SearchNode(Head,hashvalue);
+    LocalHashNode * node = SearchNode(Head,hashkey);
     if(node->flag!=0)
     {
         SyncDelete(node->offset);   //write into disk(meta data).

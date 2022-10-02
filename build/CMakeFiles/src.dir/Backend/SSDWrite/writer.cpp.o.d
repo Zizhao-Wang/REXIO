@@ -175,6 +175,7 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: \
  /home/femu/experiment/code2/src/Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
  /home/femu/experiment/code2/src/Backend/SSDWrite/../../TNCTree/StoreTier/syncstore.h \
  /home/femu/experiment/code2/src/Backend/SSDWrite/../../TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../TNCTree/StoreTier/../MemoryTier/Node.h \
  /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm_cli.h \
  /home/femu/experiment/code2/src/Backend/SSDWrite/../IODisk/WriteDisk.h \
  /home/femu/experiment/code2/src/Backend/SSDWrite/../IODisk/../BlockManage/BlockInfo.h \

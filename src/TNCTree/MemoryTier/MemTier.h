@@ -42,7 +42,7 @@ int InsertNode(SKey hashkey, SValue hashvalue);
 
 
 /**  
- * ================= Insertion module ====================  
+ * ================= update module ====================  
  **/
 int Update(SKey key1, SValue val);
 

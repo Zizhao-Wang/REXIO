@@ -18,6 +18,7 @@
 #include <iostream>
 #include "../utility/types.h"
 #include "../StoreTier/syncstore.h"
+#include "../../Auxizilary/SysOutput.h"
 
 #define N 9999
 
@@ -215,12 +216,14 @@ int Update(SKey key1, SValue val)
     }
 
     err = SyncDelete(node->offset);
-    if(err ==)
+    if(err != 0 )
+    {
+        EMessageOutput("Update failure!",5899);
+    }
+
     node->offset = SyncWrite(key1,val);
-    
 
-
-
+    return 0;
 }
 
 

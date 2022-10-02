@@ -156,6 +156,8 @@ CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o: \
  /usr/include/c++/9/bits/stl_vector.h \
  /usr/include/c++/9/bits/stl_bvector.h /usr/include/c++/9/bits/vector.tcc \
  /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../MemoryTier/Node.h \
+ /home/femu/experiment/code2/src/TNCTree/StoreTier/../MemoryTier/../../Auxizilary/GlobalVariable.h \
  /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDWrite/writer.h \
  /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm.h \
  /usr/include/inttypes.h /usr/include/c++/9/stdlib.h \
@@ -166,7 +168,6 @@ CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o: \
  /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm_spec.h \
  /usr/include/assert.h \
  /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDWrite/../../TNCTree/MemoryTier/Node.h \
- /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDWrite/../../TNCTree/MemoryTier/../../Auxizilary/GlobalVariable.h \
  /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDWrite/../../Auxizilary/VariablesTypes.h \
  /home/femu/experiment/code2/src/TNCTree/StoreTier/../../Backend/SSDWrite/../../Auxizilary/SysOutput.h \
  /usr/include/c++/9/algorithm /usr/include/c++/9/bits/stl_algo.h \

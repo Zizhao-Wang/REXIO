@@ -15,9 +15,9 @@
 
 /* ================= 2-Tier None-Coupling module ==================== */
 
-int TNCtreeInit();
+void TNCtreeInit(void);
 
 
-void TNCtreeStart();
+void TNCtreePort(void);
 
 #endif //EXPERIMENT1_FRONTMAIN_H

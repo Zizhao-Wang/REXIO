@@ -15,40 +15,32 @@
 #include "../Auxizilary/SysOutput.h"
 #include "MemoryTier/MemTier.h"
 
-int TNCtreeInit(void)
+void TNCtreeInit(void)
 {
 
      int Createflag = ExtendHashTableInitialize();
-     if(Createflag != 0)
+     if(Createflag == 0)
      {
-          return -1;
-     }
-     printf("\n ================ Index information ================: \
+          printf("\n ================ Index information ================: \
             \n ---- Initialization successful!   \
             \n ---- 20 nodes tree has been initialized!\n");
-     return 0;
+     }
 
 }
 
-void TNCtreeStart(void)
+void TNCtreePort(void)
 {
-     int flag = 0;
-     flag = TNCtreeInit();
-
-     if(flag!=0)
-     {
-          EMessageOutput("Memeory tier(first tier) create failure",370);
-     }
+     
+     TNCtreeInit();
 
 
      clock_t startTime,endTime;                        // Definition of timestamp
-     std::vector<GlobalHashNode*> global;
 
-     /* Write datum */
+    /* Write datum */
     startTime = clock();
     for(uint64_t i=1;i<=100000;i++)
     {
-          Insert(i,i);
+     InsertNode(i,i);
     }
     endTime = clock();
     std::cout << "Total Time of inserting: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";

@@ -200,6 +200,31 @@ int InsertNode(SKey hashkey, SValue hashvalue)
     return 0;
 }
 
+/**  
+ * ================= update module ====================  
+ **/
+int Update(SKey key1, SValue val)
+{
+    int err = 0;
+    LocalHeadNode * head = global[key1 & (1<<Globaldepth)-1]->local;
+    LocalHashNode * node = SearchNode(head, key1);
+
+    if(node == nullptr)
+    {
+        return -1;
+    }
+
+    err = SyncDelete(node->offset);
+    if(err ==)
+    node->offset = SyncWrite(key1,val);
+    
+
+
+
+}
+
+
+
 
 /**
  *   =================Node deletion module====================  

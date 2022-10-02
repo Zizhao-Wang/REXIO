@@ -23,6 +23,9 @@ int TNCtreeInit(void)
      {
           return -1;
      }
+     printf("\n ================ Index information ================: \
+            \n ---- Initialization successful!   \
+            \n ---- 20 nodes tree has been initialized!\n");
      return 0;
 
 }
@@ -45,13 +48,7 @@ void TNCtreeStart(void)
     startTime = clock();
     for(uint64_t i=1;i<=100000;i++)
     {
-      if(i>=10000 && i%10000 ==0)
-      {
-        printf("Value:%lu \n",i);
-        endTime = clock();
-        std::cout << "Total Time of inserting: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-      } 
-      uint64_t value = i;
+          Insert(i,i);
     }
     endTime = clock();
     std::cout << "Total Time of inserting: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";

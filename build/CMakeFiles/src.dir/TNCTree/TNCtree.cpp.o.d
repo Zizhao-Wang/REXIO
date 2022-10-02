@@ -154,4 +154,5 @@ CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: \
  /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
  /usr/include/c++/9/bits/uniform_int_dist.h /usr/include/c++/9/limits \
  /home/femu/experiment/code2/src/TNCTree/MemoryTier/MemTier.h \
+ /home/femu/experiment/code2/src/TNCTree/MemoryTier/../../Auxizilary/GlobalVariable.h \
  /home/femu/experiment/code2/src/TNCTree/MemoryTier/Node.h

@@ -31,11 +31,10 @@ int InfoRenew(size_t scale)
     sectorpointer+=scale; //update sector pointer.
     chunkusage[sectorpointer/4096]= chunkusage[sectorpointer/4096] + scale;
     
-    if(sectorpointer%4096 == 3536)
+    if(sectorpointer%4096 == 3276)
     {
-        sectorpointer += 140*4; 
+        sectorpointer += 205*4; 
     } 
-    //printf("values after renewed: sector pointer: %lu,chunk pointer: %lu \n",sectorpointer,chunkusage[sectorpointer/4096]);
     return 0;
 }
 
@@ -67,13 +66,14 @@ int SinglePageWrite()
     err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
     if(err == 0) 
     {
-        PointerRenew(ws_min);   /* update pointers! */
+        InfoRenew(ws_min);   /* update pointers! */
     }
     else
     {
         EMessageOutput("Page writing failed in "+ Uint64toString(sectorpointer)+"\n", 4598);
     }
     return err;
+    
 }
 
 int PageLogWrite(uint64_t BlockId)

@@ -32,6 +32,8 @@ extern std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkLog;
  * ============= writer methods module ===============
  *  Function declartion for writing data into one or more pages:
  **/
+int InfoRenew(size_t scale);
+
 
 int SinglePageWrite(); // Insert page-level key-value pairs into physicals for TNC-tree.
 

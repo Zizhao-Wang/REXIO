@@ -70,52 +70,6 @@ bool DoubleHashtable()
 }
 
 
-/**  
- * =================Node Searching module====================
- * There are 3 steps for searching whether a kv pair in the TNC-tree: 
- * 1. check whether the page in memory or not
- * 2. return value if data is not flushed into physical page, or read from physical page
- * 3. return value if data is in the physical block   
- **/
-
-LocalHashNode* SearchNode(LocalHeadNode* Head,SKey hashkey)
-{
-    if(Head->CurrentLevel == 1)
-        return nullptr;
-    int curLevel = Head->CurrentLevel-1;
-    LocalHashNode *node = Head->HashNode ;
-    for(int i=curLevel; i>=0; --i)
-    {
-        while(node->next[i]->Hashkey < hashkey)
-        {
-            node = node->next[i];
-        }
-    }
-
-    node = node->next[0];
-    return node;
-}
-
-SValue Search(SKey key1)
-{
-    TNCEntry entry;
-    LocalHeadNode * head = global[key1 & (1<<Globaldepth)-1]->local;
-    LocalHashNode* node =  SearchNode(head, key1);
-    if(node == nullptr)
-    {
-        return UINT64_MAX;
-    }
-
-    entry = SyncRead(node->offset);
-    if(entry.key == key1)
-    {
-        return entry.val;
-    }
-
-    return UINT64_MAX;
-}
-
-
 /**
  *  =================Node Insertion module====================  
  **/
@@ -190,7 +144,7 @@ int InsertNode(SKey hashkey, SValue hashvalue)
         //write into disk
         uint_32 offset1 = SyncWrite(hashkey,hashvalue);  //printf("%u\n",temp->offset);
         ++head->Nodenumber;
-        temp = Initialization(hashvalue,offset1);
+        temp = Initialization(hashkey,offset1);
         if(temp == nullptr)
             return -1;
         for(int i=0;i<v;++i)
@@ -202,6 +156,53 @@ int InsertNode(SKey hashkey, SValue hashvalue)
     
     return 0;
 }
+
+
+/**  
+ * =================Node Searching module====================
+ * There are 3 steps for searching whether a kv pair in the TNC-tree: 
+ * 1. check whether the page in memory or not
+ * 2. return value if data is not flushed into physical page, or read from physical page
+ * 3. return value if data is in the physical block   
+ **/
+
+LocalHashNode* SearchNode(LocalHeadNode* Head,SKey hashkey)
+{
+    if(Head->CurrentLevel == 1)
+        return nullptr;
+    int curLevel = Head->CurrentLevel-1;
+    LocalHashNode *node = Head->HashNode ;
+    for(int i=curLevel; i>=0; --i)
+    {
+        while(node->next[i]->Hashkey < hashkey)
+        {
+            node = node->next[i];
+        }
+    }
+
+    node = node->next[0];
+    return node;
+}
+
+SValue Search(SKey key1)
+{
+    TNCEntry entry;
+    LocalHeadNode * head = global[key1 & (1<<Globaldepth)-1]->local;
+    LocalHashNode* node =  SearchNode(head, key1);
+    if(node == nullptr)
+    {
+        return UINT64_MAX;
+    }
+
+    entry = SyncRead(node->offset);
+    if(entry.key == key1)
+    {
+        return entry.val;
+    }
+
+    return UINT64_MAX;
+}
+
 
 /**  
  * ================= update module ====================  

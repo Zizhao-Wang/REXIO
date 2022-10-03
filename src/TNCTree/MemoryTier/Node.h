@@ -73,7 +73,7 @@ typedef struct TNCEntry
      */
 LocalHashNode * NILInitialize();
 
-LocalHashNode * Initialization(unsigned int hashkey, unsigned int offset);
+LocalHashNode * Initialization(SKey hashkey, uint32_t offset);
 
 LocalHashNode * Initialization();
 

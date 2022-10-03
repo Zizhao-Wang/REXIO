@@ -23,13 +23,6 @@ bool LocalGeneration(GlobalHashNode * global);
 bool DoubleHashtable();
 
 
-/**
- *  =================  Search module  ==================== 
- **/
-
-LocalHashNode* SearchNode(LocalHeadNode* Head,unsigned int hashvalue);
-SValue Search(SKey key1);
-
 /**  
  * ================= Insertion module ====================  
  **/
@@ -41,16 +34,26 @@ LocalHeadNode * NodeSplit(LocalHeadNode * head);
 int InsertNode(SKey hashkey, SValue hashvalue);
 
 
+/**
+ *  =================  Search module  ==================== 
+ **/
+
+LocalHashNode* SearchNode(LocalHeadNode* Head,unsigned int hashvalue);
+SValue Search(SKey key1);
+
+
 /**  
  * ================= update module ====================  
  **/
 int Update(SKey key1, SValue val);
+
 
 /**
  *  ================= deletion module====================  
  **/
 bool DeleteValue(LocalHeadNode * Head, unsigned int hashvalue);
 int Delete(SKey key1);
+
 
 /**  
  * ================= Memory-tier initialization module ====================  

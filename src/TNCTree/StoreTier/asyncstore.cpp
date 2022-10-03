@@ -6,33 +6,7 @@
 
 int CreateMultiProcess()
 {
-
-	pid_t pid = fork();
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // uint32_t AsyncWrite(SKey key, SValue value) 

@@ -32,17 +32,16 @@ uint32_t SyncWrite(SKey key1, SValue value)
 
 int  SyncDelete(uint32_t offset)
 { 
-    char *temp = new char[1];
-    *temp = 0;
+    uint8_t temp = 0; 
     uint64_t BlockId = (uint64_t)offset>>22;
 
     while(offset)
     {
-        *temp = (char)offset & 0XFF;
+        temp = (uint8_t)(offset & 0XFF);
         offset = offset >> 8;
-        BufferLog[BlockId].emplace_back(*temp);
+        BufferLog[BlockId].emplace_back(temp);
     }
-    delete(temp);
+    
 
     if(BufferLog[BlockId].size() == CalculatePageCapacity(4))
     {

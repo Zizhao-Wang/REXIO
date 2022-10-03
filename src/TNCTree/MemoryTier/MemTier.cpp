@@ -86,7 +86,7 @@ LocalHashNode* SearchNode(LocalHeadNode* Head,SKey hashkey)
     LocalHashNode *node = Head->HashNode ;
     for(int i=curLevel; i>=0; --i)
     {
-        while(node->next[i]->Hashvalue < hashkey)
+        while(node->next[i]->Hashkey < hashkey)
         {
             node = node->next[i];
         }
@@ -153,7 +153,7 @@ int InsertNode(SKey hashkey, SValue hashvalue)
 
     for(int i=curLevel; i>=0; --i)
     {
-        while(temp->next[i]->Hashvalue < hashvalue)
+        while(temp->next[i]->Hashkey < hashkey)
         {
             temp = temp->next[i];
         }
@@ -161,7 +161,7 @@ int InsertNode(SKey hashkey, SValue hashvalue)
     }
     temp = temp->next[0];
 
-    if(temp->Hashvalue == hashvalue)
+    if(temp->Hashkey == hashkey)
     {
         if(temp->flag == 1)
         {

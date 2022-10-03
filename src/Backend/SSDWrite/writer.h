@@ -26,7 +26,7 @@
 extern int indexs;
 extern int LogIndex;
 extern TNCEntry * Pagedata;
-extern std::unordered_map<uint64_t,uint64_t> ChunkLog;
+extern std::unordered_map<uint64_t,uint64_t> ChunkLog;  
 extern uint64_t * LogPage;
 
 /**

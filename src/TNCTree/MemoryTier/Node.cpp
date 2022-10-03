@@ -20,7 +20,7 @@ LocalHashNode * NILInitialize()
 {
     auto * nil =(LocalHashNode *) malloc(sizeof LOCAL_HASH_SIZE);
     if(nil!= nullptr)
-        nil->Hashvalue=UINT_MAX;
+        nil->Hashkey=UINT64_MAX;
     return nil;
 }
 
@@ -29,12 +29,12 @@ LocalHashNode * NILInitialize()
  * Local node initialization.
  */
 
-LocalHashNode * Initialization(unsigned int hashvalue, unsigned int offset)
+LocalHashNode * Initialization(unsigned int hashkey, unsigned int offset)
 {
     auto * local =(LocalHashNode*) malloc(LOCAL_HASH_SIZE);
     if(local== nullptr)
         exit(0);
-    local->Hashvalue = hashvalue;
+    local->Hashkey = hashkey;
     local->offset = offset;
     local->flag = 1;
     return local;

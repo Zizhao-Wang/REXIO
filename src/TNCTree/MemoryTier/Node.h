@@ -24,9 +24,9 @@
  */
 typedef struct LocalHashNode
 {
-    unsigned int Hashvalue;
-    unsigned char flag;
-    unsigned int offset;
+    uint64_t Hashkey;
+    uint32_t offset;
+    uint8_t flag;
     LocalHashNode * next[MaxLevel];
 }LocalHashNode;
 
@@ -73,7 +73,7 @@ typedef struct TNCEntry
      */
 LocalHashNode * NILInitialize();
 
-LocalHashNode * Initialization(unsigned int hashvalue, unsigned int offset);
+LocalHashNode * Initialization(unsigned int hashkey, unsigned int offset);
 
 LocalHashNode * Initialization();
 

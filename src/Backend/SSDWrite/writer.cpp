@@ -22,8 +22,7 @@
 int indexs=0;
 int LogIndex = 0;
 TNCEntry * Pagedata = nullptr;
-std::unordered_map<uint64_t,uint64_t> ChunkLog;
-uint64_t * LogPage;
+std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkLog;
 
 /* function is used to update pointers. */
 int InfoRenew(size_t scale)
@@ -101,7 +100,7 @@ int PageLogWrite(uint64_t BlockId)
     err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
     if(err == 0) 
     {
-        LogPage[LogIndex++] = sectorpointer;
+        ChunkLog[sectorpointer/4096].emplace_back(sectorpointer) ;
         PointerRenew(ws_min);   /* update pointers! */
     }
     else

@@ -23,17 +23,18 @@
 #include "../../TNCTree/StoreTier/syncstore.h"
 
 /*  Global variables for SSD write definition.  */
-extern int indexs;
-extern int LogIndex;
-extern TNCEntry * Pagedata;
+
 extern std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkLog;  
+
+extern std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkData;
+
+extern PageType Datapointer;
 
 /**
  * ============= writer methods module ===============
  *  Function declartion for writing data into one or more pages:
  **/
 int InfoRenew(size_t scale);
-
 
 int SinglePageWrite(); // Insert page-level key-value pairs into physicals for TNC-tree.
 

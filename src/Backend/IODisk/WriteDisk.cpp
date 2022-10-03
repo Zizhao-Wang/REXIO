@@ -30,16 +30,9 @@ bool flag = false;
 int PointerRenew(size_t sectors)
 {
 
+    chunkusage[sectorpointer/4096]= chunkusage[sectorpointer/4096] + sectors;
     sectorpointer+=sectors; //update sector pointer.
-
-    if(sectorpointer >= 4096 && sectorpointer % 4096 == 0)
-    {
-        chunkusage[sectorpointer/4096 -1]= 4096; //update chunk pointer.
-    }
-    else
-    {
-        chunkusage[sectorpointer/4096]= chunkusage[sectorpointer/4096] + sectors;
-    } 
+ 
     //printf("values after renewed: sector pointer: %lu,chunk pointer: %lu \n",sectorpointer,chunkusage[sectorpointer/4096]);
     return 0;
 

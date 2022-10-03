@@ -20,7 +20,11 @@
 #include "../../LRU/lru.h"
 
 /* Global variable declaration! */
+extern int indexs;
 extern uint32_t offset;
+//extern TNCEntry * Pagedata;
+extern TNCEntry Pagedata[1030];
+extern PageType WBufferId;
 extern std::unordered_map<uint64_t, std::vector<char>> BufferLog;  //Log buffer 
 extern LRUCache lrucache;
 
@@ -37,6 +41,8 @@ int      SyncDelete(uint32_t offset);
 /**
  *  ================= Synchronous read module====================  
  **/
+TNCEntry Read4Buffer(size_t Position);
+
 TNCEntry   SyncRead(uint32_t offset);
 
 #endif

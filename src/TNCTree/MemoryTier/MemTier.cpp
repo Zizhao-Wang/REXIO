@@ -133,7 +133,7 @@ int InsertNode(SKey hashkey, SValue hashvalue)
     else
     {
         int v=RandomLevel();
-        if(v > curLevel )
+        if(v > curLevel)
         {
             for(int i=curLevel+1; i<v; ++i )
             {
@@ -189,7 +189,7 @@ SValue Search(SKey key1)
     TNCEntry entry;
     LocalHeadNode * head = global[key1 & (1<<Globaldepth)-1]->local;
     LocalHashNode* node =  SearchNode(head, key1);
-    if(node == nullptr)
+    if(node == nullptr || node->flag == 0)
     {
         return UINT64_MAX;
     }
@@ -213,20 +213,22 @@ int Update(SKey key1, SValue val)
     LocalHeadNode * head = global[key1 & (1<<Globaldepth)-1]->local;
     LocalHashNode * node = SearchNode(head, key1);
 
-    if(node == nullptr)
-    {
+    if(node == nullptr){
         return -1;
     }
 
-    err = SyncDelete(node->offset);
+    if(node->flag == 1){
+        err = SyncDelete(node->offset);
+    }
+    
     if(err != 0 )
     {
         EMessageOutput("Update failure!",5899);
     }
-
     node->offset = SyncWrite(key1,val);
 
     return 0;
+
 }
 
 
@@ -238,7 +240,7 @@ int Update(SKey key1, SValue val)
 bool DeleteValue(LocalHeadNode * Head, SKey hashkey)
 {
     LocalHashNode * node = SearchNode(Head,hashkey);
-    if(node->flag!=0)
+    if(node->flag==1)
     {
         SyncDelete(node->offset);   //write into disk(meta data).
         node->flag=0;
@@ -251,12 +253,12 @@ int Delete(SKey key1)
 {
     LocalHeadNode * head = global[key1 & (1<<Globaldepth)-1]->local;
     bool flag = DeleteValue(head, key1);
-    if(flag)
+    head->Nodenumber--;
+    if(!flag)
     {
-        return 0;
+        EMessageOutput("Delete value failure in TNC-tree!",1578);
     }
-    return -1;
-    
+    return 0;
 }
 
 /**

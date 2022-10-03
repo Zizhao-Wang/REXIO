@@ -25,16 +25,17 @@ void TNCtreeInit(void)
 
      int Createflag = ExtendHashTableInitialize();
 
-     Pagedata = (TNCEntry *)malloc(bp->geo->l.nbytes+10);
-     if (Pagedata == nullptr)
-     {
-          EMessageOutput("Index initialized failure!",1578);
-     }
+     // Pagedata = (TNCEntry *)malloc(bp->geo->l.nbytes);
+     // if (Pagedata == nullptr)
+     // {
+     //      EMessageOutput("Index initialized failure!",1578);
+     // }
 
      if(Createflag == 0)
      {
           printf("\n ================ Index information ================ \
-            \n ---- Initialization successful! \n");
+            \n ---- Initialization successful! \
+            \n ---- Meta data space allocated successful! \n");
      }
 
 }
@@ -48,44 +49,58 @@ void TNCtreePort(void)
 
      /* workload a: insert only*/
      startTime = clock();
-     for(uint64_t i=1;i<=10000000;i++)
+     for(SKey i=1;i<=50000000;i++)
      {
+          // if(i!=0&&i%100000==0)
+          // printf("Insert %lu successful!\n",i);
           InsertNode(i,i);
      }
      endTime = clock();
-     std::cout << "Total Time of workload a: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+     std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
 
-     // /* workload b: read only, all in it */
-     // startTime = clock();
-     // for(int i=1;i<=1000000;i++)
-     // {
-     //      srand48(time(NULL));
-     //      SKey k = 1+(rand()%60000000);
-     //      Search(k);
-     // }
-     // endTime = clock();
-     // std::cout << "Total Time of workload b: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+     /* workload b: read only, all in it */
+     startTime = clock();
+     for(int i=1;i<=1000000;i++)
+     {
+          srand48(time(NULL));
+          SKey k = 1+(rand()%50000000);
+          Search(k);
+          if(i==10000 || i%100000==0)
+          {
+               endTime = clock();
+               std::cout << "Total Time of"<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+          }
+     }
+     endTime = clock();
+     std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
-     // /* workload c: read only, 50% in it, 50% not in it */
-     // startTime = clock();
+     /* workload c: read only, 50% in it, 50% not in it */
+     startTime = clock();
      
-     // for(int i=1;i<=500000;i++)
-     // {
-     //      srand48(time(NULL));
-     //      SKey k = 1+(rand()%60000000);
-     //      Search(k);
-     // }
-     // for(int i=1;i<=500000;i++)
-     // {
-     //      srand48(time(NULL));
-     //      SKey k = 60000000+(rand()%60000000);
-     //      Search(k);
-     // }
-     // endTime = clock();
-     // std::cout << "Total Time of workload c: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+     for(int i=1;i<=1000000;i++)
+     {
+          srand48(time(NULL));
+          if(i%100<50)
+          {
+               SKey k = 1+(rand()%60000000);
+               Search(k);
+          }
+          else
+          {
+               SKey k = 50000000+(rand()%60000000);
+               Search(k);
+          }
+          if(i%100000==0 || i==10000)
+          {
+               endTime = clock();
+               std::cout << "Total Time of"<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+          }
+     }
+     endTime = clock();
+     std::cout << "Total Time of workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
-     // /* workload d: update heavy workload, 50% read, 50% update */
+     /* workload d: update heavy workload, 50% read, 50% update */
      // startTime = clock();
      // for(int i=1;i<=1000000;i++)
      // {
@@ -109,7 +124,7 @@ void TNCtreePort(void)
      // for(int i=1;i<=1000000;i++)
      // {
      //      srand48(time(NULL));
-     //      if(i%2==0)
+     //      if(i%100<95)
      //      {
      //           SKey k = 1+(rand()%60000000);
      //           Search(k);
@@ -123,20 +138,20 @@ void TNCtreePort(void)
      // endTime = clock();
      // std::cout << "Total Time of workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
-     // /* workload F: read mostly workload, 95% read, 5% update */
+     // /* workload F: read latest workload, 95% read, 5% insert */
      // startTime = clock();
      // for(int i=1;i<=1000000;i++)
      // {
      //      srand48(time(NULL));
      //      if(i%100<95)
      //      {
-     //           SKey k = 1+(rand()%60000000);
+     //           SKey k = 1+(rand()%50000000);
      //           Search(k);
      //      }
      //      else
      //      {
-     //           SKey k = 1+(rand()%60000000);
-     //           Update(k,k+1);
+     //           SKey k = 1+(rand()%50000000);
+     //           InsertNode(i+50000000,i+50000000);
      //      } 
      // }
      // endTime = clock();
@@ -147,7 +162,7 @@ void TNCtreePort(void)
      // for(int i=1;i<=1000000;i++)
      // {
      //      srand48(time(NULL));
-     //      SKey k = 1+(rand()%60000000);
+     //      SKey k = 1+(rand()%50000000);
      //      Delete(k); 
      // }
      // endTime = clock();

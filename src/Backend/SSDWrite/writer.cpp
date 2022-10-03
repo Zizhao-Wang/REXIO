@@ -18,25 +18,25 @@
 #include "../IODisk/WriteDisk.h"
 #include "../../Auxizilary/GlobalVariable.h"
 
-
-int indexs=0;
-int LogIndex = 0;
-TNCEntry * Pagedata = nullptr;
 std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkLog;
+std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkData;
+PageType DataPagePointer = 0;
 
 /* function is used to update pointers. */
 int InfoRenew(size_t scale)
 {
 
-    sectorpointer+=scale; //update sector pointer.
-    chunkusage[sectorpointer/4096]= chunkusage[sectorpointer/4096] + scale;
-    
-    if(sectorpointer%4096 == 3276)
+    chunkusage[DataPagePointer/4096]= chunkusage[DataPagePointer/4096] + scale;
+    DataPagePointer += scale;
+
+    if(ChunkData[sectorpointer/4096].size()>=820 )
     {
-        sectorpointer += 205*4; 
+        DataPagePointer += (4096-DataPagePointer%4096); 
     } 
     return 0;
+
 }
+
 
 
 /* 
@@ -48,13 +48,13 @@ int SinglePageWrite()
     /* Function flag, default value equals 0(successful flag). */
     int err = 0;
 
-    struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, sectorpointer);
+    struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, DataPagePointer);
     size_t ws_min = nvm_dev_get_ws_min(bp->dev);
     struct nvm_addr addrs[ws_min];
     for (size_t aidx = 0; aidx < ws_min; ++aidx) 
     {
 	    addrs[aidx].val = addrs_chunk.val;
-	 	addrs[aidx].l.sectr =(sectorpointer%4096)+aidx;
+	 	addrs[aidx].l.sectr =(DataPagePointer%4096)+aidx;
 	}
         
     /* Write value into page. */ 
@@ -66,6 +66,7 @@ int SinglePageWrite()
     err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
     if(err == 0) 
     {
+        ChunkData[sectorpointer/4096].emplace_back(sectorpointer);
         InfoRenew(ws_min);   /* update pointers! */
     }
     else
@@ -82,6 +83,7 @@ int PageLogWrite(uint64_t BlockId)
     /* Function flag, default value equals 0(successful flag). */
     int err = 0;
 
+    PageType LogPagePointer = chunkusage[BlockId];
     struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, sectorpointer);
     size_t ws_min = nvm_dev_get_ws_min(bp->dev);
     struct nvm_addr addrs[ws_min];

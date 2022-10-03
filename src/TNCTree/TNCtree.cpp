@@ -29,19 +29,10 @@ void TNCtreeInit(void)
           EMessageOutput("Index initialized failure!",1578);
      }
 
-
-     for(size_t i=0;i<100;i++)
-     {
-          ChunkLog[i] = 0;
-     }
-
-     LogPage = new uint64_t[205];
-
      if(Createflag == 0)
      {
           printf("\n ================ Index information ================ \
-            \n ---- Initialization successful!   \
-            \n ---- 20 nodes tree has been initialized!\n");
+            \n ---- Initialization successful! \n");
      }
 
 }

@@ -26,8 +26,7 @@
 extern int indexs;
 extern int LogIndex;
 extern TNCEntry * Pagedata;
-extern std::unordered_map<uint64_t,uint64_t> ChunkLog;  
-extern uint64_t * LogPage;
+extern std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkLog;  
 
 /**
  * ============= writer methods module ===============

@@ -28,7 +28,8 @@ void TNCtreeInit(void)
      {
           EMessageOutput("Index initialized failure!",1578);
      }
-        
+
+
      for(size_t i=0;i<100;i++)
      {
           ChunkLog[i] = 0;
@@ -52,7 +53,7 @@ void TNCtreePort(void)
 
      clock_t startTime,endTime;                        // Definition of timestamp
 
-     /* Write datum */
+     /* workload a: insert only*/
      startTime = clock();
      for(uint64_t i=1;i<=1000000;i++)
      {

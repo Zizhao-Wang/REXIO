@@ -28,7 +28,7 @@ int InfoRenew(size_t scale, PageType LogPointer=0, bool flag=false)
 
     if(flag)
     {
-        DataPagePointer += LogPointer/4096 == DataPagePointer/4096 ?scale:0;
+        DataPagePointer += (LogPointer/4096 == DataPagePointer/4096) ?scale:0;
         chunkusage[LogPointer/4096]= chunkusage[LogPointer/4096] + scale;
     }
     else
@@ -114,7 +114,7 @@ int PageLogWrite(uint64_t BlockId)
     if(err == 0) 
     {
         ChunkLog[LogPagePointer/4096].emplace_back(LogPagePointer) ;
-        PointerRenew(ws_min);   /* update pointers! */
+        InfoRenew(ws_min,LogPagePointer,true);   /* update pointers! */
     }
     else
     {

@@ -28,7 +28,7 @@ extern std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkLog;
 
 extern std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkData;
 
-extern PageType Datapointer;
+extern PageType DataPagePointer;
 
 /**
  * ============= writer methods module ===============

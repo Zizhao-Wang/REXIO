@@ -28,6 +28,8 @@ extern PageType WBufferId;
 extern std::unordered_map<uint64_t, std::vector<char>> BufferLog;  //Log buffer 
 extern LRUCache lrucache;
 
+extern int buffernumber;
+
 /**
  *  ================= Synchronous write module====================  
  **/

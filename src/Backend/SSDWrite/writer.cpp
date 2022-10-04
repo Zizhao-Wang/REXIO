@@ -30,6 +30,7 @@ int InfoRenew(size_t scale, PageType LogPointer=0, bool flag=false)
     {
         DataPagePointer += (LogPointer/4096 == DataPagePointer/4096) ?scale:0;
         chunkusage[LogPointer/4096]= chunkusage[LogPointer/4096] + scale;
+        //printf("LogPointer:%lu DataPagePointer:%lu chunkusage[LogPointer/4096]:%lu\n ",LogPointer,DataPagePointer,chunkusage[LogPointer/4096]);
     }
     else
     {
@@ -46,8 +47,6 @@ int InfoRenew(size_t scale, PageType LogPointer=0, bool flag=false)
     return 0;
 
 }
-
-
 
 /* 
  * Write functions. 
@@ -94,14 +93,14 @@ int PageLogWrite(uint64_t BlockId)
     int err = 0;
 
     PageType LogPagePointer = chunkusage[BlockId];
-
-    struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, LogPagePointer);
+    //printf("LogPagePointer:%lu BlockID:%lu \n",LogPagePointer,BlockId);
+    struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, LogPagePointer+4096*BlockId);
     size_t ws_min = nvm_dev_get_ws_min(bp->dev);
     struct nvm_addr addrs[ws_min];
     for (size_t aidx = 0; aidx < ws_min; ++aidx) 
     {
 	    addrs[aidx].val = addrs_chunk.val;
-	 	addrs[aidx].l.sectr =(LogPagePointer%4096)+aidx;
+	 	addrs[aidx].l.sectr =LogPagePointer+aidx;
 	}
         
     /* Write value into page. */ 
@@ -113,8 +112,8 @@ int PageLogWrite(uint64_t BlockId)
     err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
     if(err == 0) 
     {
-        ChunkLog[LogPagePointer/4096].emplace_back(LogPagePointer) ;
-        InfoRenew(ws_min,LogPagePointer,true);   /* update pointers! */
+        ChunkLog[BlockId].emplace_back(LogPagePointer) ;
+        InfoRenew(ws_min,LogPagePointer+4096*BlockId,true);   /* update pointers! */
     }
     else
     {

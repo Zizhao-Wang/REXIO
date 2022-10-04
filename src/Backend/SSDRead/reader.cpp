@@ -28,7 +28,6 @@ int SinglePageRead(uint64_t pageno)
 
 TNCEntry* TNCEntryRead(PageType PageId)
 {
-
 	size_t capacity = CalculatePageCapacity(sizeof(TNCEntry));
 	TNCEntry* data = new TNCEntry[capacity+10];
 	size_t pos = 0;

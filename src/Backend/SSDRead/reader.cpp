@@ -51,3 +51,14 @@ TNCEntry* TNCEntryRead(PageType PageId)
 	return data;
 
 }
+
+
+/** 
+ * ================= Linear Hash module ==================== 
+ *   Read functions for Linear Hashing! 
+ **/
+std::vector<LHEntry> PageRead(PageType PageNum)
+{
+	std::vector<LHEntry> entries;
+
+}

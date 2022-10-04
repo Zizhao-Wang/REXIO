@@ -37,19 +37,19 @@ public:
     /* Erase the bucket but not give up the memory space. */
     void BucketErase();
 
+    /**
+     *  "get()" functions is used to set private variables.
+     **/
+    std::vector<uint64_t> GetBucket(); // Return the vector that represents the specific page! 
 
-    /* Return the vector that represents the specific page! */
-    std::vector<uint64_t> GetBucket(); 
-
-    /* Return the current size of bucket. */
-    size_t GetBucketSize(); 
+    size_t GetBucketSize();  // Return the current size of bucket. 
 
     uint64_t GetBucketNo();
 
     bool GetFlag();
 
     /*
-     * Some set() functions is used to set private variables.
+     *  "set()" functions is used to set private variables.
      */
     void SetBucketNo(uint64_t bucketno);
 
@@ -57,27 +57,18 @@ public:
 
 class LinearHashTable
 {
-  /* Private variables. */
-  private:
+
+private:
     std::vector<LBucket> BucketTable;  // In-memeory buckets table with fixed bucket size.
-    uint64_t Tablesize, mod;           // Size of hash table and number is used to operate "mod" 
+    uint64_t Tablesize, mod;           // Size of hash table and number is used to operate "mod"
+    size_t h1,h2; 
     const uint64_t BucketBase = 2048;  // maximum of bucket in hash table
     const size_t tablebase = 100;
           
   
-  public:
+public:
     /* some public function to manipulate private variables. */
-    LinearHashTable()
-    {
-      /*  Constructive function is used to initialize private variables. */
-      mod = 100;
-      Tablesize = 100;
-      for(uint64_t i = 0; i<Tablesize;++i)
-      {
-        LBucket TempBucket;
-        BucketTable.push_back(TempBucket);
-      } 
-    }
+    LinearHashTable(uint16_t );
 
     /* Doubling hash table  */
     int TableDouble()

@@ -20,7 +20,6 @@ LBucket::LBucket()
      BucketMax = 2048;      //The capacity of a bucket
 }
 
-
 void LBucket::Insert(uint64_t key1)
 {
      size_t cursize = bucket.size();
@@ -36,7 +35,6 @@ void LBucket::Insert(uint64_t key1)
      }
 }
 
-
 void LBucket::BucketErase()
 {
      bucket.clear();
@@ -50,18 +48,15 @@ void LBucket::BucketErase()
      }
 }
 
-
 std::vector<SValue> LBucket::GetBucket()
 {
      return bucket;
 }
 
-
 size_t LBucket::GetBucketSize()
 {
      return bucket.size();
 }
-
 
 PageType LBucket::GetBucketNo()
 {
@@ -72,7 +67,6 @@ bool LBucket::GetFlag()
 {
      return IsFirst;
 }
-
 
 void LBucket::SetBucketNo(uint64_t bucketno)
 {
@@ -87,6 +81,22 @@ void LBucket::SetBucketNo(uint64_t bucketno)
      }
 }
 
+
+LinearHashTable::LinearHashTable(uint16_t Initialsize)
+{
+     /**
+      * Constructive function is used to initialize private variables.
+      * There are  global  
+      **/
+     h1 = Initialsize;
+     h2 = 2*h1;
+     Tablesize = Initialsize;
+     for(uint64_t i = 0; i<Tablesize;++i)
+     {
+        LBucket TempBucket;
+        BucketTable.push_back(TempBucket);
+     } 
+}
 
 int LinearHashTable::insert(uint64_t key, uint64_t value)
 {
@@ -163,7 +173,7 @@ void LHashPort()
 {
   
     clock_t startTime,endTime;  // Definition of timestamp
-    LinearHashTable hashtable;        // initialize a in-memory hash table
+    LinearHashTable hashtable(100);        // initialize a in-memory hash table
     /* Write datum */
 //     clock_t startTime,endTime;                        // Definition of timestamp
 

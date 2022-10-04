@@ -195,6 +195,7 @@ SValue Search(SKey key1)
     }
 
     entry = SyncRead(node->offset);
+    printf("Key: %lu offset: %u ReadKey:%lu \n",key1,node->offset,entry.key);
     if(entry.key == key1)
     {
         return entry.val;

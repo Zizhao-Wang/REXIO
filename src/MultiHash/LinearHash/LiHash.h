@@ -24,8 +24,8 @@ class LBucket
   
 private:
     std::vector<LHEntry>  bucket;
-    PageType  PageNum;
-    uint16_t  BucketMax;   //The capacity of a speific bucket
+    PageType  PageNum, overflowPage;
+    uint16_t  BucketMax,size;   //The capacity of a speific bucket
     bool  IsFirst;
 
 public:
@@ -34,10 +34,15 @@ public:
     /* Insert key into specific vector! */
     int Insert(SKey key1, SValue val);
 
-    /* Erase the bucket but not give up the memory space. */
-    void BucketErase();
+    void BucketWrite(void);
 
+    /* Erase the bucket but not give up the memory space. */
+    
     LHEntry BucketRetrival(SKey key);
+
+    int ValueDelet(SKey);
+
+    void BucketErase();
 
     /**
      *  "get()" functions is used to set private variables.
@@ -55,6 +60,9 @@ public:
      */
     void SetBucketNo(PageType bucketno);
 
+
+    bool IsFull(void) const;
+
 };
 
 class LinearHashTable
@@ -62,9 +70,8 @@ class LinearHashTable
 
 private:
     std::vector<LBucket> BucketTable;  // In-memeory buckets table with fixed bucket size.
-    uint64_t TableBase;               // Size of hash table and number is used to operate "mod"
-    size_t h1,h2;
-    bool SplitFlag[105];       
+    uint64_t workRound,SplitFlag;               // Size of hash table and number is used to operate "mod"
+    size_t h1,h2;       
   
 public:
     /* some public function to manipulate private variables. */
@@ -74,19 +81,15 @@ public:
     int TableDouble();
 
     /* Return 0 if suucess, */
-    int split(uint64_t val);
+    int split();
 
     int Insert(SKey key, SValue value);
 
-    int Search(uint64_t key)
-    {
-      return 0;
-    }
+    int Search(SKey key);
 
-    int Delete(uint64_t value)
-    {
-      return 0;
-    }
+    int Delete(SValue value);
+
+    int Update(SKey key, SValue val);
 };
 
 

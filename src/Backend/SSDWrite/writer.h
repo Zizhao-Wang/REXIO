@@ -46,7 +46,7 @@ int PageLogWrite(uint64_t BlockId);
  * ============= Linear Hash module ===============
  *  Function declartion for writing data into one or more pages:
  **/
-PageType SingleValueWrite(std::vector<LHEntry> entries, uint64_t pageno);
+PageType SingleBucketWrite(std::vector<LHEntry> entries, uint64_t pageno);
 
 
 #endif //EXPERIMENT1_WRITEDISK_H

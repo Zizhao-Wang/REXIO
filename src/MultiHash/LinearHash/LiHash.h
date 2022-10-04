@@ -77,9 +77,6 @@ public:
     /* some public function to manipulate private variables. */
     LinearHashTable(uint16_t );
 
-    /* Doubling hash table  */
-    int TableDouble();
-
     /* Return 0 if suucess, */
     int split();
 

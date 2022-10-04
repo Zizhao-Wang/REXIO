@@ -21,18 +21,21 @@ uint32_t SyncWrite(SKey key1, SValue value)
         SinglePageWrite();
 
         WBufferId = DataPagePointer;
-        offset += DataPagePointer%4096==0 ?0x400000:0x00000000;
+        offset += DataPagePointer%4096==0?0x400000:0x00000000;
 
         offset = offset & 0xFFC00FFF; 
         offset += ((DataPagePointer%4096)<<12);
 
         offset = offset & 0xFFFFF000;
         indexs = 0;
+
+        printf("offset: %ud ", offset);
     } 
 	Pagedata[indexs].key = key1;
 	Pagedata[indexs].val = value;
 	++indexs;
 
+    
     ++offset;
 
     return offset;
@@ -67,7 +70,7 @@ TNCEntry Read4Buffer(size_t pos)
 
 TNCEntry  SyncRead(uint32_t offset)
 {
-    uint64_t PageId = (offset>>22)*bp->geo->l.nsectr+((offset>>12)&0x3FF)*4;
+    uint64_t PageId = (offset>>22)*bp->geo->l.nsectr+((offset>>12)&0x3FF);
     size_t Position = (offset & 0x00000FFF)-1;
 
     if(PageId == WBufferId)

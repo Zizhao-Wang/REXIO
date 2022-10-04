@@ -219,6 +219,7 @@ int Update(SKey key1, SValue val)
     }
 
     if(node->flag == 1){
+        //printf("key: %lu ",key1);
         err = SyncDelete(node->offset);
     }
     

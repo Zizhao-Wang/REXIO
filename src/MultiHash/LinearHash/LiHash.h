@@ -113,7 +113,8 @@ class LinearHashTable
     std::vector<LBucket> BucketTable;  // In-memeory buckets table with fixed bucket size.
     uint64_t Tablesize, mod;           // Size of hash table and number is used to operate "mod" 
     const uint64_t BucketBase = 2048;  // maximum of bucket in hash table
-    const size_t tablebase = 100;      
+    const size_t tablebase = 100;
+          
   
   public:
     /* some public function to manipulate private variables. */

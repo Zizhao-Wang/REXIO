@@ -9,7 +9,7 @@ uint32_t offset = 0;
 TNCEntry Pagedata[1030];
 PageType WBufferId = 0;
 std::unordered_map<uint64_t, std::vector<char>> BufferLog;
-LRUCache lrucache(32);
+LRUCache lrucache(256);
 
 uint32_t SyncWrite(SKey key1, SValue value)
 {

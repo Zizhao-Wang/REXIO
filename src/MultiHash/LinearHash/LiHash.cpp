@@ -7,17 +7,18 @@
 //Some useful header files.
 
 #include "LiHash.h"
-#include<iostream>
-#include<vector>
-
+#include <iostream>
+#include <vector>
+#include "node.h"
 
 /* Global variables definition and utilization, coming soon...  */
 
 
-LBucket::LBucket()
+LBucket::LBucket(uint16_t maxsize)
 {
-     BucketNo = UINT64_MAX;     
-     BucketMax = 2048;      //The capacity of a bucket
+
+     PageNum = UINT64_MAX;     
+     this->BucketMax = maxsize;   
 }
 
 void LBucket::Insert(uint64_t key1)
@@ -82,6 +83,7 @@ void LBucket::SetBucketNo(uint64_t bucketno)
 }
 
 
+
 LinearHashTable::LinearHashTable(uint16_t Initialsize)
 {
      /**
@@ -91,6 +93,7 @@ LinearHashTable::LinearHashTable(uint16_t Initialsize)
      h1 = Initialsize;
      h2 = 2*h1;
      Tablesize = Initialsize;
+     size_t MaxSize = CalculatePageCapacity(sizeof(LHEntry));
      for(uint64_t i = 0; i<Tablesize;++i)
      {
         LBucket TempBucket;
@@ -98,47 +101,89 @@ LinearHashTable::LinearHashTable(uint16_t Initialsize)
      } 
 }
 
-int LinearHashTable::insert(uint64_t key, uint64_t value)
+int LinearHashTable::TableDouble()
 {
-  /* This function is implemented to insert a special value into a bucket according to
+     for(size_t i=1;i<=tablebase;i++)
+     {
+          LBucket TempBucket;
+          BucketTable.push_back(TempBucket);
+     }
+     if(BucketTable.size() - Tablesize == tablebase)
+     {
+          Tablesize = Tablesize + tablebase;
+          mod = mod + tablebase;
+     }
+     else
+     {
+          printf("Because of unknoen reason, Hash table double failure!\n");
+          return -1;
+     }
+     return 0;
+
+}
+
+int LinearHashTable::split(uint64_t val)
+{
+      
+     std::vector<uint64_t> TempBucket;  /* Intermediate varible definition */
+     if(TableDouble() == -1)
+     {
+          printf("Doubling hash table failure when spliting bucket %lu because unknown reaon.",val);
+          return -1;
+          exit(103);
+     }
+     TempBucket = BucketTable[val].GetBucket();
+     BucketTable[val].BucketErase();
+     for(int i=0;i<TempBucket.size();i++)
+     {
+          insert(TempBucket[i],TempBucket[i]);
+     }
+
+     return 0;
+
+}
+
+int LinearHashTable::Insert(SKey key, SValue value)
+{
+     /** 
+      * This function is implemented to insert a special value into a bucket according to
       * a special rule that usually is called “Linear Hashing method”. 
       * The following source code contains three steps:
       *  1. Find a proper bucket
       *  2. Insert this value into this in-memory bucket 
       *  4. Synchronize the value with Disk
       *  3. update in-memory table 
-      */
+      **/
+     uint64_t bucketno = key % h1; 
+     //printf("Parameter testing: mod:%lu bucketno:%lu key:%lu value:%lu\n",mod,bucketno,key,value); 
+     if(BucketTable[bucketno].GetBucketSize() >= BucketBase)
+     {
+          //printf("Split Parameter testing: mod:%lu bucketno:%lu key:%lu value:%lu\n",mod,bucketno,key,value); 
+          int err = 0;
+          uint64_t pageno;
 
-    uint64_t bucketno = key % mod; 
-    //printf("Parameter testing: mod:%lu bucketno:%lu key:%lu value:%lu\n",mod,bucketno,key,value); 
-    if(BucketTable[bucketno].GetBucketSize() >= BucketBase)
-    {
-      //printf("Split Parameter testing: mod:%lu bucketno:%lu key:%lu value:%lu\n",mod,bucketno,key,value); 
-      int err = 0;
-      uint64_t pageno;
-
-      err = split(bucketno);
-      if(err == -1)
-      {
-        printf("Bucket spliting failure!\n");
-      }
-      BucketTable[bucketno].Insert(key);
-      //printf("Test: Pageno %lu\n",BucketTable[bucketno].GetBucketNo());
-      if(BucketTable[bucketno].GetBucketNo() == UINT64_MAX)
-      {
-        pageno = SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize()-1);
-        BucketTable[bucketno].SetBucketNo(pageno);
-      }
-      else
-      {
-        pageno = SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize()-1);
-        if(pageno != BucketTable[bucketno].GetBucketNo())
-        {
-          printf("Fatal error in spliting: Bucket number don't matching!\n");
-          return -1;
-        }
-      }
-    }
+          err = split(bucketno);
+          if(err == -1)
+          {
+               printf("Bucket spliting failure!\n");
+          }
+          BucketTable[bucketno].Insert(key);
+          //printf("Test: Pageno %lu\n",BucketTable[bucketno].GetBucketNo());
+          if(BucketTable[bucketno].GetBucketNo() == UINT64_MAX)
+          {
+               pageno = SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize()-1);
+               BucketTable[bucketno].SetBucketNo(pageno);
+          }
+          else
+          {
+               pageno = SingleValueWrite(value,BucketTable[bucketno].GetBucketNo(),BucketTable[bucketno].GetBucketSize()-1);
+               if(pageno != BucketTable[bucketno].GetBucketNo())
+               {
+                    printf("Fatal error in spliting: Bucket number don't matching!\n");
+                    return -1;
+               }
+          }
+     }
     else
     {
         uint64_t pageno;
@@ -164,6 +209,7 @@ int LinearHashTable::insert(uint64_t key, uint64_t value)
     }
 
     return 1;
+
 }
 
 

@@ -23,13 +23,13 @@ class LBucket
 {
   
 private:
-    std::vector<uint64_t>  bucket;
-    uint64_t  BucketNo;
-    uint64_t  BucketMax;
+    std::vector<SKey>  bucket;
+    PageType  PageNum;
+    uint16_t  BucketMax;   //The capacity of a speific bucket
     bool  IsFirst;
 
 public:
-    LBucket();
+    LBucket(uint16_t maxsize);
 
     /* Insert key into specific vector! */
     void Insert(uint64_t key1);
@@ -60,60 +60,21 @@ class LinearHashTable
 
 private:
     std::vector<LBucket> BucketTable;  // In-memeory buckets table with fixed bucket size.
-    uint64_t Tablesize, mod;           // Size of hash table and number is used to operate "mod"
-    size_t h1,h2; 
-    const uint64_t BucketBase = 2048;  // maximum of bucket in hash table
-    const size_t tablebase = 100;
-          
+    uint64_t Tablesize;               // Size of hash table and number is used to operate "mod"
+    size_t h1,h2;
+    size_t SplitFlag;       
   
 public:
     /* some public function to manipulate private variables. */
     LinearHashTable(uint16_t );
 
     /* Doubling hash table  */
-    int TableDouble()
-    {
-      for(size_t i=1;i<=tablebase;i++)
-      {
-        LBucket TempBucket;
-        BucketTable.push_back(TempBucket);
-      }
-      if (BucketTable.size() - Tablesize == tablebase)
-      {
-        Tablesize = Tablesize + tablebase;
-        mod = mod + tablebase;
-      }
-      else
-      {
-        printf("Because of unknoen reason, Hash table double failure!\n");
-        return -1;
-      }
-      return 0;
-
-    }
+    int TableDouble();
 
     /* Return 0 if suucess, */
-    int split(uint64_t val)
-    {
-      
-      std::vector<uint64_t> TempBucket;  /* Intermediate varible definition */
-      if(TableDouble() == -1)
-      {
-        printf("Doubling hash table failure when spliting bucket %lu because unknown reaon.",val);
-        return -1;
-        exit(103);
-      }
-      TempBucket = BucketTable[val].GetBucket();
-      BucketTable[val].BucketErase();
-      for(int i=0;i<TempBucket.size();i++)
-      {
-        insert(TempBucket[i],TempBucket[i]);
-      }
-      return 0;
-      
-    }
+    int split(uint64_t val);
 
-    int insert(uint64_t key, uint64_t value);
+    int Insert(SKey key, SValue value);
 
     int Search(uint64_t key)
     {

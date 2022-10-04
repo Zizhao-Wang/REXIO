@@ -69,7 +69,7 @@ void TNCtreePort(void)
           if(i==10000 || i%100000==0)
           {
                endTime = clock();
-               std::cout << "Total Time of"<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+               std::cout << "Total Time of "<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
           }
      }
      endTime = clock();
@@ -94,7 +94,7 @@ void TNCtreePort(void)
           if(i%100000==0 || i==10000)
           {
                endTime = clock();
-               std::cout << "Total Time of"<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+               std::cout << "Total Time of "<<i<<" in workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
           }
      }
      endTime = clock();

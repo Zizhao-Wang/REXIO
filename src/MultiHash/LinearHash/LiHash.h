@@ -28,28 +28,10 @@ class LBucket
     bool  IsFirst;
 
   public:
-    LBucket()
-    {
-      /*  Initialize some necessary in-class variables */
-      BucketNo = UINT64_MAX;     //Bucket number = page number 
-      BucketMax = 2048;              //The capacity of a bucket
-    }
+    LBucket();
 
     /* Insert key into specific vector! */
-    void Insert(uint64_t key1)
-    {
-      size_t cursize = bucket.size();
-      bucket.push_back(key1);
-      size_t nowsize = bucket.size();
-      if (nowsize - cursize > 0)
-      {
-        //printf("Insert key %lu into bucket %lu successful, size of the bucket is %lu after inserting.\n", key1,BucketNo,nowsize);
-      }
-      else
-      {
-        //printf("Because some unknown reasons, insertion failure!\n");
-      }
-    }
+    void Insert(uint64_t key1);
 
     /* Erase the bucket but not give up the memory space. */
     void BucketErase()

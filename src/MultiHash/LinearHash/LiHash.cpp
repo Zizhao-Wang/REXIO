@@ -13,6 +13,30 @@
 
 /* Global variables definition and utilization, coming soon...  */
 
+
+LBucket::LBucket()
+{
+     BucketNo = UINT64_MAX;     
+     BucketMax = 2048;      //The capacity of a bucket
+}
+
+void LBucket::Insert(uint64_t key1)
+{
+     size_t cursize = bucket.size();
+     bucket.push_back(key1);
+     size_t nowsize = bucket.size();
+     if (nowsize - cursize > 0)
+     {
+        //printf("Insert key %lu into bucket %lu successful, size of the bucket is %lu after inserting.\n", key1,BucketNo,nowsize);
+     }
+     else
+     {
+        //printf("Because some unknown reasons, insertion failure!\n");
+     }
+}
+
+
+
 int LinearHashTable::insert(uint64_t key, uint64_t value)
 {
   /* This function is implemented to insert a special value into a bucket according to

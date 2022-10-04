@@ -23,15 +23,25 @@ std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkData;
 PageType DataPagePointer = 0;
 
 /* function is used to update pointers. */
-int InfoRenew(size_t scale)
+int InfoRenew(size_t scale, PageType LogPointer=0, bool flag=false)
 {
 
-    chunkusage[DataPagePointer/4096]= chunkusage[DataPagePointer/4096] + scale;
-    DataPagePointer += scale;
-
-    if(ChunkData[sectorpointer/4096].size()>=820 )
+    if(flag)
     {
-        DataPagePointer += (4096-DataPagePointer%4096); 
+        DataPagePointer += LogPointer/4096 == DataPagePointer/4096 ?scale:0;
+        chunkusage[LogPointer/4096]= chunkusage[LogPointer/4096] + scale;
+    }
+    else
+    {
+        chunkusage[DataPagePointer/4096]= chunkusage[DataPagePointer/4096] + scale;
+        if(ChunkData[sectorpointer/4096].size()>=820)
+        {
+            DataPagePointer += (4096-DataPagePointer%4096);
+        }
+        else
+        {
+            DataPagePointer += scale;
+        } 
     } 
     return 0;
 

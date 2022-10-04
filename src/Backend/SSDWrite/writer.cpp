@@ -66,12 +66,12 @@ int SinglePageWrite()
     err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
     if(err == 0) 
     {
-        ChunkData[sectorpointer/4096].emplace_back(sectorpointer);
+        ChunkData[DataPagePointer/4096].emplace_back(DataPagePointer);
         InfoRenew(ws_min);   /* update pointers! */
     }
     else
     {
-        EMessageOutput("Page writing failed in "+ Uint64toString(sectorpointer)+"\n", 4598);
+        EMessageOutput("Page writing failed in "+ Uint64toString(DataPagePointer)+"\n", 4598);
     }
     return err;
     
@@ -84,13 +84,14 @@ int PageLogWrite(uint64_t BlockId)
     int err = 0;
 
     PageType LogPagePointer = chunkusage[BlockId];
-    struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, sectorpointer);
+
+    struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, LogPagePointer);
     size_t ws_min = nvm_dev_get_ws_min(bp->dev);
     struct nvm_addr addrs[ws_min];
     for (size_t aidx = 0; aidx < ws_min; ++aidx) 
     {
 	    addrs[aidx].val = addrs_chunk.val;
-	 	addrs[aidx].l.sectr =(sectorpointer%4096)+aidx;
+	 	addrs[aidx].l.sectr =(LogPagePointer%4096)+aidx;
 	}
         
     /* Write value into page. */ 
@@ -102,12 +103,12 @@ int PageLogWrite(uint64_t BlockId)
     err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
     if(err == 0) 
     {
-        ChunkLog[sectorpointer/4096].emplace_back(sectorpointer) ;
+        ChunkLog[LogPagePointer/4096].emplace_back(LogPagePointer) ;
         PointerRenew(ws_min);   /* update pointers! */
     }
     else
     {
-        EMessageOutput("Page writing failed in "+ Uint64toString(sectorpointer)+"\n", 4598);
+        EMessageOutput("Page writing failed in "+ Uint64toString(LogPagePointer)+"\n", 4598);
     }
     return err;
 

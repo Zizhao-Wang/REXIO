@@ -43,7 +43,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : "Debug"
+			"value" : "Release"
 		},
 		{
 			"name" : "CMAKE_CACHEFILE_DIR",
@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/femu/experiment1/code2/build"
+			"value" : "/home/femu/experiment/code2/build"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -91,7 +91,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "3"
+			"value" : "0"
 		},
 		{
 			"name" : "CMAKE_COLOR_MAKEFILE",
@@ -283,10 +283,10 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
+					"value" : "C compiler"
 				}
 			],
-			"type" : "FILEPATH",
+			"type" : "STRING",
 			"value" : "/usr/bin/c89-gcc"
 		},
 		{
@@ -591,7 +591,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/femu/experiment1/code2/src"
+			"value" : "/home/femu/experiment/code2/src"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1331,7 +1331,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/femu/experiment1/code2/build"
+			"value" : "/home/femu/experiment/code2/build"
 		},
 		{
 			"name" : "src_IS_TOP_LEVEL",
@@ -1355,7 +1355,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/femu/experiment1/code2/src"
+			"value" : "/home/femu/experiment/code2/src"
 		}
 	],
 	"kind" : "cache",

@@ -22,12 +22,14 @@ void LBucket::BucketWrite(void)
 
 int LBucket::Insert(SKey key1, SValue val)
 {
+     
      LHEntry entry{key1,val};
      bucket.emplace_back(entry);
      size = bucket.size();
      if(bucket.size() >= BucketMax)
      {
           BucketWrite();
+          bucket.clear();
           return 1;
      }
 
@@ -68,6 +70,16 @@ LHEntry LBucket::BucketRetrival(SKey key)
 
 std::vector<LHEntry> LBucket::GetBucket()
 {
+     if(PageNum != UINT64_MAX)
+     {
+          std::vector<LHEntry> entries = PageRead(PageNum);
+          for(size_t i=0;i<bucket.size();i++)
+          {
+               entries.emplace_back(bucket[i]);
+          }
+          return entries;
+     }
+
      return bucket;
 }
 
@@ -121,29 +133,24 @@ LinearHashTable::LinearHashTable(uint16_t Initialsize)
      workRound = 1;
 
      size_t MaxSize = CalculatePageCapacity(sizeof(LHEntry));
-     for(uint64_t i = 0; i<TableBase;++i)
+     for(uint16_t i = 0; i<Initialsize;++i)
      {
         LBucket TempBucket(MaxSize);
         BucketTable.push_back(TempBucket);
      } 
 }
 
-int LinearHashTable::TableDouble()
-{
 
-     for(size_t i=1;i<=TableBase;i++)
-     {
-          LBucket TempBucket(CalculatePageCapacity(sizeof(LHEntry)));
-          BucketTable.emplace_back(TempBucket);
-     }
-     return 0;
-}
 
 int LinearHashTable::split()
 {
       
-     std::vector<uint64_t> TempBucket;  /* Intermediate varible definition */
-     
+     std::vector<LHEntry> OldBucket;  /* Intermediate varible definition */
+     LBucket TempBucket(CalculatePageCapacity(sizeof(LHEntry)));
+     BucketTable.emplace_back(TempBucket);
+
+     OldBucket = 
+
 
      TempBucket = BucketTable[val].GetBucket();
      BucketTable[val].BucketErase();

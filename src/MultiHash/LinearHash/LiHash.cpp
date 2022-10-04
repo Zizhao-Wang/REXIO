@@ -20,6 +20,7 @@ LBucket::LBucket()
      BucketMax = 2048;      //The capacity of a bucket
 }
 
+
 void LBucket::Insert(uint64_t key1)
 {
      size_t cursize = bucket.size();
@@ -35,6 +36,56 @@ void LBucket::Insert(uint64_t key1)
      }
 }
 
+
+void LBucket::BucketErase()
+{
+     bucket.clear();
+     if (bucket.size() == 0) 
+     {
+        printf("Bucket %lu clear succeed!\n",BucketNo);
+     }
+     else
+     {
+        printf("Bucket %lu clear failure.\n",BucketNo);
+     }
+}
+
+
+std::vector<SValue> LBucket::GetBucket()
+{
+     return bucket;
+}
+
+
+size_t LBucket::GetBucketSize()
+{
+     return bucket.size();
+}
+
+
+PageType LBucket::GetBucketNo()
+{
+     return BucketNo;
+}
+
+bool LBucket::GetFlag()
+{
+     return IsFirst;
+}
+
+
+void LBucket::SetBucketNo(uint64_t bucketno)
+{
+     if(BucketNo == UINT64_MAX)
+     {
+        BucketNo = bucketno;
+     }
+     else
+     {
+          printf("Set bucket number failure, %lu can not be setted!\n",bucketno);
+          exit(104);
+     }
+}
 
 
 int LinearHashTable::insert(uint64_t key, uint64_t value)

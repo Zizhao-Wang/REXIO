@@ -21,70 +21,37 @@
 
 class LBucket
 {
-  private:
+  
+private:
     std::vector<uint64_t>  bucket;
     uint64_t  BucketNo;
     uint64_t  BucketMax;
     bool  IsFirst;
 
-  public:
+public:
     LBucket();
 
     /* Insert key into specific vector! */
     void Insert(uint64_t key1);
 
     /* Erase the bucket but not give up the memory space. */
-    void BucketErase()
-    {
-      bucket.clear();
-      if (bucket.size() == 0) 
-      {
-        printf("Bucket %lu clear succeed!\n",BucketNo);
-      }
-      else
-      {
-        printf("Bucket %lu clear failure.\n",BucketNo);
-      }
-    }
+    void BucketErase();
 
-    /*
-     * Some Get() function is used to get private variables.
-     */
-    
-    std::vector<uint64_t> GetBucket() /* Return the vector that represents the specific page! */
-    {
-      return bucket;
-    }
-    
-    size_t GetBucketSize() /* Return the current size of bucket. */
-    {
-      return bucket.size();
-    }
 
-    uint64_t GetBucketNo()
-    {
-      return BucketNo;
-    }
-    bool GetFlag()
-    {
-      return IsFirst;
-    }
+    /* Return the vector that represents the specific page! */
+    std::vector<uint64_t> GetBucket(); 
+
+    /* Return the current size of bucket. */
+    size_t GetBucketSize(); 
+
+    uint64_t GetBucketNo();
+
+    bool GetFlag();
 
     /*
      * Some set() functions is used to set private variables.
      */
-    void SetBucketNo(uint64_t bucketno)
-    {
-      if(BucketNo == UINT64_MAX)
-      {
-        BucketNo = bucketno;
-      }
-      else
-      {
-        printf("Set bucket number failure, %lu can not be setted!\n",bucketno);
-        exit(104);
-      }
-    }
+    void SetBucketNo(uint64_t bucketno);
 
 };
 

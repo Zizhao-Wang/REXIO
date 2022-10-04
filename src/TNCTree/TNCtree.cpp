@@ -49,7 +49,7 @@ void TNCtreePort(void)
 
      /* workload a: insert only*/
      startTime = clock();
-     for(SKey i=1;i<=100000;i++)
+     for(SKey i=1;i<=40000000;i++)
      {
           // if(i!=0&&i%100000==0)
           // printf("Insert %lu successful!\n",i);
@@ -61,10 +61,10 @@ void TNCtreePort(void)
 
      /* workload b: read only, all in it */
      startTime = clock();
-     for(int i=1;i<=100;i++)
+     for(int i=1;i<=1000000;i++)
      {
           srand48(time(NULL));
-          SKey k = 1+(rand()%100000);
+          SKey k = 1+(rand()%40000000);
           Search(k);
           if(i==10000 || i%100000==0)
           {
@@ -76,29 +76,29 @@ void TNCtreePort(void)
      std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
      // /* workload c: read only, 50% in it, 50% not in it */
-     // startTime = clock();
+     startTime = clock();
      
-     // for(int i=1;i<=1000000;i++)
-     // {
-     //      srand48(time(NULL));
-     //      if(i%100<50)
-     //      {
-     //           SKey k = 1+(rand()%40000000);
-     //           Search(k);
-     //      }
-     //      else
-     //      {
-     //           SKey k = 40000000+(rand()%40000000);
-     //           Search(k);
-     //      }
-     //      if(i%100000==0 || i==10000)
-     //      {
-     //           endTime = clock();
-     //           std::cout << "Total Time of "<<i<<" in workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
-     //      }
-     // }
-     // endTime = clock();
-     // std::cout << "Total Time of workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+     for(int i=1;i<=1000000;i++)
+     {
+          srand48(time(NULL));
+          if(i%100<50)
+          {
+               SKey k = 1+(rand()%40000000);
+               Search(k);
+          }
+          else
+          {
+               SKey k = 40000000+(rand()%40000000);
+               Search(k);
+          }
+          if(i%100000==0 || i==10000)
+          {
+               endTime = clock();
+               std::cout << "Total Time of "<<i<<" in workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+          }
+     }
+     endTime = clock();
+     std::cout << "Total Time of workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
      /* workload d: update heavy workload, 50% read, 50% update */
      // startTime = clock();

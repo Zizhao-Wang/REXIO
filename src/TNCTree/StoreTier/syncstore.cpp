@@ -28,8 +28,7 @@ uint32_t SyncWrite(SKey key1, SValue value)
 
         offset = offset & 0xFFFFF000;
         indexs = 0;
-
-        printf("offset: %ud ", offset);
+        //printf("offset: %ud ", offset);
     } 
 	Pagedata[indexs].key = key1;
 	Pagedata[indexs].val = value;

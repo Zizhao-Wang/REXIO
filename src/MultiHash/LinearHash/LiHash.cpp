@@ -1,55 +1,62 @@
-/* @Author: Zizhao Wang
- * @E-mail: zz.wang@siat.ac.cn
- * @Date: 10/8/2022
- * @name: Implementation of Linear-Hashing.
-*/
-
-//Some useful header files.
-
 #include "LiHash.h"
 #include <iostream>
 #include <vector>
-#include "node.h"
+#include "../../Backend/SSDRead/reader.h"
+#include <algorithm>
 
 /* Global variables definition and utilization, coming soon...  */
 
 
 LBucket::LBucket(uint16_t maxsize)
 {
-
      PageNum = UINT64_MAX;     
      this->BucketMax = maxsize;   
 }
 
-void LBucket::Insert(uint64_t key1)
+void LBucket::Insert(SKey key1, SValue val)
 {
-     size_t cursize = bucket.size();
-     bucket.push_back(key1);
-     size_t nowsize = bucket.size();
-     if (nowsize - cursize > 0)
+     LHEntry entry{key1,val};
+     bucket.emplace_back(entry);
+     if(bucket.size()== BucketMax)
      {
-        //printf("Insert key %lu into bucket %lu successful, size of the bucket is %lu after inserting.\n", key1,BucketNo,nowsize);
+          PageNum = 
      }
-     else
-     {
-        //printf("Because some unknown reasons, insertion failure!\n");
-     }
+
 }
 
 void LBucket::BucketErase()
 {
      bucket.clear();
-     if (bucket.size() == 0) 
-     {
-        printf("Bucket %lu clear succeed!\n",BucketNo);
-     }
-     else
-     {
-        printf("Bucket %lu clear failure.\n",BucketNo);
-     }
+     AssertCondition(bucket.size() == 0);
 }
 
-std::vector<SValue> LBucket::GetBucket()
+LHEntry LBucket::BucketRetrival(SKey key)
+{
+     if(bucket.size()<CalculatePageCapacity(sizeof(LHEntry)))
+     {
+          std::vector<LHEntry>::iterator get;
+          get = find(bucket.begin(),bucket.end(), LHEntry{key,0});
+          if(get != bucket.end())
+          {
+               return  *get;
+          }
+          return LHEntry{0,0};
+     }
+     AssertCondition(PageNum != UINT64_MAX);
+     std::vector<LHEntry> TempEntry = PageRead(PageNum);
+
+     std::vector<LHEntry>::iterator get;
+     get = find(bucket.begin(),bucket.end(), new LHEntry{key,0});
+     if(get != bucket.end())
+     {
+          return *get;
+     }
+
+     return LHEntry{0,0};
+
+}
+
+std::vector<LHEntry> LBucket::GetBucket()
 {
      return bucket;
 }
@@ -61,7 +68,7 @@ size_t LBucket::GetBucketSize()
 
 PageType LBucket::GetBucketNo()
 {
-     return BucketNo;
+     return PageNum;
 }
 
 bool LBucket::GetFlag()
@@ -71,14 +78,11 @@ bool LBucket::GetFlag()
 
 void LBucket::SetBucketNo(uint64_t bucketno)
 {
-     if(BucketNo == UINT64_MAX)
-     {
-        BucketNo = bucketno;
+     if(PageNum == UINT64_MAX){
+        PageNum = bucketno;
      }
-     else
-     {
-          printf("Set bucket number failure, %lu can not be setted!\n",bucketno);
-          exit(104);
+     else{
+          EMessageOutput("Set bucket number failure, %lu can not be setted!\n",104);
      }
 }
 
@@ -92,32 +96,29 @@ LinearHashTable::LinearHashTable(uint16_t Initialsize)
       **/
      h1 = Initialsize;
      h2 = 2*h1;
-     Tablesize = Initialsize;
+     TableBase = Initialsize;
+     for(int i=0;i<102;i++)
+     {
+          SplitFlag[i] = false;
+     }
      size_t MaxSize = CalculatePageCapacity(sizeof(LHEntry));
      for(uint64_t i = 0; i<Tablesize;++i)
      {
-        LBucket TempBucket;
+        LBucket TempBucket(MaxSize);
         BucketTable.push_back(TempBucket);
      } 
 }
 
 int LinearHashTable::TableDouble()
 {
-     for(size_t i=1;i<=tablebase;i++)
+
+     for(size_t i=1;i<=Tablesize;i++)
      {
-          LBucket TempBucket;
-          BucketTable.push_back(TempBucket);
+          LBucket TempBucket(CalculatePageCapacity(sizeof(LHEntry)));
+          BucketTable.emplace_back(TempBucket);
      }
-     if(BucketTable.size() - Tablesize == tablebase)
-     {
-          Tablesize = Tablesize + tablebase;
-          mod = mod + tablebase;
-     }
-     else
-     {
-          printf("Because of unknoen reason, Hash table double failure!\n");
-          return -1;
-     }
+
+     Tablesize += Tablesize;
      return 0;
 
 }
@@ -136,7 +137,7 @@ int LinearHashTable::split(uint64_t val)
      BucketTable[val].BucketErase();
      for(int i=0;i<TempBucket.size();i++)
      {
-          insert(TempBucket[i],TempBucket[i]);
+          insert(,TempBucket[i]);
      }
 
      return 0;
@@ -154,8 +155,12 @@ int LinearHashTable::Insert(SKey key, SValue value)
       *  4. Synchronize the value with Disk
       *  3. update in-memory table 
       **/
-     uint64_t bucketno = key % h1; 
-     //printf("Parameter testing: mod:%lu bucketno:%lu key:%lu value:%lu\n",mod,bucketno,key,value); 
+     size_t bucketno = key % h1; //printf("Parameter testing: mod:%lu bucketno:%lu key:%lu value:%lu\n",mod,bucketno,key,value); 
+     if(SplitFlag[bucketno % TableBase])
+     {
+          bucketno = key % h2;
+     }
+     BucketTable[bucketno].Insert(key,value);
      if(BucketTable[bucketno].GetBucketSize() >= BucketBase)
      {
           //printf("Split Parameter testing: mod:%lu bucketno:%lu key:%lu value:%lu\n",mod,bucketno,key,value); 

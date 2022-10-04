@@ -34,7 +34,7 @@ extern PageType Datapointer;
  * ============= writer methods module ===============
  *  Function declartion for writing data into one or more pages:
  **/
-int InfoRenew(size_t scale);
+int InfoRenew(size_t scale, PageType LogPointer, bool flag);
 
 int SinglePageWrite(); // Insert page-level key-value pairs into physicals for TNC-tree.
 

@@ -110,12 +110,12 @@ void TNCtreePort(void)
           srand48(time(NULL));
           if(i%2==0)
           {
-               SKey k = 1+(rand()%60000000);
+               SKey k = 1+(rand()%40000000);
                Search(k);
           }
           else
           {
-               SKey k = 1+(rand()%60000000);
+               SKey k = 1+(rand()%40000000);
                Update(k,k+1);
           }
           if(i%100000==0 || i==10000)
@@ -134,12 +134,12 @@ void TNCtreePort(void)
           srand48(time(NULL));
           if(i%100<95)
           {
-               SKey k = 1+(rand()%60000000);
+               SKey k = 1+(rand()%40000000);
                Search(k);
           }
           else
           {
-               SKey k = 1+(rand()%60000000);
+               SKey k = 1+(rand()%40000000);
                Update(k,k+1);
           }
           if(i%100000==0 || i==10000)
@@ -158,12 +158,12 @@ void TNCtreePort(void)
           srand48(time(NULL));
           if(i%100<95)
           {
-               SKey k = 1+(rand()%50000000);
+               SKey k = 1+(rand()%40000000);
                Search(k);
           }
           else
           {
-               SKey k = 1+(rand()%50000000);
+               SKey k = 40000000+(rand()%40000000);
                InsertNode(i+40000000,i+40000000);
           }
           if(i%100000==0 || i==10000)
@@ -180,7 +180,7 @@ void TNCtreePort(void)
      for(int i=1;i<=1000000;i++)
      {
           srand48(time(NULL));
-          SKey k = 1+(rand()%50000000);
+          SKey k = 1+(rand()%40000000);
           Delete(k);
           if(i%100000==0 || i==10000)
           {

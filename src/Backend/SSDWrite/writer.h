@@ -21,6 +21,8 @@
 #include "../../Auxizilary/SysOutput.h"
 #include "../../Auxizilary/GlobalVariable.h"
 #include "../../TNCTree/StoreTier/syncstore.h"
+#include "../../MultiHash/LinearHash/node.h"
+#include "../../MultiHash/LinearHash/LiHash.h"
 
 /*  Global variables for SSD write definition.  */
 
@@ -31,7 +33,7 @@ extern std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkData;
 extern PageType DataPagePointer;
 
 /**
- * ============= writer methods module ===============
+ * ============= TNC-tree methods module ===============
  *  Function declartion for writing data into one or more pages:
  **/
 int InfoRenew(size_t scale, PageType LogPointer, bool flag);
@@ -39,6 +41,12 @@ int InfoRenew(size_t scale, PageType LogPointer, bool flag);
 int SinglePageWrite(); // Insert page-level key-value pairs into physicals for TNC-tree.
 
 int PageLogWrite(uint64_t BlockId);
+
+/**
+ * ============= Linear Hash module ===============
+ *  Function declartion for writing data into one or more pages:
+ **/
+PageType SingleValueWrite(std::vector<LHEntry> entries, uint64_t pageno);
 
 
 #endif //EXPERIMENT1_WRITEDISK_H

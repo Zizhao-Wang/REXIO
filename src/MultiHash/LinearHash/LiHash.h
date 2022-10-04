@@ -13,7 +13,7 @@
 
 #include <iostream>
 #include <vector>
-
+#include "node.h"
 #include "../../Backend/IODisk/WriteDisk.h"
 
 /* Global variables declaration */
@@ -23,7 +23,7 @@ class LBucket
 {
   
 private:
-    std::vector<SKey>  bucket;
+    std::vector<LHEntry>  bucket;
     PageType  PageNum;
     uint16_t  BucketMax;   //The capacity of a speific bucket
     bool  IsFirst;
@@ -32,26 +32,28 @@ public:
     LBucket(uint16_t maxsize);
 
     /* Insert key into specific vector! */
-    void Insert(uint64_t key1);
+    void Insert(SKey key1);
 
     /* Erase the bucket but not give up the memory space. */
     void BucketErase();
 
+    LHEntry BucketRetrival(SKey key);
+
     /**
      *  "get()" functions is used to set private variables.
      **/
-    std::vector<uint64_t> GetBucket(); // Return the vector that represents the specific page! 
+    std::vector<LHEntry> GetBucket(); // Return the vector that represents the specific page! 
 
     size_t GetBucketSize();  // Return the current size of bucket. 
 
-    uint64_t GetBucketNo();
+    PageType GetBucketNo();
 
     bool GetFlag();
 
     /*
      *  "set()" functions is used to set private variables.
      */
-    void SetBucketNo(uint64_t bucketno);
+    void SetBucketNo(PageType bucketno);
 
 };
 
@@ -60,9 +62,9 @@ class LinearHashTable
 
 private:
     std::vector<LBucket> BucketTable;  // In-memeory buckets table with fixed bucket size.
-    uint64_t Tablesize;               // Size of hash table and number is used to operate "mod"
+    uint64_t TableBase;               // Size of hash table and number is used to operate "mod"
     size_t h1,h2;
-    size_t SplitFlag;       
+    bool SplitFlag[105];       
   
 public:
     /* some public function to manipulate private variables. */

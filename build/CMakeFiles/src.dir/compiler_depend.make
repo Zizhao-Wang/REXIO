@@ -799,6 +799,8 @@ CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o: /home/femu/experiment1/code2/sr
   /home/femu/experiment1/code2/src/TNCTree/StoreTier/asyncstore.h \
   /home/femu/experiment1/code2/src/TNCTree/utility/types.h \
   /home/femu/experiment1/code2/src/TNCTree/MemoryTier/Node.h \
+  /home/femu/experiment1/code2/src/MultiHash/LinearHash/node.h \
+  /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
   /home/femu/experiment1/code2/src/Backend/IODisk/WriteDisk.h \
   /home/femu/experiment1/code2/src/Backend/BlockManage/BlockInfo.h \
   /home/femu/liblightnvm/include/liblightnvm_cli.h \
@@ -1026,13 +1028,18 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: /home/femu/experiment1/code2/s
   /usr/include/c++/9/bits/allocated_ptr.h \
   /usr/include/c++/9/bits/list.tcc \
   /home/femu/experiment1/code2/src/TNCTree/MemoryTier/Node.h \
-  /home/femu/liblightnvm/include/liblightnvm_cli.h \
+  /home/femu/experiment1/code2/src/MultiHash/LinearHash/node.h \
+  /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
+  /home/femu/experiment1/code2/src/MultiHash/LinearHash/LiHash.h \
+  /home/femu/experiment1/code2/src/MultiHash/LinearHash/node.h \
   /home/femu/experiment1/code2/src/Backend/IODisk/WriteDisk.h \
   /home/femu/experiment1/code2/src/Backend/BlockManage/BlockInfo.h \
+  /home/femu/liblightnvm/include/liblightnvm_cli.h \
   /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
   /home/femu/experiment1/code2/src/Auxizilary/VariablesTypes.h \
   /home/femu/experiment1/code2/src/Auxizilary/SysOutput.h \
-  /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h
+  /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
+  /home/femu/experiment1/code2/src/Backend/IODisk/WriteDisk.h
 
 CMakeFiles/src.dir/LRU/lru.cpp.o: /home/femu/experiment1/code2/src/LRU/lru.cpp \
   /usr/include/stdc-predef.h \
@@ -3335,6 +3342,8 @@ CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o: /home/femu/experiment1/cod
   /usr/include/c++/9/bits/stl_vector.h \
   /usr/include/c++/9/bits/stl_bvector.h \
   /usr/include/c++/9/bits/vector.tcc \
+  /home/femu/experiment1/code2/src/MultiHash/LinearHash/node.h \
+  /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
   /home/femu/experiment1/code2/src/Backend/IODisk/WriteDisk.h \
   /usr/include/c++/9/unordered_map \
   /usr/include/c++/9/ext/aligned_buffer.h \
@@ -3369,8 +3378,22 @@ CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o: /home/femu/experiment1/cod
   /usr/include/c++/9/bits/stl_tempbuf.h \
   /usr/include/c++/9/bits/uniform_int_dist.h \
   /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
-  /home/femu/experiment1/code2/src/MultiHash/LinearHash/node.h \
-  /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h
+  /home/femu/experiment1/code2/src/Backend/SSDRead/reader.h \
+  /home/femu/experiment1/code2/src/Auxizilary/SysOutput.h \
+  /home/femu/experiment1/code2/src/TNCTree/StoreTier/syncstore.h \
+  /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
+  /home/femu/experiment1/code2/src/TNCTree/MemoryTier/Node.h \
+  /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
+  /home/femu/experiment1/code2/src/LRU/lru.h \
+  /usr/include/c++/9/list \
+  /usr/include/c++/9/bits/stl_list.h \
+  /usr/include/c++/9/bits/allocated_ptr.h \
+  /usr/include/c++/9/bits/list.tcc \
+  /home/femu/experiment1/code2/src/TNCTree/MemoryTier/Node.h \
+  /home/femu/experiment1/code2/src/TNCTree/StoreTier/asyncstore.h \
+  /home/femu/experiment1/code2/src/TNCTree/utility/types.h \
+  /home/femu/experiment1/code2/src/TNCTree/MemoryTier/Node.h \
+  /home/femu/experiment1/code2/src/MultiHash/LinearHash/node.h
 
 CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o: /home/femu/experiment1/code2/src/TNCTree/MemoryTier/MemTier.cpp \
   /usr/include/stdc-predef.h \
@@ -4177,6 +4200,17 @@ CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o: /home/femu/experiment1/cod
   /usr/include/c++/9/bits/uniform_int_dist.h \
   /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
   /home/femu/experiment1/code2/src/TNCTree/StoreTier/syncstore.h \
+  /home/femu/experiment1/code2/src/MultiHash/LinearHash/node.h \
+  /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
+  /home/femu/experiment1/code2/src/MultiHash/LinearHash/LiHash.h \
+  /home/femu/experiment1/code2/src/MultiHash/LinearHash/node.h \
+  /home/femu/experiment1/code2/src/Backend/IODisk/WriteDisk.h \
+  /home/femu/experiment1/code2/src/Backend/BlockManage/BlockInfo.h \
+  /home/femu/liblightnvm/include/liblightnvm_cli.h \
+  /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
+  /home/femu/experiment1/code2/src/Auxizilary/VariablesTypes.h \
+  /home/femu/experiment1/code2/src/Auxizilary/SysOutput.h \
+  /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
   /home/femu/experiment1/code2/src/Backend/SSDRead/reader.h \
   /home/femu/experiment1/code2/src/Auxizilary/SysOutput.h \
   /home/femu/experiment1/code2/src/TNCTree/StoreTier/syncstore.h \
@@ -4184,13 +4218,8 @@ CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o: /home/femu/experiment1/cod
   /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
   /home/femu/experiment1/code2/src/TNCTree/utility/types.h \
   /home/femu/experiment1/code2/src/TNCTree/MemoryTier/Node.h \
-  /home/femu/experiment1/code2/src/Backend/IODisk/WriteDisk.h \
-  /home/femu/experiment1/code2/src/Backend/BlockManage/BlockInfo.h \
-  /home/femu/liblightnvm/include/liblightnvm_cli.h \
-  /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
-  /home/femu/experiment1/code2/src/Auxizilary/VariablesTypes.h \
-  /home/femu/experiment1/code2/src/Auxizilary/SysOutput.h \
-  /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h
+  /home/femu/experiment1/code2/src/MultiHash/LinearHash/node.h \
+  /home/femu/experiment1/code2/src/Backend/IODisk/WriteDisk.h
 
 CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: /home/femu/experiment1/code2/src/TNCTree/TNCtree.cpp \
   /usr/include/stdc-predef.h \
@@ -4416,6 +4445,10 @@ CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: /home/femu/experiment1/code2/src/TNCTr
   /usr/include/c++/9/bits/allocated_ptr.h \
   /usr/include/c++/9/bits/list.tcc \
   /home/femu/experiment1/code2/src/TNCTree/MemoryTier/Node.h \
+  /home/femu/experiment1/code2/src/MultiHash/LinearHash/node.h \
+  /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
+  /home/femu/experiment1/code2/src/MultiHash/LinearHash/LiHash.h \
+  /home/femu/experiment1/code2/src/MultiHash/LinearHash/node.h \
   /home/femu/experiment1/code2/src/Backend/IODisk/WriteDisk.h \
   /home/femu/experiment1/code2/src/Backend/BlockManage/BlockInfo.h \
   /home/femu/liblightnvm/include/liblightnvm_cli.h \
@@ -4423,6 +4456,7 @@ CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: /home/femu/experiment1/code2/src/TNCTr
   /home/femu/experiment1/code2/src/Auxizilary/VariablesTypes.h \
   /home/femu/experiment1/code2/src/Auxizilary/SysOutput.h \
   /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
+  /home/femu/experiment1/code2/src/Backend/IODisk/WriteDisk.h \
   /home/femu/experiment1/code2/src/TNCTree/StoreTier/syncstore.h
 
 CMakeFiles/src.dir/TNCTree/utility/types.cpp.o: /home/femu/experiment1/code2/src/TNCTree/utility/types.cpp \
@@ -4992,6 +5026,8 @@ CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment1/code2/src/main.cpp \
   /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
   /home/femu/experiment1/code2/src/Auxizilary/SysOutput.h \
   /home/femu/experiment1/code2/src/MultiHash/LinearHash/LiHash.h \
+  /home/femu/experiment1/code2/src/MultiHash/LinearHash/node.h \
+  /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
   /home/femu/experiment1/code2/src/Backend/IODisk/WriteDisk.h \
   /home/femu/experiment1/code2/src/Auxizilary/Logo.h \
   /home/femu/experiment1/code2/src/LSM-Tree/LsmTree.h \
@@ -5013,8 +5049,6 @@ CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment1/code2/src/main.cpp \
 /home/femu/experiment1/code2/src/TNCTree/utility/types.cpp:
 
 /home/femu/experiment1/code2/src/TNCTree/TNCtree.cpp:
-
-/home/femu/experiment1/code2/src/MultiHash/LinearHash/node.h:
 
 /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/LSHash.h:
 
@@ -5190,12 +5224,6 @@ CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment1/code2/src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/confname.h:
 
-/home/femu/experiment1/code2/src/MultiHash/LinearHash/LiHash.h:
-
-/usr/include/c++/9/bits/regex_scanner.h:
-
-/usr/include/x86_64-linux-gnu/bits/posix_opt.h:
-
 /usr/include/unistd.h:
 
 /home/femu/experiment1/code2/src/LSM-Tree/UtilityDefine/ResAllocate.h:
@@ -5306,6 +5334,8 @@ CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment1/code2/src/main.cpp \
 
 /usr/include/c++/9/ext/string_conversions.h:
 
+/home/femu/experiment1/code2/src/MultiHash/LinearHash/node.h:
+
 /home/femu/experiment1/code2/src/TNCTree/StoreTier/asyncstore.cpp:
 
 /usr/include/c++/9/bits/unordered_map.h:
@@ -5405,6 +5435,10 @@ CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment1/code2/src/main.cpp \
 /usr/include/c++/9/bits/stl_multimap.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h:
+
+/usr/include/c++/9/functional:
+
+/usr/include/c++/9/bits/invoke.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
 
@@ -5834,6 +5868,12 @@ CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment1/code2/src/main.cpp \
 
 /home/femu/experiment1/code2/src/Backend/SSDWrite/writer.cpp:
 
+/usr/include/c++/9/bits/regex_scanner.h:
+
+/usr/include/x86_64-linux-gnu/bits/posix_opt.h:
+
+/home/femu/experiment1/code2/src/MultiHash/LinearHash/LiHash.h:
+
 /home/femu/experiment1/code2/src/LSM-Tree/LsmTree.cpp:
 
 /usr/include/features.h:
@@ -5889,7 +5929,3 @@ CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment1/code2/src/main.cpp \
 /home/femu/experiment1/code2/src/LSM-Tree/UtilityDefine/run.h:
 
 /home/femu/experiment1/code2/src/LSM-Tree/UtilityDefine/worker_pool.h:
-
-/usr/include/c++/9/bits/invoke.h:
-
-/usr/include/c++/9/functional:

@@ -20,15 +20,21 @@
 #include "../../TNCTree/StoreTier/syncstore.h"
 #include "../../TNCTree/StoreTier/asyncstore.h"
 #include "../../TNCTree/utility/types.h"
-
+#include "../../MultiHash/LinearHash/node.h"
 /**
  * Function declartion for reading from one or more pages:
- *   
+ * Two-tier none-coupling tree  
  **/
 int SinglePageRead(PageType pageno);
 
-
 TNCEntry* TNCEntryRead(PageType PageId);
+
+
+/**
+ * Function declartion for reading from one or more pages:
+ * Linear Hash   
+ **/
+std::vector<LHEntry> PageRead(PageType PageNum);
 
 
 #endif //EXPERIMENT1_WRITEDISK_H

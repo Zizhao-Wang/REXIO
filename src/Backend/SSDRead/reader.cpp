@@ -61,4 +61,21 @@ std::vector<LHEntry> PageRead(PageType PageNum)
 {
 	std::vector<LHEntry> entries;
 
+	SinglePageRead(PageNum);
+
+    char * temp = new char[20];
+    LHEntry entry;
+    for (size_t i = 0; i < CalculatePageCapacity(sizeof(LHEntry)); i++)
+    {
+        for(size_t j = i*sizeof(LHEntry),k=0;j<i*sizeof(LHEntry)+sizeof(LHEntry);j++,k++)
+        {
+            temp[k] = bp->bufs->write[j];
+        }
+        uint64_t *ML = (uint64_t*) temp;
+        entry.key = ML[0], entry.val = ML[1];
+        entries.emplace_back(entry);
+    }  
+
+    return entries;
+	
 }

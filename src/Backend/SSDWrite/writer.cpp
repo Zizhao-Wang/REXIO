@@ -131,6 +131,6 @@ int PageLogWrite(uint64_t BlockId)
  **/
 PageType SingleValueWrite(std::vector<LHEntry> entries, uint64_t pageno)
 {
-    PageType = sectorpointer;
-    return PageType;
+    PageType PageNum = sectorpointer;
+    return PageNum;
 }

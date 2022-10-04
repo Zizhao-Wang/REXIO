@@ -13,15 +13,16 @@ LBucket::LBucket(uint16_t maxsize)
      this->BucketMax = maxsize;   
 }
 
-void LBucket::Insert(SKey key1, SValue val)
+int LBucket::Insert(SKey key1, SValue val)
 {
      LHEntry entry{key1,val};
      bucket.emplace_back(entry);
-     if(bucket.size()== BucketMax)
+     if(bucket.size() >= BucketMax)
      {
-          PageNum = 
+          return 1;
      }
 
+     return 0;
 }
 
 void LBucket::BucketErase()
@@ -102,7 +103,7 @@ LinearHashTable::LinearHashTable(uint16_t Initialsize)
           SplitFlag[i] = false;
      }
      size_t MaxSize = CalculatePageCapacity(sizeof(LHEntry));
-     for(uint64_t i = 0; i<Tablesize;++i)
+     for(uint64_t i = 0; i<TableBase;++i)
      {
         LBucket TempBucket(MaxSize);
         BucketTable.push_back(TempBucket);
@@ -112,15 +113,12 @@ LinearHashTable::LinearHashTable(uint16_t Initialsize)
 int LinearHashTable::TableDouble()
 {
 
-     for(size_t i=1;i<=Tablesize;i++)
+     for(size_t i=1;i<=TableBase;i++)
      {
           LBucket TempBucket(CalculatePageCapacity(sizeof(LHEntry)));
           BucketTable.emplace_back(TempBucket);
      }
-
-     Tablesize += Tablesize;
      return 0;
-
 }
 
 int LinearHashTable::split(uint64_t val)

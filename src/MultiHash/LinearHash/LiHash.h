@@ -32,7 +32,7 @@ public:
     LBucket(uint16_t maxsize);
 
     /* Insert key into specific vector! */
-    void Insert(SKey key1);
+    int Insert(SKey key1, SValue val);
 
     /* Erase the bucket but not give up the memory space. */
     void BucketErase();

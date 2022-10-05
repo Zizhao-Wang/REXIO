@@ -352,7 +352,7 @@ void LHashPort()
           if(i%10000000==0||i==1000000)
           {
                endTime = clock();
-               std::cout << "Total Time of workload A: "<<i <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+               std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
           }
           //printf("Insert %lu successful!\n",i);
           hashtable.Insert(i,i);

@@ -34,7 +34,7 @@ public:
     /* Insert key into specific vector! */
     int Insert(SKey key1, SValue val);
 
-    void BucketWrite(void);
+    void BucketWrite(std::vector<LHEntry> entries);
 
     /* Erase the bucket but not give up the memory space. */
     
@@ -47,7 +47,7 @@ public:
     /**
      *  "get()" functions is used to set private variables.
      **/
-    std::vector<LHEntry> GetBucket(); // Return the vector that represents the specific page! 
+    std::vector<LHEntry> GetBucket(void); // Return the vector that represents the specific page! 
 
     size_t GetBucketSize();  // Return the current size of bucket. 
 

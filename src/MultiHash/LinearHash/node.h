@@ -18,6 +18,15 @@ typedef struct LHEntry
 {
 	SKey   key;
 	SValue val;
+
+	bool operator == (const LHEntry& other) const 
+    {
+        return key == other.key;
+    }
+    bool operator<(const LHEntry& other) const 
+    {
+        return key < other.key;
+    }
 }LHEntry;
 
 

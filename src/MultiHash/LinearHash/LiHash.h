@@ -23,9 +23,11 @@ class LBucket
 {  
 private:
     std::vector<LHEntry>  bucket;
-    PageType  PageNum, overflowPage;
+#ifdef OverflowPage
+    PageType overflowPage;
+#endif
+    PageType  PageNum;
     uint16_t  BucketMax,size;   //The capacity of a speific bucket
-    bool  IsFirst;
 
 public:
     LBucket(uint16_t maxsize);
@@ -33,13 +35,15 @@ public:
     /* Insert key into specific vector! */
     int Insert(SKey key1, SValue val);
 
-    void BucketWrite(std::vector<LHEntry> entries);
+    void BucketWrite(PageType page);
 
     /* Erase the bucket but not give up the memory space. */
     
     LHEntry BucketRetrival(SKey key);
 
     int ValueDelet(SKey);
+
+    int ValueUpdate(SKey key1, SValue val);
 
     void BucketErase();
 
@@ -67,15 +71,18 @@ class LinearHashTable
 
 private:
     std::vector<LBucket> BucketTable;  // In-memeory buckets table with fixed bucket size.
-    uint64_t workRound,SplitFlag;               // Size of hash table and number is used to operate "mod"
-    size_t h1,h2;       
+    //uint64_t SplitFlag;               // Size of hash table and number is used to operate "mod"
+    size_t h1,h2;
+    bool SplitFlag[UINT16_MAX];       
   
 public:
     /* some public function to manipulate private variables. */
-    LinearHashTable(uint16_t );
+    LinearHashTable(uint16_t);
+
+    void TableDouble();
 
     /* Return 0 if suucess, */
-    int split();
+    int split(size_t SplitBucket);
 
     int Insert(SKey key, SValue value);
 

@@ -131,6 +131,40 @@ int PageLogWrite(uint64_t BlockId)
  **/
 PageType SingleBucketWrite(std::vector<LHEntry> entries, uint64_t pageno)
 {
-    PageType PageNum = sectorpointer;
-    return PageNum;
+    /* Function flag, default value equals 0(successful flag). */
+    int err = 0;
+
+    if(pageno == UINT64_MAX)
+    {
+        pageno = sectorpointer;
+        struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, pageno);
+        size_t ws_min = nvm_dev_get_ws_min(bp->dev);
+        struct nvm_addr addrs[ws_min];
+        for (size_t aidx = 0; aidx < ws_min; ++aidx) 
+        {
+		    addrs[aidx].val = addrs_chunk.val;
+		    addrs[aidx].l.sectr = (pageno%4096)+aidx;
+	    }
+
+        char * temp = new char[20];
+        for (size_t i = 0; i < entries.size(); i++)
+        {
+            uint64_t *ML = (uint64_t*) temp;
+            ML[0] = entries[i].key, ML[1] = entries[i].val;
+            for(size_t j= i*sizeof(LHEntry)*8,k=0;j<i*sizeof(LHEntry)*8+sizeof(LHEntry)*8;j++,k++)
+            {
+                bp->bufs->write[j] = temp[k];
+            }
+        }
+
+        // Write value into page. 
+        err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
+        if(err == 0) 
+        {
+            PointerRenew(ws_min);   /* update pointers! */
+        }
+    }
+
+    return pageno;
+    
 }

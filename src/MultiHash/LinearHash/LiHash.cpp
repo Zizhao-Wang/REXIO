@@ -6,7 +6,9 @@
 #include "../../Backend/SSDWrite/writer.h"
 
 /* Global variables definition and utilization, coming soon...  */
-
+int readcount = 0;
+int writecount = 0;
+int erasecount = 0;
 
 LBucket::LBucket(uint16_t maxsize)
 {
@@ -292,6 +294,12 @@ int LinearHashTable::Search(SKey key)
      }
      LHEntry entry; 
      entry =  BucketTable[bucketno].BucketRetrival(key);
+
+     if(key != entry.key)
+     {
+          printf("test!!!!!!!!\n");
+     }
+
      if(entry.key ==0 && entry.val ==0 || entry.key!=key)
      {
           return -1;
@@ -358,6 +366,7 @@ void LHashPort()
           hashtable.Insert(i,i);
      }
      endTime = clock();
+     printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
      std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
 
@@ -375,6 +384,7 @@ void LHashPort()
           }
      }
      endTime = clock();
+     printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
      std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
      // /* workload c: read only, 50% in it, 50% not in it */
@@ -399,6 +409,7 @@ void LHashPort()
                std::cout << "Total Time of "<<i<<" in workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
           }
      }
+     printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
      endTime = clock();
      std::cout << "Total Time of workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
@@ -423,6 +434,7 @@ void LHashPort()
                std::cout << "Total Time of "<<i<<" in workload D: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
           } 
      }
+     printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
      endTime = clock();
      std::cout << "Total Time of workload d: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
@@ -447,6 +459,7 @@ void LHashPort()
                std::cout << "Total Time of "<<i<<" in workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
           } 
      }
+     printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
      endTime = clock();
      std::cout << "Total Time of workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
@@ -471,6 +484,7 @@ void LHashPort()
                std::cout << "Total Time of "<<i<<" in workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
           } 
      }
+     printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
      endTime = clock();
      std::cout << "Total Time of workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
@@ -487,6 +501,7 @@ void LHashPort()
                std::cout << "Total Time of "<<i<<" in workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
           }  
      }
+     printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
      endTime = clock();
      std::cout << "Total Time of workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 

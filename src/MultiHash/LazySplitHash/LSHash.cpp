@@ -83,14 +83,13 @@ int LSbucket::PageWrite()
 }
 
 
-
 LSHash::LSHash(uint16_t bucketmsize = DEFAULT_BUCKETMAXSIZE, uint16_t tablebsize = DEFAULT_TABLEBASESIZE, double ifth = DEFAULT_IFTHRESHOLD)
 {
-  for(uint16_t i = 0;i<tablebsize;i++)
-  {
-    LSbucket temp(bucketmsize);
-    bucketList.emplace_back(temp);
-  }
+    for(uint16_t i = 0;i<tablebsize;i++)
+    {
+        LSbucket temp(bucketmsize);
+        bucketList.emplace_back(temp);
+    }
   this->bmaxsize = bucketmsize;
   this->Allsize = 0;
   this->IFthreshold = ifth;

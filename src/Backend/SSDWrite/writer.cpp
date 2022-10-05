@@ -224,6 +224,7 @@ PageType SingleBucketWrite(std::vector<LHEntry> entries, uint64_t pageno)
     
     if(pageno == UINT64_MAX)
     {
+        writecount++;
         pageno = sectorpointer;
         //printf("pageno:%lu sectorpointer:%lu",pageno,sectorpointer);
         struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, pageno);
@@ -255,6 +256,9 @@ PageType SingleBucketWrite(std::vector<LHEntry> entries, uint64_t pageno)
     }
     else
     {
+        writecount++;
+        readcount++;
+        erasecount++;
         int err = 0;
         err = PageUpdate(pageno, entries);
         if(err != 0)

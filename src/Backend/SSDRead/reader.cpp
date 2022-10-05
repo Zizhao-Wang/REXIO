@@ -1,8 +1,10 @@
 #include "reader.h"
 #include "../IODisk/WriteDisk.h"
+#include "../../MultiHash/LinearHash/LiHash.h"
 
 int SinglePageRead(uint64_t pageno)
 {
+    readcount++;
     int err;
     struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, pageno);
     size_t ws_min = nvm_dev_get_ws_min(bp->dev);
@@ -28,6 +30,7 @@ int SinglePageRead(uint64_t pageno)
 
 TNCEntry* TNCEntryRead(PageType PageId)
 {
+    
 	size_t capacity = CalculatePageCapacity(sizeof(TNCEntry));
 	TNCEntry* data = new TNCEntry[capacity+10];
 	size_t pos = 0;
@@ -61,7 +64,11 @@ std::vector<LHEntry> PageRead(PageType PageNum)
 {
 	std::vector<LHEntry> entries;
 
+    // clock_t startTime,endTime;  // Definition of timestamp
+    // startTime = clock();
 	SinglePageRead(PageNum);
+    // endTime = clock();
+    // std::cout << "Total Time : " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
     char * temp = new char[20];
     LHEntry entry;

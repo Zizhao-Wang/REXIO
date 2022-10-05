@@ -17,7 +17,9 @@
 #include "../../Backend/IODisk/WriteDisk.h"
 
 /* Global variables declaration */
-
+extern int readcount;
+extern int writecount;
+extern int erasecount;
 
 class LBucket
 {  

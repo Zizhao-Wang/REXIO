@@ -134,6 +134,7 @@ PageType SingleBucketWrite(std::vector<LHEntry> entries, uint64_t pageno)
     /* Function flag, default value equals 0(successful flag). */
     int err = 0;
 
+    printf("Page number:%lu",pageno);
     if(pageno == UINT64_MAX)
     {
         pageno = sectorpointer;

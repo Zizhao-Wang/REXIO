@@ -150,7 +150,7 @@ void LBucket::SetBucketNo(uint64_t bucketno)
 
 bool LBucket::IsFull(void) const
 {
-     if(size<BucketMax)
+     if(size>=BucketMax)
      {
           return true;
      }

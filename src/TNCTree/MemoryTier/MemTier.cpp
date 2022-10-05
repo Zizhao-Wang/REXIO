@@ -198,6 +198,8 @@ SValue Search(SKey key1)
     //printf("Key: %lu offset: %u ReadKey:%lu \n",key1,node->offset,entry.key);
     if(entry.key == key1)
     {
+        printf("key1: %lu entry.key: %lu Value: %lu",key1,entry.key,entry.val);
+        exit(100000);
         return entry.val;
     }
 

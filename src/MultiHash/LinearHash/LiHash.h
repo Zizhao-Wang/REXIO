@@ -20,8 +20,7 @@
 
 
 class LBucket
-{
-  
+{  
 private:
     std::vector<LHEntry>  bucket;
     PageType  PageNum, overflowPage;
@@ -60,9 +59,7 @@ public:
      */
     void SetBucketNo(PageType bucketno);
 
-
     bool IsFull(void) const;
-
 };
 
 class LinearHashTable
@@ -88,7 +85,6 @@ public:
 
     int Update(SKey key, SValue val);
 };
-
 
 /* All function declaration!*/
 void LHashPort();

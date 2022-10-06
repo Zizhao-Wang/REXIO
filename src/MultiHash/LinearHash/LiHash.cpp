@@ -362,7 +362,7 @@ void LHashPort()
 
      /* workload a: insert only*/
      startTime = clock();
-     for(SKey i=1;i<=20000;i++)
+     for(SKey i=1;i<=21000;i++)
      {
           if(i%10000000==0||i==1000000)
           {

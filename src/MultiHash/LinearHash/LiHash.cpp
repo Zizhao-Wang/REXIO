@@ -362,7 +362,7 @@ void LHashPort()
 
      /* workload a: insert only*/
      startTime = clock();
-     for(SKey i=1;i<=21000;i++)
+     for(SKey i=1;i<=100000;i++)
      {
           if(i%10000000==0||i==1000000)
           {
@@ -382,7 +382,7 @@ void LHashPort()
      for(int i=1;i<=200;i++)
      {
           srand48(time(NULL));
-          SKey k = 1+(rand()%10250);
+          SKey k = 1+(rand()%100000);
           hashtable.Search(k);
           if(i==10000 || i%100000==0)
           {

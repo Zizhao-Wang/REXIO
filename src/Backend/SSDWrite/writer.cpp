@@ -175,7 +175,6 @@ int PageUpdate(PageType pageno, std::vector<LHEntry> entries)
 		}
         //printf("Read part 1 succeed!\n");
     }
-    exit(1000);
    /* 
     * Step 2: Erase original block. 
     */

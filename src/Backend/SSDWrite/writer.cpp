@@ -150,7 +150,7 @@ int PageUpdate(PageType pageno, std::vector<LHEntry> entries)
         chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,sectr+chunkno*4096);
         size_t buf_ofz = sectr * bp->geo->l.nbytes;
 		struct nvm_addr addrs[ws_min];
-        printf("==============\n");
+        //printf("==============\n");
 		for (size_t aidx = 0; aidx < ws_min; ++aidx) 
         {
 			addrs[aidx].val = chunk_addrs[0].val;
@@ -168,30 +168,6 @@ int PageUpdate(PageType pageno, std::vector<LHEntry> entries)
             }
         }
 
-        
-        // for(size_t i=sectr*bp->geo->l.nbytes;i<ws_min * bp->geo->l.nbytes;i++)
-        // {
-        //     bp->bufs->write[i] = bp->bufs->read[i];
-        // }
-        for (size_t m = 0; m < 5; m++)
-        {
-            for(size_t k=0,j=buf_ofz+m*16;j<buf_ofz+m*16+16;j++,k++)
-            {
-                temp[k] = bp->bufs->read[j];
-            }
-            uint64_t *ML = (uint64_t*) temp;
-            printf("%lu %lu \n",ML[0],ML[1]);
-        }
-        for (size_t m = 0; m < 5; m++)
-        {
-            for(size_t k=0,j=buf_ofz+m*16;j<buf_ofz+m*16+16;j++,k++)
-            {
-                temp[k] = bp->bufs->write[j];
-            }
-            uint64_t *ML = (uint64_t*) temp;
-            printf("%lu %lu \n",ML[0],ML[1]);
-        }
-        printf("==============\n\n");
 		if (err == -1) 
         {
 			printf("Read failure in part 1 of %ld page.\n",sectr);

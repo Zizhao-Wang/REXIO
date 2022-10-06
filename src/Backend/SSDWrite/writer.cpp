@@ -139,13 +139,14 @@ int PageUpdate(PageType pageno, std::vector<LHEntry> entries)
     uint64_t chunkno = pageno/4096;
     uint64_t updatesec = pageno%4096;
     uint64_t curseofchunk = chunkusage[chunkno];
-    struct nvm_addr chunk_addrs[1];
-    chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,pageno);
+    
     size_t ws_min = nvm_dev_get_ws_min(bp->dev);
 
     // Read datum from original block/chunk.
     for (size_t sectr = 0; sectr < curseofchunk; sectr += ws_min) 
     {
+        struct nvm_addr chunk_addrs[1];
+        chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,sectr+chunkno*4096);
         size_t buf_ofz = sectr * bp->geo->l.nbytes;
 		struct nvm_addr addrs[ws_min];
 		for (size_t aidx = 0; aidx < ws_min; ++aidx) 
@@ -183,7 +184,7 @@ int PageUpdate(PageType pageno, std::vector<LHEntry> entries)
     {
         uint64_t *ML = (uint64_t*) temp;
         ML[0] = entries[i].key, ML[1] = entries[i].val;
-        for(size_t j= (bp->geo->l.nbytes * updatesec)+i*sizeof(LHEntry)*8,k=0;j<i*sizeof(LHEntry)*8+sizeof(LHEntry)*8;j++,k++)
+        for(size_t j= (bp->geo->l.nbytes * updatesec)+i*sizeof(LHEntry),k=0;j<i*sizeof(LHEntry)+sizeof(LHEntry);j++,k++)
         {
             bp->bufs->write[j] = temp[k];
         }
@@ -193,6 +194,8 @@ int PageUpdate(PageType pageno, std::vector<LHEntry> entries)
     for (size_t sectr = 0; sectr < curseofchunk; sectr += ws_min) 
     {
         //printf("Write start:\n");
+        struct nvm_addr chunk_addrs[1];
+        chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,sectr+chunkno*4096);
         size_t buf_ofz = sectr * bp->geo->l.nbytes;
 		struct nvm_addr addrs[ws_min];
 		for (size_t aidx = 0; aidx < ws_min; ++aidx) 
@@ -241,7 +244,7 @@ PageType SingleBucketWrite(std::vector<LHEntry> entries, uint64_t pageno)
         {
             uint64_t *ML = (uint64_t*) temp;
             ML[0] = entries[i].key, ML[1] = entries[i].val;
-            for(size_t j= i*sizeof(LHEntry)*8,k=0;j<i*sizeof(LHEntry)*8+sizeof(LHEntry)*8;j++,k++)
+            for(size_t j= i*sizeof(LHEntry),k=0;j<i*sizeof(LHEntry)+sizeof(LHEntry);j++,k++)
             {
                 bp->bufs->write[j] = temp[k];
             }
@@ -266,7 +269,7 @@ PageType SingleBucketWrite(std::vector<LHEntry> entries, uint64_t pageno)
             EMessageOutput("PageUpdate failure in page: %lu"+Uint64toString(pageno),1500);
         }
     }
-
+    //printf("Pageno %lu\n",pageno);
     return pageno;
     
 }

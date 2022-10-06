@@ -29,15 +29,15 @@ private:
     PageType overflowPage;
 #endif
     PageType  PageNum;
-    uint16_t  BucketMax,size;   //The capacity of a speific bucket
+    size_t  BucketMax,size;   //The capacity of a speific bucket
 
 public:
-    LBucket(uint16_t maxsize);
+    LBucket(size_t maxsize);
 
     /* Insert key into specific vector! */
     int Insert(SKey key1, SValue val);
 
-    void BucketWrite(PageType page);
+    void BucketWrite();
 
     /* Erase the bucket but not give up the memory space. */
     
@@ -79,7 +79,7 @@ private:
   
 public:
     /* some public function to manipulate private variables. */
-    LinearHashTable(uint16_t);
+    LinearHashTable(size_t Initialsize);
 
     void TableDouble();
 

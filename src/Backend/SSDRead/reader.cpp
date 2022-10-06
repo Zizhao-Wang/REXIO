@@ -13,8 +13,9 @@ int SinglePageRead(uint64_t pageno)
     for (size_t aidx = 0; aidx < ws_min; ++aidx) 
     {
 		addrs[aidx].val = addrs_chunk.val;
-		addrs[aidx].l.sectr = pageno % bp->geo->l.nsectr + aidx;
+		addrs[aidx].l.sectr = (pageno % bp->geo->l.nsectr) + aidx;
 	}
+    
     err = nvm_cmd_read(bp->dev, addrs, ws_min,bp->bufs->read, NULL,0x0, NULL);
     if(err == -1)
     {
@@ -76,7 +77,7 @@ std::vector<LHEntry> PageRead(PageType PageNum)
     {
         for(size_t j = i*sizeof(LHEntry),k=0;j<i*sizeof(LHEntry)+sizeof(LHEntry);j++,k++)
         {
-            temp[k] = bp->bufs->write[j];
+            temp[k] = bp->bufs->read[j];
         }
         uint64_t *ML = (uint64_t*) temp;
         entry.key = ML[0], entry.val = ML[1];

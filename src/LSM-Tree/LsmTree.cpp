@@ -69,8 +69,10 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
         /* Take over runs from current!*/
         for (int i = 0;i<current->Runs.size();++i) 
         {
-            if(next->Runs.front().SetPagePointers(run.GetPagePointers()) == -1 && next->Runs.front().SetFencePointers(run.GetFencePointers()) == -1)
+            if(next->Runs[0].SetPagePointers(current->Runs[i].GetPagePointers()) == 0 && next->Runs[0].SetFencePointers(current->Runs[i].GetFencePointers()) == 0)
             {
+                current->Runs[i].Reset();
+            }else{
                 EMessageOutput("Page pointers merging failure in Level"+ Uint64toString(current->GetLevelNumber())+ "is trying to merging into Level"+ Uint64toString(next->GetLevelNumber())+"\n",110);
             }
             sizecount += current->Runs[i].GetNowSize();

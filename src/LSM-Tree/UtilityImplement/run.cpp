@@ -19,6 +19,7 @@ Run::Run(unsigned long maxsize)
         PagePointers.emplace_back(UINT64_MAX);
     }
     Size = 0;
+    MaxKey = 0;
 }
 
 void Run::PointersDisplay()
@@ -212,10 +213,15 @@ uint64_t Run::GetMaxKey(void)
 
 int Run::SetPagePointers(std::vector<uint64_t> pointers)
 {
-    size_t FirstSize = PagePointers.size();
-    PagePointers.insert(PagePointers.end(),PagePointers.begin(),PagePointers.end());
-    size_t MergeSize = PagePointers.size();
-    if(MergeSize - FirstSize != pointers.size())
+
+    for(size_t i=0;i<pointers.size();++i)
+    {
+        AssertCondition(pointers[i] != UINT64_MAX);
+        PagePointers[i] = pointers[i];
+        Size += CalculatePageCapacity(sizeof(entry_t));
+    }
+
+    if(pointers.size()!=MaxSize/2 )
     {
         return -1;
     }
@@ -225,10 +231,13 @@ int Run::SetPagePointers(std::vector<uint64_t> pointers)
 
 int Run::SetFencePointers(std::vector<uint64_t> pointers)
 {
-    size_t FirstSize = FencePointers.size();
-    FencePointers.insert(FencePointers.end(),PagePointers.begin(),PagePointers.end());
-    size_t MergeSize = FencePointers.size();
-    if(MergeSize - FirstSize != pointers.size())
+    for(size_t i=0;i<pointers.size();++i)
+    {
+        FencePointers.emplace_back(pointers[i]);
+        MaxKey = max(MaxKey,pointers[i]);
+    }
+
+    if(pointers.size()!=MaxSize/2 )
     {
         return -1;
     }
@@ -245,6 +254,7 @@ void Run::Reset()
     {
         PagePointers[i]=UINT64_MAX;
     }
+    MaxKey = 0;
     AssertCondition(Rundata.size()==0);
 }
 

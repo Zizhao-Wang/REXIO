@@ -382,18 +382,21 @@ int PageUpdate(std::vector<uint64_t> pagelist, std::vector<entry_t> values)
     * Step 1: Read all datum from original block. 
     */
     int err;
-    struct nvm_addr chunk_addrs[1];
+    
 
     uint64_t chunkno = pagelist[0]/4096;
     uint64_t updatesec = pagelist[0]%4096;
     uint64_t curseofchunk = chunkusage[chunkno];
-    chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,pagelist[0]);
+    
     size_t ws_min = nvm_dev_get_ws_min(bp->dev);
     uint64_t index = CalculatePageCapacity(sizeof(entry_t));
 
     // Read datum from original block/chunk.
     for (size_t sectr = 0; sectr < curseofchunk; sectr += ws_min) 
     {
+        struct nvm_addr chunk_addrs[1];
+        chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,pagelist[0]);
+
         size_t buf_ofz = sectr * bp->geo->l.nbytes;
 		struct nvm_addr addrs[ws_min];
 		for (size_t aidx = 0; aidx < ws_min; ++aidx) 
@@ -401,6 +404,7 @@ int PageUpdate(std::vector<uint64_t> pagelist, std::vector<entry_t> values)
 			addrs[aidx].val = chunk_addrs[0].val;
 			addrs[aidx].l.sectr = sectr + aidx;
 		}
+
 		err = nvm_cmd_read(bp->dev, addrs, ws_min, bp->bufs->read+buf_ofz, NULL, 0x0, NULL);
         for(size_t i=sectr*bp->geo->l.nbytes;i<ws_min * bp->geo->l.nbytes;i++)
         {
@@ -444,6 +448,8 @@ int PageUpdate(std::vector<uint64_t> pagelist, std::vector<entry_t> values)
     /* Step 4: Write datum to the free-block. */
     for (size_t sectr = 0; sectr < curseofchunk; sectr += ws_min) 
     {
+        struct nvm_addr chunk_addrs[1];
+        chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,pagelist[0]);
         //printf("Write start:\n");
         size_t buf_ofz = sectr * bp->geo->l.nbytes;
 		struct nvm_addr addrs[ws_min];
@@ -528,61 +534,6 @@ uint64_t SingleValueWrite(uint64_t value, uint64_t pageno, uint64_t Cursize)
 }
 
 
-uint64_t SinglePageWrite(std::vector<entry_t> Entries, uint64_t pageno)
-{
-
-    /* Function flag, default value equals 0(successful flag). */
-    int err = 0;
-
-    /* Get chunkno, judge sector pointer of this block. */
-    //printf("pageno: %lu, sectorpointer: %lu\n",pageno,sectorpointer);
-    uint64_t  flag = pageno;
-    if(pageno == UINT64_MAX)
-    {
-        pageno = sectorpointer;
-    }
-
-    if(flag == UINT64_MAX )
-    {
-        struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, pageno);
-        size_t ws_min = nvm_dev_get_ws_min(bp->dev);
-        struct nvm_addr addrs[ws_min];
-        for (size_t aidx = 0; aidx < ws_min; ++aidx) 
-        {
-		    addrs[aidx].val = addrs_chunk.val;
-		    addrs[aidx].l.sectr = (pageno%4096)+aidx;
-		    /* printf("aidx: %lu addrs[aidx].val : %lu chunk_addrs[cidx].val %lu addrs[aidx].l.sectr %lu \n",aidx,addrs[aidx].val,chunk_addrs[cidx].val,addrs[aidx].l.sectr); */
-	    }
-
-        char * temp = new char[20];
-        for (size_t i = 0; i < Entries.size(); i++)
-        {
-            // printf("Value :%ld has been inserted!\n", ML[Cursize]);
-            uint64_t *ML = (uint64_t*) temp;
-            ML[0] = Entries[i].key, ML[1] = Entries[i].val;
-            for(size_t j= i*sizeof(entry_t)*8,k=0;j<i*sizeof(entry_t)*8+sizeof(entry_t)*8;j++,k++)
-            {
-                bp->bufs->write[i] = temp[i];
-            }
-        }
-        
-        // Write value into page. 
-        err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
-        if(err == 0) 
-        {
-            //printf("Insert completion! Insert sectors: %ld\n",sectorpointer);
-            PointerRenew(ws_min);   /* update pointers! */
-        }
-        else
-        {
-            EMessageOutput("Page writing failed in "+ Uint64toString(pageno)+"\n", 4598);
-        }
-    }
-
-    return pageno;
-
-}
-
 int MultiPageWrite(std::vector<entry_t> entries, std::vector<uint64_t> pagelist)
 {
     /* Function flag, default value equals 0(successful flag). */
@@ -596,63 +547,8 @@ int MultiPageWrite(std::vector<entry_t> entries, std::vector<uint64_t> pagelist)
 /*
  * Read functions. 
  */
-int PageDataRead(uint64_t pageno)
-{
-    int err;
-    struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, pageno);
-    size_t ws_min = nvm_dev_get_ws_min(bp->dev);
-    struct nvm_addr addrs[ws_min];
-
-    for (size_t aidx = 0; aidx < ws_min; ++aidx) 
-    {
-		addrs[aidx].val = addrs_chunk.val;
-		addrs[aidx].l.sectr = pageno % bp->geo->l.nsectr + aidx;
-	}
-    err = nvm_cmd_read(bp->dev, addrs, ws_min,bp->bufs->read, NULL,0x0, NULL);
-    if(err == -1)
-    {
-        printf("Reading page %ld failure.\n",pageno);
-        EMessageOutput("Run data read failure in page"+ Uint64toString(pageno)+"\n",106);
-        return -1;
-    }
-    
-    return 0;
-}
 
 
-std::vector<entry_t> RunReadFromPage(uint64_t PageNum, size_t Runsize)
-{
-
-    std::vector<entry_t> data ;
-    PageDataRead(PageNum);
-
-    /**
-    *size_t pagebytes = sizeof(entry_t)*(Runsize+5);
-    *data = (entry_t*)malloc(pagebytes);
-    *if(data == NULL)
-    
-    {
-        EMessageOutput("Memory allocating failure in RunReadFromPage function when reaading page "+Uint64toString(PageNum)+"\n",578);
-    }
-    **/
-    char * temp = new char[20];
-    entry_t TempEntry;
-    for (size_t i = 0; i < Runsize; i++)
-    {
-        // printf("Value :%ld has been inserted!\n", ML[Cursize]);
-        for(size_t j = i*sizeof(entry_t),k=0;j<i*sizeof(entry_t)+sizeof(entry_t);j++,k++)
-        {
-            temp[k] = bp->bufs->write[i];
-        }
-        uint64_t *ML = (uint64_t*) temp;
-        TempEntry.key = ML[0], TempEntry.val = ML[1];
-        data.emplace_back(TempEntry);
-    }  
-    printf("%lu data entries have beed read!\n",data.size());
-
-    return data;
-
-}
 
 int RunDataErase(std::vector<uint64_t> pageno)
 {

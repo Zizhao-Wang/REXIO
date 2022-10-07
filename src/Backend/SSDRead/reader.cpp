@@ -1,6 +1,7 @@
 #include "reader.h"
 #include "../IODisk/WriteDisk.h"
 #include "../../MultiHash/LinearHash/LiHash.h"
+#include "../../LSM-Tree/LsmTree.h"
 
 int SinglePageRead(uint64_t pageno)
 {
@@ -86,4 +87,64 @@ std::vector<LHEntry> PageRead(PageType PageNum)
 
     return entries;
 	
+}
+
+/**
+ * ============= Linear Hash module ===============
+ *  Function declartion for writing data into one or more pages:
+ **/
+int PageDataRead(PageType pageno)
+{
+    int err;
+    LSMTreeReadPhysicalPage++;
+    struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, pageno);
+    size_t ws_min = nvm_dev_get_ws_min(bp->dev);
+    struct nvm_addr addrs[ws_min];
+
+    for (size_t aidx = 0; aidx < ws_min; ++aidx) 
+    {
+		addrs[aidx].val = addrs_chunk.val;
+		addrs[aidx].l.sectr = pageno % bp->geo->l.nsectr + aidx;
+	}
+    err = nvm_cmd_read(bp->dev, addrs, ws_min,bp->bufs->read, NULL,0x0, NULL);
+    if(err == -1)
+    {
+        printf("Reading page %ld failure.\n",pageno);
+        EMessageOutput("Run data read failure in page"+ Uint64toString(pageno)+"\n",106);
+        return -1;
+    }
+    
+    return 0;
+}
+
+
+std::vector<entry_t> RunReadFromPage(PageType PageNum, size_t Runsize)
+{
+
+    std::vector<entry_t> data;
+    AssertCondition(PageNum != UINT64_MAX);
+    PageDataRead(PageNum);
+    
+    char * temp = new char[20];
+    entry_t TempEntry;
+    for (size_t i = 0; i < Runsize; i++)
+    {
+        // printf("Value :%ld has been inserted!\n", ML[Cursize]);
+        for(size_t j = i*sizeof(entry_t),k=0;j<i*sizeof(entry_t)+sizeof(entry_t);j++,k++)
+        {
+            temp[k] = bp->bufs->read[j];
+        }
+        uint64_t *ML = (uint64_t*) temp;
+        TempEntry.key = ML[0], TempEntry.val = ML[1];
+        data.emplace_back(TempEntry);
+    }
+    // for (size_t i = 0; i < 5; i++)
+    // {
+    //     printf("%lu %lu ",data[i].key,data[i].val);
+    // }
+    // printf("\n");
+    //printf("%lu data entries have beed read!\n",data.size());
+
+    return data;
+
 }

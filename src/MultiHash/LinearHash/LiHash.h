@@ -56,6 +56,8 @@ public:
 
     size_t GetBucketSize();  // Return the current size of bucket. 
 
+    size_t GetBucketsize();
+
     PageType GetBucketNo();
 
     bool GetFlag();

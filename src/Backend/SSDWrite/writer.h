@@ -50,5 +50,12 @@ int PageUpdatePageUpdate(PageType pageno, std::vector<LHEntry> entries);
 
 PageType SingleBucketWrite(std::vector<LHEntry> entries, uint64_t pageno);
 
+/**
+ * ============= LSM-tree module ===============
+ *  Function declartion for writing data into one or more pages:
+ **/
+PageType SinglePageWrite(std::vector<entry_t> Entries, uint64_t pageno);
+
+
 
 #endif //EXPERIMENT1_WRITEDISK_H

@@ -21,6 +21,7 @@ void LBucket::BucketWrite()
 {
      sort(bucket.begin(),bucket.end());
      PageNum = SingleBucketWrite(bucket, PageNum);
+     bucket.clear();
 }
 
 int LBucket::Insert(SKey key1, SValue val)
@@ -28,13 +29,6 @@ int LBucket::Insert(SKey key1, SValue val)
      LHEntry entry{key1,val};
      bucket.emplace_back(entry);
      size++;
-     if(bucket.size() >= BucketMax )
-     {
-          //printf("key1: %lu val: %lu bucket.size():%lu\n",key1,val,bucket.size());
-          BucketWrite();
-          bucket.clear();
-          return 1;
-     }
 
      return 0;
 }
@@ -48,7 +42,22 @@ void LBucket::BucketErase()
 
 LHEntry LBucket::BucketRetrival(SKey key)
 {
-     //printf("PageNum: %lu ",PageNum);
+     //printf("Key:%lu bucketsize: %lu",key,bucket.size());
+     if(bucket.size())
+     {
+          std::vector<LHEntry>::iterator get;
+          get = find(bucket.begin(),bucket.end(), LHEntry{key,0});
+          if(get != bucket.end())
+          {
+               return *get;
+          }
+     }
+     // for(int i=0;i<bucket.size();i++)
+     // {
+     //      printf("%lu in bucket",bucket[i].key);
+     // }
+     // printf("============\n");
+     // printf("PageNum: %lu ",PageNum);
      if(PageNum != UINT64_MAX )
      {
           std::vector<LHEntry> TempEntry = PageRead(PageNum);
@@ -57,16 +66,14 @@ LHEntry LBucket::BucketRetrival(SKey key)
           if(get != TempEntry.end())
           {
                     return  *get;  
-          } 
+          }
+     //      for(int i=0;i<TempEntry.size();i++)
+     // {
+     //      printf("%lu in TempEntry",TempEntry[i].key);
+     // }
+     // printf("============\n");
      }
 
-     std::vector<LHEntry>::iterator get;
-     get = find(bucket.begin(),bucket.end(), LHEntry{key,0});
-     if(get != bucket.end())
-     {
-          return *get;
-     }
-     
      return LHEntry{0,0};
 }
 
@@ -143,7 +150,7 @@ std::vector<LHEntry> LBucket::GetBucket(void)
           return entries;
      }
 #endif
-     if(PageNum != UINT64_MAX )
+     if(PageNum != UINT64_MAX && size>=bucket.size() && bucket.size()==0)
      {
           std::vector<LHEntry> entries = PageRead(PageNum);
           return entries;
@@ -155,6 +162,11 @@ std::vector<LHEntry> LBucket::GetBucket(void)
 size_t LBucket::GetBucketSize()
 {
      return size;
+}
+
+size_t LBucket::GetBucketsize()
+{
+     return bucket.size();
 }
 
 PageType LBucket::GetBucketNo()
@@ -174,7 +186,7 @@ void LBucket::SetBucketNo(uint64_t bucketno)
 
 bool LBucket::IsFull(void) const
 {
-     if(size >= BucketMax)
+     if(bucket.size()>=BucketMax )
      {
           return true;
      }
@@ -219,10 +231,13 @@ void LinearHashTable::TableDouble()
 
 int LinearHashTable::split(size_t SplitBucket)
 {
+
+     
      std::vector<LHEntry> OldBucket;  /* Intermediate varible definition */
 
      OldBucket = BucketTable[SplitBucket].GetBucket();
      BucketTable[SplitBucket].BucketErase();
+     SplitFlag[SplitBucket] = true;
 
      for(size_t i=0;i<OldBucket.size();i++)
      {
@@ -232,9 +247,9 @@ int LinearHashTable::split(size_t SplitBucket)
                TableDouble();
           }
           
-          BucketTable[bucketno].Insert(OldBucket[i].key,OldBucket[i].val);
+          Insert(OldBucket[i].key,OldBucket[i].val);
      }
-     SplitFlag[SplitBucket] = true;
+     
 
      bool flag = true;
      for(size_t i=0;i<h1;i++)
@@ -279,6 +294,7 @@ int LinearHashTable::Insert(SKey key, SValue value)
      //printf("h1:%u h2:%u ",h1,h2);
      if(BucketTable[bucketno].IsFull())
      {
+          BucketTable[bucketno].BucketWrite();
           //printf("bucket size:%lu,h1:%lu h2:%lu",BucketTable[bucketno].GetBucketSize(),h1,h2);
           split(bucketno);
           bucketno = key % h2;
@@ -291,7 +307,7 @@ int LinearHashTable::Insert(SKey key, SValue value)
 int LinearHashTable::Search(SKey key)
 {
      size_t bucketno = key % h1;
-     // //printf("First bucket:%lu ",bucketno);
+     //printf("SplitFlag[bucketno]:%d\n ",SplitFlag[bucketno]);
      if(SplitFlag[bucketno])
      {
           bucketno = key % h2;
@@ -303,7 +319,7 @@ int LinearHashTable::Search(SKey key)
      //printf("key: %lu entry.key:%lu ",key,entry.key);
      if(key != entry.key)
      {
-          printf("key: %lu, entry.key:%lu, Pageno:%lu,h1:%lu h2:%lu test!!!!!!!!\n",key,entry.key,BucketTable[bucketno].GetBucketNo(),h1,h2);
+          printf("key: %lu, entry.key:%lu, Pageno:%lu,h1:%lu h2:%lu bucketsize:%lu test!!!!!!!!\n",key,entry.key,BucketTable[bucketno].GetBucketNo(),h1,h2,BucketTable[bucketno].GetBucketsize());
      }
      
 
@@ -362,7 +378,7 @@ void LHashPort()
 
      /* workload a: insert only*/
      startTime = clock();
-     for(SKey i=1;i<=100000;i++)
+     for(SKey i=1;i<=120480;i++)
      {
           if(i%10000000==0||i==1000000)
           {
@@ -379,10 +395,10 @@ void LHashPort()
 
      /* workload b: read only, all in it */
      startTime = clock();
-     for(int i=1;i<=200;i++)
+     for(int i=1;i<=110;i++)
      {
           srand48(time(NULL));
-          SKey k = 1+(rand()%100000);
+          SKey k = 1+(rand()%120480);
           hashtable.Search(k);
           if(i==10000 || i%100000==0)
           {

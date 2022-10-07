@@ -31,19 +31,24 @@
 #define DEFAULT_BF_BITS_PER_ENTRY 0.5   // bloom filter bits
 
 
+extern uint32_t LSMTreeReadPhysicalPage;
+extern uint32_t LSMTreeWritePhysicalPage;
+extern uint32_t LSMTreeErasehysicalPage;
+
 class LSMTree 
 {
 private:
     Buffer buffer;
-    WorkerPool worker_pool;
     float bf_bits_per_entry;
+    // 7-levels 
     vector<Level> Levels;
 
 public:
-    LSMTree(int, int);
+    LSMTree(size_t ,int );
     int PutValue(KEY_t, VAL_t);
     void GetValue(KEY_t);
     void GetRange(KEY_t, KEY_t);
+    void UpdateValue(KEY_t, VAL_t);
     void DeleteValue(KEY_t);
     void load(std::string);
     int FlushInto(vector<Level>::iterator);

@@ -4,6 +4,11 @@
 #include <map>
 #include "LsmTree.h"
 
+uint32_t LSMTreeReadPhysicalPage = 0;
+uint32_t LSMTreeWritePhysicalPage = 0;
+uint32_t LSMTreeErasehysicalPage = 0;
+
+
 /*
  * LSM Tree
  * @BufferSize
@@ -13,8 +18,16 @@
  * @bf_bits_per_entry
  */
 
-LSMTree::LSMTree(int BufferSize, int NumThreads) :
-        buffer(BufferSize),worker_pool(NumThreads){}
+LSMTree::LSMTree(size_t BufferSize,int levelnum) :
+        buffer(BufferSize)
+{
+    for(int i=0;i<levelnum;i++)
+    {
+        Level temp(buffer.GetMaxSize());
+        Levels.emplace_back(temp);
+    }
+
+}
 
 int LSMTree::FlushInto(vector<Level>::iterator current) 
 {
@@ -25,11 +38,6 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
     AssertCondition(current >= Levels.begin());
     if (current->IsFull()) 
     {
-        if(current+1 == Levels.end())
-        {
-            Level temp(buffer.GetMaxSize());
-            Levels.emplace_back(temp);
-        }
         next = current + 1;
     }
     else
@@ -52,12 +60,14 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
         * If the next level does not have space for the current level,
         * recursively merge the next level downwards to create some
         **/
+        printf("Run has test it\n");
         FlushInto(next);
         AssertCondition(next->IsEmpty());
 
         long sizecount = 0;
-        AssertCondition(next->Runs.front().GetNowSize() == 0);
-        for (auto& run : current->Runs) 
+
+        /* Take over runs from current!*/
+        for (int i = 0;i<current->Runs.size();++i) 
         {
             if(next->Runs.front().SetPagePointers(run.GetPagePointers()) == -1 && next->Runs.front().SetFencePointers(run.GetFencePointers()) == -1)
             {
@@ -66,44 +76,47 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
             sizecount += run.GetNowSize();
         }
         AssertCondition(sizecount == next->Runs.front().GetNowSize());
-        for (auto& run : current->Runs) 
-        {
-            run.Unbind();
-        }
     }
     else
     {
-
-        for (auto& run : current->Runs) 
+        printf("Run has test it222\n");
+        for(int i=0;i<current->Runs.size();i++)
         {
-            if(run.GetNowSize() != 0)
+            printf("Run has %lu items in  current\n",current->Runs[i].GetNowSize());
+            if(current->Runs[i].GetNowSize() != 0)
             {
-                mergecon.Insert(run.SingleRunRead());
+                mergecon.Insert(current->Runs[i].SingleRunRead());
+                printf("Run has %lu items in  current\n",current->Runs[i].GetNowSize());
             }
         }
-        for(auto& run : next->Runs)
+        for(int i=0;i<next->Runs.size();i++)
         {
-            if(run.GetNowSize() != 0)
+            if(next->Runs[i].GetNowSize() != 0)
             {
-                mergecon.Insert(run.SingleRunRead());
+                mergecon.Insert(current->Runs[i].SingleRunRead());
+                printf("Run has %lu items in next\n",current->Runs[i].GetNowSize());
+                current->Runs[i].Reset();
             }
         }
 
-        std::vector<entry_t> values;
         while(!mergecon.IsEmpty())
         {
             entry_t entry = mergecon.Contextpop();
             // Remove deleted keys from the final level
-            if ( entry.val != VAL_TOMBSTONE) 
+            if ( entry.val != VAL_MAX) 
             {
-                values.emplace_back(entry);
+                next->PutValue(entry);
             }
         }
-        next->PutEntries(values);
-        for (auto& run : current->Runs) 
+        for(int i=0;i<next->Runs.size();i++)
         {
-            run.Unbind();
-        }   
+            printf("Run size: %ld from GetNowSize() \n",next->Runs[i].GetNowSize());
+        }
+        //next->PutEntries(values);  
+    }
+    for(int i=0;i<current->Runs.size();i++)
+    {
+        current->Runs[i].Reset(); 
     }
     
     return 0;
@@ -123,47 +136,65 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
     {
         return 1;
     }
+    // printf("Entries size:%lu\n",buffer.Entries.size());
 
     /* Step 2: Flush the buffer to level 0 */
     if(Levels.size()==0)
     {
+        
         Level temp(buffer.GetMaxSize());
         Levels.emplace_back(temp);
     }
+    
     FlushInto(Levels.begin());  //check whether level 1 is full and flush it if level 1 is full 
-
+    // exit(0);
 
     // Step 3
     std::vector<entry_t> bufferdata = buffer.GetEntries();
+
     if(Levels[0].IsEmpty())
     {
         for(auto& kv : bufferdata)
         {
             Levels[0].PutValue(kv);
         }
+        // for(auto& run : Levels[0].Runs)
+        // {
+        //     printf("Run size: %ld from GetNowSize()\n",run.GetNowSize());
+        // }
+        //exit(0);
     }
     else
     {
         MergeContext mergecon;
+        //printf("buffer size: %lu  ",bufferdata.size());
         mergecon.Insert(bufferdata);
-        for(auto& run : Levels[0].Runs)
+        for(int i=0;i<Levels[0].Runs.size();i++)
         {
-            if(run.GetNowSize()!= 0)
+            if(Levels[0].Runs[i].GetNowSize()!= 0)
             {
-                printf("Run size: %ld from GetNowSize()\n",run.GetNowSize());
-                mergecon.Insert(run.SingleRunRead());
+                //printf("Run size: %ld from GetNowSize()\n",run.GetNowSize());
+                mergecon.Insert(Levels[0].Runs[i].SingleRunRead());
+                // printf("run size: %lu  ",run.SingleRunRead());
+                Levels[0].Runs[i].Reset();
             }
         }
-        std::vector<entry_t> values;
+        //printf("Run size: %ld from GetNowSize()\n",run.GetNowSize());
+        //std::vector<entry_t> values;
+        //int i=0;
         while(!mergecon.IsEmpty())
         {
             entry_t entry = mergecon.Contextpop();
-            if (entry.val != VAL_TOMBSTONE) 
+            if (entry.val != VAL_MAX) 
             {
-                values.emplace_back(entry);
+                //values.emplace_back(entry);
+                Levels[0].PutValue(entry);
             }
         }
-        Levels[0].PutEntries(values);
+        for(int i=0;i<Levels[0].Runs.size();i++)
+        {
+            printf("Run size: %ld from GetNowSize()\n",Levels[0].Runs[i].GetNowSize());
+        }
     }
     
     buffer.AllClear();
@@ -171,6 +202,11 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
 
     return 0;
     
+}
+
+void LSMTree::UpdateValue(KEY_t key, VAL_t val)
+{
+    PutValue(key,val);
 }
 
 // Run * LSMTree::get_run(int index) 
@@ -183,62 +219,74 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
 //         }
 //         else 
 //         {
-//             index -= level.runs.size();
+//              index -= level.runs.size();
 //         }
 //     }
 
 //     return nullptr;
 // };
 
-// void LSMTree::GetValue(KEY_t key) {
-//     VAL_t *buffer_val;
-//     VAL_t latest_val;
-//     int latest_run;
-//     SpinLock lock;
-//     atomic<int> counter;
+void LSMTree::GetValue(KEY_t key) 
+{
 
-//     /*
-//      * Search buffer
-//      */
+    VAL_t *buffer_val = new VAL_t;
+    VAL_t latest_val;
+    int latest_run;
+    SpinLock lock;
+    atomic<int> counter;
 
-//     buffer_val = buffer.get(key);
+    /* Search buffe */
 
-//     if (buffer_val != nullptr) {
-//         if (*buffer_val != VAL_TOMBSTONE) cout << *buffer_val;
-//         cout << endl;
-//         delete buffer_val;
-//         return;
-//     }
+    buffer_val = buffer.GetValue(key);
 
-//     /*
-//      * Search runs
-//      */
+    if (buffer_val != nullptr) 
+    {
+        delete buffer_val;
+        return ;
+    }
+    delete buffer_val;
 
-//     counter = 0;
-//     latest_run = -1;
+    /* Search levels */
 
-//     worker_task search = [&] {
+    VAL_t *level_val = new VAL_t;
+    for(auto lev:Levels)
+    {
+        level_val = lev.GetValue(key);
+        if(level_val!=nullptr)
+        {
+            return ;
+        }
+    }
+    delete level_val;
+    return ; 
+     
 //         int current_run;
 //         Run *run;
-//         VAL_t *current_val;
-
+//         
+//          counter = 0;
+//          latest_run = -1;
 //         current_run = counter++;
 
-//         if (latest_run >= 0 || (run = get_run(current_run)) == nullptr) {
+//         if (latest_run >= 0 || (run = get_run(current_run)) == nullptr) 
+//         {
 //             // Stop search if we discovered a key in another run, or
 //             // if there are no more runs to search
 //             return;
-//         } else if ((current_val = run->get(key)) == nullptr) {
+//         } 
+//         else if ((current_val = run->get(key)) == nullptr) 
+//         {
 //             // Couldn't find the key in the current run, so we need
 //             // to keep searching.
 //             search();
-//         } else {
+//         } else 
+//         {
 //             // Update val if the run is more recent than the
 //             // last, then stop searching since there's no need
 //             // to search later runs.
 //             lock.lock();
 
-//             if (latest_run < 0 || current_run < latest_run) {
+//             if (latest_run < 0 || current_run < latest_run) 
+//             {
 //                 latest_run = current_run;
 //                 latest_val = *current_val;
 //             }
@@ -248,12 +296,9 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
 //         }
 //     };
 
-//     worker_pool.launch(search);
-//     worker_pool.wait_all();
-
 //     if (latest_run >= 0 && latest_val != VAL_TOMBSTONE) cout << latest_val;
 //     cout << endl;
-// }
+}
 
 // void LSMTree::GetRange(KEY_t start, KEY_t end) 
 // {
@@ -332,7 +377,7 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
 
 void LSMTree::DeleteValue(KEY_t key) 
 {
-    PutValue(key, VAL_TOMBSTONE);
+    PutValue(key, VAL_MAX);
 }
 
 // void LSMTree::load(string file_path) 
@@ -356,43 +401,157 @@ void LSMTree::DeleteValue(KEY_t key)
 void LSMTreeInit()
 {
     clock_t startTime,endTime;                        // Definition of timestamp
-    LSMTree Lsmtree(64,5);                  // Initialize a LSM-tree structure
+    LSMTree Lsmtree(256,7);                  // Initialize a LSM-tree structure
 
-    /* Write datum */
-    //printf("long size:%lu \n",sizeof(long));
+    /* workload a: insert only*/
     startTime = clock();
-    for(uint64_t i=1;i<=10000000;i++)
+    for(SKey i=1;i<=1000000;i++)
     {
-      if(i>=10000 && i%10000 ==0)
-      {
-        printf("Value:%lu \n",i);
-        endTime = clock();
-        std::cout << "Total Time of inserting: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-      } 
-      uint64_t value = i;
-      Lsmtree.PutValue(i,value);
+        if(i%10000000==0||i==1000000)
+        {
+            endTime = clock();
+            std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+        }
+        //printf("Insert %lu successful!\n",i);
+        Lsmtree.PutValue(i,i);
     }
+    printf("Read count:%d Write count:%u Erase Count:%d \n",LSMTreeReadPhysicalPage,LSMTreeWritePhysicalPage,LSMTreeErasehysicalPage);
     endTime = clock();
-    std::cout << "Total Time of inserting: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+    std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
 
-    /* Read datum */
-    startTime = clock();
-    for(int i=1;i<=1000000;i++)
-    {
-      uint64_t value = i;
-      // d.insert(i,value,0);
-    }
-    endTime = clock();
-    std::cout << "Total Time of reading data: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+    // /* workload b: read only, all in it */
+    // startTime = clock();
+    // for(int i=1;i<=110;i++)
+    // {
+    //     srand48(time(NULL));
+    //     SKey k = 1+(rand()%120480);
+    //     Lsmtree.GetValue(k);
+    //     if(i==10000 || i%100000==0)
+    //     {
+    //         endTime = clock();
+    //         std::cout << "Total Time of "<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+    //     }
+    // }
+    // endTime = clock();
+    // printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
+    // std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
-    /* data update */
-    startTime = clock();
-    for(int i=1;i<=3;i++)
-    {
-        uint64_t value = i;
-        // d.insert(i,value,0);
-    }
-    endTime = clock();
-    std::cout << "Total Time of datum update: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+    //  /* workload c: read only, 50% in it, 50% not in it */
+    //  startTime = clock();
+     
+    // for(int i=1;i<=1000000;i++)
+    // {
+    //     srand48(time(NULL));
+    //     if(i%100<50)
+    //     {
+    //         SKey k = 1+(rand()%40000000);
+    //         Lsmtree.GetValue(k);
+    //     }
+    //     else
+    //     {
+    //         SKey k = 40000000+(rand()%40000000);
+    //         Lsmtree.GetValue(k);
+    //     }
+    //     if(i%100000==0 || i==10000)
+    //     {
+    //         endTime = clock();
+    //         std::cout << "Total Time of "<<i<<" in workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+    //     }
+    // }
+    // //printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
+    // endTime = clock();
+    // std::cout << "Total Time of workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+
+    // /* workload d: update heavy workload, 50% read, 50% update */
+    // startTime = clock();
+    // for(int i=1;i<=1000000;i++)
+    // {
+    //     srand48(time(NULL));
+    //     if(i%2==0)
+    //     {
+    //         SKey k = 1+(rand()%40000000);
+    //         Lsmtree.GetValue(k);
+    //     }
+    //     else
+    //     {
+    //         SKey k = 1+(rand()%40000000);
+    //         Lsmtree.UpdateValue(k,k+1);
+    //     }
+    //     if(i%100000==0 || i==10000)
+    //     {
+    //         endTime = clock();
+    //         std::cout << "Total Time of "<<i<<" in workload D: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+    //     } 
+    // }
+    //  //printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
+    // endTime = clock();
+    // std::cout << "Total Time of workload d: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+
+    //  /* workload E: read mostly workload, 95% read, 5% update */
+    //  startTime = clock();
+    //  for(int i=1;i<=1000000;i++)
+    //  {
+    //     srand48(time(NULL));
+    //     if(i%100<95)
+    //     {
+    //         SKey k = 1+(rand()%40000000);
+    //         Lsmtree.GetValue(k);
+    //     }
+    //     else
+    //     {
+    //         SKey k = 1+(rand()%40000000);
+    //         Lsmtree.UpdateValue(k,k+1);
+    //     }
+    //     if(i%100000==0 || i==10000)
+    //     {
+    //         endTime = clock();
+    //         std::cout << "Total Time of "<<i<<" in workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+    //     } 
+    // }
+    //  //printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
+    // endTime = clock();
+    // std::cout << "Total Time of workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+
+    //  /* workload F: read latest workload, 95% read, 5% insert */
+    // startTime = clock();
+    // for(int i=1;i<=1000000;i++)
+    // {
+    //     srand48(time(NULL));
+    //     if(i%100<95)
+    //     {
+    //         SKey k = 1+(rand()%40000000);
+    //         Lsmtree.GetValue(k);
+    //     }
+    //     else
+    //     {
+    //         SKey k = 40000000+(rand()%40000000);
+    //         Lsmtree.PutValue(k,k+1);
+    //     }
+    //     if(i%100000==0 || i==10000)
+    //     {
+    //         endTime = clock();
+    //         std::cout << "Total Time of "<<i<<" in workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+    //     } 
+    // }
+    // //printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
+    // endTime = clock();
+    // std::cout << "Total Time of workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+
+    // /* workload G: delete workload, 100% delete*/
+    // startTime = clock();
+    // for(int i=1;i<=1000000;i++)
+    // {
+    //     srand48(time(NULL));
+    //     SKey k = 1+(rand()%40000000);
+    //     Lsmtree.DeleteValue(k);
+    //     if(i%100000==0 || i==10000)
+    //     {
+    //         endTime = clock();
+    //         std::cout << "Total Time of "<<i<<" in workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+    //     }  
+    // }
+    // //printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
+    // endTime = clock();
+    // std::cout << "Total Time of workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 }

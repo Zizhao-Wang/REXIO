@@ -12,18 +12,17 @@
 #include <sys/types.h>
 #include "../UtilityDefine/ResAllocate.h"
 
-Level::Level(long buffersize)
+Level::Level(uint64_t buffersize)
 {
-
     this->LevelNumber = LevelAlloctor();
 	this->MaxRuns = 2;
-	this->MaxRunSize = buffersize * pow(2,LevelNumber-1);
-    for(int i=0;i<MaxRuns;i++)
+	this->MaxRunSize = buffersize * pow(2,LevelNumber-1); //256*1024*2^(levelnumber-1)
+    printf("Run Maxsize:%lu in level %ld!\n",MaxRunSize,LevelNumber);
+    for(int i=0;i<this->MaxRuns;i++)
     {
         Run run(MaxRunSize);
         Runs.emplace_back(run);
     }
-
 }
 
 void Level::PutValue(entry_t entry1)
@@ -36,22 +35,34 @@ void Level::PutValue(entry_t entry1)
             return ;
         }
     }
+}
 
+VAL_t* Level::GetValue(KEY_t key)
+{
+    VAL_t *val = new VAL_t;
+    for(auto& run: Runs)
+    {  
+        if(!run.Isfull())
+        {
+            val = run.GetValue(key);
+            if(val != nullptr)
+                return val;
+        }
+    }
+
+    delete(val);
+    return nullptr;
 }
 
 void Level::PutEntries(std::vector<entry_t> entry1)
 {
-    for(auto& run: Runs)
+    for(auto ent: entry1)
     {
-        if(run.Isfull())
-        {
-            run.DataClear(entry1);
-            return ;
-        }
+        PutValue(ent);
     }
 }
 
-bool Level::IsEmpty(void) 
+bool Level::IsEmpty(void)  
 {
     for(auto& run:Runs)
     {
@@ -60,11 +71,10 @@ bool Level::IsEmpty(void)
             return false;
         }
     }
-
     return true;
 }
 
-bool Level::IsFull(void) 
+bool Level::IsFull(void)  
 {
     for(auto& run:Runs)
     {

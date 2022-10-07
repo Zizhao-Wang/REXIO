@@ -8,6 +8,8 @@
 #include <cstring>
 #include <cmath>
 #include "../../Backend/IODisk/WriteDisk.h"
+#include "../../Backend/SSDWrite/writer.h"
+#include "../../Backend/SSDRead/reader.h"
 
 Run::Run(unsigned long maxsize)
 {
@@ -19,36 +21,39 @@ Run::Run(unsigned long maxsize)
     Size = 0;
 }
 
+void Run::PointersDisplay()
+{
+    for(size_t i=0;i<PagePointers.size();i++)
+    {
+        printf("page pointer:%lu\n",PagePointers[i]);
+    }
+}
+
 int Run::RunDataWrite(void)
 {
 
     uint64_t pagesize = CalculatePageCapacity(sizeof(entry_t));
-    uint64_t Pointer;
+    PageType Pointer;
     
     if(Rundata.size() == pagesize)
     {
-        //printf("Rundata size: %lu Page number: %lu, Size: %lu\n",Rundata.size(),Pointer,Size);
-        Pointer = SinglePageWrite(Rundata,PagePointers[Size/pagesize-1]);
-        {
-            printf("Rundata size: %lu Page number: %lu, Size: %lu\n",Rundata.size(),Pointer,Size);
-            printf("Datum of Run in Level write succeed!\n");
-            PagePointers[Size/pagesize-1] = Pointer;
-            Rundata.clear();
-            return 0;
-        }
+        Pointer = SinglePageWrite(Rundata,PagePointers[(Size/pagesize)-1]);
+        //printf("The %lu Page: %lu, Size: %lu\n",(Size/pagesize)-1,Pointer,Size);
+        //printf("Datum of Run in Level write succeed!\n");
+        PagePointers[(Size/pagesize)-1] = Pointer;
+        Rundata.clear();
+        return 0;  
     }
-    
     printf("Datum size of Run doesn't matching, check again!");
     return -1;
-
 }
 
-VAL_t* Run::RunValuesRead(uint64_t PageNum)
+std::vector<entry_t> Run::RunValuesRead(uint64_t PageNum)
 {
-    VAL_t * value = nullptr;
+    
     std::vector<entry_t> reads;
-    RunReadFromPage(PageNum,CalculatePageCapacity(sizeof(entry_t)));
-    return value;
+    reads =  RunReadFromPage(PageNum,CalculatePageCapacity(sizeof(entry_t)));
+    return reads;
 }
 
 std::vector<entry_t> Run::SingleRunRead()
@@ -56,14 +61,15 @@ std::vector<entry_t> Run::SingleRunRead()
     std::vector<entry_t> entries1; 
     size_t Pagecapacity = CalculatePageCapacity(sizeof(entry_t));
 
-    printf("Test 1 : size of page pointers:%lu\n",PagePointers.size());
+    //printf("Test 1 : size of page pointers:%lu\n",PagePointers.size());
     for(size_t i=0; i<PagePointers.size();i++)
     {
+        printf("Read from page pointer:%lu\n",PagePointers[i]);
         std::vector<entry_t> temp;
         temp = RunReadFromPage(PagePointers[i],Pagecapacity);
         entries1.insert(entries1.end(),temp.begin(),temp.end());
     }
-    printf("Test 3");
+    //printf("Test 3");
     return entries1;
 
     /** entry_t * entries1 = nullptr; 
@@ -95,12 +101,12 @@ void Run::PutValue(entry_t entry)
     Rundata.emplace_back(entry);
     Size++;    
     MaxKey = max(entry.key,MaxKey);
-    if(Rundata.size() % CalculatePageCapacity(sizeof(entry_t)) == 0 && Size != 0)
+    if(Rundata.size() == CalculatePageCapacity(sizeof(entry_t)) && Size != 0)
     {
         //printf("Size in Put Value: %lu\n",Size);
         FencePointers.emplace_back(entry.key);
         int err = RunDataWrite();
-        if(flag == 0)
+        if(err == 0)
         {
             assert(Rundata.size() == 0); 
         }
@@ -113,9 +119,10 @@ void Run::PutValue(entry_t entry)
 
 VAL_t * Run::GetValue(KEY_t key)  
 {
-    std::vector<KEY_t>::iterator NextPage;
-    long PageIndex;
+    std::vector<PageType>::iterator NextPage;
+    PageType PageIndex;
     VAL_t * value = nullptr;
+    std::vector<entry_t> reads;
 
     if (key < FencePointers[0] || key > MaxKey) 
     {
@@ -126,8 +133,16 @@ VAL_t * Run::GetValue(KEY_t key)
     PageIndex = (NextPage - FencePointers.begin()) - 1;
     assert(PageIndex >= 0);
 
-    value = RunValuesRead(PagePointers[PageIndex]);
-
+    reads = RunValuesRead(PagePointers[PageIndex]);
+    std::vector<entry_t>::iterator get;
+    get = find(reads.begin(),reads.end(),entry_t{key,0});
+    if(get!=reads.end())
+    {
+        *value = (*get).val;
+        return value; 
+    }
+    
+    delete(value);
     return value;
 }
 
@@ -221,6 +236,18 @@ int Run::SetFencePointers(std::vector<uint64_t> pointers)
     return 0;
 }
 
+void Run::Reset()
+{
+    FencePointers.clear();
+    Size = 0;
+    Rundata.clear();
+    for(size_t i=0;i<this->MaxSize/CalculatePageCapacity(sizeof(entry_t));i++) //Initialize all page pointers as UINT64_MAX
+    {
+        PagePointers[i]=UINT64_MAX;
+    }
+    AssertCondition(Rundata.size()==0);
+}
+
 void Run::Unbind()
 {
     PagePointers.clear();
@@ -246,5 +273,5 @@ unsigned long Run::GetNowSize()
 
 bool Run::Isfull(void)
 {
-    return GetNowSize() == MaxSize;
+    return Size >= MaxSize;
 }

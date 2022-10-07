@@ -73,7 +73,7 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
             {
                 EMessageOutput("Page pointers merging failure in Level"+ Uint64toString(current->GetLevelNumber())+ "is trying to merging into Level"+ Uint64toString(next->GetLevelNumber())+"\n",110);
             }
-            sizecount += run.GetNowSize();
+            sizecount += current->Runs[i].GetNowSize();
         }
         AssertCondition(sizecount == next->Runs.front().GetNowSize());
     }

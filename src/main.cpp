@@ -39,7 +39,7 @@ int GlobalInitialize(int argc, char **argv)
     }
 
     /* Initialize chunk information. */
-    for(size_t i=0;i<100;i++)
+    for(size_t i=0;i<150;i++)
     {
         chunkusage[i] = 0;
     }
@@ -65,9 +65,9 @@ int main(int argc, char **argv)
 
        //TNCtreePort();
 
-     LHashPort();
+     //LHashPort();
 
-    // LSMTreeInit();
+     LSMTreeInit();
 
     // LSHashPort();
 

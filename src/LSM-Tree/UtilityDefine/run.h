@@ -24,17 +24,18 @@
 class Run 
 {
 private:
-    unsigned long Size, MaxSize;
+    uint64_t Size, MaxSize;
     uint64_t MaxKey;
-    std::vector<uint64_t> PagePointers;
+    std::vector<PageType> PagePointers;
     std::vector<entry_t> Rundata;
     std::vector<KEY_t> FencePointers;
     
 public:
-    Run(unsigned long);
+    Run(uint64_t);
     int  RunDataWrite();
+    void PointersDisplay();
     void PutValue(entry_t entry);
-    VAL_t* RunValuesRead(uint64_t PageNum);
+    std::vector<entry_t> RunValuesRead(uint64_t PageNum);
     std::vector<entry_t> SingleRunRead();
     VAL_t * GetValue(KEY_t key);
     std::vector<entry_t> * GetRange(KEY_t, KEY_t);
@@ -43,6 +44,7 @@ public:
     uint64_t GetMaxKey(void);
     int SetPagePointers(std::vector<uint64_t>);
     int SetFencePointers(std::vector<KEY_t>);
+    void Reset();
     void Unbind();
     int DataClear(std::vector<entry_t> );
     unsigned long GetNowSize();

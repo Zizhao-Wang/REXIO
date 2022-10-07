@@ -31,10 +31,11 @@ private:
     long LevelNumber;
 
 public:
-    std::deque<Run> Runs;
-    Level(long s);
+    std::vector<Run> Runs;
+    Level(uint64_t);
     void PutValue(entry_t entry1);
-    void PutEntries(std::vector<entry_t> );
+    VAL_t* GetValue(KEY_t key);
+    void PutEntries(std::vector<entry_t>);
     bool IsEmpty(void);
     bool IsFull (void);
     long GetMRunSize(void) const;

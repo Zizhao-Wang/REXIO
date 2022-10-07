@@ -34,13 +34,13 @@ typedef struct MergeEntry
         }
     }
 
-}MergeEntryt;
+}MergeEntry;
 
 class MergeContext 
 {
 private:
 
-    std::priority_queue<MergeEntryt, std::vector<MergeEntryt>, std::greater<MergeEntryt> > queue;
+    std::priority_queue<MergeEntry, std::vector<MergeEntry>, std::greater<MergeEntry> > queue;
 
 public:
     void Insert(entry_t *, size_t);

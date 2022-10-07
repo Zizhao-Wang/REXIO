@@ -84,9 +84,6 @@ uint64_t SSD_write2(uint64_t values);
 uint64_t SingleValueWrite(uint64_t value, uint64_t pageno,uint64_t Cursize);
 
 // Insert page-level key-value pairs into physicals for linear hashing.
-uint64_t SinglePageWrite(std::vector<entry_t> Entries, uint64_t pageno);
-
-uint64_t SinglePageWrite(std::vector<entry_t> Entries, uint64_t pageno);
 
 int MultiPageWrite(std::vector<entry_t> entries, std::vector<uint64_t> pagelist);
 
@@ -97,9 +94,6 @@ int MultiPageWrite(std::vector<entry_t> entries, std::vector<uint64_t> pagelist)
  * Function declartion for reading from one or more pages:
  *   
  **/
-int PageDataRead(uint64_t pageno);
-
-std::vector<entry_t> RunReadFromPage(uint64_t PageNum, size_t Runsize);
 
 int RunDataErase(std::vector<uint64_t> pageno);
 

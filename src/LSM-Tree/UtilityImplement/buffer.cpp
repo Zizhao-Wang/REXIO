@@ -4,8 +4,9 @@
 
 Buffer::Buffer(size_t maxpage)
 {
+    // 1024 * 256 = 262144 
     uint64_t capacity =  CalculatePageCapacity(sizeof(entry_t));
-    MaxSize = capacity * maxpage;
+    this->MaxSize = capacity * maxpage;
     //printf("Test successful! Size of entry:%lu, Page capacity: %lu, Buffer size:%u\n",sizeof(entry_t),capacity,MaxSize);
 }
 
@@ -15,7 +16,7 @@ bool Buffer::PutValue(KEY_t key, VAL_t val)
     entry_t SingleEntry;
     std::set<entry_t>::iterator itor;
 
-    if (Entries.size() == MaxSize) 
+    if (Entries.size() >= MaxSize) 
     {
         return false;
     } 
@@ -25,7 +26,7 @@ bool Buffer::PutValue(KEY_t key, VAL_t val)
         SingleEntry.key = key;
         SingleEntry.val = val;
         Tempair = Entries.insert(SingleEntry);
-        
+        //printf("Key:%lu Value:%lu Result: %d\n",key,val,Tempair.second);
         if (Tempair.second == false)  // Update the entry if it already exists
         {
             Entries.erase(itor);
@@ -35,7 +36,7 @@ bool Buffer::PutValue(KEY_t key, VAL_t val)
     }
 }
 
-VAL_t * Buffer::GetValue(KEY_t key) const 
+VAL_t * Buffer::GetValue(KEY_t key)
 {
     entry_t SearchEntry;
     std::set<entry_t>::iterator EntryItor;

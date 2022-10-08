@@ -20,7 +20,7 @@ uint32_t SyncWrite(SKey key1, SValue value)
 	if(indexs >= CalculatePageCapacity(sizeof(TNCEntry)))
     {
 
-        SinglePageWrite();
+        //SinglePageWrite();
         WBufferId = DataPagePointer;
         offset += DataPagePointer%4096==0?0x1000000:0x00000000;
 

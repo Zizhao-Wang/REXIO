@@ -10,14 +10,14 @@
 int sync_ex01_ewr_prp(struct nvm_bp *bp)
 {
 	int err =0;
-	struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, 0);
+	struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, 4096);
     size_t ws_min = nvm_dev_get_ws_min(bp->dev);
     struct nvm_addr addrs[ws_min];
 
     for (size_t aidx = 0; aidx < ws_min; ++aidx) 
     {
 		addrs[aidx].val = addrs_chunk.val;
-		addrs[aidx].l.sectr =0+ aidx;
+		addrs[aidx].l.sectr =4096+ aidx;
 	}
 	err = nvm_cmd_read(bp->dev, addrs, ws_min,bp->bufs->read, NULL,0x0, NULL);
 
@@ -41,6 +41,9 @@ int main(int argc, char **argv)
 {
 	struct nvm_bp *bp;
 	int err = EXIT_FAILURE;
+
+	int *a =nullptr;
+	*a =12;
 
 	bp = nvm_bp_init_from_args(argc, argv);
 	if (!bp) {

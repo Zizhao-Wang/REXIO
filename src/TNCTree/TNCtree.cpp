@@ -49,15 +49,16 @@ void TNCtreePort(void)
 
      /* workload a: insert only*/
      startTime = clock();
-     for(SKey i=1;i<=40000000;i++)
+     for(SKey i=1;i<=1000000;i++)
      {
           // if(i!=0&&i%100000==0)
           // printf("Insert %lu successful!\n",i);
           InsertNode(i,i);
      }
      endTime = clock();
+     printf("Read count:%d\n",readcount);
      std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-
+     exit(0);
 
      /* workload b: read only, all in it */
      startTime = clock();

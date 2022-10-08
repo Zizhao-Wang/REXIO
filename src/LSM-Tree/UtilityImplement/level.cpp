@@ -17,7 +17,7 @@ Level::Level(uint64_t buffersize)
     this->LevelNumber = LevelAlloctor();
 	this->MaxRuns = 2;
 	this->MaxRunSize = buffersize * pow(2,LevelNumber-1); //256*1024*2^(levelnumber-1)
-    printf("Run Maxsize:%lu in level %ld!\n",MaxRunSize,LevelNumber);
+    //printf("Run Maxsize:%lu in level %ld!\n",MaxRunSize,LevelNumber);
     for(int i=0;i<this->MaxRuns;i++)
     {
         Run run(MaxRunSize);
@@ -40,11 +40,11 @@ void Level::PutValue(entry_t entry1)
 VAL_t* Level::GetValue(KEY_t key)
 {
     VAL_t *val = new VAL_t;
-    for(auto& run: Runs)
+    for(int i=0;i<Runs.size();i++)
     {  
-        if(!run.Isfull())
+        if(!Runs[i].Isfull())
         {
-            val = run.GetValue(key);
+            val = Runs[i].GetValue(key);
             if(val != nullptr)
                 return val;
         }

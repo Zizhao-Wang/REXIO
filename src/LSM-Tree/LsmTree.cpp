@@ -54,73 +54,70 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
     * 2.check if the size is greater than 0 
     * 3.Flush directly if the size equals 0, or merge all datum of next run and flush    
     **/
+    printf("=========================\n");
     if (next->IsFull()) 
     {
        /**
         * If the next level does not have space for the current level,
         * recursively merge the next level downwards to create some
         **/
-        printf("Run has test it\n");
+        printf("Next 1 run size:%lu Next 2 run size:%lu \n",next->Runs[0].GetNowSize(),next->Runs[1].GetNowSize());
         FlushInto(next);
-        AssertCondition(next->IsEmpty());
-
-        long sizecount = 0;
-
-        /* Take over runs from current!*/
-        for (int i = 0;i<current->Runs.size();++i) 
-        {
-            if(next->Runs[0].SetPagePointers(current->Runs[i].GetPagePointers()) == 0 && next->Runs[0].SetFencePointers(current->Runs[i].GetFencePointers()) == 0)
-            {
-                current->Runs[i].Reset();
-            }else{
-                EMessageOutput("Page pointers merging failure in Level"+ Uint64toString(current->GetLevelNumber())+ "is trying to merging into Level"+ Uint64toString(next->GetLevelNumber())+"\n",110);
-            }
-            sizecount += current->Runs[i].GetNowSize();
-        }
-        AssertCondition(sizecount == next->Runs.front().GetNowSize());
+        assert(next->IsEmpty());
+        // /* Take over runs from current!*/
+        // for (int i = 0;i<current->Runs.size();++i) 
+        // {
+        //     std::vector<PageType> pages  = current->Runs[i].GetPagePointers();
+        //     if(next->Runs[0].SetPagePointers() == 0 && next->Runs[0].SetFencePointers(current->Runs[i].GetFencePointers()) == 0 &&next->Runs[0].SetMaxkey(current->Runs[i].GetMaxKey())==0)
+        //     {
+        //         current->Runs[i].Reset();
+        //         printf("Size in take over:%lu\n",current->Runs[i].GetNowSize());
+        //     }else{
+        //         EMessageOutput("Page pointers merging failure in Level"+ Uint64toString(current->GetLevelNumber())+ "is trying to merging into Level"+ Uint64toString(next->GetLevelNumber())+"\n",110);
+        //     }
+        // }
+        // assert(next->Runs[0].Isfull() == true);
     }
-    else
+    
+    
+    for(int i=0;i<current->Runs.size();i++)
     {
-        printf("Run has test it222\n");
-        for(int i=0;i<current->Runs.size();i++)
+        printf("Run has %lu items in current level %ld\n",current->Runs[i].GetNowSize(),current->GetLevelNumber());
+        if(current->Runs[i].GetNowSize() != 0)
         {
-            printf("Run has %lu items in  current\n",current->Runs[i].GetNowSize());
-            if(current->Runs[i].GetNowSize() != 0)
-            {
-                mergecon.Insert(current->Runs[i].SingleRunRead());
-                printf("Run has %lu items in  current\n",current->Runs[i].GetNowSize());
-            }
+            mergecon.Insert(current->Runs[i].SingleRunRead());
         }
-        for(int i=0;i<next->Runs.size();i++)
-        {
-            if(next->Runs[i].GetNowSize() != 0)
-            {
-                mergecon.Insert(current->Runs[i].SingleRunRead());
-                printf("Run has %lu items in next\n",current->Runs[i].GetNowSize());
-                current->Runs[i].Reset();
-            }
-        }
-
-        while(!mergecon.IsEmpty())
-        {
-            entry_t entry = mergecon.Contextpop();
-            // Remove deleted keys from the final level
-            if ( entry.val != VAL_MAX) 
-            {
-                next->PutValue(entry);
-            }
-        }
-        for(int i=0;i<next->Runs.size();i++)
-        {
-            printf("Run size: %ld from GetNowSize() \n",next->Runs[i].GetNowSize());
-        }
-        //next->PutEntries(values);  
     }
+    for(int i=0;i<next->Runs.size();i++)
+    {
+        printf("Run has %lu items in next level %ld!\n",next->Runs[i].GetNowSize(),next->GetLevelNumber());
+        if(next->Runs[i].GetNowSize() != 0)
+        {
+            mergecon.Insert(next->Runs[i].SingleRunRead());
+            next->Runs[i].Reset();
+        }
+    }
+
+    while(!mergecon.IsEmpty())
+    {
+        entry_t entry = mergecon.Contextpop();
+            // Remove deleted keys from the final level
+        if ( entry.val != VAL_MAX) 
+        {
+            next->PutValue(entry);
+        }
+    }
+    for(int i=0;i<next->Runs.size();i++)
+    {
+        printf("Run size: %ld from GetNowSize() \n",next->Runs[i].GetNowSize());
+    }
+        //next->PutEntries(values);  
+    
     for(int i=0;i<current->Runs.size();i++)
     {
         current->Runs[i].Reset(); 
     }
-    
+    printf("=========================\n");
     return 0;
 }
 
@@ -141,12 +138,6 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
     // printf("Entries size:%lu\n",buffer.Entries.size());
 
     /* Step 2: Flush the buffer to level 0 */
-    if(Levels.size()==0)
-    {
-        
-        Level temp(buffer.GetMaxSize());
-        Levels.emplace_back(temp);
-    }
     
     FlushInto(Levels.begin());  //check whether level 1 is full and flush it if level 1 is full 
     // exit(0);
@@ -169,7 +160,6 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
     else
     {
         MergeContext mergecon;
-        //printf("buffer size: %lu  ",bufferdata.size());
         mergecon.Insert(bufferdata);
         for(int i=0;i<Levels[0].Runs.size();i++)
         {
@@ -193,10 +183,10 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
                 Levels[0].PutValue(entry);
             }
         }
-        for(int i=0;i<Levels[0].Runs.size();i++)
-        {
-            printf("Run size: %ld from GetNowSize()\n",Levels[0].Runs[i].GetNowSize());
-        }
+        // for(int i=0;i<Levels[0].Runs.size();i++)
+        // {
+        //     printf("Run size: %ld from GetNowSize() in Level[0]\n",Levels[0].Runs[i].GetNowSize());
+        // }
     }
     
     buffer.AllClear();
@@ -228,39 +218,35 @@ void LSMTree::UpdateValue(KEY_t key, VAL_t val)
 //     return nullptr;
 // };
 
-void LSMTree::GetValue(KEY_t key) 
+VAL_t* LSMTree::GetValue(KEY_t key) 
 {
-
+    
     VAL_t *buffer_val = new VAL_t;
-    VAL_t latest_val;
-    int latest_run;
-    SpinLock lock;
-    atomic<int> counter;
-
-    /* Search buffe */
-
+    
+    // /* Search buffe */
+    
     buffer_val = buffer.GetValue(key);
 
     if (buffer_val != nullptr) 
     {
-        delete buffer_val;
-        return ;
+        return buffer_val;
     }
+
     delete buffer_val;
-
-    /* Search levels */
-
+    
+    // /* Search levels */
     VAL_t *level_val = new VAL_t;
-    for(auto lev:Levels)
+    for(int i=0;i<Levels.size();++i)
     {
-        level_val = lev.GetValue(key);
+        level_val = Levels[i].GetValue(key);
         if(level_val!=nullptr)
         {
-            return ;
+            return level_val;
         }
     }
+    
     delete level_val;
-    return ; 
+    return nullptr; 
      
 //         int current_run;
 //         Run *run;
@@ -407,14 +393,13 @@ void LSMTreeInit()
 
     /* workload a: insert only*/
     startTime = clock();
-    for(SKey i=1;i<=1000000;i++)
+    for(SKey i=1;i<=1048599;i++)
     {
         if(i%10000000==0||i==1000000)
         {
             endTime = clock();
             std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
         }
-        //printf("Insert %lu successful!\n",i);
         Lsmtree.PutValue(i,i);
     }
     printf("Read count:%d Write count:%u Erase Count:%d \n",LSMTreeReadPhysicalPage,LSMTreeWritePhysicalPage,LSMTreeErasehysicalPage);
@@ -422,22 +407,25 @@ void LSMTreeInit()
     std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
 
-    // /* workload b: read only, all in it */
-    // startTime = clock();
-    // for(int i=1;i<=110;i++)
-    // {
-    //     srand48(time(NULL));
-    //     SKey k = 1+(rand()%120480);
-    //     Lsmtree.GetValue(k);
-    //     if(i==10000 || i%100000==0)
-    //     {
-    //         endTime = clock();
-    //         std::cout << "Total Time of "<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
-    //     }
-    // }
-    // endTime = clock();
-    // printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
-    // std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+    /* workload b: read only, all in it */
+    startTime = clock();
+     for(int i=1;i<=110;i++)
+     {
+
+        srand48(time(NULL));
+        SKey k = 1+(rand()%120480);
+
+        Lsmtree.GetValue(k);
+
+        if(i==10000 || i%100000==0)
+        {
+            endTime = clock();
+            std::cout << "Total Time of "<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+        }
+     }
+    endTime = clock();
+    printf("Read count:%d Write count:%u Erase Count:%d \n",LSMTreeReadPhysicalPage,LSMTreeWritePhysicalPage,LSMTreeErasehysicalPage);
+    std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
     //  /* workload c: read only, 50% in it, 50% not in it */
     //  startTime = clock();

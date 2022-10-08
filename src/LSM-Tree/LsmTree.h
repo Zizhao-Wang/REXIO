@@ -35,18 +35,36 @@ extern uint32_t LSMTreeReadPhysicalPage;
 extern uint32_t LSMTreeWritePhysicalPage;
 extern uint32_t LSMTreeErasehysicalPage;
 
+
+typedef struct LSMEntry
+{
+    KEY_t key;
+    VAL_t val;
+
+    LSMEntry * next[20];
+
+}LSMEntry;
+
+typedef struct HeadNode
+{
+    int    CurrentLevel;
+    int    Nodenumber;
+
+    LSMEntry * Node;
+}HeadNode;
+
 class LSMTree 
 {
 private:
     Buffer buffer;
-    float bf_bits_per_entry;
+    //float bf_bits_per_entry;
     // 7-levels 
     vector<Level> Levels;
 
 public:
     LSMTree(size_t ,int );
     int PutValue(KEY_t, VAL_t);
-    void GetValue(KEY_t);
+    VAL_t* GetValue(KEY_t);
     void GetRange(KEY_t, KEY_t);
     void UpdateValue(KEY_t, VAL_t);
     void DeleteValue(KEY_t);
@@ -54,6 +72,10 @@ public:
     int FlushInto(vector<Level>::iterator);
     Run * get_run(int);
 };
+
+
+
+
 
 
 /* Portable function declaration */

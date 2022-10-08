@@ -49,14 +49,6 @@ int Run::RunDataWrite(void)
     return -1;
 }
 
-std::vector<entry_t> Run::RunValuesRead(uint64_t PageNum)
-{
-    
-    std::vector<entry_t> reads;
-    reads =  RunReadFromPage(PageNum,CalculatePageCapacity(sizeof(entry_t)));
-    return reads;
-}
-
 std::vector<entry_t> Run::SingleRunRead()
 {
     std::vector<entry_t> entries1; 
@@ -65,11 +57,11 @@ std::vector<entry_t> Run::SingleRunRead()
     //printf("Test 1 : size of page pointers:%lu\n",PagePointers.size());
     for(size_t i=0; i<PagePointers.size();i++)
     {
-        printf("Read from page pointer:%lu\n",PagePointers[i]);
         std::vector<entry_t> temp;
-        temp = RunReadFromPage(PagePointers[i],Pagecapacity);
+        temp = RunReadFromPage(PagePointers[i]);
         entries1.insert(entries1.end(),temp.begin(),temp.end());
     }
+    printf("Read from start page pointer:%lu end:%lu. total: %lu\n",PagePointers[0],PagePointers[PagePointers.size()-1],PagePointers.size());
     //printf("Test 3");
     return entries1;
 
@@ -120,21 +112,32 @@ void Run::PutValue(entry_t entry)
 
 VAL_t * Run::GetValue(KEY_t key)  
 {
-    std::vector<PageType>::iterator NextPage;
-    PageType PageIndex;
-    VAL_t * value = nullptr;
+    int PageIndex;
+    VAL_t * value = new VAL_t;
     std::vector<entry_t> reads;
 
-    if (key < FencePointers[0] || key > MaxKey) 
+    assert();
+    if(FencePointers.size()!=0)
     {
-        return value;
+        if (key < FencePointers[0] || key > MaxKey) 
+        {
+            return value;
+        }
     }
+    
 
-    NextPage = upper_bound(FencePointers.begin(), FencePointers.end(), key);
-    PageIndex = (NextPage - FencePointers.begin()) - 1;
-    assert(PageIndex >= 0);
+    PageIndex = 0;
+    for(int i=0;i<FencePointers.size();++i)
+    {
+        if(key<FencePointers[i])
+        {
+            PageIndex = i;
+        }
+    }
+    
+    assert(PageIndex==-1);
 
-    reads = RunValuesRead(PagePointers[PageIndex]);
+    reads = RunReadFromPage(PagePointers[PageIndex]);;
     std::vector<entry_t>::iterator get;
     get = find(reads.begin(),reads.end(),entry_t{key,0});
     if(get!=reads.end())
@@ -142,9 +145,8 @@ VAL_t * Run::GetValue(KEY_t key)
         *value = (*get).val;
         return value; 
     }
-    
     delete(value);
-    return value;
+    return nullptr;
 }
 
 
@@ -213,15 +215,15 @@ uint64_t Run::GetMaxKey(void)
 
 int Run::SetPagePointers(std::vector<uint64_t> pointers)
 {
-
+    assert(PagePointers.size()==0);
     for(size_t i=0;i<pointers.size();++i)
     {
-        AssertCondition(pointers[i] != UINT64_MAX);
-        PagePointers[i] = pointers[i];
+        assert(pointers[i] != UINT64_MAX);
+        PagePointers.emplace_back(pointers[i]);
         Size += CalculatePageCapacity(sizeof(entry_t));
     }
 
-    if(pointers.size()!=MaxSize/2 )
+    if(pointers.size()*CalculatePageCapacity(sizeof(entry_t)) != MaxSize/2 )
     {
         return -1;
     }
@@ -231,13 +233,14 @@ int Run::SetPagePointers(std::vector<uint64_t> pointers)
 
 int Run::SetFencePointers(std::vector<uint64_t> pointers)
 {
+
     for(size_t i=0;i<pointers.size();++i)
     {
         FencePointers.emplace_back(pointers[i]);
         MaxKey = max(MaxKey,pointers[i]);
     }
 
-    if(pointers.size()!=MaxSize/2 )
+    if(pointers.size()*CalculatePageCapacity(sizeof(entry_t))!=MaxSize/2 )
     {
         return -1;
     }
@@ -245,17 +248,39 @@ int Run::SetFencePointers(std::vector<uint64_t> pointers)
     return 0;
 }
 
+void Run::Reset(bool flag)
+{
+    if(FencePointers.size()!=0)
+        FencePointers.clear();
+    Size = 0;
+    if(Rundata.size()!=0)
+        Rundata.clear();
+    if(flag)
+    {
+        if(PagePointers.size()!=0)
+            PagePointers.clear();
+    }
+    MaxKey = 0;
+}
+
+int Run::SetMaxkey(KEY_t key)
+{
+    MaxKey = max(MaxKey,key);
+}
+
 void Run::Reset()
 {
-    FencePointers.clear();
+    if(FencePointers.size()!=0)
+        FencePointers.clear();
     Size = 0;
-    Rundata.clear();
-    for(size_t i=0;i<this->MaxSize/CalculatePageCapacity(sizeof(entry_t));i++) //Initialize all page pointers as UINT64_MAX
+    if(Rundata.size()!=0)
+        Rundata.clear();
+    for(size_t i=0;i<PagePointers.size();i++) //Initialize all page pointers as UINT64_MAX
     {
         PagePointers[i]=UINT64_MAX;
     }
     MaxKey = 0;
-    AssertCondition(Rundata.size()==0);
+
 }
 
 void Run::Unbind()

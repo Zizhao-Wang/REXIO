@@ -43,6 +43,6 @@ std::vector<LHEntry> PageRead(PageType PageNum);
  **/
 int PageDataRead(PageType pageno);
 
-std::vector<entry_t> RunReadFromPage(PageType PageNum, size_t Runsize);
+std::vector<entry_t> RunReadFromPage(PageType PageNum);
 
 #endif //EXPERIMENT1_WRITEDISK_H

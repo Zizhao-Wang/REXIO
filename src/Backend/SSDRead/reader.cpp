@@ -118,16 +118,16 @@ int PageDataRead(PageType pageno)
 }
 
 
-std::vector<entry_t> RunReadFromPage(PageType PageNum, size_t Runsize)
+std::vector<entry_t> RunReadFromPage(PageType PageNum)
 {
 
     std::vector<entry_t> data;
-    AssertCondition(PageNum != UINT64_MAX);
+    assert(PageNum != UINT64_MAX);
     PageDataRead(PageNum);
     
     char * temp = new char[20];
     entry_t TempEntry;
-    for (size_t i = 0; i < Runsize; i++)
+    for (size_t i = 0; i <CalculatePageCapacity(sizeof(entry_t)); i++)
     {
         // printf("Value :%ld has been inserted!\n", ML[Cursize]);
         for(size_t j = i*sizeof(entry_t),k=0;j<i*sizeof(entry_t)+sizeof(entry_t);j++,k++)
@@ -145,6 +145,7 @@ std::vector<entry_t> RunReadFromPage(PageType PageNum, size_t Runsize)
     // printf("\n");
     //printf("%lu data entries have beed read!\n",data.size());
 
+    delete(temp);
     return data;
 
 }

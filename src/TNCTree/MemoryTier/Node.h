@@ -18,6 +18,8 @@
 #define LOCAL_HEAD_SIZE  sizeof (LocalHeadNode)
 #define MaxLevel 20
 
+const int MAX_LEVEL1 = 32;
+const int P_FACTOR1 = RAND_MAX >> 2;
 
 /*
  * Local hash table node.
@@ -43,6 +45,24 @@ typedef struct LocalHeadNode
 }LocalHeadNode;
 
 
+typedef struct TSkiplistNode 
+{
+    uint64_t key;
+    uint8_t flag;
+    uint32_t offset;
+    int maxLevel;
+    struct TSkiplistNode **forward;
+} TSkiplistNode;
+
+
+typedef struct 
+{
+    TSkiplistNode *head;
+    int number;
+    int level;
+    int depth;
+} TNCSkiplist;
+
 /*
  * Global hash table node.
  */
@@ -50,7 +70,7 @@ typedef struct LocalHeadNode
 typedef struct GlobalHashNode
 {
     unsigned int bit;
-    LocalHeadNode * local;
+    TNCSkiplist * local;
 }GlobalHashNode;
 
 /**
@@ -71,6 +91,10 @@ typedef struct TNCEntry
     /*
      * Some methods of initialization.
      */
+TSkiplistNode * TskiplistNodeCreat(uint64_t key,uint32_t offset, int maxLevel);
+
+TNCSkiplist *  TskiplistCreate();
+
 LocalHashNode * NILInitialize();
 
 LocalHashNode * Initialization(SKey hashkey, uint32_t offset);

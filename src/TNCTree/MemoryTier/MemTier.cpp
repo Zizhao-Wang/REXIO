@@ -32,22 +32,13 @@ using namespace std;
 bool LocalGeneration(GlobalHashNode * globalNode)
 {
 
-    auto * localHead =(LocalHeadNode*) malloc(LOCAL_HEAD_SIZE);
-    if(localHead!=nullptr || globalNode->local== nullptr)
-    {
-        localHead->depth  = Globaldepth;
-        localHead->Nodenumber = 0;
-        localHead->CurrentLevel = 1;
+    TNCSkiplist * localHead = TskiplistCreate();
+    
+    localHead->depth  = Globaldepth;
 
-        auto * localnodehead = Initialization();
-        localHead->HashNode = localnodehead;
-
-        globalNode->local = localHead;
-        return true;
-    }
-    else
-        return false;
-        fork();
+    globalNode->local = localHead;
+    return true;
+    
 }
 
 /*
@@ -78,9 +69,7 @@ int RandomLevel()
 {
 
     int v = 1;
-    srand ((unsigned int)(time (NULL)));
-    while(rand() % (N + 1) / (float)(N + 1) < pro && v< MaxLevel )
-    {
+    while (rand() < P_FACTOR1 && v < MAX_LEVEL1) {
         v++;
     }
 #ifdef DEBUG
@@ -99,23 +88,21 @@ int RandomLevel()
 int InsertNode(SKey hashkey, SValue hashvalue)
 {
     /*  Insert the hash value into special skip-list. */
-    LocalHeadNode * head = global[hashkey & (1<<Globaldepth)-1]->local;
-    LocalHashNode * temp = head->HashNode;
-    LocalHashNode * update[MaxLevel];
+    TNCSkiplist * Head = global[hashkey & (1<<Globaldepth)-1]->local;
+    TSkiplistNode * temp = Head->head;
+    TSkiplistNode * update[MAX_LEVEL1];
 
-    int curLevel = head->CurrentLevel-1;
 
-    for(int i=curLevel; i>=0; --i)
+    for(int i=Head->level; i>=0; i--)
     {
-        while(temp->next[i]->Hashkey < hashkey)
+        while(temp->forward[i] && temp->forward[i]->key < hashkey)
         {
-            temp = temp->next[i];
+            temp = temp->forward[i];
         }
         update[i] = temp;
     }
-    temp = temp->next[0];
 
-    if(temp->Hashkey == hashkey)
+    if(temp->key == hashkey)
     {
         if(temp->flag == 1)
         {
@@ -126,31 +113,29 @@ int InsertNode(SKey hashkey, SValue hashvalue)
             temp->flag =1;
             // write into disk
             temp->offset = SyncWrite(hashkey,hashvalue); //printf("%u\n",temp->offset);
-            ++head->Nodenumber;
+            ++Head->number;
             return 0;
         }
     }
     else
     {
         int v=RandomLevel();
-        if(v > curLevel)
+        if(v > Head->level)
         {
-            for(int i=curLevel+1; i<v; ++i )
+            for(int i=Head->level; i<v; ++i )
             {
-                update[i] = head->HashNode;
+                update[i] = Head->head;
             }
-            head->CurrentLevel = v+1;
+            Head->level = v;
         }
         //write into disk
         uint_32 offset1 = SyncWrite(hashkey,hashvalue);  //printf("%u\n",temp->offset);
-        ++head->Nodenumber;
-        temp = Initialization(hashkey,offset1);
-        if(temp == nullptr)
-            return -1;
+        ++Head->number;
+        TSkiplistNode* tsl = TskiplistNodeCreat(hashkey,offset1,v);
         for(int i=0;i<v;++i)
         {
-            temp->next[i] = update[i]->next[i];
-            update[i]->next[i] = temp;
+            tsl->forward[i] = update[i]->forward[i];
+            update[i]->forward[i] = tsl;
         }
     }
     
@@ -166,29 +151,29 @@ int InsertNode(SKey hashkey, SValue hashvalue)
  * 3. return value if data is in the physical block   
  **/
 
-LocalHashNode* SearchNode(LocalHeadNode* Head,SKey hashkey)
+TSkiplistNode * SearchNode(TNCSkiplist * Head,SKey hashkey)
 {
-    if(Head->CurrentLevel == 1)
+    if(Head->level == 1)
         return nullptr;
-    int curLevel = Head->CurrentLevel-1;
-    LocalHashNode *node = Head->HashNode ;
-    for(int i=curLevel; i>=0; --i)
+
+    TSkiplistNode*node = Head->head ;
+    for(int i=Head->level-1; i>=0; --i)
     {
-        while(node->next[i]->Hashkey < hashkey)
+        while(node->forward[i] && node->forward[i]->key < hashkey)
         {
-            node = node->next[i];
+            node = node->forward[i];
         }
     }
 
-    node = node->next[0];
+    node = node->forward[0];
     return node;
 }
 
 SValue Search(SKey key1)
 {
     TNCEntry entry;
-    LocalHeadNode * head = global[key1 & (1<<Globaldepth)-1]->local;
-    LocalHashNode* node =  SearchNode(head, key1);
+    TNCSkiplist * head = global[key1 & (1<<Globaldepth)-1]->local;
+    TSkiplistNode * node =  SearchNode(head, key1);
     if(node == nullptr || node->flag == 0)
     {
         return UINT64_MAX;
@@ -198,8 +183,7 @@ SValue Search(SKey key1)
     //printf("Key: %lu offset: %u ReadKey:%lu \n",key1,node->offset,entry.key);
     if(entry.key == key1)
     {
-        printf("key1: %lu entry.key: %lu Value: %lu",key1,entry.key,entry.val);
-        exit(100000);
+        //printf("key1: %lu entry.key: %lu Value: %lu",key1,entry.key,entry.val);
         return entry.val;
     }
 
@@ -213,8 +197,8 @@ SValue Search(SKey key1)
 int Update(SKey key1, SValue val)
 {
     int err = 0;
-    LocalHeadNode * head = global[key1 & (1<<Globaldepth)-1]->local;
-    LocalHashNode * node = SearchNode(head, key1);
+    TNCSkiplist * head = global[key1 & (1<<Globaldepth)-1]->local;
+    TSkiplistNode * node = SearchNode(head, key1);
 
     if(node == nullptr){
         return -1;
@@ -241,9 +225,9 @@ int Update(SKey key1, SValue val)
  *   =================Node deletion module====================  
  **/
 
-bool DeleteValue(LocalHeadNode * Head, SKey hashkey)
+bool DeleteValue(TNCSkiplist * Head, SKey hashkey)
 {
-    LocalHashNode * node = SearchNode(Head,hashkey);
+    TSkiplistNode * node = SearchNode(Head,hashkey);
     if(node->flag==1)
     {
         SyncDelete(node->offset);   //write into disk(meta data).
@@ -255,13 +239,13 @@ bool DeleteValue(LocalHeadNode * Head, SKey hashkey)
 
 int Delete(SKey key1)
 {
-    LocalHeadNode * head = global[key1 & (1<<Globaldepth)-1]->local;
+    TNCSkiplist * head = global[key1 & (1<<Globaldepth)-1]->local;
     bool flag = DeleteValue(head, key1);
-    head->Nodenumber--;
     if(!flag)
     {
         EMessageOutput("Delete value failure in TNC-tree!",1578);
     }
+    head->number--;
     return 0;
 }
 

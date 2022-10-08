@@ -27,7 +27,7 @@ extern TNCEntry Pagedata[1030];
 extern PageType WBufferId;
 extern std::unordered_map<uint64_t, std::vector<char>> BufferLog;  //Log buffer 
 extern LRUCache lrucache;
-
+extern std::unordered_map<uint64_t, uint64_t> LogIndex;
 extern int buffernumber;
 
 /**

@@ -12,6 +12,35 @@
 #include <cstdlib>
 #include <climits>
 
+
+TSkiplistNode *TskiplistNodeCreat(uint64_t key,uint32_t offset, int maxLevel)
+{
+    TSkiplistNode *obj = (TSkiplistNode *)malloc(sizeof(TSkiplistNode));
+	obj->key = key;
+    obj->offset = offset;
+    obj->flag = 1;
+    obj->maxLevel = maxLevel;
+    obj->forward = (TSkiplistNode **)malloc(sizeof(TSkiplistNode *) * maxLevel);
+    for (int i = 0; i < maxLevel; i++) {
+        obj->forward[i] = NULL;
+    }
+    return obj;
+}
+
+TNCSkiplist * TskiplistCreate()
+{
+    TNCSkiplist *obj = (TNCSkiplist *)malloc(sizeof(TNCSkiplist));
+    obj->head = TskiplistNodeCreat(0,0, MAX_LEVEL1);
+    obj->level = 0;
+    srand(time(NULL));
+    return obj;
+
+}
+
+
+
+
+
 /*
  * NIL node of skip list initialization.
  */

@@ -35,24 +35,6 @@ extern uint32_t LSMTreeReadPhysicalPage;
 extern uint32_t LSMTreeWritePhysicalPage;
 extern uint32_t LSMTreeErasehysicalPage;
 
-
-typedef struct LSMEntry
-{
-    KEY_t key;
-    VAL_t val;
-
-    LSMEntry * next[20];
-
-}LSMEntry;
-
-typedef struct HeadNode
-{
-    int    CurrentLevel;
-    int    Nodenumber;
-
-    LSMEntry * Node;
-}HeadNode;
-
 class LSMTree 
 {
 private:
@@ -69,12 +51,10 @@ public:
     void UpdateValue(KEY_t, VAL_t);
     void DeleteValue(KEY_t);
     void load(std::string);
+    void display();
     int FlushInto(vector<Level>::iterator);
     Run * get_run(int);
 };
-
-
-
 
 
 

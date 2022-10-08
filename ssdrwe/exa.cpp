@@ -5,7 +5,9 @@
 #include <liblightnvm.h>
 #include <liblightnvm_spec.h>
 #include <liblightnvm_cli.h>
-
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 int sync_ex01_ewr_prp(struct nvm_bp *bp)
 {
@@ -39,24 +41,8 @@ int sync_ex01_ewr_prp(struct nvm_bp *bp)
 
 int main(int argc, char **argv)
 {
-	struct nvm_bp *bp;
-	int err = EXIT_FAILURE;
 
-	int *a =nullptr;
-	*a =12;
-
-	bp = nvm_bp_init_from_args(argc, argv);
-	if (!bp) {
-		perror("nvm_bp_init");
-		return err;
-	}
-
-	err = sync_ex01_ewr_prp(bp);
-	if (err) {
-		perror("sync_ex01_ewr_prp");
-		err = EXIT_FAILURE;
-	}
-
-	nvm_bp_term(bp);
-	return err;
+    char *ptr = NULL;
+    strncpy(ptr, "abc", 3);
+    return 0;
 }

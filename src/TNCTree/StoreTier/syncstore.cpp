@@ -20,7 +20,7 @@ uint32_t SyncWrite(SKey key1, SValue value)
 	if(indexs >= CalculatePageCapacity(sizeof(TNCEntry)))
     {
 
-        //SinglePageWrite();
+        SinglePageWrite();
         WBufferId = DataPagePointer;
         offset += DataPagePointer%4096==0?0x1000000:0x00000000;
 
@@ -43,26 +43,27 @@ uint32_t SyncWrite(SKey key1, SValue value)
 
 int  SyncDelete(uint32_t offset)
 { 
-    uint8_t temp = 0;
+    char temp;
     
     uint64_t BlockId = offset>>24;
-    //printf("offset: %u BlockID: %lu\n",offset,BlockId);
+    //printf("BlockID: %lu\n",BlockId);
 
-
-    while(offset)
+    int i =4;
+    while(i--)
     {
-        temp = (uint8_t)(offset & 0XFF);
+        temp = (char)(offset & 0XFF);
         offset = offset >> 8;
         BufferLog[BlockId].emplace_back(temp);
     }
-    
 
-    if(BufferLog[BlockId].size() == CalculatePageCapacity(sizeof(uint32_t)))
+    //printf("=========\n");
+    if(BufferLog[BlockId].size() >= CalculatePageCapacity(sizeof(char)))
     {
         PageLogWrite(BlockId);
-        BufferLog[BlockId].clear();    
+        if(BufferLog[BlockId].size()!=0)
+            BufferLog[BlockId].clear();  
     }
-
+    //printf("=========\n");
     return 0;
 }
 

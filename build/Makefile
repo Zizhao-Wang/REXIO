@@ -297,6 +297,30 @@ LSM-Tree/LsmTree.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.s
 .PHONY : LSM-Tree/LsmTree.cpp.s
 
+LSM-Tree/UtilityDefine/node2.o: LSM-Tree/UtilityDefine/node2.cpp.o
+.PHONY : LSM-Tree/UtilityDefine/node2.o
+
+# target to build an object file
+LSM-Tree/UtilityDefine/node2.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSM-Tree/UtilityDefine/node2.cpp.o
+.PHONY : LSM-Tree/UtilityDefine/node2.cpp.o
+
+LSM-Tree/UtilityDefine/node2.i: LSM-Tree/UtilityDefine/node2.cpp.i
+.PHONY : LSM-Tree/UtilityDefine/node2.i
+
+# target to preprocess a source file
+LSM-Tree/UtilityDefine/node2.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSM-Tree/UtilityDefine/node2.cpp.i
+.PHONY : LSM-Tree/UtilityDefine/node2.cpp.i
+
+LSM-Tree/UtilityDefine/node2.s: LSM-Tree/UtilityDefine/node2.cpp.s
+.PHONY : LSM-Tree/UtilityDefine/node2.s
+
+# target to generate assembly for a file
+LSM-Tree/UtilityDefine/node2.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSM-Tree/UtilityDefine/node2.cpp.s
+.PHONY : LSM-Tree/UtilityDefine/node2.cpp.s
+
 LSM-Tree/UtilityImplement/ResAllocate.o: LSM-Tree/UtilityImplement/ResAllocate.cpp.o
 .PHONY : LSM-Tree/UtilityImplement/ResAllocate.o
 
@@ -711,6 +735,9 @@ help:
 	@echo "... LSM-Tree/LsmTree.o"
 	@echo "... LSM-Tree/LsmTree.i"
 	@echo "... LSM-Tree/LsmTree.s"
+	@echo "... LSM-Tree/UtilityDefine/node2.o"
+	@echo "... LSM-Tree/UtilityDefine/node2.i"
+	@echo "... LSM-Tree/UtilityDefine/node2.s"
 	@echo "... LSM-Tree/UtilityImplement/ResAllocate.o"
 	@echo "... LSM-Tree/UtilityImplement/ResAllocate.i"
 	@echo "... LSM-Tree/UtilityImplement/ResAllocate.s"

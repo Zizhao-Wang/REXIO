@@ -102,7 +102,7 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
     {
         entry_t entry = mergecon.Contextpop();
             // Remove deleted keys from the final level
-        if ( entry.val != VAL_MAX) 
+        if ( entry.val != 0) 
         {
             next->PutValue(entry);
         }
@@ -138,7 +138,6 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
     // printf("Entries size:%lu\n",buffer.Entries.size());
 
     /* Step 2: Flush the buffer to level 0 */
-    
     FlushInto(Levels.begin());  //check whether level 1 is full and flush it if level 1 is full 
     // exit(0);
 
@@ -177,7 +176,7 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
         while(!mergecon.IsEmpty())
         {
             entry_t entry = mergecon.Contextpop();
-            if (entry.val != VAL_MAX) 
+            if (entry.val != 0) 
             {
                 //values.emplace_back(entry);
                 Levels[0].PutValue(entry);
@@ -365,7 +364,11 @@ VAL_t* LSMTree::GetValue(KEY_t key)
 
 void LSMTree::DeleteValue(KEY_t key) 
 {
-    PutValue(key, VAL_MAX);
+    PutValue(key, 0);
+}
+void LSMTree::display()
+{
+    buffer.display();
 }
 
 // void LSMTree::load(string file_path) 
@@ -393,7 +396,7 @@ void LSMTreeInit()
 
     /* workload a: insert only*/
     startTime = clock();
-    for(SKey i=1;i<=1048599;i++)
+    for(SKey i=1;i<=1000000;i++)
     {
         if(i%10000000==0||i==1000000)
         {
@@ -402,6 +405,7 @@ void LSMTreeInit()
         }
         Lsmtree.PutValue(i,i);
     }
+    //Lsmtree.display();
     printf("Read count:%d Write count:%u Erase Count:%d \n",LSMTreeReadPhysicalPage,LSMTreeWritePhysicalPage,LSMTreeErasehysicalPage);
     endTime = clock();
     std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";

@@ -18,6 +18,7 @@
 #include "../IODisk/WriteDisk.h"
 #include "../../Auxizilary/GlobalVariable.h"
 #include "../../LSM-Tree/LsmTree.h"
+#include "../../TNCTree/TNCtree.h"
 
 std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkLog;
 std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkData;
@@ -57,7 +58,8 @@ int SinglePageWrite()
 
     /* Function flag, default value equals 0(successful flag). */
     int err = 0;
-
+    readcount++;
+    write++;
     struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, DataPagePointer);
     size_t ws_min = nvm_dev_get_ws_min(bp->dev);
     struct nvm_addr addrs[ws_min];
@@ -92,8 +94,9 @@ int PageLogWrite(uint64_t BlockId)
 
     /* Function flag, default value equals 0(successful flag). */
     int err = 0;
-
+    write++;
     PageType LogPagePointer = chunkusage[BlockId];
+    assert(LogPagePointer<=4092);
     //printf("LogPagePointer:%lu BlockID:%lu \n",LogPagePointer,BlockId);
     struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, LogPagePointer+4096*BlockId);
     size_t ws_min = nvm_dev_get_ws_min(bp->dev);
@@ -104,9 +107,8 @@ int PageLogWrite(uint64_t BlockId)
 	 	addrs[aidx].l.sectr =LogPagePointer+aidx;
 	}
         
-    /* Write value into page. */ 
-    char * databuffer = (char*) Pagedata;
-    for(int i=0;i<2048*8;i++)
+    /* Write value into page. */
+    for(int i=0;i<4096*4;i++)
     {
         bp->bufs->write[i] = BufferLog[BlockId][i];
     }

@@ -20,7 +20,8 @@
 #include <vector>
 #include "../../Auxizilary/VariablesTypes.h"
 #include "../../Backend/IODisk/WriteDisk.h"
-#include "../LsmTree.h"
+#include "node2.h"
+
 
 /*
  * Level 0 
@@ -30,13 +31,14 @@ class Buffer
 private:
     uint64_t MaxSize;
     uint64_t size;
-    HeadNode * head;
+    Skiplist *Head;
 
 public:
     int RandomLevel();
     std::set<entry_t> Entries;
     Buffer(size_t maxpage);
     bool PutValue(KEY_t, VAL_t val);
+    void display(); 
     VAL_t * GetValue(KEY_t);
     std::vector<entry_t> * GetRange(KEY_t, KEY_t) const;
     void AllClear(void);

@@ -38,7 +38,7 @@ int InsertNode(SKey hashkey, SValue hashvalue);
  *  =================  Search module  ==================== 
  **/
 
-LocalHashNode* SearchNode(LocalHeadNode* Head,SKey hashkey);
+TSkiplistNode * SearchNode(TNCSkiplist * Head,SKey hashkey);
 SValue Search(SKey key1);
 
 
@@ -51,7 +51,7 @@ int Update(SKey key1, SValue val);
 /**
  *  ================= deletion module====================  
  **/
-bool DeleteValue(LocalHeadNode * Head, SKey hashkey);
+bool DeleteValue(TNCSkiplist * Head, SKey hashkey);
 int Delete(SKey key1);
 
 

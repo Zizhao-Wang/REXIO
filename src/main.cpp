@@ -59,21 +59,21 @@ int main(int argc, char **argv)
         exit(101);
     }
 
-    clock_t startTime,endTime;
-    startTime = clock();
-    std::set<int> a;
-    for(int i=0;i<=1000000;i++)
-    {
-        a.insert(i);
-    }
-    endTime = clock();
-    std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+    // clock_t startTime,endTime;
+    // startTime = clock();
+    // std::set<int> a;
+    // for(int i=0;i<=1000000;i++)
+    // {
+    //     a.insert(i);
+    // }
+    // endTime = clock();
+    // std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
     /* select different indexes. line 49- */
 
     // EXHashing1();
 
-    //   TNCtreePort();
+       TNCtreePort();
 
      //LHashPort();
 

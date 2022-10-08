@@ -116,7 +116,6 @@ VAL_t * Run::GetValue(KEY_t key)
     VAL_t * value = new VAL_t;
     std::vector<entry_t> reads;
 
-    assert();
     if(FencePointers.size()!=0)
     {
         if (key < FencePointers[0] || key > MaxKey) 

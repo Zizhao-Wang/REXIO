@@ -20,6 +20,11 @@
 #include "../Backend/IODisk/WriteDisk.h"
 #include "StoreTier/syncstore.h"
 
+int reads = 0;
+int write = 0;
+int erase = 0;
+
+
 void TNCtreeInit(void)
 {
 
@@ -49,16 +54,19 @@ void TNCtreePort(void)
 
      /* workload a: insert only*/
      startTime = clock();
-     for(SKey i=1;i<=1000000;i++)
+     for(SKey i=1;i<=40000000;i++)
      {
-          // if(i!=0&&i%100000==0)
-          // printf("Insert %lu successful!\n",i);
+          if(i%10000000==0||i==1000000)
+          {
+               endTime = clock();
+               std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+               printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
+          }
           InsertNode(i,i);
      }
      endTime = clock();
-     printf("Read count:%d\n",readcount);
+     printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
      std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-     exit(0);
 
      /* workload b: read only, all in it */
      startTime = clock();
@@ -69,13 +77,13 @@ void TNCtreePort(void)
           Search(k);
           if(i==10000 || i%100000==0)
           {
+               printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
                endTime = clock();
                std::cout << "Total Time of "<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
           }
      }
      endTime = clock();
-     printf("BufferNumber: %d",buffernumber);
-     buffernumber = 0;
+     printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
      std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
      // /* workload c: read only, 50% in it, 50% not in it */
@@ -96,12 +104,12 @@ void TNCtreePort(void)
           }
           if(i%100000==0 || i==10000)
           {
+               printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
                endTime = clock();
                std::cout << "Total Time of "<<i<<" in workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
           }
      }
-     printf("BufferNumber: %d",buffernumber);
-     endTime = clock();
+     printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
      std::cout << "Total Time of workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
      /* workload d: update heavy workload, 50% read, 50% update */
@@ -121,10 +129,12 @@ void TNCtreePort(void)
           }
           if(i%100000==0 || i==10000)
           {
+               printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
                endTime = clock();
                std::cout << "Total Time of "<<i<<" in workload D: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
           } 
      }
+     printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
      endTime = clock();
      std::cout << "Total Time of workload d: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
@@ -145,10 +155,12 @@ void TNCtreePort(void)
           }
           if(i%100000==0 || i==10000)
           {
+               printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
                endTime = clock();
                std::cout << "Total Time of "<<i<<" in workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
           } 
      }
+     printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
      endTime = clock();
      std::cout << "Total Time of workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
@@ -169,10 +181,12 @@ void TNCtreePort(void)
           }
           if(i%100000==0 || i==10000)
           {
+               printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
                endTime = clock();
                std::cout << "Total Time of "<<i<<" in workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
           } 
      }
+     printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
      endTime = clock();
      std::cout << "Total Time of workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
@@ -185,10 +199,12 @@ void TNCtreePort(void)
           Delete(k);
           if(i%100000==0 || i==10000)
           {
+               printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
                endTime = clock();
                std::cout << "Total Time of "<<i<<" in workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
           }  
      }
+     printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
      endTime = clock();
      std::cout << "Total Time of workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
      

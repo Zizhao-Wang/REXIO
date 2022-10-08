@@ -12,6 +12,10 @@
 #ifndef EXPERIMENT1_TNCTREE_H
 #define EXPERIMENT1_TNCTREE_H
 
+extern int reads;
+extern int write;
+extern int erase;
+
 
 /* ================= 2-Tier None-Coupling module ==================== */
 

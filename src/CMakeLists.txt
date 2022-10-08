@@ -40,4 +40,4 @@ add_executable(src main.cpp
 				LSM-Tree/LsmTree.h LSM-Tree/LsmTree.cpp LSM-Tree/UtilityDefine/buffer.h LSM-Tree/UtilityImplement/buffer.cpp 
 				LSM-Tree/UtilityDefine/ResAllocate.h LSM-Tree/UtilityImplement/ResAllocate.cpp LSM-Tree/UtilityDefine/level.h 
 				LSM-Tree/UtilityImplement/level.cpp LSM-Tree/UtilityDefine/merge.h LSM-Tree/UtilityImplement/merge.cpp 
-				LSM-Tree/UtilityDefine/run.h LSM-Tree/UtilityImplement/run.cpp)
+				LSM-Tree/UtilityDefine/run.h LSM-Tree/UtilityImplement/run.cpp LSM-Tree/UtilityDefine/node2.h LSM-Tree/UtilityDefine/node2.cpp )

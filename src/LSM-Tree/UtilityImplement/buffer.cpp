@@ -2,12 +2,20 @@
 #include "../UtilityDefine/buffer.h"
 #include "../LsmTree.h"
 
+#define N2 9999
+
+
 Buffer::Buffer(size_t maxpage)
 {
     // 1024 * 256 = 262144 
     uint64_t capacity =  CalculatePageCapacity(sizeof(entry_t));
-    this->MaxSize = capacity * maxpage;
+    this->MaxSize = 1000000;
     size = 0;
+
+    Head = skiplistCreate();
+
+    printf("key:%lu \n\n",Head->head->key);
+
     //printf("Test successful! Size of entry:%lu, Page capacity: %lu, Buffer size:%u\n",sizeof(entry_t),capacity,MaxSize);
 }
 
@@ -15,9 +23,7 @@ int Buffer::RandomLevel()
 {
 
     int v = 1;
-    srand ((unsigned int)(time (NULL)));
-    while(rand() % (N + 1) / (float)(N + 1) < pro && v< MaxLevel )
-    {
+    while (rand() < P_FACTOR && v < MAX_LEVEL) {
         v++;
     }
 #ifdef DEBUG
@@ -27,64 +33,67 @@ int Buffer::RandomLevel()
 
 }
 
+void Buffer::display()
+{
+    SkiplistNode * first = Head->head;
+    std::set<int> a;
+    std::pair<std::set<int>::iterator,bool> Tempair;
+    while (first->forward[0]!=NULL)
+    {
+        printf("%lu\n",first->key);
+        first = first->forward[0];        /* code */
+        
+    }
+    printf("%lu",a.size());    
+    return ;
+}
 
 bool Buffer::PutValue(KEY_t key1, VAL_t val1) 
 {
-    entry_t SingleEntry;
-    std::set<entry_t>::iterator itor;
-    LSMEntry * update[20];
-    LSMEntry * temp = head->Node;
-
+    SkiplistNode * update[MAX_LEVEL];
+    SkiplistNode * curr = Head->head;
     if (size >= MaxSize) 
     {
         return false;
     } 
     else 
     {
-        int curLevel = head->CurrentLevel-1;
-
-        for(int i=curLevel; i>=0; --i)
+        for(int i=Head->level-1; i>=0; i--)
         {
-            while(temp->next[i]->key < key1)
+            while(curr->forward[i] && curr->forward[i]->key < key1)
             {
-                temp = temp->next[i];
+                curr = curr->forward[i];
             }
-            update[i] = temp;
+            update[i] = curr;
         }
-    temp = temp->next[0];
-
-    if(temp->key == key1)
-    {
-        
-        temp->key = key1;
-            // write into disk
-        temp->val = val1;
-        ++head->Nodenumber;
-        return 0;
-        
-    }
-    else
-    {
-        int v=RandomLevel();
-        if(v > curLevel)
+        if(curr->key == key1)
         {
-            for(int i=curLevel+1; i<v; ++i )
+        
+            curr->key = key1;
+            curr->value = val1;
+            return 0;
+        }
+        else
+        {
+            int v=RandomLevel();
+            if(v > Head->level)
             {
-                update[i] = head->HashNode;
+                for(int i=Head->level; i<v; ++i )
+                {
+                    update[i] = Head->head;
+                }
+                Head->level = v;
             }
-            head->CurrentLevel = v+1;
+
+            SkiplistNode * lst = skiplistNodeCreat(key1,val1,v);
+            for(int i=0;i<v;i++)
+            {
+                lst->forward[i] = update[i]->forward[i];
+                update[i]->forward[i] = lst;
+            }
+            size++;
         }
-        //write into disk
-        uint_32 offset1 = SyncWrite(hashkey,hashvalue);  //printf("%u\n",temp->offset);
-        ++head->Nodenumber;
-        temp = Initialization(hashkey,offset1);
-        if(temp == nullptr)
-            return -1;
-        for(int i=0;i<v;++i)
-        {
-            temp->next[i] = update[i]->next[i];
-            update[i]->next[i] = temp;
-        }
+        return true;
     }
 
 #ifdef SET
@@ -98,9 +107,10 @@ bool Buffer::PutValue(KEY_t key1, VAL_t val1)
             Entries.erase(itor);
             Entries.insert(SingleEntry);
         }
-#endif
         return true;
-    }
+#endif
+
+    
 }
 
 VAL_t * Buffer::GetValue(KEY_t key)

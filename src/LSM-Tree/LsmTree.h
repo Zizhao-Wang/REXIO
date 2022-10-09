@@ -58,8 +58,9 @@ public:
 };
 
 
+void LSMtreeInit(void);
 
 /* Portable function declaration */
-void LSMTreeInit();
+void LSMTreePort();
 
 #endif //EXPERIMENT1_LSMTREE_H

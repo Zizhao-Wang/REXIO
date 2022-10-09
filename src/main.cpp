@@ -73,11 +73,11 @@ int main(int argc, char **argv)
 
     // EXHashing1();
 
-    //   TNCtreePort();
+    // TNCtreePort();
 
-     //LHashPort();
+    // LHashPort();
 
-    LSMTreeInit();
+    // LSMTreePort();
 
     // LSHashPort();
 

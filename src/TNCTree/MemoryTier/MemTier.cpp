@@ -153,11 +153,9 @@ int InsertNode(SKey hashkey, SValue hashvalue)
 
 TSkiplistNode * SearchNode(TNCSkiplist * Head,SKey hashkey)
 {
-    if(Head->level == 1)
-        return nullptr;
 
     TSkiplistNode*node = Head->head ;
-    for(int i=Head->level-1; i>=0; --i)
+    for(int i=Head->level-1; i>=0; i--)
     {
         while(node->forward[i] && node->forward[i]->key < hashkey)
         {
@@ -245,7 +243,6 @@ int Delete(SKey key1)
     {
         EMessageOutput("Delete value failure in TNC-tree!",1578);
     }
-    head->number--;
     return 0;
 }
 

@@ -54,6 +54,8 @@ int CompenstaeFun(uint64_t chunkno);
 // Erase a sprcific chunck.
 int erasechunk(size_t pageno, uint64_t chunkno);
 
+int erasechunk(uint64_t chunkno);
+
 int erasepage(size_t pageno);
 
 /* function is used to update pointers.  */

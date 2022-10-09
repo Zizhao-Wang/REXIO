@@ -46,6 +46,7 @@ public:
     void Insert(entry_t *, size_t);
     void Insert(std::vector<entry_t> entries); 
     entry_t Contextpop(void);
+    entry_t Contextpop1(); 
     bool IsEmpty(void) const;
     
 };

@@ -65,7 +65,7 @@ bool Buffer::PutValue(KEY_t key1, VAL_t val1)
         
             curr->key = key1;
             curr->value = val1;
-            return 0;
+            return true;
         }
         else
         {

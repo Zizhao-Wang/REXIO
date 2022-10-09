@@ -234,13 +234,13 @@ VAL_t* LSMTree::GetValue(KEY_t key)
     VAL_t *level_val = new VAL_t;
     for(int i=0;i<Levels.size();++i)
     {
-        printf("Search in Level %d\n",i);
+        //printf("Search in Level %d\n",i);
         level_val = Levels[i].GetValue(key);
         if(level_val!=nullptr)
         {
             return level_val;
         }
-        printf("==============\n");
+        //printf("==============\n");
     }
     
     delete level_val;
@@ -395,7 +395,7 @@ void LSMTreeInit()
 
     /* workload a: insert only*/
     startTime = clock();
-    for(SKey i=1;i<=10000000;i++)
+    for(SKey i=1;i<=20000000;i++)
     {
         if(i%10000000==0||i==1000000)
         {
@@ -437,121 +437,123 @@ void LSMTreeInit()
     printf("Read count:%d Write count:%u Erase Count:%d \n",LSMTreeReadPhysicalPage,LSMTreeWritePhysicalPage,LSMTreeErasehysicalPage);
     std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
-    //  /* workload c: read only, 50% in it, 50% not in it */
-    //  startTime = clock();
+     /* workload c: read only, 50% in it, 50% not in it */
+     startTime = clock();
      
-    // for(int i=1;i<=1000000;i++)
-    // {
-    //     srand48(time(NULL));
-    //     if(i%100<50)
-    //     {
-    //         SKey k = 1+(rand()%40000000);
-    //         Lsmtree.GetValue(k);
-    //     }
-    //     else
-    //     {
-    //         SKey k = 40000000+(rand()%40000000);
-    //         Lsmtree.GetValue(k);
-    //     }
-    //     if(i%100000==0 || i==10000)
-    //     {
-    //         endTime = clock();
-    //         std::cout << "Total Time of "<<i<<" in workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
-    //     }
-    // }
-    // //printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
-    // endTime = clock();
-    // std::cout << "Total Time of workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+    for(int i=1;i<=1000000;i++)
+    {
+        srand48(time(NULL));
+        if(i%100<50)
+        {
+            SKey k = 1+(rand()%40000000);
+            Lsmtree.GetValue(k);
+        }
+        else
+        {
+            SKey k = 40000000+(rand()%40000000);
+            Lsmtree.GetValue(k);
+        }
+        if(i%100000==0 || i==10000)
+        {
+            endTime = clock();
+            std::cout << "Total Time of "<<i<<" in workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+        //    printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
+        }
+    }
+   // printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
+    endTime = clock();
+    std::cout << "Total Time of workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
-    // /* workload d: update heavy workload, 50% read, 50% update */
-    // startTime = clock();
-    // for(int i=1;i<=1000000;i++)
-    // {
-    //     srand48(time(NULL));
-    //     if(i%2==0)
-    //     {
-    //         SKey k = 1+(rand()%40000000);
-    //         Lsmtree.GetValue(k);
-    //     }
-    //     else
-    //     {
-    //         SKey k = 1+(rand()%40000000);
-    //         Lsmtree.UpdateValue(k,k+1);
-    //     }
-    //     if(i%100000==0 || i==10000)
-    //     {
-    //         endTime = clock();
-    //         std::cout << "Total Time of "<<i<<" in workload D: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
-    //     } 
-    // }
-    //  //printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
-    // endTime = clock();
-    // std::cout << "Total Time of workload d: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+    /* workload d: update heavy workload, 50% read, 50% update */
+    startTime = clock();
+    for(int i=1;i<=1000000;i++)
+    {
+        srand48(time(NULL));
+        if(i%2==0)
+        {
+            SKey k = 1+(rand()%40000000);
+            Lsmtree.GetValue(k);
+        }
+        else
+        {
+            SKey k = 1+(rand()%40000000);
+            Lsmtree.UpdateValue(k,k+1);
+        }
+        if(i%100000==0 || i==10000)
+        {
+            endTime = clock();
+            std::cout << "Total Time of "<<i<<" in workload D: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+       //     printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);     
+        } 
+    }
+    //printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
+    endTime = clock();
+    std::cout << "Total Time of workload d: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
-    //  /* workload E: read mostly workload, 95% read, 5% update */
-    //  startTime = clock();
-    //  for(int i=1;i<=1000000;i++)
-    //  {
-    //     srand48(time(NULL));
-    //     if(i%100<95)
-    //     {
-    //         SKey k = 1+(rand()%40000000);
-    //         Lsmtree.GetValue(k);
-    //     }
-    //     else
-    //     {
-    //         SKey k = 1+(rand()%40000000);
-    //         Lsmtree.UpdateValue(k,k+1);
-    //     }
-    //     if(i%100000==0 || i==10000)
-    //     {
-    //         endTime = clock();
-    //         std::cout << "Total Time of "<<i<<" in workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
-    //     } 
-    // }
-    //  //printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
-    // endTime = clock();
-    // std::cout << "Total Time of workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+     /* workload E: read mostly workload, 95% read, 5% update */
+     startTime = clock();
+     for(int i=1;i<=1000000;i++)
+     {
+        srand48(time(NULL));
+        if(i%100<95)
+        {
+            SKey k = 1+(rand()%40000000);
+            Lsmtree.GetValue(k);
+        }
+        else
+        {
+            SKey k = 1+(rand()%40000000);
+            Lsmtree.UpdateValue(k,k+1);
+        }
+        if(i%100000==0 || i==10000)
+        {
+            endTime = clock();
+            std::cout << "Total Time of "<<i<<" in workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+        } 
+    }
+     //printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
+    endTime = clock();
+    std::cout << "Total Time of workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
-    //  /* workload F: read latest workload, 95% read, 5% insert */
-    // startTime = clock();
-    // for(int i=1;i<=1000000;i++)
-    // {
-    //     srand48(time(NULL));
-    //     if(i%100<95)
-    //     {
-    //         SKey k = 1+(rand()%40000000);
-    //         Lsmtree.GetValue(k);
-    //     }
-    //     else
-    //     {
-    //         SKey k = 40000000+(rand()%40000000);
-    //         Lsmtree.PutValue(k,k+1);
-    //     }
-    //     if(i%100000==0 || i==10000)
-    //     {
-    //         endTime = clock();
-    //         std::cout << "Total Time of "<<i<<" in workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
-    //     } 
-    // }
-    // //printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
-    // endTime = clock();
-    // std::cout << "Total Time of workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+     /* workload F: read latest workload, 95% read, 5% insert */
+    startTime = clock();
+    for(int i=1;i<=1000000;i++)
+    {
+        srand48(time(NULL));
+        if(i%100<95)
+        {
+            SKey k = 1+(rand()%40000000);
+            Lsmtree.GetValue(k);
+        }
+        else
+        {
+            SKey k = 40000000+(rand()%40000000);
+            Lsmtree.PutValue(k,k+1);
+        }
+        if(i%100000==0 || i==10000)
+        {
+            endTime = clock();
+            std::cout << "Total Time of "<<i<<" in workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+        } 
+    }
+    //printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
+    endTime = clock();
+    std::cout << "Total Time of workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
-    // /* workload G: delete workload, 100% delete*/
-    // startTime = clock();
-    // for(int i=1;i<=1000000;i++)
-    // {
-    //     srand48(time(NULL));
-    //     SKey k = 1+(rand()%40000000);
-    //     Lsmtree.DeleteValue(k);
-    //     if(i%100000==0 || i==10000)
-    //     {
-    //         endTime = clock();
-    //         std::cout << "Total Time of "<<i<<" in workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
-    //     }  
-    // }
-    // //printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
-    // endTime = clock();
-    // std::cout << "Total Time of workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+    /* workload G: delete workload, 100% delete*/
+    startTime = clock();
+    for(int i=1;i<=1000000;i++)
+    {
+        srand48(time(NULL));
+        SKey k = 1+(rand()%40000000);
+        Lsmtree.DeleteValue(k);
+        if(i%100000==0 || i==10000)
+        {
+            endTime = clock();
+            std::cout << "Total Time of "<<i<<" in workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+        }  
+    }
+    //printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
+    endTime = clock();
+    std::cout << "Total Time of workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 }

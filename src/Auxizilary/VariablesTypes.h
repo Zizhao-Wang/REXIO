@@ -31,7 +31,7 @@ typedef struct entry
 {
     KEY_t key;
     VAL_t val;
-    bool operator==(const entry& other) const 
+    bool operator == (const entry& other) const 
     {
         return key == other.key;
     }

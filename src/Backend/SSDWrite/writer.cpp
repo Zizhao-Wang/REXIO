@@ -22,6 +22,7 @@
 
 std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkLog;
 std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkData;
+std::unordered_map<uint64_t,bool[1024]> GPT;
 PageType DataPagePointer = 0;
 
 /* function is used to update pointers. */
@@ -337,4 +338,23 @@ uint64_t SinglePageWrite(std::vector<entry_t> Entries, uint64_t pageno)
 
     return pageno;
 
+}
+
+auto isEven = [](int x)->bool
+{
+    return x == false;
+
+};
+
+void GPTDisplay(void)
+{
+    for(int i=0;i<sectorpointer/4096;i++)
+    {
+        bool IsTrue = std::all_of(GPT[i],GPT[i]+1024,isEven);
+        if(IsTrue)
+        {
+            printf("Block %d has been released!\n",i);
+        }
+    }
+    printf("sectorpointer:%lu\n",sectorpointer);
 }

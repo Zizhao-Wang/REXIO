@@ -1,7 +1,6 @@
 /**
  * @date:   21/9/2022
  * @author: zz.wang
- * @email:  zz.wang@siat.ac.cn
  * @details:
  *          This file shows how to construct a Lazy-split Hash.
  *

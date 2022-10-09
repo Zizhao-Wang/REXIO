@@ -27,9 +27,8 @@
 /*  Global variables for SSD write definition.  */
 
 extern std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkLog;  
-
 extern std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkData;
-
+extern std::unordered_map<uint64_t,bool[1024]> GPT;
 extern PageType DataPagePointer;
 
 /**
@@ -56,6 +55,9 @@ PageType SingleBucketWrite(std::vector<LHEntry> entries, uint64_t pageno);
  **/
 PageType SinglePageWrite(std::vector<entry_t> Entries, uint64_t pageno);
 
+
+
+void GPTDisplay(void);
 
 
 #endif //EXPERIMENT1_WRITEDISK_H

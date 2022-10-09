@@ -60,9 +60,16 @@ std::vector<entry_t> Run::SingleRunRead()
     //printf("Test 1 : size of page pointers:%lu\n",PagePointers.size());
     for(size_t i=0; i<PagePointers.size();i++)
     {
+        if(PagePointers[i]== UINT64_MAX)
+            continue;
         std::vector<entry_t> temp;
         temp = RunReadFromPage(PagePointers[i]);
         entries1.insert(entries1.end(),temp.begin(),temp.end());
+        GPT[PagePointers[i]/4096][(PagePointers[i]%4096)/4] = false;
+    }
+    if(Rundata.size()!=0)
+    {
+        entries1.insert(entries1.end(),Rundata.begin(),Rundata.end());
     }
     //printf("Read from start page pointer:%lu end:%lu. total: %lu\n",PagePointers[0],PagePointers[PagePointers.size()-1],PagePointers.size());
     //printf("Test 3");
@@ -101,7 +108,6 @@ void Run::PutValue(entry_t entry)
    
     //a.emplace_back(entry.key);
     
-
     if(Rundata.size() == CalculatePageCapacity(sizeof(entry_t)) && Size != 0)
     {
         //a.emplace_back(entry.key);
@@ -122,11 +128,10 @@ VAL_t * Run::GetValue(KEY_t key)
 {
     if(Size == 0)
         return nullptr;
-    assert(Size%262144==0);
     VAL_t * value = new VAL_t;
     std::vector<entry_t> reads;
 
-   // printf("Run size:%lu\n min:%lu max:%lu\n",Size,MinKey,MaxKey);
+    //printf("Run size:%lu\n min:%lu max:%lu\n",Size,MinKey,MaxKey);
     if(FencePointers.size()!=0)
     {
         if (key < MinKey || key > MaxKey) 
@@ -138,15 +143,26 @@ VAL_t * Run::GetValue(KEY_t key)
     std::vector<uint64_t>::iterator it = lower_bound(FencePointers.begin(),FencePointers.end(),key);
     size_t PageIndex = it-FencePointers.begin();
 
-    assert(PageIndex < PagePointers.size());
-
-    reads = RunReadFromPage(PagePointers[PageIndex]);;
-    std::vector<entry_t>::iterator get;
-    get = find(reads.begin(),reads.end(),entry_t{key,0});
-    if(get!=reads.end())
+    if(PageIndex < PagePointers.size() && PagePointers[PageIndex]!=UINT64_MAX)
     {
-        *value = (*get).val;
-        return value; 
+        reads = RunReadFromPage(PagePointers[PageIndex]);;
+        std::vector<entry_t>::iterator get;
+        get = find(reads.begin(),reads.end(),entry_t{key,0});
+        if(get!=reads.end())
+        {
+            *value = (*get).val;
+            return value; 
+        }
+    }
+    else
+    {
+        std::vector<entry_t>::iterator get;
+        get = find(Rundata.begin(),Rundata.end(),entry_t{key,0});
+        if(get!=reads.end())
+        {
+            *value = (*get).val;
+            return value; 
+        }
     }
     delete(value);
     return nullptr;

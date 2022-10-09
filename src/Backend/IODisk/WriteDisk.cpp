@@ -17,6 +17,8 @@
 #include "WriteDisk.h"
 #include "../../Auxizilary/GlobalVariable.h"
 #include "../BackendMain.h"
+#include "../SSDWrite/writer.h"
+#include "../../LSM-Tree/LsmTree.h"
 
 size_t writepointer = 0;
 size_t blockpointer = 0;
@@ -31,8 +33,18 @@ int PointerRenew(size_t sectors)
 {
 
     chunkusage[sectorpointer/4096]= chunkusage[sectorpointer/4096] + sectors;
+    GPT[sectorpointer/4096][(sectorpointer%4096)/4] = true;
     sectorpointer+=sectors; //update sector pointer.
- 
+    if(sectorpointer >= 923648)
+    {
+        sectorpointer = 0;
+        for(size_t i=0;i<150;i++)
+        {
+            erasechunk(i);
+            chunkusage[i] = 0;
+        }
+    }
+    
     //printf("values after renewed: sector pointer: %lu,chunk pointer: %lu \n",sectorpointer,chunkusage[sectorpointer/4096]);
     return 0;
 
@@ -87,6 +99,30 @@ int erasechunk(size_t pageno, uint64_t chunkno)
     uint64_t curseofchunk = chunkusage[chunkno];
     struct nvm_addr chunk_addrs[1];
     chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,pageno);
+
+    if(curseofchunk < bp->geo->l.nsectr)
+    {
+        if(CompenstaeFun(chunkno) == -1)
+        {
+            printf("Compensation failure in chunk %lu!\n",chunkno);
+            return -1;
+        }
+    }
+    int err = nvm_cmd_erase(bp->dev, chunk_addrs, 1, NULL, 0x0, NULL);
+    if(err == -1)
+    {
+        printf("chunk %lu erase failure.\n",chunkno);
+    }
+    return err;
+
+}
+
+int erasechunk(uint64_t chunkno)
+{
+    LSMTreeErasehysicalPage++;
+    uint64_t curseofchunk = chunkusage[chunkno];
+    struct nvm_addr chunk_addrs[1];
+    chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,chunkno*4096);
 
     if(curseofchunk < bp->geo->l.nsectr)
     {

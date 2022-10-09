@@ -3,6 +3,7 @@
 #include <iostream>
 #include <map>
 #include "LsmTree.h"
+#include "../Backend/SSDWrite/writer.h"
 
 uint32_t LSMTreeReadPhysicalPage = 0;
 uint32_t LSMTreeWritePhysicalPage = 0;
@@ -105,14 +106,13 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
 
     while(!mergecon.IsEmpty())
     {
-        entry_t entry = mergecon.Contextpop();
+        entry_t entry = mergecon.Contextpop1();
             // Remove deleted keys from the final level
         if ( entry.val != 0) 
         {
             next->PutValue(entry);
         }
     }
-    //next->PutEntries(values);  
     
     printf("=========================\n");
     return 0;
@@ -172,7 +172,7 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
         //int i=0;
         while(!mergecon.IsEmpty())
         {
-            entry_t entry = mergecon.Contextpop();
+            entry_t entry = mergecon.Contextpop1();
             if (entry.val != 0) 
             {
                 //values.emplace_back(entry);
@@ -386,41 +386,54 @@ void LSMTree::display()
 //     }
 // }
 
+void LSMtreeInit(void)
+{
+    for(int i=0;i<100;++i)
+    {
+        memset(GPT[i],0,sizeof(GPT[i])); 
+    }
 
+    printf("\n ================ Index information ================ \
+            \n ---- Initialization successful! \
+            \n ---- Global Page Table initialization successful! \n");
+    
+   // printf("se:%d\n",GPT[0][105]);
+}
 
-void LSMTreeInit()
+void LSMTreePort()
 {
     clock_t startTime,endTime;                        // Definition of timestamp
     LSMTree Lsmtree(256,7);                  // Initialize a LSM-tree structure
+    LSMtreeInit();
 
     /* workload a: insert only*/
     startTime = clock();
-    for(SKey i=1;i<=20000000;i++)
+    for(SKey i=1;i<=40000000;i++)
     {
         if(i%10000000==0||i==1000000)
         {
             endTime = clock();
             std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+            printf("Read count:%d Write count:%u Erase Count:%d \n",LSMTreeReadPhysicalPage,LSMTreeWritePhysicalPage,LSMTreeErasehysicalPage);
+
         }
         Lsmtree.PutValue(i,i);
     }
-    // for(int i=0;i<10;i++)
-    // {
-    //     printf("key:%d\n",a[i]);
-    // }
     //Lsmtree.display();
     printf("Read count:%d Write count:%u Erase Count:%d \n",LSMTreeReadPhysicalPage,LSMTreeWritePhysicalPage,LSMTreeErasehysicalPage);
     endTime = clock();
     std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+    //GPTDisplay();
+    
 
 
     /* workload b: read only, all in it */
     startTime = clock();
-     for(int i=1;i<=10;i++)
+     for(int i=1;i<=1000000;i++)
      {
 
         srand48(time(NULL));
-        SKey k = 1+(rand()%2000000);
+        SKey k = 1+(rand()%4000000);
 
         if(Lsmtree.GetValue(k)==nullptr)
         {

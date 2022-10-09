@@ -59,6 +59,23 @@ entry_t MergeContext::Contextpop(void)
     return current.SingleEntry;
 }
 
+entry_t MergeContext::Contextpop1() 
+{
+    // printf("priority_queue.top():%lu",queue.top().SingleEntry.key);
+    // exit(0);
+    MergeEntry current;
+
+    current = queue.top();
+
+    if(!queue.empty())  // Only release the most recent value for a given key
+    {
+        queue.pop();
+    }
+
+    return current.SingleEntry;
+}
+
+
 bool MergeContext::IsEmpty(void) const 
 {
     return queue.empty();

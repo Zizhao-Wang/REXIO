@@ -126,7 +126,7 @@ VAL_t * Run::GetValue(KEY_t key)
     VAL_t * value = new VAL_t;
     std::vector<entry_t> reads;
 
-    printf("Run size:%lu\n min:%lu max:%lu\n",Size,MinKey,MaxKey);
+   // printf("Run size:%lu\n min:%lu max:%lu\n",Size,MinKey,MaxKey);
     if(FencePointers.size()!=0)
     {
         if (key < MinKey || key > MaxKey) 

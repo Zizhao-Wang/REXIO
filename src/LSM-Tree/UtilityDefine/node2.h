@@ -46,6 +46,8 @@ SkiplistNode *skiplistNodeCreat(uint64_t key,uint64_t val, int maxLevel);
 
 Skiplist* skiplistCreate();
 
+void skiplistNodeFree(SkiplistNode* obj);
+
 LSMEntry * NILInit();
 
 LSMEntry * Init();

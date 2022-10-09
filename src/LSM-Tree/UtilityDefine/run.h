@@ -21,11 +21,13 @@
 #include "../../Backend/IODisk/WriteDisk.h"
 #include "../../Auxizilary/SysOutput.h"
 
+extern vector<int> a;
+
 class Run 
 {
 private:
     uint64_t Size, MaxSize;
-    uint64_t MaxKey;
+    uint64_t MaxKey, MinKey;
     std::vector<PageType> PagePointers;
     std::vector<entry_t> Rundata;
     std::vector<KEY_t> FencePointers;
@@ -42,6 +44,7 @@ public:
     std::vector<uint64_t> GetPagePointers(void);
     std::vector<KEY_t> GetFencePointers(void);
     uint64_t GetMaxKey(void);
+    uint64_t GetMinKey(void);
     int SetPagePointers(std::vector<uint64_t>);
     int SetFencePointers(std::vector<KEY_t>);
     void Reset();
@@ -51,6 +54,7 @@ public:
     int DataClear(std::vector<entry_t> );
     unsigned long GetNowSize();
     bool Isfull(void);
+    bool IsEmpty(void);
 };
 
 #endif

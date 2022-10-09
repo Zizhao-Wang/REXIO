@@ -9,6 +9,7 @@ uint32_t LSMTreeWritePhysicalPage = 0;
 uint32_t LSMTreeErasehysicalPage = 0;
 
 
+
 /*
  * LSM Tree
  * @BufferSize
@@ -61,7 +62,7 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
         * If the next level does not have space for the current level,
         * recursively merge the next level downwards to create some
         **/
-        printf("Next 1 run size:%lu Next 2 run size:%lu \n",next->Runs[0].GetNowSize(),next->Runs[1].GetNowSize());
+        //printf("Next 1 run size:%lu Next 2 run size:%lu \n",next->Runs[0].GetNowSize(),next->Runs[1].GetNowSize());
         FlushInto(next);
         assert(next->IsEmpty());
         // /* Take over runs from current!*/
@@ -79,10 +80,9 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
         // assert(next->Runs[0].Isfull() == true);
     }
     
-    
     for(int i=0;i<current->Runs.size();i++)
     {
-        printf("Run has %lu items in current level %ld\n",current->Runs[i].GetNowSize(),current->GetLevelNumber());
+        //printf("Run has %lu items in current level %ld\n",current->Runs[i].GetNowSize(),current->GetLevelNumber());
         if(current->Runs[i].GetNowSize() != 0)
         {
             mergecon.Insert(current->Runs[i].SingleRunRead());
@@ -90,13 +90,18 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
     }
     for(int i=0;i<next->Runs.size();i++)
     {
-        printf("Run has %lu items in next level %ld!\n",next->Runs[i].GetNowSize(),next->GetLevelNumber());
+        //printf("Run has %lu items in next level %ld!\n",next->Runs[i].GetNowSize(),next->GetLevelNumber());
         if(next->Runs[i].GetNowSize() != 0)
         {
             mergecon.Insert(next->Runs[i].SingleRunRead());
             next->Runs[i].Reset();
         }
     }
+    for(int i=0;i<current->Runs.size();i++)
+    {
+        current->Runs[i].Reset(); 
+    }
+
 
     while(!mergecon.IsEmpty())
     {
@@ -107,16 +112,8 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
             next->PutValue(entry);
         }
     }
-    for(int i=0;i<next->Runs.size();i++)
-    {
-        printf("Run size: %ld from GetNowSize() \n",next->Runs[i].GetNowSize());
-    }
-        //next->PutEntries(values);  
+    //next->PutEntries(values);  
     
-    for(int i=0;i<current->Runs.size();i++)
-    {
-        current->Runs[i].Reset(); 
-    }
     printf("=========================\n");
     return 0;
 }
@@ -135,7 +132,7 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
     {
         return 1;
     }
-    // printf("Entries size:%lu\n",buffer.Entries.size());
+    //printf("Entries size:%lu\n",buffer.GetEntries().size());
 
     /* Step 2: Flush the buffer to level 0 */
     FlushInto(Levels.begin());  //check whether level 1 is full and flush it if level 1 is full 
@@ -189,7 +186,7 @@ int LSMTree::PutValue(KEY_t key, VAL_t value)
     }
     
     buffer.AllClear();
-    AssertCondition(buffer.PutValue(key, value));
+    assert(buffer.PutValue(key, value));
 
     return 0;
     
@@ -237,11 +234,13 @@ VAL_t* LSMTree::GetValue(KEY_t key)
     VAL_t *level_val = new VAL_t;
     for(int i=0;i<Levels.size();++i)
     {
+        printf("Search in Level %d\n",i);
         level_val = Levels[i].GetValue(key);
         if(level_val!=nullptr)
         {
             return level_val;
         }
+        printf("==============\n");
     }
     
     delete level_val;
@@ -396,7 +395,7 @@ void LSMTreeInit()
 
     /* workload a: insert only*/
     startTime = clock();
-    for(SKey i=1;i<=1000000;i++)
+    for(SKey i=1;i<=10000000;i++)
     {
         if(i%10000000==0||i==1000000)
         {
@@ -405,6 +404,10 @@ void LSMTreeInit()
         }
         Lsmtree.PutValue(i,i);
     }
+    // for(int i=0;i<10;i++)
+    // {
+    //     printf("key:%d\n",a[i]);
+    // }
     //Lsmtree.display();
     printf("Read count:%d Write count:%u Erase Count:%d \n",LSMTreeReadPhysicalPage,LSMTreeWritePhysicalPage,LSMTreeErasehysicalPage);
     endTime = clock();
@@ -413,13 +416,16 @@ void LSMTreeInit()
 
     /* workload b: read only, all in it */
     startTime = clock();
-     for(int i=1;i<=110;i++)
+     for(int i=1;i<=10;i++)
      {
 
         srand48(time(NULL));
-        SKey k = 1+(rand()%120480);
+        SKey k = 1+(rand()%2000000);
 
-        Lsmtree.GetValue(k);
+        if(Lsmtree.GetValue(k)==nullptr)
+        {
+            printf("key:%lu Not Found!\n",k);
+        }
 
         if(i==10000 || i%100000==0)
         {

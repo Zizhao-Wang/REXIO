@@ -11,6 +11,8 @@
 #include "../../Backend/SSDWrite/writer.h"
 #include "../../Backend/SSDRead/reader.h"
 
+vector<int> a;
+
 Run::Run(unsigned long maxsize)
 {
     this->MaxSize = maxsize;
@@ -18,8 +20,9 @@ Run::Run(unsigned long maxsize)
     {
         PagePointers.emplace_back(UINT64_MAX);
     }
-    Size = 0;
     MaxKey = 0;
+    MinKey = UINT64_MAX;
+    Size = 0;
 }
 
 void Run::PointersDisplay()
@@ -61,7 +64,7 @@ std::vector<entry_t> Run::SingleRunRead()
         temp = RunReadFromPage(PagePointers[i]);
         entries1.insert(entries1.end(),temp.begin(),temp.end());
     }
-    printf("Read from start page pointer:%lu end:%lu. total: %lu\n",PagePointers[0],PagePointers[PagePointers.size()-1],PagePointers.size());
+    //printf("Read from start page pointer:%lu end:%lu. total: %lu\n",PagePointers[0],PagePointers[PagePointers.size()-1],PagePointers.size());
     //printf("Test 3");
     return entries1;
 
@@ -92,14 +95,19 @@ void Run::PutValue(entry_t entry)
 {
     assert(Size < MaxSize);
     Rundata.emplace_back(entry);
-    Size++;    
     MaxKey = max(entry.key,MaxKey);
+    MinKey = min(entry.key,MinKey);
+    Size++;
+   
+    //a.emplace_back(entry.key);
+    
+
     if(Rundata.size() == CalculatePageCapacity(sizeof(entry_t)) && Size != 0)
     {
-        //printf("Size in Put Value: %lu\n",Size);
+        //a.emplace_back(entry.key);
         FencePointers.emplace_back(entry.key);
         int err = RunDataWrite();
-        if(err == 0)
+        if(err==0)
         {
             assert(Rundata.size() == 0); 
         }
@@ -112,29 +120,25 @@ void Run::PutValue(entry_t entry)
 
 VAL_t * Run::GetValue(KEY_t key)  
 {
-    int PageIndex;
+    if(Size == 0)
+        return nullptr;
+    assert(Size%262144==0);
     VAL_t * value = new VAL_t;
     std::vector<entry_t> reads;
 
+    printf("Run size:%lu\n min:%lu max:%lu\n",Size,MinKey,MaxKey);
     if(FencePointers.size()!=0)
     {
-        if (key < FencePointers[0] || key > MaxKey) 
+        if (key < MinKey || key > MaxKey) 
         {
-            return value;
+            return nullptr;
         }
     }
     
+    std::vector<uint64_t>::iterator it = lower_bound(FencePointers.begin(),FencePointers.end(),key);
+    size_t PageIndex = it-FencePointers.begin();
 
-    PageIndex = 0;
-    for(int i=0;i<FencePointers.size();++i)
-    {
-        if(key<FencePointers[i])
-        {
-            PageIndex = i;
-        }
-    }
-    
-    assert(PageIndex==-1);
+    assert(PageIndex < PagePointers.size());
 
     reads = RunReadFromPage(PagePointers[PageIndex]);;
     std::vector<entry_t>::iterator get;
@@ -211,6 +215,11 @@ uint64_t Run::GetMaxKey(void)
     return MaxKey;
 }
 
+uint64_t Run::GetMinKey(void)
+{
+    return MinKey;
+}
+
 
 int Run::SetPagePointers(std::vector<uint64_t> pointers)
 {
@@ -260,6 +269,7 @@ void Run::Reset(bool flag)
             PagePointers.clear();
     }
     MaxKey = 0;
+    MinKey = UINT64_MAX;
 }
 
 int Run::SetMaxkey(KEY_t key)
@@ -279,6 +289,7 @@ void Run::Reset()
         PagePointers[i]=UINT64_MAX;
     }
     MaxKey = 0;
+    MinKey = UINT64_MAX;
 
 }
 
@@ -308,4 +319,9 @@ unsigned long Run::GetNowSize()
 bool Run::Isfull(void)
 {
     return Size >= MaxSize;
+}
+
+bool Run::IsEmpty(void)
+{
+    return Size == 0;
 }

@@ -21,7 +21,7 @@ typedef struct MergeEntry
 
     entry_t SingleEntry;
 
-    bool operator > (const MergeEntry& other) const 
+    bool operator < (const MergeEntry& other) const 
     {
         // Order first by keys, then by precedence
         if (SingleEntry.key == other.SingleEntry.key) 
@@ -30,7 +30,7 @@ typedef struct MergeEntry
         } 
         else 
         {
-            return SingleEntry.key < other.SingleEntry.key;
+            return SingleEntry.key > other.SingleEntry.key;
         }
     }
 
@@ -40,7 +40,7 @@ class MergeContext
 {
 private:
 
-    std::priority_queue<MergeEntry, std::vector<MergeEntry>, std::greater<MergeEntry> > queue;
+    std::priority_queue<MergeEntry, std::vector<MergeEntry>, std::less<MergeEntry> > queue;
 
 public:
     void Insert(entry_t *, size_t);

@@ -32,10 +32,11 @@ private:
     uint64_t MaxSize;
     uint64_t size;
     Skiplist *Head;
-
+    std::set<entry_t> Entries;
+    
 public:
     int RandomLevel();
-    std::set<entry_t> Entries;
+    
     Buffer(size_t maxpage);
     bool PutValue(KEY_t, VAL_t val);
     void display(); 

@@ -42,7 +42,8 @@ VAL_t* Level::GetValue(KEY_t key)
     VAL_t *val = new VAL_t;
     for(int i=0;i<Runs.size();i++)
     {  
-        if(!Runs[i].Isfull())
+        printf("Search in Run %d, Run has %lu\n",i,Runs[i].GetNowSize());
+        if(!Runs[i].IsEmpty())
         {
             val = Runs[i].GetValue(key);
             if(val != nullptr)

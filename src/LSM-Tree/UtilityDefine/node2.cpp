@@ -25,48 +25,13 @@ Skiplist* skiplistCreate()
     return obj;
 }
 
-
-LSMEntry * NILInit()
+void skiplistNodeFree(SkiplistNode* obj) 
 {
-    auto * nil =(LSMEntry *) malloc(sizeof(LSMEntry));
-    if(nil!= nullptr)
-        nil->key=UINT64_MAX;
-    return nil;
-}
-
-
-LSMEntry * Init() 
-{
-
-    LSMEntry *local = (LSMEntry *)malloc(sizeof(LSMEntry));
-    if (local == NULL)
-        exit(0);
-	local ->key = 0;
-	local ->val = 0;
-	local ->val = 32;
-    for(int i=0;i<1;i++)
+    if (obj->forward) 
     {
-        local->next[i]= NULL;
+        free(obj->forward);
+        obj->forward = NULL;
+        obj->maxLevel = 0;
     }
-    return local;
-}
-
-
-
-LSMEntry * Initialize(uint64_t hashkey, uint64_t val1,int maxlevel)
-{
-	auto * temp =(LSMEntry*) malloc(sizeof(LSMEntry));
-    if(temp == nullptr)
-        exit(0);
-
-    temp->key = hashkey;
-	temp->val = val1;
-	temp->maxlevel = maxlevel;
-
-	for(int i=0;i<maxlevel;i++)
-	{
-		temp->next[i]=nullptr;
-	}
-   
-    return temp;
+    free(obj);
 }

@@ -22,6 +22,7 @@
 #include "../../TNCTree/utility/types.h"
 #include "../../MultiHash/LinearHash/node.h"
 #include "../../Auxizilary/VariablesTypes.h"
+#include "../../MultiHash/LazySplitHash/LSNode.h"
 /**
  * Function declartion for reading from one or more pages:
  * Two-tier none-coupling tree  

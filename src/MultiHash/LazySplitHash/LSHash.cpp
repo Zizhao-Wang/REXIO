@@ -1,4 +1,5 @@
 #include "LSHash.h"
+#include <cmath>
 #include "../../Backend/SSDRead/reader.h"
 
 LSbucket::LSbucket(uint16_t max)
@@ -93,42 +94,53 @@ std::vector<LSEntry> LSbucket::BDataRead()
 }
 
 
-LSHash::LSHash(uint16_t bucketmsize = DEFAULT_BUCKETMAXSIZE, uint16_t tablebsize = DEFAULT_TABLEBASESIZE, double ifth = DEFAULT_IFTHRESHOLD)
+LSHash::LSHash( uint16_t tablebsize = DEFAULT_TABLEBASESIZE, double ifth = DEFAULT_IFTHRESHOLD)
 {
+
+    uint16_t bucketmsize = CalculatePageCapacity(sizeof(LSEntry));
     for(uint16_t i = 0;i<tablebsize;i++)
     {
         LSbucket temp(bucketmsize);
         bucketList.emplace_back(temp);
     }
-  this->bmaxsize = bucketmsize;
-  this->Allsize = 0;
-  this->IFthreshold = ifth;
+    this->bmaxsize = bucketmsize;
+    this->Allsize = 0;
+    this->IFthreshold = ifth;
+    //printf("bucketmsize:%d tablebsize:%d IFthreshold:%lf\n",bucketmsize, tablebsize,IFthreshold);
+
 }
 
 SKey LSHash::BitHashfunc(SKey Number, uint8_t bits)
 {
   SKey BitNumber;
-  BitNumber = Number & (SKey)(1<<bits);
+  BitNumber = Number & (1<<bits)-1;
+  //printf("BitNumber:%lu \n",BitNumber);
   return BitNumber;
 }
 
 uint8_t LSHash::GetBits(SKey Number)
 {
   uint8_t bits = 0;
+  //printf("number:%lu ",Number);
   while(Number)
   {
     Number = Number>>1;
     bits++;
   }
-
+  //printf("bits:%d ",bits);
   return bits;
 }
 
+bool LSHash::IsNecessary()
+{
+  return true;
+}
 
-void LSHash::Split(size_t BucketNo)
+
+void LSHash::Split(size_t BucketNum)
 {
   std::vector<LSEntry> tempdata;
-  tempdata = bucketList[BucketNo].Getdata();
+  tempdata = bucketList[BucketNum].Getdata();
   
   for(size_t i =0;i<tempdata.size();i++)
   {
@@ -138,9 +150,33 @@ void LSHash::Split(size_t BucketNo)
     }
   }
 
-  bucketList[BucketNo].AllClear();
+  bucketList[BucketNum].AllClear();
   AssertCondition(bucketList.size()==0);
+}
 
+size_t LSHash::SplitNumber()
+{
+  size_t f = bucketList.size() - pow(2,GetBits(bucketList.size())-1);
+
+  return f;
+
+}
+
+void LSHash::Spliting()
+{
+  bool split = IsNecessary();
+
+  if
+  (split)
+  {
+    size_t tmp = 0;
+    SplitCursor = bucketList.size() - 1;
+
+    while (tmp < SplitNumber())
+    {
+      Split(tmp);
+    }
+  }  
 }
 
 double LSHash::IFCompute()
@@ -158,9 +194,10 @@ int LSHash::Insert(SKey key, SValue value)
     bucketList.emplace_back(temp);
     //split
     uint8_t i = GetBits(bucketList.size());
-    BitHashfunc(bucketList.size()-1,GetBits(bucketList.size()-1)-1);
+    size_t num = BitHashfunc(bucketList.size()-1,GetBits(bucketList.size()-1)-1);
+    Split(num);
   }
-  uint64_t tmp = BitHashfunc(key,GetBits(bucketList.size()-1)-1);
+  uint64_t tmp = BitHashfunc(key,i);
   if(tmp >= bucketList.size())
   {
     tmp = BitHashfunc(BitHashfunc(key,i),GetBits(BitHashfunc(key,i))-1);
@@ -241,11 +278,17 @@ void LSHashPort()
   
     clock_t startTime,endTime;  // Definition of timestamp
     LSHash LShashtable;        // initialize a in-memory hash table
+    // for(int i=1;i<=1024;i*=2)
+    // {
+    //   LShashtable.BitHashfunc(i,LShashtable.GetBits(i));
+    // }
+    // exit(0);
+
     /* Write datum */
     startTime = clock();
     for(uint64_t i=1;i<=10000000;i++)
     {
-      if(i>=10000 && i%10000 ==0)
+      if(i==1000000|| i%10000000 ==0)
       {
         printf("Value:%lu \n",i);
         endTime = clock();

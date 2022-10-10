@@ -24,14 +24,16 @@ extern int erasecount;
 class LBucket
 {  
 private:
-    std::vector<LHEntry>  bucket;
+    
 #ifdef OverflowPage
     PageType overflowPage;
 #endif
     PageType  PageNum;
+    
     size_t  BucketMax,size;   //The capacity of a speific bucket
 
 public:
+    std::vector<LHEntry>  bucket;
     LBucket(size_t maxsize);
 
     /* Insert key into specific vector! */
@@ -54,9 +56,9 @@ public:
      **/
     std::vector<LHEntry> GetBucket(void); // Return the vector that represents the specific page! 
 
-    size_t GetBucketSize();  // Return the current size of bucket. 
+    size_t GetSize();  // Return the current size of bucket. 
 
-    size_t GetBucketsize();
+    std::vector<LHEntry> GetBucketRead(void);
 
     PageType GetBucketNo();
 
@@ -84,6 +86,8 @@ public:
     LinearHashTable(size_t Initialsize);
 
     void TableDouble();
+
+    void TableDisplay();
 
     /* Return 0 if suucess, */
     int split(size_t SplitBucket);

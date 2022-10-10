@@ -23,10 +23,12 @@ typedef struct LHEntry
     {
         return key == other.key;
     }
+    
     bool operator<(const LHEntry& other) const 
     {
         return key < other.key;
     }
+
 }LHEntry;
 
 

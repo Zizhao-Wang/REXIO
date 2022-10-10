@@ -3610,17 +3610,7 @@ CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o: /home/femu/experiment1/
   /usr/include/c++/9/bits/uniform_int_dist.h \
   /usr/include/c++/9/limits \
   /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/LSNode.h \
-  /home/femu/experiment1/code2/src/Backend/SSDRead/reader.h \
-  /home/femu/liblightnvm/include/liblightnvm.h \
-  /usr/include/inttypes.h \
-  /usr/include/c++/9/stdlib.h \
-  /home/femu/liblightnvm/include/liblightnvm_util.h \
-  /usr/include/string.h \
-  /usr/include/strings.h \
-  /home/femu/liblightnvm/include/liblightnvm_spec.h \
-  /usr/include/assert.h \
-  /home/femu/experiment1/code2/src/Auxizilary/SysOutput.h \
-  /home/femu/experiment1/code2/src/TNCTree/StoreTier/syncstore.h \
+  /home/femu/experiment1/code2/src/Backend/IODisk/WriteDisk.h \
   /usr/include/c++/9/unordered_map \
   /usr/include/c++/9/ext/aligned_buffer.h \
   /usr/include/c++/9/bits/hashtable.h \
@@ -3631,6 +3621,34 @@ CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o: /home/femu/experiment1/
   /usr/include/c++/9/bits/invoke.h \
   /usr/include/c++/9/bits/unordered_map.h \
   /usr/include/c++/9/bits/erase_if.h \
+  /home/femu/liblightnvm/include/liblightnvm.h \
+  /usr/include/inttypes.h \
+  /usr/include/c++/9/stdlib.h \
+  /home/femu/liblightnvm/include/liblightnvm_util.h \
+  /usr/include/string.h \
+  /usr/include/strings.h \
+  /home/femu/liblightnvm/include/liblightnvm_spec.h \
+  /usr/include/assert.h \
+  /home/femu/experiment1/code2/src/Backend/BlockManage/BlockInfo.h \
+  /home/femu/liblightnvm/include/liblightnvm_cli.h \
+  /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
+  /home/femu/experiment1/code2/src/Auxizilary/VariablesTypes.h \
+  /home/femu/experiment1/code2/src/Auxizilary/SysOutput.h \
+  /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
+  /usr/include/c++/9/cmath \
+  /usr/include/math.h \
+  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
+  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
+  /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
+  /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
+  /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
+  /home/femu/experiment1/code2/src/Backend/SSDRead/reader.h \
+  /home/femu/experiment1/code2/src/Auxizilary/SysOutput.h \
+  /home/femu/experiment1/code2/src/TNCTree/StoreTier/syncstore.h \
   /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
   /home/femu/experiment1/code2/src/TNCTree/MemoryTier/Node.h \
   /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
@@ -5522,6 +5540,7 @@ CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment1/code2/src/main.cpp \
   /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \
   /home/femu/experiment1/code2/src/Auxizilary/SysOutput.h \
   /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/LSNode.h \
+  /home/femu/experiment1/code2/src/Backend/IODisk/WriteDisk.h \
   /home/femu/experiment1/code2/src/MultiHash/LinearHash/LiHash.h \
   /home/femu/experiment1/code2/src/MultiHash/LinearHash/node.h \
   /home/femu/experiment1/code2/src/Auxizilary/GlobalVariable.h \

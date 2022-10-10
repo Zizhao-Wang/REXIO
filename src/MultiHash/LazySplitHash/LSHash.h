@@ -32,6 +32,7 @@ protected:
 public:
 	LSbucket(uint16_t maxsize);
 
+
 	int Insert(SKey key, SValue value);
 	SEntry Retrieval(SKey key);
     int Delete(SKey key);
@@ -42,8 +43,9 @@ public:
 
     void AllClear(void);
 	uint16_t GetMaxSize() const;
-	std::vector<SEntry> Getdata() const;
+	std::vector<LSEntry> Getdata() const;
     int PageWrite();
+	std::vector<LSEntry> BDataRead();
 
 };
 

@@ -150,16 +150,20 @@ std::vector<entry_t> RunReadFromPage(PageType PageNum)
  * ============= Lazy-split hashing module ===============
  *  Function declartion for writing data into one or more pages:
  **/
-std::vector<LSEntry> LSBucketFromPage(PageType PageNum, int size = 0)
+std::vector<LSEntry> LSBucketFromPage(PageType PageNum, int size)
 {
 
     std::vector<LSEntry> data;
-    assert(PageNum != UINT64_MAX);
-    PageDataRead(PageNum);
-    
+    size_t Qsize;
     char * temp = new char[30];
     LSEntry TempEntry;
-    for (size_t i = 0; i <CalculatePageCapacity(sizeof(LSEntry)); i++)
+
+    assert(PageNum != UINT64_MAX);
+    PageDataRead(PageNum);
+
+    size == 0? Qsize = CalculatePageCapacity(sizeof(LSEntry)): Qsize = size;
+
+    for (size_t i = 0; i <Qsize; i++)
     {
         for(size_t j = i*sizeof(LSEntry),k=0;j<i*sizeof(LSEntry)+sizeof(LSEntry);j++,k++)
         {

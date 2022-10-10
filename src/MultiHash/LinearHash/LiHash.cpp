@@ -29,14 +29,18 @@ int LBucket::Insert(SKey key1, SValue val)
      LHEntry entry{key1,val};
      bucket.emplace_back(entry);
      size++;
+     if(size == CalculatePageCapacity(sizeof(LHEntry)))
+     {
+          BucketWrite();
+     }
 
      return 0;
 }
 
 void LBucket::BucketErase()
 {
-     if(bucket.size()!=0)
-          bucket.clear();
+     assert(bucket.size()==0);
+     PageNum = UINT64_MAX;
      size = 0;
 }
 
@@ -51,6 +55,7 @@ LHEntry LBucket::BucketRetrival(SKey key)
           {
                return *get;
           }
+          return LHEntry{0,0};
      }
      // for(int i=0;i<bucket.size();i++)
      // {
@@ -159,15 +164,25 @@ std::vector<LHEntry> LBucket::GetBucket(void)
      return bucket;
 }
 
-size_t LBucket::GetBucketSize()
+std::vector<LHEntry> LBucket::GetBucketRead(void)
+{
+     assert(size == CalculatePageCapacity(sizeof(LHEntry)));
+     if(PageNum != UINT64_MAX && bucket.size()==0)
+     {
+          std::vector<LHEntry> entries = PageRead(PageNum);
+          return entries;
+     }
+     PageNum = UINT64_MAX;
+     //printf("test! in Get BUCKET\n");
+     return bucket;
+}
+
+
+size_t LBucket::GetSize()
 {
      return size;
 }
 
-size_t LBucket::GetBucketsize()
-{
-     return bucket.size();
-}
 
 PageType LBucket::GetBucketNo()
 {
@@ -186,7 +201,7 @@ void LBucket::SetBucketNo(uint64_t bucketno)
 
 bool LBucket::IsFull(void) const
 {
-     if(bucket.size()>=BucketMax )
+     if(size>=BucketMax )
      {
           return true;
      }
@@ -218,6 +233,15 @@ LinearHashTable::LinearHashTable(size_t Initialsize)
             \n ---- Meta data space allocated successful! \n"); 
 }
 
+void LinearHashTable::TableDisplay()
+{
+     for(int i=0;i<BucketTable.size();i++)
+     {
+          printf("bucket size:%lu No. bucket:%lu memory size:%lu\n",BucketTable[i].GetBucket(),BucketTable[i].GetBucketNo(),BucketTable[i].bucket.size());
+     }
+}
+
+
 void LinearHashTable::TableDouble()
 {
      size_t MaxSize = CalculatePageCapacity(sizeof(LHEntry));
@@ -235,7 +259,7 @@ int LinearHashTable::split(size_t SplitBucket)
      
      std::vector<LHEntry> OldBucket;  /* Intermediate varible definition */
 
-     OldBucket = BucketTable[SplitBucket].GetBucket();
+     OldBucket = BucketTable[SplitBucket].GetBucketRead();
      BucketTable[SplitBucket].BucketErase();
      SplitFlag[SplitBucket] = true;
 
@@ -294,7 +318,6 @@ int LinearHashTable::Insert(SKey key, SValue value)
      //printf("h1:%u h2:%u ",h1,h2);
      if(BucketTable[bucketno].IsFull())
      {
-          BucketTable[bucketno].BucketWrite();
           //printf("bucket size:%lu,h1:%lu h2:%lu",BucketTable[bucketno].GetBucketSize(),h1,h2);
           split(bucketno);
           bucketno = key % h2;
@@ -319,7 +342,7 @@ int LinearHashTable::Search(SKey key)
      //printf("key: %lu entry.key:%lu ",key,entry.key);
      if(key != entry.key)
      {
-          printf("key: %lu, entry.key:%lu, Pageno:%lu,h1:%lu h2:%lu bucketsize:%lu test!!!!!!!!\n",key,entry.key,BucketTable[bucketno].GetBucketNo(),h1,h2,BucketTable[bucketno].GetBucketsize());
+          printf("key: %lu, entry.key:%lu, Pageno:%lu,h1:%lu h2:%lu bucketsize:%lu test!!!!!!!!\n",key,entry.key,BucketTable[bucketno].GetBucketNo(),h1,h2);
      }
      
 
@@ -373,42 +396,42 @@ void LHashPort()
 {
   
      clock_t startTime,endTime;  // Definition of timestamp
-     LinearHashTable hashtable(10);        // initialize a in-memory hash table
+     LinearHashTable hashtable(4);        // initialize a in-memory hash table
      /* Write datum */
 
      /* workload a: insert only*/
      startTime = clock();
-     for(SKey i=1;i<=120480;i++)
+     for(SKey i=1;i<=4096;i++)
      {
           if(i%10000000==0||i==1000000)
           {
                endTime = clock();
                std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
           }
-          //printf("Insert %lu successful!\n",i);
           hashtable.Insert(i,i);
      }
      endTime = clock();
      printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
      std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+     hashtable.TableDisplay();
 
 
-     /* workload b: read only, all in it */
-     startTime = clock();
-     for(int i=1;i<=110;i++)
-     {
-          srand48(time(NULL));
-          SKey k = 1+(rand()%120480);
-          hashtable.Search(k);
-          if(i==10000 || i%100000==0)
-          {
-               endTime = clock();
-               std::cout << "Total Time of "<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
-          }
-     }
-     endTime = clock();
-     printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
-     std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+     // /* workload b: read only, all in it */
+     // startTime = clock();
+     // for(int i=1;i<=110;i++)
+     // {
+     //      srand48(time(NULL));
+     //      SKey k = 1+(rand()%120480);
+     //      hashtable.Search(k);
+     //      if(i==10000 || i%100000==0)
+     //      {
+     //           endTime = clock();
+     //           std::cout << "Total Time of "<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+     //      }
+     // }
+     // endTime = clock();
+     // printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
+     // std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
      // /* workload c: read only, 50% in it, 50% not in it */
      // startTime = clock();

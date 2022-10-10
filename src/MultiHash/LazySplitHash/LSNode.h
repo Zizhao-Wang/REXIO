@@ -21,3 +21,6 @@ typedef struct LSEntry
 	uint8_t flag;
 	
 }LSEntry;
+
+
+#endif

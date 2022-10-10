@@ -17,10 +17,11 @@
 #include "../../Auxizilary/GlobalVariable.h"
 #include "../../Auxizilary/SysOutput.h"
 #include "LSNode.h"
+#include "../../Backend/IODisk/WriteDisk.h"
 
 
 #define DEFAULT_BUCKETMAXSIZE 100
-#define DEFAULT_TABLEBASESIZE 100
+#define DEFAULT_TABLEBASESIZE 4
 #define DEFAULT_IFTHRESHOLD   0.9
 
 class LSbucket 
@@ -63,11 +64,14 @@ private:
 	double  IFthreshold;
 
 public:
-	LSHash(uint16_t , uint16_t, double ifth);
+	LSHash( uint16_t, double );
 
 	SKey BitHashfunc(SKey, uint8_t);
 	uint8_t  GetBits(SKey);
-	void Split(size_t BucketNo);
+	bool IsNecessary();
+	void Split(size_t BucketNum);
+	size_t SplitNumber();
+	void Spliting();
 
 	double IFCompute();
 	int Insert(SKey key, SValue value);

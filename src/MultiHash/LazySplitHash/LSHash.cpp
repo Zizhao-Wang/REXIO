@@ -222,6 +222,8 @@ void LSHashPort()
   
     clock_t startTime,endTime;  // Definition of timestamp
     LSHash LShashtable;        // initialize a in-memory hash table
+
+    
     /* Write datum */
     startTime = clock();
     for(uint64_t i=1;i<=10000000;i++)

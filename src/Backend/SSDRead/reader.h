@@ -45,4 +45,10 @@ int PageDataRead(PageType pageno);
 
 std::vector<entry_t> RunReadFromPage(PageType PageNum);
 
+/**
+ * ============= Lazy-split hashing module ===============
+ *  Function declartion for writing data into one or more pages:
+ **/
+std::vector<LSEntry> LSBucketFromPage(PageType PageNum);
+
 #endif //EXPERIMENT1_WRITEDISK_H

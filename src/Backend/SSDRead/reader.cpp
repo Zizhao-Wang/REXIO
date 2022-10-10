@@ -3,6 +3,7 @@
 #include "../../MultiHash/LinearHash/LiHash.h"
 #include "../../LSM-Tree/LsmTree.h"
 #include "../../TNCTree/TNCtree.h"
+#include "../../MultiHash/LazySplitHash/LSNode.h"
 
 int SinglePageRead(uint64_t pageno)
 {
@@ -140,13 +141,35 @@ std::vector<entry_t> RunReadFromPage(PageType PageNum)
         TempEntry.key = ML[0], TempEntry.val = ML[1];
         data.emplace_back(TempEntry);
     }
-    // for (size_t i = 0; i < 5; i++)
-    // {
-    //     printf("%lu %lu ",data[i].key,data[i].val);
-    // }
-    // printf("\n");
-    //printf("%lu data entries have beed read!\n",data.size());
+    delete(temp);
+    return data;
 
+}
+
+
+/**
+ * ============= Lazy-split hashing module ===============
+ *  Function declartion for writing data into one or more pages:
+ **/
+std::vector<LSEntry> LSBucketFromPage(PageType PageNum)
+{
+
+    std::vector<LSEntry> data;
+    assert(PageNum != UINT64_MAX);
+    PageDataRead(PageNum);
+    
+    char * temp = new char[20];
+    LSEntry TempEntry;
+    for (size_t i = 0; i <CalculatePageCapacity(sizeof(LSEntry)); i++)
+    {
+        for(size_t j = i*sizeof(LSEntry),k=0;j<i*sizeof(LSEntry)+sizeof(LSEntry);j++,k++)
+        {
+            temp[k] = bp->bufs->read[j];
+        }
+        uint64_t *ML = (uint64_t*) temp;
+        TempEntry.key = ML[0], TempEntry.val = ML[1];
+        data.emplace_back(TempEntry);
+    }
     delete(temp);
     return data;
 

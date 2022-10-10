@@ -12,6 +12,8 @@ Buffer::Buffer(size_t maxpage)
     this->MaxSize = capacity*maxpage;
     size = 0;
     Head = skiplistCreate();
+    //printf("key:%lu \n\n",Head->head->key);
+    //printf("Test successful! Size of entry:%lu, Page capacity: %lu, Buffer size:%u\n",sizeof(entry_t),capacity,MaxSize);
 }
 
 int Buffer::RandomLevel()

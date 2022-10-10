@@ -1,5 +1,6 @@
 #include "LSHash.h"
-
+#include "LSNode.h"
+#include "../../Backend/SSDRead/reader.h"
 
 LSbucket::LSbucket(uint16_t max)
 {
@@ -18,7 +19,7 @@ int LSbucket::Insert(SKey key, SValue value)
 	BucketEntries.emplace_back(entry);
 	size++;
 
-  if(CurrentSize == MaxSize)
+  if(size == maxsize)
   {
     PageWrite();
   }
@@ -27,6 +28,7 @@ int LSbucket::Insert(SKey key, SValue value)
 
 SEntry LSbucket::Retrieval(SKey key)
 {
+
 	SEntry entry;
 
 	return entry;
@@ -81,6 +83,12 @@ int LSbucket::PageWrite()
 {
   
   return 0;
+}
+
+std::vector<LSEntry> LSbucket::BDataRead(PageType PageNum)
+{
+
+
 }
 
 

@@ -3,7 +3,6 @@
 #include "../../MultiHash/LinearHash/LiHash.h"
 #include "../../LSM-Tree/LsmTree.h"
 #include "../../TNCTree/TNCtree.h"
-#include "../../MultiHash/LazySplitHash/LSNode.h"
 
 int SinglePageRead(uint64_t pageno)
 {
@@ -158,7 +157,7 @@ std::vector<LSEntry> LSBucketFromPage(PageType PageNum)
     assert(PageNum != UINT64_MAX);
     PageDataRead(PageNum);
     
-    char * temp = new char[20];
+    char * temp = new char[30];
     LSEntry TempEntry;
     for (size_t i = 0; i <CalculatePageCapacity(sizeof(LSEntry)); i++)
     {
@@ -167,7 +166,9 @@ std::vector<LSEntry> LSBucketFromPage(PageType PageNum)
             temp[k] = bp->bufs->read[j];
         }
         uint64_t *ML = (uint64_t*) temp;
-        TempEntry.key = ML[0], TempEntry.val = ML[1];
+        TempEntry.key1 = ML[0];
+        TempEntry.val = ML[1]; 
+        TempEntry.flag = ML[2];
         data.emplace_back(TempEntry);
     }
     delete(temp);

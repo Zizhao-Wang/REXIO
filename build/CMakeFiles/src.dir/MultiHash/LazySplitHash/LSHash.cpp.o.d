@@ -179,4 +179,5 @@ CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o: \
  /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/utility/../MemoryTier/Node.h \
  /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/LinearHash/node.h \
  /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../Auxizilary/VariablesTypes.h
+ /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../Auxizilary/VariablesTypes.h \
+ /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/LazySplitHash/LSNode.h

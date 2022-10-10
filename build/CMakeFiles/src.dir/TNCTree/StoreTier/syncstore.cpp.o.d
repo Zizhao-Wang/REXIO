@@ -193,4 +193,5 @@ CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o: \
  /home/femu/experiment1/code2/src/TNCTree/StoreTier/../../Backend/SSDRead/../../TNCTree/utility/../MemoryTier/Node.h \
  /home/femu/experiment1/code2/src/TNCTree/StoreTier/../../Backend/SSDRead/../../MultiHash/LinearHash/node.h \
  /home/femu/experiment1/code2/src/TNCTree/StoreTier/../../Backend/SSDRead/../../Auxizilary/VariablesTypes.h \
+ /home/femu/experiment1/code2/src/TNCTree/StoreTier/../../Backend/SSDRead/../../MultiHash/LazySplitHash/LSNode.h \
  /home/femu/experiment1/code2/src/TNCTree/StoreTier/../../Backend/IODisk/WriteDisk.h

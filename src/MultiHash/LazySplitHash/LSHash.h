@@ -22,10 +22,12 @@
 #define DEFAULT_TABLEBASESIZE 100
 #define DEFAULT_IFTHRESHOLD   0.9
 
-class LSbucket : public bucket
+class LSbucket 
 {
 protected:
 	std::vector<SEntry> BucketEntries;
+	uint32_t size;
+	uint16_t maxsize;
 
 public:
 	LSbucket(uint16_t maxsize);

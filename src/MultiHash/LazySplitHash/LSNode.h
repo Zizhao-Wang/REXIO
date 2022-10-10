@@ -19,4 +19,5 @@ typedef struct SEntry
 	SKey key1;
 	SValue val;
 	uint8_t flag;
+	
 }SEntry;

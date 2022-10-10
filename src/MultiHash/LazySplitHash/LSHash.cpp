@@ -1,21 +1,22 @@
 #include "LSHash.h"
 
 
-LSbucket::LSbucket(uint16_t maxsize)
-	:bucket(maxsize)
+LSbucket::LSbucket(uint16_t max)
 {
-
+  this->maxsize = max;
+  this->size = 0;
 }
 
 int LSbucket::Insert(SKey key, SValue value)
 {
 
-	SEntry entry;
+	LSEntry entry;
 	entry.key1 = key;
 	entry.val  = value;
+  entry.flag = 0;
 
 	BucketEntries.emplace_back(entry);
-	CurrentSize++;
+	size++;
 
   if(CurrentSize == MaxSize)
   {
@@ -222,8 +223,6 @@ void LSHashPort()
   
     clock_t startTime,endTime;  // Definition of timestamp
     LSHash LShashtable;        // initialize a in-memory hash table
-
-    
     /* Write datum */
     startTime = clock();
     for(uint64_t i=1;i<=10000000;i++)

@@ -26,7 +26,7 @@
 class LSbucket 
 {
 protected:
-	std::vector<SEntry> BucketEntries;
+	std::vector<LSEntry> BucketEntries;
 	uint32_t size;
 	uint16_t maxsize;
 	PageType PageNum;
@@ -45,7 +45,7 @@ public:
 
     void AllClear(void);
 	uint16_t GetMaxSize() const;
-	std::vector<LSEntry> Getdata() const;
+	std::vector<LSEntry> Getdata();
     int PageWrite();
 	std::vector<LSEntry> BDataRead();
 

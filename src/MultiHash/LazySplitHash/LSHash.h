@@ -27,9 +27,9 @@ class LSbucket
 {
 protected:
 	std::vector<LSEntry> BucketEntries;
-	uint32_t size;
-	uint16_t maxsize;
+	uint32_t size,maxsize;
 	PageType PageNum;
+
 
 public:
 	LSbucket(uint16_t maxsize);
@@ -59,6 +59,7 @@ private:
 	std::vector<LSbucket> bucketList;
 	uint64_t Allsize;
 	uint16_t bmaxsize;
+	uint32_t SplitCursor;
 	double  IFthreshold;
 
 public:

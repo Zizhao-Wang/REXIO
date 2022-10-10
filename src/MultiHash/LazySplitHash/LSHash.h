@@ -16,6 +16,7 @@
 #include "../Bucket.h"
 #include "../../Auxizilary/GlobalVariable.h"
 #include "../../Auxizilary/SysOutput.h"
+#include "LSNode.h"
 
 
 #define DEFAULT_BUCKETMAXSIZE 100
@@ -28,6 +29,7 @@ protected:
 	std::vector<SEntry> BucketEntries;
 	uint32_t size;
 	uint16_t maxsize;
+	PageType PageNum;
 
 public:
 	LSbucket(uint16_t maxsize);

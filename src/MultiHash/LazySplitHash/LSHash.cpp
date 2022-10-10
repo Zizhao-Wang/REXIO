@@ -173,6 +173,8 @@ int LSHash::Insert(SKey key, SValue value)
 SEntry LSHash::Retrieval(SKey key)
 {
   SEntry entry;
+  std::vector<LSEntry> data;
+
   uint8_t i = GetBits(bucketList.size());
   SKey tmp = BitHashfunc(key,i);
 
@@ -181,6 +183,13 @@ SEntry LSHash::Retrieval(SKey key)
     tmp = BitHashfunc(BitHashfunc(key,i), GetBits(BitHashfunc(key,i))-1);
   }
 
+  while (tmp > SplitCursor)
+  {
+    data = bucketList[tmp].BDataRead();
+    tmp = BitHashfunc(BitHashfunc(key,i),GetBits(tmp)-1);
+  }
+  data = bucketList[tmp].BDataRead();
+  
   entry = bucketList[tmp].Retrieval(key);
 
   return entry;

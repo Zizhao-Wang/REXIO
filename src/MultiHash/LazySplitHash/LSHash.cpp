@@ -53,20 +53,20 @@ int LSbucket::Update(SKey key, SValue value)
 
 bool LSbucket::IsFull(void) const
 {
-	return CurrentSize == MaxSize;
+	return size == maxsize;
 }
 
 bool LSbucket::IsEmpty(void) const
 {
-	return CurrentSize == 0;
+	return size == 0;
 }
 
 uint16_t LSbucket::GetMaxSize() const
 {
-  return MaxSize;
+  return maxsize;
 }
 
-std::vector<SEntry> LSbucket::Getdata() const
+std::vector<LSEntry> LSbucket::Getdata() 
 {
   return BucketEntries;
 }
@@ -127,7 +127,7 @@ uint8_t LSHash::GetBits(SKey Number)
 
 void LSHash::Split(size_t BucketNo)
 {
-  std::vector<SEntry> tempdata;
+  std::vector<LSEntry> tempdata;
   tempdata = bucketList[BucketNo].Getdata();
   
   for(size_t i =0;i<tempdata.size();i++)

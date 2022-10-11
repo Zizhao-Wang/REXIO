@@ -18,12 +18,12 @@ typedef struct ExEntry
 	SKey   key;
 	SValue val;
 
-	bool operator == (const LHEntry& other) const 
+	bool operator == (const ExEntry& other) const 
     {
         return key == other.key;
     }
     
-    bool operator<(const LHEntry& other) const 
+    bool operator<(const ExEntry& other) const 
     {
         return key < other.key;
     }

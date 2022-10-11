@@ -1,5 +1,6 @@
-CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment/code2/src/main.cpp \
- /usr/include/stdc-predef.h /usr/include/c++/9/ctime \
+CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o: \
+ /home/femu/experiment/code2/src/LSM-Tree/LsmTree.cpp \
+ /usr/include/stdc-predef.h /usr/include/c++/9/cassert \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h \
  /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
@@ -8,33 +9,15 @@ CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment/code2/src/main.cpp \
  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/cpu_defines.h \
- /usr/include/time.h /usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h \
- /usr/include/x86_64-linux-gnu/bits/time.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/timesize.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/time64.h \
- /usr/include/x86_64-linux-gnu/bits/timex.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endianness.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/c++/9/iostream /usr/include/c++/9/ostream \
- /usr/include/c++/9/ios /usr/include/c++/9/iosfwd \
- /usr/include/c++/9/bits/stringfwd.h /usr/include/c++/9/bits/memoryfwd.h \
- /usr/include/c++/9/bits/postypes.h /usr/include/c++/9/cwchar \
- /usr/include/wchar.h \
+ /usr/include/assert.h /usr/include/c++/9/fstream \
+ /usr/include/c++/9/istream /usr/include/c++/9/ios \
+ /usr/include/c++/9/iosfwd /usr/include/c++/9/bits/stringfwd.h \
+ /usr/include/c++/9/bits/memoryfwd.h /usr/include/c++/9/bits/postypes.h \
+ /usr/include/c++/9/cwchar /usr/include/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/x86_64-linux-gnu/bits/floatn.h \
  /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
+ /usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
@@ -42,6 +25,8 @@ CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment/code2/src/main.cpp \
  /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
  /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
+ /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
  /usr/include/c++/9/exception /usr/include/c++/9/bits/exception.h \
  /usr/include/c++/9/bits/exception_ptr.h \
  /usr/include/c++/9/bits/exception_defines.h \
@@ -63,20 +48,35 @@ CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment/code2/src/main.cpp \
  /usr/include/c++/9/bits/ptr_traits.h /usr/include/c++/9/debug/debug.h \
  /usr/include/c++/9/bits/predefined_ops.h /usr/include/c++/9/cstdint \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/types.h \
+ /usr/include/x86_64-linux-gnu/bits/timesize.h \
+ /usr/include/x86_64-linux-gnu/bits/typesizes.h \
+ /usr/include/x86_64-linux-gnu/bits/time64.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/c++/9/bits/localefwd.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++locale.h \
  /usr/include/c++/9/clocale /usr/include/locale.h \
  /usr/include/x86_64-linux-gnu/bits/locale.h /usr/include/c++/9/cctype \
- /usr/include/ctype.h /usr/include/c++/9/bits/ios_base.h \
- /usr/include/c++/9/ext/atomicity.h \
+ /usr/include/ctype.h /usr/include/x86_64-linux-gnu/bits/endian.h \
+ /usr/include/x86_64-linux-gnu/bits/endianness.h \
+ /usr/include/c++/9/bits/ios_base.h /usr/include/c++/9/ext/atomicity.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/gthr.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/gthr-default.h \
  /usr/include/pthread.h /usr/include/sched.h \
+ /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
  /usr/include/x86_64-linux-gnu/bits/sched.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
- /usr/include/x86_64-linux-gnu/bits/cpu-set.h \
+ /usr/include/x86_64-linux-gnu/bits/cpu-set.h /usr/include/time.h \
+ /usr/include/x86_64-linux-gnu/bits/time.h \
+ /usr/include/x86_64-linux-gnu/bits/timex.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
+ /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
+ /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
@@ -134,72 +134,47 @@ CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment/code2/src/main.cpp \
  /usr/include/c++/9/bits/streambuf_iterator.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/ctype_inline.h \
  /usr/include/c++/9/bits/locale_facets.tcc \
- /usr/include/c++/9/bits/basic_ios.tcc \
- /usr/include/c++/9/bits/ostream.tcc /usr/include/c++/9/istream \
- /usr/include/c++/9/bits/istream.tcc /usr/include/c++/9/random \
- /usr/include/c++/9/cmath /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
- /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
- /usr/include/c++/9/limits /usr/include/c++/9/bits/random.h \
+ /usr/include/c++/9/bits/basic_ios.tcc /usr/include/c++/9/ostream \
+ /usr/include/c++/9/bits/ostream.tcc /usr/include/c++/9/bits/istream.tcc \
+ /usr/include/c++/9/bits/codecvt.h \
+ /usr/include/x86_64-linux-gnu/c++/9/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/9/bits/c++io.h \
+ /usr/include/c++/9/bits/fstream.tcc /usr/include/c++/9/iostream \
+ /usr/include/c++/9/map /usr/include/c++/9/bits/stl_tree.h \
+ /usr/include/c++/9/ext/aligned_buffer.h \
+ /usr/include/c++/9/bits/stl_map.h /usr/include/c++/9/tuple \
+ /usr/include/c++/9/utility /usr/include/c++/9/bits/stl_relops.h \
+ /usr/include/c++/9/array /usr/include/c++/9/bits/uses_allocator.h \
+ /usr/include/c++/9/bits/invoke.h /usr/include/c++/9/bits/stl_multimap.h \
+ /usr/include/c++/9/bits/erase_if.h \
+ /home/femu/experiment/code2/src/LSM-Tree/LsmTree.h \
  /usr/include/c++/9/vector /usr/include/c++/9/bits/stl_construct.h \
  /usr/include/c++/9/bits/stl_uninitialized.h \
  /usr/include/c++/9/bits/stl_vector.h \
  /usr/include/c++/9/bits/stl_bvector.h /usr/include/c++/9/bits/vector.tcc \
- /usr/include/c++/9/bits/uniform_int_dist.h \
- /usr/include/x86_64-linux-gnu/c++/9/bits/opt_random.h \
- /usr/include/c++/9/bits/random.tcc /usr/include/c++/9/numeric \
- /usr/include/c++/9/bits/stl_numeric.h \
+ /home/femu/experiment/code2/src/LSM-Tree/UtilityDefine/buffer.h \
+ /usr/include/c++/9/set /usr/include/c++/9/bits/stl_set.h \
+ /usr/include/c++/9/bits/stl_multiset.h \
+ /home/femu/experiment/code2/src/LSM-Tree/UtilityDefine/../../Auxizilary/VariablesTypes.h \
+ /home/femu/experiment/code2/src/LSM-Tree/UtilityDefine/../../Backend/IODisk/WriteDisk.h \
+ /usr/include/c++/9/unordered_map /usr/include/c++/9/bits/hashtable.h \
+ /usr/include/c++/9/bits/hashtable_policy.h /usr/include/c++/9/limits \
+ /usr/include/c++/9/bits/unordered_map.h \
  /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm.h \
  /usr/include/inttypes.h /usr/include/c++/9/stdlib.h \
  /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm_util.h \
  /usr/include/string.h /usr/include/strings.h \
  /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm_spec.h \
- /usr/include/assert.h /home/femu/experiment/code2/src/TNCTree/TNCtree.h \
- /home/femu/experiment/code2/src/MultiHash/ExtendibleHash/ExHash.h \
- /home/femu/experiment/code2/src/MultiHash/ExtendibleHash/ExNode.h \
- /home/femu/experiment/code2/src/MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment/code2/src/MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
- /usr/include/c++/9/unordered_map /usr/include/c++/9/ext/aligned_buffer.h \
- /usr/include/c++/9/bits/hashtable.h \
- /usr/include/c++/9/bits/hashtable_policy.h /usr/include/c++/9/tuple \
- /usr/include/c++/9/utility /usr/include/c++/9/bits/stl_relops.h \
- /usr/include/c++/9/array /usr/include/c++/9/bits/uses_allocator.h \
- /usr/include/c++/9/bits/invoke.h /usr/include/c++/9/bits/unordered_map.h \
- /usr/include/c++/9/bits/erase_if.h \
- /home/femu/experiment/code2/src/MultiHash/ExtendibleHash/../../Backend/IODisk/../BlockManage/BlockInfo.h \
+ /home/femu/experiment/code2/src/LSM-Tree/UtilityDefine/../../Backend/IODisk/../BlockManage/BlockInfo.h \
  /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm_cli.h \
- /home/femu/experiment/code2/src/MultiHash/ExtendibleHash/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment/code2/src/MultiHash/ExtendibleHash/../../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
- /home/femu/experiment/code2/src/MultiHash/ExtendibleHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
+ /home/femu/experiment/code2/src/LSM-Tree/UtilityDefine/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/LSM-Tree/UtilityDefine/../../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
+ /home/femu/experiment/code2/src/LSM-Tree/UtilityDefine/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
  /usr/include/c++/9/algorithm /usr/include/c++/9/bits/stl_algo.h \
  /usr/include/c++/9/bits/algorithmfwd.h \
  /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
- /home/femu/experiment/code2/src/MultiHash/ExtendibleHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment/code2/src/MultiHash/LazySplitHash/LSHash.h \
- /home/femu/experiment/code2/src/MultiHash/LazySplitHash/../Bucket.h \
- /home/femu/experiment/code2/src/MultiHash/LazySplitHash/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment/code2/src/MultiHash/LazySplitHash/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment/code2/src/MultiHash/LazySplitHash/../../Auxizilary/SysOutput.h \
- /home/femu/experiment/code2/src/MultiHash/LazySplitHash/LSNode.h \
- /home/femu/experiment/code2/src/MultiHash/LazySplitHash/../../Backend/IODisk/WriteDisk.h \
- /home/femu/experiment/code2/src/MultiHash/LinearHash/LiHash.h \
- /home/femu/experiment/code2/src/MultiHash/LinearHash/node.h \
- /home/femu/experiment/code2/src/MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment/code2/src/MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
- /home/femu/experiment/code2/src/Auxizilary/Logo.h \
- /home/femu/experiment/code2/src/LSM-Tree/LsmTree.h \
- /home/femu/experiment/code2/src/LSM-Tree/UtilityDefine/buffer.h \
- /usr/include/c++/9/set /usr/include/c++/9/bits/stl_tree.h \
- /usr/include/c++/9/bits/stl_set.h /usr/include/c++/9/bits/stl_multiset.h \
- /home/femu/experiment/code2/src/LSM-Tree/UtilityDefine/../../Auxizilary/VariablesTypes.h \
- /home/femu/experiment/code2/src/LSM-Tree/UtilityDefine/../../Backend/IODisk/WriteDisk.h \
+ /usr/include/c++/9/bits/uniform_int_dist.h \
+ /home/femu/experiment/code2/src/LSM-Tree/UtilityDefine/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
  /home/femu/experiment/code2/src/LSM-Tree/UtilityDefine/node2.h \
  /home/femu/experiment/code2/src/LSM-Tree/UtilityDefine/level.h \
  /usr/include/c++/9/queue /usr/include/c++/9/deque \
@@ -223,13 +198,30 @@ CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment/code2/src/main.cpp \
  /usr/include/c++/9/bits/shared_ptr_atomic.h \
  /usr/include/c++/9/backward/auto_ptr.h /usr/include/c++/9/thread \
  /usr/include/c++/9/chrono /usr/include/c++/9/ratio \
- /usr/include/c++/9/bits/parse_numbers.h /usr/include/c++/9/mutex \
- /usr/include/c++/9/bits/std_mutex.h \
+ /usr/include/c++/9/ctime /usr/include/c++/9/bits/parse_numbers.h \
+ /usr/include/c++/9/mutex /usr/include/c++/9/bits/std_mutex.h \
  /usr/include/c++/9/bits/unique_lock.h \
  /usr/include/c++/9/condition_variable /usr/include/c++/9/future \
  /usr/include/c++/9/bits/atomic_futex.h \
  /home/femu/experiment/code2/src/LSM-Tree/../Auxizilary/VariablesTypes.h \
  /home/femu/experiment/code2/src/LSM-Tree/../Auxizilary/SysOutput.h \
  /home/femu/experiment/code2/src/LSM-Tree/UtilityDefine/merge.h \
- /usr/include/c++/9/cassert \
- /home/femu/experiment/code2/src/LSM-Tree/UtilityDefine/run.h
+ /home/femu/experiment/code2/src/LSM-Tree/UtilityDefine/run.h \
+ /home/femu/experiment/code2/src/LSM-Tree/../Backend/SSDWrite/writer.h \
+ /home/femu/experiment/code2/src/LSM-Tree/../Backend/SSDWrite/../../TNCTree/MemoryTier/Node.h \
+ /home/femu/experiment/code2/src/LSM-Tree/../Backend/SSDWrite/../../TNCTree/MemoryTier/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/LSM-Tree/../Backend/SSDWrite/../../Auxizilary/VariablesTypes.h \
+ /home/femu/experiment/code2/src/LSM-Tree/../Backend/SSDWrite/../../Auxizilary/SysOutput.h \
+ /home/femu/experiment/code2/src/LSM-Tree/../Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/LSM-Tree/../Backend/SSDWrite/../../TNCTree/StoreTier/syncstore.h \
+ /home/femu/experiment/code2/src/LSM-Tree/../Backend/SSDWrite/../../TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/LSM-Tree/../Backend/SSDWrite/../../TNCTree/StoreTier/../MemoryTier/Node.h \
+ /home/femu/experiment/code2/src/LSM-Tree/../Backend/SSDWrite/../../TNCTree/StoreTier/../../LRU/lru.h \
+ /usr/include/c++/9/list /usr/include/c++/9/bits/stl_list.h \
+ /usr/include/c++/9/bits/list.tcc \
+ /home/femu/experiment/code2/src/LSM-Tree/../Backend/SSDWrite/../../TNCTree/StoreTier/../../LRU/../TNCTree/MemoryTier/Node.h \
+ /home/femu/experiment/code2/src/LSM-Tree/../Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
+ /home/femu/experiment/code2/src/LSM-Tree/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/LSM-Tree/../Backend/SSDWrite/../../MultiHash/LinearHash/LiHash.h \
+ /home/femu/experiment/code2/src/LSM-Tree/../Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
+ /home/femu/experiment/code2/src/LSM-Tree/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h

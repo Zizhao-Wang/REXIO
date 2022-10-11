@@ -45,9 +45,18 @@ int PageLogWrite(uint64_t BlockId);
  * ============= Linear Hash module ===============
  *  Function declartion for writing data into one or more pages:
  **/
+int BucketWrite(std::vector<LHEntry> entries, uint64_t pageno);
+
 int PageUpdatePageUpdate(PageType pageno, std::vector<LHEntry> entries);
 
 PageType SingleBucketWrite(std::vector<LHEntry> entries, uint64_t pageno);
+
+/**
+ * ============= Linear Hash module ===============
+ *  Function declartion for writing data into one or more pages:
+ **/
+int LSBucketWrite(std::vector<LHEntry> entries, uint64_t pageno);
+
 
 /**
  * ============= LSM-tree module ===============

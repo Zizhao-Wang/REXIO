@@ -11,9 +11,9 @@
 #ifndef EXPERIMENT1_EXTENDIBLEHASH_EXHASH_H
 #define EXPERIMENT1_EXTENDIBLEHASH_EXHASH_H
 
-#include <bits/stdc++.h>
 #include "../../Backend/IODisk/WriteDisk.h"
-using namespace std;
+#include "ExNode.h"
+
 
 
 void EXHashing1();
@@ -21,26 +21,34 @@ void EXHashing1();
 
 class Bucket 
 {
-    public:
-        int depth,size; 
-        uint64_t pageno, CurSize; //page number and current size 
-        map<int, uint64_t> values;
-    
-        Bucket(int depth, int size);
-        int insert(int key,uint64_t value);
-        int remove(int key);
-        int update(int key, uint64_t value);
-        void search(int key);
-        int isFull(void);
-        int isEmpty(void);
-        int getDepth(void);
-        int increaseDepth(void);
-        int decreaseDepth(void);
-        std::map<int, uint64_t> copy(void);
-        void clear(void);
-        void display(void);
-        int  PageWrite();
+private:
+    int depth,size,maxsize; 
+    uint64_t PageNum; //page number and current size 
+    map<int, uint64_t> values;
+
+public:
+    Bucket(int depth, int size);
+
+    int Insert(int key,uint64_t value);
+    int Remove(int key);
+    int Update(int key, uint64_t value);
+    void Search(int key);
+
+    int isFull(void);
+    int isEmpty(void);
+
+    int getDepth(void);
+    int increaseDepth(void);
+    int decreaseDepth(void);
+
+    std::map<int, uint64_t> copy(void);
+    void clear(void);
+    void display(void);
+    int  PageWrite();
+
 };
+
+
 
 class Directory {
     public:

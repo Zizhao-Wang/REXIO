@@ -38,6 +38,8 @@ TNCEntry* TNCEntryRead(PageType PageId);
  **/
 std::vector<LHEntry> PageRead(PageType PageNum);
 
+int PageReadTest(PageType PageNum);
+
 /**
  * ============= LSM-tree module ===============
  *  Function declartion for writing data into one or more pages:

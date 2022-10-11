@@ -44,6 +44,7 @@ void Buffer::display()
 
 bool Buffer::PutValue(KEY_t key1, VAL_t val1) 
 {
+#ifdef SET
     SkiplistNode * update[MAX_LEVEL];
     SkiplistNode * curr = Head->head;
     if (size >= MaxSize) 
@@ -89,26 +90,33 @@ bool Buffer::PutValue(KEY_t key1, VAL_t val1)
         }
         return true;
     }
-
-#ifdef SET
-        std::pair<std::set<entry_t>::iterator,bool> Tempair;
-        SingleEntry.key = key;
-        SingleEntry.val = val;
-        Tempair = Entries.insert(SingleEntry);
-        //printf("Key:%lu Value:%lu Result: %d\n",key,val,Tempair.second);
-        if (Tempair.second == false)  // Update the entry if it already exists
-        {
-            Entries.erase(itor);
-            Entries.insert(SingleEntry);
-        }
-        return true;
 #endif
 
+    if (size >= MaxSize) 
+    {
+        return false;
+    }
+
+    entry_t SingleEntry;
+    std::pair<std::set<entry_t>::iterator,bool> Tempair;
+    SingleEntry.key = key1;
+    SingleEntry.val = val1;
+    size++;
+    Tempair = Entries.insert(SingleEntry);
+    if (Tempair.second == false)  // Update the entry if it already exists
+    {
+        Entries.erase(Tempair.first);
+        Entries.insert(SingleEntry);
+        size--;
+    }
+
+    return true;  
     
 }
 
 VAL_t * Buffer::GetValue(KEY_t key1)
 {
+#ifdef SKIPLIST
     SkiplistNode *curr = Head->head;
     for (int i = Head->level - 1; i >= 0; i--) 
     {
@@ -125,6 +133,22 @@ VAL_t * Buffer::GetValue(KEY_t key1)
         return value;
     } 
     return nullptr;
+#endif
+    entry_t search_entry;
+    set<entry_t>::iterator entry;
+    VAL_t *val;
+
+    search_entry.key = key1;
+    entry = Entries.find(search_entry);
+
+    if (entry == Entries.end()) 
+    {
+        return nullptr;
+    }  
+    
+    val = new VAL_t;
+    *val = entry->val;
+    return val;
 
 }
 
@@ -145,14 +169,19 @@ std::vector<entry_t> * Buffer::GetRange(KEY_t start, KEY_t end) const
 
 void Buffer::AllClear(void) 
 {
+#ifdef SKIPlist
     for (SkiplistNode * curr = Head->head; curr; ) 
     {
         SkiplistNode *prev = curr;
         curr = curr->forward[0];
         skiplistNodeFree(prev);
     }
-    size = 0;
     Head = skiplistCreate();
+#endif
+
+    Entries.clear();
+    size = 0;
+
 }
 
 uint64_t Buffer::GetMaxSize()
@@ -162,6 +191,7 @@ uint64_t Buffer::GetMaxSize()
 
 std::vector<entry_t> Buffer::GetEntries()
 {
+#ifdef sk
     std::vector<entry_t> values;
      SkiplistNode * first = Head->head;
 
@@ -182,4 +212,12 @@ std::vector<entry_t> Buffer::GetEntries()
     values.emplace_back(en);
 
     return values;
+#endif
+    std::vector<entry_t> valus;
+    std::set<entry_t>::iterator it;
+    for(it = Entries.begin();it != Entries.end(); it++)
+    {
+        valus.emplace_back(*it);
+    }
+    return valus;
 }

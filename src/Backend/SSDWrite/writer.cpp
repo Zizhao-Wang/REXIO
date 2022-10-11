@@ -19,6 +19,7 @@
 #include "../../Auxizilary/GlobalVariable.h"
 #include "../../LSM-Tree/LsmTree.h"
 #include "../../TNCTree/TNCtree.h"
+#include "../SSDRead/reader.h"
 
 std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkLog;
 std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkData;
@@ -134,101 +135,78 @@ int PageLogWrite(uint64_t BlockId)
  *  Function declartion for writing data into one or more pages:
  **/
 
+int BucketWrite(std::vector<LHEntry> entries, uint64_t pageno)
+{
+    /* Function flag, default value equals 0(successful flag). */
+    int err = 0;
+    assert(pageno != UINT64_MAX);
+    
+    struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, pageno);
+    size_t ws_min = nvm_dev_get_ws_min(bp->dev);
+    struct nvm_addr addrs[ws_min];
+    for (size_t aidx = 0; aidx < ws_min; ++aidx) 
+    {
+		addrs[aidx].val = addrs_chunk.val;
+		addrs[aidx].l.sectr = (pageno%4096)+aidx;
+	}
+
+    char * temp = new char[20];
+    for (size_t i = 0; i < entries.size(); i++)
+    {
+        uint64_t *ML = (uint64_t*) temp;
+        ML[0] = entries[i].key, ML[1] = entries[i].val;
+        for(size_t j= i*sizeof(LHEntry),k=0;j<i*sizeof(LHEntry)+sizeof(LHEntry);j++,k++)
+        {
+                bp->bufs->write[j] = temp[k];
+        }
+    }
+
+    // Write value into page. 
+    err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
+    return pageno;
+}
+
+
+
 int PageUpdate(PageType pageno, std::vector<LHEntry> entries)
 {
    /* 
     * Step 1: Read all datum from original block. 
     */
-    int err;
     uint64_t chunkno = pageno/4096;
     uint64_t updatesec = pageno%4096;
     uint64_t curseofchunk = chunkusage[chunkno];
-    //printf("current sector pointer:%lu\n",curseofchunk);
+    std::unordered_map<PageType, std::vector<LHEntry>> TempEntries ;
     
     size_t ws_min = nvm_dev_get_ws_min(bp->dev);
 
-    // Read datum from original block/chunk.
     for (size_t sectr = 0; sectr < curseofchunk; sectr += ws_min) 
     {
-        struct nvm_addr chunk_addrs[1];
-        chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,sectr+chunkno*4096);
-        size_t buf_ofz = sectr * bp->geo->l.nbytes;
-		struct nvm_addr addrs[ws_min];
-        //printf("==============\n");
-		for (size_t aidx = 0; aidx < ws_min; ++aidx) 
-        {
-			addrs[aidx].val = chunk_addrs[0].val;
-			addrs[aidx].l.sectr = sectr + aidx;
-		}
-		err = nvm_cmd_read(bp->dev, addrs, ws_min, bp->bufs->read+buf_ofz, NULL, 0x0, NULL);
-
-        char * temp = new char[20];
-        for (size_t m = 0; m < CalculatePageCapacity(sizeof(LHEntry)); m++)
-        {
-            for(size_t k=0,j=buf_ofz+m*16;j<buf_ofz+m*16+16;j++,k++)
-            {
-                temp[k] = bp->bufs->read[j];
-                bp->bufs->write[j] = temp[k];
-            }
-        }
-
-		if (err == -1) 
-        {
-			printf("Read failure in part 1 of %ld page.\n",sectr);
-			return -1;
-		}
-        //printf("Read part 1 succeed!\n");
+    
+        std::vector<LHEntry> data = PageRead(sectr+chunkno*4096);
+        TempEntries[sectr] = data;
     }
-   /* 
-    * Step 2: Erase original block. 
-    */
+
+    /* Step 2: Erase original block. */
     int eraseflag = erasechunk(pageno, chunkno);
     if(eraseflag == -1)
     {
         printf("Fatal error: chunk %lu erase failure.\n Error information: pageno:%lu chunkno:%lu",pageno/4096,pageno,chunkno);
     }
 
-   /*
-    * Step 3: Update datum that generate from step 1.
-    */
-    char * temp = new char[20];
-    for (size_t i = 0; i < entries.size(); i++)
-    {
-        uint64_t *ML = (uint64_t*) temp;
-        ML[0] = entries[i].key, ML[1] = entries[i].val;
-        for(size_t j= (bp->geo->l.nbytes * updatesec)+i*sizeof(LHEntry),k=0;j<i*sizeof(LHEntry)+sizeof(LHEntry);j++,k++)
-        {
-            bp->bufs->write[j] = temp[k];
-        }
-    }
+   /* Step 3: Update datum that generate from step 1. */
+    TempEntries[updatesec] = entries;
+    
 
     /* Step 4: Write datum to the free-block. */
     for (size_t sectr = 0; sectr < curseofchunk; sectr += ws_min) 
     {
-        //printf("Write start:\n");
-        struct nvm_addr chunk_addrs[1];
-        chunk_addrs[0] = nvm_addr_dev2gen(bp->dev,sectr+chunkno*4096);
-        size_t buf_ofz = sectr * bp->geo->l.nbytes;
-		struct nvm_addr addrs[ws_min];
-		for (size_t aidx = 0; aidx < ws_min; ++aidx) 
-        {
-			addrs[aidx].val = chunk_addrs[0].val;
-			addrs[aidx].l.sectr = sectr + aidx;
-		}
-		err = nvm_cmd_write(bp->dev, addrs, ws_min, bp->bufs->write+buf_ofz, NULL, 0x0, NULL);  
-		if (err == -1) 
-        {
-			printf("Write failure in part 1 of %ld page.\n",sectr);
-			return -1;
-		}
-        //printf("Re-write part 1 succeed!\n");
+        writecount++;
+        BucketWrite(TempEntries[sectr], sectr+chunkno*4096);
     }
-
-    //printf("# Update completion in chunk: %ld\n", chunkno);
-    return err;
+    
+    return 0;
 }
-
-
 
 
 PageType SingleBucketWrite(std::vector<LHEntry> entries, uint64_t pageno)
@@ -271,9 +249,9 @@ PageType SingleBucketWrite(std::vector<LHEntry> entries, uint64_t pageno)
     }
     else
     {
+        erasecount++;
         writecount++;
         readcount++;
-        erasecount++;
         int err = 0;
         err = PageUpdate(pageno, entries);
         if(err != 0)

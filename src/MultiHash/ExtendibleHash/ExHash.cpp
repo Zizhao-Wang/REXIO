@@ -4,6 +4,10 @@
 #include "ExNode.h"
 #include "../../Backend/SSDRead/reader.h"
 
+int Eread = 0;
+int Ewrite = 0;
+int Eerase = 0;
+
 Directory::Directory(int depth, int bucket_size)
 {
     this->global_depth = depth;
@@ -30,7 +34,10 @@ int Directory::pairIndex(int bucket_no, int depth)
 void Directory::grow(void)
 {
     for(int i = 0 ; i < 1<<global_depth ; i++ )
+    {
         buckets.push_back(buckets[i]);
+    }
+        
     global_depth++;
 }
 
@@ -62,7 +69,7 @@ void Directory::split(int bucket_no)
 
     int local_depth,pair_index,index_diff,dir_size,i;
 
-    std::vector<ExEntry> temp ;
+    std::vector<ExEntry> temp;
     std::vector<ExEntry>::iterator it;
 
     // Hash Table double
@@ -96,7 +103,6 @@ void Directory::split(int bucket_no)
 
         printf(" %d %d  %d\n",index_diff, dir_size,i);
     }
-        
 
     for(it=temp.begin();it!=temp.end();it++)
         insert((*it).key,(*it).val);
@@ -145,14 +151,19 @@ string Directory::bucket_id(int n)
 
 void Directory::insert(SKey key,SValue value)
 {
+
     int bucket_no = hash(key);
-    
+    //printf("bucket no:%d\n",bucket_no);
     if(buckets[bucket_no]->IsFull()) // chech if bucket is full or not.
     {
         split(bucket_no);
+        insert(key,value);
     }
-
-    insert(key,value);
+    else
+    {
+        buckets[bucket_no]->Insert(key,value);
+    }
+    
 }
 
 void Directory::remove(SKey key,int mode)
@@ -191,7 +202,7 @@ void Directory::search(SKey key)
 
 }
 
-void Directory::display(bool duplicates)
+void Directory::display()
 {
 
     cout<<"Global depth : "<<global_depth<<endl;
@@ -223,15 +234,190 @@ void EXHashing1()
     Directory d(initial_global_depth,bucket_size);
     printf("======Initialized directory structure completed!=======\n");
 
-    /* WorkLoad A: */
+
+    /* workload a: insert only*/
+    printf(("=========workload A=====\n"));
     startTime = clock();
-    for(int i=1;i<=1000000;i++)
+    for(SKey i=1;i<=40000000;i++)
     {
-        d.insert(i,i);
+        if(i%10000000==0||i==1000000)
+        {
+            endTime = clock();
+            std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+            printf("Read count:%d Write count:%d Erase Count:%d \n",Eread = 0,Ewrite = 0,Eerase = 0);
+        }
+        d.insert(i,i);;
     }
     endTime = clock();
-    std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s" << std::endl;
+    printf("Read count:%d Write count:%d Erase Count:%d \n",Eread = 0,Ewrite = 0,Eerase = 0);
+    std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
+    //d.display();
 
+
+    /* workload b: read only, all in it */
+    startTime = clock();
+    Eread = 0;
+    Ewrite = 0;
+    Eerase = 0;
+    printf(("=========workload B=====\n"));
+    for(int i=1;i<=1000000;i++)
+    {
+        srand48(time(NULL));
+        SKey k = 1+(rand()%10000000);
+        d.search(k);
+        if(i==10000 || i%100000==0)
+        {
+            endTime = clock();
+            std::cout << "Total Time of "<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+            printf("Read count:%d Write count:%d Erase Count:%d \n",Eread = 0,Ewrite = 0,Eerase = 0);   
+        }
+    }
+    endTime = clock();
+    printf("Read count:%d Write count:%d Erase Count:%d \n",Eread = 0,Ewrite = 0,Eerase = 0);
+    std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
+
+    /* workload c: read only, 50% in it, 50% not in it */
+    startTime = clock();
+    printf(("=========workload C=====\n"));
+    Eread = 0;
+    Ewrite = 0;
+    Eerase = 0;
+     
+    for(int i=1;i<=1000000;i++)
+    {
+        srand48(time(NULL));
+        if(i%100<50)
+        {
+            SKey k = 1+(rand()%40000000);
+            d.Search(k);
+        }
+        else
+        {
+            SKey k = 40000000+(rand()%40000000);
+            d.Search(k);
+        }
+        if(i%100000==0 || i==10000)
+        {
+            endTime = clock();
+            std::cout << "Total Time of "<<i<<" in workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";  
+            printf("Read count:%d Write count:%d Erase Count:%d \n",Eread = 0,Ewrite = 0,Eerase = 0);   
+        }
+    }
+    printf("Read count:%d Write count:%d Erase Count:%d \n",Eread = 0,Ewrite = 0,Eerase = 0);
+    endTime = clock();
+    std::cout << "Total Time of workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
+
+    /* workload d: update heavy workload, 50% read, 50% update */
+    startTime = clock();
+    printf(("=========workload D=====\n"));
+    Eread = 0;
+    Ewrite = 0;
+    Eerase = 0;
+    for(int i=1;i<=1000000;i++)
+    {
+        srand48(time(NULL));
+        if(i%2==0)
+        {
+            SKey k = 1+(rand()%40000000);
+            d.Search(k);
+        }
+        else
+        {
+            SKey k = 1+(rand()%40000000);
+            d.Update(k,k+1);
+        }
+        if(i%100000==0 || i==10000)
+        {
+            endTime = clock();
+            std::cout << "Total Time of "<<i<<" in workload D: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+            printf("Read count:%d Write count:%d Erase Count:%d \n",Eread = 0,Ewrite = 0,Eerase = 0); 
+        } 
+    }
+    printf("Read count:%d Write count:%d Erase Count:%d \n",Eread = 0,Ewrite = 0,Eerase = 0);
+    endTime = clock();
+    std::cout << "Total Time of workload d: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
+
+    /* workload E: read mostly workload, 95% read, 5% update */
+    Eread = 0;
+    Ewrite = 0;
+    Eerase = 0;
+    startTime = clock();
+    printf(("=========workload E=====\n"));
+    for(int i=1;i<=1000000;i++)
+    {
+        srand48(time(NULL));
+        if(i%100<95)
+        {
+            SKey k = 1+(rand()%40000000);
+            hashtable.Search(k);
+        }
+        else
+        {
+            SKey k = 1+(rand()%40000000);
+            hashtable.Update(k,k+1);
+        }
+        if(i%100000==0 || i==10000)
+        {
+            endTime = clock();
+            std::cout << "Total Time of "<<i<<" in workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n"; 
+            printf("Read count:%d Write count:%d Erase Count:%d \n",Eread ,Ewrite ,Eerase );  
+        } 
+    }
+    printf("Read count:%d Write count:%d Erase Count:%d \n",Eread ,Ewrite ,Eerase);
+    endTime = clock();
+    std::cout << "Total Time of workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
+
+     /* workload F: read latest workload, 95% read, 5% insert */
+     startTime = clock();
+     printf(("=========workload F=====\n"));
+     readcount=0;
+     writecount=0;
+     erasecount=0;
+     for(int i=1;i<=1000000;i++)
+     {
+          srand48(time(NULL));
+          if(i%100<95)
+          {
+               SKey k = 1+(rand()%40000000);
+               hashtable.Search(k);
+          }
+          else
+          {
+               SKey k = 1+(rand()%40000000);
+               hashtable.Insert(i+40000000,i+40000000);
+          }
+          if(i%100000==0 || i==10000)
+          {
+               endTime = clock();
+               std::cout << "Total Time of "<<i<<" in workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+               printf("Read count:%d Write count:%d Erase Count:%d \n",Eread ,Ewrite ,Eerase);
+          } 
+     }
+     printf("Read count:%d Write count:%d Erase Count:%d \n",Eread ,Ewrite ,Eerase);
+     endTime = clock();
+     std::cout << "Total Time of workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
+
+     /* workload G: delete workload, 100% delete*/
+     startTime = clock();
+     printf(("=========workload G=====\n"));
+     readcount=0;
+     writecount=0;
+     erasecount=0;
+     for(int i=1;i<=1000000;i++)
+     {
+        srand48(time(NULL));
+        SKey k = 1+(rand()%40000000);
+        d.remove(k);
+        if(i%100000==0 || i==10000)
+        {
+            endTime = clock();
+            std::cout << "Total Time of "<<i<<" in workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+            printf("Read count:%d Write count:%d Erase Count:%d \n",Eread ,Ewrite ,Eerase);     
+        }  
+    }
+    printf("Read count:%d Write count:%d Erase Count:%d \n",Eread ,Ewrite ,Eerase);
+    endTime = clock();
+    std::cout << "Total Time of workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
  
 
     /*do

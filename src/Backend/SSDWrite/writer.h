@@ -24,6 +24,7 @@
 #include "../../MultiHash/LinearHash/node.h"
 #include "../../MultiHash/LinearHash/LiHash.h"
 #include "../../MultiHash/ExtendibleHash/ExNode.h"
+#include "../../MultiHash/ExtendibleHash/ExHash.h"
 
 /*  Global variables for SSD write definition.  */
 

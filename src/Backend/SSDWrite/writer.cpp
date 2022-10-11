@@ -21,6 +21,7 @@
 #include "../../TNCTree/TNCtree.h"
 #include "../SSDRead/reader.h"
 
+
 std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkLog;
 std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkData;
 std::unordered_map<uint64_t,bool[1024]> GPT;
@@ -316,7 +317,7 @@ int PageUpdate(PageType pageno, std::vector<ExEntry> entries)
 
     for (size_t sectr = 0; sectr < curseofchunk; sectr += ws_min) 
     {
-    
+        Eread++;
         std::vector<ExEntry> data =EBucketRead(sectr+chunkno*4096);
         TempEntries[sectr] = data;
     }
@@ -335,7 +336,7 @@ int PageUpdate(PageType pageno, std::vector<ExEntry> entries)
     /* Step 4: Write datum to the free-block. */
     for (size_t sectr = 0; sectr < curseofchunk; sectr += ws_min) 
     {
-        writecount++;
+        Ewrite++;
         BucketWrite(TempEntries[sectr], sectr+chunkno*4096);
     }
     
@@ -351,7 +352,7 @@ PageType SingleBucketWrite(std::vector<ExEntry> entries, uint64_t pageno)
     
     if(pageno == UINT64_MAX)
     {
-        writecount++;
+        Ewrite++;
         pageno = sectorpointer;
         //printf("pageno:%lu sectorpointer:%lu",pageno,sectorpointer);
         struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, pageno);
@@ -383,9 +384,8 @@ PageType SingleBucketWrite(std::vector<ExEntry> entries, uint64_t pageno)
     }
     else
     {
-        erasecount++;
-        writecount++;
-        readcount++;
+
+        Eerase++;
         int err = 0;
         err = PageUpdate(pageno, entries);
         if(err != 0)

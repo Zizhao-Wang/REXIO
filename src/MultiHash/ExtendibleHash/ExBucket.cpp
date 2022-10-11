@@ -1,6 +1,9 @@
 #include "ExBucket.h"
+#include <algorithm>
+#include "../../Backend/SSDWrite/writer.h"
+#include "../../Backend/SSDRead/reader.h"
 
-Bucket::Bucket(int depth, int msize)
+ExBucket::ExBucket(int depth, int msize)
 {
     this->depth = depth;
     this->maxsize = msize;
@@ -8,9 +11,16 @@ Bucket::Bucket(int depth, int msize)
     this->PageNum = UINT64_MAX;
 }
 
-int Bucket::Insert(SKey key,uint64_t value)
+int ExBucket::PageWrite()
 {
+    sort(values.begin(),values.end());
+    PageNum = SingleBucketWrite(values, PageNum);
+    values.clear();
+    return 0;
+}
 
+int ExBucket::Insert(SKey key,uint64_t value)
+{
 
     std::vector<ExEntry>::iterator it;
     it = find(values.begin(),values.end(),ExEntry{key,0}); 
@@ -18,26 +28,27 @@ int Bucket::Insert(SKey key,uint64_t value)
     if(it!=values.end())
     {
         (*it).val = value;
-        return 1;
+        return 0;
     }
 
     values.emplace_back(ExEntry{key,value});
+    size++;
 
     if(IsFull())
     {
-        PageNum = PageWrite();
+        PageWrite();
         return 0;
     }
     //printf("%ld \n",pageno);
     return 1;
 }
 
-int Bucket::Remove(SKey key)
+int ExBucket::Remove(SKey key)
 {
     if(values.size()!=0)
      {
           std::vector<ExEntry>::iterator get;
-          get = find(values.begin(),values.end(), LHEntry{key,0});
+          get = find(values.begin(),values.end(), ExEntry{key,0});
           if(get != values.end())
           {
                values.erase(get);
@@ -50,7 +61,7 @@ int Bucket::Remove(SKey key)
         values = EBucketRead(PageNum);
         std::vector<ExEntry>::iterator get;
         size += maxsize;
-        get = find(values.begin(),values.end(), LHEntry{key,0});
+        get = find(values.begin(),values.end(), ExEntry{key,0});
         if(get != values.end())
         {
             values.erase(get);
@@ -62,12 +73,12 @@ int Bucket::Remove(SKey key)
      return 1;
 }
 
-inline int Bucket::Update(SKey key, SValue value)
+int ExBucket::Update(SKey key, SValue value)
 {
     if(values.size()!=0)
      {
           std::vector<ExEntry>::iterator get;
-          get = find(values.begin(),values.end(), LHEntry{key,0});
+          get = find(values.begin(),values.end(), ExEntry{key,0});
           if(get != values.end())
           {
                (*get).val = value;
@@ -79,22 +90,22 @@ inline int Bucket::Update(SKey key, SValue value)
         values = EBucketRead(PageNum);
         std::vector<ExEntry>::iterator get;
         size += maxsize;
-        get = find(values.begin(),values.end(), LHEntry{key,0});
+        get = find(values.begin(),values.end(), ExEntry{key,0});
         if(get != values.end())
         {
             (*get).val = value;
-            PageNum = PageWrite();
+            PageWrite();
             return 0;
         }
     }
      return 1;
 }
 
-ExEntry Bucket::Search(SKey key)
+ExEntry ExBucket::Search(SKey key)
 {
-     // for(int i=0;i<bucket.size();i++)
+     // for(int i=0;i<ExBucket.size();i++)
      // {
-     //      printf("%lu in bucket",bucket[i].key);
+     //      printf("%lu in ExBucket",ExBucket[i].key);
      // }
      // printf("============\n");
      // printf("PageNum: %lu ",PageNum);
@@ -124,7 +135,7 @@ ExEntry Bucket::Search(SKey key)
     return ExEntry{key,0};
 }
 
-bool Bucket::IsFull(void)
+bool ExBucket::IsFull(void)
 {
     if(size >= maxsize)
         return true;
@@ -132,7 +143,7 @@ bool Bucket::IsFull(void)
         return false;
 }
 
-bool Bucket::IsEmpty(void)
+bool ExBucket::IsEmpty(void)
 {
     if(size == 0)
         return true;
@@ -140,12 +151,12 @@ bool Bucket::IsEmpty(void)
         return false;
 }
 
-int Bucket::getDepth(void)
+int ExBucket::getDepth(void)
 {
     return depth;
 }
 
-std::vector<ExEntry>  Bucket::GetData()
+std::vector<ExEntry>  ExBucket::GetData()
 {
 
     //assert(size == CalculatePageCapacity(sizeof(ExEntry)));
@@ -154,30 +165,36 @@ std::vector<ExEntry>  Bucket::GetData()
         std::vector<ExEntry> entries = EBucketRead(PageNum);
         return entries;
     }
-    //printf("test! in Get BUCKET\n");
+    //printf("test! in Get ExBucket\n");
     return values;
 
 }
 
-int Bucket::increaseDepth(void)
+int ExBucket::increaseDepth(void)
 {
     depth++;
     return depth;
 }
 
-int Bucket::decreaseDepth(void)
+int ExBucket::decreaseDepth(void)
 {
     depth--;
     return depth;
 }
 
-void Bucket::Allclear(void)
+void ExBucket::Allclear(void)
 {
     values.clear();
     size = 0;
 }
 
-std::vector<ExEntry> Bucket::Pageread()
+void ExBucket::display(void)
+{
+    printf("Memeory size:%lu Actual size:%d PageNum:%lu",values.size(),size,PageNum);
+    return ;
+}
+
+std::vector<ExEntry> ExBucket::Pageread()
 {
     std::vector<ExEntry> data;
     return data;

@@ -88,8 +88,8 @@ void LSbucket::Erase(void)
 
 int LSbucket::PageWrite()
 {
-  
-  return 0;
+    return 0;
+
 }
 
 std::vector<LSEntry> LSbucket::BDataRead()

@@ -125,6 +125,7 @@ std::vector<ExEntry> EBucketRead(PageType PageNum)
 {
 	std::vector<ExEntry> entries;
 
+    Eread++;
 	SinglePageRead(PageNum);
 
     char * temp = new char[20];

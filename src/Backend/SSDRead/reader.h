@@ -24,6 +24,7 @@
 #include "../../Auxizilary/VariablesTypes.h"
 #include "../../MultiHash/LazySplitHash/LSNode.h"
 #include "../../MultiHash/ExtendibleHash/ExNode.h"
+#include "../../MultiHash/ExtendibleHash/ExHash.h"
 /**
  * Function declartion for reading from one or more pages:
  * Two-tier none-coupling tree  

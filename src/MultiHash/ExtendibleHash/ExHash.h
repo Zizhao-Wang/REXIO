@@ -49,26 +49,29 @@ public:
 
 };
 
-
-
-class Directory {
-    public:
-        int global_depth, bucket_size;
-        vector<Bucket*> buckets;
-        int hash(int n);
-        int pairIndex(int bucket_no, int depth);
-        void grow(void);
-        void shrink(void);
-        void split(int bucket_no);
-        void merge(int bucket_no);
-        string bucket_id(int n);
+class Directory 
+{
+private:
+    int global_depth, bucket_size;
+    vector<Bucket*> buckets;
     
-        Directory(int depth, int bucket_size);
-        void insert(int key,uint64_t value,bool reinserted);
-        void remove(int key,int mode);
-        void update(int key, uint64_t value);
-        void search(int key);
-        void display(bool duplicates);
+public:
+    int hash(int n);
+    int pairIndex(int bucket_no, int depth);
+    void grow(void);
+    void shrink(void);
+    void split(int bucket_no);
+    void merge(int bucket_no);
+    string bucket_id(int n);
+    
+    Directory(int depth, int bucket_size);
+    void insert(int key,uint64_t value,bool reinserted);
+    void remove(int key,int mode);
+    void update(int key, uint64_t value);
+    void search(int key);
+    void display(bool duplicates);
+
+
 };
 
 /* Bucket class functions */

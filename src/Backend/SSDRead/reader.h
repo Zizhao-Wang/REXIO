@@ -23,6 +23,7 @@
 #include "../../MultiHash/LinearHash/node.h"
 #include "../../Auxizilary/VariablesTypes.h"
 #include "../../MultiHash/LazySplitHash/LSNode.h"
+#include "../../MultiHash/ExtendibleHash/ExNode.h"
 /**
  * Function declartion for reading from one or more pages:
  * Two-tier none-coupling tree  
@@ -39,6 +40,13 @@ TNCEntry* TNCEntryRead(PageType PageId);
 std::vector<LHEntry> PageRead(PageType PageNum);
 
 int PageReadTest(PageType PageNum);
+
+/**
+ * ============= Extendible Hash module ===============
+ *  Function declartion for writing data into one or more pages:
+ **/
+std::vector<ExEntry> EBucketRead(PageType PageNum);
+
 
 /**
  * ============= LSM-tree module ===============

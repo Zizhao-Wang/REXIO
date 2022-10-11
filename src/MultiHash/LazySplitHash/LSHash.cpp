@@ -78,7 +78,13 @@ void LSbucket::AllClear(void)
   AssertCondition(BucketEntries.size()==0);
 }
 
+void LSbucket::Erase(void)
+{
 
+  size = 0;
+  BucketEntries.clear();
+  
+}
 
 int LSbucket::PageWrite()
 {
@@ -141,6 +147,7 @@ void LSHash::Split(size_t BucketNum)
 {
   std::vector<LSEntry> tempdata;
   tempdata = bucketList[BucketNum].Getdata();
+  bucketList[BucketNum].AllClear();
   
   for(size_t i =0;i<tempdata.size();i++)
   {
@@ -186,23 +193,23 @@ double LSHash::IFCompute()
 
 int LSHash::Insert(SKey key, SValue value)
 {
-  this->Allsize++;
-  uint8_t i = GetBits(bucketList.size());
-  if(IFCompute()>IFthreshold)
-  {
-    LSbucket temp(bmaxsize);
-    bucketList.emplace_back(temp);
-    //split
+    this->Allsize++;
     uint8_t i = GetBits(bucketList.size());
-    size_t num = BitHashfunc(bucketList.size()-1,GetBits(bucketList.size()-1)-1);
-    Split(num);
-  }
-  uint64_t tmp = BitHashfunc(key,i);
-  if(tmp >= bucketList.size())
-  {
-    tmp = BitHashfunc(BitHashfunc(key,i),GetBits(BitHashfunc(key,i))-1);
-  }
-  bucketList[tmp].Insert(key,value);
+    if(IFCompute()>IFthreshold)
+    {
+        LSbucket temp(bmaxsize);
+        bucketList.emplace_back(temp);
+        //split
+        uint8_t i = GetBits(bucketList.size());
+        size_t num = BitHashfunc(bucketList.size()-1,GetBits(bucketList.size()-1)-1);
+        Split(num);
+    }
+    uint64_t tmp = BitHashfunc(key,i);
+    if(tmp >= bucketList.size())
+    {
+        tmp = BitHashfunc(BitHashfunc(key,i),GetBits(BitHashfunc(key,i))-1);
+    }
+    bucketList[tmp].Insert(key,value);
 	return 0;
 
 }

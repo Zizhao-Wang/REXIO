@@ -66,13 +66,10 @@ TNCEntry* TNCEntryRead(PageType PageId)
  **/
 std::vector<LHEntry> PageRead(PageType PageNum)
 {
+    readcount++;
 	std::vector<LHEntry> entries;
 
-    // clock_t startTime,endTime;  // Definition of timestamp
-    // startTime = clock();
 	SinglePageRead(PageNum);
-    // endTime = clock();
-    // std::cout << "Total Time : " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
     char * temp = new char[20];
     LHEntry entry;
@@ -91,8 +88,37 @@ std::vector<LHEntry> PageRead(PageType PageNum)
 	
 }
 
+int PageReadTest(PageType PageNum)
+{
+
+
+    // clock_t startTime,endTime;  // Definition of timestamp
+    // startTime = clock();
+	SinglePageRead(PageNum);
+    // endTime = clock();
+    // std::cout << "Total Time : " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+
+    printf("Page %lu:\n",PageNum);
+    char * temp = new char[20];
+    LHEntry entry;
+    for (size_t i = 0; i < 5; i++)
+    {
+        for(size_t j = i*sizeof(LHEntry),k=0;j<i*sizeof(LHEntry)+sizeof(LHEntry);j++,k++)
+        {
+            temp[k] = bp->bufs->read[j];
+        }
+        uint64_t *ML = (uint64_t*) temp;
+        entry.key = ML[0], entry.val = ML[1];
+        printf("key: %lu val:%lu    ",ML[0],ML[1]);
+    }  
+    printf("===========\n");
+
+    return 0;
+	
+}
+
 /**
- * ============= Linear Hash module ===============
+ * ============= LSM-tree module ===============
  *  Function declartion for writing data into one or more pages:
  **/
 int PageDataRead(PageType pageno)
@@ -144,6 +170,33 @@ std::vector<entry_t> RunReadFromPage(PageType PageNum)
     return data;
 
 }
+
+std::vector<entry_t> RunReadFromPageTest(PageType PageNum)
+{
+
+    std::vector<entry_t> data;
+    assert(PageNum != UINT64_MAX);
+    PageDataRead(PageNum);
+    
+     printf("Page %lu\n",PageNum);
+    char * temp = new char[20];
+    entry_t TempEntry;
+    for (size_t i = 0; i <CalculatePageCapacity(sizeof(entry_t)); i++)
+    {
+        // printf("Value :%ld has been inserted!\n", ML[Cursize]);
+        for(size_t j = i*sizeof(entry_t),k=0;j<i*sizeof(entry_t)+sizeof(entry_t);j++,k++)
+        {
+            temp[k] = bp->bufs->read[j];
+        }
+        uint64_t *ML = (uint64_t*) temp;
+        TempEntry.key = ML[0], TempEntry.val = ML[1];
+        printf("key: %lu val:%lu\n",ML[0],ML[1]);
+    }
+    delete(temp);
+    return data;
+
+}
+
 
 
 /**

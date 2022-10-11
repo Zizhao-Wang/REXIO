@@ -56,7 +56,6 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
     * 2.check if the size is greater than 0 
     * 3.Flush directly if the size equals 0, or merge all datum of next run and flush    
     **/
-    printf("=========================\n");
     if (next->IsFull()) 
     {
        /**
@@ -114,7 +113,6 @@ int LSMTree::FlushInto(vector<Level>::iterator current)
         }
     }
     
-    printf("=========================\n");
     return 0;
 }
 
@@ -415,7 +413,6 @@ void LSMTreePort()
             endTime = clock();
             std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
             printf("Read count:%d Write count:%u Erase Count:%d \n",LSMTreeReadPhysicalPage,LSMTreeWritePhysicalPage,LSMTreeErasehysicalPage);
-
         }
         Lsmtree.PutValue(i,i);
     }
@@ -443,7 +440,8 @@ void LSMTreePort()
         if(i==10000 || i%100000==0)
         {
             endTime = clock();
-            std::cout << "Total Time of "<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+            std::cout << "Total Time of "<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+            printf("Read count:%d Write count:%u Erase Count:%d \n",LSMTreeReadPhysicalPage,LSMTreeWritePhysicalPage,LSMTreeErasehysicalPage);   
         }
      }
     endTime = clock();
@@ -470,10 +468,10 @@ void LSMTreePort()
         {
             endTime = clock();
             std::cout << "Total Time of "<<i<<" in workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-        //    printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
+            printf("Read count:%d Write count:%u Erase Count:%d \n",LSMTreeReadPhysicalPage,LSMTreeWritePhysicalPage,LSMTreeErasehysicalPage);
         }
     }
-   // printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
+    printf("Read count:%d Write count:%u Erase Count:%d \n",LSMTreeReadPhysicalPage,LSMTreeWritePhysicalPage,LSMTreeErasehysicalPage);
     endTime = clock();
     std::cout << "Total Time of workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
@@ -496,10 +494,10 @@ void LSMTreePort()
         {
             endTime = clock();
             std::cout << "Total Time of "<<i<<" in workload D: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-       //     printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);     
+            printf("Read count:%d Write count:%u Erase Count:%d \n",LSMTreeReadPhysicalPage,LSMTreeWritePhysicalPage,LSMTreeErasehysicalPage);
         } 
     }
-    //printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
+    printf("Read count:%d Write count:%u Erase Count:%d \n",LSMTreeReadPhysicalPage,LSMTreeWritePhysicalPage,LSMTreeErasehysicalPage);
     endTime = clock();
     std::cout << "Total Time of workload d: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
@@ -521,10 +519,11 @@ void LSMTreePort()
         if(i%100000==0 || i==10000)
         {
             endTime = clock();
-            std::cout << "Total Time of "<<i<<" in workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+            std::cout << "Total Time of "<<i<<" in workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+           printf("Read count:%d Write count:%u Erase Count:%d \n",LSMTreeReadPhysicalPage,LSMTreeWritePhysicalPage,LSMTreeErasehysicalPage);
         } 
     }
-     //printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
+    printf("Read count:%d Write count:%u Erase Count:%d \n",LSMTreeReadPhysicalPage,LSMTreeWritePhysicalPage,LSMTreeErasehysicalPage);
     endTime = clock();
     std::cout << "Total Time of workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
@@ -546,10 +545,11 @@ void LSMTreePort()
         if(i%100000==0 || i==10000)
         {
             endTime = clock();
-            std::cout << "Total Time of "<<i<<" in workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+            std::cout << "Total Time of "<<i<<" in workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n"; 
+            printf("Read count:%d Write count:%u Erase Count:%d \n",LSMTreeReadPhysicalPage,LSMTreeWritePhysicalPage,LSMTreeErasehysicalPage);
         } 
     }
-    //printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
+    printf("Read count:%d Write count:%u Erase Count:%d \n",LSMTreeReadPhysicalPage,LSMTreeWritePhysicalPage,LSMTreeErasehysicalPage);
     endTime = clock();
     std::cout << "Total Time of workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
@@ -563,10 +563,11 @@ void LSMTreePort()
         if(i%100000==0 || i==10000)
         {
             endTime = clock();
-            std::cout << "Total Time of "<<i<<" in workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+            std::cout << "Total Time of "<<i<<" in workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";  
+            printf("Read count:%d Write count:%u Erase Count:%d \n",LSMTreeReadPhysicalPage,LSMTreeWritePhysicalPage,LSMTreeErasehysicalPage);
         }  
     }
-    //printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
+    printf("Read count:%d Write count:%u Erase Count:%d \n",LSMTreeReadPhysicalPage,LSMTreeWritePhysicalPage,LSMTreeErasehysicalPage);
     endTime = clock();
     std::cout << "Total Time of workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 }

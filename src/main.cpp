@@ -75,9 +75,9 @@ int main(int argc, char **argv)
 
     // TNCtreePort();
 
-    LHashPort();
+    // LHashPort();
 
-    // LSMTreePort();
+    LSMTreePort();
 
     // LSHashPort();
 

@@ -45,6 +45,7 @@ public:
     bool IsEmpty(void) const;
 
     void AllClear(void);
+	void Erase(void);
 	uint16_t GetMaxSize() const;
 	std::vector<LSEntry> Getdata();
     int PageWrite();

@@ -28,12 +28,14 @@ private:
 #ifdef OverflowPage
     PageType overflowPage;
 #endif
+    
+public:
+    std::vector<LHEntry>  bucket;
     PageType  PageNum;
     
     size_t  BucketMax,size;   //The capacity of a speific bucket
 
-public:
-    std::vector<LHEntry>  bucket;
+
     LBucket(size_t maxsize);
 
     /* Insert key into specific vector! */
@@ -50,6 +52,7 @@ public:
     int ValueUpdate(SKey key1, SValue val);
 
     void BucketErase();
+    void BucketErase(bool flag);
 
     /**
      *  "get()" functions is used to set private variables.
@@ -91,6 +94,8 @@ public:
 
     /* Return 0 if suucess, */
     int split(size_t SplitBucket);
+
+    bool Judge(size_t bucketno);
 
     int Insert(SKey key, SValue value);
 

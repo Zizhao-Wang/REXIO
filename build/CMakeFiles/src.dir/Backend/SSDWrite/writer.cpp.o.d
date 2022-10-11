@@ -1,7 +1,7 @@
 CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/writer.cpp \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/writer.cpp \
  /usr/include/stdc-predef.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/writer.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/writer.h \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
@@ -134,14 +134,14 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: \
  /usr/include/c++/9/bits/invoke.h /usr/include/c++/9/limits \
  /usr/include/c++/9/bits/unordered_map.h \
  /usr/include/c++/9/bits/erase_if.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm.h \
+ /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm.h \
  /usr/include/inttypes.h /usr/include/c++/9/stdlib.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm_util.h \
+ /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm_util.h \
  /usr/include/string.h /usr/include/strings.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm_spec.h \
+ /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm_spec.h \
  /usr/include/assert.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../TNCTree/MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../TNCTree/MemoryTier/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../TNCTree/MemoryTier/Node.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../TNCTree/MemoryTier/../../Auxizilary/GlobalVariable.h \
  /usr/include/c++/9/iostream /usr/include/c++/9/ostream \
  /usr/include/c++/9/ios /usr/include/c++/9/bits/ios_base.h \
  /usr/include/c++/9/bits/locale_classes.h \
@@ -159,52 +159,52 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: \
  /usr/include/c++/9/bits/basic_ios.tcc \
  /usr/include/c++/9/bits/ostream.tcc /usr/include/c++/9/istream \
  /usr/include/c++/9/bits/istream.tcc \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../Auxizilary/SysOutput.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../Auxizilary/VariablesTypes.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../Auxizilary/SysOutput.h \
  /usr/include/c++/9/algorithm /usr/include/c++/9/bits/stl_algo.h \
  /usr/include/c++/9/bits/algorithmfwd.h \
  /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
  /usr/include/c++/9/bits/uniform_int_dist.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../TNCTree/StoreTier/syncstore.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../TNCTree/StoreTier/../MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../TNCTree/StoreTier/../../LRU/lru.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../TNCTree/StoreTier/syncstore.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../TNCTree/StoreTier/../MemoryTier/Node.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../TNCTree/StoreTier/../../LRU/lru.h \
  /usr/include/c++/9/list /usr/include/c++/9/bits/stl_list.h \
  /usr/include/c++/9/bits/allocated_ptr.h /usr/include/c++/9/bits/list.tcc \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../TNCTree/StoreTier/../../LRU/../TNCTree/MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/LiHash.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../BlockManage/BlockInfo.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm_cli.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../IODisk/WriteDisk.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/LsmTree.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/buffer.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../TNCTree/StoreTier/../../LRU/../TNCTree/MemoryTier/Node.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/LiHash.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../BlockManage/BlockInfo.h \
+ /home/femu/experiment/code2/src/../../../liblightnvm/include/liblightnvm_cli.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../IODisk/WriteDisk.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../LSM-Tree/LsmTree.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/buffer.h \
  /usr/include/c++/9/set /usr/include/c++/9/bits/stl_tree.h \
  /usr/include/c++/9/bits/stl_set.h /usr/include/c++/9/bits/stl_multiset.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/../../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/../../Backend/IODisk/WriteDisk.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/node2.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/level.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/../../Auxizilary/VariablesTypes.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/../../Backend/IODisk/WriteDisk.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/node2.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/level.h \
  /usr/include/c++/9/queue /usr/include/c++/9/deque \
  /usr/include/c++/9/bits/stl_deque.h /usr/include/c++/9/bits/deque.tcc \
  /usr/include/c++/9/bits/stl_queue.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/../../Auxizilary/SysOutput.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/run.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/spin_lock.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/../../Auxizilary/SysOutput.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/run.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/spin_lock.h \
  /usr/include/c++/9/atomic /usr/include/c++/9/bits/atomic_base.h \
  /usr/include/c++/9/bits/atomic_lockfree_defines.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/worker_pool.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/worker_pool.h \
  /usr/include/c++/9/functional /usr/include/c++/9/bits/refwrap.h \
  /usr/include/c++/9/bits/std_function.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/thread_pool.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/thread_pool.h \
  /usr/include/c++/9/memory /usr/include/c++/9/bits/stl_raw_storage_iter.h \
  /usr/include/c++/9/ext/concurrence.h \
  /usr/include/c++/9/bits/unique_ptr.h \
@@ -218,9 +218,19 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: \
  /usr/include/c++/9/bits/unique_lock.h \
  /usr/include/c++/9/condition_variable /usr/include/c++/9/future \
  /usr/include/c++/9/bits/atomic_futex.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/../Auxizilary/SysOutput.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/merge.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../LSM-Tree/../Auxizilary/VariablesTypes.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../LSM-Tree/../Auxizilary/SysOutput.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/merge.h \
  /usr/include/c++/9/cassert \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/run.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../TNCTree/TNCtree.h
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/run.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../../TNCTree/TNCtree.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../SSDRead/reader.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../SSDRead/../../Auxizilary/SysOutput.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../SSDRead/../../TNCTree/StoreTier/syncstore.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../SSDRead/../../TNCTree/StoreTier/asyncstore.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../SSDRead/../../TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../SSDRead/../../TNCTree/utility/types.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../SSDRead/../../TNCTree/utility/../MemoryTier/Node.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../SSDRead/../../MultiHash/LinearHash/node.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../SSDRead/../../Auxizilary/VariablesTypes.h \
+ /home/femu/experiment/code2/src/Backend/SSDWrite/../SSDRead/../../MultiHash/LazySplitHash/LSNode.h

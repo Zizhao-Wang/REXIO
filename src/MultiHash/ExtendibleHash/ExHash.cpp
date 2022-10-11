@@ -1,15 +1,17 @@
 /* header files references. */
 #include "ExHash.h"
 #include <ctime>
+#include "ExNode.h"
 #include "../../Backend/SSDRead/reader.h"
 
-inline Directory::Directory(int depth, int bucket_size)
+Directory::Directory(int depth, int bucket_size)
 {
     this->global_depth = depth;
     this->bucket_size = bucket_size;
+
     for(int i = 0 ; i < 1<<depth ; i++ )
     {
-        buckets.push_back(new Bucket(depth,bucket_size));
+        buckets.push_back(new ExBucket(depth,bucket_size));
     }
 }
 
@@ -20,7 +22,7 @@ int Directory::hash(int n)
 }
 
 
-inline int Directory::pairIndex(int bucket_no, int depth)
+int Directory::pairIndex(int bucket_no, int depth)
 {
     return bucket_no^(1<<(depth-1));
 }
@@ -38,7 +40,7 @@ void Directory::grow(void)
 // 邮电在哪 
 
 
-inline void Directory::shrink(void)
+void Directory::shrink(void)
 {
     int i,flag=1;
     for( i=0 ; i<buckets.size() ; i++ )
@@ -49,6 +51,7 @@ inline void Directory::shrink(void)
             return;
         }
     }
+
     global_depth--;
     for(i = 0 ; i < 1<<global_depth ; i++ )
         buckets.pop_back();
@@ -71,7 +74,7 @@ void Directory::split(int bucket_no)
     pair_index = pairIndex(bucket_no,local_depth);
 
     //对插入的数据进行初始化 
-    buckets[pair_index] = new Bucket(local_depth,bucket_size);
+    buckets[pair_index] = new ExBucket(local_depth,bucket_size);
 
     temp = buckets[bucket_no]->GetData();
     buckets[bucket_no]->Allclear();
@@ -99,7 +102,7 @@ void Directory::split(int bucket_no)
         insert((*it).key,(*it).val);
 }
 
-inline void Directory::merge(int bucket_no)
+void Directory::merge(int bucket_no)
 {
     int local_depth,pair_index,index_diff,dir_size,i;
 
@@ -120,7 +123,7 @@ inline void Directory::merge(int bucket_no)
     }
 }
 
-inline  string Directory::bucket_id(int n)
+string Directory::bucket_id(int n)
 {
     int d;
     string s;
@@ -155,11 +158,11 @@ void Directory::insert(SKey key,SValue value)
 void Directory::remove(SKey key,int mode)
 {
     int bucket_no = hash(key);
-    if(buckets[bucket_no]->remove(key))
-        cout<<"Deleted key "<<key<<" from bucket "<<bucket_id(bucket_no)<<endl;
+    buckets[bucket_no]->Remove(key);
+
     if(mode>0)
     {
-        if(buckets[bucket_no]->isEmpty() && buckets[bucket_no]->getDepth()>1)
+        if(buckets[bucket_no]->IsEmpty() && buckets[bucket_no]->getDepth()>1)
             merge(bucket_no);
     }
     if(mode>1)
@@ -209,7 +212,6 @@ void EXHashing1()
     int bucket_size=CalculatePageCapacity(sizeof(ExEntry)); 
     int initial_global_depth=2;
     int key, mode;
-    string choice, value;
     clock_t startTime,endTime;
 
     // Set show_messages to 0 when taking input using file redirection

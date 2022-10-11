@@ -13,7 +13,6 @@
 
 #include <iostream>
 #include <vector>
-#include "ExNode.h"
 #include "../../Backend/IODisk/WriteDisk.h"
 #include "ExBucket.h"
 
@@ -24,7 +23,7 @@ class Directory
 {
 private:
     int global_depth, bucket_size;
-    vector<Bucket*> buckets;
+    vector<ExBucket*> buckets;
     
 public:
     int hash(int n);

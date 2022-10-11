@@ -12,8 +12,9 @@
 #define EXPERIMENT1_EXTENDIBLEHASH_EXBUCKET_H
 
 #include <vector>
+#include "ExNode.h"
 
-class Bucket 
+class ExBucket 
 {
 private:
     int depth,size,maxsize; 
@@ -21,7 +22,7 @@ private:
     std::vector<ExEntry> values;
 
 public:
-    Bucket(int depth, int msize);
+    ExBucket(int depth, int msize);
 
     int Insert(SKey key,SValue value);
     int Remove(SKey key);

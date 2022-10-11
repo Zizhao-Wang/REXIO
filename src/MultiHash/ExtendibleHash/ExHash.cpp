@@ -38,35 +38,60 @@ int Bucket::Insert(SKey key,uint64_t value)
 
 int Bucket::Remove(SKey key)
 {
-    std::map<int,uint64_t>::iterator it;
-    it = values.find(key);
-    if(it!=values.end())
-    {
-        values.erase(it);
-        return 1;
-    }
-    else
-    {
-        cout<<"Cannot remove : This key does not exists"<<endl;
-        return 0;
-    }
+    if(values.size()!=0)
+     {
+          std::vector<ExEntry>::iterator get;
+          get = find(values.begin(),values.end(), LHEntry{key,0});
+          if(get != values.end())
+          {
+               values.erase(get);
+               size--;
+               return 0;
+          }
+     }
+     else
+     {
+        values = EBucketRead(PageNum);
+        std::vector<ExEntry>::iterator get;
+        size += maxsize;
+        get = find(values.begin(),values.end(), LHEntry{key,0});
+        if(get != values.end())
+        {
+            values.erase(get);
+            size--;
+            return 0;
+        }
+     }
+
+     return 1;
 }
 
-inline int Bucket::Update(int key, uint64_t value)
+inline int Bucket::Update(SKey key, SValue value)
 {
-    std::map<int,uint64_t>::iterator it;
-    it = values.find(key);
-    if(it!=values.end())
-    {
-        values[key] = value;
-        cout<<"Value updated"<<endl;
-        return 1;
+    if(values.size()!=0)
+     {
+          std::vector<ExEntry>::iterator get;
+          get = find(values.begin(),values.end(), LHEntry{key,0});
+          if(get != values.end())
+          {
+               (*get).val = value;
+               return 0;
+          }
     }
     else
     {
-        cout<<"Cannot update : This key does not exists"<<endl;
-        return 0;
+        values = EBucketRead(PageNum);
+        std::vector<ExEntry>::iterator get;
+        size += maxsize;
+        get = find(values.begin(),values.end(), LHEntry{key,0});
+        if(get != values.end())
+        {
+            (*get).val = value;
+            PageNum = PageWrite();
+            return 0;
+        }
     }
+     return 1;
 }
 
 ExEntry Bucket::Search(SKey key)

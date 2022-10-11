@@ -117,6 +117,34 @@ int PageReadTest(PageType PageNum)
 	
 }
 
+/** 
+ * ================= Extendible Hash module ==================== 
+ *   Read functions for Linear Hashing! 
+ **/
+std::vector<ExEntry> EBucketRead(PageType PageNum)
+{
+	std::vector<ExEntry> entries;
+
+	SinglePageRead(PageNum);
+
+    char * temp = new char[20];
+    LHEntry entry;
+    for (size_t i = 0; i < CalculatePageCapacity(sizeof(ExEntry)); i++)
+    {
+        for(size_t j = i*sizeof(ExEntry),k=0;j<i*sizeof(ExEntry)+sizeof(ExEntry);j++,k++)
+        {
+            temp[k] = bp->bufs->read[j];
+        }
+        uint64_t *ML = (uint64_t*) temp;
+        entry.key = ML[0], entry.val = ML[1];
+        entries.emplace_back(entry);
+    }  
+
+    return entries;
+
+}
+
+
 /**
  * ============= LSM-tree module ===============
  *  Function declartion for writing data into one or more pages:

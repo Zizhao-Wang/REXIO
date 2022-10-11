@@ -30,13 +30,13 @@ private:
 public:
     Bucket(int depth, int msize);
 
-    int Insert(int key,uint64_t value);
-    int Remove(int key);
-    int Update(int key, uint64_t value);
-    void Search(int key);
+    int Insert(SKey key,SValue value);
+    int Remove(SKey key);
+    int Update(SKey key, SValue value);
+    ExEntry Search(SKey key);
 
-    int isFull(void);
-    int isEmpty(void);
+    bool IsFull(void);
+    bool IsEmpty(void);
 
     int getDepth(void);
     int increaseDepth(void);
@@ -46,6 +46,7 @@ public:
     void clear(void);
     void display(void);
     int  PageWrite();
+    std::vector<ExEntry> Pageread();
 
 };
 
@@ -73,140 +74,9 @@ class Directory {
 
 /* Bucket class functions */
 
-inline Bucket::Bucket(int depth, int msize)
-{
-    this->depth = depth;
-    this->maxsize = msize;
-    this->size = 0;
-    this->PageNum = UINT64_MAX;
-}
-
-inline int Bucket::insert(int key,uint64_t value)
-{
 
 
-    std::map<int,uint64_t>::iterator it;
-    it = values.find(key);
 
-    // 如果找不到，直接返回end，说明之前没被插入
-    if(it!=values.end())
-        return -1;
-    if(isFull())
-    {
-        vector<uint64_t> result;
-        /*  for(it = values.begin(); it != values.end(); ++it)
-            result.push_back(it->second);
-        if(this->pageno == 100000000 )
-            this->pageno = SSD_write2(result, true);
-        else
-            this->pageno = SSD_write2(result, false, pageno); */ 
-        return 0;
-    }
-    //printf("%ld \n",pageno);
-    this->pageno = SingleValueWrite(value,this->pageno,this->CurSize);
-    values[key] = value;
-    this->CurSize++;
-    return 1;
-}
-
-inline int Bucket::remove(int key)
-{
-    std::map<int,uint64_t>::iterator it;
-    it = values.find(key);
-    if(it!=values.end())
-    {
-        values.erase(it);
-        return 1;
-    }
-    else
-    {
-        cout<<"Cannot remove : This key does not exists"<<endl;
-        return 0;
-    }
-}
-
-inline int Bucket::update(int key, uint64_t value)
-{
-    std::map<int,uint64_t>::iterator it;
-    it = values.find(key);
-    if(it!=values.end())
-    {
-        values[key] = value;
-        cout<<"Value updated"<<endl;
-        return 1;
-    }
-    else
-    {
-        cout<<"Cannot update : This key does not exists"<<endl;
-        return 0;
-    }
-}
-
-inline void Bucket::search(int key)
-{
-    std::map<int,uint64_t>::iterator it;
-    it = values.find(key);
-    if(it!=values.end())
-    {
-        cout<<"Value = "<<it->second<<endl;
-    }
-    else
-    {
-        cout<<"This key does not exists"<<endl;
-    }
-}
-
-inline int Bucket::isFull(void)
-{
-    if(values.size()==size)
-        return 1;
-    else
-        return 0;
-}
-
-inline int Bucket::isEmpty(void)
-{
-    if(values.size()==0)
-        return 1;
-    else
-        return 0;
-}
-
-inline int Bucket::getDepth(void)
-{
-    return depth;
-}
-
-inline int Bucket::increaseDepth(void)
-{
-    depth++;
-    return depth;
-}
-
-inline int Bucket::decreaseDepth(void)
-{
-    depth--;
-    return depth;
-}
-
-inline map<int, uint64_t> Bucket::copy(void)
-{
-    std::map<int, uint64_t> temp(values.begin(),values.end());
-    return temp;
-}
-
-inline void Bucket::clear(void)
-{
-    values.clear();
-}
-
-inline void Bucket::display()
-{
-    std::map<int,uint64_t>::iterator it;
-    for(it=values.begin();it!=values.end();it++)
-        cout<<it->first<<" ";
-    cout<<endl;
-}
 
 
 

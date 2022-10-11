@@ -28,7 +28,7 @@ private:
     std::vector<ExEntry> values;
 
 public:
-    Bucket(int depth, int size);
+    Bucket(int depth, int msize);
 
     int Insert(int key,uint64_t value);
     int Remove(int key);
@@ -73,12 +73,12 @@ class Directory {
 
 /* Bucket class functions */
 
-inline Bucket::Bucket(int depth, int size)
+inline Bucket::Bucket(int depth, int msize)
 {
     this->depth = depth;
-    this->size = size;
-    this->CurSize = 0;
-    this->pageno = UINT64_MAX;
+    this->maxsize = msize;
+    this->size = 0;
+    this->PageNum = UINT64_MAX;
 }
 
 inline int Bucket::insert(int key,uint64_t value)

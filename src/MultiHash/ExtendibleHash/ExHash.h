@@ -11,9 +11,10 @@
 #ifndef EXPERIMENT1_EXTENDIBLEHASH_EXHASH_H
 #define EXPERIMENT1_EXTENDIBLEHASH_EXHASH_H
 
-#include "../../Backend/IODisk/WriteDisk.h"
+#include <iostream>
+#include <vector>
 #include "ExNode.h"
-
+#include "../../Backend/IODisk/WriteDisk.h"
 
 
 void EXHashing1();
@@ -24,7 +25,7 @@ class Bucket
 private:
     int depth,size,maxsize; 
     uint64_t PageNum; //page number and current size 
-    map<int, uint64_t> values;
+    std::vector<ExEntry> values;
 
 public:
     Bucket(int depth, int size);

@@ -265,6 +265,143 @@ PageType SingleBucketWrite(std::vector<LHEntry> entries, uint64_t pageno)
 }
 
 /**
+ * ============= Extendible Hash module ===============
+ *  Function declartion for writing data into one or more pages:
+ **/
+
+int BucketWrite(std::vector<ExEntry> entries, uint64_t pageno)
+{
+    /* Function flag, default value equals 0(successful flag). */
+    int err = 0;
+    assert(pageno != UINT64_MAX);
+    
+    struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, pageno);
+    size_t ws_min = nvm_dev_get_ws_min(bp->dev);
+    struct nvm_addr addrs[ws_min];
+    for (size_t aidx = 0; aidx < ws_min; ++aidx) 
+    {
+		addrs[aidx].val = addrs_chunk.val;
+		addrs[aidx].l.sectr = (pageno%4096)+aidx;
+	}
+
+    char * temp = new char[20];
+    for (size_t i = 0; i < entries.size(); i++)
+    {
+        uint64_t *ML = (uint64_t*) temp;
+        ML[0] = entries[i].key, ML[1] = entries[i].val;
+        for(size_t j= i*sizeof(ExEntry),k=0;j<i*sizeof(ExEntry)+sizeof(ExEntry);j++,k++)
+        {
+                bp->bufs->write[j] = temp[k];
+        }
+    }
+
+    // Write value into page. 
+    err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
+    return pageno;
+}
+
+
+
+int PageUpdate(PageType pageno, std::vector<ExEntry> entries)
+{
+   /* 
+    * Step 1: Read all datum from original block. 
+    */
+    uint64_t chunkno = pageno/4096;
+    uint64_t updatesec = pageno%4096;
+    uint64_t curseofchunk = chunkusage[chunkno];
+    std::unordered_map<PageType, std::vector<ExEntry>> TempEntries ;
+    
+    size_t ws_min = nvm_dev_get_ws_min(bp->dev);
+
+    for (size_t sectr = 0; sectr < curseofchunk; sectr += ws_min) 
+    {
+    
+        std::vector<ExEntry> data =EBucketRead(sectr+chunkno*4096);
+        TempEntries[sectr] = data;
+    }
+
+    /* Step 2: Erase original block. */
+    int eraseflag = erasechunk(pageno, chunkno);
+    if(eraseflag == -1)
+    {
+        printf("Fatal error: chunk %lu erase failure.\n Error information: pageno:%lu chunkno:%lu",pageno/4096,pageno,chunkno);
+    }
+
+   /* Step 3: Update datum that generate from step 1. */
+    TempEntries[updatesec] = entries;
+    
+
+    /* Step 4: Write datum to the free-block. */
+    for (size_t sectr = 0; sectr < curseofchunk; sectr += ws_min) 
+    {
+        writecount++;
+        BucketWrite(TempEntries[sectr], sectr+chunkno*4096);
+    }
+    
+    return 0;
+}
+
+
+PageType SingleBucketWrite(std::vector<ExEntry> entries, uint64_t pageno)
+{
+    /* Function flag, default value equals 0(successful flag). */
+    int err = 0;
+
+    
+    if(pageno == UINT64_MAX)
+    {
+        writecount++;
+        pageno = sectorpointer;
+        //printf("pageno:%lu sectorpointer:%lu",pageno,sectorpointer);
+        struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, pageno);
+        size_t ws_min = nvm_dev_get_ws_min(bp->dev);
+        struct nvm_addr addrs[ws_min];
+        for (size_t aidx = 0; aidx < ws_min; ++aidx) 
+        {
+		    addrs[aidx].val = addrs_chunk.val;
+		    addrs[aidx].l.sectr = (pageno%4096)+aidx;
+	    }
+
+        char * temp = new char[20];
+        for (size_t i = 0; i < entries.size(); i++)
+        {
+            uint64_t *ML = (uint64_t*) temp;
+            ML[0] = entries[i].key, ML[1] = entries[i].val;
+            for(size_t j= i*sizeof(ExEntry),k=0;j<i*sizeof(ExEntry)+sizeof(ExEntry);j++,k++)
+            {
+                bp->bufs->write[j] = temp[k];
+            }
+        }
+
+        // Write value into page. 
+        err = nvm_cmd_write(bp->dev, addrs, ws_min,bp->bufs->write, NULL,0x0, NULL);
+        if(err == 0) 
+        {
+            PointerRenew(ws_min);   /* update pointers! */
+        }
+    }
+    else
+    {
+        erasecount++;
+        writecount++;
+        readcount++;
+        int err = 0;
+        err = PageUpdate(pageno, entries);
+        if(err != 0)
+        {
+            EMessageOutput("PageUpdate failure in page: %lu"+Uint64toString(pageno),1500);
+        }
+    }
+    //printf("Pageno %lu\n",pageno);
+    return pageno;
+    
+}
+
+
+
+
+/**
  * ============= LSM-tree module ===============
  *  Function declartion for writing data into one or more pages:
  **/

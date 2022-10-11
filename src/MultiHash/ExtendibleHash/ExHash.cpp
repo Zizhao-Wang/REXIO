@@ -190,22 +190,14 @@ void Directory::search(SKey key)
 
 void Directory::display(bool duplicates)
 {
-    int i,j,d;
-    string s;
-    std::set<string> shown;
+
     cout<<"Global depth : "<<global_depth<<endl;
-    for(i=0;i<buckets.size();i++)
+    for(int i=0;i<buckets.size();i++)
     {
-        d = buckets[i]->getDepth();
-        s = bucket_id(i);
-        if(duplicates || shown.find(s)==shown.end())
-        {
-            shown.insert(s);
-            for(j=d;j<=global_depth;j++)
-                cout<<" ";
-            cout<<s<<" => ";
-            buckets[i]->display();
-        }
+        int d = buckets[i]->getDepth();
+        printf("The %d bucket has depth:%d.",i,d);
+        buckets[i]->display();
+        printf("\n");
     }
 }
 

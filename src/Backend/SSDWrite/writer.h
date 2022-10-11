@@ -23,6 +23,7 @@
 #include "../../TNCTree/StoreTier/syncstore.h"
 #include "../../MultiHash/LinearHash/node.h"
 #include "../../MultiHash/LinearHash/LiHash.h"
+#include "../../MultiHash/ExtendibleHash/ExNode.h"
 
 /*  Global variables for SSD write definition.  */
 
@@ -52,11 +53,21 @@ int PageUpdatePageUpdate(PageType pageno, std::vector<LHEntry> entries);
 PageType SingleBucketWrite(std::vector<LHEntry> entries, uint64_t pageno);
 
 /**
- * ============= Linear Hash module ===============
+ * ============= Extendible Hash module ===============
+ *  Function declartion for writing data into one or more pages:
+ **/
+int BucketWrite(std::vector<ExEntry> entries, uint64_t pageno);
+
+int PageUpdatePageUpdate(PageType pageno, std::vector<ExEntry> entries);
+
+PageType SingleBucketWrite(std::vector<ExEntry> entries, uint64_t pageno);
+
+
+/**
+ * ============= Lazy-split Hash module ===============
  *  Function declartion for writing data into one or more pages:
  **/
 int LSBucketWrite(std::vector<LHEntry> entries, uint64_t pageno);
-
 
 /**
  * ============= LSM-tree module ===============

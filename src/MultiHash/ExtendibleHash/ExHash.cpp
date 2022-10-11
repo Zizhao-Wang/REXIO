@@ -59,8 +59,8 @@ void Directory::split(int bucket_no)
 
     int local_depth,pair_index,index_diff,dir_size,i;
 
-    std::vector<ExEntry> temp = buckets[bucket_no]->GetData();
-    map<int, uint64_t>::iterator it;
+    std::vector<ExEntry> temp ;
+    std::vector<ExEntry>::iterator it;
 
     // Hash Table double
     local_depth = buckets[bucket_no]->increaseDepth();
@@ -73,8 +73,8 @@ void Directory::split(int bucket_no)
     //对插入的数据进行初始化 
     buckets[pair_index] = new Bucket(local_depth,bucket_size);
 
-    temp = buckets[bucket_no]->copy();
-    buckets[bucket_no]->clear();
+    temp = buckets[bucket_no]->GetData();
+    buckets[bucket_no]->Allclear();
 
 
     index_diff = 1<<local_depth;
@@ -85,9 +85,7 @@ void Directory::split(int bucket_no)
     {
         buckets[i] = buckets[pair_index];
         printf(" %d %d  %d\n",index_diff, dir_size,i);
-
     }
-        
 
     for( i=pair_index+index_diff ; i<dir_size ; i+=index_diff )
     {
@@ -98,7 +96,7 @@ void Directory::split(int bucket_no)
         
 
     for(it=temp.begin();it!=temp.end();it++)
-        insert((*it).first,(*it).second,1);
+        insert((*it).key,(*it).val);
 }
 
 inline void Directory::merge(int bucket_no)
@@ -154,7 +152,7 @@ void Directory::insert(SKey key,SValue value)
     insert(key,value);
 }
 
-void Directory::remove(int key,int mode)
+void Directory::remove(SKey key,int mode)
 {
     int bucket_no = hash(key);
     if(buckets[bucket_no]->remove(key))
@@ -168,19 +166,26 @@ void Directory::remove(int key,int mode)
     {
         shrink();
     }
+
 }
 
-void Directory::update(int key, uint64_t value)
+void Directory::update(SKey key, SValue value)
 {
     int bucket_no = hash(key);
-    buckets[bucket_no]->update(key,value);
+    buckets[bucket_no]->Update(key,value);
 }
 
-void Directory::search(int key)
+void Directory::search(SKey key)
 {
+
     int bucket_no = hash(key);
-    cout<<"Searching key "<<key<<" in bucket "<<bucket_id(bucket_no)<<endl;
-    buckets[bucket_no]->search(key);
+    ExEntry entry;
+    entry = buckets[bucket_no]->Search(key);
+    if(entry.key!=key)
+    {
+        printf("Not found!\n");
+    }
+
 }
 
 void Directory::display(bool duplicates)
@@ -209,7 +214,8 @@ void Directory::display(bool duplicates)
 void EXHashing1()
 {
     bool show_messages, show_duplicate_buckets;
-    int bucket_size=2048, initial_global_depth=1;
+    int bucket_size=CalculatePageCapacity(sizeof(ExEntry)); 
+    int initial_global_depth=2;
     int key, mode;
     string choice, value;
     clock_t startTime,endTime;
@@ -223,16 +229,14 @@ void EXHashing1()
     Directory d(initial_global_depth,bucket_size);
     printf("======Initialized directory structure completed!=======\n");
 
-    /* Insert 10 values 
-     */
+    /* WorkLoad A: */
     startTime = clock();
-    for(int i=1;i<=3;i++)
+    for(int i=1;i<=1000000;i++)
     {
-        uint64_t value = i;
-        d.insert(i,value,0);
+        d.insert(i,i);
     }
     endTime = clock();
-    std::cout << "Total Time : " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s" << std::endl;
+    std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s" << std::endl;
 
  
 

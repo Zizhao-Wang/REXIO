@@ -42,8 +42,7 @@ public:
     int increaseDepth(void);
     int decreaseDepth(void);
 
-    std::map<int, uint64_t> copy(void);
-    void clear(void);
+    void Allclear(void);
     void display(void);
     int  PageWrite();
     std::vector<ExEntry> Pageread();

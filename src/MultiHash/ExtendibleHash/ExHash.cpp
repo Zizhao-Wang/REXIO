@@ -1,6 +1,8 @@
 /* header files references. */
 #include "ExHash.h"
 #include <ctime>
+#include "../../Backend/SSDRead/reader.h"
+
 
 Bucket::Bucket(int depth, int msize)
 {
@@ -25,25 +27,16 @@ int Bucket::Insert(SKey key,uint64_t value)
 
     values.emplace_back(ExEntry{key,value});
 
-    if(isFull())
+    if(IsFull())
     {
-        vector<uint64_t> result;
-        /*  for(it = values.begin(); it != values.end(); ++it)
-            result.push_back(it->second);
-        if(this->pageno == 100000000 )
-            this->pageno = SSD_write2(result, true);
-        else
-            this->pageno = SSD_write2(result, false, pageno); */ 
+        PageNum = PageWrite();
         return 0;
     }
     //printf("%ld \n",pageno);
-    this->pageno = SingleValueWrite(value,this->pageno,this->CurSize);
-    values[key] = value;
-    this->CurSize++;
     return 1;
 }
 
-inline int Bucket::remove(int key)
+int Bucket::Remove(SKey key)
 {
     std::map<int,uint64_t>::iterator it;
     it = values.find(key);
@@ -59,7 +52,7 @@ inline int Bucket::remove(int key)
     }
 }
 
-inline int Bucket::update(int key, uint64_t value)
+inline int Bucket::Update(int key, uint64_t value)
 {
     std::map<int,uint64_t>::iterator it;
     it = values.find(key);
@@ -78,24 +71,12 @@ inline int Bucket::update(int key, uint64_t value)
 
 ExEntry Bucket::Search(SKey key)
 {
-
      // for(int i=0;i<bucket.size();i++)
      // {
      //      printf("%lu in bucket",bucket[i].key);
      // }
      // printf("============\n");
      // printf("PageNum: %lu ",PageNum);
-     if(PageNum != UINT64_MAX )
-     {
-          std::vector<LHEntry> TempEntry = PageRead(PageNum);
-          std::vector<LHEntry>::iterator get;
-          get = find(TempEntry.begin(),TempEntry.end(), LHEntry{key,0});
-          if(get != TempEntry.end())
-          {
-                    return  *get;  
-          }
-     }
-     return LHEntry{0,0};
     
     if(values.size()!=0)
     {
@@ -108,16 +89,18 @@ ExEntry Bucket::Search(SKey key)
         return ExEntry{0,0};
     }
 
-    assert(PageNum != UINT64_MAX)
+    assert(PageNum != UINT64_MAX);
    
-    std::vector<ExEntry> TempEntry = PageRead();
-    std::vector<ExEntry>::iterator get;
-    get = find(TempEntry.begin(),TempEntry.end(), ExEntry{key,0});
-    if(get != TempEntry.end())
+    std::vector<ExEntry> TempEntry = EBucketRead(PageNum);
+    std::vector<ExEntry>::iterator it;
+    it = find(TempEntry.begin(),TempEntry.end(), ExEntry{key,0});
+
+    if(it != TempEntry.end())
     {
-        return  *get;  
+        return  *it;  
     }
     
+    return ExEntry{key,0};
 }
 
 bool Bucket::IsFull(void)
@@ -136,40 +119,27 @@ bool Bucket::IsEmpty(void)
         return false;
 }
 
-inline int Bucket::getDepth(void)
+int Bucket::getDepth(void)
 {
     return depth;
 }
 
-inline int Bucket::increaseDepth(void)
+int Bucket::increaseDepth(void)
 {
     depth++;
     return depth;
 }
 
-inline int Bucket::decreaseDepth(void)
+int Bucket::decreaseDepth(void)
 {
     depth--;
     return depth;
 }
 
-inline map<int, uint64_t> Bucket::copy(void)
-{
-    std::map<int, uint64_t> temp(values.begin(),values.end());
-    return temp;
-}
-
-inline void Bucket::clear(void)
+void Bucket::Allclear(void)
 {
     values.clear();
-}
-
-inline void Bucket::display()
-{
-    std::map<int,uint64_t>::iterator it;
-    for(it=values.begin();it!=values.end();it++)
-        cout<<it->first<<" ";
-    cout<<endl;
+    size = 0;
 }
 
 std::vector<ExEntry> Bucket::Pageread()
@@ -177,9 +147,6 @@ std::vector<ExEntry> Bucket::Pageread()
     std::vector<ExEntry> data;
     return data;
 }
-
-
-
 
 
 

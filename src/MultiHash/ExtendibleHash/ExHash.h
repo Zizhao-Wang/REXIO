@@ -40,7 +40,7 @@ public:
     
     Directory(int depth, int bucket_size);
     void insert(SKey key,SValue value);
-    void remove(SKey key,int mode);
+    void remove(SKey key);
     void update(SKey key, SValue value);
     void search(SKey key);
     void display();

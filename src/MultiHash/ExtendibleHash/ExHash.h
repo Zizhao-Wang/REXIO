@@ -16,6 +16,10 @@
 #include "../../Backend/IODisk/WriteDisk.h"
 #include "ExBucket.h"
 
+extern int Eread;
+extern int Ewrite;
+extern int Eerase;
+
 void EXHashing1();
 
 
@@ -39,7 +43,7 @@ public:
     void remove(SKey key,int mode);
     void update(SKey key, SValue value);
     void search(SKey key);
-    void display(bool duplicates);
+    void display();
 
 
 };

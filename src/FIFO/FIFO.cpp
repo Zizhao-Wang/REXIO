@@ -1,4 +1,6 @@
 #include "FIFO.h"
+#include<cassert>
+
 
 TNCEntry* FIFOCache::get(PageType page)
 {

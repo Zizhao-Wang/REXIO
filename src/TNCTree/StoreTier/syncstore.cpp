@@ -11,7 +11,7 @@ PageType WBufferId = 0;
 int buffernumber =0;
 std::unordered_map<uint64_t, std::vector<char>> BufferLog;
 LRUCache lrucache(128);
-FIFOCache fifocache(128);
+FIFOCache fifocache(32);
 
 uint32_t SyncWrite(SKey key1, SValue value)
 {

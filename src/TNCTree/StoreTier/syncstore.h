@@ -18,6 +18,7 @@
 #include "../../Auxizilary/GlobalVariable.h"
 #include "../MemoryTier/Node.h"
 #include "../../LRU/lru.h"
+#include "../../FIFO/FIFO.h"
 
 /* Global variable declaration! */
 extern int indexs;
@@ -29,6 +30,7 @@ extern std::unordered_map<uint64_t, std::vector<char>> BufferLog;  //Log buffer
 extern LRUCache lrucache;
 extern std::unordered_map<uint64_t, uint64_t> LogIndex;
 extern int buffernumber;
+extern FIFOCache fifocache;
 
 /**
  *  ================= Synchronous write module====================  

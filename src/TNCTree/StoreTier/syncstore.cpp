@@ -11,6 +11,7 @@ PageType WBufferId = 0;
 int buffernumber =0;
 std::unordered_map<uint64_t, std::vector<char>> BufferLog;
 LRUCache lrucache(128);
+FIFOCache fifocache(128);
 
 uint32_t SyncWrite(SKey key1, SValue value)
 {
@@ -74,7 +75,7 @@ TNCEntry Read4Buffer(size_t pos)
 
 TNCEntry  SyncRead(uint32_t offset)
 {
-    uint64_t offsetpage = ((offset>>12)&0x3FF) ;
+    uint64_t offsetpage = ((offset>>12)&0xFFF) ;
     uint64_t PageId = (offset>>24)*bp->geo->l.nsectr+ offsetpage;
     size_t Position = (offset & 0x00000FFF)-1;
 
@@ -83,6 +84,30 @@ TNCEntry  SyncRead(uint32_t offset)
         return Read4Buffer(Position);
     }
 
+    // TNCEntry* ReadData = TNCEntryRead(PageId);
+    // TNCEntry a{ReadData[Position].key};
+    // delete(ReadData);
+    // return a;
+
+
+    bool IsFlag = fifocache.IsFIFOPage(PageId);
+    if(!IsFlag)
+    {
+        buffernumber++;
+        FReadNode temp;
+        TNCEntry* ReadData = TNCEntryRead(PageId);
+        temp.data = ReadData;
+        temp.PageId = PageId;
+        fifocache.put(PageId, temp);
+        return ReadData[Position];    
+    }
+    else
+    {
+        TNCEntry *values = fifocache.get(PageId);
+        return values[Position];
+    }
+
+#ifdef LRU
     bool IsFlag = lrucache.IsLRUPage(PageId);
     if(!IsFlag)
     {
@@ -90,6 +115,7 @@ TNCEntry  SyncRead(uint32_t offset)
         ReadNode temp;
         TNCEntry* ReadData = TNCEntryRead(PageId);
         temp.data = ReadData;
+        temp.PageId = PageId;
         lrucache.put(PageId, temp);
         return ReadData[Position];    
     }
@@ -98,5 +124,6 @@ TNCEntry  SyncRead(uint32_t offset)
         TNCEntry *values = lrucache.get(PageId);
         return values[Position];
     }
+#endif
 
 }

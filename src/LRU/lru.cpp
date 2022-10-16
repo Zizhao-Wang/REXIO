@@ -1,9 +1,5 @@
 #include "lru.h"
 
-std::unordered_map<uint64_t, ReadNode*> ReadBuffer;
-
-
-
 TNCEntry* LRUCache::get(PageType page)
 {
 
@@ -40,16 +36,6 @@ void LRUCache::put(PageType page, ReadNode node)
     }
     cache.push_front(node);
     HashMap[page] = cache.begin(); 
-}
-
-bool LRUCache::IsLRUPosition(void)
-{
-	return ReadBuffer.size()<capacity;
-}
-
-bool LRUCache::IsLRUFull(void)
-{
-	return ReadBuffer.size()>=capacity;
 }
 
 bool LRUCache::IsLRUPage(PageType page)

@@ -51,10 +51,7 @@ bool FIFOCache::IsFIFOPage(PageType page)
 
 void FIFOCache::Clear(void)
 {
-    for(auto it:HashMap)
-    {
-        HashMap.erase(it.first);
-    }
+    HashMap.clear();
 
     while (!Rcache.empty())
     {

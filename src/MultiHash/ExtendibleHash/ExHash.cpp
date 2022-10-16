@@ -191,7 +191,7 @@ void Directory::search(SKey key)
     entry = buckets[bucket_no]->Search(key);
     if(entry.key!=key)
     {
-        printf("Not found!\n");
+        //printf("Not found!\n");
     }
 
 }

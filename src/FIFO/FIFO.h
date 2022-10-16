@@ -1,46 +1,45 @@
 /**
- * @date    3/10/2022 
+ * @date    16/10/2022 
  * @author  zz.wang
  * @details
  *          This file implemented the data structure of the node in Hash Table!
  *
  * IDENTIFICATION:
- *          src/TNCTree/StoreTier/LRU.h
+ *          src/FIFO/FIFO.h
  */
 
-#ifndef EXPERIMENT1_TNCTREE_LRU_H
-#define EXPERIMENT1_TNCTREE_LRU_H
+#ifndef EXPERIMENT1_SRC_FIFO_H
+#define EXPERIMENT1_SRC_FIFO_H
 
-#include <vector>
 #include <unordered_map>
 #include <list>
 #include "../TNCTree/MemoryTier/Node.h"
 
 
-typedef struct ReadNode
+typedef struct FReadNode
 {
 	PageType   PageId;
 	TNCEntry * data;
-}ReadNode;
+}FReadNode;
 
 
-class LRUCache 
+class FIFOCache 
 {
 
 private:
     uint16_t capacity;
-    std::list<ReadNode> cache;
-    std::unordered_map<int, std::list<ReadNode>::iterator> HashMap;
+	std::list <FReadNode> Rcache;
+	std::unordered_map<PageType, std::list<FReadNode>::iterator> HashMap;
 
 public:
-    LRUCache(uint16_t cap) 
+    FIFOCache(uint16_t cap) 
 	{
         this->capacity = cap; 
     }
     
     TNCEntry* get(PageType page); 
-    void put(PageType page, ReadNode node);
-	bool IsLRUPage(PageType);
+    void put(PageType page, FReadNode node);
+	bool IsFIFOPage(PageType);
 
 };
 

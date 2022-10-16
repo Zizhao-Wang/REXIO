@@ -178,12 +178,18 @@ SValue Search(SKey key1)
     }
 
     entry = SyncRead(node->offset);
-    //printf("Key: %lu offset: %u ReadKey:%lu \n",key1,node->offset,entry.key);
+    //printf("Key: %lu  ReadKey:%lu \n",key1,entry.key);
     if(entry.key == key1)
     {
-        //printf("key1: %lu entry.key: %lu Value: %lu",key1,entry.key,entry.val);
         return entry.val;
     }
+    else
+    {
+        printf("key1: %lu offset: %u entry.key: %lu Value: %lu\n",key1,node->offset,entry.key,entry.val);
+        exit(0);
+    }
+
+    
 
     return UINT64_MAX;
 }

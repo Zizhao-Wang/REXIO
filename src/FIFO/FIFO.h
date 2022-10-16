@@ -40,7 +40,7 @@ public:
     TNCEntry* get(PageType page); 
     void put(PageType page, FReadNode node);
 	bool IsFIFOPage(PageType);
-
+	void Clear(void);
 };
 
 

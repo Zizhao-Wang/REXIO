@@ -89,7 +89,9 @@ void TNCtreePort(void)
      printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
      std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n\n";
 
-     // /* workload c: read only, 50% in it, 50% not in it */
+     fifocache
+
+     /* workload c: read only, 50% in it, 50% not in it */
      startTime = clock();
      reads = 0;
      write = 0;

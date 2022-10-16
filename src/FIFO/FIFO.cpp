@@ -46,6 +46,7 @@ bool FIFOCache::IsFIFOPage(PageType page)
 
     return true; 
 }
+
 void FIFOCache::Clear(void)
 {
     for(auto it:HashMap)

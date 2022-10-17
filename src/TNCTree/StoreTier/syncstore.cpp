@@ -10,8 +10,8 @@ TNCEntry Pagedata[1030];
 PageType WBufferId = 0;
 int buffernumber =0;
 std::unordered_map<uint64_t, std::vector<char>> BufferLog;
-LRUCache lrucache(128);
-FIFOCache fifocache(1024);
+//LRUCache lrucache(2048);
+FIFOCache fifocache(0);
 
 uint32_t SyncWrite(SKey key1, SValue value)
 {
@@ -89,7 +89,6 @@ TNCEntry  SyncRead(uint32_t offset)
     // delete(ReadData);
     // return a;
 
-
     bool IsFlag = fifocache.IsFIFOPage(PageId);
     if(!IsFlag)
     {
@@ -106,9 +105,10 @@ TNCEntry  SyncRead(uint32_t offset)
         TNCEntry *values = fifocache.get(PageId);
         return values[Position];
     }
+    
 
 #ifdef LRU
-    bool IsFlag = lrucache.IsLRUPage(PageId);
+bool IsFlag = lrucache.IsLRUPage(PageId);
     if(!IsFlag)
     {
         buffernumber++;
@@ -124,6 +124,7 @@ TNCEntry  SyncRead(uint32_t offset)
         TNCEntry *values = lrucache.get(PageId);
         return values[Position];
     }
+   
 #endif
 
 }

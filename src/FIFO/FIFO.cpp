@@ -49,7 +49,7 @@ bool FIFOCache::IsFIFOPage(PageType page)
     return true; 
 }
 
-void FIFOCache::Clear(void)
+void FIFOCache::Clear(size_t cap)
 {
     HashMap.clear();
 
@@ -60,4 +60,5 @@ void FIFOCache::Clear(void)
 
     assert(Rcache.size()==0);
     assert(HashMap.size()==0);    
+    this->capacity =cap;
 }

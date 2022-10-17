@@ -68,56 +68,61 @@ void TNCtreePort(void)
      printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
      std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
 
-     /* workload b: read only, all in it */
-     startTime = clock();
-     reads = 0;
-     write = 0;
-     erase = 0;
-     for(int i=1;i<=1000000;i++)
+     for (size_t i = 32; i <= 1024; i=i*2)
      {
-          srand48(time(NULL));
-          SKey k = 1+(rand()%40000000);
-          Search(k);
-          if(i==10000 || i%100000==0)
+          printf("Buffer size:%lu\n",i);
+          /* workload b: read only, all in it */
+          startTime = clock();
+          reads = 0;
+          write = 0;
+          erase = 0;
+          for(int i=1;i<=1000000;i++)
           {
-               printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
-               endTime = clock();
-               std::cout << "Total Time of "<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
-          }
-     }
-     endTime = clock();
-     printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
-     std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n\n";
-
-     fifocache.Clear();
-
-     /* workload c: read only, 50% in it, 50% not in it */
-     startTime = clock();
-     reads = 0;
-     write = 0;
-     erase = 0;
-     for(int i=1;i<=1000000;i++)
-     {
-          srand48(time(NULL));
-          if(i%100<50)
-          {
+               srand48(time(NULL));
                SKey k = 1+(rand()%40000000);
                Search(k);
+               if(i==10000 || i%100000==0)
+               {
+                    printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
+                    endTime = clock();
+                    std::cout << "Total Time of "<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+               }
           }
-          else
+          endTime = clock();
+          printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
+          std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
+
+          
+
+          /* workload c: read only, 50% in it, 50% not in it */
+          startTime = clock();
+          reads = 0;
+          write = 0;
+          erase = 0;
+          for(int i=1;i<=1000000;i++)
           {
-               SKey k = 40000000+(rand()%40000000);
-               Search(k);
+               srand48(time(NULL));
+               if(i%100<50)
+               {
+                    SKey k = 1+(rand()%40000000);
+                    Search(k);
+               }
+               else
+               {
+                    SKey k = 40000000+(rand()%40000000);
+                    Search(k);
+               }
+               if(i%100000==0 || i==10000)
+               {
+                    printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
+                    endTime = clock();
+                    std::cout << "Total Time of "<<i<<" in workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+               }
           }
-          if(i%100000==0 || i==10000)
-          {
-               printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
-               endTime = clock();
-               std::cout << "Total Time of "<<i<<" in workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
-          }
+          printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
+          std::cout << "Total Time of workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
+          
      }
-     printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
-     std::cout << "Total Time of workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n\n";
 
      // /* workload d: update heavy workload, 50% read, 50% update */
      // startTime = clock();

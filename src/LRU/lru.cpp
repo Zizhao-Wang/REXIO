@@ -49,3 +49,14 @@ bool LRUCache::IsLRUPage(PageType page)
 
     return true; 
 }
+
+void LRUCache::ClearaReset(size_t cap)
+{
+    HashMap.clear();
+    cache.clear();
+
+    assert(HashMap.size()==0);
+    assert(cache.size()==0);
+
+    this->capacity = cap;
+}

@@ -14,6 +14,7 @@
 #include <vector>
 #include <unordered_map>
 #include <list>
+#include <cassert>
 #include "../TNCTree/MemoryTier/Node.h"
 
 
@@ -28,12 +29,12 @@ class LRUCache
 {
 
 private:
-    uint16_t capacity;
+    size_t capacity;
     std::list<ReadNode> cache;
     std::unordered_map<int, std::list<ReadNode>::iterator> HashMap;
 
 public:
-    LRUCache(uint16_t cap) 
+    LRUCache(size_t cap) 
 	{
         this->capacity = cap; 
     }
@@ -41,6 +42,7 @@ public:
     TNCEntry* get(PageType page); 
     void put(PageType page, ReadNode node);
 	bool IsLRUPage(PageType);
+    void ClearaReset(size_t cap);
 
 };
 

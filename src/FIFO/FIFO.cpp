@@ -33,8 +33,7 @@ void FIFOCache::put(PageType page, FReadNode node)
         Rcache.push_front(node);
         HashMap[page] = Rcache.begin();
     }
-    Rcache.push_front(node);
-    HashMap[page] = Rcache.begin(); 
+    
 }
 
 bool FIFOCache::IsFIFOPage(PageType page)

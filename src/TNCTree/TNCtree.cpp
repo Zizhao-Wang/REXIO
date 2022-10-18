@@ -110,13 +110,13 @@ void TNCtreePort(void)
      // }
      // exit(0);
 
-     for (size_t i = 32; i <= 4096; i=i*2)
+     for (size_t i = 1024; i <= 4096; i=i+1024)
      {
           printf("Buffer size:%lu\n",i);
           /* workload b: read only, all in it */
 
-          //lrucache.ClearaReset(i);
           fifocache.Clear(i);
+          // lrucache.ClearaReset(i);
           startTime = clock();
           reads = 0;
           write = 0;
@@ -138,23 +138,23 @@ void TNCtreePort(void)
 
           
 
-          // /* workload c: read only, 50% in it, 50% not in it */
-          // startTime = clock();
-          // reads = 0;
-          // write = 0;
-          // erase = 0;
-          // for(int i=1;i<=1000000;i++)
-          // {
-          //      //Search(workc[i-1]);
-          //      if(i%100000==0 || i==10000)
-          //      {
-          //           printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
-          //           endTime = clock();
-          //           std::cout << "Total Time of "<<i<<" in workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
-          //      }
-          // }
-          // printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
-          // std::cout << "Total Time of workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
+     //      // /* workload c: read only, 50% in it, 50% not in it */
+     //      // startTime = clock();
+     //      // reads = 0;
+     //      // write = 0;
+     //      // erase = 0;
+     //      // for(int i=1;i<=1000000;i++)
+     //      // {
+     //      //      //Search(workc[i-1]);
+     //      //      if(i%100000==0 || i==10000)
+     //      //      {
+     //      //           printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
+     //      //           endTime = clock();
+     //      //           std::cout << "Total Time of "<<i<<" in workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+     //      //      }
+     //      // }
+     //      // printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
+     //      // std::cout << "Total Time of workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
           
      }
 

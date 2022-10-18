@@ -34,8 +34,13 @@ void LRUCache::put(PageType page, ReadNode node)
         cache.push_front(node);
         HashMap[page] = cache.begin();
     }
-    cache.push_front(node);
-    HashMap[page] = cache.begin(); 
+    else
+    {
+        cache.erase(HashMap[page]);
+        cache.push_front(node);
+        HashMap[page] = cache.begin();
+    }
+     
 }
 
 bool LRUCache::IsLRUPage(PageType page)

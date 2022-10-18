@@ -29,11 +29,13 @@ class LRUCache
 {
 
 private:
-    size_t capacity;
-    std::list<ReadNode> cache;
+    
+    
     std::unordered_map<int, std::list<ReadNode>::iterator> HashMap;
 
 public:
+    size_t capacity;
+    std::list<ReadNode> cache;
     LRUCache(size_t cap) 
 	{
         this->capacity = cap; 

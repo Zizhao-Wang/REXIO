@@ -37,8 +37,26 @@ bool LocalGeneration(GlobalHashNode * globalNode)
     localHead->depth  = Globaldepth;
 
     globalNode->local = localHead;
-    return true;
+
+#ifdef FastSkiplist
+    auto * localHead =(LocalHeadNode*) malloc(LOCAL_HEAD_SIZE);
+    if(localHead!=nullptr || globalNode->local== nullptr)
+    {
+        localHead->depth  = Globaldepth;
+        localHead->Nodenumber = 0;
+        localHead->CurrentLevel = 1;
+
+        auto * localnodehead = Initialization();
+        localHead->HashNode = localnodehead;
+
+        globalNode->local = localHead;
+        return true;
+    }
+    else
+        return false;
     
+#endif
+    return true;
 }
 
 /*
@@ -67,13 +85,17 @@ bool DoubleHashtable()
 
 int RandomLevel()
 {
-
     int v = 1;
     while (rand() < P_FACTOR1 && v < MAX_LEVEL1) {
         v++;
     }
-#ifdef DEBUG
-
+#ifdef FastSkiplist
+    int v = 1;
+    srand ((unsigned int)(time (NULL)));
+    while(rand() % (N + 1) / (float)(N + 1) < pro && v< MaxLevel )
+    {
+        v++;
+    }
 #endif
     return v;
 
@@ -87,6 +109,7 @@ int RandomLevel()
 
 int InsertNode(SKey hashkey, SValue hashvalue)
 {
+
     /*  Insert the hash value into special skip-list. */
     TNCSkiplist * Head = global[hashkey & (1<<Globaldepth)-1]->local;
     TSkiplistNode * temp = Head->head;
@@ -139,6 +162,62 @@ int InsertNode(SKey hashkey, SValue hashvalue)
         }
     }
     
+#ifdef FastSkiplist 
+    LocalHeadNode * head = global[hashkey & (1<<Globaldepth)-1]->local;
+    LocalHashNode * temp = head->HashNode;
+    LocalHashNode * update[MaxLevel];
+
+    int curLevel = head->CurrentLevel-1;
+
+    for(int i=curLevel; i>=0; --i)
+    {
+        while(temp->next[i]->Hashkey < hashvalue)
+        {
+            temp = temp->next[i];
+        }
+        update[i] = temp;
+    }
+    temp = temp->next[0];
+
+    if(temp->Hashkey == hashvalue)
+    {
+        if(temp->flag == 1)
+        {
+            return 0;
+        }
+        else
+        {
+            temp->flag =1;
+            // write into disk
+            temp->offset = SyncWrite(hashkey,hashvalue); //printf("%u\n",temp->offset);
+            ++head->Nodenumber;
+            return 0;
+        }
+    }
+    else
+    {
+        int v=RandomLevel();
+        if(v > curLevel )
+        {
+            for(int i=curLevel+1; i<v; ++i )
+            {
+                update[i] = head->HashNode;
+            }
+            head->CurrentLevel = v+1;
+        }
+        //write into disk
+        uint_32 offset1 = SyncWrite(hashkey,hashvalue);  //printf("%u\n",temp->offset);
+        ++head->Nodenumber;
+        temp = Initialization(hashvalue,offset1);
+        if(temp == nullptr)
+            return -1;
+        for(int i=0;i<v;++i)
+        {
+            temp->next[i] = update[i]->next[i];
+            update[i]->next[i] = temp;
+        }
+    }
+#endif
     return 0;
 }
 
@@ -169,6 +248,7 @@ TSkiplistNode * SearchNode(TNCSkiplist * Head,SKey hashkey)
 
 SValue Search(SKey key1)
 {
+
     TNCEntry entry;
     TNCSkiplist * head = global[key1 & (1<<Globaldepth)-1]->local;
     TSkiplistNode * node =  SearchNode(head, key1);
@@ -188,8 +268,6 @@ SValue Search(SKey key1)
         printf("key1: %lu offset: %u entry.key: %lu Value: %lu\n",key1,node->offset,entry.key,entry.val);
         exit(0);
     }
-
-    
 
     return UINT64_MAX;
 }

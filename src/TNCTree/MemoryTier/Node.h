@@ -44,6 +44,7 @@ typedef struct LocalHeadNode
     LocalHashNode * HashNode;
 }LocalHeadNode;
 
+// ============  another Skiplist implementation =========
 
 typedef struct TSkiplistNode 
 {
@@ -73,6 +74,12 @@ typedef struct GlobalHashNode
     TNCSkiplist * local;
 }GlobalHashNode;
 
+// typedef struct GlobalHashNode
+// {
+//     unsigned int bit;
+//     LocalHeadNode * local;
+// }GlobalHashNode;
+
 /**
  *  Definition of key-value pair
  **/
@@ -94,6 +101,8 @@ typedef struct TNCEntry
 TSkiplistNode * TskiplistNodeCreat(uint64_t key,uint32_t offset, int maxLevel);
 
 TNCSkiplist *  TskiplistCreate();
+
+
 
 LocalHashNode * NILInitialize();
 

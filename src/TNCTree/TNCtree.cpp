@@ -110,13 +110,13 @@ void TNCtreePort(void)
      // }
      // exit(0);
 
-     for (size_t i = 1024; i <= 4096; i=i+1024)
+     for (size_t i = 32; i <= 1024; i=i*2)
      {
           printf("Buffer size:%lu\n",i);
           /* workload b: read only, all in it */
 
-          fifocache.Clear(i);
-          // lrucache.ClearaReset(i);
+          fifocache.Clear(i+2048);
+          // lrucache.ClearaReset(i+2048);
           startTime = clock();
           reads = 0;
           write = 0;

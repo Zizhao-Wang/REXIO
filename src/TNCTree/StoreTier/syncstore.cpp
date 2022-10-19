@@ -88,7 +88,6 @@ TNCEntry  SyncRead(uint32_t offset)
     // TNCEntry a{ReadData[Position].key};
     // delete(ReadData);
     // return a;
-
     bool IsFlag = fifocache.IsFIFOPage(PageId);
     if(!IsFlag)
     {
@@ -105,8 +104,6 @@ TNCEntry  SyncRead(uint32_t offset)
         TNCEntry *values = fifocache.get(PageId);
         return values[Position];
     }
-    
-    
 
 #ifdef LRU
     bool IsFlag = lrucache.IsLRUPage(PageId);

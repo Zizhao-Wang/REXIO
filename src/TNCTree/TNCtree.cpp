@@ -73,7 +73,7 @@ void TNCtreePort(void)
      string x;
      int index1=0;
      ifstream inFile;
-     inFile.open("/home/femu/experiment1/code2/src/data/x1.txt");
+     inFile.open("/home/femu/experiment1/code2/src/data/x2.txt");
      if (!inFile) 
      {
           std::cerr << "Unable to open file datafile.txt";
@@ -110,53 +110,52 @@ void TNCtreePort(void)
      // }
      // exit(0);
 
-     for (size_t i = 32; i <= 1024; i=i*2)
-     {
-          printf("Buffer size:%lu\n",i);
+     // for (size_t i = 32; i <= 1024; i=i*2)
+     // {
+          //printf("Buffer size:%lu\n",i);
           /* workload b: read only, all in it */
 
-          fifocache.Clear(i+2048);
-          // lrucache.ClearaReset(i+2048);
-          startTime = clock();
-          reads = 0;
-          write = 0;
-          erase = 0;
+          // fifocache.Clear(i+2048);
+          // // lrucache.ClearaReset(i+2048);
+          // startTime = clock();
+          // reads = 0;
+          // write = 0;
+          // erase = 0;
 
-          for(int i=1;i<=1000000;i++)
+          // for(int i=1;i<=1000000;i++)
+          // {
+          //      Search(workb[i-1]);
+          //      if(i%100000==0)
+          //      {
+          //           printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
+          //           endTime = clock();
+          //           std::cout << "Total Time of "<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+          //      }
+          // }
+          // endTime = clock();
+          // printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
+          // std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
+
+          
+
+     /* workload c: read only, 50% in it, 50% not in it */
+     startTime = clock();
+     reads = 0;
+     write = 0;
+     erase = 0;
+     for(int i=1;i<=1000000;i++)
+     {
+          Search(workb[i-1]);
+          if(i%100000==0 || i==10000)
           {
-               Search(workb[i-1]);
-               if(i%100000==0)
-               {
-                    printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
-                    endTime = clock();
-                    std::cout << "Total Time of "<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
-               }
+               printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
+               endTime = clock();
+               std::cout << "Total Time of "<<i<<" in workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
           }
-          endTime = clock();
-          printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
-          std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
-
-          
-
-     //      // /* workload c: read only, 50% in it, 50% not in it */
-     //      // startTime = clock();
-     //      // reads = 0;
-     //      // write = 0;
-     //      // erase = 0;
-     //      // for(int i=1;i<=1000000;i++)
-     //      // {
-     //      //      //Search(workc[i-1]);
-     //      //      if(i%100000==0 || i==10000)
-     //      //      {
-     //      //           printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
-     //      //           endTime = clock();
-     //      //           std::cout << "Total Time of "<<i<<" in workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
-     //      //      }
-     //      // }
-     //      // printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
-     //      // std::cout << "Total Time of workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
-          
      }
+     printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
+     std::cout << "Total Time of workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
+          
 
      // /* workload d: update heavy workload, 50% read, 50% update */
      // startTime = clock();

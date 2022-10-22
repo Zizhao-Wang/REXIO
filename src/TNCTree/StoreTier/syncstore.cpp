@@ -10,8 +10,8 @@ TNCEntry Pagedata[1030];
 PageType WBufferId = 0;
 int buffernumber =0;
 std::unordered_map<uint64_t, std::vector<char>> BufferLog;
-// LRUCache lrucache(2048);
-FIFOCache fifocache(0);
+LRUCache lrucache(2048);
+// FIFOCache fifocache(0);
 
 uint32_t SyncWrite(SKey key1, SValue value)
 {
@@ -83,29 +83,10 @@ TNCEntry  SyncRead(uint32_t offset)
     {
         return Read4Buffer(Position);
     }
-
     // TNCEntry* ReadData = TNCEntryRead(PageId);
     // TNCEntry a{ReadData[Position].key};
     // delete(ReadData);
     // return a;
-    bool IsFlag = fifocache.IsFIFOPage(PageId);
-    if(!IsFlag)
-    {
-        buffernumber++;
-        FReadNode temp;
-        TNCEntry* ReadData = TNCEntryRead(PageId);
-        temp.data = ReadData;
-        temp.PageId = PageId;
-        fifocache.put(PageId, temp);
-        return ReadData[Position];    
-    }
-    else
-    {
-        TNCEntry *values = fifocache.get(PageId);
-        return values[Position];
-    }
-
-#ifdef LRU
     bool IsFlag = lrucache.IsLRUPage(PageId);
     if(!IsFlag)
     {
@@ -125,6 +106,23 @@ TNCEntry  SyncRead(uint32_t offset)
         TNCEntry *values = lrucache.get(PageId);
         TNCEntry tem{values[Position].key};
         return tem;
+    }
+#ifdef LRU
+    bool IsFlag = fifocache.IsFIFOPage(PageId);
+    if(!IsFlag)
+    {
+        buffernumber++;
+        FReadNode temp;
+        TNCEntry* ReadData = TNCEntryRead(PageId);
+        temp.data = ReadData;
+        temp.PageId = PageId;
+        fifocache.put(PageId, temp);
+        return ReadData[Position];    
+    }
+    else
+    {
+        TNCEntry *values = fifocache.get(PageId);
+        return values[Position];
     }
 #endif
 

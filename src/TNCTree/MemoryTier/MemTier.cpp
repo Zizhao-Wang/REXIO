@@ -263,11 +263,11 @@ SValue Search(SKey key1)
     {
         return entry.val;
     }
-    else
-    {
-        printf("key1: %lu offset: %u entry.key: %lu Value: %lu\n",key1,node->offset,entry.key,entry.val);
-        exit(0);
-    }
+    // else
+    // {
+    //     printf("key1: %lu offset: %u entry.key: %lu Value: %lu\n",key1,node->offset,entry.key,entry.val);
+    //     exit(0);
+    // }
 
     return UINT64_MAX;
 }

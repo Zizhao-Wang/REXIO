@@ -447,6 +447,7 @@ void LHashPort()
           if(i%10000000==0||i==1000000)
           {
                endTime = clock();
+               printf("Read count:%d Write count:%u Erase Count:%d \n",readcount,writecount,erasecount);
                std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
           }
           hashtable.Insert(i,i);

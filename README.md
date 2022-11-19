@@ -6,7 +6,7 @@ This repo has open-source code of TNC-hasing, which is a novel two-layer non-cou
 ## Table of Contents
 
 - [Preliminaries](#Preliminaries)
-- [Install](#install)
+- [Install](#Installl)
 - [Usage](#usage)
 	- [Generator](#generator)
 - [Badge](#badge)
@@ -16,4 +16,8 @@ This repo has open-source code of TNC-hasing, which is a novel two-layer non-cou
 - [Contributing](#contributing)
 - [License](#license)
 
-# Preliminaries
+## Preliminaries
+### Lightnvm
+### FEMU
+
+## Install

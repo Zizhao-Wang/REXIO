@@ -5,7 +5,7 @@ This repo has open-source code of TNC-hasing, which is a novel two-layer non-cou
 
 ## Table of Contents
 
-- [Background](#background)
+- [Preliminaries](#Preliminaries)
 - [Install](#install)
 - [Usage](#usage)
 	- [Generator](#generator)
@@ -16,4 +16,4 @@ This repo has open-source code of TNC-hasing, which is a novel two-layer non-cou
 - [Contributing](#contributing)
 - [License](#license)
 
-# 
+# Preliminaries

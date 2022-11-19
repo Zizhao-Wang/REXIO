@@ -1,7 +1,7 @@
 # A two-layer non-coupling index for OpenChannel-SSD
 
 ## A brief description
-This repo has open-source code of TNC-hasing, which is a novel two-layer non-coupling index that can be used to modern **_Based OpenChannel-SSD DataBase system_**.
+This repo has open-source code of TNC-hasing, which is a novel two-layer non-coupling index that can be used to modern **_Based OpenChannel-SSD DataBase System_**.
 
 ## Table of Contents
 

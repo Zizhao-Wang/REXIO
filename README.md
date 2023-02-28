@@ -1,7 +1,7 @@
 # TiOCS: A novel two-layer index for key-value stores on open channel SSD
 
 ## A brief description
-This repo has open-source code of TNC-hasing, which is a novel two-layer non-coupling index that can be used to modern **_Based OpenChannel-SSD DataBase System_**.
+This repo has open-source code of TiOCS, which is a novel two-layer index for solving *cascaaded write amplification problem* on **_Open Channel Solid State Drive based DataBase System_**.
 
 ## Table of Contents
 

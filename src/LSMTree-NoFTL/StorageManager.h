@@ -14,7 +14,7 @@
 
 #include <vector>
 #include "buffer.h"
-// #include "UtilityDefine/level.h"
+#include "level.h"
 // #include "UtilityDefine/spin_lock.h"
 // #include "UtilityDefine/worker_pool.h"
 // #include "../Auxizilary/VariablesTypes.h"
@@ -36,7 +36,7 @@ extern uint32_t LSMTreeWritePhysicalPage;
 extern uint32_t LSMTreeErasehysicalPage;
 
 
-class LSMTree 
+class LSMTreeNoFTL 
 {
 private:
     Buffer buffer;
@@ -45,7 +45,7 @@ private:
     vector<Level> Levels;
 
 public:
-    LSMTree(size_t ,int );
+    LSMTreeNoFTL(size_t ,int );
     int PutValue(KEY_t, VAL_t);
     VAL_t* GetValue(KEY_t);
     void GetRange(KEY_t, KEY_t);
@@ -54,13 +54,12 @@ public:
     void load(std::string);
     void display();
     int FlushInto(vector<Level>::iterator);
-    Run * get_run(int);
+    NoFTLRun * get_run(int);
 };
 
 
-void LSMtreeInit(void);
+void NoFTLKVInit(void);
 
-/* Portable function declaration */
-void LSMTreePort();
+
 
 #endif //EXPERIMENT1_LSMTREE_H

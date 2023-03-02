@@ -11,7 +11,7 @@ Buffer::Buffer(size_t maxpage)
     uint64_t capacity =  CalculatePageCapacity(sizeof(entry_t));
     this->MaxSize = capacity*maxpage;
     size = 0;
-    Head = skiplistCreate();
+    //Head = skiplistCreate();
     //printf("key:%lu \n\n",Head->head->key);
     //printf("Test successful! Size of entry:%lu, Page capacity: %lu, Buffer size:%u\n",sizeof(entry_t),capacity,MaxSize);
 }
@@ -20,9 +20,9 @@ int Buffer::RandomLevel()
 {
 
     int v = 1;
-    while (rand() < P_FACTOR && v < MAX_LEVEL) {
-        v++;
-    }
+    // while (rand() < P_FACTOR && v < MAX_LEVEL) {
+    //     v++;
+    // }
 #ifdef DEBUG
 
 #endif
@@ -32,13 +32,13 @@ int Buffer::RandomLevel()
 
 void Buffer::display()
 {
-    SkiplistNode * first = Head->head;
+    //SkiplistNode * first = Head->head;
 
-    while (first->forward[0]!=NULL)
-    {
-        printf("%lu\n",first->key);
-        first = first->forward[0];        /* code */  
-    }  
+    // while (first->forward[0]!=NULL)
+    // {
+    //     printf("%lu\n",first->key);
+    //     first = first->forward[0];        /* code */  
+    // }  
     return ;
 }
 

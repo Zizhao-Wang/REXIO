@@ -39,7 +39,10 @@ int GlobalInitialize(int argc, char **argv)
 		return 1;
 	}
     nvm_dev_pr(dev);
-    nvm_dev_close(dev);
+	nvm_dev_close(dev);
+    const struct nvm_geo *geo = nvm_dev_get_geo(dev);
+    
+    printf("geo nblocks:%lu nchannels:%lu nluns:%lu npages:%lu nplanes:%lu nsectors:%lu\n ",geo->nblocks,geo->nchannels,geo->nluns,geo->npages,geo->nplanes,geo->nsectors);
     bp = nvm_bp_init_from_args(argc,argv);
     if(!bp)
     {

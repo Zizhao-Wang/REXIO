@@ -18,6 +18,7 @@
 #include <random> 
 #include <liblightnvm.h> // other project's .h files
 #include "TNCTree/TNCtree.h"//your project's .h files
+#include "LSMTree-NoFTL/StorageManager.h"
 #include "MultiHash/ExtendibleHash/ExHash.h"
 #include "MultiHash/LazySplitHash/LSHash.h"
 #include "MultiHash/LinearHash/LiHash.h"
@@ -32,6 +33,13 @@ int GlobalInitialize(int argc, char **argv)
 {
 
     /* Initialize device information */
+    struct nvm_dev *dev = nvm_dev_open("/dev/nvme0n1");
+    if (!dev) {
+		perror("nvm_dev_open");
+		return 1;
+	}
+    nvm_dev_pr(dev);
+    nvm_dev_close(dev);
     bp = nvm_bp_init_from_args(argc,argv);
     if(!bp)
     {
@@ -73,7 +81,9 @@ int main(int argc, char **argv)
 
     // EXHashing1();
 
-    TNCtreePort();
+    // TNCtreePort();
+
+    NoFTLKVInit();
 
     // LHashPort();
 

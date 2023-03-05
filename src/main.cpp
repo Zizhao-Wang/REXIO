@@ -38,11 +38,7 @@ int GlobalInitialize(int argc, char **argv)
 		perror("nvm_dev_open");
 		return 1;
 	}
-    nvm_dev_pr(dev);
-	nvm_dev_close(dev);
     const struct nvm_geo *geo = nvm_dev_get_geo(dev);
-    
-    printf("geo nblocks:%lu nchannels:%lu nluns:%lu npages:%lu nplanes:%lu nsectors:%lu\n ",geo->nblocks,geo->nchannels,geo->nluns,geo->npages,geo->nplanes,geo->nsectors);
     bp = nvm_bp_init_from_args(argc,argv);
     if(!bp)
     {
@@ -57,7 +53,10 @@ int GlobalInitialize(int argc, char **argv)
     printf(UCAS_SIAT);
     printf(Name);
     return 0;
-    
+
+    // nvm_dev_pr(dev);
+	// nvm_dev_close(dev);
+    // printf("geo nblocks:%lu nchannels:%lu nluns:%lu npages:%lu nplanes:%lu nsectors:%lu\n ",geo->nblocks,geo->nchannels,geo->nluns,geo->npages,geo->nplanes,geo->nsectors);
 }
 
 int main(int argc, char **argv)

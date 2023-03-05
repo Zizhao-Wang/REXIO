@@ -35,14 +35,37 @@ extern uint32_t LSMTreeReadPhysicalPage;
 extern uint32_t LSMTreeWritePhysicalPage;
 extern uint32_t LSMTreeErasehysicalPage;
 
+class RegionParams
+{
+
+private:
+    size_t channels_per_ssd;
+    size_t blocks_per_channel;
+    size_t io_requests;
+
+public:
+    RegionParams(size_t channels_per_ssd=32, size_t blocks_per_channel=2)
+    {
+        this->channels_per_ssd = channels_per_ssd;
+        this->blocks_per_channel = blocks_per_channel;
+        this->io_requests = channels_per_ssd * blocks_per_channel;
+    }
+
+    size_t get_io_requests()
+    {
+        return this->io_requests;
+    }
+
+};
 
 class LSMTreeNoFTL 
 {
 private:
     Buffer buffer;
+    RegionParams region_params;
+    vector<Level> Levels;
     //float bf_bits_per_entry;
     // 7-levels 
-    vector<Level> Levels;
 
 public:
     LSMTreeNoFTL(size_t ,int );

@@ -33,18 +33,22 @@ int GlobalInitialize(int argc, char **argv)
 {
 
     /* Initialize device information */
-    struct nvm_dev *dev = nvm_dev_open("/dev/nvme0n1");
-    if (!dev) {
-		perror("nvm_dev_open");
-		return 1;
-	}
-    const struct nvm_geo *geo = nvm_dev_get_geo(dev);
+    // struct nvm_dev *dev = nvm_dev_open("/dev/nvme0n1");
+    // if (!dev) {
+	// 	perror("nvm_dev_open");
+	// 	return 1;
+	// }
+    // nvm_dev_pr(dev);
+	// nvm_dev_close(dev);
+    // const struct nvm_geo *geo = nvm_dev_get_geo(dev);
+    // nvm_geo_pr(geo);
     bp = nvm_bp_init_from_args(argc,argv);
     if(!bp)
     {
         return -1;
     }
-
+    printf("nchunks:%lu tsectr:%lu \n ",bp->naddrs,bp->naddrs*bp->geo->l.nsectr);
+    exit(0);
     /* Initialize chunk information. */
     for(size_t i=0;i<250;i++)
     {
@@ -54,8 +58,7 @@ int GlobalInitialize(int argc, char **argv)
     printf(Name);
     return 0;
 
-    // nvm_dev_pr(dev);
-	// nvm_dev_close(dev);
+    
     // printf("geo nblocks:%lu nchannels:%lu nluns:%lu npages:%lu nplanes:%lu nsectors:%lu\n ",geo->nblocks,geo->nchannels,geo->nluns,geo->npages,geo->nplanes,geo->nsectors);
 }
 
@@ -68,16 +71,6 @@ int main(int argc, char **argv)
         printf("Initialization failure!\n");
         exit(101);
     }
-
-    // clock_t startTime,endTime;
-    // startTime = clock();
-    // std::set<int> a;
-    // for(int i=0;i<=1000000;i++)
-    // {
-    //     a.insert(i);
-    // }
-    // endTime = clock();
-    // std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
     /* select different indexes. line 49- */
 

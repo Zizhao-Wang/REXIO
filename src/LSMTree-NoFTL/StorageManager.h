@@ -45,7 +45,7 @@ private:
     size_t io_requests;
 
 public:
-    RegionParams(size_t channels_per_ssd=32, size_t blocks_per_channel=2)
+    RegionParams(size_t channels_per_ssd=2, size_t blocks_per_channel=32*4)
     {
         this->channels_per_ssd = channels_per_ssd;
         this->blocks_per_channel = blocks_per_channel;
@@ -67,7 +67,6 @@ private:
     RegionParams region_params;
     vector<NoFTLKVLevel> Levels;
     //float bf_bits_per_entry;
-    // 7-levels 
 
 public:
     LSMTreeNoFTL(size_t ,int );
@@ -80,6 +79,7 @@ public:
     void display();
     int FlushInto(vector<NoFTLKVLevel>::iterator);
     NoFTLRun * get_run(int);
+
 };
 
 

@@ -11,8 +11,6 @@
 #include "../Backend/SSDWrite/writer.h"
 #include "../Backend/SSDRead/reader.h"
 
-vector<int> a;
-
 NoFTLRun::NoFTLRun(unsigned long maxsize)
 {
     this->MaxSize = maxsize;

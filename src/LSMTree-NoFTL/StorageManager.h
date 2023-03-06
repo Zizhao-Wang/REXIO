@@ -18,10 +18,11 @@
 // #include "UtilityDefine/spin_lock.h"
 // #include "UtilityDefine/worker_pool.h"
 // #include "../Auxizilary/VariablesTypes.h"
-// #include "UtilityDefine/level.h"
+#include "level.h"
+#include "merge.h"
+#include "run.h"
 // #include "../Auxizilary/SysOutput.h"
-// #include "UtilityDefine/merge.h"
-// #include "UtilityDefine/run.h"
+
 
 
 #define DEFAULT_TREE_DEPTH 5
@@ -31,9 +32,9 @@
 #define DEFAULT_BF_BITS_PER_ENTRY 0.5   // bloom filter bits
 
 
-extern uint32_t LSMTreeReadPhysicalPage;
-extern uint32_t LSMTreeWritePhysicalPage;
-extern uint32_t LSMTreeErasehysicalPage;
+extern uint32_t rNoFTLKVPages;
+extern uint32_t wNoFTLKVPages;
+extern uint32_t eNoFTLKVPages;
 
 class RegionParams
 {
@@ -60,10 +61,11 @@ public:
 
 class LSMTreeNoFTL 
 {
+
 private:
-    Buffer buffer;
+    memory_buffer buffer;
     RegionParams region_params;
-    vector<Level> Levels;
+    vector<NoFTLKVLevel> Levels;
     //float bf_bits_per_entry;
     // 7-levels 
 
@@ -76,7 +78,7 @@ public:
     void DeleteValue(KEY_t);
     void load(std::string);
     void display();
-    int FlushInto(vector<Level>::iterator);
+    int FlushInto(vector<NoFTLKVLevel>::iterator);
     NoFTLRun * get_run(int);
 };
 

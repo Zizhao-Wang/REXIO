@@ -5,7 +5,7 @@
 #define N2 9999
 
 
-Buffer::Buffer(size_t maxpage)
+memory_buffer::memory_buffer(size_t maxpage)
 {
     // 1024 * 256 = 262144 
     uint64_t capacity =  CalculatePageCapacity(sizeof(entry_t));
@@ -16,7 +16,7 @@ Buffer::Buffer(size_t maxpage)
     //printf("Test successful! Size of entry:%lu, Page capacity: %lu, Buffer size:%u\n",sizeof(entry_t),capacity,MaxSize);
 }
 
-int Buffer::RandomLevel()
+int memory_buffer::RandomLevel()
 {
 
     int v = 1;
@@ -30,7 +30,7 @@ int Buffer::RandomLevel()
 
 }
 
-void Buffer::display()
+void memory_buffer::display()
 {
     //SkiplistNode * first = Head->head;
 
@@ -42,7 +42,7 @@ void Buffer::display()
     return ;
 }
 
-bool Buffer::PutValue(KEY_t key1, VAL_t val1) 
+bool memory_buffer::PutValue(KEY_t key1, VAL_t val1) 
 {
 #ifdef SET
     SkiplistNode * update[MAX_LEVEL];
@@ -114,7 +114,7 @@ bool Buffer::PutValue(KEY_t key1, VAL_t val1)
     
 }
 
-VAL_t * Buffer::GetValue(KEY_t key1)
+VAL_t * memory_buffer::GetValue(KEY_t key1)
 {
 #ifdef SKIPLIST
     SkiplistNode *curr = Head->head;
@@ -152,7 +152,7 @@ VAL_t * Buffer::GetValue(KEY_t key1)
 
 }
 
-std::vector<entry_t> * Buffer::GetRange(KEY_t start, KEY_t end) const 
+std::vector<entry_t> * memory_buffer::GetRange(KEY_t start, KEY_t end) const 
 {
     entry_t SearchEntry;
     std::set<entry_t>::iterator SubRangeStart, SubRangeEnd;
@@ -167,7 +167,7 @@ std::vector<entry_t> * Buffer::GetRange(KEY_t start, KEY_t end) const
 }
 
 
-void Buffer::AllClear(void) 
+void memory_buffer::AllClear(void) 
 {
 #ifdef SKIPlist
     for (SkiplistNode * curr = Head->head; curr; ) 
@@ -184,12 +184,12 @@ void Buffer::AllClear(void)
 
 }
 
-uint64_t Buffer::GetMaxSize()
+uint64_t memory_buffer::GetMaxSize()
 {
     return MaxSize;
 }
 
-std::vector<entry_t> Buffer::GetEntries()
+std::vector<entry_t> memory_buffer::GetEntries()
 {
 #ifdef sk
     std::vector<entry_t> values;

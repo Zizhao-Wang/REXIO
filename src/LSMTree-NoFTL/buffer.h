@@ -13,8 +13,8 @@
  *          TiOCS/src/LSMTree-NoFTL/level0.h
  **/
 
-#ifndef EXPERIMENT1_LSMTREE_BUFFER_H
-#define EXPERIMENT1_LSMTREE_BUFFER_H
+#ifndef TiOCS_LSMTREENOFTL_BUFFER_H
+#define TiOCS_LSMTREENOFTL_BUFFER_H
 
 #include <set>
 #include <vector>
@@ -26,7 +26,7 @@
 /*
  * Level 0 
  */
-class Buffer 
+class memory_buffer 
 {
 
 private:
@@ -36,7 +36,7 @@ private:
     
 public:
     int RandomLevel();
-    Buffer(size_t maxpage);
+    memory_buffer(size_t maxpage);
     bool PutValue(KEY_t, VAL_t val);
     void display(); 
     VAL_t * GetValue(KEY_t);

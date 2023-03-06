@@ -23,8 +23,6 @@
 #include "../Backend/IODisk/WriteDisk.h"
 #include "../Auxizilary/SysOutput.h"
 
-extern vector<int> a;
-
 class NoFTLRun 
 {
 

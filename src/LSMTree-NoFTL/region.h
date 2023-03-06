@@ -9,8 +9,8 @@
  *          TiOCS/src/LSMTree-NoFTL/Region.h
  **/
 
-#ifndef TiOCS_LSMTREENoFTL_H
-#define TiOCS_LSMTREENoFTL_H
+#ifndef TiOCS_LSMTREENOFTL_REGION_H
+#define TiOCS_LSMTREENOFTL_REGION_H
 
 // acquire the hardware information of SSD, including the number of chips(dies), blocks, pages, and 
 // calculate the number of regions. 

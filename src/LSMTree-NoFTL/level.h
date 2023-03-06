@@ -13,8 +13,8 @@
  *          TiOCS_experiment/TiOCS/src/LSMTree-NoFTL/level.h
  **/
 
-#ifndef EXPERIMENT1_LSMTREE_LEVEL_H
-#define EXPERIMENT1_LSMTREE_LEVEL_H
+#ifndef TiOCS_LSMTREENOFTL_LEVEL_H
+#define TiOCS_LSMTREENOFTL_LEVEL_H
 
 #include <vector>
 #include <queue>
@@ -23,7 +23,7 @@
 #include "../Auxizilary/SysOutput.h"
 #include "run.h"
 
-class Level 
+class NoFTLKVLevel 
 {
 private:
     int  MaxRuns;
@@ -32,7 +32,7 @@ private:
 
 public:
     std::vector<NoFTLRun> Runs;
-    Level(uint64_t);
+    NoFTLKVLevel(uint64_t);
     void PutValue(entry_t entry1);
     VAL_t* GetValue(KEY_t key);
     void PutEntries(std::vector<entry_t>);

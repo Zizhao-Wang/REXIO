@@ -38,11 +38,12 @@ extern uint32_t LSMTreeErasehysicalPage;
 
 class LSMTree 
 {
+
 private:
-    Buffer buffer;
     //float bf_bits_per_entry;
     // 7-levels 
     vector<Level> Levels;
+    Buffer buffer;
 
 public:
     LSMTree(size_t ,int );

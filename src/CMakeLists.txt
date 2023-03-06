@@ -42,5 +42,8 @@ add_executable(src main.cpp
 				LSM-Tree/UtilityDefine/ResAllocate.h LSM-Tree/UtilityImplement/ResAllocate.cpp LSM-Tree/UtilityDefine/level.h 
 				LSM-Tree/UtilityImplement/level.cpp LSM-Tree/UtilityDefine/merge.h LSM-Tree/UtilityImplement/merge.cpp 
 				LSM-Tree/UtilityDefine/run.h LSM-Tree/UtilityImplement/run.cpp LSM-Tree/UtilityDefine/node2.h LSM-Tree/UtilityDefine/node2.cpp
-				LSMTree-NoFTL/StorageManager.h  LSMTree-NoFTL/StorageManager.cpp
+				LSMTree-NoFTL/StorageManager.h  LSMTree-NoFTL/StorageManager.cpp LSMTree-NoFTL/run.h LSMTree-NoFTL/run.cpp 
+				LSMTree-NoFTL/level.h LSMTree-NoFTL/level.cpp LSMTree-NoFTL/buffer.h LSMTree-NoFTL/buffer.cpp
+				LSMTree-NoFTL/merge.h LSMTree-NoFTL/merge.cpp LSMTree-NoFTL/region.h LSMTree-NoFTL/region.cpp
+				LSMTree-NoFTL/allocation.h  LSMTree-NoFTL/allocation.cpp
 				FIFO/FIFO.h FIFO/FIFO.cpp)

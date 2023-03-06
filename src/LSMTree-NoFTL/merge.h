@@ -1,28 +1,27 @@
 /**
- * @date     18/9/2022
+ * @date     6/3/2022
  * @author   zz.wang
  * @details 
  *           This code is used to merge 
  *
  * IDENTIFICATION:
- *          src/LSM-Tree/UtilityDefine/merge.h
+ *          TiOCS/src/LSMTree-NoFTL/merge.h
  **/
-#ifndef EXPERIMENT1_MERGE_H
-#define EXPERIMENT1_MERGE_H
+#ifndef TiOCS_LSMTREENoFTL_MERGE_H
+#define TiOCS_LSMTREENoFTL_MERGE_H
 
 #include <cassert>  //C library file
 #include <functional> // C++
 #include <vector>
 #include <queue>      // Library file
-#include "../../Auxizilary/VariablesTypes.h" //header files in this project
+#include "../Auxizilary/VariablesTypes.h" //header files in this project
 
- 
-typedef struct MergeEntry
+typedef struct merge_entry 
 {
 
     entry_t SingleEntry;
 
-    bool operator < (const MergeEntry& other) const 
+    bool operator < (const merge_entry& other) const 
     {
         // Order first by keys, then by precedence
         if (SingleEntry.key == other.SingleEntry.key) 
@@ -35,13 +34,13 @@ typedef struct MergeEntry
         }
     }
 
-}MergeEntry;
+}merge_entry;
 
-class MergeContext 
+class merge_context 
 {
+    
 private:
-
-    std::priority_queue<MergeEntry, std::vector<MergeEntry>, std::less<MergeEntry> > queue;
+    std::priority_queue<merge_entry, std::vector<merge_entry>, std::less<merge_entry> > queue;
 
 public:
     void Insert(entry_t *, size_t);

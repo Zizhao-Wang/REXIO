@@ -62,7 +62,7 @@ int SinglePageWrite()
     /* Function flag, default value equals 0(successful flag). */
     int err = 0;
     readcount++;
-    write++;
+    writes++;
     struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, DataPagePointer);
     size_t ws_min = nvm_dev_get_ws_min(bp->dev);
     struct nvm_addr addrs[ws_min];
@@ -97,7 +97,7 @@ int PageLogWrite(uint64_t BlockId)
 
     /* Function flag, default value equals 0(successful flag). */
     int err = 0;
-    write++;
+    writes++;
     PageType LogPagePointer = chunkusage[BlockId];
     assert(LogPagePointer<=4092);
     //printf("LogPagePointer:%lu BlockID:%lu \n",LogPagePointer,BlockId);

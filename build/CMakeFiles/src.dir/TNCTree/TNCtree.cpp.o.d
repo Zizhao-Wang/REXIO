@@ -1,8 +1,6 @@
 CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: \
- /home/femu/experiment1/code2/src/TNCTree/TNCtree.cpp \
- /usr/include/stdc-predef.h \
- /home/femu/experiment1/code2/src/TNCTree/TNCtree.h \
- /usr/include/c++/9/cstdlib \
+ /home/TiOCS/src/TNCTree/TNCtree.cpp /usr/include/stdc-predef.h \
+ /home/TiOCS/src/TNCTree/TNCtree.h /usr/include/c++/9/cstdlib \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h \
  /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
@@ -143,63 +141,98 @@ CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: \
  /usr/include/c++/9/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++io.h \
- /usr/include/c++/9/bits/fstream.tcc /usr/include/c++/9/vector \
+ /usr/include/c++/9/bits/fstream.tcc /usr/include/unistd.h \
+ /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+ /usr/include/x86_64-linux-gnu/bits/environments.h \
+ /usr/include/x86_64-linux-gnu/bits/confname.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+ /usr/include/x86_64-linux-gnu/sys/wait.h /usr/include/signal.h \
+ /usr/include/x86_64-linux-gnu/bits/signum.h \
+ /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
+ /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
+ /usr/include/x86_64-linux-gnu/bits/sigaction.h \
+ /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
+ /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
+ /usr/include/x86_64-linux-gnu/sys/ucontext.h \
+ /usr/include/x86_64-linux-gnu/bits/sigstack.h \
+ /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
+ /usr/include/x86_64-linux-gnu/bits/sigthread.h \
+ /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+ /usr/include/x86_64-linux-gnu/sys/ipc.h \
+ /usr/include/x86_64-linux-gnu/bits/ipctypes.h \
+ /usr/include/x86_64-linux-gnu/bits/ipc.h \
+ /usr/include/x86_64-linux-gnu/bits/ipc-perm.h \
+ /usr/include/x86_64-linux-gnu/sys/shm.h \
+ /usr/include/x86_64-linux-gnu/bits/shm.h \
+ /usr/include/x86_64-linux-gnu/bits/shmlba.h \
+ /usr/include/x86_64-linux-gnu/bits/shm-pad.h /usr/include/c++/9/vector \
  /usr/include/c++/9/bits/stl_construct.h \
  /usr/include/c++/9/bits/stl_uninitialized.h \
  /usr/include/c++/9/bits/stl_vector.h \
  /usr/include/c++/9/bits/stl_bvector.h /usr/include/c++/9/bits/vector.tcc \
- /home/femu/experiment1/code2/src/TNCTree/../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/TNCTree/../Auxizilary/SysOutput.h \
  /usr/include/c++/9/algorithm /usr/include/c++/9/utility \
  /usr/include/c++/9/bits/stl_relops.h /usr/include/c++/9/bits/stl_algo.h \
  /usr/include/c++/9/bits/algorithmfwd.h \
  /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
  /usr/include/c++/9/bits/uniform_int_dist.h /usr/include/c++/9/limits \
- /home/femu/experiment1/code2/src/TNCTree/MemoryTier/MemTier.h \
- /home/femu/experiment1/code2/src/TNCTree/MemoryTier/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/TNCTree/MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/writer.h \
+ /home/TiOCS/src/TNCTree/MemoryTier/MemTier.h \
+ /home/TiOCS/src/TNCTree/MemoryTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/writer.h \
  /usr/include/c++/9/unordered_map /usr/include/c++/9/ext/aligned_buffer.h \
  /usr/include/c++/9/bits/hashtable.h \
  /usr/include/c++/9/bits/hashtable_policy.h /usr/include/c++/9/tuple \
  /usr/include/c++/9/array /usr/include/c++/9/bits/uses_allocator.h \
  /usr/include/c++/9/bits/invoke.h /usr/include/c++/9/bits/unordered_map.h \
  /usr/include/c++/9/bits/erase_if.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm.h \
  /usr/include/inttypes.h /usr/include/c++/9/stdlib.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm_util.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm_util.h \
  /usr/include/string.h /usr/include/strings.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm_spec.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm_spec.h \
  /usr/include/assert.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../TNCTree/MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../Auxizilary/SysOutput.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../TNCTree/StoreTier/syncstore.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../TNCTree/StoreTier/../MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../TNCTree/StoreTier/../../LRU/lru.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../TNCTree/MemoryTier/Node.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../TNCTree/StoreTier/syncstore.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../TNCTree/StoreTier/../MemoryTier/Node.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../TNCTree/StoreTier/../../LRU/lru.h \
  /usr/include/c++/9/list /usr/include/c++/9/bits/stl_list.h \
  /usr/include/c++/9/bits/allocated_ptr.h /usr/include/c++/9/bits/list.tcc \
  /usr/include/c++/9/cassert \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../TNCTree/StoreTier/../../LRU/../TNCTree/MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../TNCTree/StoreTier/../../FIFO/FIFO.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../TNCTree/StoreTier/../../FIFO/../TNCTree/MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../MultiHash/LinearHash/LiHash.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../BlockManage/BlockInfo.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm_cli.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExHash.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExBucket.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
- /home/femu/experiment1/code2/src/TNCTree/../Backend/IODisk/WriteDisk.h \
- /home/femu/experiment1/code2/src/TNCTree/StoreTier/syncstore.h
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../TNCTree/StoreTier/../../LRU/../TNCTree/MemoryTier/Node.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../TNCTree/StoreTier/../../FIFO/FIFO.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../TNCTree/StoreTier/../../FIFO/../TNCTree/MemoryTier/Node.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../MultiHash/LinearHash/LiHash.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../BlockManage/BlockInfo.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm_cli.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExHash.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExBucket.h \
+ /home/TiOCS/src/TNCTree/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
+ /home/TiOCS/src/TNCTree/../Backend/IODisk/WriteDisk.h \
+ /home/TiOCS/src/TNCTree/StoreTier/syncstore.h

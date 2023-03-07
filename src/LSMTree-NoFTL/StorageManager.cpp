@@ -385,6 +385,12 @@ void LSMTreeNoFTL::display()
 
 void NoFTLKVInit(void)
 {
+
+    
+
+
+
+
 	clock_t startTime,endTime;                     // Definition of timestamp
     LSMTreeNoFTL noftlkv(256,7);                  // Initialize the LSMtree part of NoFTL-KV
 

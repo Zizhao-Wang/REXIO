@@ -14,6 +14,11 @@
 #include <ctime>
 #include <iostream>
 #include <fstream>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
 #include <vector>
 #include "../Auxizilary/SysOutput.h"
 #include "MemoryTier/MemTier.h"
@@ -22,13 +27,52 @@
 #include "StoreTier/syncstore.h"
 
 int reads = 0;
-int write = 0;
-int erase = 0;
+int writes = 0;
+int erases = 0;
 
 
-void TNCtreeInit(void)
+int sub_process_init(void)
 {
+     /*create a sub-process */
+     pid_t pid;
+     int status;
+     key_t key = ftok("/home/TiOCS/src/shared_memory.txt", 'R');
+     if (key == -1)
+     {
+          perror("Failed to create shared memory key.");
+          return -1;
+     }
+     else
+     {
+          printf("Shared memory key created successfully.\n");
+     }
+     int shmid = shmget(key, sizeof(int), IPC_CREAT | 0666);
+     if (shmid == -1)
+     {
+          perror("Failed to create shared memory.");
+          return -1;
+     }
+     int *data = (int*) shmat(shmid, NULL, 0); // 连接共享内存
+     *data = 0; // inialize the shared memory
 
+     if((pid = fork()) == -1 )
+     {
+          perror("fork error");
+          return -1;
+     }
+     else if(pid == 0)
+     {
+          // child process
+          //printf("child process
+     }
+     else
+     {
+          // parent process
+          //printf("parent process
+     }
+     
+     exit(0);
+     
      int Createflag = ExtendHashTableInitialize();
 
      // Pagedata = (TNCEntry *)malloc(bp->geo->l.nbytes);
@@ -46,10 +90,13 @@ void TNCtreeInit(void)
 
 }
 
-void TNCtreePort(void)
+void TiOCSInit(void)
 {
      
-     TNCtreeInit();
+     if(sub_process_init() == 0)
+     {
+          printf("sub-process initialized failed!\n");
+     }
 
      clock_t startTime,endTime;                        // Definition of timestamp
 
@@ -61,12 +108,12 @@ void TNCtreePort(void)
           {
                endTime = clock();
                std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-               printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
+               printf("Read count:%d write:%d erase:%d\n",reads,writes,erases);
           }
           InsertNode(i,i);
      }
      endTime = clock();
-     printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
+     printf("Read count:%d write:%d erase:%d\n",reads,writes,erases);
      std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
 
      uint64_t workb[1000010];
@@ -141,19 +188,19 @@ void TNCtreePort(void)
      /* workload c: read only, 50% in it, 50% not in it */
      startTime = clock();
      reads = 0;
-     write = 0;
-     erase = 0;
+     writes = 0;
+     erases = 0;
      for(int i=1;i<=1000000;i++)
      {
           Search(workb[i-1]);
           if(i%100000==0 || i==10000)
           {
-               printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
+               printf("Read count:%d write:%d erase:%d\n",reads,writes,erases);
                endTime = clock();
                std::cout << "Total Time of "<<i<<" in workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
           }
      }
-     printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
+     printf("Read count:%d write:%d erase:%d\n",reads,writes,erases);
      std::cout << "Total Time of workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
           
 

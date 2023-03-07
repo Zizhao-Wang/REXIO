@@ -8,10 +8,10 @@ project(src)
 set(CMAKE_CXX_STANDARD 14)
 
 
-include_directories("../../../liblightnvm/include/")
+include_directories("../../liblightnvm/include/")
 
 
-link_libraries(-llightnvm_cli -llightnvm)
+link_libraries("/home/liblightnvm/build/liblightnvm_cli.a"  "/home/liblightnvm/build/liblightnvm.a")
 
 
 FIND_PACKAGE( OpenMP REQUIRED)

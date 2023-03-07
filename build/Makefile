@@ -57,10 +57,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/femu/experiment1/code2/src
+CMAKE_SOURCE_DIR = /home/TiOCS/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/femu/experiment1/code2/build
+CMAKE_BINARY_DIR = /home/TiOCS/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/femu/experiment1/code2/build/CMakeFiles /home/femu/experiment1/code2/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/TiOCS/build/CMakeFiles /home/TiOCS/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/femu/experiment1/code2/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/TiOCS/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -465,6 +465,174 @@ LSM-Tree/UtilityImplement/run.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.s
 .PHONY : LSM-Tree/UtilityImplement/run.cpp.s
 
+LSMTree-NoFTL/StorageManager.o: LSMTree-NoFTL/StorageManager.cpp.o
+.PHONY : LSMTree-NoFTL/StorageManager.o
+
+# target to build an object file
+LSMTree-NoFTL/StorageManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.o
+.PHONY : LSMTree-NoFTL/StorageManager.cpp.o
+
+LSMTree-NoFTL/StorageManager.i: LSMTree-NoFTL/StorageManager.cpp.i
+.PHONY : LSMTree-NoFTL/StorageManager.i
+
+# target to preprocess a source file
+LSMTree-NoFTL/StorageManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.i
+.PHONY : LSMTree-NoFTL/StorageManager.cpp.i
+
+LSMTree-NoFTL/StorageManager.s: LSMTree-NoFTL/StorageManager.cpp.s
+.PHONY : LSMTree-NoFTL/StorageManager.s
+
+# target to generate assembly for a file
+LSMTree-NoFTL/StorageManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.s
+.PHONY : LSMTree-NoFTL/StorageManager.cpp.s
+
+LSMTree-NoFTL/allocation.o: LSMTree-NoFTL/allocation.cpp.o
+.PHONY : LSMTree-NoFTL/allocation.o
+
+# target to build an object file
+LSMTree-NoFTL/allocation.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/allocation.cpp.o
+.PHONY : LSMTree-NoFTL/allocation.cpp.o
+
+LSMTree-NoFTL/allocation.i: LSMTree-NoFTL/allocation.cpp.i
+.PHONY : LSMTree-NoFTL/allocation.i
+
+# target to preprocess a source file
+LSMTree-NoFTL/allocation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/allocation.cpp.i
+.PHONY : LSMTree-NoFTL/allocation.cpp.i
+
+LSMTree-NoFTL/allocation.s: LSMTree-NoFTL/allocation.cpp.s
+.PHONY : LSMTree-NoFTL/allocation.s
+
+# target to generate assembly for a file
+LSMTree-NoFTL/allocation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/allocation.cpp.s
+.PHONY : LSMTree-NoFTL/allocation.cpp.s
+
+LSMTree-NoFTL/buffer.o: LSMTree-NoFTL/buffer.cpp.o
+.PHONY : LSMTree-NoFTL/buffer.o
+
+# target to build an object file
+LSMTree-NoFTL/buffer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/buffer.cpp.o
+.PHONY : LSMTree-NoFTL/buffer.cpp.o
+
+LSMTree-NoFTL/buffer.i: LSMTree-NoFTL/buffer.cpp.i
+.PHONY : LSMTree-NoFTL/buffer.i
+
+# target to preprocess a source file
+LSMTree-NoFTL/buffer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/buffer.cpp.i
+.PHONY : LSMTree-NoFTL/buffer.cpp.i
+
+LSMTree-NoFTL/buffer.s: LSMTree-NoFTL/buffer.cpp.s
+.PHONY : LSMTree-NoFTL/buffer.s
+
+# target to generate assembly for a file
+LSMTree-NoFTL/buffer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/buffer.cpp.s
+.PHONY : LSMTree-NoFTL/buffer.cpp.s
+
+LSMTree-NoFTL/level.o: LSMTree-NoFTL/level.cpp.o
+.PHONY : LSMTree-NoFTL/level.o
+
+# target to build an object file
+LSMTree-NoFTL/level.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/level.cpp.o
+.PHONY : LSMTree-NoFTL/level.cpp.o
+
+LSMTree-NoFTL/level.i: LSMTree-NoFTL/level.cpp.i
+.PHONY : LSMTree-NoFTL/level.i
+
+# target to preprocess a source file
+LSMTree-NoFTL/level.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/level.cpp.i
+.PHONY : LSMTree-NoFTL/level.cpp.i
+
+LSMTree-NoFTL/level.s: LSMTree-NoFTL/level.cpp.s
+.PHONY : LSMTree-NoFTL/level.s
+
+# target to generate assembly for a file
+LSMTree-NoFTL/level.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/level.cpp.s
+.PHONY : LSMTree-NoFTL/level.cpp.s
+
+LSMTree-NoFTL/merge.o: LSMTree-NoFTL/merge.cpp.o
+.PHONY : LSMTree-NoFTL/merge.o
+
+# target to build an object file
+LSMTree-NoFTL/merge.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/merge.cpp.o
+.PHONY : LSMTree-NoFTL/merge.cpp.o
+
+LSMTree-NoFTL/merge.i: LSMTree-NoFTL/merge.cpp.i
+.PHONY : LSMTree-NoFTL/merge.i
+
+# target to preprocess a source file
+LSMTree-NoFTL/merge.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/merge.cpp.i
+.PHONY : LSMTree-NoFTL/merge.cpp.i
+
+LSMTree-NoFTL/merge.s: LSMTree-NoFTL/merge.cpp.s
+.PHONY : LSMTree-NoFTL/merge.s
+
+# target to generate assembly for a file
+LSMTree-NoFTL/merge.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/merge.cpp.s
+.PHONY : LSMTree-NoFTL/merge.cpp.s
+
+LSMTree-NoFTL/region.o: LSMTree-NoFTL/region.cpp.o
+.PHONY : LSMTree-NoFTL/region.o
+
+# target to build an object file
+LSMTree-NoFTL/region.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/region.cpp.o
+.PHONY : LSMTree-NoFTL/region.cpp.o
+
+LSMTree-NoFTL/region.i: LSMTree-NoFTL/region.cpp.i
+.PHONY : LSMTree-NoFTL/region.i
+
+# target to preprocess a source file
+LSMTree-NoFTL/region.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/region.cpp.i
+.PHONY : LSMTree-NoFTL/region.cpp.i
+
+LSMTree-NoFTL/region.s: LSMTree-NoFTL/region.cpp.s
+.PHONY : LSMTree-NoFTL/region.s
+
+# target to generate assembly for a file
+LSMTree-NoFTL/region.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/region.cpp.s
+.PHONY : LSMTree-NoFTL/region.cpp.s
+
+LSMTree-NoFTL/run.o: LSMTree-NoFTL/run.cpp.o
+.PHONY : LSMTree-NoFTL/run.o
+
+# target to build an object file
+LSMTree-NoFTL/run.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/run.cpp.o
+.PHONY : LSMTree-NoFTL/run.cpp.o
+
+LSMTree-NoFTL/run.i: LSMTree-NoFTL/run.cpp.i
+.PHONY : LSMTree-NoFTL/run.i
+
+# target to preprocess a source file
+LSMTree-NoFTL/run.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/run.cpp.i
+.PHONY : LSMTree-NoFTL/run.cpp.i
+
+LSMTree-NoFTL/run.s: LSMTree-NoFTL/run.cpp.s
+.PHONY : LSMTree-NoFTL/run.s
+
+# target to generate assembly for a file
+LSMTree-NoFTL/run.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/run.cpp.s
+.PHONY : LSMTree-NoFTL/run.cpp.s
+
 MultiHash/EagerSplitHash/ESHash.o: MultiHash/EagerSplitHash/ESHash.cpp.o
 .PHONY : MultiHash/EagerSplitHash/ESHash.o
 
@@ -804,6 +972,27 @@ help:
 	@echo "... LSM-Tree/UtilityImplement/run.o"
 	@echo "... LSM-Tree/UtilityImplement/run.i"
 	@echo "... LSM-Tree/UtilityImplement/run.s"
+	@echo "... LSMTree-NoFTL/StorageManager.o"
+	@echo "... LSMTree-NoFTL/StorageManager.i"
+	@echo "... LSMTree-NoFTL/StorageManager.s"
+	@echo "... LSMTree-NoFTL/allocation.o"
+	@echo "... LSMTree-NoFTL/allocation.i"
+	@echo "... LSMTree-NoFTL/allocation.s"
+	@echo "... LSMTree-NoFTL/buffer.o"
+	@echo "... LSMTree-NoFTL/buffer.i"
+	@echo "... LSMTree-NoFTL/buffer.s"
+	@echo "... LSMTree-NoFTL/level.o"
+	@echo "... LSMTree-NoFTL/level.i"
+	@echo "... LSMTree-NoFTL/level.s"
+	@echo "... LSMTree-NoFTL/merge.o"
+	@echo "... LSMTree-NoFTL/merge.i"
+	@echo "... LSMTree-NoFTL/merge.s"
+	@echo "... LSMTree-NoFTL/region.o"
+	@echo "... LSMTree-NoFTL/region.i"
+	@echo "... LSMTree-NoFTL/region.s"
+	@echo "... LSMTree-NoFTL/run.o"
+	@echo "... LSMTree-NoFTL/run.i"
+	@echo "... LSMTree-NoFTL/run.s"
 	@echo "... MultiHash/EagerSplitHash/ESHash.o"
 	@echo "... MultiHash/EagerSplitHash/ESHash.i"
 	@echo "... MultiHash/EagerSplitHash/ESHash.s"

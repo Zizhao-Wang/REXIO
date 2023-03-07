@@ -13,15 +13,15 @@
 #define EXPERIMENT1_TNCTREE_H
 
 extern int reads;
-extern int write;
-extern int erase;
+extern int writes;
+extern int erases;
 
 
 /* ================= 2-Tier None-Coupling module ==================== */
 
-void TNCtreeInit(void);
+int sub_process_init(void);
 
 
-void TNCtreePort(void);
+void TiOCSInit(void);
 
 #endif //EXPERIMENT1_FRONTMAIN_H

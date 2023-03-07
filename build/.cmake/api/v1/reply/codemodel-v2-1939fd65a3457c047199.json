@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "src::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-src-Debug-f44dd396353520317993.json",
+					"jsonFile" : "target-src-Debug-73c1232b226e7a3868ca.json",
 					"name" : "src",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/femu/experiment1/code2/build",
-		"source" : "/home/femu/experiment1/code2/src"
+		"build" : "/home/TiOCS/build",
+		"source" : "/home/TiOCS/src"
 	},
 	"version" : 
 	{

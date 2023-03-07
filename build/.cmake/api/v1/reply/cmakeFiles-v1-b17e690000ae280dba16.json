@@ -6,7 +6,7 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "/home/femu/experiment1/code2/build/CMakeFiles/3.23.0/CMakeSystem.cmake"
+			"path" : "/home/TiOCS/build/CMakeFiles/3.23.0/CMakeSystem.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -15,11 +15,11 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "/home/femu/experiment1/code2/build/CMakeFiles/3.23.0/CMakeCCompiler.cmake"
+			"path" : "/home/TiOCS/build/CMakeFiles/3.23.0/CMakeCCompiler.cmake"
 		},
 		{
 			"isGenerated" : true,
-			"path" : "/home/femu/experiment1/code2/build/CMakeFiles/3.23.0/CMakeCXXCompiler.cmake"
+			"path" : "/home/TiOCS/build/CMakeFiles/3.23.0/CMakeCXXCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -145,8 +145,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "/home/femu/experiment1/code2/build",
-		"source" : "/home/femu/experiment1/code2/src"
+		"build" : "/home/TiOCS/build",
+		"source" : "/home/TiOCS/src"
 	},
 	"version" : 
 	{

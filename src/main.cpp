@@ -33,22 +33,31 @@ int GlobalInitialize(int argc, char **argv)
 {
 
     /* Initialize device information */
-    // struct nvm_dev *dev = nvm_dev_open("/dev/nvme0n1");
-    // if (!dev) {
-	// 	perror("nvm_dev_open");
-	// 	return 1;
-	// }
-    // nvm_dev_pr(dev);
-	// nvm_dev_close(dev);
-    // const struct nvm_geo *geo = nvm_dev_get_geo(dev);
-    // nvm_geo_pr(geo);
+    struct nvm_dev *dev = nvm_dev_open("/dev/nvme0n1");
+    if (!dev) {
+		perror("nvm_dev_open");
+		return 1;
+	}
+    nvm_dev_pr(dev);
+	nvm_dev_close(dev);
+    const struct nvm_geo *geo = nvm_dev_get_geo(dev);
+    nvm_geo_pr(geo);
     bp = nvm_bp_init_from_args(argc,argv);
     if(!bp)
     {
         return -1;
     }
+    
+    // struct nvm_async_ctx *ctx = nullptr;
+
+	// size_t depth=0;
+
+    // ctx = nvm_async_init(dev, depth,0);
+	// if (!ctx) {
+	// 	perror("could not initialize async context");
+	// 	return -1;
+	// }
     printf("nchunks:%lu tsectr:%lu \n ",bp->naddrs,bp->naddrs*bp->geo->l.nsectr);
-    exit(0);
     /* Initialize chunk information. */
     for(size_t i=0;i<250;i++)
     {
@@ -76,9 +85,9 @@ int main(int argc, char **argv)
 
     // EXHashing1();
 
-    // TNCtreePort();
+       TiOCSInit();
 
-    NoFTLKVInit();
+    // NoFTLKVInit();
 
     // LHashPort();
 

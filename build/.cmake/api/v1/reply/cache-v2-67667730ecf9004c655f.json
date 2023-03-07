@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/femu/experiment1/code2/build"
+			"value" : "/home/TiOCS/build"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -591,7 +591,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/femu/experiment1/code2/src"
+			"value" : "/home/TiOCS/src"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1331,7 +1331,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/femu/experiment1/code2/build"
+			"value" : "/home/TiOCS/build"
 		},
 		{
 			"name" : "src_IS_TOP_LEVEL",
@@ -1355,7 +1355,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/femu/experiment1/code2/src"
+			"value" : "/home/TiOCS/src"
 		}
 	],
 	"kind" : "cache",

@@ -1,7 +1,7 @@
 CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o: \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/LSHash.cpp \
+ /home/TiOCS/src/MultiHash/LazySplitHash/LSHash.cpp \
  /usr/include/stdc-predef.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/LSHash.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/LSHash.h \
  /usr/include/c++/9/iostream \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h \
@@ -142,35 +142,35 @@ CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o: \
  /usr/include/c++/9/bits/stl_uninitialized.h \
  /usr/include/c++/9/bits/stl_vector.h \
  /usr/include/c++/9/bits/stl_bvector.h /usr/include/c++/9/bits/vector.tcc \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../Bucket.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../Bucket.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Auxizilary/SysOutput.h \
  /usr/include/c++/9/algorithm /usr/include/c++/9/utility \
  /usr/include/c++/9/bits/stl_relops.h /usr/include/c++/9/bits/stl_algo.h \
  /usr/include/c++/9/bits/algorithmfwd.h \
  /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
  /usr/include/c++/9/bits/uniform_int_dist.h /usr/include/c++/9/limits \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/LSNode.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/IODisk/WriteDisk.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/LSNode.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/IODisk/WriteDisk.h \
  /usr/include/c++/9/unordered_map /usr/include/c++/9/ext/aligned_buffer.h \
  /usr/include/c++/9/bits/hashtable.h \
  /usr/include/c++/9/bits/hashtable_policy.h /usr/include/c++/9/tuple \
  /usr/include/c++/9/array /usr/include/c++/9/bits/uses_allocator.h \
  /usr/include/c++/9/bits/invoke.h /usr/include/c++/9/bits/unordered_map.h \
  /usr/include/c++/9/bits/erase_if.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm.h \
  /usr/include/inttypes.h /usr/include/c++/9/stdlib.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm_util.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm_util.h \
  /usr/include/string.h /usr/include/strings.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm_spec.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm_spec.h \
  /usr/include/assert.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/IODisk/../BlockManage/BlockInfo.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm_cli.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/IODisk/../BlockManage/BlockInfo.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm_cli.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
  /usr/include/c++/9/cmath /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
@@ -181,29 +181,29 @@ CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
  /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/reader.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../Auxizilary/SysOutput.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/StoreTier/syncstore.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/StoreTier/../MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/StoreTier/../MemoryTier/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/StoreTier/../../LRU/lru.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/reader.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/StoreTier/syncstore.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/StoreTier/../MemoryTier/Node.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/StoreTier/../MemoryTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/StoreTier/../../LRU/lru.h \
  /usr/include/c++/9/list /usr/include/c++/9/bits/stl_list.h \
  /usr/include/c++/9/bits/allocated_ptr.h /usr/include/c++/9/bits/list.tcc \
  /usr/include/c++/9/cassert \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/StoreTier/../../LRU/../TNCTree/MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/StoreTier/../../FIFO/FIFO.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/StoreTier/../../FIFO/../TNCTree/MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/StoreTier/asyncstore.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/utility/types.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/utility/../MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/LinearHash/node.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/LazySplitHash/LSNode.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExNode.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExHash.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExBucket.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExNode.h
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/StoreTier/../../LRU/../TNCTree/MemoryTier/Node.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/StoreTier/../../FIFO/FIFO.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/StoreTier/../../FIFO/../TNCTree/MemoryTier/Node.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/StoreTier/asyncstore.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/utility/types.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../TNCTree/utility/../MemoryTier/Node.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/LinearHash/node.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/LazySplitHash/LSNode.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExNode.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExHash.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExBucket.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExNode.h

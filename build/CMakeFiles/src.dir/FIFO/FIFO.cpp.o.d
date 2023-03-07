@@ -1,6 +1,5 @@
-CMakeFiles/src.dir/FIFO/FIFO.cpp.o: \
- /home/femu/experiment1/code2/src/FIFO/FIFO.cpp \
- /usr/include/stdc-predef.h /home/femu/experiment1/code2/src/FIFO/FIFO.h \
+CMakeFiles/src.dir/FIFO/FIFO.cpp.o: /home/TiOCS/src/FIFO/FIFO.cpp \
+ /usr/include/stdc-predef.h /home/TiOCS/src/FIFO/FIFO.h \
  /usr/include/c++/9/unordered_map /usr/include/c++/9/type_traits \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h \
@@ -133,8 +132,8 @@ CMakeFiles/src.dir/FIFO/FIFO.cpp.o: \
  /usr/include/c++/9/bits/erase_if.h /usr/include/c++/9/list \
  /usr/include/c++/9/bits/stl_list.h \
  /usr/include/c++/9/bits/allocated_ptr.h /usr/include/c++/9/bits/list.tcc \
- /home/femu/experiment1/code2/src/FIFO/../TNCTree/MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/FIFO/../TNCTree/MemoryTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/FIFO/../TNCTree/MemoryTier/Node.h \
+ /home/TiOCS/src/FIFO/../TNCTree/MemoryTier/../../Auxizilary/GlobalVariable.h \
  /usr/include/c++/9/iostream /usr/include/c++/9/ostream \
  /usr/include/c++/9/ios /usr/include/c++/9/bits/ios_base.h \
  /usr/include/c++/9/bits/locale_classes.h \

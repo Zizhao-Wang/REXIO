@@ -14,8 +14,6 @@
 #include <ctime>
 #include <iostream>
 #include <fstream>
-#include <unistd.h>
-#include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
@@ -30,13 +28,19 @@ int reads = 0;
 int writes = 0;
 int erases = 0;
 
+pid_t pid =0 ;
+int status =0;
+key_t key =0;
+int shmid = 0;
+int *data;
 
 int sub_process_init(void)
 {
      /*create a sub-process */
-     pid_t pid;
-     int status;
-     key_t key = ftok("/home/TiOCS/src/shared_memory.txt", 'R');
+     
+
+     /* create key for shared memory */
+     key = ftok("/home/TiOCS/src/shared_memory.txt", 'R');
      if (key == -1)
      {
           perror("Failed to create shared memory key.");
@@ -46,60 +50,105 @@ int sub_process_init(void)
      {
           printf("Shared memory key created successfully.\n");
      }
-     int shmid = shmget(key, sizeof(int), IPC_CREAT | 0666);
+
+     /* connect shared memory with two processes */
+     shmid = shmget(key, sizeof(int), IPC_CREAT | 0666);
      if (shmid == -1)
      {
           perror("Failed to create shared memory.");
           return -1;
      }
-     int *data = (int*) shmat(shmid, NULL, 0); // 连接共享内存
-     *data = 0; // inialize the shared memory
+     data = (int*) shmat(shmid, NULL, 0); 
+
+     /* initialize the shared memory*/ 
+     *data = 0; 
 
      if((pid = fork()) == -1 )
      {
-          perror("fork error");
+          perror("Failed to create child process");
           return -1;
      }
      else if(pid == 0)
      {
-          // child process
-          //printf("child process
+          
+               if(*data != 0)
+               {
+                    printf("Child process received data: \n");
+                    for (int i = 0; i < 5; i++) 
+                    {
+                         cout << *(data+i) << " ";
+                    }
+                    cout << endl;
+                    *data = 0;
+               }
+
+               sleep(1); // waiting 1 second
+          
+          
      }
-     else
-     {
-          // parent process
-          //printf("parent process
-     }
-     
-     exit(0);
      
      int Createflag = ExtendHashTableInitialize();
-
-     // Pagedata = (TNCEntry *)malloc(bp->geo->l.nbytes);
-     // if (Pagedata == nullptr)
-     // {
-     //      EMessageOutput("Index initialized failure!",1578);
-     // }
-
      if(Createflag == 0)
      {
           printf("\n ================ Index information ================ \
-            \n ---- Initialization successful! \
-            \n ---- Meta data space allocated successful! \n");
+            \n ---- In-memory table Initialization successful! \
+            \n ---- Meta data space allocated successful! \
+            \n ---- child process created successful! \
+            \n");
      }
+
+     return 0;
+
+     /**  
+      * Pagedata = (TNCEntry *)malloc(bp->geo->l.nbytes);
+      * if (Pagedata == nullptr)
+      * {
+      *   EMessageOutput("Index initialized failure!",1578);
+      * }
+      **/
 
 }
 
 void TiOCSInit(void)
 {
      
-     if(sub_process_init() == 0)
+     if(sub_process_init() != 0)
      {
           printf("sub-process initialized failed!\n");
      }
 
+     printf("Parent process is running...\n");
+     // 监视系统运行状况
+     cout << "Monitoring system..." << endl;
+     // 构造数据
+     int data_to_send[5] = {1, 2, 3, 4, 5};
+     // 将数据写入共享内存
+     for (int i = 0; i < 5; i++) 
+     {
+          *(data+i) = data_to_send[i];
+     }
+
+     // 等待从进程处理数据
+     sleep(1); 
+
+     // 等待子进程结束
+     wait(&status);
+
+     // 删除共享内存
+     shmdt(data);
+     shmctl(shmid, IPC_RMID, NULL);
+
+     
+
      clock_t startTime,endTime;                        // Definition of timestamp
 
+
+     for (int i = 0; i < 5; i++) 
+     {
+          *(data+i) = data_to_send[i];
+     }
+
+     exit(0);
      /* workload a: insert only*/
      startTime = clock();
      for(SKey i=1;i<=40000000;i++)

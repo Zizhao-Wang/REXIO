@@ -12,9 +12,18 @@
 #ifndef EXPERIMENT1_TNCTREE_H
 #define EXPERIMENT1_TNCTREE_H
 
+#include <unistd.h>
+#include <sys/types.h>
+
 extern int reads;
 extern int writes;
 extern int erases;
+extern pid_t pid;
+extern int status;
+extern key_t key;
+extern int shmid;
+extern int *data;
+
 
 
 /* ================= 2-Tier None-Coupling module ==================== */

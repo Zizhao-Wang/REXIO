@@ -1,5 +1,6 @@
 #include "reader.h"
 #include "../IODisk/WriteDisk.h"
+#include "../backend_variables.h"
 #include "../../MultiHash/LinearHash/LiHash.h"
 #include "../../LSM-Tree/LsmTree.h"
 
@@ -7,7 +8,6 @@
 int SinglePageRead(uint64_t pageno)
 {
     reads++;
-    readcount++;
     int err;
     struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, pageno);
     size_t ws_min = nvm_dev_get_ws_min(bp->dev);

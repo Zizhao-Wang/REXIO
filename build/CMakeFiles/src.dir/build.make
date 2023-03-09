@@ -237,10 +237,24 @@ CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/TiOCS/src/Backend/SSDRead/reader.cpp -o CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.s
 
+CMakeFiles/src.dir/Backend/backend_variables.cpp.o: CMakeFiles/src.dir/flags.make
+CMakeFiles/src.dir/Backend/backend_variables.cpp.o: /home/TiOCS/src/Backend/backend_variables.cpp
+CMakeFiles/src.dir/Backend/backend_variables.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/src.dir/Backend/backend_variables.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/Backend/backend_variables.cpp.o -MF CMakeFiles/src.dir/Backend/backend_variables.cpp.o.d -o CMakeFiles/src.dir/Backend/backend_variables.cpp.o -c /home/TiOCS/src/Backend/backend_variables.cpp
+
+CMakeFiles/src.dir/Backend/backend_variables.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/Backend/backend_variables.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/TiOCS/src/Backend/backend_variables.cpp > CMakeFiles/src.dir/Backend/backend_variables.cpp.i
+
+CMakeFiles/src.dir/Backend/backend_variables.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/Backend/backend_variables.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/TiOCS/src/Backend/backend_variables.cpp -o CMakeFiles/src.dir/Backend/backend_variables.cpp.s
+
 CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o: /home/TiOCS/src/AuxizilaryImplement/SysOutput.cpp
 CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o -MF CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o.d -o CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o -c /home/TiOCS/src/AuxizilaryImplement/SysOutput.cpp
 
 CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.i: cmake_force
@@ -254,7 +268,7 @@ CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.s: cmake_force
 CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o: /home/TiOCS/src/MultiHash/ExtendibleHash/ExHash.cpp
 CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o -MF CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o.d -o CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o -c /home/TiOCS/src/MultiHash/ExtendibleHash/ExHash.cpp
 
 CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.i: cmake_force
@@ -268,7 +282,7 @@ CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.s: cmake_force
 CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExBucket.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExBucket.cpp.o: /home/TiOCS/src/MultiHash/ExtendibleHash/ExBucket.cpp
 CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExBucket.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExBucket.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExBucket.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExBucket.cpp.o -MF CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExBucket.cpp.o.d -o CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExBucket.cpp.o -c /home/TiOCS/src/MultiHash/ExtendibleHash/ExBucket.cpp
 
 CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExBucket.cpp.i: cmake_force
@@ -282,7 +296,7 @@ CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExBucket.cpp.s: cmake_force
 CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o: /home/TiOCS/src/MultiHash/LinearHash/LiHash.cpp
 CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o -MF CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o.d -o CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o -c /home/TiOCS/src/MultiHash/LinearHash/LiHash.cpp
 
 CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.i: cmake_force
@@ -296,7 +310,7 @@ CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.s: cmake_force
 CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o: /home/TiOCS/src/MultiHash/LazySplitHash/LSHash.cpp
 CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o -MF CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o.d -o CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o -c /home/TiOCS/src/MultiHash/LazySplitHash/LSHash.cpp
 
 CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.i: cmake_force
@@ -310,7 +324,7 @@ CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.s: cmake_force
 CMakeFiles/src.dir/MultiHash/EagerSplitHash/ESHash.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/MultiHash/EagerSplitHash/ESHash.cpp.o: /home/TiOCS/src/MultiHash/EagerSplitHash/ESHash.cpp
 CMakeFiles/src.dir/MultiHash/EagerSplitHash/ESHash.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/src.dir/MultiHash/EagerSplitHash/ESHash.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/src.dir/MultiHash/EagerSplitHash/ESHash.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/MultiHash/EagerSplitHash/ESHash.cpp.o -MF CMakeFiles/src.dir/MultiHash/EagerSplitHash/ESHash.cpp.o.d -o CMakeFiles/src.dir/MultiHash/EagerSplitHash/ESHash.cpp.o -c /home/TiOCS/src/MultiHash/EagerSplitHash/ESHash.cpp
 
 CMakeFiles/src.dir/MultiHash/EagerSplitHash/ESHash.cpp.i: cmake_force
@@ -324,7 +338,7 @@ CMakeFiles/src.dir/MultiHash/EagerSplitHash/ESHash.cpp.s: cmake_force
 CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o: /home/TiOCS/src/LSM-Tree/LsmTree.cpp
 CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o -MF CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o.d -o CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o -c /home/TiOCS/src/LSM-Tree/LsmTree.cpp
 
 CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.i: cmake_force
@@ -338,7 +352,7 @@ CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.s: cmake_force
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/buffer.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/buffer.cpp.o: /home/TiOCS/src/LSM-Tree/UtilityImplement/buffer.cpp
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/buffer.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/src.dir/LSM-Tree/UtilityImplement/buffer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/src.dir/LSM-Tree/UtilityImplement/buffer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/LSM-Tree/UtilityImplement/buffer.cpp.o -MF CMakeFiles/src.dir/LSM-Tree/UtilityImplement/buffer.cpp.o.d -o CMakeFiles/src.dir/LSM-Tree/UtilityImplement/buffer.cpp.o -c /home/TiOCS/src/LSM-Tree/UtilityImplement/buffer.cpp
 
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/buffer.cpp.i: cmake_force
@@ -352,7 +366,7 @@ CMakeFiles/src.dir/LSM-Tree/UtilityImplement/buffer.cpp.s: cmake_force
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o: /home/TiOCS/src/LSM-Tree/UtilityImplement/ResAllocate.cpp
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o -MF CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o.d -o CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.o -c /home/TiOCS/src/LSM-Tree/UtilityImplement/ResAllocate.cpp
 
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.i: cmake_force
@@ -366,7 +380,7 @@ CMakeFiles/src.dir/LSM-Tree/UtilityImplement/ResAllocate.cpp.s: cmake_force
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.o: /home/TiOCS/src/LSM-Tree/UtilityImplement/level.cpp
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.o -MF CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.o.d -o CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.o -c /home/TiOCS/src/LSM-Tree/UtilityImplement/level.cpp
 
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.i: cmake_force
@@ -380,7 +394,7 @@ CMakeFiles/src.dir/LSM-Tree/UtilityImplement/level.cpp.s: cmake_force
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.o: /home/TiOCS/src/LSM-Tree/UtilityImplement/merge.cpp
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.o -MF CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.o.d -o CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.o -c /home/TiOCS/src/LSM-Tree/UtilityImplement/merge.cpp
 
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.i: cmake_force
@@ -394,7 +408,7 @@ CMakeFiles/src.dir/LSM-Tree/UtilityImplement/merge.cpp.s: cmake_force
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o: /home/TiOCS/src/LSM-Tree/UtilityImplement/run.cpp
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o -MF CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o.d -o CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o -c /home/TiOCS/src/LSM-Tree/UtilityImplement/run.cpp
 
 CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.i: cmake_force
@@ -408,7 +422,7 @@ CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.s: cmake_force
 CMakeFiles/src.dir/LSM-Tree/UtilityDefine/node2.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/LSM-Tree/UtilityDefine/node2.cpp.o: /home/TiOCS/src/LSM-Tree/UtilityDefine/node2.cpp
 CMakeFiles/src.dir/LSM-Tree/UtilityDefine/node2.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/src.dir/LSM-Tree/UtilityDefine/node2.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/src.dir/LSM-Tree/UtilityDefine/node2.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/LSM-Tree/UtilityDefine/node2.cpp.o -MF CMakeFiles/src.dir/LSM-Tree/UtilityDefine/node2.cpp.o.d -o CMakeFiles/src.dir/LSM-Tree/UtilityDefine/node2.cpp.o -c /home/TiOCS/src/LSM-Tree/UtilityDefine/node2.cpp
 
 CMakeFiles/src.dir/LSM-Tree/UtilityDefine/node2.cpp.i: cmake_force
@@ -422,7 +436,7 @@ CMakeFiles/src.dir/LSM-Tree/UtilityDefine/node2.cpp.s: cmake_force
 CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.o: /home/TiOCS/src/LSMTree-NoFTL/StorageManager.cpp
 CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.o -MF CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.o.d -o CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.o -c /home/TiOCS/src/LSMTree-NoFTL/StorageManager.cpp
 
 CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.i: cmake_force
@@ -436,7 +450,7 @@ CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.s: cmake_force
 CMakeFiles/src.dir/LSMTree-NoFTL/run.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/LSMTree-NoFTL/run.cpp.o: /home/TiOCS/src/LSMTree-NoFTL/run.cpp
 CMakeFiles/src.dir/LSMTree-NoFTL/run.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/src.dir/LSMTree-NoFTL/run.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/src.dir/LSMTree-NoFTL/run.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/LSMTree-NoFTL/run.cpp.o -MF CMakeFiles/src.dir/LSMTree-NoFTL/run.cpp.o.d -o CMakeFiles/src.dir/LSMTree-NoFTL/run.cpp.o -c /home/TiOCS/src/LSMTree-NoFTL/run.cpp
 
 CMakeFiles/src.dir/LSMTree-NoFTL/run.cpp.i: cmake_force
@@ -450,7 +464,7 @@ CMakeFiles/src.dir/LSMTree-NoFTL/run.cpp.s: cmake_force
 CMakeFiles/src.dir/LSMTree-NoFTL/level.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/LSMTree-NoFTL/level.cpp.o: /home/TiOCS/src/LSMTree-NoFTL/level.cpp
 CMakeFiles/src.dir/LSMTree-NoFTL/level.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/src.dir/LSMTree-NoFTL/level.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/src.dir/LSMTree-NoFTL/level.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/LSMTree-NoFTL/level.cpp.o -MF CMakeFiles/src.dir/LSMTree-NoFTL/level.cpp.o.d -o CMakeFiles/src.dir/LSMTree-NoFTL/level.cpp.o -c /home/TiOCS/src/LSMTree-NoFTL/level.cpp
 
 CMakeFiles/src.dir/LSMTree-NoFTL/level.cpp.i: cmake_force
@@ -464,7 +478,7 @@ CMakeFiles/src.dir/LSMTree-NoFTL/level.cpp.s: cmake_force
 CMakeFiles/src.dir/LSMTree-NoFTL/buffer.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/LSMTree-NoFTL/buffer.cpp.o: /home/TiOCS/src/LSMTree-NoFTL/buffer.cpp
 CMakeFiles/src.dir/LSMTree-NoFTL/buffer.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/src.dir/LSMTree-NoFTL/buffer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/src.dir/LSMTree-NoFTL/buffer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/LSMTree-NoFTL/buffer.cpp.o -MF CMakeFiles/src.dir/LSMTree-NoFTL/buffer.cpp.o.d -o CMakeFiles/src.dir/LSMTree-NoFTL/buffer.cpp.o -c /home/TiOCS/src/LSMTree-NoFTL/buffer.cpp
 
 CMakeFiles/src.dir/LSMTree-NoFTL/buffer.cpp.i: cmake_force
@@ -478,7 +492,7 @@ CMakeFiles/src.dir/LSMTree-NoFTL/buffer.cpp.s: cmake_force
 CMakeFiles/src.dir/LSMTree-NoFTL/merge.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/LSMTree-NoFTL/merge.cpp.o: /home/TiOCS/src/LSMTree-NoFTL/merge.cpp
 CMakeFiles/src.dir/LSMTree-NoFTL/merge.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/src.dir/LSMTree-NoFTL/merge.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/src.dir/LSMTree-NoFTL/merge.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/LSMTree-NoFTL/merge.cpp.o -MF CMakeFiles/src.dir/LSMTree-NoFTL/merge.cpp.o.d -o CMakeFiles/src.dir/LSMTree-NoFTL/merge.cpp.o -c /home/TiOCS/src/LSMTree-NoFTL/merge.cpp
 
 CMakeFiles/src.dir/LSMTree-NoFTL/merge.cpp.i: cmake_force
@@ -492,7 +506,7 @@ CMakeFiles/src.dir/LSMTree-NoFTL/merge.cpp.s: cmake_force
 CMakeFiles/src.dir/LSMTree-NoFTL/region.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/LSMTree-NoFTL/region.cpp.o: /home/TiOCS/src/LSMTree-NoFTL/region.cpp
 CMakeFiles/src.dir/LSMTree-NoFTL/region.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/src.dir/LSMTree-NoFTL/region.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/src.dir/LSMTree-NoFTL/region.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/LSMTree-NoFTL/region.cpp.o -MF CMakeFiles/src.dir/LSMTree-NoFTL/region.cpp.o.d -o CMakeFiles/src.dir/LSMTree-NoFTL/region.cpp.o -c /home/TiOCS/src/LSMTree-NoFTL/region.cpp
 
 CMakeFiles/src.dir/LSMTree-NoFTL/region.cpp.i: cmake_force
@@ -506,7 +520,7 @@ CMakeFiles/src.dir/LSMTree-NoFTL/region.cpp.s: cmake_force
 CMakeFiles/src.dir/LSMTree-NoFTL/allocation.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/LSMTree-NoFTL/allocation.cpp.o: /home/TiOCS/src/LSMTree-NoFTL/allocation.cpp
 CMakeFiles/src.dir/LSMTree-NoFTL/allocation.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/src.dir/LSMTree-NoFTL/allocation.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/src.dir/LSMTree-NoFTL/allocation.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/LSMTree-NoFTL/allocation.cpp.o -MF CMakeFiles/src.dir/LSMTree-NoFTL/allocation.cpp.o.d -o CMakeFiles/src.dir/LSMTree-NoFTL/allocation.cpp.o -c /home/TiOCS/src/LSMTree-NoFTL/allocation.cpp
 
 CMakeFiles/src.dir/LSMTree-NoFTL/allocation.cpp.i: cmake_force
@@ -520,7 +534,7 @@ CMakeFiles/src.dir/LSMTree-NoFTL/allocation.cpp.s: cmake_force
 CMakeFiles/src.dir/FIFO/FIFO.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/FIFO/FIFO.cpp.o: /home/TiOCS/src/FIFO/FIFO.cpp
 CMakeFiles/src.dir/FIFO/FIFO.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/src.dir/FIFO/FIFO.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/src.dir/FIFO/FIFO.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/FIFO/FIFO.cpp.o -MF CMakeFiles/src.dir/FIFO/FIFO.cpp.o.d -o CMakeFiles/src.dir/FIFO/FIFO.cpp.o -c /home/TiOCS/src/FIFO/FIFO.cpp
 
 CMakeFiles/src.dir/FIFO/FIFO.cpp.i: cmake_force
@@ -545,6 +559,7 @@ src_OBJECTS = \
 "CMakeFiles/src.dir/Backend/BlockManage/BlockInfo.cpp.o" \
 "CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o" \
 "CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o" \
+"CMakeFiles/src.dir/Backend/backend_variables.cpp.o" \
 "CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o" \
 "CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o" \
 "CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExBucket.cpp.o" \
@@ -582,6 +597,7 @@ src: CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o
 src: CMakeFiles/src.dir/Backend/BlockManage/BlockInfo.cpp.o
 src: CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o
 src: CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o
+src: CMakeFiles/src.dir/Backend/backend_variables.cpp.o
 src: CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o
 src: CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o
 src: CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExBucket.cpp.o
@@ -607,7 +623,7 @@ src: CMakeFiles/src.dir/build.make
 src: /home/liblightnvm/build/liblightnvm_cli.a
 src: /home/liblightnvm/build/liblightnvm.a
 src: CMakeFiles/src.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Linking CXX executable src"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Linking CXX executable src"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/src.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

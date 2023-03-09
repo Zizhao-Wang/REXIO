@@ -249,6 +249,30 @@ Backend/SSDWrite/writer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.s
 .PHONY : Backend/SSDWrite/writer.cpp.s
 
+Backend/backend_variables.o: Backend/backend_variables.cpp.o
+.PHONY : Backend/backend_variables.o
+
+# target to build an object file
+Backend/backend_variables.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/backend_variables.cpp.o
+.PHONY : Backend/backend_variables.cpp.o
+
+Backend/backend_variables.i: Backend/backend_variables.cpp.i
+.PHONY : Backend/backend_variables.i
+
+# target to preprocess a source file
+Backend/backend_variables.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/backend_variables.cpp.i
+.PHONY : Backend/backend_variables.cpp.i
+
+Backend/backend_variables.s: Backend/backend_variables.cpp.s
+.PHONY : Backend/backend_variables.s
+
+# target to generate assembly for a file
+Backend/backend_variables.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/backend_variables.cpp.s
+.PHONY : Backend/backend_variables.cpp.s
+
 FIFO/FIFO.o: FIFO/FIFO.cpp.o
 .PHONY : FIFO/FIFO.o
 
@@ -945,6 +969,9 @@ help:
 	@echo "... Backend/SSDWrite/writer.o"
 	@echo "... Backend/SSDWrite/writer.i"
 	@echo "... Backend/SSDWrite/writer.s"
+	@echo "... Backend/backend_variables.o"
+	@echo "... Backend/backend_variables.i"
+	@echo "... Backend/backend_variables.s"
 	@echo "... FIFO/FIFO.o"
 	@echo "... FIFO/FIFO.i"
 	@echo "... FIFO/FIFO.s"

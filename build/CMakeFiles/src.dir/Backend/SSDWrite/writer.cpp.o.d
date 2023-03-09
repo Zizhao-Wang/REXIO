@@ -192,6 +192,7 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: \
  /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
  /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExBucket.h \
  /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
+ /home/TiOCS/src/Backend/SSDWrite/../backend_variables.h \
  /home/TiOCS/src/Backend/SSDWrite/../IODisk/WriteDisk.h \
  /home/TiOCS/src/Backend/SSDWrite/../../LSM-Tree/LsmTree.h \
  /home/TiOCS/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/buffer.h \

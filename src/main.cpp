@@ -16,6 +16,11 @@
 #include <ctime> //C system files
 #include <iostream>//C++ system files 
 #include <random> 
+#include <unistd.h>
+#include <sys/wait.h>
+#include <sys/msg.h>
+#include <cstring>
+#include <cstdlib>
 #include <liblightnvm.h> // other project's .h files
 #include "TNCTree/TNCtree.h"//your project's .h files
 #include "LSMTree-NoFTL/StorageManager.h"
@@ -24,7 +29,7 @@
 #include "MultiHash/LinearHash/LiHash.h"
 #include "Auxizilary/Logo.h"
 #include "LSM-Tree/LsmTree.h"
-
+#define MAX_MSG_SIZE 1024
 /* Define some global variables. */
 struct nvm_bp* bp = nullptr;
 std::unordered_map<uint64_t,uint64_t> chunkusage;
@@ -68,7 +73,7 @@ int GlobalInitialize(int argc, char **argv)
     printf("nchunks:%lu tsectr:%lu \n ",bp->naddrs,bp->naddrs*bp->geo->l.nsectr);
     printf("geo nblocks:%lu nchannels:%lu nluns:%lu npages:%lu nplanes:%lu nsectors:%lu\n ",geo->nblocks,geo->nchannels,geo->nluns,geo->npages,geo->nplanes,geo->nsectors); */
 }
-
+#define MAX_MSG_SIZE 1024
 int main(int argc, char **argv)
 {
     /* initialize some global variables and SSD components initialization. */ 
@@ -83,9 +88,9 @@ int main(int argc, char **argv)
 
     // EXHashing1();
 
-       TiOCSInit();
+    //   TiOCSInit();
 
-    // NoFTLKVInit();
+    NoFTLKVInit();
 
     // LHashPort();
 

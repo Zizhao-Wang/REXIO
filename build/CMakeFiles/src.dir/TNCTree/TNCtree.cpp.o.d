@@ -174,10 +174,22 @@ CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/ipctypes.h \
  /usr/include/x86_64-linux-gnu/bits/ipc.h \
  /usr/include/x86_64-linux-gnu/bits/ipc-perm.h \
+ /usr/include/x86_64-linux-gnu/sys/prctl.h /usr/include/linux/prctl.h \
+ /usr/include/linux/types.h /usr/include/x86_64-linux-gnu/asm/types.h \
+ /usr/include/asm-generic/types.h /usr/include/asm-generic/int-ll64.h \
+ /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+ /usr/include/asm-generic/bitsperlong.h /usr/include/linux/posix_types.h \
+ /usr/include/linux/stddef.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+ /usr/include/asm-generic/posix_types.h \
  /usr/include/x86_64-linux-gnu/sys/shm.h \
  /usr/include/x86_64-linux-gnu/bits/shm.h \
  /usr/include/x86_64-linux-gnu/bits/shmlba.h \
- /usr/include/x86_64-linux-gnu/bits/shm-pad.h /usr/include/c++/9/vector \
+ /usr/include/x86_64-linux-gnu/bits/shm-pad.h \
+ /usr/include/x86_64-linux-gnu/sys/msg.h \
+ /usr/include/x86_64-linux-gnu/bits/msq.h \
+ /usr/include/x86_64-linux-gnu/bits/msq-pad.h /usr/include/c++/9/vector \
  /usr/include/c++/9/bits/stl_construct.h \
  /usr/include/c++/9/bits/stl_uninitialized.h \
  /usr/include/c++/9/bits/stl_vector.h \

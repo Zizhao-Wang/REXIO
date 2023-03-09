@@ -29,7 +29,7 @@
 #include "MultiHash/LinearHash/LiHash.h"
 #include "Auxizilary/Logo.h"
 #include "LSM-Tree/LsmTree.h"
-#define MAX_MSG_SIZE 1024
+
 /* Define some global variables. */
 struct nvm_bp* bp = nullptr;
 std::unordered_map<uint64_t,uint64_t> chunkusage;
@@ -39,6 +39,8 @@ int GlobalInitialize(int argc, char **argv)
 
     /* Initialize device information */
     bp = nvm_bp_init_from_args(argc,argv);
+    const char * process_Name = "Main of TiOCS";
+
     if(!bp)
     {
         return -1;
@@ -48,6 +50,8 @@ int GlobalInitialize(int argc, char **argv)
     {
         chunkusage[i] = 0;
     }
+    prctl(PR_SET_NAME, reinterpret_cast<unsigned long>(process_Name),0,0,0);
+
     printf(UCAS_SIAT);
     printf(Name);
     return 0;
@@ -90,7 +94,7 @@ int main(int argc, char **argv)
 
     //   TiOCSInit();
 
-    NoFTLKVInit();
+    // NoFTLKVInit();
 
     // LHashPort();
 

@@ -20,12 +20,10 @@
 #include "../Backend/SSDWrite/writer.h"
 #include "../Backend/IODisk/WriteDisk.h"
 #include "StoreTier/syncstore.h"
+#include "../Backend/backend_variables.h"
 
 #define MAX_MSG_SIZE 1024
 
-int reads = 0;
-int writes = 0;
-int erases = 0;
 volatile int msgid;
 
 struct mymsgbuf 

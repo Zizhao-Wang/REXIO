@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o.d"
   "CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o"
   "CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o.d"
+  "CMakeFiles/src.dir/Backend/backend_variables.cpp.o"
+  "CMakeFiles/src.dir/Backend/backend_variables.cpp.o.d"
   "CMakeFiles/src.dir/FIFO/FIFO.cpp.o"
   "CMakeFiles/src.dir/FIFO/FIFO.cpp.o.d"
   "CMakeFiles/src.dir/LRU/lru.cpp.o"

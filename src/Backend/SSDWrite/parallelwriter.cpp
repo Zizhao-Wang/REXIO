@@ -1,41 +1,18 @@
+#include <pthread.h>
 #include "parallelwriter.h"
 
 
 
 
 
-int async_write_horz(struct nvm_bp *bp, struct nvm_async_ctx *ctx, enum nvm_dio_opcodes opc)
+
+
+
+
+int parallel_write_into_pu()
 {
-	struct nvm_addr *chunk_addrs = bp->addrs;
-	const size_t nchunks = bp->naddrs;
-	const size_t tsectr = nchunks +bp->geo->l.nsectr;
-	struct nvm_ret rets[];
-	int err = 0;
 
-	/* step 1: write data asynchronously */
-	err = nvm_async_pwrite(ctx, addrs, naddrs, buf, nbytes, &ret);
-	if (err) {
-		perror("nvm_async_pwrite");
-		return -1;
-	}
-
-	/* step 2: wait for completion */
-	err = nvm_async_wait(ctx);
-	if (err) {
-		perror("nvm_async_wait");
-		return -1;
-	}
-
-	/* step 3: check completion status */
-	if (ret.result) {
-		errno = ret.result;
-		perror("nvm_async_pwrite");
-		return -1;
-	}
-
-	return 0;
 }
-
 
 
 

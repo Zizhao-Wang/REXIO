@@ -12,7 +12,7 @@
  */
 
 #include "writer.h"
-
+#include "../backend_variables.h"
 #include <liblightnvm_cli.h>
 #include <liblightnvm_spec.h>
 #include "../IODisk/WriteDisk.h"
@@ -20,6 +20,7 @@
 #include "../../LSM-Tree/LsmTree.h"
 #include "../../Ti-OCSSD/TiOCS.h"
 #include "../SSDRead/reader.h"
+#include "../backend_variables.h"
 
 
 std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkLog;
@@ -61,7 +62,6 @@ int SinglePageWrite()
 
     /* Function flag, default value equals 0(successful flag). */
     int err = 0;
-    readcount++;
     writes++;
     struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, DataPagePointer);
     size_t ws_min = nvm_dev_get_ws_min(bp->dev);

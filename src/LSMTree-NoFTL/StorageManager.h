@@ -31,11 +31,6 @@
 #define DEFAULT_THREAD_COUNT 1          // Single thread query
 #define DEFAULT_BF_BITS_PER_ENTRY 0.5   // bloom filter bits
 
-
-extern uint32_t rNoFTLKVPages;
-extern uint32_t wNoFTLKVPages;
-extern uint32_t eNoFTLKVPages;
-
 class RegionParams
 {
 

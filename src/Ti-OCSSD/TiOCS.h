@@ -20,10 +20,6 @@
 #include <sys/msg.h>
 #include <sys/types.h>
 
-extern int reads;
-extern int writes;
-extern int erases;
-
 extern volatile int msqid;
 
 /* ================= 2-Tier None-Coupling module ==================== */

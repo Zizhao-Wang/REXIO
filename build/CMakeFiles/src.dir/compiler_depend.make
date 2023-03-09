@@ -951,6 +951,7 @@ CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o: /home/TiOCS/src/Backend/SSDRead
   /home/TiOCS/src/MultiHash/ExtendibleHash/ExBucket.h \
   /home/TiOCS/src/MultiHash/ExtendibleHash/ExNode.h \
   /home/TiOCS/src/Backend/IODisk/WriteDisk.h \
+  /home/TiOCS/src/Backend/backend_variables.h \
   /home/TiOCS/src/MultiHash/LinearHash/LiHash.h \
   /home/TiOCS/src/MultiHash/LinearHash/node.h \
   /home/TiOCS/src/Backend/IODisk/WriteDisk.h \
@@ -1243,6 +1244,7 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: /home/TiOCS/src/Backend/SSDWri
   /home/TiOCS/src/Backend/IODisk/WriteDisk.h \
   /home/TiOCS/src/MultiHash/ExtendibleHash/ExBucket.h \
   /home/TiOCS/src/MultiHash/ExtendibleHash/ExNode.h \
+  /home/TiOCS/src/Backend/backend_variables.h \
   /home/TiOCS/src/Backend/IODisk/WriteDisk.h \
   /home/TiOCS/src/LSM-Tree/LsmTree.h \
   /home/TiOCS/src/LSM-Tree/UtilityDefine/buffer.h \
@@ -1360,6 +1362,10 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: /home/TiOCS/src/Backend/SSDWri
   /home/TiOCS/src/MultiHash/LazySplitHash/LSNode.h \
   /home/TiOCS/src/MultiHash/ExtendibleHash/ExNode.h \
   /home/TiOCS/src/MultiHash/ExtendibleHash/ExHash.h
+
+CMakeFiles/src.dir/Backend/backend_variables.cpp.o: /home/TiOCS/src/Backend/backend_variables.cpp \
+  /usr/include/stdc-predef.h \
+  /home/TiOCS/src/Backend/backend_variables.h
 
 CMakeFiles/src.dir/FIFO/FIFO.cpp.o: /home/TiOCS/src/FIFO/FIFO.cpp \
   /usr/include/stdc-predef.h \
@@ -7328,7 +7334,8 @@ CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o: /home/TiOCS/src/Ti-OCSSD/TiOCS.cpp \
   /home/TiOCS/src/MultiHash/ExtendibleHash/ExBucket.h \
   /home/TiOCS/src/MultiHash/ExtendibleHash/ExNode.h \
   /home/TiOCS/src/Backend/IODisk/WriteDisk.h \
-  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h \
+  /home/TiOCS/src/Backend/backend_variables.h
 
 CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o: /home/TiOCS/src/Ti-OCSSD/utility/types.cpp \
   /usr/include/stdc-predef.h \
@@ -7976,6 +7983,10 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
 /usr/include/c++/9/bits/stl_multimap.h:
 
 /home/TiOCS/src/LRU/lru.cpp:
+
+/home/TiOCS/src/Backend/backend_variables.cpp:
+
+/home/TiOCS/src/Backend/backend_variables.h:
 
 /usr/include/x86_64-linux-gnu/bits/msq-pad.h:
 

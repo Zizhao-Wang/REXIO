@@ -139,8 +139,8 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: \
  /usr/include/string.h /usr/include/strings.h \
  /home/TiOCS/src/../../liblightnvm/include/liblightnvm_spec.h \
  /usr/include/assert.h \
- /home/TiOCS/src/Backend/SSDWrite/../../TNCTree/MemoryTier/Node.h \
- /home/TiOCS/src/Backend/SSDWrite/../../TNCTree/MemoryTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/Node.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/../../Auxizilary/GlobalVariable.h \
  /usr/include/c++/9/iostream /usr/include/c++/9/ostream \
  /usr/include/c++/9/ios /usr/include/c++/9/bits/ios_base.h \
  /usr/include/c++/9/bits/locale_classes.h \
@@ -165,16 +165,16 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: \
  /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
  /usr/include/c++/9/bits/uniform_int_dist.h \
  /home/TiOCS/src/Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/Backend/SSDWrite/../../TNCTree/StoreTier/syncstore.h \
- /home/TiOCS/src/Backend/SSDWrite/../../TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/Backend/SSDWrite/../../TNCTree/StoreTier/../MemoryTier/Node.h \
- /home/TiOCS/src/Backend/SSDWrite/../../TNCTree/StoreTier/../../LRU/lru.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/StoreTier/syncstore.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../MemoryTier/Node.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../../LRU/lru.h \
  /usr/include/c++/9/list /usr/include/c++/9/bits/stl_list.h \
  /usr/include/c++/9/bits/allocated_ptr.h /usr/include/c++/9/bits/list.tcc \
  /usr/include/c++/9/cassert \
- /home/TiOCS/src/Backend/SSDWrite/../../TNCTree/StoreTier/../../LRU/../TNCTree/MemoryTier/Node.h \
- /home/TiOCS/src/Backend/SSDWrite/../../TNCTree/StoreTier/../../FIFO/FIFO.h \
- /home/TiOCS/src/Backend/SSDWrite/../../TNCTree/StoreTier/../../FIFO/../TNCTree/MemoryTier/Node.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../../LRU/../Ti-OCSSD/MemoryTier/Node.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../../FIFO/FIFO.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../../FIFO/../Ti-OCSSD/MemoryTier/Node.h \
  /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
  /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/LiHash.h \
@@ -230,20 +230,62 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: \
  /home/TiOCS/src/Backend/SSDWrite/../../LSM-Tree/../Auxizilary/SysOutput.h \
  /home/TiOCS/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/merge.h \
  /home/TiOCS/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/run.h \
- /home/TiOCS/src/Backend/SSDWrite/../../TNCTree/TNCtree.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/TiOCS.h \
  /usr/include/unistd.h /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
  /usr/include/x86_64-linux-gnu/bits/environments.h \
  /usr/include/x86_64-linux-gnu/bits/confname.h \
  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+ /usr/include/x86_64-linux-gnu/sys/wait.h /usr/include/signal.h \
+ /usr/include/x86_64-linux-gnu/bits/signum.h \
+ /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
+ /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
+ /usr/include/x86_64-linux-gnu/bits/sigaction.h \
+ /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
+ /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
+ /usr/include/x86_64-linux-gnu/sys/ucontext.h \
+ /usr/include/x86_64-linux-gnu/bits/sigstack.h \
+ /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
+ /usr/include/x86_64-linux-gnu/bits/sigthread.h \
+ /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+ /usr/include/x86_64-linux-gnu/sys/ipc.h \
+ /usr/include/x86_64-linux-gnu/bits/ipctypes.h \
+ /usr/include/x86_64-linux-gnu/bits/ipc.h \
+ /usr/include/x86_64-linux-gnu/bits/ipc-perm.h \
+ /usr/include/x86_64-linux-gnu/sys/prctl.h /usr/include/linux/prctl.h \
+ /usr/include/linux/types.h /usr/include/x86_64-linux-gnu/asm/types.h \
+ /usr/include/asm-generic/types.h /usr/include/asm-generic/int-ll64.h \
+ /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+ /usr/include/asm-generic/bitsperlong.h /usr/include/linux/posix_types.h \
+ /usr/include/linux/stddef.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+ /usr/include/asm-generic/posix_types.h \
+ /usr/include/x86_64-linux-gnu/sys/shm.h \
+ /usr/include/x86_64-linux-gnu/bits/shm.h \
+ /usr/include/x86_64-linux-gnu/bits/shmlba.h \
+ /usr/include/x86_64-linux-gnu/bits/shm-pad.h \
+ /usr/include/x86_64-linux-gnu/sys/msg.h \
+ /usr/include/x86_64-linux-gnu/bits/msq.h \
+ /usr/include/x86_64-linux-gnu/bits/msq-pad.h \
  /home/TiOCS/src/Backend/SSDWrite/../SSDRead/reader.h \
  /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Auxizilary/SysOutput.h \
- /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../TNCTree/StoreTier/syncstore.h \
- /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../TNCTree/StoreTier/asyncstore.h \
- /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../TNCTree/utility/types.h \
- /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../TNCTree/utility/../MemoryTier/Node.h \
+ /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Ti-OCSSD/StoreTier/syncstore.h \
+ /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Ti-OCSSD/StoreTier/asyncstore.h \
+ /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Ti-OCSSD/StoreTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Ti-OCSSD/utility/types.h \
+ /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Ti-OCSSD/utility/../MemoryTier/Node.h \
+ /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Ti-OCSSD/TiOCS.h \
  /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Auxizilary/VariablesTypes.h \
  /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../MultiHash/LazySplitHash/LSNode.h \

@@ -169,21 +169,21 @@ CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o: \
  /home/TiOCS/src/Backend/IODisk/../../Auxizilary/GlobalVariable.h \
  /home/TiOCS/src/Backend/IODisk/../BackendMain.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/writer.h \
- /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../TNCTree/MemoryTier/Node.h \
- /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../TNCTree/MemoryTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Ti-OCSSD/MemoryTier/Node.h \
+ /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Ti-OCSSD/MemoryTier/../../Auxizilary/GlobalVariable.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Auxizilary/VariablesTypes.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../TNCTree/StoreTier/syncstore.h \
- /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../TNCTree/StoreTier/../MemoryTier/Node.h \
- /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../TNCTree/StoreTier/../../LRU/lru.h \
+ /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Ti-OCSSD/StoreTier/syncstore.h \
+ /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Ti-OCSSD/StoreTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Ti-OCSSD/StoreTier/../MemoryTier/Node.h \
+ /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Ti-OCSSD/StoreTier/../../LRU/lru.h \
  /usr/include/c++/9/list /usr/include/c++/9/bits/stl_list.h \
  /usr/include/c++/9/bits/allocated_ptr.h /usr/include/c++/9/bits/list.tcc \
  /usr/include/c++/9/cassert \
- /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../TNCTree/StoreTier/../../LRU/../TNCTree/MemoryTier/Node.h \
- /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../TNCTree/StoreTier/../../FIFO/FIFO.h \
- /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../TNCTree/StoreTier/../../FIFO/../TNCTree/MemoryTier/Node.h \
+ /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Ti-OCSSD/StoreTier/../../LRU/../Ti-OCSSD/MemoryTier/Node.h \
+ /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Ti-OCSSD/StoreTier/../../FIFO/FIFO.h \
+ /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Ti-OCSSD/StoreTier/../../FIFO/../Ti-OCSSD/MemoryTier/Node.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../MultiHash/LinearHash/LiHash.h \

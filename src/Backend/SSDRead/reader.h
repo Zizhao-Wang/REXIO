@@ -17,9 +17,10 @@
 #include <vector>
 #include <liblightnvm.h>
 #include "../../Auxizilary/SysOutput.h"
-#include "../../TNCTree/StoreTier/syncstore.h"
-#include "../../TNCTree/StoreTier/asyncstore.h"
-#include "../../TNCTree/utility/types.h"
+#include "../../Ti-OCSSD/StoreTier/syncstore.h"
+#include "../../Ti-OCSSD/StoreTier/asyncstore.h"
+#include "../../Ti-OCSSD/utility/types.h"
+#include "../../Ti-OCSSD/TiOCS.h"
 #include "../../MultiHash/LinearHash/node.h"
 #include "../../Auxizilary/VariablesTypes.h"
 #include "../../MultiHash/LazySplitHash/LSNode.h"

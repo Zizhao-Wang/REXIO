@@ -25,10 +25,10 @@ endif()
 
 # add the executable
 add_executable(src main.cpp 
-				TNCTree/TNCtree.h TNCTree/TNCtree.cpp TNCTree/MemoryTier/MemTier.h
-				TNCTree/MemoryTier/MemTier.cpp TNCTree/MemoryTier/Node.h TNCTree/MemoryTier/Node.cpp
-				TNCTree/utility/types.h TNCTree/utility/types.cpp TNCTree/StoreTier/asyncstore.h TNCTree/StoreTier/asyncstore.cpp
-				TNCTree/StoreTier/syncstore.h TNCTree/StoreTier/syncstore.cpp  
+                Ti-OCSSD/TiOCS.h Ti-OCSSD/TiOCS.cpp Ti-OCSSD/MemoryTier/MemTier.h
+				Ti-OCSSD/MemoryTier/MemTier.cpp Ti-OCSSD/MemoryTier/Node.h Ti-OCSSD/MemoryTier/Node.cpp
+				Ti-OCSSD/utility/types.h Ti-OCSSD/utility/types.cpp Ti-OCSSD/StoreTier/asyncstore.h Ti-OCSSD/StoreTier/asyncstore.cpp
+				Ti-OCSSD/StoreTier/syncstore.h Ti-OCSSD/StoreTier/syncstore.cpp  
 				LRU/lru.h LRU/lru.cpp MultiHash/ExtendibleHash/ExBucket.h MultiHash/ExtendibleHash/ExBucket.h
 				Backend/IODisk/WriteDisk.h Backend/BackendMain.h Backend/IODisk/WriteDisk.cpp  
 				Backend/BlockManage/BlockInfo.cpp Backend/BlockManage/BlockInfo.h

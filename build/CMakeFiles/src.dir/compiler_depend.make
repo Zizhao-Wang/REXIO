@@ -580,23 +580,23 @@ CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o: /home/TiOCS/src/Backend/IODis
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/Backend/BackendMain.h \
   /home/TiOCS/src/Backend/SSDWrite/writer.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/Auxizilary/VariablesTypes.h \
   /home/TiOCS/src/Auxizilary/SysOutput.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/StoreTier/syncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/LRU/lru.h \
   /usr/include/c++/9/list \
   /usr/include/c++/9/bits/stl_list.h \
   /usr/include/c++/9/bits/allocated_ptr.h \
   /usr/include/c++/9/bits/list.tcc \
   /usr/include/c++/9/cassert \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/FIFO/FIFO.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/MultiHash/LinearHash/node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/MultiHash/LinearHash/LiHash.h \
@@ -830,7 +830,7 @@ CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o: /home/TiOCS/src/Backend/SSDRead
   /usr/include/c++/9/bits/stl_tempbuf.h \
   /usr/include/c++/9/bits/uniform_int_dist.h \
   /usr/include/c++/9/limits \
-  /home/TiOCS/src/TNCTree/StoreTier/syncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h \
   /usr/include/c++/9/iostream \
   /usr/include/c++/9/ostream \
   /usr/include/c++/9/ios \
@@ -866,7 +866,7 @@ CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o: /home/TiOCS/src/Backend/SSDRead
   /usr/include/c++/9/bits/unordered_map.h \
   /usr/include/c++/9/bits/erase_if.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/LRU/lru.h \
   /usr/include/c++/9/list \
@@ -874,12 +874,66 @@ CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o: /home/TiOCS/src/Backend/SSDRead
   /usr/include/c++/9/bits/allocated_ptr.h \
   /usr/include/c++/9/bits/list.tcc \
   /usr/include/c++/9/cassert \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/FIFO/FIFO.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
-  /home/TiOCS/src/TNCTree/StoreTier/asyncstore.h \
-  /home/TiOCS/src/TNCTree/utility/types.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/asyncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/utility/types.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/TiOCS.h \
+  /usr/include/unistd.h \
+  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+  /usr/include/x86_64-linux-gnu/bits/environments.h \
+  /usr/include/x86_64-linux-gnu/bits/confname.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+  /usr/include/x86_64-linux-gnu/sys/wait.h \
+  /usr/include/signal.h \
+  /usr/include/x86_64-linux-gnu/bits/signum.h \
+  /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
+  /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/sigaction.h \
+  /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
+  /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
+  /usr/include/x86_64-linux-gnu/sys/ucontext.h \
+  /usr/include/x86_64-linux-gnu/bits/sigstack.h \
+  /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
+  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
+  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+  /usr/include/x86_64-linux-gnu/sys/ipc.h \
+  /usr/include/x86_64-linux-gnu/bits/ipctypes.h \
+  /usr/include/x86_64-linux-gnu/bits/ipc.h \
+  /usr/include/x86_64-linux-gnu/bits/ipc-perm.h \
+  /usr/include/x86_64-linux-gnu/sys/prctl.h \
+  /usr/include/linux/prctl.h \
+  /usr/include/linux/types.h \
+  /usr/include/x86_64-linux-gnu/asm/types.h \
+  /usr/include/asm-generic/types.h \
+  /usr/include/asm-generic/int-ll64.h \
+  /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+  /usr/include/asm-generic/bitsperlong.h \
+  /usr/include/linux/posix_types.h \
+  /usr/include/linux/stddef.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+  /usr/include/asm-generic/posix_types.h \
+  /usr/include/x86_64-linux-gnu/sys/shm.h \
+  /usr/include/x86_64-linux-gnu/bits/shm.h \
+  /usr/include/x86_64-linux-gnu/bits/shmlba.h \
+  /usr/include/x86_64-linux-gnu/bits/shm-pad.h \
+  /usr/include/x86_64-linux-gnu/sys/msg.h \
+  /usr/include/x86_64-linux-gnu/bits/msq.h \
+  /usr/include/x86_64-linux-gnu/bits/msq-pad.h \
   /home/TiOCS/src/MultiHash/LinearHash/node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/Auxizilary/VariablesTypes.h \
@@ -948,15 +1002,7 @@ CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o: /home/TiOCS/src/Backend/SSDRead
   /home/TiOCS/src/Auxizilary/VariablesTypes.h \
   /home/TiOCS/src/Auxizilary/SysOutput.h \
   /home/TiOCS/src/LSM-Tree/UtilityDefine/merge.h \
-  /home/TiOCS/src/LSM-Tree/UtilityDefine/run.h \
-  /home/TiOCS/src/TNCTree/TNCtree.h \
-  /usr/include/unistd.h \
-  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
-  /usr/include/x86_64-linux-gnu/bits/environments.h \
-  /usr/include/x86_64-linux-gnu/bits/confname.h \
-  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
-  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
-  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h
+  /home/TiOCS/src/LSM-Tree/UtilityDefine/run.h
 
 CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: /home/TiOCS/src/Backend/SSDWrite/writer.cpp \
   /usr/include/stdc-predef.h \
@@ -1134,7 +1180,7 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: /home/TiOCS/src/Backend/SSDWri
   /usr/include/strings.h \
   /home/liblightnvm/include/liblightnvm_spec.h \
   /usr/include/assert.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /usr/include/c++/9/iostream \
   /usr/include/c++/9/ostream \
@@ -1168,18 +1214,18 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: /home/TiOCS/src/Backend/SSDWri
   /usr/include/c++/9/bits/stl_tempbuf.h \
   /usr/include/c++/9/bits/uniform_int_dist.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/StoreTier/syncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/LRU/lru.h \
   /usr/include/c++/9/list \
   /usr/include/c++/9/bits/stl_list.h \
   /usr/include/c++/9/bits/allocated_ptr.h \
   /usr/include/c++/9/bits/list.tcc \
   /usr/include/c++/9/cassert \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/FIFO/FIFO.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/MultiHash/LinearHash/node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/MultiHash/LinearHash/LiHash.h \
@@ -1247,7 +1293,7 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: /home/TiOCS/src/Backend/SSDWri
   /home/TiOCS/src/Auxizilary/SysOutput.h \
   /home/TiOCS/src/LSM-Tree/UtilityDefine/merge.h \
   /home/TiOCS/src/LSM-Tree/UtilityDefine/run.h \
-  /home/TiOCS/src/TNCTree/TNCtree.h \
+  /home/TiOCS/src/Ti-OCSSD/TiOCS.h \
   /usr/include/unistd.h \
   /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/environments.h \
@@ -1255,13 +1301,60 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: /home/TiOCS/src/Backend/SSDWri
   /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
   /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
   /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+  /usr/include/x86_64-linux-gnu/sys/wait.h \
+  /usr/include/signal.h \
+  /usr/include/x86_64-linux-gnu/bits/signum.h \
+  /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
+  /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/sigaction.h \
+  /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
+  /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
+  /usr/include/x86_64-linux-gnu/sys/ucontext.h \
+  /usr/include/x86_64-linux-gnu/bits/sigstack.h \
+  /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
+  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
+  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+  /usr/include/x86_64-linux-gnu/sys/ipc.h \
+  /usr/include/x86_64-linux-gnu/bits/ipctypes.h \
+  /usr/include/x86_64-linux-gnu/bits/ipc.h \
+  /usr/include/x86_64-linux-gnu/bits/ipc-perm.h \
+  /usr/include/x86_64-linux-gnu/sys/prctl.h \
+  /usr/include/linux/prctl.h \
+  /usr/include/linux/types.h \
+  /usr/include/x86_64-linux-gnu/asm/types.h \
+  /usr/include/asm-generic/types.h \
+  /usr/include/asm-generic/int-ll64.h \
+  /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+  /usr/include/asm-generic/bitsperlong.h \
+  /usr/include/linux/posix_types.h \
+  /usr/include/linux/stddef.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+  /usr/include/asm-generic/posix_types.h \
+  /usr/include/x86_64-linux-gnu/sys/shm.h \
+  /usr/include/x86_64-linux-gnu/bits/shm.h \
+  /usr/include/x86_64-linux-gnu/bits/shmlba.h \
+  /usr/include/x86_64-linux-gnu/bits/shm-pad.h \
+  /usr/include/x86_64-linux-gnu/sys/msg.h \
+  /usr/include/x86_64-linux-gnu/bits/msq.h \
+  /usr/include/x86_64-linux-gnu/bits/msq-pad.h \
   /home/TiOCS/src/Backend/SSDRead/reader.h \
   /home/TiOCS/src/Auxizilary/SysOutput.h \
-  /home/TiOCS/src/TNCTree/StoreTier/syncstore.h \
-  /home/TiOCS/src/TNCTree/StoreTier/asyncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/asyncstore.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/utility/types.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/utility/types.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/TiOCS.h \
   /home/TiOCS/src/MultiHash/LinearHash/node.h \
   /home/TiOCS/src/Auxizilary/VariablesTypes.h \
   /home/TiOCS/src/MultiHash/LazySplitHash/LSNode.h \
@@ -1434,7 +1527,7 @@ CMakeFiles/src.dir/FIFO/FIFO.cpp.o: /home/TiOCS/src/FIFO/FIFO.cpp \
   /usr/include/c++/9/bits/stl_list.h \
   /usr/include/c++/9/bits/allocated_ptr.h \
   /usr/include/c++/9/bits/list.tcc \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /usr/include/c++/9/iostream \
   /usr/include/c++/9/ostream \
@@ -1636,7 +1729,7 @@ CMakeFiles/src.dir/LRU/lru.cpp.o: /home/TiOCS/src/LRU/lru.cpp \
   /usr/include/c++/9/bits/list.tcc \
   /usr/include/c++/9/cassert \
   /usr/include/assert.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /usr/include/c++/9/iostream \
   /usr/include/c++/9/ostream \
@@ -1932,21 +2025,21 @@ CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o: /home/TiOCS/src/LSM-Tree/LsmTree.cpp 
   /home/TiOCS/src/LSM-Tree/UtilityDefine/merge.h \
   /home/TiOCS/src/LSM-Tree/UtilityDefine/run.h \
   /home/TiOCS/src/Backend/SSDWrite/writer.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/Auxizilary/VariablesTypes.h \
   /home/TiOCS/src/Auxizilary/SysOutput.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/StoreTier/syncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/LRU/lru.h \
   /usr/include/c++/9/list \
   /usr/include/c++/9/bits/stl_list.h \
   /usr/include/c++/9/bits/list.tcc \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/FIFO/FIFO.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/MultiHash/LinearHash/node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/MultiHash/LinearHash/LiHash.h \
@@ -3259,22 +3352,22 @@ CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o: /home/TiOCS/src/LSM-Tree
   /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
   /home/TiOCS/src/Backend/IODisk/WriteDisk.h \
   /home/TiOCS/src/Backend/SSDWrite/writer.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/Auxizilary/VariablesTypes.h \
   /home/TiOCS/src/Auxizilary/SysOutput.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/StoreTier/syncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/LRU/lru.h \
   /usr/include/c++/9/list \
   /usr/include/c++/9/bits/stl_list.h \
   /usr/include/c++/9/bits/allocated_ptr.h \
   /usr/include/c++/9/bits/list.tcc \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/FIFO/FIFO.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/MultiHash/LinearHash/node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/MultiHash/LinearHash/LiHash.h \
@@ -3288,11 +3381,65 @@ CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o: /home/TiOCS/src/LSM-Tree
   /home/TiOCS/src/MultiHash/ExtendibleHash/ExNode.h \
   /home/TiOCS/src/Backend/SSDRead/reader.h \
   /home/TiOCS/src/Auxizilary/SysOutput.h \
-  /home/TiOCS/src/TNCTree/StoreTier/syncstore.h \
-  /home/TiOCS/src/TNCTree/StoreTier/asyncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/asyncstore.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/utility/types.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/utility/types.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/TiOCS.h \
+  /usr/include/unistd.h \
+  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+  /usr/include/x86_64-linux-gnu/bits/environments.h \
+  /usr/include/x86_64-linux-gnu/bits/confname.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+  /usr/include/x86_64-linux-gnu/sys/wait.h \
+  /usr/include/signal.h \
+  /usr/include/x86_64-linux-gnu/bits/signum.h \
+  /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
+  /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/sigaction.h \
+  /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
+  /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
+  /usr/include/x86_64-linux-gnu/sys/ucontext.h \
+  /usr/include/x86_64-linux-gnu/bits/sigstack.h \
+  /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
+  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
+  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+  /usr/include/x86_64-linux-gnu/sys/ipc.h \
+  /usr/include/x86_64-linux-gnu/bits/ipctypes.h \
+  /usr/include/x86_64-linux-gnu/bits/ipc.h \
+  /usr/include/x86_64-linux-gnu/bits/ipc-perm.h \
+  /usr/include/x86_64-linux-gnu/sys/prctl.h \
+  /usr/include/linux/prctl.h \
+  /usr/include/linux/types.h \
+  /usr/include/x86_64-linux-gnu/asm/types.h \
+  /usr/include/asm-generic/types.h \
+  /usr/include/asm-generic/int-ll64.h \
+  /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+  /usr/include/asm-generic/bitsperlong.h \
+  /usr/include/linux/posix_types.h \
+  /usr/include/linux/stddef.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+  /usr/include/asm-generic/posix_types.h \
+  /usr/include/x86_64-linux-gnu/sys/shm.h \
+  /usr/include/x86_64-linux-gnu/bits/shm.h \
+  /usr/include/x86_64-linux-gnu/bits/shmlba.h \
+  /usr/include/x86_64-linux-gnu/bits/shm-pad.h \
+  /usr/include/x86_64-linux-gnu/sys/msg.h \
+  /usr/include/x86_64-linux-gnu/bits/msq.h \
+  /usr/include/x86_64-linux-gnu/bits/msq-pad.h \
   /home/TiOCS/src/MultiHash/LinearHash/node.h \
   /home/TiOCS/src/Auxizilary/VariablesTypes.h \
   /home/TiOCS/src/MultiHash/LazySplitHash/LSNode.h \
@@ -3539,22 +3686,22 @@ CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.o: /home/TiOCS/src/LSMTree-N
   /usr/include/c++/9/bits/stl_map.h \
   /usr/include/c++/9/bits/stl_multimap.h \
   /home/TiOCS/src/Backend/SSDWrite/writer.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/Auxizilary/VariablesTypes.h \
   /home/TiOCS/src/Auxizilary/SysOutput.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/StoreTier/syncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/LRU/lru.h \
   /usr/include/c++/9/list \
   /usr/include/c++/9/bits/stl_list.h \
   /usr/include/c++/9/bits/allocated_ptr.h \
   /usr/include/c++/9/bits/list.tcc \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/FIFO/FIFO.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/MultiHash/LinearHash/node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/MultiHash/LinearHash/LiHash.h \
@@ -4665,22 +4812,22 @@ CMakeFiles/src.dir/LSMTree-NoFTL/run.cpp.o: /home/TiOCS/src/LSMTree-NoFTL/run.cp
   /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
   /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
   /home/TiOCS/src/Backend/SSDWrite/writer.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/Auxizilary/VariablesTypes.h \
   /home/TiOCS/src/Auxizilary/SysOutput.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/StoreTier/syncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/LRU/lru.h \
   /usr/include/c++/9/list \
   /usr/include/c++/9/bits/stl_list.h \
   /usr/include/c++/9/bits/allocated_ptr.h \
   /usr/include/c++/9/bits/list.tcc \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/FIFO/FIFO.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/MultiHash/LinearHash/node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/MultiHash/LinearHash/LiHash.h \
@@ -4694,11 +4841,65 @@ CMakeFiles/src.dir/LSMTree-NoFTL/run.cpp.o: /home/TiOCS/src/LSMTree-NoFTL/run.cp
   /home/TiOCS/src/MultiHash/ExtendibleHash/ExNode.h \
   /home/TiOCS/src/Backend/SSDRead/reader.h \
   /home/TiOCS/src/Auxizilary/SysOutput.h \
-  /home/TiOCS/src/TNCTree/StoreTier/syncstore.h \
-  /home/TiOCS/src/TNCTree/StoreTier/asyncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/asyncstore.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/utility/types.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/utility/types.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/TiOCS.h \
+  /usr/include/unistd.h \
+  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+  /usr/include/x86_64-linux-gnu/bits/environments.h \
+  /usr/include/x86_64-linux-gnu/bits/confname.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+  /usr/include/x86_64-linux-gnu/sys/wait.h \
+  /usr/include/signal.h \
+  /usr/include/x86_64-linux-gnu/bits/signum.h \
+  /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
+  /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/sigaction.h \
+  /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
+  /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
+  /usr/include/x86_64-linux-gnu/sys/ucontext.h \
+  /usr/include/x86_64-linux-gnu/bits/sigstack.h \
+  /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
+  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
+  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+  /usr/include/x86_64-linux-gnu/sys/ipc.h \
+  /usr/include/x86_64-linux-gnu/bits/ipctypes.h \
+  /usr/include/x86_64-linux-gnu/bits/ipc.h \
+  /usr/include/x86_64-linux-gnu/bits/ipc-perm.h \
+  /usr/include/x86_64-linux-gnu/sys/prctl.h \
+  /usr/include/linux/prctl.h \
+  /usr/include/linux/types.h \
+  /usr/include/x86_64-linux-gnu/asm/types.h \
+  /usr/include/asm-generic/types.h \
+  /usr/include/asm-generic/int-ll64.h \
+  /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+  /usr/include/asm-generic/bitsperlong.h \
+  /usr/include/linux/posix_types.h \
+  /usr/include/linux/stddef.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+  /usr/include/asm-generic/posix_types.h \
+  /usr/include/x86_64-linux-gnu/sys/shm.h \
+  /usr/include/x86_64-linux-gnu/bits/shm.h \
+  /usr/include/x86_64-linux-gnu/bits/shmlba.h \
+  /usr/include/x86_64-linux-gnu/bits/shm-pad.h \
+  /usr/include/x86_64-linux-gnu/sys/msg.h \
+  /usr/include/x86_64-linux-gnu/bits/msq.h \
+  /usr/include/x86_64-linux-gnu/bits/msq-pad.h \
   /home/TiOCS/src/MultiHash/LinearHash/node.h \
   /home/TiOCS/src/Auxizilary/VariablesTypes.h \
   /home/TiOCS/src/MultiHash/LazySplitHash/LSNode.h \
@@ -4916,23 +5117,23 @@ CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExBucket.cpp.o: /home/TiOCS/src/Mult
   /usr/include/strings.h \
   /home/liblightnvm/include/liblightnvm_spec.h \
   /usr/include/assert.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/Auxizilary/VariablesTypes.h \
   /home/TiOCS/src/Auxizilary/SysOutput.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/StoreTier/syncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/LRU/lru.h \
   /usr/include/c++/9/list \
   /usr/include/c++/9/bits/stl_list.h \
   /usr/include/c++/9/bits/allocated_ptr.h \
   /usr/include/c++/9/bits/list.tcc \
   /usr/include/c++/9/cassert \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/FIFO/FIFO.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/MultiHash/LinearHash/node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/MultiHash/LinearHash/LiHash.h \
@@ -4950,11 +5151,65 @@ CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExBucket.cpp.o: /home/TiOCS/src/Mult
   /home/TiOCS/src/MultiHash/ExtendibleHash/ExBucket.h \
   /home/TiOCS/src/Backend/SSDRead/reader.h \
   /home/TiOCS/src/Auxizilary/SysOutput.h \
-  /home/TiOCS/src/TNCTree/StoreTier/syncstore.h \
-  /home/TiOCS/src/TNCTree/StoreTier/asyncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/asyncstore.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/utility/types.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/utility/types.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/TiOCS.h \
+  /usr/include/unistd.h \
+  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+  /usr/include/x86_64-linux-gnu/bits/environments.h \
+  /usr/include/x86_64-linux-gnu/bits/confname.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+  /usr/include/x86_64-linux-gnu/sys/wait.h \
+  /usr/include/signal.h \
+  /usr/include/x86_64-linux-gnu/bits/signum.h \
+  /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
+  /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/sigaction.h \
+  /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
+  /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
+  /usr/include/x86_64-linux-gnu/sys/ucontext.h \
+  /usr/include/x86_64-linux-gnu/bits/sigstack.h \
+  /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
+  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
+  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+  /usr/include/x86_64-linux-gnu/sys/ipc.h \
+  /usr/include/x86_64-linux-gnu/bits/ipctypes.h \
+  /usr/include/x86_64-linux-gnu/bits/ipc.h \
+  /usr/include/x86_64-linux-gnu/bits/ipc-perm.h \
+  /usr/include/x86_64-linux-gnu/sys/prctl.h \
+  /usr/include/linux/prctl.h \
+  /usr/include/linux/types.h \
+  /usr/include/x86_64-linux-gnu/asm/types.h \
+  /usr/include/asm-generic/types.h \
+  /usr/include/asm-generic/int-ll64.h \
+  /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+  /usr/include/asm-generic/bitsperlong.h \
+  /usr/include/linux/posix_types.h \
+  /usr/include/linux/stddef.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+  /usr/include/asm-generic/posix_types.h \
+  /usr/include/x86_64-linux-gnu/sys/shm.h \
+  /usr/include/x86_64-linux-gnu/bits/shm.h \
+  /usr/include/x86_64-linux-gnu/bits/shmlba.h \
+  /usr/include/x86_64-linux-gnu/bits/shm-pad.h \
+  /usr/include/x86_64-linux-gnu/sys/msg.h \
+  /usr/include/x86_64-linux-gnu/bits/msq.h \
+  /usr/include/x86_64-linux-gnu/bits/msq-pad.h \
   /home/TiOCS/src/MultiHash/LinearHash/node.h \
   /home/TiOCS/src/Auxizilary/VariablesTypes.h \
   /home/TiOCS/src/MultiHash/LazySplitHash/LSNode.h \
@@ -5179,9 +5434,9 @@ CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o: /home/TiOCS/src/MultiH
   /usr/include/c++/9/ctime \
   /home/TiOCS/src/Backend/SSDRead/reader.h \
   /home/TiOCS/src/Auxizilary/SysOutput.h \
-  /home/TiOCS/src/TNCTree/StoreTier/syncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/LRU/lru.h \
   /usr/include/c++/9/list \
@@ -5189,12 +5444,66 @@ CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o: /home/TiOCS/src/MultiH
   /usr/include/c++/9/bits/allocated_ptr.h \
   /usr/include/c++/9/bits/list.tcc \
   /usr/include/c++/9/cassert \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/FIFO/FIFO.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
-  /home/TiOCS/src/TNCTree/StoreTier/asyncstore.h \
-  /home/TiOCS/src/TNCTree/utility/types.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/asyncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/utility/types.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/TiOCS.h \
+  /usr/include/unistd.h \
+  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+  /usr/include/x86_64-linux-gnu/bits/environments.h \
+  /usr/include/x86_64-linux-gnu/bits/confname.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+  /usr/include/x86_64-linux-gnu/sys/wait.h \
+  /usr/include/signal.h \
+  /usr/include/x86_64-linux-gnu/bits/signum.h \
+  /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
+  /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/sigaction.h \
+  /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
+  /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
+  /usr/include/x86_64-linux-gnu/sys/ucontext.h \
+  /usr/include/x86_64-linux-gnu/bits/sigstack.h \
+  /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
+  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
+  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+  /usr/include/x86_64-linux-gnu/sys/ipc.h \
+  /usr/include/x86_64-linux-gnu/bits/ipctypes.h \
+  /usr/include/x86_64-linux-gnu/bits/ipc.h \
+  /usr/include/x86_64-linux-gnu/bits/ipc-perm.h \
+  /usr/include/x86_64-linux-gnu/sys/prctl.h \
+  /usr/include/linux/prctl.h \
+  /usr/include/linux/types.h \
+  /usr/include/x86_64-linux-gnu/asm/types.h \
+  /usr/include/asm-generic/types.h \
+  /usr/include/asm-generic/int-ll64.h \
+  /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+  /usr/include/asm-generic/bitsperlong.h \
+  /usr/include/linux/posix_types.h \
+  /usr/include/linux/stddef.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+  /usr/include/asm-generic/posix_types.h \
+  /usr/include/x86_64-linux-gnu/sys/shm.h \
+  /usr/include/x86_64-linux-gnu/bits/shm.h \
+  /usr/include/x86_64-linux-gnu/bits/shmlba.h \
+  /usr/include/x86_64-linux-gnu/bits/shm-pad.h \
+  /usr/include/x86_64-linux-gnu/sys/msg.h \
+  /usr/include/x86_64-linux-gnu/bits/msq.h \
+  /usr/include/x86_64-linux-gnu/bits/msq-pad.h \
   /home/TiOCS/src/MultiHash/LinearHash/node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/Auxizilary/VariablesTypes.h \
@@ -5432,9 +5741,9 @@ CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o: /home/TiOCS/src/MultiHa
   /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
   /home/TiOCS/src/Backend/SSDRead/reader.h \
   /home/TiOCS/src/Auxizilary/SysOutput.h \
-  /home/TiOCS/src/TNCTree/StoreTier/syncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/LRU/lru.h \
   /usr/include/c++/9/list \
@@ -5442,12 +5751,66 @@ CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o: /home/TiOCS/src/MultiHa
   /usr/include/c++/9/bits/allocated_ptr.h \
   /usr/include/c++/9/bits/list.tcc \
   /usr/include/c++/9/cassert \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/FIFO/FIFO.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
-  /home/TiOCS/src/TNCTree/StoreTier/asyncstore.h \
-  /home/TiOCS/src/TNCTree/utility/types.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/asyncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/utility/types.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/TiOCS.h \
+  /usr/include/unistd.h \
+  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+  /usr/include/x86_64-linux-gnu/bits/environments.h \
+  /usr/include/x86_64-linux-gnu/bits/confname.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+  /usr/include/x86_64-linux-gnu/sys/wait.h \
+  /usr/include/signal.h \
+  /usr/include/x86_64-linux-gnu/bits/signum.h \
+  /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
+  /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/sigaction.h \
+  /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
+  /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
+  /usr/include/x86_64-linux-gnu/sys/ucontext.h \
+  /usr/include/x86_64-linux-gnu/bits/sigstack.h \
+  /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
+  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
+  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+  /usr/include/x86_64-linux-gnu/sys/ipc.h \
+  /usr/include/x86_64-linux-gnu/bits/ipctypes.h \
+  /usr/include/x86_64-linux-gnu/bits/ipc.h \
+  /usr/include/x86_64-linux-gnu/bits/ipc-perm.h \
+  /usr/include/x86_64-linux-gnu/sys/prctl.h \
+  /usr/include/linux/prctl.h \
+  /usr/include/linux/types.h \
+  /usr/include/x86_64-linux-gnu/asm/types.h \
+  /usr/include/asm-generic/types.h \
+  /usr/include/asm-generic/int-ll64.h \
+  /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+  /usr/include/asm-generic/bitsperlong.h \
+  /usr/include/linux/posix_types.h \
+  /usr/include/linux/stddef.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+  /usr/include/asm-generic/posix_types.h \
+  /usr/include/x86_64-linux-gnu/sys/shm.h \
+  /usr/include/x86_64-linux-gnu/bits/shm.h \
+  /usr/include/x86_64-linux-gnu/bits/shmlba.h \
+  /usr/include/x86_64-linux-gnu/bits/shm-pad.h \
+  /usr/include/x86_64-linux-gnu/sys/msg.h \
+  /usr/include/x86_64-linux-gnu/bits/msq.h \
+  /usr/include/x86_64-linux-gnu/bits/msq-pad.h \
   /home/TiOCS/src/MultiHash/LinearHash/node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/Auxizilary/VariablesTypes.h \
@@ -5675,9 +6038,9 @@ CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o: /home/TiOCS/src/MultiHash/
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/Backend/SSDRead/reader.h \
   /home/TiOCS/src/Auxizilary/SysOutput.h \
-  /home/TiOCS/src/TNCTree/StoreTier/syncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/LRU/lru.h \
   /usr/include/c++/9/list \
@@ -5685,12 +6048,66 @@ CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o: /home/TiOCS/src/MultiHash/
   /usr/include/c++/9/bits/allocated_ptr.h \
   /usr/include/c++/9/bits/list.tcc \
   /usr/include/c++/9/cassert \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/FIFO/FIFO.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
-  /home/TiOCS/src/TNCTree/StoreTier/asyncstore.h \
-  /home/TiOCS/src/TNCTree/utility/types.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/asyncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/utility/types.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/TiOCS.h \
+  /usr/include/unistd.h \
+  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+  /usr/include/x86_64-linux-gnu/bits/environments.h \
+  /usr/include/x86_64-linux-gnu/bits/confname.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+  /usr/include/x86_64-linux-gnu/sys/wait.h \
+  /usr/include/signal.h \
+  /usr/include/x86_64-linux-gnu/bits/signum.h \
+  /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
+  /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/sigaction.h \
+  /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
+  /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
+  /usr/include/x86_64-linux-gnu/sys/ucontext.h \
+  /usr/include/x86_64-linux-gnu/bits/sigstack.h \
+  /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
+  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
+  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+  /usr/include/x86_64-linux-gnu/sys/ipc.h \
+  /usr/include/x86_64-linux-gnu/bits/ipctypes.h \
+  /usr/include/x86_64-linux-gnu/bits/ipc.h \
+  /usr/include/x86_64-linux-gnu/bits/ipc-perm.h \
+  /usr/include/x86_64-linux-gnu/sys/prctl.h \
+  /usr/include/linux/prctl.h \
+  /usr/include/linux/types.h \
+  /usr/include/x86_64-linux-gnu/asm/types.h \
+  /usr/include/asm-generic/types.h \
+  /usr/include/asm-generic/int-ll64.h \
+  /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+  /usr/include/asm-generic/bitsperlong.h \
+  /usr/include/linux/posix_types.h \
+  /usr/include/linux/stddef.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+  /usr/include/asm-generic/posix_types.h \
+  /usr/include/x86_64-linux-gnu/sys/shm.h \
+  /usr/include/x86_64-linux-gnu/bits/shm.h \
+  /usr/include/x86_64-linux-gnu/bits/shmlba.h \
+  /usr/include/x86_64-linux-gnu/bits/shm-pad.h \
+  /usr/include/x86_64-linux-gnu/sys/msg.h \
+  /usr/include/x86_64-linux-gnu/bits/msq.h \
+  /usr/include/x86_64-linux-gnu/bits/msq-pad.h \
   /home/TiOCS/src/MultiHash/LinearHash/node.h \
   /home/TiOCS/src/Auxizilary/VariablesTypes.h \
   /home/TiOCS/src/MultiHash/LazySplitHash/LSNode.h \
@@ -5701,19 +6118,19 @@ CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o: /home/TiOCS/src/MultiHash/
   /home/TiOCS/src/MultiHash/ExtendibleHash/ExBucket.h \
   /home/TiOCS/src/MultiHash/ExtendibleHash/ExNode.h \
   /home/TiOCS/src/Backend/SSDWrite/writer.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/Auxizilary/VariablesTypes.h \
   /home/TiOCS/src/Auxizilary/SysOutput.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/StoreTier/syncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h \
   /home/TiOCS/src/MultiHash/LinearHash/node.h \
   /home/TiOCS/src/MultiHash/LinearHash/LiHash.h \
   /home/TiOCS/src/MultiHash/ExtendibleHash/ExNode.h \
   /home/TiOCS/src/MultiHash/ExtendibleHash/ExHash.h
 
-CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o: /home/TiOCS/src/TNCTree/MemoryTier/MemTier.cpp \
+CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.o: /home/TiOCS/src/Ti-OCSSD/MemoryTier/MemTier.cpp \
   /usr/include/stdc-predef.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/MemTier.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/MemTier.h \
   /usr/lib/gcc/x86_64-linux-gnu/9/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
@@ -5884,7 +6301,7 @@ CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o: /home/TiOCS/src/TNCTree/Mem
   /usr/include/c++/9/bits/ostream.tcc \
   /usr/include/c++/9/istream \
   /usr/include/c++/9/bits/istream.tcc \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /usr/include/c++/9/stdlib.h \
   /usr/include/unistd.h \
   /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
@@ -5893,15 +6310,15 @@ CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o: /home/TiOCS/src/TNCTree/Mem
   /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
   /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
   /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
-  /home/TiOCS/src/TNCTree/utility/types.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/utility/types.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /usr/include/c++/9/vector \
   /usr/include/c++/9/bits/stl_construct.h \
   /usr/include/c++/9/bits/stl_uninitialized.h \
   /usr/include/c++/9/bits/stl_vector.h \
   /usr/include/c++/9/bits/stl_bvector.h \
   /usr/include/c++/9/bits/vector.tcc \
-  /home/TiOCS/src/TNCTree/StoreTier/syncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h \
   /usr/include/c++/9/unordered_map \
   /usr/include/c++/9/ext/aligned_buffer.h \
   /usr/include/c++/9/bits/hashtable.h \
@@ -5916,7 +6333,7 @@ CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o: /home/TiOCS/src/TNCTree/Mem
   /usr/include/c++/9/bits/unordered_map.h \
   /usr/include/c++/9/bits/erase_if.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/LRU/lru.h \
   /usr/include/c++/9/list \
   /usr/include/c++/9/bits/stl_list.h \
@@ -5924,9 +6341,9 @@ CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o: /home/TiOCS/src/TNCTree/Mem
   /usr/include/c++/9/bits/list.tcc \
   /usr/include/c++/9/cassert \
   /usr/include/assert.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/FIFO/FIFO.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/Auxizilary/SysOutput.h \
   /usr/include/c++/9/algorithm \
   /usr/include/c++/9/bits/stl_algo.h \
@@ -5935,9 +6352,9 @@ CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o: /home/TiOCS/src/TNCTree/Mem
   /usr/include/c++/9/bits/stl_tempbuf.h \
   /usr/include/c++/9/bits/uniform_int_dist.h
 
-CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.o: /home/TiOCS/src/TNCTree/MemoryTier/Node.cpp \
+CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.o: /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.cpp \
   /usr/include/stdc-predef.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /usr/include/c++/9/cstdint \
   /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \
@@ -6119,9 +6536,9 @@ CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.o: /home/TiOCS/src/TNCTree/Memory
   /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
   /usr/include/x86_64-linux-gnu/bits/uio_lim.h
 
-CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.o: /home/TiOCS/src/TNCTree/StoreTier/asyncstore.cpp \
+CMakeFiles/src.dir/Ti-OCSSD/StoreTier/asyncstore.cpp.o: /home/TiOCS/src/Ti-OCSSD/StoreTier/asyncstore.cpp \
   /usr/include/stdc-predef.h \
-  /home/TiOCS/src/TNCTree/StoreTier/asyncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/asyncstore.h \
   /usr/lib/gcc/x86_64-linux-gnu/9/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
@@ -6300,9 +6717,9 @@ CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.o: /home/TiOCS/src/TNCTree/S
   /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
   /usr/include/x86_64-linux-gnu/bits/unistd_ext.h
 
-CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o: /home/TiOCS/src/TNCTree/StoreTier/syncstore.cpp \
+CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o: /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.cpp \
   /usr/include/stdc-predef.h \
-  /home/TiOCS/src/TNCTree/StoreTier/syncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h \
   /usr/lib/gcc/x86_64-linux-gnu/9/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
@@ -6492,7 +6909,7 @@ CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o: /home/TiOCS/src/TNCTree/St
   /usr/include/c++/9/bits/stl_bvector.h \
   /usr/include/c++/9/bits/vector.tcc \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/LRU/lru.h \
   /usr/include/c++/9/list \
@@ -6501,9 +6918,9 @@ CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o: /home/TiOCS/src/TNCTree/St
   /usr/include/c++/9/bits/list.tcc \
   /usr/include/c++/9/cassert \
   /usr/include/assert.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/FIFO/FIFO.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/Backend/SSDWrite/writer.h \
   /home/liblightnvm/include/liblightnvm.h \
   /usr/include/inttypes.h \
@@ -6512,7 +6929,7 @@ CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o: /home/TiOCS/src/TNCTree/St
   /usr/include/string.h \
   /usr/include/strings.h \
   /home/liblightnvm/include/liblightnvm_spec.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/Auxizilary/VariablesTypes.h \
   /home/TiOCS/src/Auxizilary/SysOutput.h \
   /usr/include/c++/9/algorithm \
@@ -6522,7 +6939,7 @@ CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o: /home/TiOCS/src/TNCTree/St
   /usr/include/c++/9/bits/stl_tempbuf.h \
   /usr/include/c++/9/bits/uniform_int_dist.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/StoreTier/syncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h \
   /home/TiOCS/src/MultiHash/LinearHash/node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/MultiHash/LinearHash/LiHash.h \
@@ -6542,11 +6959,65 @@ CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o: /home/TiOCS/src/TNCTree/St
   /home/TiOCS/src/MultiHash/ExtendibleHash/ExNode.h \
   /home/TiOCS/src/Backend/SSDRead/reader.h \
   /home/TiOCS/src/Auxizilary/SysOutput.h \
-  /home/TiOCS/src/TNCTree/StoreTier/syncstore.h \
-  /home/TiOCS/src/TNCTree/StoreTier/asyncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/asyncstore.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/utility/types.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/utility/types.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/TiOCS.h \
+  /usr/include/unistd.h \
+  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+  /usr/include/x86_64-linux-gnu/bits/environments.h \
+  /usr/include/x86_64-linux-gnu/bits/confname.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+  /usr/include/x86_64-linux-gnu/sys/wait.h \
+  /usr/include/signal.h \
+  /usr/include/x86_64-linux-gnu/bits/signum.h \
+  /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
+  /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/sigaction.h \
+  /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
+  /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
+  /usr/include/x86_64-linux-gnu/sys/ucontext.h \
+  /usr/include/x86_64-linux-gnu/bits/sigstack.h \
+  /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
+  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
+  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+  /usr/include/x86_64-linux-gnu/sys/ipc.h \
+  /usr/include/x86_64-linux-gnu/bits/ipctypes.h \
+  /usr/include/x86_64-linux-gnu/bits/ipc.h \
+  /usr/include/x86_64-linux-gnu/bits/ipc-perm.h \
+  /usr/include/x86_64-linux-gnu/sys/prctl.h \
+  /usr/include/linux/prctl.h \
+  /usr/include/linux/types.h \
+  /usr/include/x86_64-linux-gnu/asm/types.h \
+  /usr/include/asm-generic/types.h \
+  /usr/include/asm-generic/int-ll64.h \
+  /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+  /usr/include/asm-generic/bitsperlong.h \
+  /usr/include/linux/posix_types.h \
+  /usr/include/linux/stddef.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+  /usr/include/asm-generic/posix_types.h \
+  /usr/include/x86_64-linux-gnu/sys/shm.h \
+  /usr/include/x86_64-linux-gnu/bits/shm.h \
+  /usr/include/x86_64-linux-gnu/bits/shmlba.h \
+  /usr/include/x86_64-linux-gnu/bits/shm-pad.h \
+  /usr/include/x86_64-linux-gnu/sys/msg.h \
+  /usr/include/x86_64-linux-gnu/bits/msq.h \
+  /usr/include/x86_64-linux-gnu/bits/msq-pad.h \
   /home/TiOCS/src/MultiHash/LinearHash/node.h \
   /home/TiOCS/src/Auxizilary/VariablesTypes.h \
   /home/TiOCS/src/MultiHash/LazySplitHash/LSNode.h \
@@ -6554,9 +7025,9 @@ CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o: /home/TiOCS/src/TNCTree/St
   /home/TiOCS/src/MultiHash/ExtendibleHash/ExHash.h \
   /home/TiOCS/src/Backend/IODisk/WriteDisk.h
 
-CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: /home/TiOCS/src/TNCTree/TNCtree.cpp \
+CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o: /home/TiOCS/src/Ti-OCSSD/TiOCS.cpp \
   /usr/include/stdc-predef.h \
-  /home/TiOCS/src/TNCTree/TNCtree.h \
+  /home/TiOCS/src/Ti-OCSSD/TiOCS.h \
   /usr/include/unistd.h \
   /usr/include/features.h \
   /usr/include/x86_64-linux-gnu/sys/cdefs.h \
@@ -6575,36 +7046,82 @@ CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: /home/TiOCS/src/TNCTree/TNCtree.cpp \
   /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
   /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
   /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
-  /usr/include/x86_64-linux-gnu/sys/types.h \
-  /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
-  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
-  /usr/include/endian.h \
-  /usr/include/x86_64-linux-gnu/bits/endian.h \
-  /usr/include/x86_64-linux-gnu/bits/endianness.h \
-  /usr/include/x86_64-linux-gnu/bits/byteswap.h \
-  /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
-  /usr/include/x86_64-linux-gnu/sys/select.h \
-  /usr/include/x86_64-linux-gnu/bits/select.h \
+  /usr/include/x86_64-linux-gnu/sys/wait.h \
+  /usr/include/signal.h \
+  /usr/include/x86_64-linux-gnu/bits/signum.h \
+  /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
+  /usr/include/x86_64-linux-gnu/bits/endian.h \
+  /usr/include/x86_64-linux-gnu/bits/endianness.h \
+  /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
+  /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
+  /usr/include/x86_64-linux-gnu/bits/sigaction.h \
+  /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
+  /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
+  /usr/include/x86_64-linux-gnu/sys/ucontext.h \
+  /usr/include/x86_64-linux-gnu/bits/sigstack.h \
+  /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
   /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
   /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
   /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
+  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
+  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+  /usr/include/x86_64-linux-gnu/bits/waitflags.h \
+  /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
+  /usr/include/x86_64-linux-gnu/sys/ipc.h \
+  /usr/include/x86_64-linux-gnu/bits/ipctypes.h \
+  /usr/include/x86_64-linux-gnu/bits/ipc.h \
+  /usr/include/x86_64-linux-gnu/bits/ipc-perm.h \
+  /usr/include/x86_64-linux-gnu/sys/prctl.h \
+  /usr/include/linux/prctl.h \
+  /usr/include/linux/types.h \
+  /usr/include/x86_64-linux-gnu/asm/types.h \
+  /usr/include/asm-generic/types.h \
+  /usr/include/asm-generic/int-ll64.h \
+  /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+  /usr/include/asm-generic/bitsperlong.h \
+  /usr/include/linux/posix_types.h \
+  /usr/include/linux/stddef.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+  /usr/include/asm-generic/posix_types.h \
+  /usr/include/x86_64-linux-gnu/sys/shm.h \
+  /usr/include/x86_64-linux-gnu/bits/shm.h \
+  /usr/include/x86_64-linux-gnu/bits/shmlba.h \
+  /usr/include/x86_64-linux-gnu/bits/shm-pad.h \
+  /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
+  /usr/include/x86_64-linux-gnu/sys/msg.h \
+  /usr/include/x86_64-linux-gnu/bits/msq.h \
+  /usr/include/x86_64-linux-gnu/bits/msq-pad.h \
+  /usr/include/x86_64-linux-gnu/sys/types.h \
+  /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
+  /usr/include/endian.h \
+  /usr/include/x86_64-linux-gnu/bits/byteswap.h \
+  /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
+  /usr/include/x86_64-linux-gnu/sys/select.h \
+  /usr/include/x86_64-linux-gnu/bits/select.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
   /usr/include/c++/9/cstdlib \
   /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \
   /usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h \
   /usr/include/x86_64-linux-gnu/c++/9/bits/cpu_defines.h \
   /usr/include/stdlib.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
-  /usr/include/x86_64-linux-gnu/bits/waitflags.h \
-  /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
@@ -6739,52 +7256,6 @@ CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: /home/TiOCS/src/TNCTree/TNCtree.cpp \
   /usr/include/x86_64-linux-gnu/c++/9/bits/basic_file.h \
   /usr/include/x86_64-linux-gnu/c++/9/bits/c++io.h \
   /usr/include/c++/9/bits/fstream.tcc \
-  /usr/include/x86_64-linux-gnu/sys/wait.h \
-  /usr/include/signal.h \
-  /usr/include/x86_64-linux-gnu/bits/signum.h \
-  /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
-  /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
-  /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
-  /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
-  /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
-  /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
-  /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
-  /usr/include/x86_64-linux-gnu/bits/sigaction.h \
-  /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
-  /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
-  /usr/include/x86_64-linux-gnu/sys/ucontext.h \
-  /usr/include/x86_64-linux-gnu/bits/sigstack.h \
-  /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
-  /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
-  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
-  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
-  /usr/include/x86_64-linux-gnu/sys/ipc.h \
-  /usr/include/x86_64-linux-gnu/bits/ipctypes.h \
-  /usr/include/x86_64-linux-gnu/bits/ipc.h \
-  /usr/include/x86_64-linux-gnu/bits/ipc-perm.h \
-  /usr/include/x86_64-linux-gnu/sys/prctl.h \
-  /usr/include/linux/prctl.h \
-  /usr/include/linux/types.h \
-  /usr/include/x86_64-linux-gnu/asm/types.h \
-  /usr/include/asm-generic/types.h \
-  /usr/include/asm-generic/int-ll64.h \
-  /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
-  /usr/include/asm-generic/bitsperlong.h \
-  /usr/include/linux/posix_types.h \
-  /usr/include/linux/stddef.h \
-  /usr/include/x86_64-linux-gnu/asm/posix_types.h \
-  /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
-  /usr/include/asm-generic/posix_types.h \
-  /usr/include/x86_64-linux-gnu/sys/shm.h \
-  /usr/include/x86_64-linux-gnu/bits/shm.h \
-  /usr/include/x86_64-linux-gnu/bits/shmlba.h \
-  /usr/include/x86_64-linux-gnu/bits/shm-pad.h \
-  /usr/include/x86_64-linux-gnu/sys/msg.h \
-  /usr/include/x86_64-linux-gnu/bits/msq.h \
-  /usr/include/x86_64-linux-gnu/bits/msq-pad.h \
   /usr/include/c++/9/vector \
   /usr/include/c++/9/bits/stl_construct.h \
   /usr/include/c++/9/bits/stl_uninitialized.h \
@@ -6801,9 +7272,9 @@ CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: /home/TiOCS/src/TNCTree/TNCtree.cpp \
   /usr/include/c++/9/bits/stl_tempbuf.h \
   /usr/include/c++/9/bits/uniform_int_dist.h \
   /usr/include/c++/9/limits \
-  /home/TiOCS/src/TNCTree/MemoryTier/MemTier.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/MemTier.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/Backend/SSDWrite/writer.h \
   /usr/include/c++/9/unordered_map \
   /usr/include/c++/9/ext/aligned_buffer.h \
@@ -6823,22 +7294,22 @@ CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: /home/TiOCS/src/TNCTree/TNCtree.cpp \
   /usr/include/strings.h \
   /home/liblightnvm/include/liblightnvm_spec.h \
   /usr/include/assert.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/Auxizilary/VariablesTypes.h \
   /home/TiOCS/src/Auxizilary/SysOutput.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/StoreTier/syncstore.h \
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/LRU/lru.h \
   /usr/include/c++/9/list \
   /usr/include/c++/9/bits/stl_list.h \
   /usr/include/c++/9/bits/allocated_ptr.h \
   /usr/include/c++/9/bits/list.tcc \
   /usr/include/c++/9/cassert \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/FIFO/FIFO.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/MultiHash/LinearHash/node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /home/TiOCS/src/MultiHash/LinearHash/LiHash.h \
@@ -6857,12 +7328,12 @@ CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: /home/TiOCS/src/TNCTree/TNCtree.cpp \
   /home/TiOCS/src/MultiHash/ExtendibleHash/ExBucket.h \
   /home/TiOCS/src/MultiHash/ExtendibleHash/ExNode.h \
   /home/TiOCS/src/Backend/IODisk/WriteDisk.h \
-  /home/TiOCS/src/TNCTree/StoreTier/syncstore.h
+  /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h
 
-CMakeFiles/src.dir/TNCTree/utility/types.cpp.o: /home/TiOCS/src/TNCTree/utility/types.cpp \
+CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o: /home/TiOCS/src/Ti-OCSSD/utility/types.cpp \
   /usr/include/stdc-predef.h \
-  /home/TiOCS/src/TNCTree/utility/types.h \
-  /home/TiOCS/src/TNCTree/MemoryTier/Node.h \
+  /home/TiOCS/src/Ti-OCSSD/utility/types.h \
+  /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h \
   /home/TiOCS/src/Auxizilary/GlobalVariable.h \
   /usr/include/c++/9/cstdint \
   /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \
@@ -7282,7 +7753,24 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
   /home/liblightnvm/include/liblightnvm_util.h \
   /home/liblightnvm/include/liblightnvm_spec.h \
   /usr/include/assert.h \
-  /home/TiOCS/src/TNCTree/TNCtree.h \
+  /home/TiOCS/src/Ti-OCSSD/TiOCS.h \
+  /usr/include/x86_64-linux-gnu/sys/prctl.h \
+  /usr/include/linux/prctl.h \
+  /usr/include/linux/types.h \
+  /usr/include/x86_64-linux-gnu/asm/types.h \
+  /usr/include/asm-generic/types.h \
+  /usr/include/asm-generic/int-ll64.h \
+  /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+  /usr/include/asm-generic/bitsperlong.h \
+  /usr/include/linux/posix_types.h \
+  /usr/include/linux/stddef.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+  /usr/include/asm-generic/posix_types.h \
+  /usr/include/x86_64-linux-gnu/sys/shm.h \
+  /usr/include/x86_64-linux-gnu/bits/shm.h \
+  /usr/include/x86_64-linux-gnu/bits/shmlba.h \
+  /usr/include/x86_64-linux-gnu/bits/shm-pad.h \
   /home/TiOCS/src/LSMTree-NoFTL/StorageManager.h \
   /home/TiOCS/src/LSMTree-NoFTL/buffer.h \
   /usr/include/c++/9/set \
@@ -7391,43 +7879,7 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
 
 /home/TiOCS/src/main.cpp:
 
-/usr/include/x86_64-linux-gnu/bits/msq-pad.h:
-
-/usr/include/linux/posix_types.h:
-
-/usr/include/asm-generic/int-ll64.h:
-
-/usr/include/linux/types.h:
-
-/usr/include/linux/prctl.h:
-
-/usr/include/x86_64-linux-gnu/asm/types.h:
-
-/usr/include/x86_64-linux-gnu/sys/ipc.h:
-
-/usr/include/x86_64-linux-gnu/bits/signal_ext.h:
-
-/usr/include/x86_64-linux-gnu/bits/sigthread.h:
-
-/usr/include/x86_64-linux-gnu/sys/ucontext.h:
-
-/usr/include/x86_64-linux-gnu/bits/sigcontext.h:
-
-/usr/include/x86_64-linux-gnu/bits/sigevent-consts.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/siginfo-consts.h:
-
-/usr/include/x86_64-linux-gnu/bits/ss_flags.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/signum.h:
-
-/home/TiOCS/src/TNCTree/TNCtree.cpp:
-
-/usr/include/x86_64-linux-gnu/bits/uio_lim.h:
+/home/TiOCS/src/Ti-OCSSD/utility/types.cpp:
 
 /usr/include/x86_64-linux-gnu/bits/xopen_lim.h:
 
@@ -7439,27 +7891,17 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
 
 /usr/lib/gcc/x86_64-linux-gnu/9/include/limits.h:
 
-/home/TiOCS/src/TNCTree/MemoryTier/Node.cpp:
+/home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.cpp:
+
+/home/TiOCS/src/Ti-OCSSD/MemoryTier/MemTier.cpp:
 
 /home/TiOCS/src/MultiHash/LinearHash/LiHash.cpp:
-
-/usr/include/x86_64-linux-gnu/bits/sigstack.h:
-
-/home/TiOCS/src/TNCTree/StoreTier/syncstore.cpp:
-
-/home/TiOCS/src/MultiHash/Bucket.h:
 
 /home/TiOCS/src/MultiHash/LazySplitHash/LSHash.h:
 
 /home/TiOCS/src/MultiHash/EagerSplitHash/ESHash.cpp:
 
 /home/TiOCS/src/LSMTree-NoFTL/run.cpp:
-
-/usr/include/x86_64-linux-gnu/bits/msq.h:
-
-/usr/include/x86_64-linux-gnu/bits/shm.h:
-
-/home/TiOCS/src/LSMTree-NoFTL/region.cpp:
 
 /home/TiOCS/src/LSMTree-NoFTL/merge.cpp:
 
@@ -7468,6 +7910,8 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
 /home/TiOCS/src/LSMTree-NoFTL/buffer.cpp:
 
 /home/TiOCS/src/LSMTree-NoFTL/allocation.h:
+
+/home/TiOCS/src/LSMTree-NoFTL/allocation.cpp:
 
 /home/TiOCS/src/LSMTree-NoFTL/level.h:
 
@@ -7483,6 +7927,8 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/mman-shared.h:
 
+/home/TiOCS/src/Ti-OCSSD/TiOCS.cpp:
+
 /usr/include/x86_64-linux-gnu/bits/mman-linux.h:
 
 /usr/include/x86_64-linux-gnu/bits/mman-map-flags-generic.h:
@@ -7491,11 +7937,7 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h:
 
-/usr/include/fcntl.h:
-
 /usr/include/x86_64-linux-gnu/bits/iscanonical.h:
-
-/home/TiOCS/src/TNCTree/MemoryTier/MemTier.cpp:
 
 /usr/include/linux/falloc.h:
 
@@ -7517,14 +7959,6 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
 
 /home/TiOCS/src/LSM-Tree/UtilityImplement/level.cpp:
 
-/usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h:
-
-/home/TiOCS/src/LSM-Tree/UtilityImplement/buffer.cpp:
-
-/usr/include/x86_64-linux-gnu/bits/types/stack_t.h:
-
-/home/TiOCS/src/LSM-Tree/UtilityImplement/ResAllocate.cpp:
-
 /home/TiOCS/src/LSM-Tree/UtilityDefine/node2.cpp:
 
 /usr/include/c++/9/map:
@@ -7543,6 +7977,64 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
 
 /home/TiOCS/src/LRU/lru.cpp:
 
+/usr/include/x86_64-linux-gnu/bits/msq-pad.h:
+
+/home/TiOCS/src/LSMTree-NoFTL/region.cpp:
+
+/usr/include/x86_64-linux-gnu/bits/msq.h:
+
+/usr/include/x86_64-linux-gnu/bits/shm.h:
+
+/home/TiOCS/src/MultiHash/LazySplitHash/LSNode.h:
+
+/usr/include/linux/stddef.h:
+
+/usr/include/linux/posix_types.h:
+
+/usr/include/asm-generic/int-ll64.h:
+
+/usr/include/linux/types.h:
+
+/usr/include/linux/prctl.h:
+
+/usr/include/x86_64-linux-gnu/asm/types.h:
+
+/usr/include/x86_64-linux-gnu/sys/ipc.h:
+
+/home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.cpp:
+
+/usr/include/x86_64-linux-gnu/bits/signal_ext.h:
+
+/usr/include/x86_64-linux-gnu/bits/sigthread.h:
+
+/home/TiOCS/src/MultiHash/Bucket.h:
+
+/usr/include/x86_64-linux-gnu/bits/sigstack.h:
+
+/usr/include/x86_64-linux-gnu/sys/ucontext.h:
+
+/home/TiOCS/src/LSM-Tree/UtilityImplement/ResAllocate.cpp:
+
+/usr/include/x86_64-linux-gnu/bits/types/stack_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/sigcontext.h:
+
+/usr/include/x86_64-linux-gnu/bits/sigevent-consts.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h:
+
+/home/TiOCS/src/LSM-Tree/UtilityImplement/buffer.cpp:
+
+/usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h:
+
+/usr/include/x86_64-linux-gnu/bits/siginfo-consts.h:
+
+/usr/include/x86_64-linux-gnu/bits/ss_flags.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/signum.h:
+
 /usr/include/x86_64-linux-gnu/bits/getopt_core.h:
 
 /usr/include/x86_64-linux-gnu/bits/confname.h:
@@ -7551,13 +8043,15 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
 
 /usr/include/unistd.h:
 
-/home/TiOCS/src/TNCTree/TNCtree.h:
+/usr/include/fcntl.h:
 
-/usr/include/linux/stddef.h:
+/home/TiOCS/src/Ti-OCSSD/TiOCS.h:
 
-/home/TiOCS/src/MultiHash/LazySplitHash/LSNode.h:
+/usr/include/x86_64-linux-gnu/bits/uio_lim.h:
 
-/home/TiOCS/src/TNCTree/StoreTier/asyncstore.h:
+/home/TiOCS/src/Ti-OCSSD/utility/types.h:
+
+/home/TiOCS/src/Ti-OCSSD/StoreTier/asyncstore.h:
 
 /home/TiOCS/src/Backend/SSDRead/reader.h:
 
@@ -7631,8 +8125,6 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
 
 /usr/include/c++/9/bits/cpp_type_traits.h:
 
-/usr/include/c++/9/bits/locale_facets.tcc:
-
 /usr/include/c++/9/ext/alloc_traits.h:
 
 /usr/include/x86_64-linux-gnu/bits/floatn.h:
@@ -7683,6 +8175,8 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
 
 /usr/include/limits.h:
 
+/home/TiOCS/src/Ti-OCSSD/MemoryTier/MemTier.h:
+
 /usr/include/c++/9/bits/cxxabi_forced.h:
 
 /usr/include/c++/9/limits:
@@ -7729,8 +8223,6 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
 
-/home/TiOCS/src/TNCTree/utility/types.h:
-
 /usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
@@ -7754,8 +8246,6 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
 /usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h:
-
-/home/TiOCS/src/TNCTree/StoreTier/asyncstore.cpp:
 
 /usr/include/c++/9/ostream:
 
@@ -7796,8 +8286,6 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
 /usr/include/x86_64-linux-gnu/bits/sigaction.h:
 
 /usr/include/x86_64-linux-gnu/c++/9/bits/gthr-default.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/FILE.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
 
@@ -7873,9 +8361,11 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
 
-/usr/include/x86_64-linux-gnu/bits/ipctypes.h:
+/home/TiOCS/src/Ti-OCSSD/StoreTier/asyncstore.cpp:
 
 /usr/include/math.h:
+
+/usr/include/x86_64-linux-gnu/bits/ipctypes.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
 
@@ -7896,8 +8386,6 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
 /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
-
-/home/TiOCS/src/TNCTree/utility/types.cpp:
 
 /usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
 
@@ -7930,6 +8418,10 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
 /usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
 
 /usr/include/x86_64-linux-gnu/bits/timex.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/FILE.h:
+
+/home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.h:
 
 /usr/include/c++/9/ext/type_traits.h:
 
@@ -8115,11 +8607,9 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
 
 /home/TiOCS/src/Auxizilary/VariablesTypes.h:
 
-/home/TiOCS/src/LSMTree-NoFTL/allocation.cpp:
+/usr/include/c++/9/bits/locale_facets.tcc:
 
-/home/TiOCS/src/TNCTree/MemoryTier/Node.h:
-
-/home/TiOCS/src/TNCTree/StoreTier/syncstore.h:
+/home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.h:
 
 /home/TiOCS/src/Backend/IODisk/WriteDisk.cpp:
 
@@ -8166,8 +8656,6 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
 /usr/include/c++/9/bits/stl_multiset.h:
 
 /home/TiOCS/src/LSM-Tree/UtilityDefine/node2.h:
-
-/home/TiOCS/src/TNCTree/MemoryTier/MemTier.h:
 
 /usr/include/x86_64-linux-gnu/bits/math-vector.h:
 

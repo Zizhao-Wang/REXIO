@@ -195,7 +195,20 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
  /usr/include/inttypes.h /usr/include/c++/9/stdlib.h \
  /home/TiOCS/src/../../liblightnvm/include/liblightnvm_util.h \
  /home/TiOCS/src/../../liblightnvm/include/liblightnvm_spec.h \
- /usr/include/assert.h /home/TiOCS/src/TNCTree/TNCtree.h \
+ /usr/include/assert.h /home/TiOCS/src/Ti-OCSSD/TiOCS.h \
+ /usr/include/x86_64-linux-gnu/sys/prctl.h /usr/include/linux/prctl.h \
+ /usr/include/linux/types.h /usr/include/x86_64-linux-gnu/asm/types.h \
+ /usr/include/asm-generic/types.h /usr/include/asm-generic/int-ll64.h \
+ /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+ /usr/include/asm-generic/bitsperlong.h /usr/include/linux/posix_types.h \
+ /usr/include/linux/stddef.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+ /usr/include/asm-generic/posix_types.h \
+ /usr/include/x86_64-linux-gnu/sys/shm.h \
+ /usr/include/x86_64-linux-gnu/bits/shm.h \
+ /usr/include/x86_64-linux-gnu/bits/shmlba.h \
+ /usr/include/x86_64-linux-gnu/bits/shm-pad.h \
  /home/TiOCS/src/LSMTree-NoFTL/StorageManager.h \
  /home/TiOCS/src/LSMTree-NoFTL/buffer.h /usr/include/c++/9/set \
  /usr/include/c++/9/bits/stl_tree.h \

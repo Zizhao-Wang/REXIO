@@ -34,12 +34,12 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/TiOCS/src/MultiHash/ExtendibleHash/ExHash.cpp" "CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o" "gcc" "CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o.d"
   "/home/TiOCS/src/MultiHash/LazySplitHash/LSHash.cpp" "CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o" "gcc" "CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o.d"
   "/home/TiOCS/src/MultiHash/LinearHash/LiHash.cpp" "CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o" "gcc" "CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o.d"
-  "/home/TiOCS/src/TNCTree/MemoryTier/MemTier.cpp" "CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o" "gcc" "CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o.d"
-  "/home/TiOCS/src/TNCTree/MemoryTier/Node.cpp" "CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.o" "gcc" "CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.o.d"
-  "/home/TiOCS/src/TNCTree/StoreTier/asyncstore.cpp" "CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.o" "gcc" "CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.o.d"
-  "/home/TiOCS/src/TNCTree/StoreTier/syncstore.cpp" "CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o" "gcc" "CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o.d"
-  "/home/TiOCS/src/TNCTree/TNCtree.cpp" "CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o" "gcc" "CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o.d"
-  "/home/TiOCS/src/TNCTree/utility/types.cpp" "CMakeFiles/src.dir/TNCTree/utility/types.cpp.o" "gcc" "CMakeFiles/src.dir/TNCTree/utility/types.cpp.o.d"
+  "/home/TiOCS/src/Ti-OCSSD/MemoryTier/MemTier.cpp" "CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.o" "gcc" "CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.o.d"
+  "/home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.cpp" "CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.o" "gcc" "CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.o.d"
+  "/home/TiOCS/src/Ti-OCSSD/StoreTier/asyncstore.cpp" "CMakeFiles/src.dir/Ti-OCSSD/StoreTier/asyncstore.cpp.o" "gcc" "CMakeFiles/src.dir/Ti-OCSSD/StoreTier/asyncstore.cpp.o.d"
+  "/home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.cpp" "CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o" "gcc" "CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o.d"
+  "/home/TiOCS/src/Ti-OCSSD/TiOCS.cpp" "CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o" "gcc" "CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o.d"
+  "/home/TiOCS/src/Ti-OCSSD/utility/types.cpp" "CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o" "gcc" "CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o.d"
   "/home/TiOCS/src/main.cpp" "CMakeFiles/src.dir/main.cpp.o" "gcc" "CMakeFiles/src.dir/main.cpp.o.d"
   )
 

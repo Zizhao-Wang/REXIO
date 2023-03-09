@@ -22,7 +22,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <liblightnvm.h> // other project's .h files
-#include "TNCTree/TNCtree.h"//your project's .h files
+#include "Ti-OCSSD/TiOCS.h"//your project's .h files
 #include "LSMTree-NoFTL/StorageManager.h"
 #include "MultiHash/ExtendibleHash/ExHash.h"
 #include "MultiHash/LazySplitHash/LSHash.h"

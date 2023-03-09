@@ -132,8 +132,8 @@ CMakeFiles/src.dir/FIFO/FIFO.cpp.o: /home/TiOCS/src/FIFO/FIFO.cpp \
  /usr/include/c++/9/bits/erase_if.h /usr/include/c++/9/list \
  /usr/include/c++/9/bits/stl_list.h \
  /usr/include/c++/9/bits/allocated_ptr.h /usr/include/c++/9/bits/list.tcc \
- /home/TiOCS/src/FIFO/../TNCTree/MemoryTier/Node.h \
- /home/TiOCS/src/FIFO/../TNCTree/MemoryTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/FIFO/../Ti-OCSSD/MemoryTier/Node.h \
+ /home/TiOCS/src/FIFO/../Ti-OCSSD/MemoryTier/../../Auxizilary/GlobalVariable.h \
  /usr/include/c++/9/iostream /usr/include/c++/9/ostream \
  /usr/include/c++/9/ios /usr/include/c++/9/bits/ios_base.h \
  /usr/include/c++/9/bits/locale_classes.h \

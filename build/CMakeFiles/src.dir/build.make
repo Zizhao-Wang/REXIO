@@ -83,89 +83,89 @@ CMakeFiles/src.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/TiOCS/src/main.cpp -o CMakeFiles/src.dir/main.cpp.s
 
-CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: CMakeFiles/src.dir/flags.make
-CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: /home/TiOCS/src/TNCTree/TNCtree.cpp
-CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o -MF CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o.d -o CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o -c /home/TiOCS/src/TNCTree/TNCtree.cpp
+CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o: CMakeFiles/src.dir/flags.make
+CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o: /home/TiOCS/src/Ti-OCSSD/TiOCS.cpp
+CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o -MF CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o.d -o CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o -c /home/TiOCS/src/Ti-OCSSD/TiOCS.cpp
 
-CMakeFiles/src.dir/TNCTree/TNCtree.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/TNCTree/TNCtree.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/TiOCS/src/TNCTree/TNCtree.cpp > CMakeFiles/src.dir/TNCTree/TNCtree.cpp.i
+CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/TiOCS/src/Ti-OCSSD/TiOCS.cpp > CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.i
 
-CMakeFiles/src.dir/TNCTree/TNCtree.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/TNCTree/TNCtree.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/TiOCS/src/TNCTree/TNCtree.cpp -o CMakeFiles/src.dir/TNCTree/TNCtree.cpp.s
+CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/TiOCS/src/Ti-OCSSD/TiOCS.cpp -o CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.s
 
-CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o: CMakeFiles/src.dir/flags.make
-CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o: /home/TiOCS/src/TNCTree/MemoryTier/MemTier.cpp
-CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o -MF CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o.d -o CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o -c /home/TiOCS/src/TNCTree/MemoryTier/MemTier.cpp
+CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.o: CMakeFiles/src.dir/flags.make
+CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.o: /home/TiOCS/src/Ti-OCSSD/MemoryTier/MemTier.cpp
+CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.o -MF CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.o.d -o CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.o -c /home/TiOCS/src/Ti-OCSSD/MemoryTier/MemTier.cpp
 
-CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/TiOCS/src/TNCTree/MemoryTier/MemTier.cpp > CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.i
+CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/TiOCS/src/Ti-OCSSD/MemoryTier/MemTier.cpp > CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.i
 
-CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/TiOCS/src/TNCTree/MemoryTier/MemTier.cpp -o CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.s
+CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/TiOCS/src/Ti-OCSSD/MemoryTier/MemTier.cpp -o CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.s
 
-CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.o: CMakeFiles/src.dir/flags.make
-CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.o: /home/TiOCS/src/TNCTree/MemoryTier/Node.cpp
-CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.o -MF CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.o.d -o CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.o -c /home/TiOCS/src/TNCTree/MemoryTier/Node.cpp
+CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.o: CMakeFiles/src.dir/flags.make
+CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.o: /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.cpp
+CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.o -MF CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.o.d -o CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.o -c /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.cpp
 
-CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/TiOCS/src/TNCTree/MemoryTier/Node.cpp > CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.i
+CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.cpp > CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.i
 
-CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/TiOCS/src/TNCTree/MemoryTier/Node.cpp -o CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.s
+CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.cpp -o CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.s
 
-CMakeFiles/src.dir/TNCTree/utility/types.cpp.o: CMakeFiles/src.dir/flags.make
-CMakeFiles/src.dir/TNCTree/utility/types.cpp.o: /home/TiOCS/src/TNCTree/utility/types.cpp
-CMakeFiles/src.dir/TNCTree/utility/types.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/src.dir/TNCTree/utility/types.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/TNCTree/utility/types.cpp.o -MF CMakeFiles/src.dir/TNCTree/utility/types.cpp.o.d -o CMakeFiles/src.dir/TNCTree/utility/types.cpp.o -c /home/TiOCS/src/TNCTree/utility/types.cpp
+CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o: CMakeFiles/src.dir/flags.make
+CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o: /home/TiOCS/src/Ti-OCSSD/utility/types.cpp
+CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o -MF CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o.d -o CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o -c /home/TiOCS/src/Ti-OCSSD/utility/types.cpp
 
-CMakeFiles/src.dir/TNCTree/utility/types.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/TNCTree/utility/types.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/TiOCS/src/TNCTree/utility/types.cpp > CMakeFiles/src.dir/TNCTree/utility/types.cpp.i
+CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/TiOCS/src/Ti-OCSSD/utility/types.cpp > CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.i
 
-CMakeFiles/src.dir/TNCTree/utility/types.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/TNCTree/utility/types.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/TiOCS/src/TNCTree/utility/types.cpp -o CMakeFiles/src.dir/TNCTree/utility/types.cpp.s
+CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/TiOCS/src/Ti-OCSSD/utility/types.cpp -o CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.s
 
-CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.o: CMakeFiles/src.dir/flags.make
-CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.o: /home/TiOCS/src/TNCTree/StoreTier/asyncstore.cpp
-CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.o -MF CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.o.d -o CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.o -c /home/TiOCS/src/TNCTree/StoreTier/asyncstore.cpp
+CMakeFiles/src.dir/Ti-OCSSD/StoreTier/asyncstore.cpp.o: CMakeFiles/src.dir/flags.make
+CMakeFiles/src.dir/Ti-OCSSD/StoreTier/asyncstore.cpp.o: /home/TiOCS/src/Ti-OCSSD/StoreTier/asyncstore.cpp
+CMakeFiles/src.dir/Ti-OCSSD/StoreTier/asyncstore.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/src.dir/Ti-OCSSD/StoreTier/asyncstore.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/Ti-OCSSD/StoreTier/asyncstore.cpp.o -MF CMakeFiles/src.dir/Ti-OCSSD/StoreTier/asyncstore.cpp.o.d -o CMakeFiles/src.dir/Ti-OCSSD/StoreTier/asyncstore.cpp.o -c /home/TiOCS/src/Ti-OCSSD/StoreTier/asyncstore.cpp
 
-CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/TiOCS/src/TNCTree/StoreTier/asyncstore.cpp > CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.i
+CMakeFiles/src.dir/Ti-OCSSD/StoreTier/asyncstore.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/Ti-OCSSD/StoreTier/asyncstore.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/TiOCS/src/Ti-OCSSD/StoreTier/asyncstore.cpp > CMakeFiles/src.dir/Ti-OCSSD/StoreTier/asyncstore.cpp.i
 
-CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/TiOCS/src/TNCTree/StoreTier/asyncstore.cpp -o CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.s
+CMakeFiles/src.dir/Ti-OCSSD/StoreTier/asyncstore.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/Ti-OCSSD/StoreTier/asyncstore.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/TiOCS/src/Ti-OCSSD/StoreTier/asyncstore.cpp -o CMakeFiles/src.dir/Ti-OCSSD/StoreTier/asyncstore.cpp.s
 
-CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o: CMakeFiles/src.dir/flags.make
-CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o: /home/TiOCS/src/TNCTree/StoreTier/syncstore.cpp
-CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o -MF CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o.d -o CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o -c /home/TiOCS/src/TNCTree/StoreTier/syncstore.cpp
+CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o: CMakeFiles/src.dir/flags.make
+CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o: /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.cpp
+CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o: CMakeFiles/src.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/TiOCS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o -MF CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o.d -o CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o -c /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.cpp
 
-CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/TiOCS/src/TNCTree/StoreTier/syncstore.cpp > CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.i
+CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.cpp > CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.i
 
-CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/TiOCS/src/TNCTree/StoreTier/syncstore.cpp -o CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.s
+CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.cpp -o CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.s
 
 CMakeFiles/src.dir/LRU/lru.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/LRU/lru.cpp.o: /home/TiOCS/src/LRU/lru.cpp
@@ -534,12 +534,12 @@ CMakeFiles/src.dir/FIFO/FIFO.cpp.s: cmake_force
 # Object files for target src
 src_OBJECTS = \
 "CMakeFiles/src.dir/main.cpp.o" \
-"CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o" \
-"CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o" \
-"CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.o" \
-"CMakeFiles/src.dir/TNCTree/utility/types.cpp.o" \
-"CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.o" \
-"CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o" \
+"CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o" \
+"CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.o" \
+"CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.o" \
+"CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o" \
+"CMakeFiles/src.dir/Ti-OCSSD/StoreTier/asyncstore.cpp.o" \
+"CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o" \
 "CMakeFiles/src.dir/LRU/lru.cpp.o" \
 "CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o" \
 "CMakeFiles/src.dir/Backend/BlockManage/BlockInfo.cpp.o" \
@@ -571,12 +571,12 @@ src_OBJECTS = \
 src_EXTERNAL_OBJECTS =
 
 src: CMakeFiles/src.dir/main.cpp.o
-src: CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o
-src: CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o
-src: CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.o
-src: CMakeFiles/src.dir/TNCTree/utility/types.cpp.o
-src: CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.o
-src: CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o
+src: CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o
+src: CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.o
+src: CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.o
+src: CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o
+src: CMakeFiles/src.dir/Ti-OCSSD/StoreTier/asyncstore.cpp.o
+src: CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o
 src: CMakeFiles/src.dir/LRU/lru.cpp.o
 src: CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o
 src: CMakeFiles/src.dir/Backend/BlockManage/BlockInfo.cpp.o

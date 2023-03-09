@@ -50,7 +50,7 @@ public:
     int SetFencePointers(std::vector<KEY_t>);
     void Reset();
     void Reset(bool flag);
-    int SetMaxkey(KEY_t);
+    void SetMaxkey(KEY_t);
     void Unbind();
     int DataClear(std::vector<entry_t> );
     unsigned long GetNowSize();

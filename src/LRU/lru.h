@@ -15,7 +15,7 @@
 #include <unordered_map>
 #include <list>
 #include <cassert>
-#include "../TNCTree/MemoryTier/Node.h"
+#include "../Ti-OCSSD/MemoryTier/Node.h"
 
 
 typedef struct ReadNode

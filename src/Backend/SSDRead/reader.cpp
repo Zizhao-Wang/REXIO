@@ -2,7 +2,7 @@
 #include "../IODisk/WriteDisk.h"
 #include "../../MultiHash/LinearHash/LiHash.h"
 #include "../../LSM-Tree/LsmTree.h"
-#include "../../TNCTree/TNCtree.h"
+
 
 int SinglePageRead(uint64_t pageno)
 {

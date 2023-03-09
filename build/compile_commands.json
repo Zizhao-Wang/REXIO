@@ -6,33 +6,33 @@
 },
 {
   "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/c++  -I/home/TiOCS/src/../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o -c /home/TiOCS/src/TNCTree/TNCtree.cpp",
-  "file": "/home/TiOCS/src/TNCTree/TNCtree.cpp"
+  "command": "/usr/bin/c++  -I/home/TiOCS/src/../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o -c /home/TiOCS/src/Ti-OCSSD/TiOCS.cpp",
+  "file": "/home/TiOCS/src/Ti-OCSSD/TiOCS.cpp"
 },
 {
   "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/c++  -I/home/TiOCS/src/../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o -c /home/TiOCS/src/TNCTree/MemoryTier/MemTier.cpp",
-  "file": "/home/TiOCS/src/TNCTree/MemoryTier/MemTier.cpp"
+  "command": "/usr/bin/c++  -I/home/TiOCS/src/../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.o -c /home/TiOCS/src/Ti-OCSSD/MemoryTier/MemTier.cpp",
+  "file": "/home/TiOCS/src/Ti-OCSSD/MemoryTier/MemTier.cpp"
 },
 {
   "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/c++  -I/home/TiOCS/src/../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.o -c /home/TiOCS/src/TNCTree/MemoryTier/Node.cpp",
-  "file": "/home/TiOCS/src/TNCTree/MemoryTier/Node.cpp"
+  "command": "/usr/bin/c++  -I/home/TiOCS/src/../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.o -c /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.cpp",
+  "file": "/home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.cpp"
 },
 {
   "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/c++  -I/home/TiOCS/src/../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/TNCTree/utility/types.cpp.o -c /home/TiOCS/src/TNCTree/utility/types.cpp",
-  "file": "/home/TiOCS/src/TNCTree/utility/types.cpp"
+  "command": "/usr/bin/c++  -I/home/TiOCS/src/../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o -c /home/TiOCS/src/Ti-OCSSD/utility/types.cpp",
+  "file": "/home/TiOCS/src/Ti-OCSSD/utility/types.cpp"
 },
 {
   "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/c++  -I/home/TiOCS/src/../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.o -c /home/TiOCS/src/TNCTree/StoreTier/asyncstore.cpp",
-  "file": "/home/TiOCS/src/TNCTree/StoreTier/asyncstore.cpp"
+  "command": "/usr/bin/c++  -I/home/TiOCS/src/../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/StoreTier/asyncstore.cpp.o -c /home/TiOCS/src/Ti-OCSSD/StoreTier/asyncstore.cpp",
+  "file": "/home/TiOCS/src/Ti-OCSSD/StoreTier/asyncstore.cpp"
 },
 {
   "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/c++  -I/home/TiOCS/src/../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o -c /home/TiOCS/src/TNCTree/StoreTier/syncstore.cpp",
-  "file": "/home/TiOCS/src/TNCTree/StoreTier/syncstore.cpp"
+  "command": "/usr/bin/c++  -I/home/TiOCS/src/../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o -c /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.cpp",
+  "file": "/home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.cpp"
 },
 {
   "directory": "/home/TiOCS/build",

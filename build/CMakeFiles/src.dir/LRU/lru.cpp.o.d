@@ -136,8 +136,8 @@ CMakeFiles/src.dir/LRU/lru.cpp.o: /home/TiOCS/src/LRU/lru.cpp \
  /usr/include/c++/9/bits/stl_list.h \
  /usr/include/c++/9/bits/allocated_ptr.h /usr/include/c++/9/bits/list.tcc \
  /usr/include/c++/9/cassert /usr/include/assert.h \
- /home/TiOCS/src/LRU/../TNCTree/MemoryTier/Node.h \
- /home/TiOCS/src/LRU/../TNCTree/MemoryTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/LRU/../Ti-OCSSD/MemoryTier/Node.h \
+ /home/TiOCS/src/LRU/../Ti-OCSSD/MemoryTier/../../Auxizilary/GlobalVariable.h \
  /usr/include/c++/9/iostream /usr/include/c++/9/ostream \
  /usr/include/c++/9/ios /usr/include/c++/9/bits/ios_base.h \
  /usr/include/c++/9/bits/locale_classes.h \

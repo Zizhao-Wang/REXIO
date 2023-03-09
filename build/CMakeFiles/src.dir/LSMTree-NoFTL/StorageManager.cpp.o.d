@@ -185,20 +185,20 @@ CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.o: \
  /usr/include/c++/9/bits/fstream.tcc /usr/include/c++/9/map \
  /usr/include/c++/9/bits/stl_map.h /usr/include/c++/9/bits/stl_multimap.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/writer.h \
- /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../TNCTree/MemoryTier/Node.h \
- /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../TNCTree/MemoryTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/Node.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/../../Auxizilary/GlobalVariable.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Auxizilary/VariablesTypes.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../TNCTree/StoreTier/syncstore.h \
- /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../TNCTree/StoreTier/../MemoryTier/Node.h \
- /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../TNCTree/StoreTier/../../LRU/lru.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Ti-OCSSD/StoreTier/syncstore.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../MemoryTier/Node.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../../LRU/lru.h \
  /usr/include/c++/9/list /usr/include/c++/9/bits/stl_list.h \
  /usr/include/c++/9/bits/allocated_ptr.h /usr/include/c++/9/bits/list.tcc \
- /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../TNCTree/StoreTier/../../LRU/../TNCTree/MemoryTier/Node.h \
- /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../TNCTree/StoreTier/../../FIFO/FIFO.h \
- /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../TNCTree/StoreTier/../../FIFO/../TNCTree/MemoryTier/Node.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../../LRU/../Ti-OCSSD/MemoryTier/Node.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../../FIFO/FIFO.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../../FIFO/../Ti-OCSSD/MemoryTier/Node.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../MultiHash/LinearHash/LiHash.h \

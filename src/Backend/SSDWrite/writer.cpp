@@ -18,7 +18,7 @@
 #include "../IODisk/WriteDisk.h"
 #include "../../Auxizilary/GlobalVariable.h"
 #include "../../LSM-Tree/LsmTree.h"
-#include "../../TNCTree/TNCtree.h"
+#include "../../Ti-OCSSD/TiOCS.h"
 #include "../SSDRead/reader.h"
 
 

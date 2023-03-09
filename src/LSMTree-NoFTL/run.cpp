@@ -286,7 +286,7 @@ void NoFTLRun::Reset(bool flag)
     MinKey = UINT64_MAX;
 }
 
-int NoFTLRun::SetMaxkey(KEY_t key)
+void NoFTLRun::SetMaxkey(KEY_t key)
 {
     MaxKey = max(MaxKey,key);
 }

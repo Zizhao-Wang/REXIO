@@ -11,9 +11,15 @@
 #ifndef TIOCS_BACKEND_VARIABLES_H
 #define TIOCS_BACKEND_VARIABLES_H
 
+#include <unordered_map>
+#include <vector>
+
 extern int writes;
 extern int reads;
 extern int erases;
+
+
+extern std::unordered_map<uint64_t,std::vector<uint64_t>> chunk_usage;
 
 
 

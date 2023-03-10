@@ -9,11 +9,13 @@
 #include <cmath>
 #include "../Backend/IODisk/WriteDisk.h"
 #include "../Backend/SSDWrite/writer.h"
+#include "../Backend/SSDWrite/parallel_writer.h"
 #include "../Backend/SSDRead/reader.h"
 
-NoFTLRun::NoFTLRun(unsigned long maxsize)
+NoFTLRun::NoFTLRun(unsigned long maxsize, uint32_t lun_num)
 {
     this->MaxSize = maxsize;
+    this->lun_num = lun_num;
     for(int i=0;i<this->MaxSize/CalculatePageCapacity(sizeof(entry_t));i++) //Initialize all page pointers as UINT64_MAX
     {
         PagePointers.emplace_back(UINT64_MAX);
@@ -39,7 +41,7 @@ int NoFTLRun::RunDataWrite(void)
     
     if(Rundata.size() == pagesize)
     {
-        Pointer = SinglePageWrite(Rundata,PagePointers[(Size/pagesize)-1]);
+        Pointer = parallel_coordinator(Rundata,lun_num);
         //printf("The %lu Page: %lu, Size: %lu\n",(Size/pagesize)-1,Pointer,Size);
         //printf("Datum of Run in Level write succeed!\n");
         PagePointers[(Size/pagesize)-1] = Pointer;
@@ -103,8 +105,6 @@ void NoFTLRun::PutValue(entry_t entry)
     MaxKey = max(entry.key,MaxKey);
     MinKey = min(entry.key,MinKey);
     Size++;
-   
-    //a.emplace_back(entry.key);
     
     if(Rundata.size() == CalculatePageCapacity(sizeof(entry_t)) && Size != 0)
     {

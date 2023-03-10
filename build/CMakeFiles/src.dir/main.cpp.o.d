@@ -215,7 +215,7 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
  /usr/include/c++/9/ext/aligned_buffer.h \
  /usr/include/c++/9/bits/stl_set.h /usr/include/c++/9/bits/stl_multiset.h \
  /usr/include/c++/9/bits/erase_if.h \
- /home/TiOCS/src/LSMTree-NoFTL/../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Auxizilary/pre_definition.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/WriteDisk.h \
  /usr/include/c++/9/unordered_map /usr/include/c++/9/bits/hashtable.h \
  /usr/include/c++/9/bits/hashtable_policy.h /usr/include/c++/9/tuple \
@@ -225,7 +225,7 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../BlockManage/BlockInfo.h \
  /home/TiOCS/src/../../liblightnvm/include/liblightnvm_cli.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../../Auxizilary/SysOutput.h \
  /usr/include/c++/9/algorithm /usr/include/c++/9/bits/stl_algo.h \
  /usr/include/c++/9/bits/algorithmfwd.h \
@@ -257,7 +257,7 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
  /home/TiOCS/src/Auxizilary/Logo.h /home/TiOCS/src/LSM-Tree/LsmTree.h \
  /home/TiOCS/src/LSM-Tree/UtilityDefine/buffer.h \
- /home/TiOCS/src/LSM-Tree/UtilityDefine/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/LSM-Tree/UtilityDefine/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/LSM-Tree/UtilityDefine/../../Backend/IODisk/WriteDisk.h \
  /home/TiOCS/src/LSM-Tree/UtilityDefine/node2.h \
  /home/TiOCS/src/LSM-Tree/UtilityDefine/level.h \
@@ -282,7 +282,8 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
  /usr/include/c++/9/bits/unique_lock.h \
  /usr/include/c++/9/condition_variable /usr/include/c++/9/future \
  /usr/include/c++/9/bits/atomic_futex.h \
- /home/TiOCS/src/LSM-Tree/../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/LSM-Tree/../Auxizilary/pre_definition.h \
  /home/TiOCS/src/LSM-Tree/../Auxizilary/SysOutput.h \
  /home/TiOCS/src/LSM-Tree/UtilityDefine/merge.h \
- /home/TiOCS/src/LSM-Tree/UtilityDefine/run.h
+ /home/TiOCS/src/LSM-Tree/UtilityDefine/run.h \
+ /home/TiOCS/src/global_variables/global_variables.h

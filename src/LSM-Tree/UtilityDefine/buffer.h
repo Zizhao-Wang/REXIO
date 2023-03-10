@@ -18,7 +18,7 @@
 
 #include <set>
 #include <vector>
-#include "../../Auxizilary/VariablesTypes.h"
+#include "../../Auxizilary/pre_definition.h"
 #include "../../Backend/IODisk/WriteDisk.h"
 #include "node2.h"
 

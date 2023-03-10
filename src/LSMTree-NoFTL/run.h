@@ -19,7 +19,7 @@
 
 #include <vector>
 #include <queue>
-#include "../Auxizilary/VariablesTypes.h"
+#include "../Auxizilary/pre_definition.h"
 #include "../Backend/IODisk/WriteDisk.h"
 #include "../Auxizilary/SysOutput.h"
 
@@ -29,12 +29,13 @@ class NoFTLRun
 private:
     uint64_t Size, MaxSize;
     uint64_t MaxKey, MinKey;
+    uint32_t lun_num;
     std::vector<PageType> PagePointers;
     std::vector<entry_t> Rundata;
     std::vector<KEY_t> FencePointers;
     
 public:
-    NoFTLRun(uint64_t);
+    NoFTLRun(uint64_t, uint32_t);
     int  RunDataWrite();
     void PointersDisplay();
     void PutValue(entry_t entry);

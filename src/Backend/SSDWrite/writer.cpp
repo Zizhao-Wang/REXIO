@@ -21,6 +21,7 @@
 #include "../../Ti-OCSSD/TiOCS.h"
 #include "../SSDRead/reader.h"
 #include "../backend_variables.h"
+#include "../../global_variables/global_variables.h"
 
 
 std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkLog;

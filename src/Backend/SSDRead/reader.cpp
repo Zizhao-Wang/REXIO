@@ -3,6 +3,7 @@
 #include "../backend_variables.h"
 #include "../../MultiHash/LinearHash/LiHash.h"
 #include "../../LSM-Tree/LsmTree.h"
+#include "../../global_variables/global_variables.h"
 
 
 int SinglePageRead(uint64_t pageno)

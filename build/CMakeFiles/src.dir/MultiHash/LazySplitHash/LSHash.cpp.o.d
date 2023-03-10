@@ -168,7 +168,7 @@ CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o: \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/IODisk/../BlockManage/BlockInfo.h \
  /home/TiOCS/src/../../liblightnvm/include/liblightnvm_cli.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/IODisk/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
  /usr/include/c++/9/cmath /usr/include/math.h \
@@ -247,7 +247,7 @@ CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/msq-pad.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/LazySplitHash/LSNode.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExNode.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \

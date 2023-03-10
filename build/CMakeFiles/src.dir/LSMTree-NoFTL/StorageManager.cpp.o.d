@@ -50,7 +50,7 @@ CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.o: \
  /usr/include/c++/9/ext/aligned_buffer.h \
  /usr/include/c++/9/bits/stl_set.h /usr/include/c++/9/bits/stl_multiset.h \
  /usr/include/c++/9/bits/erase_if.h \
- /home/TiOCS/src/LSMTree-NoFTL/../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Auxizilary/pre_definition.h \
  /usr/include/c++/9/iostream /usr/include/c++/9/ostream \
  /usr/include/c++/9/ios /usr/include/c++/9/iosfwd \
  /usr/include/c++/9/bits/stringfwd.h /usr/include/c++/9/bits/postypes.h \
@@ -164,7 +164,7 @@ CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.o: \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../BlockManage/BlockInfo.h \
  /home/TiOCS/src/../../liblightnvm/include/liblightnvm_cli.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../../Auxizilary/SysOutput.h \
  /usr/include/c++/9/algorithm /usr/include/c++/9/bits/stl_algo.h \
  /usr/include/c++/9/bits/algorithmfwd.h \
@@ -187,7 +187,7 @@ CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.o: \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/writer.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/Node.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Ti-OCSSD/StoreTier/syncstore.h \

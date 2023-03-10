@@ -18,21 +18,23 @@
 
 #include <vector>
 #include <queue>
-#include "../Auxizilary/VariablesTypes.h"
+#include "../Auxizilary/pre_definition.h"
 #include "../Backend/IODisk/WriteDisk.h"
 #include "../Auxizilary/SysOutput.h"
 #include "run.h"
 
 class NoFTLKVLevel 
 {
+
 private:
-    int  MaxRuns;
-    long MaxRunSize;
-    long LevelNumber;
+    uint32_t lun_number;
+    uint32_t max_runs;
+    uint32_t MaxRunSize;
+    uint32_t LevelNumber;
 
 public:
     std::vector<NoFTLRun> Runs;
-    NoFTLKVLevel(uint64_t);
+    NoFTLKVLevel(uint64_t,uint32_t);
     void PutValue(entry_t entry1);
     VAL_t* GetValue(KEY_t key);
     void PutEntries(std::vector<entry_t>);
@@ -40,6 +42,7 @@ public:
     bool IsFull (void);
     long GetMRunSize(void) const;
     long GetLevelNumber(void) const;
+
 
 };
 

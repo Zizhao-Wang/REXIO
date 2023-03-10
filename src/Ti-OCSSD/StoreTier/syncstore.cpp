@@ -2,6 +2,7 @@
 #include "../../Backend/SSDWrite/writer.h"
 #include "../../Backend/SSDRead/reader.h"
 #include "../../Backend/IODisk/WriteDisk.h"
+#include "../../global_variables/global_variables.h"
 
 int indexs=0;
 uint32_t offset = 0;

@@ -33,8 +33,8 @@ add_executable(src main.cpp
 				Backend/IODisk/WriteDisk.h Backend/BackendMain.h Backend/IODisk/WriteDisk.cpp  
 				Backend/BlockManage/BlockInfo.cpp Backend/BlockManage/BlockInfo.h
 				Backend/SSDWrite/writer.h Backend/SSDWrite/writer.cpp Backend/SSDRead/reader.h Backend/SSDRead/reader.cpp
-				Backend/backend_variables.h Backend/backend_variables.cpp
-				Auxizilary/GlobalVariable.h Auxizilary/VariablesTypes.h Auxizilary/SysOutput.h AuxizilaryImplement/SysOutput.cpp 
+				Backend/backend_variables.h Backend/backend_variables.cpp Backend/SSDWrite/parallel_writer.h Backend/SSDWrite/parallel_writer.cpp
+				Auxizilary/GlobalVariable.h Auxizilary/pre_definition.h Auxizilary/SysOutput.h AuxizilaryImplement/SysOutput.cpp 
 				MultiHash/ExtendibleHash/ExHash.h MultiHash/ExtendibleHash/ExHash.cpp MultiHash/LinearHash/LiHash.h
 				MultiHash/ExtendibleHash/ExNode.h MultiHash/ExtendibleHash/ExBucket.h MultiHash/ExtendibleHash/ExBucket.cpp
 				MultiHash/LinearHash/LiHash.cpp MultiHash/Bucket.h MultiHash/LazySplitHash/LSHash.h MultiHash/LazySplitHash/LSHash.cpp

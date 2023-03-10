@@ -18,7 +18,7 @@
 
 #include <vector>
 #include <queue>
-#include "../../Auxizilary/VariablesTypes.h"
+#include "../../Auxizilary/pre_definition.h"
 #include "../../Backend/IODisk/WriteDisk.h"
 #include "../../Auxizilary/SysOutput.h"
 #include "run.h"

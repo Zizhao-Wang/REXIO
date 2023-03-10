@@ -160,7 +160,7 @@ CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o: \
  /usr/include/c++/9/bits/basic_ios.tcc \
  /usr/include/c++/9/bits/ostream.tcc /usr/include/c++/9/istream \
  /usr/include/c++/9/bits/istream.tcc \
- /home/TiOCS/src/Backend/IODisk/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/Backend/IODisk/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/Backend/IODisk/../../Auxizilary/SysOutput.h \
  /usr/include/c++/9/algorithm /usr/include/c++/9/bits/stl_algo.h \
  /usr/include/c++/9/bits/algorithmfwd.h \
@@ -171,7 +171,7 @@ CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o: \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/writer.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Ti-OCSSD/MemoryTier/Node.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Ti-OCSSD/MemoryTier/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Auxizilary/GlobalVariable.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Ti-OCSSD/StoreTier/syncstore.h \
@@ -199,7 +199,7 @@ CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o: \
  /home/TiOCS/src/Backend/IODisk/../../LSM-Tree/UtilityDefine/buffer.h \
  /usr/include/c++/9/set /usr/include/c++/9/bits/stl_tree.h \
  /usr/include/c++/9/bits/stl_set.h /usr/include/c++/9/bits/stl_multiset.h \
- /home/TiOCS/src/Backend/IODisk/../../LSM-Tree/UtilityDefine/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/Backend/IODisk/../../LSM-Tree/UtilityDefine/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/Backend/IODisk/../../LSM-Tree/UtilityDefine/../../Backend/IODisk/WriteDisk.h \
  /home/TiOCS/src/Backend/IODisk/../../LSM-Tree/UtilityDefine/node2.h \
  /home/TiOCS/src/Backend/IODisk/../../LSM-Tree/UtilityDefine/level.h \
@@ -228,7 +228,8 @@ CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o: \
  /usr/include/c++/9/bits/unique_lock.h \
  /usr/include/c++/9/condition_variable /usr/include/c++/9/future \
  /usr/include/c++/9/bits/atomic_futex.h \
- /home/TiOCS/src/Backend/IODisk/../../LSM-Tree/../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/Backend/IODisk/../../LSM-Tree/../Auxizilary/pre_definition.h \
  /home/TiOCS/src/Backend/IODisk/../../LSM-Tree/../Auxizilary/SysOutput.h \
  /home/TiOCS/src/Backend/IODisk/../../LSM-Tree/UtilityDefine/merge.h \
- /home/TiOCS/src/Backend/IODisk/../../LSM-Tree/UtilityDefine/run.h
+ /home/TiOCS/src/Backend/IODisk/../../LSM-Tree/UtilityDefine/run.h \
+ /home/TiOCS/src/Backend/IODisk/../../global_variables/global_variables.h

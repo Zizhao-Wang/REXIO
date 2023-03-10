@@ -153,7 +153,7 @@ CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o: \
  /usr/include/c++/9/bits/stl_bvector.h /usr/include/c++/9/bits/vector.tcc \
  /home/TiOCS/src/LSM-Tree/UtilityDefine/buffer.h /usr/include/c++/9/set \
  /usr/include/c++/9/bits/stl_set.h /usr/include/c++/9/bits/stl_multiset.h \
- /home/TiOCS/src/LSM-Tree/UtilityDefine/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/LSM-Tree/UtilityDefine/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/LSM-Tree/UtilityDefine/../../Backend/IODisk/WriteDisk.h \
  /usr/include/c++/9/unordered_map /usr/include/c++/9/bits/hashtable.h \
  /usr/include/c++/9/bits/hashtable_policy.h /usr/include/c++/9/limits \
@@ -166,7 +166,7 @@ CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o: \
  /home/TiOCS/src/LSM-Tree/UtilityDefine/../../Backend/IODisk/../BlockManage/BlockInfo.h \
  /home/TiOCS/src/../../liblightnvm/include/liblightnvm_cli.h \
  /home/TiOCS/src/LSM-Tree/UtilityDefine/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/LSM-Tree/UtilityDefine/../../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/LSM-Tree/UtilityDefine/../../Backend/IODisk/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/LSM-Tree/UtilityDefine/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
  /usr/include/c++/9/algorithm /usr/include/c++/9/bits/stl_algo.h \
  /usr/include/c++/9/bits/algorithmfwd.h \
@@ -200,14 +200,14 @@ CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o: \
  /usr/include/c++/9/bits/unique_lock.h \
  /usr/include/c++/9/condition_variable /usr/include/c++/9/future \
  /usr/include/c++/9/bits/atomic_futex.h \
- /home/TiOCS/src/LSM-Tree/../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/LSM-Tree/../Auxizilary/pre_definition.h \
  /home/TiOCS/src/LSM-Tree/../Auxizilary/SysOutput.h \
  /home/TiOCS/src/LSM-Tree/UtilityDefine/merge.h \
  /home/TiOCS/src/LSM-Tree/UtilityDefine/run.h \
  /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/writer.h \
  /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/Node.h \
  /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
  /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../Ti-OCSSD/StoreTier/syncstore.h \

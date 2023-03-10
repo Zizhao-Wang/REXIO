@@ -19,7 +19,8 @@ extern int reads;
 extern int erases;
 
 
-extern std::unordered_map<uint64_t,std::vector<uint64_t>> chunk_usage;
+extern std::unordered_map<uint64_t,uint64_t> chunk_usage;
+
 
 
 

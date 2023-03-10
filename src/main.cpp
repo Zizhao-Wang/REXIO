@@ -29,6 +29,7 @@
 #include "MultiHash/LinearHash/LiHash.h"
 #include "Auxizilary/Logo.h"
 #include "LSM-Tree/LsmTree.h"
+#include "global_variables/global_variables.h"
 
 /* Define some global variables. */
 struct nvm_bp* bp = nullptr;
@@ -39,17 +40,19 @@ int GlobalInitialize(int argc, char **argv)
 
     /* Initialize device information */
     bp = nvm_bp_init_from_args(argc,argv);
-    const char * process_Name = "Main of TiOCS";
-
     if(!bp)
     {
         return -1;
     }
+    printf("nchunks:%lu tsectr:%lu \n ",bp->naddrs,bp->geo->l.nchunk);
+    exit(0);
     /* Initialize chunk information. */
     for(size_t i=0;i<250;i++)
     {
         chunkusage[i] = 0;
     }
+
+    const char * process_Name = "Main of TiOCS";
     prctl(PR_SET_NAME, reinterpret_cast<unsigned long>(process_Name),0,0,0);
 
     printf(UCAS_SIAT);
@@ -76,8 +79,9 @@ int GlobalInitialize(int argc, char **argv)
 	}
     printf("nchunks:%lu tsectr:%lu \n ",bp->naddrs,bp->naddrs*bp->geo->l.nsectr);
     printf("geo nblocks:%lu nchannels:%lu nluns:%lu npages:%lu nplanes:%lu nsectors:%lu\n ",geo->nblocks,geo->nchannels,geo->nluns,geo->npages,geo->nplanes,geo->nsectors); */
+
 }
-#define MAX_MSG_SIZE 1024
+
 int main(int argc, char **argv)
 {
     /* initialize some global variables and SSD components initialization. */ 
@@ -94,7 +98,7 @@ int main(int argc, char **argv)
 
     //   TiOCSInit();
 
-    // NoFTLKVInit();
+    NoFTLKVInit();
 
     // LHashPort();
 

@@ -160,7 +160,7 @@ CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o: \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/IODisk/../BlockManage/BlockInfo.h \
  /home/TiOCS/src/../../liblightnvm/include/liblightnvm_cli.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/IODisk/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
  /usr/include/c++/9/algorithm /usr/include/c++/9/bits/stl_algo.h \
  /usr/include/c++/9/bits/algorithmfwd.h \
@@ -237,7 +237,7 @@ CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/msq-pad.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../MultiHash/LazySplitHash/LSNode.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExNode.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExHash.h

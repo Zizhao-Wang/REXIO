@@ -217,7 +217,7 @@ CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o: \
  /home/TiOCS/src/../../liblightnvm/include/liblightnvm_spec.h \
  /usr/include/assert.h \
  /home/TiOCS/src/Ti-OCSSD/../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/Node.h \
- /home/TiOCS/src/Ti-OCSSD/../Backend/SSDWrite/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/Ti-OCSSD/../Backend/SSDWrite/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/Ti-OCSSD/../Backend/SSDWrite/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/Ti-OCSSD/../Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
  /home/TiOCS/src/Ti-OCSSD/../Backend/SSDWrite/../../Ti-OCSSD/StoreTier/syncstore.h \
@@ -238,7 +238,7 @@ CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o: \
  /home/TiOCS/src/Ti-OCSSD/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../BlockManage/BlockInfo.h \
  /home/TiOCS/src/../../liblightnvm/include/liblightnvm_cli.h \
  /home/TiOCS/src/Ti-OCSSD/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/Ti-OCSSD/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/Ti-OCSSD/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/Ti-OCSSD/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/Ti-OCSSD/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
  /home/TiOCS/src/Ti-OCSSD/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \

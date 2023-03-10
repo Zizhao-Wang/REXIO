@@ -165,7 +165,7 @@ CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExBucket.cpp.o: \
  /usr/include/assert.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/Node.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../Ti-OCSSD/StoreTier/syncstore.h \
@@ -186,7 +186,7 @@ CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExBucket.cpp.o: \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../BlockManage/BlockInfo.h \
  /home/TiOCS/src/../../liblightnvm/include/liblightnvm_cli.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
@@ -249,7 +249,7 @@ CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExBucket.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/msq.h \
  /usr/include/x86_64-linux-gnu/bits/msq-pad.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../MultiHash/LinearHash/node.h \
- /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../MultiHash/LazySplitHash/LSNode.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExNode.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExHash.h

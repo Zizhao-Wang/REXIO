@@ -145,7 +145,7 @@ CMakeFiles/src.dir/LSMTree-NoFTL/buffer.cpp.o: \
  /usr/include/c++/9/bits/stl_uninitialized.h \
  /usr/include/c++/9/bits/stl_vector.h \
  /usr/include/c++/9/bits/stl_bvector.h /usr/include/c++/9/bits/vector.tcc \
- /home/TiOCS/src/LSMTree-NoFTL/../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Auxizilary/pre_definition.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/WriteDisk.h \
  /usr/include/c++/9/unordered_map /usr/include/c++/9/bits/hashtable.h \
  /usr/include/c++/9/bits/hashtable_policy.h /usr/include/c++/9/tuple \
@@ -162,7 +162,7 @@ CMakeFiles/src.dir/LSMTree-NoFTL/buffer.cpp.o: \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../BlockManage/BlockInfo.h \
  /home/TiOCS/src/../../liblightnvm/include/liblightnvm_cli.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../../Auxizilary/SysOutput.h \
  /usr/include/c++/9/algorithm /usr/include/c++/9/bits/stl_algo.h \
  /usr/include/c++/9/bits/algorithmfwd.h \

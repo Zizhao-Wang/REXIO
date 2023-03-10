@@ -22,7 +22,7 @@
 #include "../../Ti-OCSSD/utility/types.h"
 #include "../../Ti-OCSSD/TiOCS.h"
 #include "../../MultiHash/LinearHash/node.h"
-#include "../../Auxizilary/VariablesTypes.h"
+#include "../../Auxizilary/pre_definition.h"
 #include "../../MultiHash/LazySplitHash/LSNode.h"
 #include "../../MultiHash/ExtendibleHash/ExNode.h"
 #include "../../MultiHash/ExtendibleHash/ExHash.h"

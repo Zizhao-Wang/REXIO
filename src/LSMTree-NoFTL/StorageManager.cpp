@@ -20,9 +20,9 @@
 LSMTreeNoFTL::LSMTreeNoFTL(size_t BufferSize,int levelnum):
         buffer(BufferSize)
 {
-    for(int i=0;i<levelnum;i++)
+    for(uint32_t i=0;i<levelnum;i++)
     {
-        NoFTLKVLevel temp(buffer.GetMaxSize());
+        NoFTLKVLevel temp(buffer.GetMaxSize(),i);
         Levels.emplace_back(temp);
     }
 }
@@ -408,10 +408,11 @@ void NoFTLKVInit(void)
         }
         noftlkv.PutValue(i,i);
     }
-    //Lsmtree.display();
     printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
     endTime = clock();
     std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+
+    //Lsmtree.display();
     //GPTDisplay();
     
 

@@ -66,6 +66,11 @@
 },
 {
   "directory": "/home/TiOCS/build",
+  "command": "/usr/bin/c++  -I/home/TiOCS/src/../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Backend/SSDWrite/parallel_writer.cpp.o -c /home/TiOCS/src/Backend/SSDWrite/parallel_writer.cpp",
+  "file": "/home/TiOCS/src/Backend/SSDWrite/parallel_writer.cpp"
+},
+{
+  "directory": "/home/TiOCS/build",
   "command": "/usr/bin/c++  -I/home/TiOCS/src/../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o -c /home/TiOCS/src/AuxizilaryImplement/SysOutput.cpp",
   "file": "/home/TiOCS/src/AuxizilaryImplement/SysOutput.cpp"
 },

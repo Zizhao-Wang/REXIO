@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/TiOCS/src/Backend/BlockManage/BlockInfo.cpp" "CMakeFiles/src.dir/Backend/BlockManage/BlockInfo.cpp.o" "gcc" "CMakeFiles/src.dir/Backend/BlockManage/BlockInfo.cpp.o.d"
   "/home/TiOCS/src/Backend/IODisk/WriteDisk.cpp" "CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o" "gcc" "CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o.d"
   "/home/TiOCS/src/Backend/SSDRead/reader.cpp" "CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o" "gcc" "CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o.d"
+  "/home/TiOCS/src/Backend/SSDWrite/parallel_writer.cpp" "CMakeFiles/src.dir/Backend/SSDWrite/parallel_writer.cpp.o" "gcc" "CMakeFiles/src.dir/Backend/SSDWrite/parallel_writer.cpp.o.d"
   "/home/TiOCS/src/Backend/SSDWrite/writer.cpp" "CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o" "gcc" "CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o.d"
   "/home/TiOCS/src/Backend/backend_variables.cpp" "CMakeFiles/src.dir/Backend/backend_variables.cpp.o" "gcc" "CMakeFiles/src.dir/Backend/backend_variables.cpp.o.d"
   "/home/TiOCS/src/FIFO/FIFO.cpp" "CMakeFiles/src.dir/FIFO/FIFO.cpp.o" "gcc" "CMakeFiles/src.dir/FIFO/FIFO.cpp.o.d"

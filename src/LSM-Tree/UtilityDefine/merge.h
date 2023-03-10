@@ -14,7 +14,7 @@
 #include <functional> // C++
 #include <vector>
 #include <queue>      // Library file
-#include "../../Auxizilary/VariablesTypes.h" //header files in this project
+#include "../../Auxizilary/pre_definition.h" //header files in this project
 
  
 typedef struct MergeEntry

@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o.d"
   "CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o"
   "CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o.d"
+  "CMakeFiles/src.dir/Backend/SSDWrite/parallel_writer.cpp.o"
+  "CMakeFiles/src.dir/Backend/SSDWrite/parallel_writer.cpp.o.d"
   "CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o"
   "CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o.d"
   "CMakeFiles/src.dir/Backend/backend_variables.cpp.o"

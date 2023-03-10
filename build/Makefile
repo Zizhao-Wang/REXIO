@@ -225,6 +225,30 @@ Backend/SSDRead/reader.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.s
 .PHONY : Backend/SSDRead/reader.cpp.s
 
+Backend/SSDWrite/parallel_writer.o: Backend/SSDWrite/parallel_writer.cpp.o
+.PHONY : Backend/SSDWrite/parallel_writer.o
+
+# target to build an object file
+Backend/SSDWrite/parallel_writer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/SSDWrite/parallel_writer.cpp.o
+.PHONY : Backend/SSDWrite/parallel_writer.cpp.o
+
+Backend/SSDWrite/parallel_writer.i: Backend/SSDWrite/parallel_writer.cpp.i
+.PHONY : Backend/SSDWrite/parallel_writer.i
+
+# target to preprocess a source file
+Backend/SSDWrite/parallel_writer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/SSDWrite/parallel_writer.cpp.i
+.PHONY : Backend/SSDWrite/parallel_writer.cpp.i
+
+Backend/SSDWrite/parallel_writer.s: Backend/SSDWrite/parallel_writer.cpp.s
+.PHONY : Backend/SSDWrite/parallel_writer.s
+
+# target to generate assembly for a file
+Backend/SSDWrite/parallel_writer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/SSDWrite/parallel_writer.cpp.s
+.PHONY : Backend/SSDWrite/parallel_writer.cpp.s
+
 Backend/SSDWrite/writer.o: Backend/SSDWrite/writer.cpp.o
 .PHONY : Backend/SSDWrite/writer.o
 
@@ -966,6 +990,9 @@ help:
 	@echo "... Backend/SSDRead/reader.o"
 	@echo "... Backend/SSDRead/reader.i"
 	@echo "... Backend/SSDRead/reader.s"
+	@echo "... Backend/SSDWrite/parallel_writer.o"
+	@echo "... Backend/SSDWrite/parallel_writer.i"
+	@echo "... Backend/SSDWrite/parallel_writer.s"
 	@echo "... Backend/SSDWrite/writer.o"
 	@echo "... Backend/SSDWrite/writer.i"
 	@echo "... Backend/SSDWrite/writer.s"

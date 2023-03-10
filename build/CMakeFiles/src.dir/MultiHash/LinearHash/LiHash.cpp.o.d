@@ -161,7 +161,7 @@ CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o: \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/IODisk/../BlockManage/BlockInfo.h \
  /home/TiOCS/src/../../liblightnvm/include/liblightnvm_cli.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
  /usr/include/c++/9/algorithm /usr/include/c++/9/bits/stl_algo.h \
  /usr/include/c++/9/bits/algorithmfwd.h \
@@ -233,7 +233,7 @@ CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/msq.h \
  /usr/include/x86_64-linux-gnu/bits/msq-pad.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/LinearHash/node.h \
- /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/LazySplitHash/LSNode.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExNode.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
@@ -243,7 +243,7 @@ CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o: \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExNode.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/writer.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/Node.h \
- /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../Auxizilary/VariablesTypes.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../Ti-OCSSD/StoreTier/syncstore.h \

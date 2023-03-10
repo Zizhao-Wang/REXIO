@@ -1,5 +1,6 @@
 #include <pthread.h>
 #include "parallelwriter.h"
+#include "../../AuxizilaryFile/GlobalVariable.h"
 
 
 
@@ -7,67 +8,37 @@
 
 
 
-
-
-int parallel_write_into_pu()
+/*   */
+int parallel_write_into_pu(PageType page_num)
 {
 
-}
+    /* Function flag, default value equals 0(successful flag). */
+    int err = 0;
 
-
-
-int async_ex12_horz(struct nvm_bp *bp)
-{
-	struct nvm_async_ctx *ctx;
-	int depth = 0;
-	size_t diff;
-	int err = 0;
-
-
-	/* step 1: Allocate async context */
-	ctx = nvm_async_init(bp->dev,depth, 0);
-	if (!ctx) {
-		perror("Asynchoronous context allocation failed!");
-		return -1;
-	}
-
-	/* step 2: write data asynchronously */
-	printf("Writing data asynchronously...\n");
-	err = async_write_horz(ctx, bp);
-
-
-
-
-
+    if(page_num == UINT64_MAX )
+    {
+        LSMTreeWritePhysicalPage++;
+        page_num = DataPagePointer;
+        struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, page_num);
+        size_t ws_min = nvm_dev_get_ws_min(bp->dev);
+        struct nvm_addr addrs[ws_min];
+        for (size_t aidx = 0; aidx < ws_min; ++aidx) 
+        {
+            addrs[aidx].val = addrs_chunk.val;
+            addrs[aidx].l.sectr = (page_num%4096)+aidx;
+            /* printf("aidx: %lu addrs: %lu")*/
+        }
+    }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /**
- * ============= LSM-tree module ===============
+ * ============= NoFTL-KV module ===============
  *  Function declartion for writing data into one or more pages:
  **/
 
-
-
-
-
-
-
-uint64_t SinglePageWrite(std::vector<entry_t> Entries, uint64_t pageno)
+uint64_t lun_parallel_write(uint64_t num_lun)
 {
 
 	

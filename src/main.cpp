@@ -30,10 +30,12 @@
 #include "Auxizilary/Logo.h"
 #include "LSM-Tree/LsmTree.h"
 #include "global_variables/global_variables.h"
+#include "Backend/backend_variables.h"
 
 /* Define some global variables. */
 struct nvm_bp* bp = nullptr;
 std::unordered_map<uint64_t,uint64_t> chunkusage;
+
 
 int GlobalInitialize(int argc, char **argv)
 {
@@ -44,13 +46,16 @@ int GlobalInitialize(int argc, char **argv)
     {
         return -1;
     }
-    printf("nchunks:%lu tsectr:%lu \n ",bp->naddrs,bp->geo->l.nchunk);
-    exit(0);
+
     /* Initialize chunk information. */
     for(size_t i=0;i<250;i++)
     {
         chunkusage[i] = 0;
     }
+
+    ws_min = nvm_dev_get_ws_min(bp->dev);
+
+    
 
     const char * process_Name = "Main of TiOCS";
     prctl(PR_SET_NAME, reinterpret_cast<unsigned long>(process_Name),0,0,0);

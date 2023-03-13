@@ -47,14 +47,15 @@ int GlobalInitialize(int argc, char **argv)
         return -1;
     }
 
-    /* Initialize chunk information. */
+    /* Initialize global variables */
+
     for(size_t i=0;i<250;i++)
     {
         chunkusage[i] = 0;
     }
-
     ws_min = nvm_dev_get_ws_min(bp->dev);
-
+    // std::ifstream ifs('/proc/sys/kernel/threads-max');
+    // ifs >> max_os_threads;
     
 
     const char * process_Name = "Main of TiOCS";

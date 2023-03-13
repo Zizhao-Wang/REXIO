@@ -24,6 +24,8 @@ extern size_t ws_min;
 extern std::unordered_map<uint64_t,uint64_t> chunk_usage;
 
 
+extern int max_os_threads;
+
 
 
 #endif //TIOCS_BACKEND_VARIABLES_H

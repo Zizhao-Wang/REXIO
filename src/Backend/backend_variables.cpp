@@ -13,5 +13,9 @@ std::unordered_map<uint64_t,uint64_t> chunk_usage;
 
 
 
-/* global variable for nvm_cmd_read/write/erase */
+/* global variables for nvm_cmd_read/write/erase */
 size_t ws_min = 4;  // set 4 by default
+
+
+/* global variables for asynchronous writing/read */
+int max_os_threads = 0;  // set 8 by default

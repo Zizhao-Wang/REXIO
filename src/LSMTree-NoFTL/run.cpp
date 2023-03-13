@@ -38,8 +38,8 @@ int NoFTLRun::RunDataWrite(void)
 
     uint64_t pagesize = CalculatePageCapacity(sizeof(entry_t));
     PageType Pointer;
-    
-    if(Rundata.size() == pagesize)
+    printf("Size of Rundata:%lu\n",Rundata.size());
+    if(Rundata.size() % pagesize == 0)
     {
         Pointer = parallel_coordinator(Rundata,lun_num);
         //printf("The %lu Page: %lu, Size: %lu\n",(Size/pagesize)-1,Pointer,Size);
@@ -106,9 +106,8 @@ void NoFTLRun::PutValue(entry_t entry)
     MinKey = min(entry.key,MinKey);
     Size++;
     
-    if(Rundata.size() == CalculatePageCapacity(sizeof(entry_t)) && Size != 0)
+    if(Size == MaxSize)
     {
-        //a.emplace_back(entry.key);
         FencePointers.emplace_back(entry.key);
         int err = RunDataWrite();
         if(err==0)

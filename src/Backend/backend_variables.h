@@ -18,6 +18,8 @@ extern int writes;
 extern int reads;
 extern int erases;
 
+extern size_t ws_min;
+
 
 extern std::unordered_map<uint64_t,uint64_t> chunk_usage;
 

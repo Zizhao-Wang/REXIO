@@ -171,6 +171,7 @@ CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o: \
  /usr/include/c++/9/bits/stl_tempbuf.h \
  /usr/include/c++/9/bits/uniform_int_dist.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../UtilityDefine/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/LSM-Tree/UtilityImplement/../UtilityDefine/../../Backend/IODisk/../../Backend/backend_variables.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../UtilityDefine/../../Auxizilary/SysOutput.h \
  /usr/include/c++/9/cassert /usr/include/fcntl.h \
  /usr/include/x86_64-linux-gnu/bits/fcntl.h \
@@ -190,7 +191,7 @@ CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o: \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/IODisk/WriteDisk.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDWrite/writer.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/Node.h \
- /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/../../Backend/backend_variables.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDWrite/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDWrite/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
@@ -205,20 +206,23 @@ CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.o: \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../../FIFO/../Ti-OCSSD/MemoryTier/Node.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/backend_variables.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDWrite/../../MultiHash/LinearHash/LiHash.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Backend/backend_variables.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExHash.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExBucket.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
+ /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDWrite/../backend_variables.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDRead/reader.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDRead/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/syncstore.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/asyncstore.h \
- /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../Backend/backend_variables.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDRead/../../Ti-OCSSD/utility/types.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDRead/../../Ti-OCSSD/utility/../MemoryTier/Node.h \
  /home/TiOCS/src/LSM-Tree/UtilityImplement/../../Backend/SSDRead/../../Ti-OCSSD/TiOCS.h \

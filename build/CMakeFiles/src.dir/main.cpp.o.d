@@ -231,6 +231,7 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
  /usr/include/c++/9/bits/algorithmfwd.h \
  /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../../Backend/backend_variables.h \
  /home/TiOCS/src/LSMTree-NoFTL/level.h /usr/include/c++/9/queue \
  /usr/include/c++/9/deque /usr/include/c++/9/bits/stl_deque.h \
  /usr/include/c++/9/bits/deque.tcc /usr/include/c++/9/bits/stl_queue.h \
@@ -244,9 +245,11 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
  /home/TiOCS/src/MultiHash/ExtendibleHash/ExBucket.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/ExNode.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/backend_variables.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/LSHash.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../Bucket.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/backend_variables.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Auxizilary/GlobalVariable.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/LSNode.h \
@@ -254,6 +257,7 @@ CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
  /home/TiOCS/src/MultiHash/LinearHash/LiHash.h \
  /home/TiOCS/src/MultiHash/LinearHash/node.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/backend_variables.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
  /home/TiOCS/src/Auxizilary/Logo.h /home/TiOCS/src/LSM-Tree/LsmTree.h \
  /home/TiOCS/src/LSM-Tree/UtilityDefine/buffer.h \

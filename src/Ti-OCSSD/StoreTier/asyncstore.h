@@ -14,7 +14,7 @@
 
 #include <stdint.h>
 #include <iostream>
-#include "../../Auxizilary/GlobalVariable.h"
+#include "../../Backend/backend_variables.h"
 
 
 int CreateMultiProcess();

@@ -11,7 +11,7 @@
 #ifndef EXPERIMENT1_HASHBLOCK_H
 #define EXPERIMENT1_HASHBLOCK_H
 
-#include "../../Auxizilary/GlobalVariable.h"
+#include "../../Backend/backend_variables.h"
 
 #define LOCAL_HASH_SIZE  sizeof (LocalHashNode)
 #define GLOBAL_HASH_SIZE sizeof (GlobalHashNode)

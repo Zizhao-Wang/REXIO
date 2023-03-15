@@ -12,6 +12,7 @@
 #define EXPERIMENT1_LINEARHASH_NODE_H
 
 #include "../../Auxizilary/GlobalVariable.h"
+#include "../../Backend/backend_variables.h"
 
 
 typedef struct LHEntry

@@ -143,7 +143,7 @@ CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o: \
  /usr/include/c++/9/bits/stl_bvector.h /usr/include/c++/9/bits/vector.tcc \
  /home/TiOCS/src/MultiHash/LinearHash/node.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/backend_variables.h \
  /usr/include/c++/9/unordered_map /usr/include/c++/9/ext/aligned_buffer.h \
  /usr/include/c++/9/bits/hashtable.h \
  /usr/include/c++/9/bits/hashtable_policy.h /usr/include/c++/9/tuple \
@@ -152,6 +152,7 @@ CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o: \
  /usr/include/c++/9/bits/invoke.h /usr/include/c++/9/limits \
  /usr/include/c++/9/bits/unordered_map.h \
  /usr/include/c++/9/bits/erase_if.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
  /home/TiOCS/src/../../liblightnvm/include/liblightnvm.h \
  /usr/include/inttypes.h /usr/include/c++/9/stdlib.h \
  /home/TiOCS/src/../../liblightnvm/include/liblightnvm_util.h \
@@ -168,12 +169,13 @@ CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o: \
  /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
  /usr/include/c++/9/bits/uniform_int_dist.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/IODisk/../../Backend/backend_variables.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/reader.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/syncstore.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../Auxizilary/GlobalVariable.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../MemoryTier/Node.h \
- /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../MemoryTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../MemoryTier/../../Backend/backend_variables.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../LRU/lru.h \
  /usr/include/c++/9/list /usr/include/c++/9/bits/stl_list.h \
  /usr/include/c++/9/bits/allocated_ptr.h /usr/include/c++/9/bits/list.tcc \
@@ -182,6 +184,7 @@ CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o: \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../FIFO/FIFO.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../FIFO/../Ti-OCSSD/MemoryTier/Node.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/asyncstore.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../Backend/backend_variables.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/utility/types.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/utility/../MemoryTier/Node.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/TiOCS.h \
@@ -237,6 +240,7 @@ CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o: \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/LazySplitHash/LSNode.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExNode.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/backend_variables.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExHash.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExBucket.h \
@@ -250,4 +254,5 @@ CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o: \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../MultiHash/LinearHash/LiHash.h \
  /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
- /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExHash.h
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExHash.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/../backend_variables.h

@@ -144,21 +144,23 @@ CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o: \
  /usr/include/c++/9/bits/stl_bvector.h /usr/include/c++/9/bits/vector.tcc \
  /home/TiOCS/src/MultiHash/LazySplitHash/../Bucket.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/MultiHash/LazySplitHash/../../Auxizilary/GlobalVariable.h \
- /home/TiOCS/src/MultiHash/LazySplitHash/../../Auxizilary/SysOutput.h \
- /usr/include/c++/9/algorithm /usr/include/c++/9/utility \
- /usr/include/c++/9/bits/stl_relops.h /usr/include/c++/9/bits/stl_algo.h \
- /usr/include/c++/9/bits/algorithmfwd.h \
- /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
- /usr/include/c++/9/bits/uniform_int_dist.h /usr/include/c++/9/limits \
- /home/TiOCS/src/MultiHash/LazySplitHash/LSNode.h \
- /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/IODisk/WriteDisk.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/backend_variables.h \
  /usr/include/c++/9/unordered_map /usr/include/c++/9/ext/aligned_buffer.h \
  /usr/include/c++/9/bits/hashtable.h \
  /usr/include/c++/9/bits/hashtable_policy.h /usr/include/c++/9/tuple \
+ /usr/include/c++/9/utility /usr/include/c++/9/bits/stl_relops.h \
  /usr/include/c++/9/array /usr/include/c++/9/bits/uses_allocator.h \
- /usr/include/c++/9/bits/invoke.h /usr/include/c++/9/bits/unordered_map.h \
+ /usr/include/c++/9/bits/invoke.h /usr/include/c++/9/limits \
+ /usr/include/c++/9/bits/unordered_map.h \
  /usr/include/c++/9/bits/erase_if.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Auxizilary/SysOutput.h \
+ /usr/include/c++/9/algorithm /usr/include/c++/9/bits/stl_algo.h \
+ /usr/include/c++/9/bits/algorithmfwd.h \
+ /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
+ /usr/include/c++/9/bits/uniform_int_dist.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/LSNode.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/IODisk/WriteDisk.h \
  /home/TiOCS/src/../../liblightnvm/include/liblightnvm.h \
  /usr/include/inttypes.h /usr/include/c++/9/stdlib.h \
  /home/TiOCS/src/../../liblightnvm/include/liblightnvm_util.h \
@@ -171,6 +173,7 @@ CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o: \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/IODisk/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/IODisk/../../Backend/backend_variables.h \
  /usr/include/c++/9/cmath /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
@@ -186,7 +189,7 @@ CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o: \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/syncstore.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../Auxizilary/GlobalVariable.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../MemoryTier/Node.h \
- /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../MemoryTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../MemoryTier/../../Backend/backend_variables.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../LRU/lru.h \
  /usr/include/c++/9/list /usr/include/c++/9/bits/stl_list.h \
  /usr/include/c++/9/bits/allocated_ptr.h /usr/include/c++/9/bits/list.tcc \
@@ -195,6 +198,7 @@ CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o: \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../FIFO/FIFO.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../FIFO/../Ti-OCSSD/MemoryTier/Node.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/asyncstore.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../Backend/backend_variables.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../Ti-OCSSD/utility/types.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../Ti-OCSSD/utility/../MemoryTier/Node.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../Ti-OCSSD/TiOCS.h \
@@ -247,10 +251,12 @@ CMakeFiles/src.dir/MultiHash/LazySplitHash/LSHash.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/msq-pad.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/LinearHash/../../Backend/backend_variables.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/LazySplitHash/LSNode.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExNode.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/backend_variables.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExHash.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
  /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExBucket.h \

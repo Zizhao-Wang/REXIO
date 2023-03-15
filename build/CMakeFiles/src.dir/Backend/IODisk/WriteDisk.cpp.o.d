@@ -167,10 +167,11 @@ CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o: \
  /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
  /usr/include/c++/9/bits/uniform_int_dist.h \
  /home/TiOCS/src/Backend/IODisk/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/IODisk/../../Backend/backend_variables.h \
  /home/TiOCS/src/Backend/IODisk/../BackendMain.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/writer.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Ti-OCSSD/MemoryTier/Node.h \
- /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Ti-OCSSD/MemoryTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Ti-OCSSD/MemoryTier/../../Backend/backend_variables.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Auxizilary/GlobalVariable.h \
@@ -186,15 +187,18 @@ CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o: \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../Ti-OCSSD/StoreTier/../../FIFO/../Ti-OCSSD/MemoryTier/Node.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../MultiHash/LinearHash/../../Backend/backend_variables.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../MultiHash/LinearHash/LiHash.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../MultiHash/ExtendibleHash/../../Backend/backend_variables.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../MultiHash/ExtendibleHash/ExHash.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../MultiHash/ExtendibleHash/ExBucket.h \
  /home/TiOCS/src/Backend/IODisk/../SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
+ /home/TiOCS/src/Backend/IODisk/../SSDWrite/../backend_variables.h \
  /home/TiOCS/src/Backend/IODisk/../../LSM-Tree/LsmTree.h \
  /home/TiOCS/src/Backend/IODisk/../../LSM-Tree/UtilityDefine/buffer.h \
  /usr/include/c++/9/set /usr/include/c++/9/bits/stl_tree.h \
@@ -232,4 +236,5 @@ CMakeFiles/src.dir/Backend/IODisk/WriteDisk.cpp.o: \
  /home/TiOCS/src/Backend/IODisk/../../LSM-Tree/../Auxizilary/SysOutput.h \
  /home/TiOCS/src/Backend/IODisk/../../LSM-Tree/UtilityDefine/merge.h \
  /home/TiOCS/src/Backend/IODisk/../../LSM-Tree/UtilityDefine/run.h \
- /home/TiOCS/src/Backend/IODisk/../../global_variables/global_variables.h
+ /home/TiOCS/src/Backend/IODisk/../../global_variables/global_variables.h \
+ /home/TiOCS/src/Backend/IODisk/../backend_variables.h

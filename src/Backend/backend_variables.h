@@ -14,6 +14,7 @@
 #include <unordered_map>
 #include <vector>
 
+
 extern int writes;
 extern int reads;
 extern int erases;
@@ -24,8 +25,35 @@ extern size_t ws_min;
 extern std::unordered_map<uint64_t,uint64_t> chunk_usage;
 
 
+/* global variables for SSD geometery */
+typedef uint64_t SKey;
+typedef uint64_t SValue;
+
+#define DELETEVALUE UINT64_MAX
+
+typedef struct SEntry
+{
+	SKey key1;
+	SValue val;
+}SEntry;
+
+
+/**
+ *  
+ **/
+typedef uint64_t PageType;
+typedef uint64_t BlockType;
+
+
+
+
 extern int max_os_threads;
 
+struct thread_param
+{
+	char* buffer;
+	PageType page_num;
+};
 
 
 #endif //TIOCS_BACKEND_VARIABLES_H

@@ -173,6 +173,7 @@ CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o: \
  /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
  /usr/include/c++/9/bits/uniform_int_dist.h \
  /home/TiOCS/src/LSM-Tree/UtilityDefine/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/LSM-Tree/UtilityDefine/../../Backend/IODisk/../../Backend/backend_variables.h \
  /home/TiOCS/src/LSM-Tree/UtilityDefine/node2.h \
  /home/TiOCS/src/LSM-Tree/UtilityDefine/level.h /usr/include/c++/9/queue \
  /usr/include/c++/9/deque /usr/include/c++/9/bits/stl_deque.h \
@@ -206,7 +207,7 @@ CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o: \
  /home/TiOCS/src/LSM-Tree/UtilityDefine/run.h \
  /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/writer.h \
  /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/Node.h \
- /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/../../Backend/backend_variables.h \
  /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
@@ -221,12 +222,15 @@ CMakeFiles/src.dir/LSM-Tree/LsmTree.cpp.o: \
  /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../../FIFO/../Ti-OCSSD/MemoryTier/Node.h \
  /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/backend_variables.h \
  /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../MultiHash/LinearHash/LiHash.h \
  /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
  /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
  /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Backend/backend_variables.h \
  /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExHash.h \
  /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
  /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExBucket.h \
- /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h
+ /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
+ /home/TiOCS/src/LSM-Tree/../Backend/SSDWrite/../backend_variables.h

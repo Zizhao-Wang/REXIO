@@ -152,7 +152,7 @@ CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o: \
  /usr/include/c++/9/bits/stl_bvector.h /usr/include/c++/9/bits/vector.tcc \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Auxizilary/GlobalVariable.h \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../MemoryTier/Node.h \
- /home/TiOCS/src/Ti-OCSSD/StoreTier/../MemoryTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Ti-OCSSD/StoreTier/../MemoryTier/../../Backend/backend_variables.h \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../LRU/lru.h \
  /usr/include/c++/9/list /usr/include/c++/9/bits/stl_list.h \
  /usr/include/c++/9/bits/allocated_ptr.h /usr/include/c++/9/bits/list.tcc \
@@ -177,6 +177,7 @@ CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o: \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDWrite/../../Ti-OCSSD/StoreTier/syncstore.h \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/backend_variables.h \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDWrite/../../MultiHash/LinearHash/LiHash.h \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
@@ -186,17 +187,20 @@ CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o: \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Backend/backend_variables.h \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Backend/backend_variables.h \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExHash.h \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExBucket.h \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
+ /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDWrite/../backend_variables.h \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDRead/reader.h \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDRead/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/syncstore.h \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/asyncstore.h \
- /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../Backend/backend_variables.h \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDRead/../../Ti-OCSSD/utility/types.h \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDRead/../../Ti-OCSSD/utility/../MemoryTier/Node.h \
  /home/TiOCS/src/Ti-OCSSD/StoreTier/../../Backend/SSDRead/../../Ti-OCSSD/TiOCS.h \

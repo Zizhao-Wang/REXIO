@@ -10,9 +10,12 @@
 
 
 /*   */
-void parallel_write_into_pu(char* buffer, PageType page_num)
+void* parallel_write_into_pu(void *args)
 {
 
+    struct thread_param *arg = (struct thread_param *)args;
+    char *buffer = arg->buffer;
+    uint64_t page_num = arg->page_num;
     int err = 0;
 
     if(page_num != UINT64_MAX )
@@ -47,9 +50,11 @@ uint64_t parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_lun)
 
     /* create thread pool for asynchornous write */
     const nvm_geo *geo = nvm_dev_get_geo(bp->dev);
+    size_t pu_num = (num_lun-1) * (geo->l.nchunk*geo->l.nsectr);
     pthread_t thread_id[geo->l.nchunk];
     size_t page_size = ws_min * geo->sector_nbytes;
     char **buffer = new char*[geo->l.nchunk];
+
 
     for (size_t i = 0; i < geo->l.nchunk; i++)
     {
@@ -60,11 +65,14 @@ uint64_t parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_lun)
         }
     }
     
+    
 
     for (int i = 0; i < geo->l.nchunk; i++)
     {
-        
-        pthread_create(&thread_id[i], NULL, parallel_write_into_pu, (void *)run_data);
+        struct thread_param args;
+        args.buffer = buffer[i];
+        args.page_num = pu_num + i*geo->l.nsectr;
+        pthread_create(&thread_id[i], NULL, parallel_write_into_pu, &(args));
     }
     
 

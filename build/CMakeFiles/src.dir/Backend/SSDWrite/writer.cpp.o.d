@@ -140,7 +140,8 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: \
  /home/TiOCS/src/../../liblightnvm/include/liblightnvm_spec.h \
  /usr/include/assert.h \
  /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/Node.h \
- /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/../../Backend/backend_variables.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Auxizilary/pre_definition.h \
  /usr/include/c++/9/iostream /usr/include/c++/9/ostream \
  /usr/include/c++/9/ios /usr/include/c++/9/bits/ios_base.h \
  /usr/include/c++/9/bits/locale_classes.h \
@@ -158,7 +159,6 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: \
  /usr/include/c++/9/bits/basic_ios.tcc \
  /usr/include/c++/9/bits/ostream.tcc /usr/include/c++/9/istream \
  /usr/include/c++/9/bits/istream.tcc \
- /home/TiOCS/src/Backend/SSDWrite/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/Backend/SSDWrite/../../Auxizilary/SysOutput.h \
  /usr/include/c++/9/algorithm /usr/include/c++/9/bits/stl_algo.h \
  /usr/include/c++/9/bits/algorithmfwd.h \
@@ -177,6 +177,7 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: \
  /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../../FIFO/../Ti-OCSSD/MemoryTier/Node.h \
  /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/backend_variables.h \
  /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/LiHash.h \
  /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
@@ -186,8 +187,10 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: \
  /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Backend/backend_variables.h \
  /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
  /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Backend/backend_variables.h \
  /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExHash.h \
  /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
  /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExBucket.h \
@@ -283,7 +286,7 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: \
  /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Ti-OCSSD/StoreTier/syncstore.h \
  /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Ti-OCSSD/StoreTier/asyncstore.h \
- /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Ti-OCSSD/StoreTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Ti-OCSSD/StoreTier/../../Backend/backend_variables.h \
  /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Ti-OCSSD/utility/types.h \
  /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Ti-OCSSD/utility/../MemoryTier/Node.h \
  /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Ti-OCSSD/TiOCS.h \

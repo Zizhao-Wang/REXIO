@@ -167,16 +167,18 @@ CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o: \
  /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
  /usr/include/c++/9/bits/uniform_int_dist.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/IODisk/../../Backend/backend_variables.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/ExBucket.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/ExNode.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/backend_variables.h \
  /usr/include/c++/9/ctime \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/reader.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/syncstore.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../Auxizilary/GlobalVariable.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../MemoryTier/Node.h \
- /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../MemoryTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../MemoryTier/../../Backend/backend_variables.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../LRU/lru.h \
  /usr/include/c++/9/list /usr/include/c++/9/bits/stl_list.h \
  /usr/include/c++/9/bits/allocated_ptr.h /usr/include/c++/9/bits/list.tcc \
@@ -185,6 +187,7 @@ CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o: \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../FIFO/FIFO.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../FIFO/../Ti-OCSSD/MemoryTier/Node.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/asyncstore.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../Backend/backend_variables.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Ti-OCSSD/utility/types.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Ti-OCSSD/utility/../MemoryTier/Node.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Ti-OCSSD/TiOCS.h \
@@ -237,6 +240,7 @@ CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExHash.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/msq-pad.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../MultiHash/LinearHash/../../Backend/backend_variables.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../MultiHash/LazySplitHash/LSNode.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExNode.h \

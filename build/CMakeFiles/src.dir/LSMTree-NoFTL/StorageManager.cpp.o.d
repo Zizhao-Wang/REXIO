@@ -171,6 +171,7 @@ CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.o: \
  /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
  /usr/include/c++/9/bits/uniform_int_dist.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../../Backend/backend_variables.h \
  /home/TiOCS/src/LSMTree-NoFTL/level.h /usr/include/c++/9/queue \
  /usr/include/c++/9/deque /usr/include/c++/9/bits/stl_deque.h \
  /usr/include/c++/9/bits/deque.tcc /usr/include/c++/9/bits/stl_queue.h \
@@ -186,7 +187,7 @@ CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.o: \
  /usr/include/c++/9/bits/stl_map.h /usr/include/c++/9/bits/stl_multimap.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/writer.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/Node.h \
- /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/../../Backend/backend_variables.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
@@ -201,13 +202,16 @@ CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.o: \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../../FIFO/../Ti-OCSSD/MemoryTier/Node.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/backend_variables.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../MultiHash/LinearHash/LiHash.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Backend/backend_variables.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExHash.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExBucket.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/SSDWrite/../backend_variables.h \
  /home/TiOCS/src/LSMTree-NoFTL/../Backend/backend_variables.h

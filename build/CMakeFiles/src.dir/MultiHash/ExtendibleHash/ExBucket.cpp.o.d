@@ -144,19 +144,21 @@ CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExBucket.cpp.o: \
  /usr/include/c++/9/bits/locale_facets.tcc \
  /usr/include/c++/9/bits/basic_ios.tcc \
  /usr/include/c++/9/bits/ostream.tcc /usr/include/c++/9/istream \
- /usr/include/c++/9/bits/istream.tcc /usr/include/c++/9/algorithm \
- /usr/include/c++/9/utility /usr/include/c++/9/bits/stl_relops.h \
- /usr/include/c++/9/bits/stl_algo.h \
- /usr/include/c++/9/bits/algorithmfwd.h \
- /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
- /usr/include/c++/9/bits/uniform_int_dist.h /usr/include/c++/9/limits \
- /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/writer.h \
+ /usr/include/c++/9/bits/istream.tcc \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/backend_variables.h \
  /usr/include/c++/9/unordered_map /usr/include/c++/9/ext/aligned_buffer.h \
  /usr/include/c++/9/bits/hashtable.h \
  /usr/include/c++/9/bits/hashtable_policy.h /usr/include/c++/9/tuple \
+ /usr/include/c++/9/utility /usr/include/c++/9/bits/stl_relops.h \
  /usr/include/c++/9/array /usr/include/c++/9/bits/uses_allocator.h \
- /usr/include/c++/9/bits/invoke.h /usr/include/c++/9/bits/unordered_map.h \
- /usr/include/c++/9/bits/erase_if.h \
+ /usr/include/c++/9/bits/invoke.h /usr/include/c++/9/limits \
+ /usr/include/c++/9/bits/unordered_map.h \
+ /usr/include/c++/9/bits/erase_if.h /usr/include/c++/9/algorithm \
+ /usr/include/c++/9/bits/stl_algo.h \
+ /usr/include/c++/9/bits/algorithmfwd.h \
+ /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
+ /usr/include/c++/9/bits/uniform_int_dist.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/writer.h \
  /home/TiOCS/src/../../liblightnvm/include/liblightnvm.h \
  /usr/include/inttypes.h /usr/include/c++/9/stdlib.h \
  /home/TiOCS/src/../../liblightnvm/include/liblightnvm_util.h \
@@ -164,7 +166,7 @@ CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExBucket.cpp.o: \
  /home/TiOCS/src/../../liblightnvm/include/liblightnvm_spec.h \
  /usr/include/assert.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/Node.h \
- /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/../../Backend/backend_variables.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
@@ -180,6 +182,7 @@ CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExBucket.cpp.o: \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../../FIFO/../Ti-OCSSD/MemoryTier/Node.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/backend_variables.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../MultiHash/LinearHash/LiHash.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
@@ -189,15 +192,17 @@ CMakeFiles/src.dir/MultiHash/ExtendibleHash/ExBucket.cpp.o: \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/pre_definition.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Backend/backend_variables.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExHash.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExBucket.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDWrite/../backend_variables.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/reader.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Auxizilary/SysOutput.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/syncstore.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/asyncstore.h \
- /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../Backend/backend_variables.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Ti-OCSSD/utility/types.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Ti-OCSSD/utility/../MemoryTier/Node.h \
  /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/SSDRead/../../Ti-OCSSD/TiOCS.h \

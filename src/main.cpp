@@ -53,12 +53,16 @@ int GlobalInitialize(int argc, char **argv)
     {
         chunkusage[i] = 0;
     }
+
+
     ws_min = nvm_dev_get_ws_min(bp->dev);
     geo = nvm_dev_get_geo(bp->dev);
     chunk_write_pointer = new size_t[geo->l.npugrp *geo->l.npunit*geo->l.nchunk];
-    max_os_threads = pthread_getconcurrency();
-    printf("max_os_threads:%d \n",max_os_threads);
-
+    memset(chunk_write_pointer,0,geo->l.npugrp *geo->l.npunit*geo->l.nchunk*sizeof(size_t));
+    max_os_threads = std::thread::hardware_concurrency();
+    lun_current_pointer = new size_t[geo->l.npugrp * geo->l.npunit];
+    memset(lun_current_pointer,0,geo->l.npugrp * geo->l.npunit*sizeof(size_t));
+    
     const char * process_Name = "Main of TiOCS";
     prctl(PR_SET_NAME, reinterpret_cast<unsigned long>(process_Name),0,0,0);
 
@@ -66,7 +70,6 @@ int GlobalInitialize(int argc, char **argv)
 
     printf(UCAS_SIAT);
     printf(Name);
-    exit(0);
     return 0;
 
     /* struct nvm_dev *dev = nvm_dev_open("/dev/nvme0n1");

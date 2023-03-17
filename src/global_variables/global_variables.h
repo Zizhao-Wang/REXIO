@@ -8,7 +8,7 @@
 
 extern struct nvm_bp* bp;
 
-
+extern const struct nvm_geo *geo;
 
 /**
  * global variables for backend processes (threads). 

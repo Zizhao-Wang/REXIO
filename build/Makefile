@@ -945,6 +945,30 @@ Ti-OCSSD/utility/types.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.s
 .PHONY : Ti-OCSSD/utility/types.cpp.s
 
+global_variables/global_variables.o: global_variables/global_variables.cpp.o
+.PHONY : global_variables/global_variables.o
+
+# target to build an object file
+global_variables/global_variables.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/global_variables/global_variables.cpp.o
+.PHONY : global_variables/global_variables.cpp.o
+
+global_variables/global_variables.i: global_variables/global_variables.cpp.i
+.PHONY : global_variables/global_variables.i
+
+# target to preprocess a source file
+global_variables/global_variables.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/global_variables/global_variables.cpp.i
+.PHONY : global_variables/global_variables.cpp.i
+
+global_variables/global_variables.s: global_variables/global_variables.cpp.s
+.PHONY : global_variables/global_variables.s
+
+# target to generate assembly for a file
+global_variables/global_variables.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/global_variables/global_variables.cpp.s
+.PHONY : global_variables/global_variables.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -1080,6 +1104,9 @@ help:
 	@echo "... Ti-OCSSD/utility/types.o"
 	@echo "... Ti-OCSSD/utility/types.i"
 	@echo "... Ti-OCSSD/utility/types.s"
+	@echo "... global_variables/global_variables.o"
+	@echo "... global_variables/global_variables.i"
+	@echo "... global_variables/global_variables.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

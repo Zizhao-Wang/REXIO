@@ -1,5 +1,5 @@
 #include "backend_variables.h"
-
+#include "../global_variables/global_variables.h"
 
 
 /* global variables for recording usage of physical pages  */
@@ -19,3 +19,8 @@ size_t ws_min = 4;  // set 4 by default
 
 /* global variables for asynchronous writing/read */
 int max_os_threads = 0;  // set 8 by default
+
+
+
+/* initialize chunk write pointer  */
+size_t *chunk_write_pointer = nullptr;

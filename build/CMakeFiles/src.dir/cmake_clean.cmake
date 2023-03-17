@@ -67,6 +67,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o.d"
   "CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o"
   "CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o.d"
+  "CMakeFiles/src.dir/global_variables/global_variables.cpp.o"
+  "CMakeFiles/src.dir/global_variables/global_variables.cpp.o.d"
   "CMakeFiles/src.dir/main.cpp.o"
   "CMakeFiles/src.dir/main.cpp.o.d"
   "src"

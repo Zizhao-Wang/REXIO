@@ -47,4 +47,5 @@ add_executable(src main.cpp
 				LSMTree-NoFTL/level.h LSMTree-NoFTL/level.cpp LSMTree-NoFTL/buffer.h LSMTree-NoFTL/buffer.cpp
 				LSMTree-NoFTL/merge.h LSMTree-NoFTL/merge.cpp LSMTree-NoFTL/region.h LSMTree-NoFTL/region.cpp
 				LSMTree-NoFTL/allocation.h  LSMTree-NoFTL/allocation.cpp
-				FIFO/FIFO.h FIFO/FIFO.cpp)
+				FIFO/FIFO.h FIFO/FIFO.cpp
+				global_variables/global_variables.h global_variables/global_variables.cpp)

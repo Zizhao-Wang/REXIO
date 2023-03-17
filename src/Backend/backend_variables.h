@@ -56,4 +56,7 @@ struct thread_param
 };
 
 
+extern size_t *chunk_write_pointer;
+
+
 #endif //TIOCS_BACKEND_VARIABLES_H

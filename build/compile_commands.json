@@ -173,5 +173,10 @@
   "directory": "/home/TiOCS/build",
   "command": "/usr/bin/c++  -I/home/TiOCS/src/../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/FIFO/FIFO.cpp.o -c /home/TiOCS/src/FIFO/FIFO.cpp",
   "file": "/home/TiOCS/src/FIFO/FIFO.cpp"
+},
+{
+  "directory": "/home/TiOCS/build",
+  "command": "/usr/bin/c++  -I/home/TiOCS/src/../../liblightnvm/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/global_variables/global_variables.cpp.o -c /home/TiOCS/src/global_variables/global_variables.cpp",
+  "file": "/home/TiOCS/src/global_variables/global_variables.cpp"
 }
 ]

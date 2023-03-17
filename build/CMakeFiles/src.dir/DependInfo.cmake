@@ -42,6 +42,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.cpp" "CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o" "gcc" "CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o.d"
   "/home/TiOCS/src/Ti-OCSSD/TiOCS.cpp" "CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o" "gcc" "CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o.d"
   "/home/TiOCS/src/Ti-OCSSD/utility/types.cpp" "CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o" "gcc" "CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o.d"
+  "/home/TiOCS/src/global_variables/global_variables.cpp" "CMakeFiles/src.dir/global_variables/global_variables.cpp.o" "gcc" "CMakeFiles/src.dir/global_variables/global_variables.cpp.o.d"
   "/home/TiOCS/src/main.cpp" "CMakeFiles/src.dir/main.cpp.o" "gcc" "CMakeFiles/src.dir/main.cpp.o.d"
   )
 

@@ -55,17 +55,26 @@ uint64_t parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_lun)
     pthread_t thread_id[geo->l.nchunk];
     size_t page_size = ws_min * geo->sector_nbytes;
 
+
     char **buffer = new char*[geo->l.nchunk];
-    size_t num_copy, vector_offset;
-    for (size_t i = 0; i < geo->l.nchunk; i++)
+    for (size_t i = 0; i < run_data.size(); i++)
     {
-        buffer[i] = new char[page_size];
-        char *temp = new char[page_size];
-        num_copy = page_size / sizeof(entry_t);
-        vector_offset = num_copy * i;
-        memcpy(temp,run_data.data()+vector_offset,num_copy*sizeof(entry_t));
-        buffer[i] = temp;
+        size_t num_copy, vector_offset;
+        for (size_t i = 0; i < geo->l.nchunk; i++)
+        {
+            buffer[i] = new char[page_size];
+            char *temp = new char[page_size];
+            num_copy = page_size / sizeof(entry_t);
+            vector_offset = num_copy * i;
+            memcpy(temp,run_data.data()+vector_offset,num_copy*sizeof(entry_t));
+            buffer[i] = temp;
+        }    
     }
+    
+
+
+    
+    
     
     // entry_t *temp1 = new entry_t[page_size];
     // temp1 = (entry_t *)buffer[0];

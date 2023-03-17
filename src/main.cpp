@@ -33,7 +33,7 @@
 #include "Backend/backend_variables.h"
 
 /* Define some global variables. */
-struct nvm_bp* bp = nullptr;
+
 std::unordered_map<uint64_t,uint64_t> chunkusage;
 
 
@@ -54,15 +54,19 @@ int GlobalInitialize(int argc, char **argv)
         chunkusage[i] = 0;
     }
     ws_min = nvm_dev_get_ws_min(bp->dev);
-    // std::ifstream ifs('/proc/sys/kernel/threads-max');
-    // ifs >> max_os_threads;
-    
+    geo = nvm_dev_get_geo(bp->dev);
+    chunk_write_pointer = new size_t[geo->l.npugrp *geo->l.npunit*geo->l.nchunk];
+    max_os_threads = pthread_getconcurrency();
+    printf("max_os_threads:%d \n",max_os_threads);
 
     const char * process_Name = "Main of TiOCS";
     prctl(PR_SET_NAME, reinterpret_cast<unsigned long>(process_Name),0,0,0);
 
+    
+
     printf(UCAS_SIAT);
     printf(Name);
+    exit(0);
     return 0;
 
     /* struct nvm_dev *dev = nvm_dev_open("/dev/nvme0n1");
@@ -74,7 +78,7 @@ int GlobalInitialize(int argc, char **argv)
     /**
      * nvm_dev_pr(dev);
      * nvm_dev_close(dev);
-     * const struct nvm_geo *geo = nvm_dev_get_geo(dev);
+     * 
     nvm_geo_pr(geo);
     struct nvm_async_ctx *ctx = nullptr;
 	size_t depth=0;

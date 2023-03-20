@@ -54,10 +54,10 @@ uint64_t parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_lun)
     size_t pu_num = (num_lun) * (geo->l.nchunk*geo->l.nsectr);
     pthread_t thread_id[geo->l.nchunk];
     size_t page_size = ws_min * geo->sector_nbytes;
-
+    size_t page_capacity = page_size / sizeof(entry_t);
 
     char **buffer = new char*[geo->l.nchunk];
-    for (size_t i = 0; i < run_data.size(); i++)
+    for (size_t i = 0; i < run_data.size(); i+=page_capacity)
     {
         size_t num_copy, vector_offset;
         for (size_t i = 0; i < geo->l.nchunk; i++)
@@ -68,7 +68,27 @@ uint64_t parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_lun)
             vector_offset = num_copy * i;
             memcpy(temp,run_data.data()+vector_offset,num_copy*sizeof(entry_t));
             buffer[i] = temp;
-        }    
+        }
+
+        int res = 0;
+        struct thread_param args [geo->l.nchunk];
+        for (int i = 0; i < max_os_threads; i++)
+        {
+        args[i].buffer = buffer[i];
+        args[i].page_num = pu_num + i*geo->l.nsectr;
+        res = pthread_create(&thread_id[i], NULL, parallel_write_into_pu, &(args[i]));
+        if (res != 0)
+        {
+            EMessageOutput("Thread creation failed in"+ std::to_string(i)+"creation!", 4598);
+        }
+        
+    }
+
+
+
+
+
+
     }
     
 
@@ -80,19 +100,7 @@ uint64_t parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_lun)
     // temp1 = (entry_t *)buffer[0];
     // printf("first key: %lu \n", temp1[10].val)
     
-    int res = 0;
-    struct thread_param args [geo->l.nchunk];
-
-    for (int i = 0; i < geo->l.nchunk; i++)
-    {
-        args[i].buffer = buffer[i];
-        args[i].page_num = pu_num + i*geo->l.nsectr;
-        res = pthread_create(&thread_id[i], NULL, parallel_write_into_pu, &(args[i]));
-        if (res != 0)
-        {
-            EMessageOutput("Thread creation failed in"+ std::to_string(i)+"creation!", 4598);
-        }
-    }
+    
     
     exit(0);
     return 0;

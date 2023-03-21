@@ -59,9 +59,9 @@ int GlobalInitialize(int argc, char **argv)
     geo = nvm_dev_get_geo(bp->dev);
     chunk_write_pointer = new size_t[geo->l.npugrp *geo->l.npunit*geo->l.nchunk];
     memset(chunk_write_pointer,0,geo->l.npugrp *geo->l.npunit*geo->l.nchunk*sizeof(size_t));
-    max_os_threads = std::thread::hardware_concurrency();
     lun_current_pointer = new size_t[geo->l.npugrp * geo->l.npunit];
     memset(lun_current_pointer,0,geo->l.npugrp * geo->l.npunit*sizeof(size_t));
+    max_os_threads = std::thread::hardware_concurrency();
     
     const char * process_Name = "Main of TiOCS";
     prctl(PR_SET_NAME, reinterpret_cast<unsigned long>(process_Name),0,0,0);

@@ -32,6 +32,7 @@ void* parallel_write_into_pu(void *args)
         if(err == 0) 
         {
             printf("Page %lu writing success \n",page_num);
+            chunk_write_pointer[page_num/4096] = page_num;
         }
         else
         {
@@ -51,58 +52,77 @@ uint64_t parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_lun)
     /* create thread pool for asynchornous write */
     printf("number of LUNs: %lu \n", num_lun);
     const nvm_geo *geo = nvm_dev_get_geo(bp->dev);
-    size_t pu_num = (num_lun) * (geo->l.nchunk*geo->l.nsectr);
     pthread_t thread_id[geo->l.nchunk];
     size_t page_size = ws_min * geo->sector_nbytes;
     size_t page_capacity = page_size / sizeof(entry_t);
 
-    char **buffer = new char*[geo->l.nchunk];
-    for (size_t i = 0; i < run_data.size(); i+=page_capacity)
-    {
-        size_t num_copy, vector_offset;
-        for (size_t i = 0; i < geo->l.nchunk; i++)
-        {
-            buffer[i] = new char[page_size];
-            char *temp = new char[page_size];
-            num_copy = page_size / sizeof(entry_t);
-            vector_offset = num_copy * i;
-            memcpy(temp,run_data.data()+vector_offset,num_copy*sizeof(entry_t));
-            buffer[i] = temp;
-        }
 
-        int res = 0;
-        struct thread_param args [geo->l.nchunk];
-        for (int i = 0; i < max_os_threads; i++)
+    /* acquire the LUN information */
+    size_t cwrite_point_lun;
+
+    char **buffer = new char*[geo->l.nchunk];
+    size_t num_copy, vector_offset, batch_pages;
+    int res = 0;
+    struct thread_param args [geo->l.nchunk];
+
+    for (size_t i = 0; i < run_data.size(); i+= geo->l.nchunk * page_capacity)
+    {
+        if( (run_data.size()-i) < geo->l.nchunk * page_capacity)
         {
-        args[i].buffer = buffer[i];
-        args[i].page_num = pu_num + i*geo->l.nsectr;
-        res = pthread_create(&thread_id[i], NULL, parallel_write_into_pu, &(args[i]));
-        if (res != 0)
+            batch_pages = (run_data.size()-i) / page_capacity;
+        }
+        else
         {
-            EMessageOutput("Thread creation failed in"+ std::to_string(i)+"creation!", 4598);
+            batch_pages = geo->l.nchunk;
+        }
+             
+        for (size_t j = 0; i < batch_pages; j++)
+        {
+            buffer[j] = new char[page_size];
+            char *temp = new char[page_size];
+            num_copy = (run_data.size()-j*page_capacity) % page_capacity;
+            vector_offset = num_copy * j;
+            memcpy(temp,run_data.data()+vector_offset,num_copy*sizeof(entry_t));
+            buffer[j] = temp;
         }
         
+        cwrite_point_lun = lun_current_pointer[num_lun];
+        
+        for (size_t j = 0; j < batch_pages; j+=max_os_threads)
+        {
+            for (int k = 0; k < max_os_threads; k++)
+            {
+                args[j+k].buffer = buffer[j+k];
+                args[j+k].page_num = cwrite_point_lun + geo->l.nsectr;
+                res = pthread_create(&thread_id[j+k], NULL, parallel_write_into_pu, &(args[j+k]));
+                if (res != 0)
+                {
+                    EMessageOutput("Thread creation failed in"+ std::to_string(i)+"creation!", 4598);
+                    exit(EXIT_FAILURE);
+                }
+            }
+
+            /* reclaim threads  */
+            for (int k = 0; k < max_os_threads; k++)
+            {
+                res = pthread_join(thread_id[j+k], NULL);
+                if (res != 0)
+                {
+                    EMessageOutput("Thread join failed in"+ std::to_string(i)+"creation!", 4598);
+                    exit(EXIT_FAILURE);
+                }
+            }
+
+            lun_current_pointer[num_lun] = cwrite_point_lun + batch_pages*geo->l.nsectr;
+
+            printf("Threads batch created and reclaim successfully!\n");
+
+        }
     }
-
-
-
-
-
-
-    }
     
-
-
-    
-    
-    
-    // entry_t *temp1 = new entry_t[page_size];
     // temp1 = (entry_t *)buffer[0];
     // printf("first key: %lu \n", temp1[10].val)
     
-    
-    
-    exit(0);
     return 0;
 
 }

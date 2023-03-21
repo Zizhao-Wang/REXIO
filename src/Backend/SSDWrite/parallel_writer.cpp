@@ -118,7 +118,7 @@ uint64_t parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_lun)
             }
 
             printf("Threads batch created and reclaim successfully!\n");
-            lun_current_pointer[num_lun] = (cwrite_point_lun + max_os_threads * geo->l.nsectr)% ( geo->l.nchunk*geo->l.nsectr );
+            cwrite_point_lun + max_os_threads * geo->l.nsectr >= geo->l.nchunk*geo->l.nsectr ? lun_current_pointer[num_lun]=((cwrite_point_lun + max_os_threads*geo->l.nsectr)%geo->l.nsectr) +ws_min : lun_current_pointer[num_lun] = cwrite_point_lun + max_os_threads * geo->l.nsectr;
 
         }
 

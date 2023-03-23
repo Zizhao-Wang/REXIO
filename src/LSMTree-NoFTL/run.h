@@ -23,6 +23,10 @@
 #include "../Backend/IODisk/WriteDisk.h"
 #include "../Auxizilary/SysOutput.h"
 
+
+
+
+
 class NoFTLRun 
 {
 
@@ -30,6 +34,8 @@ private:
     uint64_t Size, MaxSize;
     uint64_t MaxKey, MinKey;
     uint32_t lun_num;
+    struct coordinator_param *run_param;
+    entry_t *read_data;
     std::vector<PageType> PagePointers;
     std::vector<entry_t> Rundata;
     std::vector<KEY_t> FencePointers;

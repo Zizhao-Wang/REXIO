@@ -16,13 +16,13 @@ NoFTLRun::NoFTLRun(unsigned long maxsize, uint32_t lun_num)
 {
     this->MaxSize = maxsize;
     this->lun_num = lun_num;
-    for(int i=0;i<this->MaxSize/CalculatePageCapacity(sizeof(entry_t));i++) //Initialize all page pointers as UINT64_MAX
-    {
-        PagePointers.emplace_back(UINT64_MAX);
-    }
+
+    read_data = nullptr;
+
     MaxKey = 0;
     MinKey = UINT64_MAX;
     Size = 0;
+
 }
 
 void NoFTLRun::PointersDisplay()
@@ -41,7 +41,7 @@ int NoFTLRun::RunDataWrite(void)
     printf("Size of Rundata:%lu\n",Rundata.size());
     if(Rundata.size() % pagesize == 0)
     {
-        Pointer = parallel_coordinator(Rundata,1);
+        parallel_coordinator(Rundata,lun_num, PAOCS_WRITE_MODE,nullptr);
         //printf("The %lu Page: %lu, Size: %lu\n",(Size/pagesize)-1,Pointer,Size);
         //printf("Datum of Run in Level write succeed!\n");
         PagePointers[(Size/pagesize)-1] = Pointer;
@@ -63,7 +63,7 @@ std::vector<entry_t> NoFTLRun::SingleRunRead()
         if(PagePointers[i]== UINT64_MAX)
             continue;
         std::vector<entry_t> temp;
-        temp = RunReadFromPage(PagePointers[i]);
+        parallel_coordinator(temp, lun_num, PAOCS_READ_MODE, run_param);
         entries1.insert(entries1.end(),temp.begin(),temp.end());
         GPT[PagePointers[i]/4096][(PagePointers[i]%4096)/4] = false;
     }

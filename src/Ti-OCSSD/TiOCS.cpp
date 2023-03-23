@@ -54,7 +54,7 @@ void bench_testing(void)
      clock_t startTime,endTime;                        // Definition of timestamp
      /* workload a: insert only*/
      startTime = clock();
-     for(SKey i=1;i<=40000000;i++)
+     for(SKey i=1;i<=262145;i++)
      {
           if(i%10000000==0||i==1000000)
           {
@@ -67,7 +67,7 @@ void bench_testing(void)
      endTime = clock();
      printf("Read count:%d write:%d erase:%d\n",reads,writes,erases);
      std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
-
+     exit(0);
      uint64_t workb[1000010];
      string x;
      int index1=0;

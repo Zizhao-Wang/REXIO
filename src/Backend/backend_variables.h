@@ -61,4 +61,21 @@ extern size_t *chunk_write_pointer;
 
 extern size_t *lun_current_pointer;
 
+
+
+
+/**
+ *  signal handler for SIGINT 
+ **/
+
+#define PAOCS_READ_MODE  0X0001
+#define PAOCS_WRITE_MODE 0X0002
+#define PAOCS_ERASE_MODE 0X0003
+
+struct coordinator_param
+{
+	size_t start_page, end_page;
+};
+
+
 #endif //TIOCS_BACKEND_VARIABLES_H

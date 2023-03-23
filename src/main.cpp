@@ -65,7 +65,7 @@ int GlobalInitialize(int argc, char **argv)
     {
         lun_current_pointer[i] = lun_current_pointer[i-1] + geo->l.nchunk*geo->l.nsectr;
     }
-    max_os_threads = std::thread::hardware_concurrency();
+    max_os_threads = 32;//std::thread::hardware_concurrency();
 
     const char * process_Name = "Main of TiOCS";
     prctl(PR_SET_NAME, reinterpret_cast<unsigned long>(process_Name),0,0,0);
@@ -111,13 +111,13 @@ int main(int argc, char **argv)
 
     // EXHashing1();
 
-    //   TiOCSInit();
+    // TiOCSInit();
 
-    NoFTLKVInit();
+     NoFTLKVInit();
 
     // LHashPort();
 
-    // LSMTreePort();
+    //  LSMTreePort();
 
     // LSHashPort();
 

@@ -121,16 +121,14 @@ int LSMTreeNoFTL::FlushInto(vector<NoFTLKVLevel>::iterator current)
 
 int LSMTreeNoFTL::PutValue(KEY_t key, VAL_t value) 
 {
-    //Step 1
+    /* Insert data into level 0 (buffer) */
     if(buffer.PutValue(key, value))  
     {
         return 1;
     }
-    //printf("Entries size:%lu\n",buffer.GetEntries().size());
 
     /* Step 2: Flush the buffer to level 0 */
     FlushInto(Levels.begin());  //check whether level 1 is full and flush it if level 1 is full 
-    // exit(0);
 
     // Step 3
     std::vector<entry_t> bufferdata = buffer.GetEntries();
@@ -145,7 +143,6 @@ int LSMTreeNoFTL::PutValue(KEY_t key, VAL_t value)
         // {
         //     printf("Run size: %ld from GetNowSize()\n",run.GetNowSize());
         // }
-        //exit(0);
     }
     else
     {
@@ -398,7 +395,7 @@ void NoFTLKVInit(void)
 
     /* workload a: insert only*/
     startTime = clock();
-    for(SKey i=1;i<=40000000;i++)
+    for(SKey i=1;i<=262145;i++)
     {
         if(i%10000000==0||i==1000000)
         {
@@ -412,6 +409,7 @@ void NoFTLKVInit(void)
     endTime = clock();
     std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
+    exit(0);
     //Lsmtree.display();
     //GPTDisplay();
     

@@ -16,15 +16,16 @@
 #include <vector>
 #include <unordered_map>
 #include <liblightnvm.h>
-#include "../../TNCTree/MemoryTier/Node.h"
-#include "../../Auxizilary/VariablesTypes.h"
+#include "../../Ti-OCSSD/MemoryTier/Node.h"
+#include "../../Auxizilary/pre_definition.h"
 #include "../../Auxizilary/SysOutput.h"
 #include "../../Auxizilary/GlobalVariable.h"
-#include "../../TNCTree/StoreTier/syncstore.h"
+#include "../../Ti-OCSSD/StoreTier/syncstore.h"
 #include "../../MultiHash/LinearHash/node.h"
 #include "../../MultiHash/LinearHash/LiHash.h"
 #include "../../MultiHash/ExtendibleHash/ExNode.h"
 #include "../../MultiHash/ExtendibleHash/ExHash.h"
+#include "../backend_variables.h"
 
 /*  Global variables for SSD write definition.  */
 

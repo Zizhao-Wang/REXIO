@@ -4,10 +4,7 @@
 #include <iostream>
 #include <map>
 #include "../Backend/SSDWrite/writer.h"
-
-uint32_t rNoFTLKVPages = 0;
-uint32_t wNoFTLKVPages = 0;
-uint32_t eNoFTLKVPages = 0;
+#include "../Backend/backend_variables.h"
 
 
 
@@ -23,9 +20,9 @@ uint32_t eNoFTLKVPages = 0;
 LSMTreeNoFTL::LSMTreeNoFTL(size_t BufferSize,int levelnum):
         buffer(BufferSize)
 {
-    for(int i=0;i<levelnum;i++)
+    for(uint32_t i=0;i<levelnum;i++)
     {
-        NoFTLKVLevel temp(buffer.GetMaxSize());
+        NoFTLKVLevel temp(buffer.GetMaxSize(),i);
         Levels.emplace_back(temp);
     }
 }
@@ -124,16 +121,14 @@ int LSMTreeNoFTL::FlushInto(vector<NoFTLKVLevel>::iterator current)
 
 int LSMTreeNoFTL::PutValue(KEY_t key, VAL_t value) 
 {
-    //Step 1
+    /* Insert data into level 0 (buffer) */
     if(buffer.PutValue(key, value))  
     {
         return 1;
     }
-    //printf("Entries size:%lu\n",buffer.GetEntries().size());
 
     /* Step 2: Flush the buffer to level 0 */
     FlushInto(Levels.begin());  //check whether level 1 is full and flush it if level 1 is full 
-    // exit(0);
 
     // Step 3
     std::vector<entry_t> bufferdata = buffer.GetEntries();
@@ -148,7 +143,6 @@ int LSMTreeNoFTL::PutValue(KEY_t key, VAL_t value)
         // {
         //     printf("Run size: %ld from GetNowSize()\n",run.GetNowSize());
         // }
-        //exit(0);
     }
     else
     {
@@ -385,6 +379,7 @@ void LSMTreeNoFTL::display()
 
 void NoFTLKVInit(void)
 {
+
 	clock_t startTime,endTime;                     // Definition of timestamp
     LSMTreeNoFTL noftlkv(256,7);                  // Initialize the LSMtree part of NoFTL-KV
 
@@ -400,20 +395,22 @@ void NoFTLKVInit(void)
 
     /* workload a: insert only*/
     startTime = clock();
-    for(SKey i=1;i<=40000000;i++)
+    for(SKey i=1;i<=524290;i++)
     {
         if(i%10000000==0||i==1000000)
         {
             endTime = clock();
             std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-            printf("Read count:%d Write count:%u Erase Count:%d \n",rNoFTLKVPages,wNoFTLKVPages,eNoFTLKVPages);
+            printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
         }
         noftlkv.PutValue(i,i);
     }
-    //Lsmtree.display();
-    printf("Read count:%d Write count:%u Erase Count:%d \n",rNoFTLKVPages,wNoFTLKVPages,eNoFTLKVPages);
+    printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
     endTime = clock();
     std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+
+    exit(0);
+    //Lsmtree.display();
     //GPTDisplay();
     
 
@@ -435,11 +432,11 @@ void NoFTLKVInit(void)
         {
             endTime = clock();
             std::cout << "Total Time of "<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-            printf("Read count:%d Write count:%u Erase Count:%d \n",rNoFTLKVPages,wNoFTLKVPages,eNoFTLKVPages);   
+            printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);   
         }
      }
     endTime = clock();
-    printf("Read count:%d Write count:%u Erase Count:%d \n",rNoFTLKVPages,wNoFTLKVPages,eNoFTLKVPages);
+    printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
     std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
      /* workload c: read only, 50% in it, 50% not in it */
@@ -462,10 +459,10 @@ void NoFTLKVInit(void)
         {
             endTime = clock();
             std::cout << "Total Time of "<<i<<" in workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-            printf("Read count:%d Write count:%u Erase Count:%d \n",rNoFTLKVPages,wNoFTLKVPages,eNoFTLKVPages);
+            printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
         }
     }
-    printf("Read count:%d Write count:%u Erase Count:%d \n",rNoFTLKVPages,wNoFTLKVPages,eNoFTLKVPages);
+    printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
     endTime = clock();
     std::cout << "Total Time of workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
@@ -488,10 +485,10 @@ void NoFTLKVInit(void)
         {
             endTime = clock();
             std::cout << "Total Time of "<<i<<" in workload D: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-            printf("Read count:%d Write count:%u Erase Count:%d \n",rNoFTLKVPages,wNoFTLKVPages,eNoFTLKVPages);
+            printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
         } 
     }
-    printf("Read count:%d Write count:%u Erase Count:%d \n",rNoFTLKVPages,wNoFTLKVPages,eNoFTLKVPages);
+    printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
     endTime = clock();
     std::cout << "Total Time of workload d: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
@@ -514,10 +511,10 @@ void NoFTLKVInit(void)
         {
             endTime = clock();
             std::cout << "Total Time of "<<i<<" in workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-           printf("Read count:%d Write count:%u Erase Count:%d \n",rNoFTLKVPages,wNoFTLKVPages,eNoFTLKVPages);
+           printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
         } 
     }
-    printf("Read count:%d Write count:%u Erase Count:%d \n",rNoFTLKVPages,wNoFTLKVPages,eNoFTLKVPages);
+    printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
     endTime = clock();
     std::cout << "Total Time of workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
@@ -540,10 +537,10 @@ void NoFTLKVInit(void)
         {
             endTime = clock();
             std::cout << "Total Time of "<<i<<" in workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n"; 
-            printf("Read count:%d Write count:%u Erase Count:%d \n",rNoFTLKVPages,wNoFTLKVPages,eNoFTLKVPages);
+            printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
         } 
     }
-    printf("Read count:%d Write count:%u Erase Count:%d \n",rNoFTLKVPages,wNoFTLKVPages,eNoFTLKVPages);
+    printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
     endTime = clock();
     std::cout << "Total Time of workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
@@ -558,10 +555,10 @@ void NoFTLKVInit(void)
         {
             endTime = clock();
             std::cout << "Total Time of "<<i<<" in workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";  
-            printf("Read count:%d Write count:%u Erase Count:%d \n",rNoFTLKVPages,wNoFTLKVPages,eNoFTLKVPages);
+            printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
         }  
     }
-    printf("Read count:%d Write count:%u Erase Count:%d \n",rNoFTLKVPages,wNoFTLKVPages,eNoFTLKVPages);
+    printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
     endTime = clock();
     std::cout << "Total Time of workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 

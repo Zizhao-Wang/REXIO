@@ -8,10 +8,10 @@ project(src)
 set(CMAKE_CXX_STANDARD 14)
 
 
-include_directories("../../../liblightnvm/include/")
+include_directories("../../liblightnvm/include/")
 
 
-link_libraries(-llightnvm_cli -llightnvm)
+link_libraries("/home/liblightnvm/build/liblightnvm_cli.a"  "/home/liblightnvm/build/liblightnvm.a")
 
 
 FIND_PACKAGE( OpenMP REQUIRED)
@@ -25,15 +25,16 @@ endif()
 
 # add the executable
 add_executable(src main.cpp 
-				TNCTree/TNCtree.h TNCTree/TNCtree.cpp TNCTree/MemoryTier/MemTier.h
-				TNCTree/MemoryTier/MemTier.cpp TNCTree/MemoryTier/Node.h TNCTree/MemoryTier/Node.cpp
-				TNCTree/utility/types.h TNCTree/utility/types.cpp TNCTree/StoreTier/asyncstore.h TNCTree/StoreTier/asyncstore.cpp
-				TNCTree/StoreTier/syncstore.h TNCTree/StoreTier/syncstore.cpp  
+                Ti-OCSSD/TiOCS.h Ti-OCSSD/TiOCS.cpp Ti-OCSSD/MemoryTier/MemTier.h
+				Ti-OCSSD/MemoryTier/MemTier.cpp Ti-OCSSD/MemoryTier/Node.h Ti-OCSSD/MemoryTier/Node.cpp
+				Ti-OCSSD/utility/types.h Ti-OCSSD/utility/types.cpp Ti-OCSSD/StoreTier/asyncstore.h Ti-OCSSD/StoreTier/asyncstore.cpp
+				Ti-OCSSD/StoreTier/syncstore.h Ti-OCSSD/StoreTier/syncstore.cpp  
 				LRU/lru.h LRU/lru.cpp MultiHash/ExtendibleHash/ExBucket.h MultiHash/ExtendibleHash/ExBucket.h
 				Backend/IODisk/WriteDisk.h Backend/BackendMain.h Backend/IODisk/WriteDisk.cpp  
 				Backend/BlockManage/BlockInfo.cpp Backend/BlockManage/BlockInfo.h
 				Backend/SSDWrite/writer.h Backend/SSDWrite/writer.cpp Backend/SSDRead/reader.h Backend/SSDRead/reader.cpp
-				Auxizilary/GlobalVariable.h Auxizilary/VariablesTypes.h Auxizilary/SysOutput.h AuxizilaryImplement/SysOutput.cpp 
+				Backend/backend_variables.h Backend/backend_variables.cpp Backend/SSDWrite/parallel_writer.h Backend/SSDWrite/parallel_writer.cpp
+				Auxizilary/GlobalVariable.h Auxizilary/pre_definition.h Auxizilary/SysOutput.h AuxizilaryImplement/SysOutput.cpp 
 				MultiHash/ExtendibleHash/ExHash.h MultiHash/ExtendibleHash/ExHash.cpp MultiHash/LinearHash/LiHash.h
 				MultiHash/ExtendibleHash/ExNode.h MultiHash/ExtendibleHash/ExBucket.h MultiHash/ExtendibleHash/ExBucket.cpp
 				MultiHash/LinearHash/LiHash.cpp MultiHash/Bucket.h MultiHash/LazySplitHash/LSHash.h MultiHash/LazySplitHash/LSHash.cpp
@@ -46,4 +47,5 @@ add_executable(src main.cpp
 				LSMTree-NoFTL/level.h LSMTree-NoFTL/level.cpp LSMTree-NoFTL/buffer.h LSMTree-NoFTL/buffer.cpp
 				LSMTree-NoFTL/merge.h LSMTree-NoFTL/merge.cpp LSMTree-NoFTL/region.h LSMTree-NoFTL/region.cpp
 				LSMTree-NoFTL/allocation.h  LSMTree-NoFTL/allocation.cpp
-				FIFO/FIFO.h FIFO/FIFO.cpp)
+				FIFO/FIFO.h FIFO/FIFO.cpp
+				global_variables/global_variables.h global_variables/global_variables.cpp)

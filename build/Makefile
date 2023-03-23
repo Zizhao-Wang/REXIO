@@ -57,10 +57,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/femu/experiment1/code2/src
+CMAKE_SOURCE_DIR = /home/TiOCS/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/femu/experiment1/code2/build
+CMAKE_BINARY_DIR = /home/TiOCS/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/femu/experiment1/code2/build/CMakeFiles /home/femu/experiment1/code2/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/TiOCS/build/CMakeFiles /home/TiOCS/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/femu/experiment1/code2/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/TiOCS/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -225,6 +225,30 @@ Backend/SSDRead/reader.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.s
 .PHONY : Backend/SSDRead/reader.cpp.s
 
+Backend/SSDWrite/parallel_writer.o: Backend/SSDWrite/parallel_writer.cpp.o
+.PHONY : Backend/SSDWrite/parallel_writer.o
+
+# target to build an object file
+Backend/SSDWrite/parallel_writer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/SSDWrite/parallel_writer.cpp.o
+.PHONY : Backend/SSDWrite/parallel_writer.cpp.o
+
+Backend/SSDWrite/parallel_writer.i: Backend/SSDWrite/parallel_writer.cpp.i
+.PHONY : Backend/SSDWrite/parallel_writer.i
+
+# target to preprocess a source file
+Backend/SSDWrite/parallel_writer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/SSDWrite/parallel_writer.cpp.i
+.PHONY : Backend/SSDWrite/parallel_writer.cpp.i
+
+Backend/SSDWrite/parallel_writer.s: Backend/SSDWrite/parallel_writer.cpp.s
+.PHONY : Backend/SSDWrite/parallel_writer.s
+
+# target to generate assembly for a file
+Backend/SSDWrite/parallel_writer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/SSDWrite/parallel_writer.cpp.s
+.PHONY : Backend/SSDWrite/parallel_writer.cpp.s
+
 Backend/SSDWrite/writer.o: Backend/SSDWrite/writer.cpp.o
 .PHONY : Backend/SSDWrite/writer.o
 
@@ -248,6 +272,30 @@ Backend/SSDWrite/writer.s: Backend/SSDWrite/writer.cpp.s
 Backend/SSDWrite/writer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.s
 .PHONY : Backend/SSDWrite/writer.cpp.s
+
+Backend/backend_variables.o: Backend/backend_variables.cpp.o
+.PHONY : Backend/backend_variables.o
+
+# target to build an object file
+Backend/backend_variables.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/backend_variables.cpp.o
+.PHONY : Backend/backend_variables.cpp.o
+
+Backend/backend_variables.i: Backend/backend_variables.cpp.i
+.PHONY : Backend/backend_variables.i
+
+# target to preprocess a source file
+Backend/backend_variables.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/backend_variables.cpp.i
+.PHONY : Backend/backend_variables.cpp.i
+
+Backend/backend_variables.s: Backend/backend_variables.cpp.s
+.PHONY : Backend/backend_variables.s
+
+# target to generate assembly for a file
+Backend/backend_variables.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Backend/backend_variables.cpp.s
+.PHONY : Backend/backend_variables.cpp.s
 
 FIFO/FIFO.o: FIFO/FIFO.cpp.o
 .PHONY : FIFO/FIFO.o
@@ -465,6 +513,174 @@ LSM-Tree/UtilityImplement/run.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSM-Tree/UtilityImplement/run.cpp.s
 .PHONY : LSM-Tree/UtilityImplement/run.cpp.s
 
+LSMTree-NoFTL/StorageManager.o: LSMTree-NoFTL/StorageManager.cpp.o
+.PHONY : LSMTree-NoFTL/StorageManager.o
+
+# target to build an object file
+LSMTree-NoFTL/StorageManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.o
+.PHONY : LSMTree-NoFTL/StorageManager.cpp.o
+
+LSMTree-NoFTL/StorageManager.i: LSMTree-NoFTL/StorageManager.cpp.i
+.PHONY : LSMTree-NoFTL/StorageManager.i
+
+# target to preprocess a source file
+LSMTree-NoFTL/StorageManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.i
+.PHONY : LSMTree-NoFTL/StorageManager.cpp.i
+
+LSMTree-NoFTL/StorageManager.s: LSMTree-NoFTL/StorageManager.cpp.s
+.PHONY : LSMTree-NoFTL/StorageManager.s
+
+# target to generate assembly for a file
+LSMTree-NoFTL/StorageManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/StorageManager.cpp.s
+.PHONY : LSMTree-NoFTL/StorageManager.cpp.s
+
+LSMTree-NoFTL/allocation.o: LSMTree-NoFTL/allocation.cpp.o
+.PHONY : LSMTree-NoFTL/allocation.o
+
+# target to build an object file
+LSMTree-NoFTL/allocation.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/allocation.cpp.o
+.PHONY : LSMTree-NoFTL/allocation.cpp.o
+
+LSMTree-NoFTL/allocation.i: LSMTree-NoFTL/allocation.cpp.i
+.PHONY : LSMTree-NoFTL/allocation.i
+
+# target to preprocess a source file
+LSMTree-NoFTL/allocation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/allocation.cpp.i
+.PHONY : LSMTree-NoFTL/allocation.cpp.i
+
+LSMTree-NoFTL/allocation.s: LSMTree-NoFTL/allocation.cpp.s
+.PHONY : LSMTree-NoFTL/allocation.s
+
+# target to generate assembly for a file
+LSMTree-NoFTL/allocation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/allocation.cpp.s
+.PHONY : LSMTree-NoFTL/allocation.cpp.s
+
+LSMTree-NoFTL/buffer.o: LSMTree-NoFTL/buffer.cpp.o
+.PHONY : LSMTree-NoFTL/buffer.o
+
+# target to build an object file
+LSMTree-NoFTL/buffer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/buffer.cpp.o
+.PHONY : LSMTree-NoFTL/buffer.cpp.o
+
+LSMTree-NoFTL/buffer.i: LSMTree-NoFTL/buffer.cpp.i
+.PHONY : LSMTree-NoFTL/buffer.i
+
+# target to preprocess a source file
+LSMTree-NoFTL/buffer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/buffer.cpp.i
+.PHONY : LSMTree-NoFTL/buffer.cpp.i
+
+LSMTree-NoFTL/buffer.s: LSMTree-NoFTL/buffer.cpp.s
+.PHONY : LSMTree-NoFTL/buffer.s
+
+# target to generate assembly for a file
+LSMTree-NoFTL/buffer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/buffer.cpp.s
+.PHONY : LSMTree-NoFTL/buffer.cpp.s
+
+LSMTree-NoFTL/level.o: LSMTree-NoFTL/level.cpp.o
+.PHONY : LSMTree-NoFTL/level.o
+
+# target to build an object file
+LSMTree-NoFTL/level.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/level.cpp.o
+.PHONY : LSMTree-NoFTL/level.cpp.o
+
+LSMTree-NoFTL/level.i: LSMTree-NoFTL/level.cpp.i
+.PHONY : LSMTree-NoFTL/level.i
+
+# target to preprocess a source file
+LSMTree-NoFTL/level.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/level.cpp.i
+.PHONY : LSMTree-NoFTL/level.cpp.i
+
+LSMTree-NoFTL/level.s: LSMTree-NoFTL/level.cpp.s
+.PHONY : LSMTree-NoFTL/level.s
+
+# target to generate assembly for a file
+LSMTree-NoFTL/level.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/level.cpp.s
+.PHONY : LSMTree-NoFTL/level.cpp.s
+
+LSMTree-NoFTL/merge.o: LSMTree-NoFTL/merge.cpp.o
+.PHONY : LSMTree-NoFTL/merge.o
+
+# target to build an object file
+LSMTree-NoFTL/merge.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/merge.cpp.o
+.PHONY : LSMTree-NoFTL/merge.cpp.o
+
+LSMTree-NoFTL/merge.i: LSMTree-NoFTL/merge.cpp.i
+.PHONY : LSMTree-NoFTL/merge.i
+
+# target to preprocess a source file
+LSMTree-NoFTL/merge.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/merge.cpp.i
+.PHONY : LSMTree-NoFTL/merge.cpp.i
+
+LSMTree-NoFTL/merge.s: LSMTree-NoFTL/merge.cpp.s
+.PHONY : LSMTree-NoFTL/merge.s
+
+# target to generate assembly for a file
+LSMTree-NoFTL/merge.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/merge.cpp.s
+.PHONY : LSMTree-NoFTL/merge.cpp.s
+
+LSMTree-NoFTL/region.o: LSMTree-NoFTL/region.cpp.o
+.PHONY : LSMTree-NoFTL/region.o
+
+# target to build an object file
+LSMTree-NoFTL/region.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/region.cpp.o
+.PHONY : LSMTree-NoFTL/region.cpp.o
+
+LSMTree-NoFTL/region.i: LSMTree-NoFTL/region.cpp.i
+.PHONY : LSMTree-NoFTL/region.i
+
+# target to preprocess a source file
+LSMTree-NoFTL/region.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/region.cpp.i
+.PHONY : LSMTree-NoFTL/region.cpp.i
+
+LSMTree-NoFTL/region.s: LSMTree-NoFTL/region.cpp.s
+.PHONY : LSMTree-NoFTL/region.s
+
+# target to generate assembly for a file
+LSMTree-NoFTL/region.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/region.cpp.s
+.PHONY : LSMTree-NoFTL/region.cpp.s
+
+LSMTree-NoFTL/run.o: LSMTree-NoFTL/run.cpp.o
+.PHONY : LSMTree-NoFTL/run.o
+
+# target to build an object file
+LSMTree-NoFTL/run.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/run.cpp.o
+.PHONY : LSMTree-NoFTL/run.cpp.o
+
+LSMTree-NoFTL/run.i: LSMTree-NoFTL/run.cpp.i
+.PHONY : LSMTree-NoFTL/run.i
+
+# target to preprocess a source file
+LSMTree-NoFTL/run.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/run.cpp.i
+.PHONY : LSMTree-NoFTL/run.cpp.i
+
+LSMTree-NoFTL/run.s: LSMTree-NoFTL/run.cpp.s
+.PHONY : LSMTree-NoFTL/run.s
+
+# target to generate assembly for a file
+LSMTree-NoFTL/run.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/LSMTree-NoFTL/run.cpp.s
+.PHONY : LSMTree-NoFTL/run.cpp.s
+
 MultiHash/EagerSplitHash/ESHash.o: MultiHash/EagerSplitHash/ESHash.cpp.o
 .PHONY : MultiHash/EagerSplitHash/ESHash.o
 
@@ -585,149 +801,173 @@ MultiHash/LinearHash/LiHash.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.s
 .PHONY : MultiHash/LinearHash/LiHash.cpp.s
 
-TNCTree/MemoryTier/MemTier.o: TNCTree/MemoryTier/MemTier.cpp.o
-.PHONY : TNCTree/MemoryTier/MemTier.o
+Ti-OCSSD/MemoryTier/MemTier.o: Ti-OCSSD/MemoryTier/MemTier.cpp.o
+.PHONY : Ti-OCSSD/MemoryTier/MemTier.o
 
 # target to build an object file
-TNCTree/MemoryTier/MemTier.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.o
-.PHONY : TNCTree/MemoryTier/MemTier.cpp.o
+Ti-OCSSD/MemoryTier/MemTier.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.o
+.PHONY : Ti-OCSSD/MemoryTier/MemTier.cpp.o
 
-TNCTree/MemoryTier/MemTier.i: TNCTree/MemoryTier/MemTier.cpp.i
-.PHONY : TNCTree/MemoryTier/MemTier.i
+Ti-OCSSD/MemoryTier/MemTier.i: Ti-OCSSD/MemoryTier/MemTier.cpp.i
+.PHONY : Ti-OCSSD/MemoryTier/MemTier.i
 
 # target to preprocess a source file
-TNCTree/MemoryTier/MemTier.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.i
-.PHONY : TNCTree/MemoryTier/MemTier.cpp.i
+Ti-OCSSD/MemoryTier/MemTier.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.i
+.PHONY : Ti-OCSSD/MemoryTier/MemTier.cpp.i
 
-TNCTree/MemoryTier/MemTier.s: TNCTree/MemoryTier/MemTier.cpp.s
-.PHONY : TNCTree/MemoryTier/MemTier.s
+Ti-OCSSD/MemoryTier/MemTier.s: Ti-OCSSD/MemoryTier/MemTier.cpp.s
+.PHONY : Ti-OCSSD/MemoryTier/MemTier.s
 
 # target to generate assembly for a file
-TNCTree/MemoryTier/MemTier.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/MemoryTier/MemTier.cpp.s
-.PHONY : TNCTree/MemoryTier/MemTier.cpp.s
+Ti-OCSSD/MemoryTier/MemTier.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.s
+.PHONY : Ti-OCSSD/MemoryTier/MemTier.cpp.s
 
-TNCTree/MemoryTier/Node.o: TNCTree/MemoryTier/Node.cpp.o
-.PHONY : TNCTree/MemoryTier/Node.o
+Ti-OCSSD/MemoryTier/Node.o: Ti-OCSSD/MemoryTier/Node.cpp.o
+.PHONY : Ti-OCSSD/MemoryTier/Node.o
 
 # target to build an object file
-TNCTree/MemoryTier/Node.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.o
-.PHONY : TNCTree/MemoryTier/Node.cpp.o
+Ti-OCSSD/MemoryTier/Node.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.o
+.PHONY : Ti-OCSSD/MemoryTier/Node.cpp.o
 
-TNCTree/MemoryTier/Node.i: TNCTree/MemoryTier/Node.cpp.i
-.PHONY : TNCTree/MemoryTier/Node.i
+Ti-OCSSD/MemoryTier/Node.i: Ti-OCSSD/MemoryTier/Node.cpp.i
+.PHONY : Ti-OCSSD/MemoryTier/Node.i
 
 # target to preprocess a source file
-TNCTree/MemoryTier/Node.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.i
-.PHONY : TNCTree/MemoryTier/Node.cpp.i
+Ti-OCSSD/MemoryTier/Node.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.i
+.PHONY : Ti-OCSSD/MemoryTier/Node.cpp.i
 
-TNCTree/MemoryTier/Node.s: TNCTree/MemoryTier/Node.cpp.s
-.PHONY : TNCTree/MemoryTier/Node.s
+Ti-OCSSD/MemoryTier/Node.s: Ti-OCSSD/MemoryTier/Node.cpp.s
+.PHONY : Ti-OCSSD/MemoryTier/Node.s
 
 # target to generate assembly for a file
-TNCTree/MemoryTier/Node.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/MemoryTier/Node.cpp.s
-.PHONY : TNCTree/MemoryTier/Node.cpp.s
+Ti-OCSSD/MemoryTier/Node.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.s
+.PHONY : Ti-OCSSD/MemoryTier/Node.cpp.s
 
-TNCTree/StoreTier/asyncstore.o: TNCTree/StoreTier/asyncstore.cpp.o
-.PHONY : TNCTree/StoreTier/asyncstore.o
+Ti-OCSSD/StoreTier/asyncstore.o: Ti-OCSSD/StoreTier/asyncstore.cpp.o
+.PHONY : Ti-OCSSD/StoreTier/asyncstore.o
 
 # target to build an object file
-TNCTree/StoreTier/asyncstore.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.o
-.PHONY : TNCTree/StoreTier/asyncstore.cpp.o
+Ti-OCSSD/StoreTier/asyncstore.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Ti-OCSSD/StoreTier/asyncstore.cpp.o
+.PHONY : Ti-OCSSD/StoreTier/asyncstore.cpp.o
 
-TNCTree/StoreTier/asyncstore.i: TNCTree/StoreTier/asyncstore.cpp.i
-.PHONY : TNCTree/StoreTier/asyncstore.i
+Ti-OCSSD/StoreTier/asyncstore.i: Ti-OCSSD/StoreTier/asyncstore.cpp.i
+.PHONY : Ti-OCSSD/StoreTier/asyncstore.i
 
 # target to preprocess a source file
-TNCTree/StoreTier/asyncstore.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.i
-.PHONY : TNCTree/StoreTier/asyncstore.cpp.i
+Ti-OCSSD/StoreTier/asyncstore.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Ti-OCSSD/StoreTier/asyncstore.cpp.i
+.PHONY : Ti-OCSSD/StoreTier/asyncstore.cpp.i
 
-TNCTree/StoreTier/asyncstore.s: TNCTree/StoreTier/asyncstore.cpp.s
-.PHONY : TNCTree/StoreTier/asyncstore.s
+Ti-OCSSD/StoreTier/asyncstore.s: Ti-OCSSD/StoreTier/asyncstore.cpp.s
+.PHONY : Ti-OCSSD/StoreTier/asyncstore.s
 
 # target to generate assembly for a file
-TNCTree/StoreTier/asyncstore.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/StoreTier/asyncstore.cpp.s
-.PHONY : TNCTree/StoreTier/asyncstore.cpp.s
+Ti-OCSSD/StoreTier/asyncstore.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Ti-OCSSD/StoreTier/asyncstore.cpp.s
+.PHONY : Ti-OCSSD/StoreTier/asyncstore.cpp.s
 
-TNCTree/StoreTier/syncstore.o: TNCTree/StoreTier/syncstore.cpp.o
-.PHONY : TNCTree/StoreTier/syncstore.o
+Ti-OCSSD/StoreTier/syncstore.o: Ti-OCSSD/StoreTier/syncstore.cpp.o
+.PHONY : Ti-OCSSD/StoreTier/syncstore.o
 
 # target to build an object file
-TNCTree/StoreTier/syncstore.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.o
-.PHONY : TNCTree/StoreTier/syncstore.cpp.o
+Ti-OCSSD/StoreTier/syncstore.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o
+.PHONY : Ti-OCSSD/StoreTier/syncstore.cpp.o
 
-TNCTree/StoreTier/syncstore.i: TNCTree/StoreTier/syncstore.cpp.i
-.PHONY : TNCTree/StoreTier/syncstore.i
+Ti-OCSSD/StoreTier/syncstore.i: Ti-OCSSD/StoreTier/syncstore.cpp.i
+.PHONY : Ti-OCSSD/StoreTier/syncstore.i
 
 # target to preprocess a source file
-TNCTree/StoreTier/syncstore.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.i
-.PHONY : TNCTree/StoreTier/syncstore.cpp.i
+Ti-OCSSD/StoreTier/syncstore.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.i
+.PHONY : Ti-OCSSD/StoreTier/syncstore.cpp.i
 
-TNCTree/StoreTier/syncstore.s: TNCTree/StoreTier/syncstore.cpp.s
-.PHONY : TNCTree/StoreTier/syncstore.s
+Ti-OCSSD/StoreTier/syncstore.s: Ti-OCSSD/StoreTier/syncstore.cpp.s
+.PHONY : Ti-OCSSD/StoreTier/syncstore.s
 
 # target to generate assembly for a file
-TNCTree/StoreTier/syncstore.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/StoreTier/syncstore.cpp.s
-.PHONY : TNCTree/StoreTier/syncstore.cpp.s
+Ti-OCSSD/StoreTier/syncstore.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.s
+.PHONY : Ti-OCSSD/StoreTier/syncstore.cpp.s
 
-TNCTree/TNCtree.o: TNCTree/TNCtree.cpp.o
-.PHONY : TNCTree/TNCtree.o
+Ti-OCSSD/TiOCS.o: Ti-OCSSD/TiOCS.cpp.o
+.PHONY : Ti-OCSSD/TiOCS.o
 
 # target to build an object file
-TNCTree/TNCtree.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/TNCtree.cpp.o
-.PHONY : TNCTree/TNCtree.cpp.o
+Ti-OCSSD/TiOCS.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o
+.PHONY : Ti-OCSSD/TiOCS.cpp.o
 
-TNCTree/TNCtree.i: TNCTree/TNCtree.cpp.i
-.PHONY : TNCTree/TNCtree.i
+Ti-OCSSD/TiOCS.i: Ti-OCSSD/TiOCS.cpp.i
+.PHONY : Ti-OCSSD/TiOCS.i
 
 # target to preprocess a source file
-TNCTree/TNCtree.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/TNCtree.cpp.i
-.PHONY : TNCTree/TNCtree.cpp.i
+Ti-OCSSD/TiOCS.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.i
+.PHONY : Ti-OCSSD/TiOCS.cpp.i
 
-TNCTree/TNCtree.s: TNCTree/TNCtree.cpp.s
-.PHONY : TNCTree/TNCtree.s
+Ti-OCSSD/TiOCS.s: Ti-OCSSD/TiOCS.cpp.s
+.PHONY : Ti-OCSSD/TiOCS.s
 
 # target to generate assembly for a file
-TNCTree/TNCtree.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/TNCtree.cpp.s
-.PHONY : TNCTree/TNCtree.cpp.s
+Ti-OCSSD/TiOCS.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.s
+.PHONY : Ti-OCSSD/TiOCS.cpp.s
 
-TNCTree/utility/types.o: TNCTree/utility/types.cpp.o
-.PHONY : TNCTree/utility/types.o
+Ti-OCSSD/utility/types.o: Ti-OCSSD/utility/types.cpp.o
+.PHONY : Ti-OCSSD/utility/types.o
 
 # target to build an object file
-TNCTree/utility/types.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/utility/types.cpp.o
-.PHONY : TNCTree/utility/types.cpp.o
+Ti-OCSSD/utility/types.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o
+.PHONY : Ti-OCSSD/utility/types.cpp.o
 
-TNCTree/utility/types.i: TNCTree/utility/types.cpp.i
-.PHONY : TNCTree/utility/types.i
+Ti-OCSSD/utility/types.i: Ti-OCSSD/utility/types.cpp.i
+.PHONY : Ti-OCSSD/utility/types.i
 
 # target to preprocess a source file
-TNCTree/utility/types.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/utility/types.cpp.i
-.PHONY : TNCTree/utility/types.cpp.i
+Ti-OCSSD/utility/types.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.i
+.PHONY : Ti-OCSSD/utility/types.cpp.i
 
-TNCTree/utility/types.s: TNCTree/utility/types.cpp.s
-.PHONY : TNCTree/utility/types.s
+Ti-OCSSD/utility/types.s: Ti-OCSSD/utility/types.cpp.s
+.PHONY : Ti-OCSSD/utility/types.s
 
 # target to generate assembly for a file
-TNCTree/utility/types.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/TNCTree/utility/types.cpp.s
-.PHONY : TNCTree/utility/types.cpp.s
+Ti-OCSSD/utility/types.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.s
+.PHONY : Ti-OCSSD/utility/types.cpp.s
+
+global_variables/global_variables.o: global_variables/global_variables.cpp.o
+.PHONY : global_variables/global_variables.o
+
+# target to build an object file
+global_variables/global_variables.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/global_variables/global_variables.cpp.o
+.PHONY : global_variables/global_variables.cpp.o
+
+global_variables/global_variables.i: global_variables/global_variables.cpp.i
+.PHONY : global_variables/global_variables.i
+
+# target to preprocess a source file
+global_variables/global_variables.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/global_variables/global_variables.cpp.i
+.PHONY : global_variables/global_variables.cpp.i
+
+global_variables/global_variables.s: global_variables/global_variables.cpp.s
+.PHONY : global_variables/global_variables.s
+
+# target to generate assembly for a file
+global_variables/global_variables.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/global_variables/global_variables.cpp.s
+.PHONY : global_variables/global_variables.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -774,9 +1014,15 @@ help:
 	@echo "... Backend/SSDRead/reader.o"
 	@echo "... Backend/SSDRead/reader.i"
 	@echo "... Backend/SSDRead/reader.s"
+	@echo "... Backend/SSDWrite/parallel_writer.o"
+	@echo "... Backend/SSDWrite/parallel_writer.i"
+	@echo "... Backend/SSDWrite/parallel_writer.s"
 	@echo "... Backend/SSDWrite/writer.o"
 	@echo "... Backend/SSDWrite/writer.i"
 	@echo "... Backend/SSDWrite/writer.s"
+	@echo "... Backend/backend_variables.o"
+	@echo "... Backend/backend_variables.i"
+	@echo "... Backend/backend_variables.s"
 	@echo "... FIFO/FIFO.o"
 	@echo "... FIFO/FIFO.i"
 	@echo "... FIFO/FIFO.s"
@@ -804,6 +1050,27 @@ help:
 	@echo "... LSM-Tree/UtilityImplement/run.o"
 	@echo "... LSM-Tree/UtilityImplement/run.i"
 	@echo "... LSM-Tree/UtilityImplement/run.s"
+	@echo "... LSMTree-NoFTL/StorageManager.o"
+	@echo "... LSMTree-NoFTL/StorageManager.i"
+	@echo "... LSMTree-NoFTL/StorageManager.s"
+	@echo "... LSMTree-NoFTL/allocation.o"
+	@echo "... LSMTree-NoFTL/allocation.i"
+	@echo "... LSMTree-NoFTL/allocation.s"
+	@echo "... LSMTree-NoFTL/buffer.o"
+	@echo "... LSMTree-NoFTL/buffer.i"
+	@echo "... LSMTree-NoFTL/buffer.s"
+	@echo "... LSMTree-NoFTL/level.o"
+	@echo "... LSMTree-NoFTL/level.i"
+	@echo "... LSMTree-NoFTL/level.s"
+	@echo "... LSMTree-NoFTL/merge.o"
+	@echo "... LSMTree-NoFTL/merge.i"
+	@echo "... LSMTree-NoFTL/merge.s"
+	@echo "... LSMTree-NoFTL/region.o"
+	@echo "... LSMTree-NoFTL/region.i"
+	@echo "... LSMTree-NoFTL/region.s"
+	@echo "... LSMTree-NoFTL/run.o"
+	@echo "... LSMTree-NoFTL/run.i"
+	@echo "... LSMTree-NoFTL/run.s"
 	@echo "... MultiHash/EagerSplitHash/ESHash.o"
 	@echo "... MultiHash/EagerSplitHash/ESHash.i"
 	@echo "... MultiHash/EagerSplitHash/ESHash.s"
@@ -819,24 +1086,27 @@ help:
 	@echo "... MultiHash/LinearHash/LiHash.o"
 	@echo "... MultiHash/LinearHash/LiHash.i"
 	@echo "... MultiHash/LinearHash/LiHash.s"
-	@echo "... TNCTree/MemoryTier/MemTier.o"
-	@echo "... TNCTree/MemoryTier/MemTier.i"
-	@echo "... TNCTree/MemoryTier/MemTier.s"
-	@echo "... TNCTree/MemoryTier/Node.o"
-	@echo "... TNCTree/MemoryTier/Node.i"
-	@echo "... TNCTree/MemoryTier/Node.s"
-	@echo "... TNCTree/StoreTier/asyncstore.o"
-	@echo "... TNCTree/StoreTier/asyncstore.i"
-	@echo "... TNCTree/StoreTier/asyncstore.s"
-	@echo "... TNCTree/StoreTier/syncstore.o"
-	@echo "... TNCTree/StoreTier/syncstore.i"
-	@echo "... TNCTree/StoreTier/syncstore.s"
-	@echo "... TNCTree/TNCtree.o"
-	@echo "... TNCTree/TNCtree.i"
-	@echo "... TNCTree/TNCtree.s"
-	@echo "... TNCTree/utility/types.o"
-	@echo "... TNCTree/utility/types.i"
-	@echo "... TNCTree/utility/types.s"
+	@echo "... Ti-OCSSD/MemoryTier/MemTier.o"
+	@echo "... Ti-OCSSD/MemoryTier/MemTier.i"
+	@echo "... Ti-OCSSD/MemoryTier/MemTier.s"
+	@echo "... Ti-OCSSD/MemoryTier/Node.o"
+	@echo "... Ti-OCSSD/MemoryTier/Node.i"
+	@echo "... Ti-OCSSD/MemoryTier/Node.s"
+	@echo "... Ti-OCSSD/StoreTier/asyncstore.o"
+	@echo "... Ti-OCSSD/StoreTier/asyncstore.i"
+	@echo "... Ti-OCSSD/StoreTier/asyncstore.s"
+	@echo "... Ti-OCSSD/StoreTier/syncstore.o"
+	@echo "... Ti-OCSSD/StoreTier/syncstore.i"
+	@echo "... Ti-OCSSD/StoreTier/syncstore.s"
+	@echo "... Ti-OCSSD/TiOCS.o"
+	@echo "... Ti-OCSSD/TiOCS.i"
+	@echo "... Ti-OCSSD/TiOCS.s"
+	@echo "... Ti-OCSSD/utility/types.o"
+	@echo "... Ti-OCSSD/utility/types.i"
+	@echo "... Ti-OCSSD/utility/types.s"
+	@echo "... global_variables/global_variables.o"
+	@echo "... global_variables/global_variables.i"
+	@echo "... global_variables/global_variables.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

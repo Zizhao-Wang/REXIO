@@ -1,7 +1,6 @@
 CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/writer.cpp \
- /usr/include/stdc-predef.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/writer.h \
+ /home/TiOCS/src/Backend/SSDWrite/writer.cpp /usr/include/stdc-predef.h \
+ /home/TiOCS/src/Backend/SSDWrite/writer.h \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
@@ -134,14 +133,15 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: \
  /usr/include/c++/9/bits/invoke.h /usr/include/c++/9/limits \
  /usr/include/c++/9/bits/unordered_map.h \
  /usr/include/c++/9/bits/erase_if.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm.h \
  /usr/include/inttypes.h /usr/include/c++/9/stdlib.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm_util.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm_util.h \
  /usr/include/string.h /usr/include/strings.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm_spec.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm_spec.h \
  /usr/include/assert.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../TNCTree/MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../TNCTree/MemoryTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/Node.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/../../Backend/backend_variables.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Auxizilary/pre_definition.h \
  /usr/include/c++/9/iostream /usr/include/c++/9/ostream \
  /usr/include/c++/9/ios /usr/include/c++/9/bits/ios_base.h \
  /usr/include/c++/9/bits/locale_classes.h \
@@ -159,61 +159,64 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: \
  /usr/include/c++/9/bits/basic_ios.tcc \
  /usr/include/c++/9/bits/ostream.tcc /usr/include/c++/9/istream \
  /usr/include/c++/9/bits/istream.tcc \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Auxizilary/SysOutput.h \
  /usr/include/c++/9/algorithm /usr/include/c++/9/bits/stl_algo.h \
  /usr/include/c++/9/bits/algorithmfwd.h \
  /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
  /usr/include/c++/9/bits/uniform_int_dist.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../TNCTree/StoreTier/syncstore.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../TNCTree/StoreTier/../MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../TNCTree/StoreTier/../../LRU/lru.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/StoreTier/syncstore.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../MemoryTier/Node.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../../LRU/lru.h \
  /usr/include/c++/9/list /usr/include/c++/9/bits/stl_list.h \
  /usr/include/c++/9/bits/allocated_ptr.h /usr/include/c++/9/bits/list.tcc \
  /usr/include/c++/9/cassert \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../TNCTree/StoreTier/../../LRU/../TNCTree/MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../TNCTree/StoreTier/../../FIFO/FIFO.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../TNCTree/StoreTier/../../FIFO/../TNCTree/MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/LiHash.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../BlockManage/BlockInfo.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm_cli.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExHash.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExBucket.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../IODisk/WriteDisk.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/LsmTree.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/buffer.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../../LRU/../Ti-OCSSD/MemoryTier/Node.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../../FIFO/FIFO.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/StoreTier/../../FIFO/../Ti-OCSSD/MemoryTier/Node.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/backend_variables.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/LiHash.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../BlockManage/BlockInfo.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm_cli.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/pre_definition.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/LinearHash/../../Backend/IODisk/../../Backend/backend_variables.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Backend/backend_variables.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExHash.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExBucket.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
+ /home/TiOCS/src/Backend/SSDWrite/../backend_variables.h \
+ /home/TiOCS/src/Backend/SSDWrite/../IODisk/WriteDisk.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../LSM-Tree/LsmTree.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/buffer.h \
  /usr/include/c++/9/set /usr/include/c++/9/bits/stl_tree.h \
  /usr/include/c++/9/bits/stl_set.h /usr/include/c++/9/bits/stl_multiset.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/../../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/../../Backend/IODisk/WriteDisk.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/node2.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/level.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/../../Auxizilary/pre_definition.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/../../Backend/IODisk/WriteDisk.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/node2.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/level.h \
  /usr/include/c++/9/queue /usr/include/c++/9/deque \
  /usr/include/c++/9/bits/stl_deque.h /usr/include/c++/9/bits/deque.tcc \
  /usr/include/c++/9/bits/stl_queue.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/../../Auxizilary/SysOutput.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/run.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/spin_lock.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/../../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/run.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/spin_lock.h \
  /usr/include/c++/9/atomic /usr/include/c++/9/bits/atomic_base.h \
  /usr/include/c++/9/bits/atomic_lockfree_defines.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/worker_pool.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/worker_pool.h \
  /usr/include/c++/9/functional /usr/include/c++/9/bits/refwrap.h \
  /usr/include/c++/9/bits/std_function.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/thread_pool.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/thread_pool.h \
  /usr/include/c++/9/memory /usr/include/c++/9/bits/stl_raw_storage_iter.h \
  /usr/include/c++/9/ext/concurrence.h \
  /usr/include/c++/9/bits/unique_ptr.h \
@@ -227,20 +230,69 @@ CMakeFiles/src.dir/Backend/SSDWrite/writer.cpp.o: \
  /usr/include/c++/9/bits/unique_lock.h \
  /usr/include/c++/9/condition_variable /usr/include/c++/9/future \
  /usr/include/c++/9/bits/atomic_futex.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/../Auxizilary/SysOutput.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/merge.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/run.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../../TNCTree/TNCtree.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../SSDRead/reader.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../SSDRead/../../Auxizilary/SysOutput.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../SSDRead/../../TNCTree/StoreTier/syncstore.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../SSDRead/../../TNCTree/StoreTier/asyncstore.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../SSDRead/../../TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../SSDRead/../../TNCTree/utility/types.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../SSDRead/../../TNCTree/utility/../MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../SSDRead/../../MultiHash/LinearHash/node.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../SSDRead/../../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../SSDRead/../../MultiHash/LazySplitHash/LSNode.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../SSDRead/../../MultiHash/ExtendibleHash/ExNode.h \
- /home/femu/experiment1/code2/src/Backend/SSDWrite/../SSDRead/../../MultiHash/ExtendibleHash/ExHash.h
+ /home/TiOCS/src/Backend/SSDWrite/../../LSM-Tree/../Auxizilary/pre_definition.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../LSM-Tree/../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/merge.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../LSM-Tree/UtilityDefine/run.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../Ti-OCSSD/TiOCS.h \
+ /usr/include/unistd.h /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+ /usr/include/x86_64-linux-gnu/bits/environments.h \
+ /usr/include/x86_64-linux-gnu/bits/confname.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+ /usr/include/x86_64-linux-gnu/sys/wait.h /usr/include/signal.h \
+ /usr/include/x86_64-linux-gnu/bits/signum.h \
+ /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
+ /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
+ /usr/include/x86_64-linux-gnu/bits/sigaction.h \
+ /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
+ /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
+ /usr/include/x86_64-linux-gnu/sys/ucontext.h \
+ /usr/include/x86_64-linux-gnu/bits/sigstack.h \
+ /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
+ /usr/include/x86_64-linux-gnu/bits/sigthread.h \
+ /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+ /usr/include/x86_64-linux-gnu/sys/ipc.h \
+ /usr/include/x86_64-linux-gnu/bits/ipctypes.h \
+ /usr/include/x86_64-linux-gnu/bits/ipc.h \
+ /usr/include/x86_64-linux-gnu/bits/ipc-perm.h \
+ /usr/include/x86_64-linux-gnu/sys/prctl.h /usr/include/linux/prctl.h \
+ /usr/include/linux/types.h /usr/include/x86_64-linux-gnu/asm/types.h \
+ /usr/include/asm-generic/types.h /usr/include/asm-generic/int-ll64.h \
+ /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+ /usr/include/asm-generic/bitsperlong.h /usr/include/linux/posix_types.h \
+ /usr/include/linux/stddef.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+ /usr/include/asm-generic/posix_types.h \
+ /usr/include/x86_64-linux-gnu/sys/shm.h \
+ /usr/include/x86_64-linux-gnu/bits/shm.h \
+ /usr/include/x86_64-linux-gnu/bits/shmlba.h \
+ /usr/include/x86_64-linux-gnu/bits/shm-pad.h \
+ /usr/include/x86_64-linux-gnu/sys/msg.h \
+ /usr/include/x86_64-linux-gnu/bits/msq.h \
+ /usr/include/x86_64-linux-gnu/bits/msq-pad.h \
+ /home/TiOCS/src/Backend/SSDWrite/../SSDRead/reader.h \
+ /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Ti-OCSSD/StoreTier/syncstore.h \
+ /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Ti-OCSSD/StoreTier/asyncstore.h \
+ /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Ti-OCSSD/StoreTier/../../Backend/backend_variables.h \
+ /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Ti-OCSSD/utility/types.h \
+ /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Ti-OCSSD/utility/../MemoryTier/Node.h \
+ /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Ti-OCSSD/TiOCS.h \
+ /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../MultiHash/LinearHash/node.h \
+ /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../Auxizilary/pre_definition.h \
+ /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../MultiHash/LazySplitHash/LSNode.h \
+ /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../MultiHash/ExtendibleHash/ExNode.h \
+ /home/TiOCS/src/Backend/SSDWrite/../SSDRead/../../MultiHash/ExtendibleHash/ExHash.h \
+ /home/TiOCS/src/Backend/SSDWrite/../../global_variables/global_variables.h

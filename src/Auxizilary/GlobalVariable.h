@@ -33,22 +33,6 @@ typedef unsigned int uint_32;
  * All inserted data will be stored in SSD blocks in units of entries. 
  **/
 
-typedef uint64_t SKey;
-typedef uint64_t SValue;
 
-#define DELETEVALUE UINT64_MAX
-
-typedef struct SEntry
-{
-	SKey key1;
-	SValue val;
-}SEntry;
-
-
-/**
- *  
- **/
-typedef uint64_t PageType;
-typedef uint64_t BlockType;
 
 #endif //EXPERIMENT1_GLOBALVARIABLE_H

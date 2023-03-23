@@ -60,13 +60,15 @@ int GlobalInitialize(int argc, char **argv)
     chunk_write_pointer = new size_t[geo->l.npugrp *geo->l.npunit*geo->l.nchunk];
     memset(chunk_write_pointer,0,geo->l.npugrp *geo->l.npunit*geo->l.nchunk*sizeof(size_t));
     lun_current_pointer = new size_t[geo->l.npugrp * geo->l.npunit];
-    memset(lun_current_pointer,0,geo->l.npugrp * geo->l.npunit*sizeof(size_t));
+    lun_current_pointer[0] = 0;
+    for(size_t i=1;i<geo->l.npugrp * geo->l.npunit;i++)
+    {
+        lun_current_pointer[i] = lun_current_pointer[i-1] + geo->l.nchunk*geo->l.nsectr;
+    }
     max_os_threads = std::thread::hardware_concurrency();
-    
+
     const char * process_Name = "Main of TiOCS";
     prctl(PR_SET_NAME, reinterpret_cast<unsigned long>(process_Name),0,0,0);
-
-    
 
     printf(UCAS_SIAT);
     printf(Name);

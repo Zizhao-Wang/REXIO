@@ -18,29 +18,33 @@ void* parallel_write_into_pu(void *args)
     uint64_t page_num = arg->page_num;
     int err = 0;
 
-   printf("Page %lu writing success \n",page_num);
+    //printf("Page %lu writing success \n",page_num);
 
-    // if(page_num != UINT64_MAX )
-    // { 
-    //     struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, page_num);
-    //     struct nvm_addr addrs[ws_min];
-    //     for (size_t aidx = 0; aidx < ws_min; ++aidx) 
-    //     {
-    //         addrs[aidx].val = addrs_chunk.val;
-    //         addrs[aidx].l.sectr = (page_num%4096)+aidx;
-    //     }
+    if(page_num != UINT64_MAX )
+    { 
+        struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, page_num);
+        struct nvm_addr addrs[ws_min];
+        for (size_t aidx = 0; aidx < ws_min; ++aidx) 
+        {
+            addrs[aidx].val = addrs_chunk.val;
+            addrs[aidx].l.sectr = (page_num%4096)+aidx;
+        }
 
-    //     err = nvm_cmd_write(bp->dev, addrs, ws_min,buffer, NULL,0x0, NULL);
-    //     if(err == 0) 
-    //     {
-    //         printf("Page %lu writing success \n",page_num);
-    //         chunk_write_pointer[page_num/4096] = page_num;
-    //     }
-    //     else
-    //     {
-    //         EMessageOutput("Page writing failed in "+ Uint64toString(page_num)+"\n", 4598);
-    //     }
-    // }
+        err = nvm_cmd_write(bp->dev, addrs, ws_min,buffer, NULL,0x0, NULL);
+        if(err == 0) 
+        {
+            //printf("Page %lu writing success \n",page_num);
+            chunk_write_pointer[page_num/4096] = page_num;
+            writes++;
+        }
+        else
+        {
+            EMessageOutput("Page writing failed in "+ Uint64toString(page_num)+"\n", 4598);
+        }
+    }
+
+    return NULL;
+    
 }
 
 
@@ -66,6 +70,7 @@ uint64_t parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_lun)
     size_t num_copy, vector_offset, batch_pages;
     int res = 0;
     struct thread_param args [geo->l.nchunk];
+    int ret = 0;
 
     for (size_t i = 0; i < run_data.size(); i+= (geo->l.nchunk * page_capacity))
     {
@@ -88,7 +93,7 @@ uint64_t parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_lun)
             buffer[j] = temp;
         }
 
-        printf("===========\n current write point: %lu \n", cwrite_point_lun);
+        // printf("===========\n current write point: %lu \n", cwrite_point_lun);
         
         for (size_t j = 0; j < batch_pages; j+=max_os_threads)
         {
@@ -117,7 +122,7 @@ uint64_t parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_lun)
                 }
             }
 
-            printf("Threads batch created and reclaim successfully!\n");
+            //printf("Threads batch created and reclaim successfully!\n");
             if (cwrite_point_lun + max_os_threads * geo->l.nsectr >= (num_lun+1) * geo->l.nchunk*geo->l.nsectr)
             {
                 lun_current_pointer[num_lun] = (cwrite_point_lun + max_os_threads*geo->l.nsectr) % ((num_lun+1)* geo->l.nchunk*geo->l.nsectr);
@@ -129,8 +134,11 @@ uint64_t parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_lun)
             }   
         }
 
-       printf("current write point: %lu \n =========== \n", lun_current_pointer[num_lun]);
+        ret += batch_pages;
+        // printf("current write point: %lu \n =========== \n", lun_current_pointer[num_lun]);
     }
+
+    printf("%d pages have been written into LUN %lu \n", ret, num_lun);
     
     return 0;
 

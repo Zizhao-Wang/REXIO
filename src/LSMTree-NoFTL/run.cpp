@@ -41,7 +41,7 @@ int NoFTLRun::RunDataWrite(void)
     printf("Size of Rundata:%lu\n",Rundata.size());
     if(Rundata.size() % pagesize == 0)
     {
-        Pointer = parallel_coordinator(Rundata,lun_num);
+        Pointer = parallel_coordinator(Rundata,1);
         //printf("The %lu Page: %lu, Size: %lu\n",(Size/pagesize)-1,Pointer,Size);
         //printf("Datum of Run in Level write succeed!\n");
         PagePointers[(Size/pagesize)-1] = Pointer;

@@ -28,7 +28,16 @@
 
 uint64_t async_write_channel(std::vector<entry_t> Entries, uint64_t pageno);
 
-uint64_t parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_lun);
+
+/* parallel read/write function */
+void* parallel_write_into_pu(void *args);
+
+void* parallel_read_from_pu(void *args);
+
+
+
+
+void* parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_lun, int mode, void* read_param);
 
 
 #endif  //TiOCS_BACKEND_PARALLELWRITER_H

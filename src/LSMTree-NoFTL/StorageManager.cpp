@@ -395,7 +395,7 @@ void NoFTLKVInit(void)
 
     /* workload a: insert only*/
     startTime = clock();
-    for(SKey i=1;i<=262145;i++)
+    for(SKey i=1;i<=524290;i++)
     {
         if(i%10000000==0||i==1000000)
         {

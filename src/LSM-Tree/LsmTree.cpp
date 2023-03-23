@@ -406,7 +406,7 @@ void LSMTreePort()
 
     /* workload a: insert only*/
     startTime = clock();
-    for(SKey i=1;i<=40000000;i++)
+    for(SKey i=1;i<=524290;i++)
     {
         if(i%10000000==0||i==1000000)
         {
@@ -422,7 +422,7 @@ void LSMTreePort()
     std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
     //GPTDisplay();
     
-
+    exit(0);
 
     /* workload b: read only, all in it */
     startTime = clock();

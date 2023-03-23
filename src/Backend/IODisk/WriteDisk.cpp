@@ -19,6 +19,8 @@
 #include "../BackendMain.h"
 #include "../SSDWrite/writer.h"
 #include "../../LSM-Tree/LsmTree.h"
+#include "../../global_variables/global_variables.h"
+#include "../backend_variables.h"
 
 size_t writepointer = 0;
 size_t blockpointer = 0;

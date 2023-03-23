@@ -19,9 +19,13 @@
 
 #include <vector>
 #include <queue>
-#include "../Auxizilary/VariablesTypes.h"
+#include "../Auxizilary/pre_definition.h"
 #include "../Backend/IODisk/WriteDisk.h"
 #include "../Auxizilary/SysOutput.h"
+
+
+
+
 
 class NoFTLRun 
 {
@@ -29,12 +33,15 @@ class NoFTLRun
 private:
     uint64_t Size, MaxSize;
     uint64_t MaxKey, MinKey;
+    uint32_t lun_num;
+    struct coordinator_param *run_param;
+    entry_t *read_data;
     std::vector<PageType> PagePointers;
     std::vector<entry_t> Rundata;
     std::vector<KEY_t> FencePointers;
     
 public:
-    NoFTLRun(uint64_t);
+    NoFTLRun(uint64_t, uint32_t);
     int  RunDataWrite();
     void PointersDisplay();
     void PutValue(entry_t entry);
@@ -50,7 +57,7 @@ public:
     int SetFencePointers(std::vector<KEY_t>);
     void Reset();
     void Reset(bool flag);
-    int SetMaxkey(KEY_t);
+    void SetMaxkey(KEY_t);
     void Unbind();
     int DataClear(std::vector<entry_t> );
     unsigned long GetNowSize();

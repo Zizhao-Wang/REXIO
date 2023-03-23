@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/femu/experiment1/code2/src/../../../liblightnvm/include
+CXX_INCLUDES = -I/home/TiOCS/src/../../liblightnvm/include
 
 CXX_FLAGS =  -fopenmp -g -std=gnu++14
 

@@ -9,18 +9,20 @@
 #include <cmath>
 #include "../Backend/IODisk/WriteDisk.h"
 #include "../Backend/SSDWrite/writer.h"
+#include "../Backend/SSDWrite/parallel_writer.h"
 #include "../Backend/SSDRead/reader.h"
 
-NoFTLRun::NoFTLRun(unsigned long maxsize)
+NoFTLRun::NoFTLRun(unsigned long maxsize, uint32_t lun_num)
 {
     this->MaxSize = maxsize;
-    for(int i=0;i<this->MaxSize/CalculatePageCapacity(sizeof(entry_t));i++) //Initialize all page pointers as UINT64_MAX
-    {
-        PagePointers.emplace_back(UINT64_MAX);
-    }
+    this->lun_num = lun_num;
+
+    read_data = nullptr;
+
     MaxKey = 0;
     MinKey = UINT64_MAX;
     Size = 0;
+
 }
 
 void NoFTLRun::PointersDisplay()
@@ -36,10 +38,10 @@ int NoFTLRun::RunDataWrite(void)
 
     uint64_t pagesize = CalculatePageCapacity(sizeof(entry_t));
     PageType Pointer;
-    
-    if(Rundata.size() == pagesize)
+    printf("Size of Rundata:%lu\n",Rundata.size());
+    if(Rundata.size() % pagesize == 0)
     {
-        Pointer = SinglePageWrite(Rundata,PagePointers[(Size/pagesize)-1]);
+        parallel_coordinator(Rundata,lun_num, PAOCS_WRITE_MODE,nullptr);
         //printf("The %lu Page: %lu, Size: %lu\n",(Size/pagesize)-1,Pointer,Size);
         //printf("Datum of Run in Level write succeed!\n");
         PagePointers[(Size/pagesize)-1] = Pointer;
@@ -61,7 +63,7 @@ std::vector<entry_t> NoFTLRun::SingleRunRead()
         if(PagePointers[i]== UINT64_MAX)
             continue;
         std::vector<entry_t> temp;
-        temp = RunReadFromPage(PagePointers[i]);
+        parallel_coordinator(temp, lun_num, PAOCS_READ_MODE, run_param);
         entries1.insert(entries1.end(),temp.begin(),temp.end());
         GPT[PagePointers[i]/4096][(PagePointers[i]%4096)/4] = false;
     }
@@ -103,12 +105,9 @@ void NoFTLRun::PutValue(entry_t entry)
     MaxKey = max(entry.key,MaxKey);
     MinKey = min(entry.key,MinKey);
     Size++;
-   
-    //a.emplace_back(entry.key);
     
-    if(Rundata.size() == CalculatePageCapacity(sizeof(entry_t)) && Size != 0)
+    if(Size == MaxSize)
     {
-        //a.emplace_back(entry.key);
         FencePointers.emplace_back(entry.key);
         int err = RunDataWrite();
         if(err==0)
@@ -286,7 +285,7 @@ void NoFTLRun::Reset(bool flag)
     MinKey = UINT64_MAX;
 }
 
-int NoFTLRun::SetMaxkey(KEY_t key)
+void NoFTLRun::SetMaxkey(KEY_t key)
 {
     MaxKey = max(MaxKey,key);
 }

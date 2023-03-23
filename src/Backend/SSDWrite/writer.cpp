@@ -12,14 +12,16 @@
  */
 
 #include "writer.h"
-
+#include "../backend_variables.h"
 #include <liblightnvm_cli.h>
 #include <liblightnvm_spec.h>
 #include "../IODisk/WriteDisk.h"
 #include "../../Auxizilary/GlobalVariable.h"
 #include "../../LSM-Tree/LsmTree.h"
-#include "../../TNCTree/TNCtree.h"
+#include "../../Ti-OCSSD/TiOCS.h"
 #include "../SSDRead/reader.h"
+#include "../backend_variables.h"
+#include "../../global_variables/global_variables.h"
 
 
 std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkLog;
@@ -61,8 +63,7 @@ int SinglePageWrite()
 
     /* Function flag, default value equals 0(successful flag). */
     int err = 0;
-    readcount++;
-    write++;
+    writes++;
     struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, DataPagePointer);
     size_t ws_min = nvm_dev_get_ws_min(bp->dev);
     struct nvm_addr addrs[ws_min];
@@ -97,7 +98,7 @@ int PageLogWrite(uint64_t BlockId)
 
     /* Function flag, default value equals 0(successful flag). */
     int err = 0;
-    write++;
+    writes++;
     PageType LogPagePointer = chunkusage[BlockId];
     assert(LogPagePointer<=4092);
     //printf("LogPagePointer:%lu BlockID:%lu \n",LogPagePointer,BlockId);

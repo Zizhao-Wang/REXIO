@@ -20,9 +20,10 @@
 #include <unordered_map>
 #include <liblightnvm.h>
 #include "../BlockManage/BlockInfo.h"
-#include "../../Auxizilary/VariablesTypes.h"
+#include "../../Auxizilary/pre_definition.h"
 #include "../../Auxizilary/SysOutput.h"
 #include "../../Auxizilary/GlobalVariable.h"
+#include "../../Backend/backend_variables.h"
 using namespace std;
 
 
@@ -33,7 +34,7 @@ extern size_t writepointer;
 extern size_t sectorpointer;
 extern size_t blockpointer;
 
-extern struct nvm_bp* bp;
+
 extern bool flag;
 
 

@@ -1,4 +1,4 @@
-CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment1/code2/src/main.cpp \
+CMakeFiles/src.dir/main.cpp.o: /home/TiOCS/src/main.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/9/ctime \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h \
@@ -155,66 +155,123 @@ CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment1/code2/src/main.cpp \
  /usr/include/c++/9/bits/uniform_int_dist.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/opt_random.h \
  /usr/include/c++/9/bits/random.tcc /usr/include/c++/9/numeric \
- /usr/include/c++/9/bits/stl_numeric.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm.h \
- /usr/include/inttypes.h /usr/include/c++/9/stdlib.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm_util.h \
+ /usr/include/c++/9/bits/stl_numeric.h /usr/include/unistd.h \
+ /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+ /usr/include/x86_64-linux-gnu/bits/environments.h \
+ /usr/include/x86_64-linux-gnu/bits/confname.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+ /usr/include/x86_64-linux-gnu/sys/wait.h /usr/include/signal.h \
+ /usr/include/x86_64-linux-gnu/bits/signum.h \
+ /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
+ /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
+ /usr/include/x86_64-linux-gnu/bits/sigaction.h \
+ /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
+ /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
+ /usr/include/x86_64-linux-gnu/sys/ucontext.h \
+ /usr/include/x86_64-linux-gnu/bits/sigstack.h \
+ /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
+ /usr/include/x86_64-linux-gnu/bits/sigthread.h \
+ /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+ /usr/include/x86_64-linux-gnu/sys/msg.h \
+ /usr/include/x86_64-linux-gnu/sys/ipc.h \
+ /usr/include/x86_64-linux-gnu/bits/ipctypes.h \
+ /usr/include/x86_64-linux-gnu/bits/ipc.h \
+ /usr/include/x86_64-linux-gnu/bits/ipc-perm.h \
+ /usr/include/x86_64-linux-gnu/bits/msq.h \
+ /usr/include/x86_64-linux-gnu/bits/msq-pad.h /usr/include/c++/9/cstring \
  /usr/include/string.h /usr/include/strings.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm_spec.h \
- /usr/include/assert.h /home/femu/experiment1/code2/src/TNCTree/TNCtree.h \
- /home/femu/experiment1/code2/src/MultiHash/ExtendibleHash/ExHash.h \
- /home/femu/experiment1/code2/src/MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
- /usr/include/c++/9/unordered_map /usr/include/c++/9/ext/aligned_buffer.h \
- /usr/include/c++/9/bits/hashtable.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm.h \
+ /usr/include/inttypes.h /usr/include/c++/9/stdlib.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm_util.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm_spec.h \
+ /usr/include/assert.h /home/TiOCS/src/Ti-OCSSD/TiOCS.h \
+ /usr/include/x86_64-linux-gnu/sys/prctl.h /usr/include/linux/prctl.h \
+ /usr/include/linux/types.h /usr/include/x86_64-linux-gnu/asm/types.h \
+ /usr/include/asm-generic/types.h /usr/include/asm-generic/int-ll64.h \
+ /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+ /usr/include/asm-generic/bitsperlong.h /usr/include/linux/posix_types.h \
+ /usr/include/linux/stddef.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+ /usr/include/asm-generic/posix_types.h \
+ /usr/include/x86_64-linux-gnu/sys/shm.h \
+ /usr/include/x86_64-linux-gnu/bits/shm.h \
+ /usr/include/x86_64-linux-gnu/bits/shmlba.h \
+ /usr/include/x86_64-linux-gnu/bits/shm-pad.h \
+ /home/TiOCS/src/LSMTree-NoFTL/StorageManager.h \
+ /home/TiOCS/src/LSMTree-NoFTL/buffer.h /usr/include/c++/9/set \
+ /usr/include/c++/9/bits/stl_tree.h \
+ /usr/include/c++/9/ext/aligned_buffer.h \
+ /usr/include/c++/9/bits/stl_set.h /usr/include/c++/9/bits/stl_multiset.h \
+ /usr/include/c++/9/bits/erase_if.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Auxizilary/pre_definition.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/WriteDisk.h \
+ /usr/include/c++/9/unordered_map /usr/include/c++/9/bits/hashtable.h \
  /usr/include/c++/9/bits/hashtable_policy.h /usr/include/c++/9/tuple \
  /usr/include/c++/9/utility /usr/include/c++/9/bits/stl_relops.h \
  /usr/include/c++/9/array /usr/include/c++/9/bits/uses_allocator.h \
  /usr/include/c++/9/bits/invoke.h /usr/include/c++/9/bits/unordered_map.h \
- /usr/include/c++/9/bits/erase_if.h \
- /home/femu/experiment1/code2/src/MultiHash/ExtendibleHash/../../Backend/IODisk/../BlockManage/BlockInfo.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm_cli.h \
- /home/femu/experiment1/code2/src/MultiHash/ExtendibleHash/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/MultiHash/ExtendibleHash/../../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/MultiHash/ExtendibleHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../BlockManage/BlockInfo.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm_cli.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../../Auxizilary/pre_definition.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../../Auxizilary/SysOutput.h \
  /usr/include/c++/9/algorithm /usr/include/c++/9/bits/stl_algo.h \
  /usr/include/c++/9/bits/algorithmfwd.h \
  /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
- /home/femu/experiment1/code2/src/MultiHash/ExtendibleHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/MultiHash/ExtendibleHash/ExBucket.h \
- /home/femu/experiment1/code2/src/MultiHash/ExtendibleHash/ExNode.h \
- /home/femu/experiment1/code2/src/MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/LSHash.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../Bucket.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Auxizilary/SysOutput.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/LSNode.h \
- /home/femu/experiment1/code2/src/MultiHash/LazySplitHash/../../Backend/IODisk/WriteDisk.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/LiHash.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/node.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
- /home/femu/experiment1/code2/src/Auxizilary/Logo.h \
- /home/femu/experiment1/code2/src/LSM-Tree/LsmTree.h \
- /home/femu/experiment1/code2/src/LSM-Tree/UtilityDefine/buffer.h \
- /usr/include/c++/9/set /usr/include/c++/9/bits/stl_tree.h \
- /usr/include/c++/9/bits/stl_set.h /usr/include/c++/9/bits/stl_multiset.h \
- /home/femu/experiment1/code2/src/LSM-Tree/UtilityDefine/../../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/LSM-Tree/UtilityDefine/../../Backend/IODisk/WriteDisk.h \
- /home/femu/experiment1/code2/src/LSM-Tree/UtilityDefine/node2.h \
- /home/femu/experiment1/code2/src/LSM-Tree/UtilityDefine/level.h \
- /usr/include/c++/9/queue /usr/include/c++/9/deque \
- /usr/include/c++/9/bits/stl_deque.h /usr/include/c++/9/bits/deque.tcc \
- /usr/include/c++/9/bits/stl_queue.h \
- /home/femu/experiment1/code2/src/LSM-Tree/UtilityDefine/../../Auxizilary/SysOutput.h \
- /home/femu/experiment1/code2/src/LSM-Tree/UtilityDefine/run.h \
- /home/femu/experiment1/code2/src/LSM-Tree/UtilityDefine/spin_lock.h \
- /usr/include/c++/9/atomic /usr/include/c++/9/bits/atomic_base.h \
- /usr/include/c++/9/bits/atomic_lockfree_defines.h \
- /home/femu/experiment1/code2/src/LSM-Tree/UtilityDefine/worker_pool.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Backend/IODisk/../../Backend/backend_variables.h \
+ /home/TiOCS/src/LSMTree-NoFTL/level.h /usr/include/c++/9/queue \
+ /usr/include/c++/9/deque /usr/include/c++/9/bits/stl_deque.h \
+ /usr/include/c++/9/bits/deque.tcc /usr/include/c++/9/bits/stl_queue.h \
+ /home/TiOCS/src/LSMTree-NoFTL/../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/LSMTree-NoFTL/run.h \
+ /home/TiOCS/src/LSMTree-NoFTL/merge.h /usr/include/c++/9/cassert \
  /usr/include/c++/9/functional /usr/include/c++/9/bits/refwrap.h \
  /usr/include/c++/9/bits/std_function.h \
- /home/femu/experiment1/code2/src/LSM-Tree/UtilityDefine/thread_pool.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/ExHash.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/ExBucket.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/ExNode.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/ExtendibleHash/../../Backend/backend_variables.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/LSHash.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../Bucket.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/backend_variables.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/LSNode.h \
+ /home/TiOCS/src/MultiHash/LazySplitHash/../../Backend/IODisk/WriteDisk.h \
+ /home/TiOCS/src/MultiHash/LinearHash/LiHash.h \
+ /home/TiOCS/src/MultiHash/LinearHash/node.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/backend_variables.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
+ /home/TiOCS/src/Auxizilary/Logo.h /home/TiOCS/src/LSM-Tree/LsmTree.h \
+ /home/TiOCS/src/LSM-Tree/UtilityDefine/buffer.h \
+ /home/TiOCS/src/LSM-Tree/UtilityDefine/../../Auxizilary/pre_definition.h \
+ /home/TiOCS/src/LSM-Tree/UtilityDefine/../../Backend/IODisk/WriteDisk.h \
+ /home/TiOCS/src/LSM-Tree/UtilityDefine/node2.h \
+ /home/TiOCS/src/LSM-Tree/UtilityDefine/level.h \
+ /home/TiOCS/src/LSM-Tree/UtilityDefine/../../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/LSM-Tree/UtilityDefine/run.h \
+ /home/TiOCS/src/LSM-Tree/UtilityDefine/spin_lock.h \
+ /usr/include/c++/9/atomic /usr/include/c++/9/bits/atomic_base.h \
+ /usr/include/c++/9/bits/atomic_lockfree_defines.h \
+ /home/TiOCS/src/LSM-Tree/UtilityDefine/worker_pool.h \
+ /home/TiOCS/src/LSM-Tree/UtilityDefine/thread_pool.h \
  /usr/include/c++/9/memory /usr/include/c++/9/bits/stl_raw_storage_iter.h \
  /usr/include/c++/9/ext/concurrence.h \
  /usr/include/c++/9/bits/unique_ptr.h \
@@ -229,8 +286,9 @@ CMakeFiles/src.dir/main.cpp.o: /home/femu/experiment1/code2/src/main.cpp \
  /usr/include/c++/9/bits/unique_lock.h \
  /usr/include/c++/9/condition_variable /usr/include/c++/9/future \
  /usr/include/c++/9/bits/atomic_futex.h \
- /home/femu/experiment1/code2/src/LSM-Tree/../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/LSM-Tree/../Auxizilary/SysOutput.h \
- /home/femu/experiment1/code2/src/LSM-Tree/UtilityDefine/merge.h \
- /usr/include/c++/9/cassert \
- /home/femu/experiment1/code2/src/LSM-Tree/UtilityDefine/run.h
+ /home/TiOCS/src/LSM-Tree/../Auxizilary/pre_definition.h \
+ /home/TiOCS/src/LSM-Tree/../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/LSM-Tree/UtilityDefine/merge.h \
+ /home/TiOCS/src/LSM-Tree/UtilityDefine/run.h \
+ /home/TiOCS/src/global_variables/global_variables.h \
+ /home/TiOCS/src/Backend/backend_variables.h

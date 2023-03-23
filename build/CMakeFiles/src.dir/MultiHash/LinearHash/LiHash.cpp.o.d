@@ -1,7 +1,6 @@
 CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o: \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/LiHash.cpp \
- /usr/include/stdc-predef.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/LiHash.h \
+ /home/TiOCS/src/MultiHash/LinearHash/LiHash.cpp \
+ /usr/include/stdc-predef.h /home/TiOCS/src/MultiHash/LinearHash/LiHash.h \
  /usr/include/c++/9/iostream \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h \
@@ -142,9 +141,9 @@ CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o: \
  /usr/include/c++/9/bits/stl_uninitialized.h \
  /usr/include/c++/9/bits/stl_vector.h \
  /usr/include/c++/9/bits/stl_bvector.h /usr/include/c++/9/bits/vector.tcc \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/node.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
+ /home/TiOCS/src/MultiHash/LinearHash/node.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/backend_variables.h \
  /usr/include/c++/9/unordered_map /usr/include/c++/9/ext/aligned_buffer.h \
  /usr/include/c++/9/bits/hashtable.h \
  /usr/include/c++/9/bits/hashtable_policy.h /usr/include/c++/9/tuple \
@@ -153,54 +152,107 @@ CMakeFiles/src.dir/MultiHash/LinearHash/LiHash.cpp.o: \
  /usr/include/c++/9/bits/invoke.h /usr/include/c++/9/limits \
  /usr/include/c++/9/bits/unordered_map.h \
  /usr/include/c++/9/bits/erase_if.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm.h \
  /usr/include/inttypes.h /usr/include/c++/9/stdlib.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm_util.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm_util.h \
  /usr/include/string.h /usr/include/strings.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm_spec.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm_spec.h \
  /usr/include/assert.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/IODisk/../BlockManage/BlockInfo.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm_cli.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/IODisk/../BlockManage/BlockInfo.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm_cli.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/pre_definition.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
  /usr/include/c++/9/algorithm /usr/include/c++/9/bits/stl_algo.h \
  /usr/include/c++/9/bits/algorithmfwd.h \
  /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
  /usr/include/c++/9/bits/uniform_int_dist.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDRead/reader.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Auxizilary/SysOutput.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDRead/../../TNCTree/StoreTier/syncstore.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDRead/../../TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDRead/../../TNCTree/StoreTier/../MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDRead/../../TNCTree/StoreTier/../MemoryTier/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDRead/../../TNCTree/StoreTier/../../LRU/lru.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/IODisk/../../Backend/backend_variables.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/reader.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/syncstore.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../MemoryTier/Node.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../MemoryTier/../../Backend/backend_variables.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../LRU/lru.h \
  /usr/include/c++/9/list /usr/include/c++/9/bits/stl_list.h \
  /usr/include/c++/9/bits/allocated_ptr.h /usr/include/c++/9/bits/list.tcc \
  /usr/include/c++/9/cassert \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDRead/../../TNCTree/StoreTier/../../LRU/../TNCTree/MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDRead/../../TNCTree/StoreTier/../../FIFO/FIFO.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDRead/../../TNCTree/StoreTier/../../FIFO/../TNCTree/MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDRead/../../TNCTree/StoreTier/asyncstore.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDRead/../../TNCTree/utility/types.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDRead/../../TNCTree/utility/../MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/LinearHash/node.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/LazySplitHash/LSNode.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExNode.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExHash.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExBucket.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExNode.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDWrite/writer.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../TNCTree/MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../Auxizilary/SysOutput.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../TNCTree/StoreTier/syncstore.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../MultiHash/LinearHash/LiHash.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
- /home/femu/experiment1/code2/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExHash.h
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../LRU/../Ti-OCSSD/MemoryTier/Node.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../FIFO/FIFO.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../FIFO/../Ti-OCSSD/MemoryTier/Node.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/asyncstore.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../Backend/backend_variables.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/utility/types.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/utility/../MemoryTier/Node.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Ti-OCSSD/TiOCS.h \
+ /usr/include/unistd.h /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+ /usr/include/x86_64-linux-gnu/bits/environments.h \
+ /usr/include/x86_64-linux-gnu/bits/confname.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+ /usr/include/x86_64-linux-gnu/sys/wait.h /usr/include/signal.h \
+ /usr/include/x86_64-linux-gnu/bits/signum.h \
+ /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
+ /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
+ /usr/include/x86_64-linux-gnu/bits/sigaction.h \
+ /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
+ /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
+ /usr/include/x86_64-linux-gnu/sys/ucontext.h \
+ /usr/include/x86_64-linux-gnu/bits/sigstack.h \
+ /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
+ /usr/include/x86_64-linux-gnu/bits/sigthread.h \
+ /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+ /usr/include/x86_64-linux-gnu/sys/ipc.h \
+ /usr/include/x86_64-linux-gnu/bits/ipctypes.h \
+ /usr/include/x86_64-linux-gnu/bits/ipc.h \
+ /usr/include/x86_64-linux-gnu/bits/ipc-perm.h \
+ /usr/include/x86_64-linux-gnu/sys/prctl.h /usr/include/linux/prctl.h \
+ /usr/include/linux/types.h /usr/include/x86_64-linux-gnu/asm/types.h \
+ /usr/include/asm-generic/types.h /usr/include/asm-generic/int-ll64.h \
+ /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+ /usr/include/asm-generic/bitsperlong.h /usr/include/linux/posix_types.h \
+ /usr/include/linux/stddef.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+ /usr/include/asm-generic/posix_types.h \
+ /usr/include/x86_64-linux-gnu/sys/shm.h \
+ /usr/include/x86_64-linux-gnu/bits/shm.h \
+ /usr/include/x86_64-linux-gnu/bits/shmlba.h \
+ /usr/include/x86_64-linux-gnu/bits/shm-pad.h \
+ /usr/include/x86_64-linux-gnu/sys/msg.h \
+ /usr/include/x86_64-linux-gnu/bits/msq.h \
+ /usr/include/x86_64-linux-gnu/bits/msq-pad.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/LinearHash/node.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../Auxizilary/pre_definition.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/LazySplitHash/LSNode.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExNode.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/backend_variables.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExHash.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExBucket.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDRead/../../MultiHash/ExtendibleHash/ExNode.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/writer.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../Ti-OCSSD/MemoryTier/Node.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../Auxizilary/pre_definition.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../Ti-OCSSD/StoreTier/syncstore.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../MultiHash/LinearHash/node.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../MultiHash/LinearHash/LiHash.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExNode.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/../../MultiHash/ExtendibleHash/ExHash.h \
+ /home/TiOCS/src/MultiHash/LinearHash/../../Backend/SSDWrite/../backend_variables.h

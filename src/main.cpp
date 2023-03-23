@@ -16,50 +16,85 @@
 #include <ctime> //C system files
 #include <iostream>//C++ system files 
 #include <random> 
+#include <unistd.h>
+#include <sys/wait.h>
+#include <sys/msg.h>
+#include <cstring>
+#include <cstdlib>
 #include <liblightnvm.h> // other project's .h files
-#include "TNCTree/TNCtree.h"//your project's .h files
+#include "Ti-OCSSD/TiOCS.h"//your project's .h files
 #include "LSMTree-NoFTL/StorageManager.h"
 #include "MultiHash/ExtendibleHash/ExHash.h"
 #include "MultiHash/LazySplitHash/LSHash.h"
 #include "MultiHash/LinearHash/LiHash.h"
 #include "Auxizilary/Logo.h"
 #include "LSM-Tree/LsmTree.h"
+#include "global_variables/global_variables.h"
+#include "Backend/backend_variables.h"
 
 /* Define some global variables. */
-struct nvm_bp* bp = nullptr;
+
 std::unordered_map<uint64_t,uint64_t> chunkusage;
+
 
 int GlobalInitialize(int argc, char **argv)
 {
 
     /* Initialize device information */
-    // struct nvm_dev *dev = nvm_dev_open("/dev/nvme0n1");
-    // if (!dev) {
-	// 	perror("nvm_dev_open");
-	// 	return 1;
-	// }
-    // nvm_dev_pr(dev);
-	// nvm_dev_close(dev);
-    // const struct nvm_geo *geo = nvm_dev_get_geo(dev);
-    // nvm_geo_pr(geo);
     bp = nvm_bp_init_from_args(argc,argv);
     if(!bp)
     {
         return -1;
     }
-    printf("nchunks:%lu tsectr:%lu \n ",bp->naddrs,bp->naddrs*bp->geo->l.nsectr);
-    exit(0);
-    /* Initialize chunk information. */
+
+    /* Initialize global variables */
+
     for(size_t i=0;i<250;i++)
     {
         chunkusage[i] = 0;
     }
+
+
+    ws_min = nvm_dev_get_ws_min(bp->dev);
+    geo = nvm_dev_get_geo(bp->dev);
+    chunk_write_pointer = new size_t[geo->l.npugrp *geo->l.npunit*geo->l.nchunk];
+    memset(chunk_write_pointer,0,geo->l.npugrp *geo->l.npunit*geo->l.nchunk*sizeof(size_t));
+    lun_current_pointer = new size_t[geo->l.npugrp * geo->l.npunit];
+    lun_current_pointer[0] = 0;
+    for(size_t i=1;i<geo->l.npugrp * geo->l.npunit;i++)
+    {
+        lun_current_pointer[i] = lun_current_pointer[i-1] + geo->l.nchunk*geo->l.nsectr;
+    }
+    max_os_threads = 32;//std::thread::hardware_concurrency();
+
+    const char * process_Name = "Main of TiOCS";
+    prctl(PR_SET_NAME, reinterpret_cast<unsigned long>(process_Name),0,0,0);
+
     printf(UCAS_SIAT);
     printf(Name);
     return 0;
 
-    
-    // printf("geo nblocks:%lu nchannels:%lu nluns:%lu npages:%lu nplanes:%lu nsectors:%lu\n ",geo->nblocks,geo->nchannels,geo->nluns,geo->npages,geo->nplanes,geo->nsectors);
+    /* struct nvm_dev *dev = nvm_dev_open("/dev/nvme0n1");
+    if (!dev) {
+		perror("nvm_dev_open");
+		return 1;
+	} */
+
+    /**
+     * nvm_dev_pr(dev);
+     * nvm_dev_close(dev);
+     * 
+    nvm_geo_pr(geo);
+    struct nvm_async_ctx *ctx = nullptr;
+	size_t depth=0;
+    ctx = nvm_async_init(dev, depth,0);
+	if (!ctx) {
+		perror("could not initialize async context");
+		return -1;
+	}
+    printf("nchunks:%lu tsectr:%lu \n ",bp->naddrs,bp->naddrs*bp->geo->l.nsectr);
+    printf("geo nblocks:%lu nchannels:%lu nluns:%lu npages:%lu nplanes:%lu nsectors:%lu\n ",geo->nblocks,geo->nchannels,geo->nluns,geo->npages,geo->nplanes,geo->nsectors); */
+
 }
 
 int main(int argc, char **argv)
@@ -76,13 +111,13 @@ int main(int argc, char **argv)
 
     // EXHashing1();
 
-    // TNCtreePort();
+    // TiOCSInit();
 
-    NoFTLKVInit();
+     NoFTLKVInit();
 
     // LHashPort();
 
-    // LSMTreePort();
+    //  LSMTreePort();
 
     // LSHashPort();
 

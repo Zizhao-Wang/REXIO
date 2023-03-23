@@ -1,5 +1,5 @@
 CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o: \
- /home/femu/experiment1/code2/src/AuxizilaryImplement/SysOutput.cpp \
+ /home/TiOCS/src/AuxizilaryImplement/SysOutput.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/9/iostream \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h \
@@ -136,7 +136,7 @@ CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o: \
  /usr/include/c++/9/bits/basic_ios.tcc \
  /usr/include/c++/9/bits/ostream.tcc /usr/include/c++/9/istream \
  /usr/include/c++/9/bits/istream.tcc \
- /home/femu/experiment1/code2/src/AuxizilaryImplement/../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/AuxizilaryImplement/../Auxizilary/SysOutput.h \
  /usr/include/c++/9/algorithm /usr/include/c++/9/utility \
  /usr/include/c++/9/bits/stl_relops.h /usr/include/c++/9/bits/stl_algo.h \
  /usr/include/c++/9/bits/algorithmfwd.h \

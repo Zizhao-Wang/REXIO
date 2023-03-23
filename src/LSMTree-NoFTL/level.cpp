@@ -12,15 +12,15 @@
 #include <sys/types.h>
 #include "allocation.h"
 
-NoFTLKVLevel::NoFTLKVLevel(uint64_t buffersize)
+NoFTLKVLevel::NoFTLKVLevel(uint64_t buffersize, uint32_t lun_num)
 {
     this->LevelNumber = LevelRising();
-	this->MaxRuns = 2;
+    this->lun_number = lun_num;
 	this->MaxRunSize = buffersize * pow(2,LevelNumber-1); //256*1024*2^(levelnumber-1)
     //printf("Run Maxsize:%lu in level %ld!\n",MaxRunSize,LevelNumber);
-    for(int i=0;i<this->MaxRuns;i++)
+    for(int i=0;i<2;i++)
     {
-        NoFTLRun run(MaxRunSize);
+        NoFTLRun run(MaxRunSize,lun_num);
         Runs.emplace_back(run);
     }
 }

@@ -1,7 +1,6 @@
 CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o: \
- /home/femu/experiment1/code2/src/Backend/SSDRead/reader.cpp \
- /usr/include/stdc-predef.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/reader.h \
+ /home/TiOCS/src/Backend/SSDRead/reader.cpp /usr/include/stdc-predef.h \
+ /home/TiOCS/src/Backend/SSDRead/reader.h \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
@@ -52,7 +51,7 @@ CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o: \
  /usr/include/c++/9/bits/functional_hash.h \
  /usr/include/c++/9/bits/range_access.h \
  /usr/include/c++/9/bits/vector.tcc \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm.h \
  /usr/include/inttypes.h /usr/include/c++/9/stdlib.h \
  /usr/include/c++/9/cstdlib /usr/include/stdlib.h \
  /usr/include/x86_64-linux-gnu/bits/waitflags.h \
@@ -83,7 +82,7 @@ CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h /usr/include/alloca.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
  /usr/include/c++/9/bits/std_abs.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm_util.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm_util.h \
  /usr/include/string.h /usr/include/strings.h /usr/include/stdio.h \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
@@ -95,9 +94,9 @@ CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
  /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm_spec.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm_spec.h \
  /usr/include/assert.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/Backend/SSDRead/../../Auxizilary/SysOutput.h \
  /usr/include/c++/9/string /usr/include/c++/9/bits/stringfwd.h \
  /usr/include/c++/9/bits/char_traits.h /usr/include/c++/9/bits/postypes.h \
  /usr/include/c++/9/cwchar /usr/include/wchar.h \
@@ -138,7 +137,7 @@ CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o: \
  /usr/include/c++/9/bits/algorithmfwd.h \
  /usr/include/c++/9/bits/stl_heap.h /usr/include/c++/9/bits/stl_tempbuf.h \
  /usr/include/c++/9/bits/uniform_int_dist.h /usr/include/c++/9/limits \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../TNCTree/StoreTier/syncstore.h \
+ /home/TiOCS/src/Backend/SSDRead/../../Ti-OCSSD/StoreTier/syncstore.h \
  /usr/include/c++/9/iostream /usr/include/c++/9/ostream \
  /usr/include/c++/9/ios /usr/include/c++/9/bits/ios_base.h \
  /usr/include/c++/9/bits/locale_classes.h \
@@ -163,59 +162,112 @@ CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o: \
  /usr/include/c++/9/array /usr/include/c++/9/bits/uses_allocator.h \
  /usr/include/c++/9/bits/invoke.h /usr/include/c++/9/bits/unordered_map.h \
  /usr/include/c++/9/bits/erase_if.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../TNCTree/StoreTier/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../TNCTree/StoreTier/../MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../TNCTree/StoreTier/../MemoryTier/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../TNCTree/StoreTier/../../LRU/lru.h \
+ /home/TiOCS/src/Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/SSDRead/../../Ti-OCSSD/StoreTier/../MemoryTier/Node.h \
+ /home/TiOCS/src/Backend/SSDRead/../../Ti-OCSSD/StoreTier/../MemoryTier/../../Backend/backend_variables.h \
+ /home/TiOCS/src/Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../LRU/lru.h \
  /usr/include/c++/9/list /usr/include/c++/9/bits/stl_list.h \
  /usr/include/c++/9/bits/allocated_ptr.h /usr/include/c++/9/bits/list.tcc \
  /usr/include/c++/9/cassert \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../TNCTree/StoreTier/../../LRU/../TNCTree/MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../TNCTree/StoreTier/../../FIFO/FIFO.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../TNCTree/StoreTier/../../FIFO/../TNCTree/MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../TNCTree/StoreTier/asyncstore.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../TNCTree/utility/types.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../TNCTree/utility/../MemoryTier/Node.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../MultiHash/LinearHash/node.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../MultiHash/LazySplitHash/LSNode.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/ExNode.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/ExHash.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/IODisk/../BlockManage/BlockInfo.h \
- /home/femu/experiment1/code2/src/../../../liblightnvm/include/liblightnvm_cli.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/IODisk/../../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/ExBucket.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/ExNode.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../IODisk/WriteDisk.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../MultiHash/LinearHash/LiHash.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../MultiHash/LinearHash/node.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../LSM-Tree/LsmTree.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/buffer.h \
+ /home/TiOCS/src/Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../LRU/../Ti-OCSSD/MemoryTier/Node.h \
+ /home/TiOCS/src/Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../FIFO/FIFO.h \
+ /home/TiOCS/src/Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../FIFO/../Ti-OCSSD/MemoryTier/Node.h \
+ /home/TiOCS/src/Backend/SSDRead/../../Ti-OCSSD/StoreTier/asyncstore.h \
+ /home/TiOCS/src/Backend/SSDRead/../../Ti-OCSSD/StoreTier/../../Backend/backend_variables.h \
+ /home/TiOCS/src/Backend/SSDRead/../../Ti-OCSSD/utility/types.h \
+ /home/TiOCS/src/Backend/SSDRead/../../Ti-OCSSD/utility/../MemoryTier/Node.h \
+ /home/TiOCS/src/Backend/SSDRead/../../Ti-OCSSD/TiOCS.h \
+ /usr/include/unistd.h /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+ /usr/include/x86_64-linux-gnu/bits/environments.h \
+ /usr/include/x86_64-linux-gnu/bits/confname.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+ /usr/include/x86_64-linux-gnu/sys/wait.h /usr/include/signal.h \
+ /usr/include/x86_64-linux-gnu/bits/signum.h \
+ /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-arch.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sigval_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
+ /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h \
+ /usr/include/x86_64-linux-gnu/bits/sigaction.h \
+ /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
+ /usr/include/x86_64-linux-gnu/bits/types/stack_t.h \
+ /usr/include/x86_64-linux-gnu/sys/ucontext.h \
+ /usr/include/x86_64-linux-gnu/bits/sigstack.h \
+ /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
+ /usr/include/x86_64-linux-gnu/bits/sigthread.h \
+ /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+ /usr/include/x86_64-linux-gnu/sys/ipc.h \
+ /usr/include/x86_64-linux-gnu/bits/ipctypes.h \
+ /usr/include/x86_64-linux-gnu/bits/ipc.h \
+ /usr/include/x86_64-linux-gnu/bits/ipc-perm.h \
+ /usr/include/x86_64-linux-gnu/sys/prctl.h /usr/include/linux/prctl.h \
+ /usr/include/linux/types.h /usr/include/x86_64-linux-gnu/asm/types.h \
+ /usr/include/asm-generic/types.h /usr/include/asm-generic/int-ll64.h \
+ /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+ /usr/include/asm-generic/bitsperlong.h /usr/include/linux/posix_types.h \
+ /usr/include/linux/stddef.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+ /usr/include/asm-generic/posix_types.h \
+ /usr/include/x86_64-linux-gnu/sys/shm.h \
+ /usr/include/x86_64-linux-gnu/bits/shm.h \
+ /usr/include/x86_64-linux-gnu/bits/shmlba.h \
+ /usr/include/x86_64-linux-gnu/bits/shm-pad.h \
+ /usr/include/x86_64-linux-gnu/sys/msg.h \
+ /usr/include/x86_64-linux-gnu/bits/msq.h \
+ /usr/include/x86_64-linux-gnu/bits/msq-pad.h \
+ /home/TiOCS/src/Backend/SSDRead/../../MultiHash/LinearHash/node.h \
+ /home/TiOCS/src/Backend/SSDRead/../../MultiHash/LinearHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/SSDRead/../../MultiHash/LinearHash/../../Backend/backend_variables.h \
+ /home/TiOCS/src/Backend/SSDRead/../../Auxizilary/pre_definition.h \
+ /home/TiOCS/src/Backend/SSDRead/../../MultiHash/LazySplitHash/LSNode.h \
+ /home/TiOCS/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/ExNode.h \
+ /home/TiOCS/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/backend_variables.h \
+ /home/TiOCS/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/ExHash.h \
+ /home/TiOCS/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/IODisk/WriteDisk.h \
+ /home/TiOCS/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/IODisk/../BlockManage/BlockInfo.h \
+ /home/TiOCS/src/../../liblightnvm/include/liblightnvm_cli.h \
+ /home/TiOCS/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/IODisk/../BlockManage/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/IODisk/../../Auxizilary/pre_definition.h \
+ /home/TiOCS/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/IODisk/../../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/IODisk/../../Auxizilary/GlobalVariable.h \
+ /home/TiOCS/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/../../Backend/IODisk/../../Backend/backend_variables.h \
+ /home/TiOCS/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/ExBucket.h \
+ /home/TiOCS/src/Backend/SSDRead/../../MultiHash/ExtendibleHash/ExNode.h \
+ /home/TiOCS/src/Backend/SSDRead/../IODisk/WriteDisk.h \
+ /home/TiOCS/src/Backend/SSDRead/../backend_variables.h \
+ /home/TiOCS/src/Backend/SSDRead/../../MultiHash/LinearHash/LiHash.h \
+ /home/TiOCS/src/Backend/SSDRead/../../MultiHash/LinearHash/node.h \
+ /home/TiOCS/src/Backend/SSDRead/../../MultiHash/LinearHash/../../Backend/IODisk/WriteDisk.h \
+ /home/TiOCS/src/Backend/SSDRead/../../LSM-Tree/LsmTree.h \
+ /home/TiOCS/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/buffer.h \
  /usr/include/c++/9/set /usr/include/c++/9/bits/stl_tree.h \
  /usr/include/c++/9/bits/stl_set.h /usr/include/c++/9/bits/stl_multiset.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/../../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/../../Backend/IODisk/WriteDisk.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/node2.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/level.h \
+ /home/TiOCS/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/../../Auxizilary/pre_definition.h \
+ /home/TiOCS/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/../../Backend/IODisk/WriteDisk.h \
+ /home/TiOCS/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/node2.h \
+ /home/TiOCS/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/level.h \
  /usr/include/c++/9/queue /usr/include/c++/9/deque \
  /usr/include/c++/9/bits/stl_deque.h /usr/include/c++/9/bits/deque.tcc \
  /usr/include/c++/9/bits/stl_queue.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/../../Auxizilary/SysOutput.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/run.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/spin_lock.h \
+ /home/TiOCS/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/../../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/run.h \
+ /home/TiOCS/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/spin_lock.h \
  /usr/include/c++/9/atomic /usr/include/c++/9/bits/atomic_base.h \
  /usr/include/c++/9/bits/atomic_lockfree_defines.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/worker_pool.h \
+ /home/TiOCS/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/worker_pool.h \
  /usr/include/c++/9/functional /usr/include/c++/9/bits/refwrap.h \
  /usr/include/c++/9/bits/std_function.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/thread_pool.h \
+ /home/TiOCS/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/thread_pool.h \
  /usr/include/c++/9/memory /usr/include/c++/9/bits/stl_raw_storage_iter.h \
  /usr/include/c++/9/ext/concurrence.h \
  /usr/include/c++/9/bits/unique_ptr.h \
@@ -229,8 +281,8 @@ CMakeFiles/src.dir/Backend/SSDRead/reader.cpp.o: \
  /usr/include/c++/9/bits/unique_lock.h \
  /usr/include/c++/9/condition_variable /usr/include/c++/9/future \
  /usr/include/c++/9/bits/atomic_futex.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../LSM-Tree/../Auxizilary/VariablesTypes.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../LSM-Tree/../Auxizilary/SysOutput.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/merge.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/run.h \
- /home/femu/experiment1/code2/src/Backend/SSDRead/../../TNCTree/TNCtree.h
+ /home/TiOCS/src/Backend/SSDRead/../../LSM-Tree/../Auxizilary/pre_definition.h \
+ /home/TiOCS/src/Backend/SSDRead/../../LSM-Tree/../Auxizilary/SysOutput.h \
+ /home/TiOCS/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/merge.h \
+ /home/TiOCS/src/Backend/SSDRead/../../LSM-Tree/UtilityDefine/run.h \
+ /home/TiOCS/src/Backend/SSDRead/../../global_variables/global_variables.h

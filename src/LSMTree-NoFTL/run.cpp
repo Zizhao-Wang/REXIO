@@ -44,7 +44,6 @@ int NoFTLRun::RunDataWrite(void)
         parallel_coordinator(Rundata,lun_num, PAOCS_WRITE_MODE,nullptr);
         //printf("The %lu Page: %lu, Size: %lu\n",(Size/pagesize)-1,Pointer,Size);
         //printf("Datum of Run in Level write succeed!\n");
-        PagePointers[(Size/pagesize)-1] = Pointer;
         Rundata.clear();
         return 0;  
     }
@@ -112,7 +111,7 @@ void NoFTLRun::PutValue(entry_t entry)
         int err = RunDataWrite();
         if(err==0)
         {
-            assert(Rundata.size() == 0); 
+           assert(Rundata.size() == 0); 
         }
         else
         {

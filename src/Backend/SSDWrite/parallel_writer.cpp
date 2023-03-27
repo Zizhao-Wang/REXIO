@@ -90,15 +90,16 @@ void* parallel_read_from_pu(void *args)
  * ============= NoFTL-KV module ===============
  *  Function declartion for writing data into one or more pages:
  **/
-void* parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_lun, int mode, void* read_param)
+void* parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_pug, int mode, void* read_param)
 {
 
     /* create thread pool for asynchornous write */
-    printf("number of LUNs: %lu \n", num_lun);
+    printf("number of LUNs: %lu \n", num_pug);
     const nvm_geo *geo = nvm_dev_get_geo(bp->dev);
     pthread_t thread_id[geo->l.nchunk];
     size_t page_size = ws_min * geo->sector_nbytes;
     size_t page_capacity = page_size / sizeof(entry_t);
+
 
     if(mode == PAOCS_WRITE_MODE && read_param == nullptr)
     {
@@ -109,7 +110,7 @@ void* parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_lun, int 
         struct thread_param args [geo->l.nchunk];
         int ret = 0;
         struct coordinator_param *param = new coordinator_param;
-        param->start_page = lun_current_pointer[num_lun];
+        param->start_page = lun_current_pointer[num_pug];
 
         for (size_t i = 0; i < run_data.size(); i+= (geo->l.nchunk * page_capacity))
         {
@@ -137,7 +138,7 @@ void* parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_lun, int 
             for (size_t j = 0; j < batch_pages; j+=max_os_threads)
             {
 
-                cwrite_point_lun = lun_current_pointer[num_lun];
+                cwrite_point_lun = lun_current_pointer[num_pug];
                 
                 for (int k = 0; k < max_os_threads; k++)
                 {
@@ -166,21 +167,21 @@ void* parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_lun, int 
                 printf("current write point: %lu \n =========== \n", cwrite_point_lun);
                 if (cwrite_point_lun + max_os_threads * geo->l.nchunk*geo->l.nsectr >= (geo->l.npunit * geo->l.nchunk*geo->l.nsectr))
                 {
-                    lun_current_pointer[num_lun] = (cwrite_point_lun + max_os_threads*geo->l.nchunk*geo->l.nsectr) % (geo->l.npunit* geo->l.nchunk*geo->l.nsectr);
-                    lun_current_pointer[num_lun] += ws_min;    
+                    lun_current_pointer[num_pug] = (cwrite_point_lun + max_os_threads*geo->l.nchunk*geo->l.nsectr) % (geo->l.npunit* geo->l.nchunk*geo->l.nsectr);
+                    lun_current_pointer[num_pug] += ws_min;    
                 }
                 else
                 {
-                    lun_current_pointer[num_lun] = cwrite_point_lun + max_os_threads*geo->l.nchunk*geo->l.nsectr;
+                    lun_current_pointer[num_pug] = cwrite_point_lun + max_os_threads*geo->l.nchunk*geo->l.nsectr;
                 }   
                 
             }
             
             ret += batch_pages;
-            printf("current write point: %lu \n =========== \n", lun_current_pointer[num_lun]);
+            printf("current write point: %lu \n =========== \n", lun_current_pointer[num_pug]);
         }
-        printf("%d pages have been written into LUN %lu \n", ret, num_lun);
-        param->end_page = lun_current_pointer[num_lun];
+        printf("%d pages have been written into LUN %lu \n", ret,num_pug);
+        param->end_page = lun_current_pointer[num_pug];
         return   (void*)param;
     }
     else if(mode == PAOCS_READ_MODE && run_data.size() == 0)
@@ -199,9 +200,9 @@ void* parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_lun, int 
             // printf("===========\n current write point: %lu \n", cwrite_point_lun);
             for (int k = 0; k < max_os_threads; k++)
             {
-                if(i+geo->l.nsectr >= (num_lun+1)*geo->l.nchunk*geo->l.nsectr)
+                if(i+geo->l.nsectr >= (num_pug+1)*geo->l.nchunk*geo->l.nsectr)
                 {
-                    i = (i+geo->l.nsectr)%((num_lun+1)* geo->l.nchunk*geo->l.nsectr);
+                    i = (i+geo->l.nsectr)%((num_pug+1)* geo->l.nchunk*geo->l.nsectr);
                 }
                 else
                 {

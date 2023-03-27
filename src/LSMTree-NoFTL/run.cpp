@@ -12,10 +12,10 @@
 #include "../Backend/SSDWrite/parallel_writer.h"
 #include "../Backend/SSDRead/reader.h"
 
-NoFTLRun::NoFTLRun(unsigned long maxsize, uint32_t lun_num)
+NoFTLRun::NoFTLRun(unsigned long maxsize, uint32_t num_pu)
 {
     this->MaxSize = maxsize;
-    this->lun_num = lun_num;
+    this->num_pu = num_pu%2;
 
     read_data = nullptr;
 
@@ -41,7 +41,7 @@ int NoFTLRun::RunDataWrite(void)
     printf("Size of Rundata:%lu\n",Rundata.size());
     if(Rundata.size() % pagesize == 0)
     {
-        parallel_coordinator(Rundata,lun_num, PAOCS_WRITE_MODE,nullptr);
+        parallel_coordinator(Rundata,num_pu, PAOCS_WRITE_MODE,nullptr);
         //printf("The %lu Page: %lu, Size: %lu\n",(Size/pagesize)-1,Pointer,Size);
         //printf("Datum of Run in Level write succeed!\n");
         Rundata.clear();
@@ -62,7 +62,7 @@ std::vector<entry_t> NoFTLRun::SingleRunRead()
         if(PagePointers[i]== UINT64_MAX)
             continue;
         std::vector<entry_t> temp;
-        parallel_coordinator(temp, lun_num, PAOCS_READ_MODE, run_param);
+        parallel_coordinator(temp, num_pu, PAOCS_READ_MODE, run_param);
         entries1.insert(entries1.end(),temp.begin(),temp.end());
         GPT[PagePointers[i]/4096][(PagePointers[i]%4096)/4] = false;
     }

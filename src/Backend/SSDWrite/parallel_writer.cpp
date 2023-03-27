@@ -94,7 +94,7 @@ void* parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_pug, int 
 {
 
     /* create thread pool for asynchornous write */
-    printf("number of LUNs: %lu \n", num_pug);
+    printf("number of CHANNEL: %lu \n", num_pug);
     const nvm_geo *geo = nvm_dev_get_geo(bp->dev);
     pthread_t thread_id[geo->l.nchunk];
     size_t page_size = ws_min * geo->sector_nbytes;
@@ -165,7 +165,7 @@ void* parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_pug, int 
 
                 printf("Threads batch created and reclaim successfully!\n");
                 printf("current write point: %lu \n =========== \n", cwrite_point_lun);
-                if (cwrite_point_lun + max_os_threads * geo->l.nchunk*geo->l.nsectr >= (geo->l.npunit * geo->l.nchunk*geo->l.nsectr))
+                if (cwrite_point_lun + max_os_threads*geo->l.nchunk*geo->l.nsectr >= (geo->l.npunit * geo->l.nchunk*geo->l.nsectr))
                 {
                     lun_current_pointer[num_pug] = (cwrite_point_lun + max_os_threads*geo->l.nchunk*geo->l.nsectr) % (geo->l.npunit* geo->l.nchunk*geo->l.nsectr);
                     lun_current_pointer[num_pug] += ws_min;    

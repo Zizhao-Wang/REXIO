@@ -58,10 +58,9 @@ struct thread_param
 
 extern size_t *chunk_write_pointer;
 
-
 extern size_t *lun_current_pointer;
 
-
+extern size_t *channel_current_pointer;
 
 
 /**

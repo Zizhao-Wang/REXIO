@@ -27,5 +27,7 @@ size_t *chunk_write_pointer = nullptr;
 
 size_t *lun_current_pointer = nullptr;
 
+size_t *channel_current_pointer = nullptr;
+
 
 

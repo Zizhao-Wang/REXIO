@@ -71,11 +71,11 @@ extern size_t *channel_current_pointer;
 #define PAOCS_WRITE_MODE 0X0002
 #define PAOCS_ERASE_MODE 0X0003
 
-struct coordinator_param
+typedef struct coordinator_param
 {
 	size_t start_page, end_page;
 	size_t size;
-};
+}coordinator_param;
 
 
 #endif //TIOCS_BACKEND_VARIABLES_H

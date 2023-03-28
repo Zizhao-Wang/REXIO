@@ -55,22 +55,22 @@ int Run::RunDataWrite(void)
 std::vector<entry_t> Run::SingleRunRead()
 {
     std::vector<entry_t> entries1; 
-    size_t Pagecapacity = CalculatePageCapacity(sizeof(entry_t));
+    // size_t Pagecapacity = CalculatePageCapacity(sizeof(entry_t));
 
-    //printf("Test 1 : size of page pointers:%lu\n",PagePointers.size());
-    for(size_t i=0; i<PagePointers.size();i++)
-    {
-        if(PagePointers[i]== UINT64_MAX)
-            continue;
-        std::vector<entry_t> temp;
-        temp = RunReadFromPage(PagePointers[i]);
-        entries1.insert(entries1.end(),temp.begin(),temp.end());
-        GPT[PagePointers[i]/4096][(PagePointers[i]%4096)/4] = false;
-    }
-    if(Rundata.size()!=0)
-    {
-        entries1.insert(entries1.end(),Rundata.begin(),Rundata.end());
-    }
+    // //printf("Test 1 : size of page pointers:%lu\n",PagePointers.size());
+    // for(size_t i=0; i<PagePointers.size();i++)
+    // {
+    //     if(PagePointers[i]== UINT64_MAX)
+    //         continue;
+    //     std::vector<entry_t> temp;
+    //     temp = RunReadFromPage(PagePointers[i]);
+    //     entries1.insert(entries1.end(),temp.begin(),temp.end());
+    //     GPT[PagePointers[i]/4096][(PagePointers[i]%4096)/4] = false;
+    // }
+    // if(Rundata.size()!=0)
+    // {
+    //     entries1.insert(entries1.end(),Rundata.begin(),Rundata.end());
+    // }
     //printf("Read from start page pointer:%lu end:%lu. total: %lu\n",PagePointers[0],PagePointers[PagePointers.size()-1],PagePointers.size());
     //printf("Test 3");
     return entries1;
@@ -112,15 +112,15 @@ void Run::PutValue(entry_t entry)
     {
         //a.emplace_back(entry.key);
         FencePointers.emplace_back(entry.key);
-        int err = RunDataWrite();
-        if(err==0)
-        {
-            assert(Rundata.size() == 0); 
-        }
-        else
-        {
-            EMessageOutput("Run failed!",104);
-        }
+        int err = 0;// = RunDataWrite();
+        // if(err==0)
+        // {
+        //     assert(Rundata.size() == 0); 
+        // }
+        // else
+        // {
+        //     EMessageOutput("Run failed!",104);
+        // }
     }
 }
 

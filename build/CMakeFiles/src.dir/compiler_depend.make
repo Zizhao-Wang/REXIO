@@ -1203,8 +1203,6 @@ CMakeFiles/src.dir/Backend/SSDWrite/parallel_writer.cpp.o: /home/TiOCS/src/Backe
   /usr/include/c++/9/bits/ostream.tcc \
   /usr/include/c++/9/istream \
   /usr/include/c++/9/bits/istream.tcc \
-  /home/TiOCS/src/Auxizilary/GlobalVariable.h \
-  /home/TiOCS/src/global_variables/global_variables.h \
   /home/TiOCS/src/Backend/backend_variables.h \
   /usr/include/c++/9/unordered_map \
   /usr/include/c++/9/ext/aligned_buffer.h \
@@ -1219,6 +1217,9 @@ CMakeFiles/src.dir/Backend/SSDWrite/parallel_writer.cpp.o: /home/TiOCS/src/Backe
   /usr/include/c++/9/limits \
   /usr/include/c++/9/bits/unordered_map.h \
   /usr/include/c++/9/bits/erase_if.h \
+  /home/TiOCS/src/Auxizilary/GlobalVariable.h \
+  /home/TiOCS/src/global_variables/global_variables.h \
+  /home/TiOCS/src/Backend/backend_variables.h \
   /home/TiOCS/src/Auxizilary/SysOutput.h \
   /usr/include/c++/9/algorithm \
   /usr/include/c++/9/bits/stl_algo.h \

@@ -41,10 +41,10 @@ int Run::RunDataWrite(void)
     
     if(Rundata.size() == pagesize)
     {
-        // Pointer = SinglePageWrite(Rundata,PagePointers[(Size/pagesize)-1]);
-        //printf("The %lu Page: %lu, Size: %lu\n",(Size/pagesize)-1,Pointer,Size);
-        //printf("Datum of Run in Level write succeed!\n");
-        PagePointers[(Size/pagesize)-1] = 0;
+        Pointer = SinglePageWrite(Rundata,PagePointers[(Size/pagesize)-1]);
+        // printf("The %lu Page: %lu, Size: %lu\n",(Size/pagesize)-1,Pointer,Size);
+        // printf("Datum of Run in Level write succeed!\n");
+        PagePointers[(Size/pagesize)-1] = Pointer;
         Rundata.clear();
         return 0;  
     }

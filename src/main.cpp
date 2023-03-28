@@ -81,7 +81,7 @@ int GlobalInitialize(int argc, char **argv)
         channel_current_pointer[i] = channel_current_pointer[i-1] + channel_width;
     }
 
-    max_os_threads = 2;//std::thread::hardware_concurrency();
+    max_os_threads = 4;//std::thread::hardware_concurrency();
 
     const char * process_Name = "Main of TiOCS";
     prctl(PR_SET_NAME, reinterpret_cast<unsigned long>(process_Name),0,0,0);

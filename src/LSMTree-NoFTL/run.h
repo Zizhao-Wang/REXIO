@@ -25,16 +25,14 @@
 
 
 
-
-
 class NoFTLRun 
 {
 
 private:
-    uint64_t Size, MaxSize;
+    uint64_t Size, max_size;
     uint64_t MaxKey, MinKey;
     uint32_t num_pu;
-    struct coordinator_param *run_param;
+    coordinator_param *run_param;
     entry_t *read_data;
     std::vector<PageType> PagePointers;
     std::vector<entry_t> Rundata;

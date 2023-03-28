@@ -14,11 +14,11 @@
 
 NoFTLRun::NoFTLRun(unsigned long maxsize, uint32_t num_pu)
 {
-    this->MaxSize = maxsize;
+    this->max_size = maxsize;
     this->num_pu = num_pu%2;
-
     read_data = nullptr;
-
+    this->run_param = new coordinator_param;
+    this->run_param->size = max_size;
     MaxKey = 0;
     MinKey = UINT64_MAX;
     Size = 0;
@@ -41,22 +41,35 @@ int NoFTLRun::RunDataWrite(void)
     printf("Size of Rundata:%lu\n",Rundata.size());
     if(Rundata.size() % pagesize == 0)
     {
-        parallel_coordinator(Rundata,num_pu, PAOCS_WRITE_MODE,nullptr);
-        //printf("The %lu Page: %lu, Size: %lu\n",(Size/pagesize)-1,Pointer,Size);
-        //printf("Datum of Run in Level write succeed!\n");
+        run_param = (coordinator_param*) parallel_coordinator(Rundata,num_pu, PAOCS_WRITE_MODE,nullptr);
+        run_param->size = max_size;
         Rundata.clear();
         return 0;  
     }
     printf("Datum size of Run doesn't matching, check again!");
     return -1;
+
+    //printf("The %lu Page: %lu, Size: %lu\n",(Size/pagesize)-1,Pointer,Size);
+    //printf("Datum of Run in Level write succeed!\n");
 }
 
 std::vector<entry_t> NoFTLRun::SingleRunRead()
 {
     std::vector<entry_t> entries1; 
     size_t Pagecapacity = CalculatePageCapacity(sizeof(entry_t));
+   
+    char *read_data = new char[Pagecapacity*sizeof(entry_t)];
+    read_data = (char*) parallel_coordinator(entries1, num_pu, PAOCS_READ_MODE, run_param);
 
-    //printf("Test 1 : size of page pointers:%lu\n",PagePointers.size());
+
+    for (size_t i = 0; i < max_size; i++)
+    {
+        entries1.push_back(((entry_t *)read_data)[i]);
+    }
+    
+    return entries1;
+
+    /**   
     for(size_t i=0; i<PagePointers.size();i++)
     {
         if(PagePointers[i]== UINT64_MAX)
@@ -65,16 +78,8 @@ std::vector<entry_t> NoFTLRun::SingleRunRead()
         parallel_coordinator(temp, num_pu, PAOCS_READ_MODE, run_param);
         entries1.insert(entries1.end(),temp.begin(),temp.end());
         GPT[PagePointers[i]/4096][(PagePointers[i]%4096)/4] = false;
-    }
-    if(Rundata.size()!=0)
-    {
-        entries1.insert(entries1.end(),Rundata.begin(),Rundata.end());
-    }
-    //printf("Read from start page pointer:%lu end:%lu. total: %lu\n",PagePointers[0],PagePointers[PagePointers.size()-1],PagePointers.size());
-    //printf("Test 3");
-    return entries1;
-
-    /** entry_t * entries1 = nullptr; 
+    } 
+    entry_t * entries1 = nullptr; 
     entry_t * head = nullptr;
     size_t Pagecapacity = CalculatePageCapacity(sizeof(entry_t));
     size_t PageBytes = Pagecapacity * sizeof(entry_t);
@@ -94,18 +99,19 @@ std::vector<entry_t> NoFTLRun::SingleRunRead()
             EMessageOutput("Memory allocating failure in SingleRunRead",578);
         }
         head = entries1 + Pagecapacity*(i+1);
-    } **/
+    } 
+    **/
 }
 
 void NoFTLRun::PutValue(entry_t entry) 
 {
-    assert(Size < MaxSize);
+    assert(Size < max_size);
     Rundata.emplace_back(entry);
     MaxKey = max(entry.key,MaxKey);
     MinKey = min(entry.key,MinKey);
     Size++;
     
-    if(Size == MaxSize)
+    if(Size == max_size)
     {
         FencePointers.emplace_back(entry.key);
         int err = RunDataWrite();
@@ -243,7 +249,7 @@ int NoFTLRun::SetPagePointers(std::vector<uint64_t> pointers)
         Size += CalculatePageCapacity(sizeof(entry_t));
     }
 
-    if(pointers.size()*CalculatePageCapacity(sizeof(entry_t)) != MaxSize/2 )
+    if(pointers.size()*CalculatePageCapacity(sizeof(entry_t)) != max_size/2 )
     {
         return -1;
     }
@@ -260,7 +266,7 @@ int NoFTLRun::SetFencePointers(std::vector<uint64_t> pointers)
         MaxKey = max(MaxKey,pointers[i]);
     }
 
-    if(pointers.size()*CalculatePageCapacity(sizeof(entry_t))!=MaxSize/2 )
+    if(pointers.size()*CalculatePageCapacity(sizeof(entry_t))!=max_size/2 )
     {
         return -1;
     }
@@ -330,7 +336,7 @@ unsigned long NoFTLRun::GetNowSize()
 
 bool NoFTLRun::Isfull(void)
 {
-    return Size >= MaxSize;
+    return Size >= max_size;
 }
 
 bool NoFTLRun::IsEmpty(void)

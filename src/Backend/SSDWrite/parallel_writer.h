@@ -13,9 +13,7 @@
 #include <liblightnvm.h>
 #include <vector>
 #include "../../Auxizilary/pre_definition.h"
-
-
-
+#include "../backend_variables.h"
 
 
 /**
@@ -37,7 +35,7 @@ void* parallel_read_from_pu(void *args);
 
 
 
-void* parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_lun, int mode, void* read_param);
+void* parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_lun, int mode, coordinator_param * read_param);
 
 
 #endif  //TiOCS_BACKEND_PARALLELWRITER_H

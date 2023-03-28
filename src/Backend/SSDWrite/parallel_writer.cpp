@@ -19,28 +19,28 @@ void* parallel_write_into_pu(void *args)
     int err = 0;
 
     // printf("Page %lu writing success \n",page_num);
-    // if(page_num != UINT64_MAX )
-    // { 
-    //     struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, page_num);
-    //     struct nvm_addr addrs[ws_min];
-    //     for (size_t aidx = 0; aidx < ws_min; ++aidx) 
-    //     {
-    //         addrs[aidx].val = addrs_chunk.val;
-    //         addrs[aidx].l.sectr = (page_num%4096)+aidx;
-    //     }
+    
+    if(page_num != UINT64_MAX )
+    { 
+        struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, page_num);
+        struct nvm_addr addrs[ws_min];
+        for (size_t aidx = 0; aidx < ws_min; ++aidx) 
+        {
+            addrs[aidx].val = addrs_chunk.val;
+            addrs[aidx].l.sectr = (page_num%4096)+aidx;
+        }
 
-    //     err = nvm_cmd_write(bp->dev, addrs, ws_min,buffer, NULL,0x0, NULL);
-    //     if(err == 0) 
-    //     {
-    //         printf("Page %lu writing success \n",page_num);
-    //         channel_current_pointer[page_num/4096] = page_num;
-    //         writes++;
-    //     }
-    //     else
-    //     {
-    //         EMessageOutput("Page writing failed in "+ Uint64toString(page_num)+"\n", 4598);
-    //     }
-    // }
+        err = nvm_cmd_write(bp->dev, addrs, ws_min,buffer, NULL,0x0, NULL);
+        if(err == 0) 
+        {
+            //printf("Page %lu writing success \n",page_num);
+            writes++;
+        }
+        else
+        {
+            EMessageOutput("Page writing failed in "+ Uint64toString(page_num)+"\n", 4598);
+        }
+    }
 
     return NULL;
     
@@ -56,30 +56,29 @@ void* parallel_read_from_pu(void *args)
     uint64_t page_num = arg->page_num;
     int err = 0;
 
-    printf("Page %lu reading success \n",page_num);
+    // printf("Page %lu reading success \n",page_num);
 
-    // if(page_num != UINT64_MAX )
-    // { 
-    //     struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, page_num);
-    //     struct nvm_addr addrs[ws_min];
-    //     for (size_t aidx = 0; aidx < ws_min; ++aidx) 
-    //     {
-    //         addrs[aidx].val = addrs_chunk.val;
-    //         addrs[aidx].l.sectr = (page_num%4096)+aidx;
-    //     }
+    if(page_num != UINT64_MAX )
+    { 
+        struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, page_num);
+        struct nvm_addr addrs[ws_min];
+        for (size_t aidx = 0; aidx < ws_min; ++aidx) 
+        {
+            addrs[aidx].val = addrs_chunk.val;
+            addrs[aidx].l.sectr = (page_num%4096)+aidx;
+        }
 
-    //     err = nvm_cmd_read(bp->dev, addrs, ws_min,buffer, NULL,0x0, NULL);
-    //     if(err == 0) 
-    //     {
-    //         //printf("Page %lu reading success \n",page_num);
-    //         channel_current_pointer[page_num/4096] = page_num;
-    //         reads++;
-    //     }
-    //     else
-    //     {
-    //         EMessageOutput("Page writing failed in "+ Uint64toString(page_num)+"\n", 4598);
-    //     }
-    // }
+        err = nvm_cmd_read(bp->dev, addrs, ws_min,buffer, NULL,0x0, NULL);
+        if(err == 0) 
+        {
+            //printf("Page %lu reading success \n",page_num);
+            reads++;
+        }
+        else
+        {
+            EMessageOutput("Page writing failed in "+ Uint64toString(page_num)+"\n", 4598);
+        }
+    }
     return (void *)args;
 
 }
@@ -89,7 +88,7 @@ void* parallel_read_from_pu(void *args)
  * ============= NoFTL-KV module ===============
  *  Function declartion for writing data into one or more pages:
  **/
-void* parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_pug, int mode, void* read_param)
+void* parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_pug, int mode, coordinator_param* read_param)
 {
 
     /* create thread pool for asynchornous write */
@@ -112,6 +111,7 @@ void* parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_pug, int 
         int ret = 0;
         struct coordinator_param *param = new coordinator_param;
         param->start_page = channel_current_pointer[num_pug];
+        
 
         for (size_t i = 0; i < run_data.size(); i+= (geo->l.nchunk * page_capacity))
         {
@@ -133,14 +133,12 @@ void* parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_pug, int 
                 memcpy(temp,run_data.data()+vector_offset,num_copy*sizeof(entry_t));
                 buffer[j] = temp;
             }
-
-            // printf("===========\n current write point: %lu \n", cwrite_point_lun);
             
             for (size_t j = 0; j < batch_pages; j+=max_os_threads)
             {
 
                 cwrite_point_lun = channel_current_pointer[num_pug];
-                
+                // printf("===========\n current write point: %lu \n", cwrite_point_lun);
                 for (int k = 0; k < max_os_threads; k++)
                 {
                     args[j+k].buffer = buffer[j+k];
@@ -174,14 +172,12 @@ void* parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_pug, int 
                 else
                 {
                     channel_current_pointer[num_pug] = cwrite_point_lun + max_os_threads*lun_width;
-                }   
-                
+                }  
             }
-            
             ret += batch_pages;
-            // printf("current write point: %lu \n =========== \n", channel_current_pointer[num_pug]);
         }
-        printf("%d pages have been written into CHANNEL %lu \n", ret,num_pug);
+        // printf("current write point: %lu \n =========== \n", channel_current_pointer[num_pug]);
+        // printf("%d pages have been written into CHANNEL %lu \n", ret,num_pug);
         param->end_page = channel_current_pointer[num_pug];
         return   (void*)param;
     }
@@ -191,16 +187,17 @@ void* parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_pug, int 
         size_t num_copy, vector_offset, batchs, remainder_bacths, cread_point_lun, channel_start_point;
         int res = 0, ret = 0, j=0;
         struct thread_param args [geo->l.nchunk];
-        struct coordinator_param *param = (struct coordinator_param*)read_param;
-        char *buffer = new char[param->size+5];
+        char *buffer = new char[read_param->size*sizeof(entry_t) +5];
         size_t read_pages[max_os_threads];
 
-        batchs = (param->size / page_capacity)/max_os_threads;
-        remainder_bacths = (param->size / page_capacity)%max_os_threads;
-        channel_start_point = cread_point_lun = param->start_page;
+        batchs = (read_param->size / page_capacity)/max_os_threads;
+        remainder_bacths = (read_param->size / page_capacity)%max_os_threads;
+        channel_start_point = cread_point_lun = read_param->start_page;
+
 
         for (size_t i = 0; i < batchs; i++)
         {
+            // printf("===========\ncurrent read point: %lu \n", cread_point_lun);
             for (size_t j = 0; j < max_os_threads; j++)
             {
                 args[j].buffer = new char[page_size];
@@ -233,8 +230,6 @@ void* parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_pug, int 
                     EMessageOutput("Thread join failed in"+ std::to_string(i)+"creation!", 4598);
                 }
             }
-
-            
         }
 
         for (size_t i = 0; i < remainder_bacths; i++)
@@ -276,7 +271,8 @@ void* parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_pug, int 
             memcpy(buffer+((j+i)*page_size), args[i].buffer, page_size);
             num_buffer += page_capacity;
         }
-
+        
+        printf("%d pages have been read from CHANNEL %lu \n", reads, num_pug);
         return  (void*)buffer;   
     }
     else

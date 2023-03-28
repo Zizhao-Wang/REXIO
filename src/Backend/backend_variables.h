@@ -74,6 +74,7 @@ extern size_t *channel_current_pointer;
 struct coordinator_param
 {
 	size_t start_page, end_page;
+	size_t size;
 };
 
 

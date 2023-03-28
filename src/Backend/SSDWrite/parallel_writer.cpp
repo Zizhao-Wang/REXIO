@@ -93,7 +93,7 @@ void* parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_pug, int 
 {
 
     /* create thread pool for asynchornous write */
-    printf("number of CHANNEL: %lu \n", num_pug);
+    printf("number of CHANNEL: %lu, Mode %d \n", num_pug,mode);
     const nvm_geo *geo = nvm_dev_get_geo(bp->dev);
     pthread_t thread_id[geo->l.nchunk];
     size_t page_size = ws_min * geo->sector_nbytes;
@@ -276,7 +276,7 @@ void* parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_pug, int 
             memcpy(buffer+((j+i)*page_size), args[i].buffer, page_size);
             num_buffer += page_capacity;
         }
-        
+
         return  (void*)buffer;   
     }
     else

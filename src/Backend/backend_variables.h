@@ -53,6 +53,7 @@ struct thread_param
 {
 	char* buffer;
 	PageType page_num;
+	size_t size;
 };
 
 

@@ -37,7 +37,6 @@ int NoFTLRun::RunDataWrite(void)
 {
 
     uint64_t pagesize = CalculatePageCapacity(sizeof(entry_t));
-    PageType Pointer;
     printf("Size of Rundata:%lu\n",Rundata.size());
     if(Rundata.size() % pagesize == 0)
     {
@@ -58,15 +57,22 @@ std::vector<entry_t> NoFTLRun::SingleRunRead()
     std::vector<entry_t> entries1; 
     size_t Pagecapacity = CalculatePageCapacity(sizeof(entry_t));
    
-    char *read_data = new char[Pagecapacity*sizeof(entry_t)];
+    char *read_data = new char[max_size*sizeof(entry_t)];
     read_data = (char*) parallel_coordinator(entries1, num_pu, PAOCS_READ_MODE, run_param);
 
-
+    entry_t *entries = (entry_t *)read_data;
+    printf("read size: %lu\n", max_size);
     for (size_t i = 0; i < max_size; i++)
     {
-        entries1.push_back(((entry_t *)read_data)[i]);
+        entries1.push_back(entries[i]);
+        // if( (i+1) != entries[i].key || entries[i].key == 0)
+        //     printf("key:%lu val:%lu\n",entries[i].key,entries[i].val);
     }
+
+    delete[] read_data;
     
+    // printf("read size: %lu\n", entries1.size());
+
     return entries1;
 
     /**   
@@ -302,10 +308,6 @@ void NoFTLRun::Reset()
     Size = 0;
     if(Rundata.size()!=0)
         Rundata.clear();
-    for(size_t i=0;i<PagePointers.size();i++) //Initialize all page pointers as UINT64_MAX
-    {
-        PagePointers[i]=UINT64_MAX;
-    }
     MaxKey = 0;
     MinKey = UINT64_MAX;
 

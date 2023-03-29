@@ -48,6 +48,7 @@ public:
     entry_t Contextpop(void);
     entry_t Contextpop1(); 
     bool IsEmpty(void) const;
+    size_t get_size(void) const;
     
 };
 

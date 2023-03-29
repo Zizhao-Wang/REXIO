@@ -152,15 +152,13 @@ int LSMTreeNoFTL::PutValue(KEY_t key, VAL_t value)
         {
             if(Levels[0].Runs[i].GetNowSize()!= 0)
             {
-                //printf("Run size: %ld from GetNowSize()\n",run.GetNowSize());
+                printf("Run size: %ld from GetNowSize()\n",Levels[0].Runs[i].GetNowSize());
                 mergecon.Insert(Levels[0].Runs[i].SingleRunRead());
-                // printf("run size: %lu  ",run.SingleRunRead());
                 Levels[0].Runs[i].Reset();
             }
         }
-        //printf("Run size: %ld from GetNowSize()\n",run.GetNowSize());
-        //std::vector<entry_t> values;
-        //int i=0;
+        int i=0;
+        printf("mergeon size:%lu\n",mergecon.get_size());
         while(!mergecon.IsEmpty())
         {
             entry_t entry = mergecon.Contextpop1();
@@ -168,8 +166,14 @@ int LSMTreeNoFTL::PutValue(KEY_t key, VAL_t value)
             {
                 //values.emplace_back(entry);
                 Levels[0].PutValue(entry);
+                i++;
             }
+            // else
+            // {
+            //     printf("entry.key:%lu, entry.val:%lu \n",entry.key,entry.val);
+            // }
         }
+        printf("i:%d\n",i);
         // for(int i=0;i<Levels[0].Runs.size();i++)
         // {
         //     printf("Run size: %ld from GetNowSize() in Level[0]\n",Levels[0].Runs[i].GetNowSize());

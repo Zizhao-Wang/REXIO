@@ -80,3 +80,8 @@ bool merge_context::IsEmpty(void) const
 {
     return queue.empty();
 }
+
+size_t merge_context::get_size(void) const 
+{
+    return queue.size();
+}

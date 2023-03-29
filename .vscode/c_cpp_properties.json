@@ -3,7 +3,7 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**","/home/femu/liblightnvm/include/**"
+                "${workspaceFolder}/**","/home/liblightnvm/include/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

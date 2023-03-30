@@ -8,10 +8,10 @@ project(src)
 set(CMAKE_CXX_STANDARD 14)
 
 
-include_directories("../../liblightnvm/include/")
+include_directories("../../liblightnvm/include/" "../../spdk/include/")
 
+link_directories("/home/liblightnvm/build/")
 
-link_libraries("/home/liblightnvm/build/liblightnvm_cli.a"  "/home/liblightnvm/build/liblightnvm.a")
 
 
 FIND_PACKAGE( OpenMP REQUIRED)
@@ -49,3 +49,5 @@ add_executable(src main.cpp
 				LSMTree-NoFTL/allocation.h  LSMTree-NoFTL/allocation.cpp
 				FIFO/FIFO.h FIFO/FIFO.cpp
 				global_variables/global_variables.h global_variables/global_variables.cpp)
+
+target_link_libraries(src liblightnvm_cli.a liblightnvm.a )

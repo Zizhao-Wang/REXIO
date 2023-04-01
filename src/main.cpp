@@ -79,6 +79,7 @@ int GlobalInitialize(int argc, char **argv)
 		{
 			printf("Failed to connect to NVMe controller\n");
 		}
+		printf("Successfully connected to NVMe controller\n");
 		g_controllers_found++;
 		spdk_nvme_detach_async(ctrlr, &g_detach_ctx);
 	}
@@ -100,37 +101,37 @@ int GlobalInitialize(int argc, char **argv)
     }
 #endif
 
-    ws_min = nvm_dev_get_ws_min(bp->dev);
-    geo = nvm_dev_get_geo(bp->dev);
+    // ws_min = nvm_dev_get_ws_min(bp->dev);
+    // geo = nvm_dev_get_geo(bp->dev);
 
-    size_t chunk_width = geo->l.nsectr;
-    size_t lun_width = geo->l.npunit * chunk_width;
-    size_t channel_width = geo->l.npugrp * lun_width;
-    chunk_write_pointer = new size_t[geo->l.npugrp *geo->l.npunit*geo->l.nchunk];
-    chunk_write_pointer[0] = 0;
-    for (size_t i = 1; i < geo->l.npugrp *geo->l.npunit*geo->l.nchunk ; i++)
-    {
-        chunk_write_pointer[i] = chunk_write_pointer[i-1]+chunk_width;
-    }
+    // size_t chunk_width = geo->l.nsectr;
+    // size_t lun_width = geo->l.npunit * chunk_width;
+    // size_t channel_width = geo->l.npugrp * lun_width;
+    // chunk_write_pointer = new size_t[geo->l.npugrp *geo->l.npunit*geo->l.nchunk];
+    // chunk_write_pointer[0] = 0;
+    // for (size_t i = 1; i < geo->l.npugrp *geo->l.npunit*geo->l.nchunk ; i++)
+    // {
+    //     chunk_write_pointer[i] = chunk_write_pointer[i-1]+chunk_width;
+    // }
 
-    lun_current_pointer = new size_t[geo->l.npugrp * geo->l.npunit];
-    lun_current_pointer[0] = 0;
-    for(size_t i=1;i<geo->l.npugrp * geo->l.npunit;i++)
-    {
-        lun_current_pointer[i] = lun_current_pointer[i-1] + lun_width;
-    }
+    // lun_current_pointer = new size_t[geo->l.npugrp * geo->l.npunit];
+    // lun_current_pointer[0] = 0;
+    // for(size_t i=1;i<geo->l.npugrp * geo->l.npunit;i++)
+    // {
+    //     lun_current_pointer[i] = lun_current_pointer[i-1] + lun_width;
+    // }
 
-    channel_current_pointer = new size_t[geo->l.npugrp];
-    channel_current_pointer[0] = 0;
-    for(size_t i=1;i<geo->l.npugrp;i++)
-    {
-        channel_current_pointer[i] = channel_current_pointer[i-1] + channel_width;
-    }
+    // channel_current_pointer = new size_t[geo->l.npugrp];
+    // channel_current_pointer[0] = 0;
+    // for(size_t i=1;i<geo->l.npugrp;i++)
+    // {
+    //     channel_current_pointer[i] = channel_current_pointer[i-1] + channel_width;
+    // }
 
-    max_os_threads = 2;//std::thread::hardware_concurrency();
+    // max_os_threads = 2;//std::thread::hardware_concurrency();
 
-    const char * process_Name = "Main of TiOCS";
-    prctl(PR_SET_NAME, reinterpret_cast<unsigned long>(process_Name),0,0,0);
+    // const char * process_Name = "Main of TiOCS";
+    // prctl(PR_SET_NAME, reinterpret_cast<unsigned long>(process_Name),0,0,0);
 
     printf(UCAS_SIAT);
     printf(Name);
@@ -177,7 +178,7 @@ int main(int argc, char **argv)
 
     // TiOCSInit();
 
-    NoFTLKVInit();
+    // NoFTLKVInit();
 
     // LHashPort();
 

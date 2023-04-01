@@ -84,6 +84,7 @@ int GlobalInitialize(int argc, char **argv)
 	}
 
 
+#ifdef USE_LIGHTNVM
     /* Initialize device information */
     bp = nvm_bp_init_from_args(argc,argv);
     if(!bp)
@@ -97,7 +98,7 @@ int GlobalInitialize(int argc, char **argv)
     {
         chunkusage[i] = 0;
     }
-
+#endif
 
     ws_min = nvm_dev_get_ws_min(bp->dev);
     geo = nvm_dev_get_geo(bp->dev);

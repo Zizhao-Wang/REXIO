@@ -24,8 +24,6 @@
 
 
 /* Define some global variables. */
-std::unordered_map<uint64_t,uint64_t> chunkusage;
-
 static char g_hostnqn[SPDK_NVMF_NQN_MAX_LEN + 1];
 static int g_controllers_found = 0;
 struct spdk_nvme_transport_id trid; //transport id
@@ -83,23 +81,6 @@ int GlobalInitialize(int argc, char **argv)
 		g_controllers_found++;
 		spdk_nvme_detach_async(ctrlr, &g_detach_ctx);
 	}
-
-
-#ifdef USE_LIGHTNVM
-    /* Initialize device information */
-    bp = nvm_bp_init_from_args(argc,argv);
-    if(!bp)
-    {
-        return -1;
-    }
-
-    /* Initialize global variables */
-
-    for(size_t i=0;i<250;i++)
-    {
-        chunkusage[i] = 0;
-    }
-#endif
 
     // ws_min = nvm_dev_get_ws_min(bp->dev);
     // geo = nvm_dev_get_geo(bp->dev);

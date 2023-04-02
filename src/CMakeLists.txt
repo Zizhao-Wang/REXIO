@@ -10,7 +10,6 @@ set(SPDK_LIB_DIR "/home/spdk/build/lib")
 set(DPDK_LIB_DIR "/home/spdk/dpdk/build/lib")
 set(DPDK_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/../spdk/dpdk/build/include")
 set(LIB_LIGHTNVM_DIR "/home/liblightnvm/build")
-set(LIB_LIGHTNVM_INCLUDE_DIR "/home/liblightnvm/include")
 
 include_directories(${SPDK_INCLUDE_DIR}  ${DPDK_INCLUDE_DIR} )
 
@@ -27,8 +26,7 @@ endif()
 add_compile_options()
 
 # 添加可执行文件
-add_executable(src main.cpp 
-    )
+add_executable(src main.cpp )
 
 target_link_libraries(src
                     -Wl,--whole-archive
@@ -56,8 +54,7 @@ target_link_libraries(src
                     uuid 
                     numa 
                     dl 
-                    rt
-                    )
+                    rt)
 
 
 

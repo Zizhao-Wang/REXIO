@@ -3,5 +3,50 @@
   "directory": "/home/TiOCS/build",
   "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/main.cpp.o -c /home/TiOCS/src/main.cpp",
   "file": "/home/TiOCS/src/main.cpp"
+},
+{
+  "directory": "/home/TiOCS/build",
+  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/locs.cpp.o -c /home/TiOCS/src/LOCS/locs.cpp",
+  "file": "/home/TiOCS/src/LOCS/locs.cpp"
+},
+{
+  "directory": "/home/TiOCS/build",
+  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/buffer.cpp.o -c /home/TiOCS/src/LOCS/buffer.cpp",
+  "file": "/home/TiOCS/src/LOCS/buffer.cpp"
+},
+{
+  "directory": "/home/TiOCS/build",
+  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/level.cpp.o -c /home/TiOCS/src/LOCS/level.cpp",
+  "file": "/home/TiOCS/src/LOCS/level.cpp"
+},
+{
+  "directory": "/home/TiOCS/build",
+  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/merge.cpp.o -c /home/TiOCS/src/LOCS/merge.cpp",
+  "file": "/home/TiOCS/src/LOCS/merge.cpp"
+},
+{
+  "directory": "/home/TiOCS/build",
+  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/run.cpp.o -c /home/TiOCS/src/LOCS/run.cpp",
+  "file": "/home/TiOCS/src/LOCS/run.cpp"
+},
+{
+  "directory": "/home/TiOCS/build",
+  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o -c /home/TiOCS/src/AuxizilaryImplement/SysOutput.cpp",
+  "file": "/home/TiOCS/src/AuxizilaryImplement/SysOutput.cpp"
+},
+{
+  "directory": "/home/TiOCS/build",
+  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/allocation.cpp.o -c /home/TiOCS/src/LOCS/allocation.cpp",
+  "file": "/home/TiOCS/src/LOCS/allocation.cpp"
+},
+{
+  "directory": "/home/TiOCS/build",
+  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/global_variables.cpp.o -c /home/TiOCS/src/LOCS/global_variables.cpp",
+  "file": "/home/TiOCS/src/LOCS/global_variables.cpp"
+},
+{
+  "directory": "/home/TiOCS/build",
+  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/io_scheduler.cpp.o -c /home/TiOCS/src/LOCS/io_scheduler.cpp",
+  "file": "/home/TiOCS/src/LOCS/io_scheduler.cpp"
 }
 ]

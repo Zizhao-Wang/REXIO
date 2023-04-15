@@ -82,7 +82,7 @@
     },
     "cmake.debugConfig": {
         "args": [
-         "/dev/nvme0n1"
+         "trtype:PCIe traddr:0000:00:05.0"
          ]
      }
 }

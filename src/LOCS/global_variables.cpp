@@ -13,13 +13,22 @@ struct spdk_nvme_ctrlr *ctrlr = nullptr; // pointer that point to the controller
 
 struct spdk_nvme_transport_id trid;
 
+struct spdk_nvme_ns * ns = nullptr;
+
 struct spdk_nvme_detach_ctx *g_detach_ctx = NULL;
 
 uint32_t chunk_capacity;
 
-uint32_t page_size;
+uint64_t page_size;
 
 bool geometry_completed = false;
+
+
+uint64_t get_max_data_entries_per_io()
+{
+	return (page_size* SPDK_NVME_OCSSD_MAX_LBAL_ENTRIES)/sizeof(entry_t);
+}
+
 
 void print_ocssd_geometry(struct spdk_ocssd_geometry_data *geometry_data)
 {
@@ -122,7 +131,7 @@ int environment_init()
 		return -1;
 	}
     nsid = spdk_nvme_ctrlr_get_first_active_ns(ctrlr);
-    spdk_nvme_ns * ns = spdk_nvme_ctrlr_get_ns(ctrlr, nsid);
+    ns = spdk_nvme_ctrlr_get_ns(ctrlr, nsid);
 
 	/* initialize global variables for LOCS write/read/reset */
 	page_size = spdk_nvme_ns_get_sector_size(ns);

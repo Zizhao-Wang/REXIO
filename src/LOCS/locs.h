@@ -41,11 +41,11 @@ private:
 
 public:
     LOCS(size_t ,int );
-    int PutValue(KEY_t, VAL_t);
-    VAL_t* GetValue(KEY_t);
+    int PutValue(const char* key, const char* value);
+    const char* GetValue(const char* key);
     void GetRange(KEY_t, KEY_t);
-    void UpdateValue(KEY_t, VAL_t);
-    void DeleteValue(KEY_t);
+    void UpdateValue(const char* key, const char* value);
+    void DeleteValue(const char* key);
     void load(std::string);
     void display();
     int FlushInto(vector<locs_level>::iterator);

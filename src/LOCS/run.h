@@ -26,9 +26,10 @@
 class locs_run 
 {
 private:
-    uint64_t Size, MaxSize;
-    uint64_t MaxKey, MinKey;
-    std::vector<uint64_t> PagePointers;
+    uint64_t Size, MaxSize, max_io_size, io_count;
+    char max_key[KEY_SIZE];
+    char min_key[KEY_SIZE];
+    std::vector<uint64_t> chunk_pointers;
     std::vector<entry_t> Rundata;
     std::vector<KEY_t> FencePointers;
     
@@ -39,20 +40,24 @@ public:
     void PutValue(entry_t entry);
     std::vector<entry_t> RunValuesRead(uint64_t PageNum);
     std::vector<entry_t> SingleRunRead();
-    VAL_t * GetValue(KEY_t key);
+    const char * GetValue(const char* key);
     std::vector<entry_t> * GetRange(KEY_t, KEY_t);
     std::vector<uint64_t> GetPagePointers(void);
     std::vector<KEY_t> GetFencePointers(void);
-    uint64_t GetMaxKey(void);
-    uint64_t GetMinKey(void);
-    int SetPagePointers(std::vector<uint64_t>);
+    const char * get_max_key(void);
+    const char * get_min_key(void);
+    int set_chunk_pointers(std::vector<uint64_t>);
     int SetFencePointers(std::vector<KEY_t>);
     void Reset();
-    void Reset(bool flag);
-    int SetMaxkey(KEY_t);
+    void set_max_key(const char* key);
+    void set_min_key(const char* key);
+    void set_current_size(uint64_t);
     void Unbind();
     int DataClear(std::vector<entry_t> );
     unsigned long GetNowSize();
+    void chunk_reset();
+    int status(void);
+    void status_display(void);
     bool Isfull(void);
     bool IsEmpty(void);
 };

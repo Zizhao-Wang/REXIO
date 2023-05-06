@@ -30,7 +30,8 @@ add_executable(src main.cpp
                     LOCS/locs.h LOCS/locs.cpp LOCS/buffer.h LOCS/buffer.cpp LOCS/level.h LOCS/level.cpp 
                     LOCS/merge.h LOCS/merge.cpp LOCS/run.h LOCS/run.cpp AuxizilaryImplement/SysOutput.cpp
                     LOCS/allocation.h LOCS/allocation.cpp LOCS/global_variables.h LOCS/global_variables.cpp
-                    LOCS/io_scheduler.h LOCS/io_scheduler.cpp )
+                    LOCS/io_scheduler.h LOCS/io_scheduler.cpp Debug/debug_micros.h Auxizilary/pre_definition.h 
+                    Auxizilary/pre_definition.cpp)
 
 target_link_libraries(src
                     -Wl,--whole-archive

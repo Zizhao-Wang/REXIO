@@ -25,13 +25,17 @@ typedef struct merge_entry
     bool operator < (const merge_entry& other) const 
     {
         // Order first by keys, then by precedence
-        if (SingleEntry.key == other.SingleEntry.key) 
+        if (SingleEntry == other.SingleEntry) 
         {
-            return  SingleEntry.val < other.SingleEntry.val;
-        } 
+            return false;
+        }
+        else if (SingleEntry < other.SingleEntry) 
+        {
+            return false;
+        }
         else 
         {
-            return SingleEntry.key > other.SingleEntry.key;
+            return true;
         }
     }
 

@@ -18,145 +18,129 @@ vector<int> a;
 locs_run::locs_run(unsigned long maxsize)
 {
     this->MaxSize = maxsize;
-    // for(int i=0;i<this->MaxSize/CalculatePageCapacity(sizeof(entry_t));i++) //Initialize all page pointers as UINT64_MAX
-    // {
-    //     PagePointers.emplace_back(UINT64_MAX);
-    // }
-    MaxKey = 0;
-    MinKey = UINT64_MAX;
-    Size = 0;
+    this->max_io_size = get_max_data_entries_per_io();
+    memset(this->max_key, 0, KEY_SIZE);
+    memset(this->min_key, 0xFF, KEY_SIZE);
+    this->Size = 0;
+    this->io_count = 0;
 }
 
 void locs_run::PointersDisplay()
 {
-    for(size_t i=0;i<PagePointers.size();i++)
+    for(size_t i=0;i<chunk_pointers.size();i++)
     {
-        printf("page pointer:%lu\n",PagePointers[i]);
+        printf("page pointer:%lu\n",chunk_pointers[i]);
     }
 }
 
 int locs_run::RunDataWrite(void)
 {
-    
-    select_queue(OCSSD_WRITE);
-    // printf("The %lu Page: %lu, Size: %lu\n",(Size/pagesize)-1,Pointer,Size);
-    // printf("Datum of Run in Level write succeed!\n");
+    select_write_queue(Rundata, OCSSD_WRITE);
     Rundata.clear();
+    io_count++;
     return 0;  
-
-    // printf("Datum size of Run doesn't matching, check again!");
-    return -1;
 }
 
 std::vector<entry_t> locs_run::SingleRunRead()
 {
     std::vector<entry_t> entries1; 
-    // size_t Pagecapacity = CalculatePageCapacity(sizeof(entry_t));
 
-    // //printf("Test 1 : size of page pointers:%lu\n",PagePointers.size());
-    // for(size_t i=0; i<PagePointers.size();i++)
-    // {
-    //     if(PagePointers[i]== UINT64_MAX)
-    //         continue;
-    //     std::vector<entry_t> temp;
-    //     temp = RunReadFromPage(PagePointers[i]);
-    //     entries1.insert(entries1.end(),temp.begin(),temp.end());
-    //     GPT[PagePointers[i]/4096][(PagePointers[i]%4096)/4] = false;
-    // }
-    // if(Rundata.size()!=0)
-    // {
-    //     entries1.insert(entries1.end(),Rundata.begin(),Rundata.end());
-    // }
-    //printf("Read from start page pointer:%lu end:%lu. total: %lu\n",PagePointers[0],PagePointers[PagePointers.size()-1],PagePointers.size());
-    //printf("Test 3");
-    return entries1;
-
-    /** entry_t * entries1 = nullptr; 
-    entry_t * head = nullptr;
-    size_t Pagecapacity = CalculatePageCapacity(sizeof(entry_t));
-    size_t PageBytes = Pagecapacity * sizeof(entry_t);
-
-    entries1 = RunReadFromPage(PagePointers[0],Pagecapacity);
-    head = entries1;
-    head += Pagecapacity;
-
-    printf("Test 1");
-    for(size_t i=1; i<PagePointers[i];i++)
+    for(size_t i=0; i<chunk_pointers.size();i++)
     {
-        head = RunReadFromPage(PagePointers[i],Pagecapacity);
-        printf("Test 2");
-        entries1  = (entry_t *)realloc(entries1, PageBytes+100);
-        if(entries1 == NULL)
+        for(size_t j=chunk_pointers[i]*geometry.clba;j<chunk_pointers[i]*geometry.clba+geometry.clba;j+=64)
         {
-            EMessageOutput("Memory allocating failure in SingleRunRead",578);
+            std::vector<entry_t> temp;
+            temp = select_read_queue(j, OCSSD_READ);
+            if(temp.size()!=0)
+            {
+                entries1.insert(entries1.end(),temp.begin(),temp.end());
+            }
         }
-        head = entries1 + Pagecapacity*(i+1);
-    } **/
+    }
+    return entries1;
 }
 
 void locs_run::PutValue(entry_t entry) 
 {
     assert(Size < MaxSize);
     Rundata.emplace_back(entry);
-    MaxKey = max(entry.key,MaxKey);
-    MinKey = min(entry.key,MinKey);
+    
+    if (memcmp(entry.key, max_key, KEY_SIZE) > 0) 
+    {
+        memcpy(max_key, entry.key, KEY_SIZE);
+    }
+
+    if (memcmp(entry.key, min_key, KEY_SIZE) < 0) 
+    {
+        memcpy(min_key, entry.key, KEY_SIZE);
+    }
+
     Size++;
    
     
-    if(Rundata.size() == chunk_capacity && Size != 0)
+    if(Rundata.size() == max_io_size && Size != 0)
     {
         int err = RunDataWrite();
-        // if(err==0)
-        // {
-        //     assert(Rundata.size() == 0); 
-        // }
-        // else
-        // {
-        //     EMessageOutput("Run failed!",104);
-        // }
+        if(err==0)
+        {
+            assert(Rundata.size() == 0); 
+        }
+        else
+        {
+            EMessageOutput("Run failed!",104);
+        }
+        if(io_count % 64 ==0 && io_count!=0)
+        {
+            chunk_pointers.emplace_back(last_written_block);
+            // printf("page pointer:%lu io_count:%lu pagepointer.size:%lu \n",last_written_block,io_count,chunk_pointers.size());
+        }
     }
+
 }
 
-VAL_t * locs_run::GetValue(KEY_t key)  
+
+
+
+const char * locs_run::GetValue(const char* key)  
 {
     if(Size == 0)
         return nullptr;
-    VAL_t * value = new VAL_t;
+    char * value = nullptr;
     std::vector<entry_t> reads;
 
-    //printf("Run size:%lu\n min:%lu max:%lu\n",Size,MinKey,MaxKey);
+    //printf("Run size:%lu\n min:%lu max:%lu\n",Size,min_key,max_key);
     if(FencePointers.size()!=0)
     {
-        if (key < MinKey || key > MaxKey) 
+        if (memcmp(key, min_key, KEY_SIZE) < 0 || memcmp(key, max_key, KEY_SIZE) > 0) 
         {
             return nullptr;
         }
     }
     
-    std::vector<uint64_t>::iterator it = lower_bound(FencePointers.begin(),FencePointers.end(),key);
-    size_t PageIndex = it-FencePointers.begin();
+    // // std::vector<uint64_t>::iterator it = lower_bound(FencePointers.begin(),FencePointers.end(),key);
+    // size_t PageIndex = it->FencePointers.begin();
 
-    if(PageIndex < PagePointers.size() && PagePointers[PageIndex]!=UINT64_MAX)
-    {
-        // reads = RunReadFromPage(PagePointers[PageIndex]);;
-        // std::vector<entry_t>::iterator get;
-        // get = find(reads.begin(),reads.end(),entry_t{key,0});
-        // if(get!=reads.end())
-        // {
-        //     *value = (*get).val;
-        //     return value; 
-        // }
-    }
-    else
-    {
-        std::vector<entry_t>::iterator get;
-        get = find(Rundata.begin(),Rundata.end(),entry_t{key,0});
-        if(get!=reads.end())
-        {
-            *value = (*get).val;
-            return value; 
-        }
-    }
+    // if(PageIndex < chunk_pointers.size() && chunk_pointers[PageIndex]!=UINT64_MAX)
+    // {
+    //     // reads = RunReadFromPage(PagePointers[PageIndex]);;
+    //     // std::vector<entry_t>::iterator get;
+    //     // get = find(reads.begin(),reads.end(),entry_t{key,0});
+    //     // if(get!=reads.end())
+    //     // {
+    //     //     *value = (*get).val;
+    //     //     return value; 
+    //     // }
+    // }
+    // else
+    // {
+    //     // std::vector<entry_t>::iterator get;
+    //     // get = find(Rundata.begin(),Rundata.end(),entry_t{key,0});
+    //     // if(get!=reads.end())
+    //     // {
+    //     //     value = (*get).val;
+    //     //     return value; 
+    //     // }
+    // }
     delete(value);
     return nullptr;
 }
@@ -211,7 +195,7 @@ VAL_t * locs_run::GetValue(KEY_t key)
 
 std::vector<uint64_t> locs_run::GetPagePointers(void)
 {
-    return PagePointers;
+    return chunk_pointers;
 }
 
 std::vector<KEY_t> locs_run::GetFencePointers(void)
@@ -219,32 +203,21 @@ std::vector<KEY_t> locs_run::GetFencePointers(void)
     return FencePointers;
 }
 
-uint64_t locs_run::GetMaxKey(void)
+const char * locs_run::get_max_key(void)
 {
-    return MaxKey;
+    return max_key;
 }
 
-uint64_t locs_run::GetMinKey(void)
+const char * locs_run::get_min_key(void)
 {
-    return MinKey;
+    return min_key;
 }
 
 
-int locs_run::SetPagePointers(std::vector<uint64_t> pointers)
+int locs_run::set_chunk_pointers(std::vector<PageType> pointers)
 {
-    assert(PagePointers.size()==0);
-
-    // for(size_t i=0;i<pointers.size();++i)
-    // {
-    //     assert(pointers[i] != UINT64_MAX);
-    //     PagePointers.emplace_back(pointers[i]);
-    //     Size += CalculatePageCapacity(sizeof(entry_t));
-    // }
-
-    // if(pointers.size()*CalculatePageCapacity(sizeof(entry_t)) != MaxSize/2 )
-    // {
-    //     return -1;
-    // }
+    assert(chunk_pointers.size()==0);
+    chunk_pointers.insert(chunk_pointers.end(),pointers.begin(),pointers.end());
 
     return 0;
 }
@@ -255,7 +228,7 @@ int locs_run::SetFencePointers(std::vector<uint64_t> pointers)
     // for(size_t i=0;i<pointers.size();++i)
     // {
     //     FencePointers.emplace_back(pointers[i]);
-    //     MaxKey = max(MaxKey,pointers[i]);
+    //     max_key = max(max_key,pointers[i]);
     // }
 
     // if(pointers.size()*CalculatePageCapacity(sizeof(entry_t))!=MaxSize/2 )
@@ -266,27 +239,6 @@ int locs_run::SetFencePointers(std::vector<uint64_t> pointers)
     return 0;
 }
 
-void locs_run::Reset(bool flag)
-{
-    if(FencePointers.size()!=0)
-        FencePointers.clear();
-    Size = 0;
-    if(Rundata.size()!=0)
-        Rundata.clear();
-    if(flag)
-    {
-        if(PagePointers.size()!=0)
-            PagePointers.clear();
-    }
-    MaxKey = 0;
-    MinKey = UINT64_MAX;
-}
-
-int locs_run::SetMaxkey(KEY_t key)
-{
-    MaxKey = max(MaxKey,key);
-}
-
 void locs_run::Reset()
 {
     if(FencePointers.size()!=0)
@@ -294,22 +246,50 @@ void locs_run::Reset()
     Size = 0;
     if(Rundata.size()!=0)
         Rundata.clear();
-    for(size_t i=0;i<PagePointers.size();i++) //Initialize all page pointers as UINT64_MAX
-    {
-        PagePointers[i]=UINT64_MAX;
-    }
-    MaxKey = 0;
-    MinKey = UINT64_MAX;
 
+    if(chunk_pointers.size()!=0)
+    {
+        uint64_t channel_id  = 0;
+        for(size_t i=0;i<chunk_pointers.size();++i)
+        {
+            channel_id = chunk_pointers[i] / (geometry.num_chk * geometry.num_pu);
+            channels[channel_id].chunk_type[chunk_pointers[i] % (geometry.num_chk * geometry.num_pu)] = DISUSED_CHUNK;
+        }
+        chunk_pointers.clear();
+    }
+    memset(max_key, 0, KEY_SIZE);
+    memset(min_key, 0xFF, KEY_SIZE);
+    io_count = 0;
+}
+
+void locs_run::set_max_key(const char* key)
+{
+    if (memcmp(key, max_key, KEY_SIZE) > 0) 
+    {
+        memcpy(max_key, key, KEY_SIZE);
+    }
+}
+
+void locs_run::set_min_key(const char* key)
+{
+    if (memcmp(key, min_key, KEY_SIZE) < 0) 
+    {
+        memcpy(min_key, key, KEY_SIZE);
+    }
+}
+
+void locs_run::set_current_size(size_t current_size)
+{
+    Size = current_size;
 }
 
 void locs_run::Unbind()
 {
-    PagePointers.clear();
+    chunk_pointers.clear();
     Rundata.clear();
     FencePointers.clear();
     Size = 0;
-    AssertCondition(PagePointers.size()==0);
+    AssertCondition(chunk_pointers.size()==0);
 }
 
 int locs_run::DataClear(std::vector<entry_t> MergeEntries)
@@ -324,6 +304,117 @@ int locs_run::DataClear(std::vector<entry_t> MergeEntries)
 unsigned long locs_run::GetNowSize()
 {
     return Size;
+}
+
+int locs_run::status(void)
+{
+    char lsm_key_max[KEY_SIZE];
+    char lsm_key_min[KEY_SIZE];
+    memset(lsm_key_max, 0, KEY_SIZE);
+    memset(lsm_key_min, 0xFF, KEY_SIZE);
+
+    if(Size == 0 && memcmp(max_key,lsm_key_max,KEY_SIZE)  == 0 && memcmp(min_key,lsm_key_min,KEY_SIZE)==0 && chunk_pointers.size()==0)
+        return FULL_EMPTY;
+    else
+        return NOT_EMPTY;
+
+}
+
+void get_log_page_completion(void *arg, const struct spdk_nvme_cpl *completion)
+{
+    if (spdk_nvme_cpl_is_error(completion)) 
+	{
+        printf("OCSSD vector write failed with status 0x%x\n", completion->status.sct);
+    }
+	outstanding_commands--;
+	
+}
+
+static void
+print_ocssd_chunk_info(struct spdk_ocssd_chunk_information_entry *chk_info, int chk_num)
+{
+	int i;
+	char *cs_str, *ct_str;
+
+	printf("OCSSD Chunk Info Glance\n");
+	printf("======================\n");
+
+	
+
+		printf("------------\n");
+		printf("Chunk index:                    %d\n", chk_num);
+		printf("Chunk state:                    %s(0x%x)\n", cs_str, *(uint8_t *) & (chk_info[chk_num].cs));
+		printf("Chunk type (write mode):        %s\n", ct_str);
+		printf("Chunk type (size_deviate):      %s\n", chk_info[chk_num].ct.size_deviate ? "Yes" : "No");
+		printf("Wear-level Index:               %d\n", chk_info[chk_num].wli);
+		printf("Starting LBA:                   %" PRIu64 "\n", chk_info[chk_num].slba);
+		printf("Number of blocks in chunk:      %" PRIu64 "\n", chk_info[chk_num].cnlb);
+		printf("Write Pointer:                  %" PRIu64 "\n", chk_info[chk_num].wp);
+	
+}
+
+
+void locs_run::chunk_reset()
+{
+    
+	int nsid = spdk_nvme_ns_get_id(ns);
+	uint32_t num_entry = 256;
+	uint32_t xfer_size = spdk_nvme_ns_get_max_io_xfer_size(ns);
+	uint32_t buf_size = 0;
+	uint64_t buf_offset = 0;
+	outstanding_commands = 0;
+
+	assert(num_entry != 0);
+
+	spdk_ocssd_chunk_information_entry * chunks = (spdk_ocssd_chunk_information_entry *)spdk_dma_malloc(num_entry*sizeof(spdk_ocssd_chunk_information_entry), 0x40, NULL);
+	assert(chunks != NULL);
+
+	buf_size = num_entry * sizeof(struct spdk_ocssd_chunk_information_entry);
+	while (buf_size > 0) 
+    {
+		xfer_size = min(buf_size, xfer_size);
+		if (spdk_nvme_ctrlr_cmd_get_log_page(ctrlr, SPDK_OCSSD_LOG_CHUNK_INFO,
+						     nsid, (void *) (chunks + buf_offset),
+						     xfer_size, buf_offset, get_log_page_completion, NULL) == 0) 
+        {
+			outstanding_commands++;
+		} 
+        else 
+        {
+			printf("get_ocssd_chunk_info_log_page() failed\n");
+			return ;
+		}
+
+		buf_size -= xfer_size;
+		buf_offset += xfer_size;
+	}
+    // printf("outstanding_commands:%d\n",outstanding_commands);
+	while (outstanding_commands) 
+    {
+		spdk_nvme_ctrlr_process_admin_completions(ctrlr);
+	}
+    int err = 0;
+
+    
+
+    for (auto pointer: chunk_pointers)
+    {
+        if( pointer == 129)
+        {
+            print_ocssd_chunk_info(chunks, pointer);
+        }
+        err = insert_erase_queue(pointer, &chunks[pointer]);
+        if(err !=0)
+        {
+            printf("Erase failed!");
+        }
+    }
+    spdk_dma_free(chunks);
+}
+
+void locs_run::status_display(void)
+{
+    printf("Size:%lu,MaxSize:%lu,chunk_pointers size:%lu,,max_key:%lu,min_key:%lu",Size,MaxSize,chunk_pointers.size(),max_key,min_key);
 }
 
 bool locs_run::Isfull(void)

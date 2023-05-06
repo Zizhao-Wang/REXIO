@@ -32,11 +32,11 @@ private:
     
 public:
     int RandomLevel();
-    locs_buffer(size_t maxpage);
-    bool PutValue(KEY_t, VAL_t val);
+    locs_buffer(size_t max_size);
+    bool PutValue(const char* key, const char* value);
     void display(); 
-    VAL_t * GetValue(KEY_t);
-    std::vector<entry_t> * GetRange(KEY_t, KEY_t) const;
+    const char* GetValue(const char* key);
+    std::vector<entry_t> * GetRange(const char* start, const char* end) const;
     void AllClear(void);
     uint64_t GetMaxSize();
     std::vector<entry_t> GetEntries();

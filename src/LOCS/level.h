@@ -33,7 +33,7 @@ public:
     std::vector<locs_run> Runs;
     locs_level(uint64_t);
     void PutValue(entry_t entry1);
-    VAL_t* GetValue(KEY_t key);
+    const char* GetValue(const char* key);
     void PutEntries(std::vector<entry_t>);
     bool IsEmpty(void);
     bool IsFull (void);

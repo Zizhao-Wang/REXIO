@@ -15,6 +15,8 @@
 
 
 /* Define some global variables. */
+#define DEBUG00 
+int outstanding_command = 0;
 
 int GlobalInitialize(int argc, char **argv)
 {
@@ -37,6 +39,15 @@ int GlobalInitialize(int argc, char **argv)
 
 }
 
+void getpage_completion(void *arg, const struct spdk_nvme_cpl *completion)
+{
+    if (spdk_nvme_cpl_is_error(completion)) 
+	{
+        printf("OCSSD vector write failed with status 0x%x\n", completion->status.sct);
+    }
+	channels[current_channel].current_request_num--;
+	
+}
 
 int main(int argc, char **argv)
 {
@@ -48,13 +59,10 @@ int main(int argc, char **argv)
         printf("Initialization failure!\n");
         exit(101);
     }
-
     /* select different indexes. line 49- */
 
     locs_init();
-
+	
     locs_close();
     return 0;
-
-
 }

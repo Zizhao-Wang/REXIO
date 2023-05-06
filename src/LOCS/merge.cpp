@@ -29,11 +29,22 @@ void merge_context::Insert(std::vector<entry_t> entries)
     
     merge_entry MergeItem;
     size_t index = 0;
+    
+    // printf("lls: Inserted key: %lu\n", test(entries[entries.size() - 1].key));
+    
     while(index < entries.size()) 
     {
         MergeItem.SingleEntry = entries[index];
         queue.push(MergeItem);
         index++;
+
+        uint64_t key_value = test(MergeItem.SingleEntry.key);
+#ifdef BIG_TO_LITTLE_ENDIAN        
+        if (index == 1 || index == entries.size() || key_value == 1048576 || key_value == 1572864)
+        {
+            printf("Inserted key: %lu\n", key_value);
+        }
+#endif
     }
     //printf("priority_queue size: %lu \n",queue.size());
 
@@ -71,6 +82,12 @@ entry_t merge_context::Contextpop1()
     {
         queue.pop();
     }
+
+    // uint64_t key_value = test(current.SingleEntry.key);
+    // if (key_value == 1 || key_value == 2097152 || key_value == 1048576 || key_value == 1572864)
+    // {
+    //     printf("Popped key: %lu\n", key_value);
+    // }
 
     return current.SingleEntry;
 }

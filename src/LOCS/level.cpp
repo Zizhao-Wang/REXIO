@@ -37,9 +37,9 @@ void locs_level ::PutValue(entry_t entry1)
     }
 }
 
-VAL_t* locs_level ::GetValue(KEY_t key)
+const char* locs_level ::GetValue(const char* key)
 {
-    VAL_t *val = new VAL_t;
+    const char *val = nullptr;
     for(int i=0;i<Runs.size();i++)
     {  
        // printf("Search in Run %d, Run has %lu\n",i,Runs[i].GetNowSize());
@@ -67,7 +67,7 @@ bool locs_level ::IsEmpty(void)
 {
     for(auto& run:Runs)
     {
-        if(run.GetNowSize()!= 0 && run.GetNowSize() == MaxRunSize)
+        if(run.GetNowSize()!= 0 )
         {
             return false;
         }
@@ -79,7 +79,7 @@ bool locs_level ::IsFull(void)
 {
     for(auto& run:Runs)
     {
-        if(run.GetNowSize()!= MaxRunSize && run.GetNowSize() == 0)
+        if(run.GetNowSize()!= MaxRunSize)
         {
             return false;
         }

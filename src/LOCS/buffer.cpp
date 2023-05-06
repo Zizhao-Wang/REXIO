@@ -1,19 +1,21 @@
-#include <iostream>
 #include "buffer.h"
+#include <iostream>
+#include "global_variables.h"
 #include "locs.h"
+#include "../Debug/debug_micros.h"
 #include "../Backend/IODisk/WriteDisk.h"
 
 const int MAX_LEVEL = 32;
 const int P_FACTOR = RAND_MAX >> 2;
 
-locs_buffer::locs_buffer(size_t maxpage)
+locs_buffer::locs_buffer(size_t max_chunks)
 {
-    // 1024 * 256 = 262144 
-    uint64_t capacity =  1024;
-    this->MaxSize = capacity*maxpage;
+
+    this->MaxSize = (max_chunks * geometry.clba * page_size) / sizeof(entry_t);
+    // this->MaxSize = 4;
+    printf("MaxSize:%lu\n",MaxSize);
     size = 0;
     //printf("key:%lu \n\n",Head->head->key);
-    //printf("Test successful! Size of entry:%lu, Page capacity: %lu, Buffer size:%u\n",sizeof(entry_t),capacity,MaxSize);
 }
 
 int locs_buffer::RandomLevel()
@@ -35,7 +37,7 @@ void locs_buffer::display()
     return ;
 }
 
-bool locs_buffer::PutValue(KEY_t key1, VAL_t val1) 
+bool locs_buffer::PutValue(const char* key, const char* value) 
 {
 #ifdef SET
     SkiplistNode * update[MAX_LEVEL];
@@ -84,16 +86,16 @@ bool locs_buffer::PutValue(KEY_t key1, VAL_t val1)
         return true;
     }
 #endif
-
     if (size >= MaxSize) 
     {
         return false;
     }
 
     entry_t SingleEntry;
+    memcpy(SingleEntry.key, key, KEY_SIZE);
+    memcpy(SingleEntry.val, value, VAL_SIZE);
+
     std::pair<std::set<entry_t>::iterator,bool> Tempair;
-    SingleEntry.key = key1;
-    SingleEntry.val = val1;
     size++;
     Tempair = Entries.insert(SingleEntry);
     if (Tempair.second == false)  // Update the entry if it already exists
@@ -103,13 +105,14 @@ bool locs_buffer::PutValue(KEY_t key1, VAL_t val1)
         size--;
     }
 
-    return true;  
+    return true;   
     
 }
 
-VAL_t * locs_buffer::GetValue(KEY_t key1)
+const char* locs_buffer::GetValue(const char* key)
 {
-#ifdef SKIPLIST
+
+#ifdef SKIPLIST1
     SkiplistNode *curr = Head->head;
     for (int i = Head->level - 1; i >= 0; i--) 
     {
@@ -125,36 +128,38 @@ VAL_t * locs_buffer::GetValue(KEY_t key1)
         *value = curr->value;
         return value;
     } 
-    return nullptr;
+    return nullptr;    
 #endif
+    
+#ifdef RED_BLACK_TREE
+
     entry_t search_entry;
     set<entry_t>::iterator entry;
-    VAL_t *val;
 
-    search_entry.key = key1;
+    memcpy(search_entry.key, key, KEY_SIZE);
     entry = Entries.find(search_entry);
 
     if (entry == Entries.end()) 
     {
         return nullptr;
     }  
-    
-    val = new VAL_t;
-    *val = entry->val;
-    return val;
+    char *value = new char[VAL_SIZE];
+    memcpy(value, entry->val, VAL_SIZE);
+    return value;
 
+#endif
 }
 
-std::vector<entry_t> * locs_buffer::GetRange(KEY_t start, KEY_t end) const 
+std::vector<entry_t> * locs_buffer::GetRange(const char* start, const char* end) const 
 {
     entry_t SearchEntry;
     std::set<entry_t>::iterator SubRangeStart, SubRangeEnd;
 
-    SearchEntry.key = start;
-    SubRangeStart = Entries.lower_bound(SearchEntry);
+    // SearchEntry.key = start;
+    // SubRangeStart = Entries.lower_bound(SearchEntry);
 
-    SearchEntry.key = end;
-    SubRangeEnd = Entries.upper_bound(SearchEntry);
+    // SearchEntry.key = end;
+    // SubRangeEnd = Entries.upper_bound(SearchEntry);
 
     return new std::vector<entry_t>(SubRangeStart, SubRangeEnd);
 }

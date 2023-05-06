@@ -9,6 +9,7 @@
 #include <spdk/nvme_ocssd_spec.h>
 #include "locs.h"
 #include "global_variables.h"
+#include "../Debug/debug_micros.h"
 #include "../Backend/SSDWrite/writer.h"
 #include "../Backend/backend_variables.h"
 
@@ -33,11 +34,13 @@ LOCS::LOCS(size_t BufferSize,int levelnum):buffer(BufferSize)
 
 int LOCS::FlushInto(vector<locs_level>::iterator current) 
 {
+
     vector<locs_level>::iterator next;
     merge_context mergecon;
     entry_t entry;
 
     AssertCondition(current >= Levels.begin());
+
     if (current->IsFull()) 
     {
         next = current + 1;
@@ -47,7 +50,6 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
         return 0;
     }
 
-
     /**
     * Merge operation:
     * Merage all runs in the current level into the first run of next level.
@@ -56,63 +58,110 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
     * 2.check if the size is greater than 0 
     * 3.Flush directly if the size equals 0, or merge all datum of next run and flush    
     **/
+    if(!next->IsFull() && !next->IsEmpty())
+    {
+        for(int i=0;i<current->Runs.size();i++)
+        {
+            //printf("Run has %lu items in current level %ld\n",current->Runs[i].GetNowSize(),current->GetLevelNumber());
+            if(current->Runs[i].GetNowSize() != 0)
+            {
+                mergecon.Insert(current->Runs[i].SingleRunRead());
+                current->Runs[i].chunk_reset();
+                current->Runs[i].Reset(); 
+            }
+        }
+
+        for(int i=0;i<next->Runs.size();i++)
+        {
+            //printf("Run has %lu items in next level %ld!\n",next->Runs[i].GetNowSize(),next->GetLevelNumber());
+            if(next->Runs[i].GetNowSize() != 0)
+            {
+                mergecon.Insert(next->Runs[i].SingleRunRead());
+                next->Runs[i].chunk_reset();
+                next->Runs[i].Reset();
+            }
+        }
+
+        while(!mergecon.IsEmpty())
+        {
+            entry_t entry = mergecon.Contextpop1();
+            // Remove deleted keys from the final level
+            if ( entry.val != 0) 
+            {
+                next->PutValue(entry);
+            }
+        }
+        return 0;
+    }
+
     if (next->IsFull()) 
     {
        /**
         * If the next level does not have space for the current level,
         * recursively merge the next level downwards to create some
         **/
-        //printf("Next 1 run size:%lu Next 2 run size:%lu \n",next->Runs[0].GetNowSize(),next->Runs[1].GetNowSize());
         FlushInto(next);
         assert(next->IsEmpty());
-        // /* Take over runs from current!*/
-        // for (int i = 0;i<current->Runs.size();++i) 
-        // {
-        //     std::vector<PageType> pages  = current->Runs[i].GetPagePointers();
-        //     if(next->Runs[0].SetPagePointers() == 0 && next->Runs[0].SetFencePointers(current->Runs[i].GetFencePointers()) == 0 &&next->Runs[0].SetMaxkey(current->Runs[i].GetMaxKey())==0)
-        //     {
-        //         current->Runs[i].Reset();
-        //         printf("Size in take over:%lu\n",current->Runs[i].GetNowSize());
-        //     }else{
-        //         EMessageOutput("Page pointers merging failure in Level"+ Uint64toString(current->GetLevelNumber())+ "is trying to merging into Level"+ Uint64toString(next->GetLevelNumber())+"\n",110);
-        //     }
-        // }
-        // assert(next->Runs[0].Isfull() == true);
-    }
-    
-    for(int i=0;i<current->Runs.size();i++)
-    {
-        //printf("Run has %lu items in current level %ld\n",current->Runs[i].GetNowSize(),current->GetLevelNumber());
-        if(current->Runs[i].GetNowSize() != 0)
-        {
-            mergecon.Insert(current->Runs[i].SingleRunRead());
-        }
-    }
-    for(int i=0;i<next->Runs.size();i++)
-    {
-        //printf("Run has %lu items in next level %ld!\n",next->Runs[i].GetNowSize(),next->GetLevelNumber());
-        if(next->Runs[i].GetNowSize() != 0)
-        {
-            mergecon.Insert(next->Runs[i].SingleRunRead());
-            next->Runs[i].Reset();
-        }
-    }
-    for(int i=0;i<current->Runs.size();i++)
-    {
-        current->Runs[i].Reset(); 
     }
 
+    /* Take over runs from current!*/
+    std::vector<PageType> page_poniters;
+    char maxkey[KEY_SIZE];
+    char minkey[KEY_SIZE];
+    memset(maxkey, 0, KEY_SIZE);
+    memset(minkey, 0xFF, KEY_SIZE);
+    uint64_t count_size = 0;
+    static int call_count = 0;
+    call_count++;
 
-    while(!mergecon.IsEmpty())
+    for (int i = 0;i<current->Runs.size();++i) 
     {
-        entry_t entry = mergecon.Contextpop1();
-            // Remove deleted keys from the final level
-        if ( entry.val != 0) 
+        std::vector<PageType> temp = current->Runs[i].GetPagePointers();
+        page_poniters.insert(page_poniters.end(),temp.begin(),temp.end());
+        if(memcmp(current->Runs[i].get_max_key(),maxkey, KEY_SIZE) > 0)
         {
-            next->PutValue(entry);
+            memcpy(maxkey, current->Runs[i].get_max_key(), KEY_SIZE);
         }
+        
+        if(memcmp(current->Runs[i].get_min_key(),minkey, KEY_SIZE) < 0)
+        {
+            memcpy(minkey, current->Runs[i].get_min_key(), KEY_SIZE);
+        }
+        
+        count_size += current->Runs[i].GetNowSize();
+        current->Runs[i].Reset();
     }
-    
+
+    if(next->Runs[0].status() == FULL_EMPTY)
+    {
+        next->Runs[0].set_chunk_pointers(page_poniters); 
+        next->Runs[0].set_max_key(maxkey);
+        next->Runs[0].set_min_key(minkey);
+        next->Runs[0].set_current_size(count_size);
+    }
+    else
+    {
+        next->Runs[0].status_display();
+        EMessageOutput("Page pointers merging failure in Level "+ Uint64toString(current->GetLevelNumber())+ "is trying to merging into Level"+ Uint64toString(next->GetLevelNumber())+"\n",110);
+    }
+
+#ifdef DEBUG
+    printf("  === Level %ld: Debug Information in LOCS::FlushInto (Call %d) ===\n", next->GetLevelNumber(), call_count);
+    printf("    Merging Page Pointers from Level %ld into Level %ld\n", current->GetLevelNumber(), next->GetLevelNumber());
+    printf("    Min Key: %lu", test(minkey));
+    printf("    Max Key: %ld\n", test(maxkey));
+    printf("    Page Pointers (%lu): ", page_poniters.size());
+
+    for (int i = 0; i < page_poniters.size(); i++) 
+    {
+        printf(" %lu ", page_poniters[i]);
+    }
+
+    printf("\n");
+    printf("  === Flush Into Debug Information End (Call %d) ===\n", call_count);
+
+#endif
+
     return 0;
 }
 
@@ -123,21 +172,34 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
  * 3.Put the value into empty buffer
  */
 
-int LOCS::PutValue(KEY_t key, VAL_t value) 
+
+int LOCS::PutValue(const char* key, const char* value) 
 {
+    int i = 0;
     /* Insert data into level 0 (buffer) */
     if(buffer.PutValue(key, value))  
     {
         return 1;
     }
 
-    
+#ifdef DEBUG
+    printf("=== Level Debug Information Begin: ===\n");
+#endif
     /* Step 2: Flush the buffer to level 0 */
     FlushInto(Levels.begin());  //check whether level 1 is full and flush it if level 1 is full 
 
     // Step 3
     std::vector<entry_t> bufferdata = buffer.GetEntries();
-    // printf("Buffer size: %ld from GetNowSize()\n",bufferdata.size());
+
+#ifdef BIG_TO_LITTLE_ENDIAN
+
+    // for(auto& kv : bufferdata)
+    // {
+    //     printf("key:%lu value:%lu\n",test(kv.key),test(kv.val));
+    // }
+
+#endif
+
 
     if(Levels[0].IsEmpty())
     {
@@ -145,10 +207,6 @@ int LOCS::PutValue(KEY_t key, VAL_t value)
         {
             Levels[0].PutValue(kv);
         }
-        // for(auto& run : Levels[0].Runs)
-        // {
-        //     printf("Run size: %ld from GetNowSize()\n",run.GetNowSize());
-        // }
     }
     else
     {
@@ -158,44 +216,80 @@ int LOCS::PutValue(KEY_t key, VAL_t value)
         {
             if(Levels[0].Runs[i].GetNowSize()!= 0)
             {
-                printf("Run size: %ld from GetNowSize()\n",Levels[0].Runs[i].GetNowSize());
+                // printf("Run size: %ld from GetNowSize()\n",Levels[0].Runs[i].GetNowSize());
                 mergecon.Insert(Levels[0].Runs[i].SingleRunRead());
+                Levels[0].Runs[i].chunk_reset();
                 Levels[0].Runs[i].Reset();
             }
         }
-        int i=0;
+        
+        char deleted_val[KEY_SIZE];
+        memset(deleted_val, 0, KEY_SIZE);
         printf("mergeon size:%lu\n",mergecon.get_size());
         while(!mergecon.IsEmpty())
         {
             entry_t entry = mergecon.Contextpop1();
-            if (entry.val != 0) 
+            uint64_t key_value = test(entry.key);
+            if (memcmp(entry.val, deleted_val,KEY_SIZE)!=0) 
             {
-                //values.emplace_back(entry);
                 Levels[0].PutValue(entry);
-                i++;
+                // i++;
+                // uint64_t key_value = test(entry.key);
+                // if (key_value == 1 || key_value == 2097152 || key_value == 1048576 || key_value == 1572864)
+                // {
+                //     printf("Inserting key: %lu\n", key_value);
+                // }
             }
-            // else
-            // {
-            //     printf("entry.key:%lu, entry.val:%lu \n",entry.key,entry.val);
-            // }
         }
-        printf("i:%d\n",i);
-        // for(int i=0;i<Levels[0].Runs.size();i++)
-        // {
-        //     printf("Run size: %ld from GetNowSize() in Level[0]\n",Levels[0].Runs[i].GetNowSize());
-        // }
+        // printf("i:%d\n",i);
     }
     
     buffer.AllClear();
     assert(buffer.PutValue(key, value));
 
+#ifdef DEBUG
+    for (auto level_it = Levels.begin(); level_it != Levels.end(); ++level_it) 
+    {
+        if (level_it->IsEmpty()) 
+        {
+            continue;
+        }
+        printf("  === Level %ld Information ===\n", level_it->GetLevelNumber());
+        for (size_t i = 0; i < level_it->Runs.size(); i++) 
+        {
+            std::vector<PageType> page_pointers = level_it->Runs[i].GetPagePointers();
+            size_t dataSize = level_it->Runs[i].GetNowSize();
+
+            if (dataSize == 0) 
+            {
+                printf("  --- Run %zu: Data Size: 0 ---\n", i);
+                continue;
+            }
+
+            printf("  --- Run %zu ---\n", i);
+            printf("    Data Size: %lu\n", dataSize);
+            printf("    Min Key: %lu  ", test(level_it->Runs[i].get_min_key()));
+            printf(" Max Key: %lu\n", test(level_it->Runs[i].get_max_key()));
+            printf("    Page Pointers (%lu): ", page_pointers.size());
+            for (size_t j = 0; j < page_pointers.size(); j++) 
+            {
+                printf("%lu ", page_pointers[j]);
+            }
+            printf("\n\n");
+        }
+    }
+    printf("=== Level Debug Information End ===\n\n");
+#endif
+
     return 0;
     
 }
 
-void LOCS::UpdateValue(KEY_t key, VAL_t val)
+
+
+void LOCS::UpdateValue(const char* key, const char* value)
 {
-    PutValue(key,val);
+    PutValue(key,value);
 }
 
 // Run * LSMTree::get_run(int index) 
@@ -215,10 +309,10 @@ void LOCS::UpdateValue(KEY_t key, VAL_t val)
 //     return nullptr;
 // };
 
-VAL_t* LOCS::GetValue(KEY_t key) 
+const char* LOCS::GetValue(const char* key) 
 {
     
-    VAL_t *buffer_val = new VAL_t;
+    const char *buffer_val = nullptr;
     
     // /* Search buffe */
     
@@ -232,7 +326,7 @@ VAL_t* LOCS::GetValue(KEY_t key)
     delete buffer_val;
     
     // /* Search levels */
-    VAL_t *level_val = new VAL_t;
+    const char *level_val = nullptr;
     for(int i=0;i<Levels.size();++i)
     {
         //printf("Search in Level %d\n",i);
@@ -362,7 +456,7 @@ VAL_t* LOCS::GetValue(KEY_t key)
 //     }
 // }
 
-void LOCS::DeleteValue(KEY_t key) 
+void LOCS::DeleteValue(const char* key) 
 {
     PutValue(key, 0);
 }
@@ -393,48 +487,69 @@ void locs_init(void)
 {
 
 	clock_t startTime,endTime;          // Definition of timestamp
-    LOCS locs(1024,7);                  // Initialize the memory part of LOCS
+    LOCS locs(2,7);                  // Initialize the memory part of LOCS
 
     /* workload a: insert only*/
     startTime = clock();
-    for(SKey i=1;i<=1048577;i++)
+    char key_buffer[KEY_SIZE];
+    char value_buffer[VAL_SIZE];
+
+    for(SKey i=1;i<=100000000;i++)
     {
-        if(i%10000000==0||i==1000000)
+        if(i%10000000==0)
         {
             endTime = clock();
             std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
             // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
         }
-        locs.PutValue(i,i);
+        memset(key_buffer, 0, KEY_SIZE);
+        memset(value_buffer, 0, VAL_SIZE);
+
+        for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
+        {
+            key_buffer[KEY_SIZE - 1 - j] = static_cast<char>((i >> (8 * j)) & 0xFF);
+        }
+        for (size_t j = 0; j < sizeof(uint64_t) && j < VAL_SIZE; ++j)
+        {
+            value_buffer[KEY_SIZE - 1 - j] = static_cast<char>((i >> (8 * j)) & 0xFF);
+        }
+        
+        locs.PutValue(key_buffer, value_buffer);
     }
     // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
     endTime = clock();
     std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
 
-    // /* workload b: read only, all in it */
-    // startTime = clock();
-    //  for(int i=1;i<=1000000;i++)
-    //  {
+    /* workload b: read only, all in it */
+    startTime = clock();
+     for(int i=1;i<=1;i++)
+     {
 
-    //     srand48(time(NULL));
-    //     SKey k = 1+(rand()%4000000);
+        srand48(time(NULL));
+        SKey k = 1+(rand()%100);
 
-    //     if(locs.GetValue(k)==nullptr)
-    //     {
-    //         printf("key:%lu Not Found!\n",k);
-    //     }
-
-    //     if(i==10000 || i%100000==0)
-    //     {
-    //         endTime = clock();
-    //         std::cout << "Total Time of "<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-    //         printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);   
-    //     }
-    //  }
-    // endTime = clock();
+        memset(key_buffer, 0, KEY_SIZE);
+        for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
+        {
+            key_buffer[KEY_SIZE - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
+        }
+        const char* value = locs.GetValue(key_buffer);
+        if(value==nullptr)
+        {
+            printf("key:%lu Not Found!\n",k);
+        }
+        // printf("\n");
+        if(i==10000 || i%100000==0)
+        {
+            endTime = clock();
+            std::cout << "Total Time of "<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+            // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);   
+        }
+     }
+    endTime = clock();
     // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
-    // std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+    std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
     //  /* workload c: read only, 50% in it, 50% not in it */
     //  startTime = clock();
@@ -564,5 +679,12 @@ void locs_init(void)
 
 void locs_close()
 {
+
+    // free I/O queues
+    for(int i=0; i<geometry.num_grp;i++)
+    {
+        spdk_nvme_ctrlr_free_io_qpair(channels[i].qpair);
+    }
+
     spdk_nvme_detach_async(ctrlr, &g_detach_ctx);
 }

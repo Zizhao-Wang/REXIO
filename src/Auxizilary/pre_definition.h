@@ -12,7 +12,7 @@
 #define EXPERIMENT1_VARIABLESTYPES_H
 
 #include <iostream>
-
+#include <cstring>
 
 typedef uint64_t KEY_t;
 typedef uint64_t VAL_t;
@@ -24,28 +24,58 @@ typedef uint64_t VAL_t;
 #define VAL_MAX 18446744073709551615
 #define VAL_MIN 0
 
-
 #define PAGE_MAX 4294967295
  
+#define VAL_SIZE 8
+#define KEY_SIZE 8
+
 typedef struct entry 
 {
-    KEY_t key;
-    VAL_t val;
-    bool operator == (const entry& other) const 
+    char key[KEY_SIZE];
+    char val[VAL_SIZE];
+    // bool operator == (const entry& other) const 
+    // {
+    //     return *(reinterpret_cast<const uint64_t*>(key)) == *(reinterpret_cast<const uint64_t*>(other.key));
+    // }
+
+    // bool operator<(const entry& other) const 
+    // {
+    //     return *(reinterpret_cast<const uint64_t*>(key)) < *(reinterpret_cast<const uint64_t*>(other.key));
+    // }
+
+    // bool operator>(const entry& other) const 
+    // {
+    //     return *(reinterpret_cast<const uint64_t*>(key)) > *(reinterpret_cast<const uint64_t*>(other.key));
+    // }
+
+    bool operator <(const entry& other) const
     {
-        return key == other.key;
+        int key_comparison_result = memcmp(key, other.key, KEY_SIZE);
+        if (key_comparison_result == 0)
+        {
+            return memcmp(val, other.val, VAL_SIZE) < 0;
+        }
+        return key_comparison_result < 0;
     }
-    bool operator<(const entry& other) const 
+
+    bool operator >(const entry& other) const
     {
-        return key < other.key;
+        int key_comparison_result = memcmp(key, other.key, KEY_SIZE);
+        if (key_comparison_result == 0)
+        {
+            return memcmp(val, other.val, VAL_SIZE) > 0;
+        }
+        return key_comparison_result > 0;
     }
-    bool operator>(const entry& other) const 
+
+    bool operator ==(const entry& other) const
     {
-        return key > other.key;
+        return memcmp(key, other.key, KEY_SIZE) == 0 && memcmp(val, other.val, VAL_SIZE) == 0;
     }
 }entry_t;
 
 
+uint64_t test(const char* buffer );
 
 
 #endif  // EXPERIMENT1_VARIABLESTYPES_H

@@ -53,5 +53,40 @@
   "directory": "/home/TiOCS/build",
   "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Auxizilary/pre_definition.cpp.o -c /home/TiOCS/src/Auxizilary/pre_definition.cpp",
   "file": "/home/TiOCS/src/Auxizilary/pre_definition.cpp"
+},
+{
+  "directory": "/home/TiOCS/build",
+  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o -c /home/TiOCS/src/Ti-OCSSD/TiOCS.cpp",
+  "file": "/home/TiOCS/src/Ti-OCSSD/TiOCS.cpp"
+},
+{
+  "directory": "/home/TiOCS/build",
+  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.o -c /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.cpp",
+  "file": "/home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.cpp"
+},
+{
+  "directory": "/home/TiOCS/build",
+  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.o -c /home/TiOCS/src/Ti-OCSSD/MemoryTier/MemTier.cpp",
+  "file": "/home/TiOCS/src/Ti-OCSSD/MemoryTier/MemTier.cpp"
+},
+{
+  "directory": "/home/TiOCS/build",
+  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o -c /home/TiOCS/src/Ti-OCSSD/utility/types.cpp",
+  "file": "/home/TiOCS/src/Ti-OCSSD/utility/types.cpp"
+},
+{
+  "directory": "/home/TiOCS/build",
+  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o -c /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.cpp",
+  "file": "/home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.cpp"
+},
+{
+  "directory": "/home/TiOCS/build",
+  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/StoreTier/io_manager.cpp.o -c /home/TiOCS/src/Ti-OCSSD/StoreTier/io_manager.cpp",
+  "file": "/home/TiOCS/src/Ti-OCSSD/StoreTier/io_manager.cpp"
+},
+{
+  "directory": "/home/TiOCS/build",
+  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LRU/lru.cpp.o -c /home/TiOCS/src/LRU/lru.cpp",
+  "file": "/home/TiOCS/src/LRU/lru.cpp"
 }
 ]

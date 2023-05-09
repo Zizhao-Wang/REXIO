@@ -13,15 +13,16 @@
 #include <climits>
 
 
-TSkiplistNode *TskiplistNodeCreat(uint64_t key,uint32_t offset, int maxLevel)
+TSkiplistNode *TskiplistNodeCreat(const char* key,uint32_t offset, int maxLevel)
 {
     TSkiplistNode *obj = (TSkiplistNode *)malloc(sizeof(TSkiplistNode));
-	obj->key = key;
+    memcpy(obj->key, key, KEY_SIZE);
     obj->offset = offset;
     obj->flag = 1;
     obj->maxLevel = maxLevel;
     obj->forward = (TSkiplistNode **)malloc(sizeof(TSkiplistNode *) * maxLevel);
-    for (int i = 0; i < maxLevel; i++) {
+    for (int i = 0; i < maxLevel; i++) 
+    {
         obj->forward[i] = NULL;
     }
     return obj;
@@ -30,8 +31,11 @@ TSkiplistNode *TskiplistNodeCreat(uint64_t key,uint32_t offset, int maxLevel)
 TNCSkiplist * TskiplistCreate()
 {
     TNCSkiplist *obj = (TNCSkiplist *)malloc(sizeof(TNCSkiplist));
-    obj->head = TskiplistNodeCreat(0,0, MAX_LEVEL1);
+    char key[KEY_SIZE];
+    memset(key, 0, KEY_SIZE); 
+    obj->head = TskiplistNodeCreat(key,0, MAX_LEVEL1);
     obj->level = 0;
+    obj->number = 0;
     srand(time(NULL));
     return obj;
 

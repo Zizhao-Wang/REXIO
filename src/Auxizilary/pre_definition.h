@@ -27,26 +27,12 @@ typedef uint64_t VAL_t;
 #define PAGE_MAX 4294967295
  
 #define VAL_SIZE 8
-#define KEY_SIZE 8
+#define KEY_SIZE 56
 
 typedef struct entry 
 {
     char key[KEY_SIZE];
     char val[VAL_SIZE];
-    // bool operator == (const entry& other) const 
-    // {
-    //     return *(reinterpret_cast<const uint64_t*>(key)) == *(reinterpret_cast<const uint64_t*>(other.key));
-    // }
-
-    // bool operator<(const entry& other) const 
-    // {
-    //     return *(reinterpret_cast<const uint64_t*>(key)) < *(reinterpret_cast<const uint64_t*>(other.key));
-    // }
-
-    // bool operator>(const entry& other) const 
-    // {
-    //     return *(reinterpret_cast<const uint64_t*>(key)) > *(reinterpret_cast<const uint64_t*>(other.key));
-    // }
 
     bool operator <(const entry& other) const
     {
@@ -72,6 +58,7 @@ typedef struct entry
     {
         return memcmp(key, other.key, KEY_SIZE) == 0 && memcmp(val, other.val, VAL_SIZE) == 0;
     }
+
 }entry_t;
 
 

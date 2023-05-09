@@ -15,12 +15,16 @@
 #include "../../Auxizilary/GlobalVariable.h" 
 #include "Node.h"
 
+
+
 /**
  *  ================= Node initialization module ==================== 
  **/
-bool LocalGeneration(GlobalHashNode * global);
+bool LocalGeneration(GlobalHashNode * global, int initialLocalDepth);
 
 bool DoubleHashtable();
+
+uint64_t big_endian2little_endian(const char *big_endian, size_t len);
 
 
 /**  
@@ -29,30 +33,33 @@ bool DoubleHashtable();
 
 int RandomLevel();
 
-LocalHeadNode * NodeSplit(LocalHeadNode * head);
+void NodeSplit(size_t bucket_index);
 
-int InsertNode(SKey hashkey, SValue hashvalue);
+int InsertNode(const char* hashkey, uint32_t offset, uint8_t flag, int bucket_id);
+
+int InsertNode(const char* hashkey, const char* hashvalue);
 
 
 /**
  *  =================  Search module  ==================== 
  **/
 
-TSkiplistNode * SearchNode(TNCSkiplist * Head,SKey hashkey);
-SValue Search(SKey key1);
+TSkiplistNode * SearchNode(TNCSkiplist * Head, const char*  hashkey);
+
+SValue Search(const char* );
 
 
 /**  
  * ================= update module ====================  
  **/
-int Update(SKey key1, SValue val);
+int Update(const char* key1, const char* val);
 
 
 /**
  *  ================= deletion module====================  
  **/
-bool DeleteValue(TNCSkiplist * Head, SKey hashkey);
-int Delete(SKey key1);
+bool DeleteValue(TNCSkiplist * Head, const char* hashkey);
+int Delete(const char* key1);
 
 
 /**  

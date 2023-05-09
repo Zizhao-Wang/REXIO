@@ -19,12 +19,15 @@
 #include "../MemoryTier/Node.h"
 #include "../../LRU/lru.h"
 #include "../../FIFO/FIFO.h"
+#include "../../LOCS/io_scheduler.h"
+
 
 /* Global variable declaration! */
 extern int indexs;
 extern uint32_t offset;
-//extern TNCEntry * Pagedata;
-extern TNCEntry Pagedata[1030];
+extern uint64_t sectors_per_page;
+extern TNCEntry* Pagedata;
+extern size_t buffer_size;
 extern PageType WBufferId;
 extern std::unordered_map<uint64_t, std::vector<char>> BufferLog;  //Log buffer 
 extern LRUCache lrucache;
@@ -34,9 +37,17 @@ extern int buffernumber;
 extern FIFOCache fifocache;
 
 /**
+ *  ================= buffer manager module====================  
+ **/
+void buffer_init();
+
+void buffer_cleanup();
+
+
+/**
  *  ================= Synchronous write module====================  
  **/
-uint32_t SyncWrite(SKey key1, SValue value);
+uint32_t SyncWrite(const char* hashkey, const char* hashvalue);
 
 /**
  *  ================= Synchronous delete module====================  

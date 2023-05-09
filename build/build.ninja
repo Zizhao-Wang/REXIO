@@ -126,6 +126,55 @@ build CMakeFiles/src.dir/Auxizilary/pre_definition.cpp.o: CXX_COMPILER__src_Debu
   OBJECT_DIR = CMakeFiles/src.dir
   OBJECT_FILE_DIR = CMakeFiles/src.dir/Auxizilary
 
+build CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o: CXX_COMPILER__src_Debug /home/TiOCS/src/Ti-OCSSD/TiOCS.cpp || cmake_object_order_depends_target_src
+  DEP_FILE = CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o.d
+  FLAGS = -fopenmp -g -std=gnu++14
+  INCLUDES = -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include
+  OBJECT_DIR = CMakeFiles/src.dir
+  OBJECT_FILE_DIR = CMakeFiles/src.dir/Ti-OCSSD
+
+build CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.o: CXX_COMPILER__src_Debug /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.cpp || cmake_object_order_depends_target_src
+  DEP_FILE = CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.o.d
+  FLAGS = -fopenmp -g -std=gnu++14
+  INCLUDES = -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include
+  OBJECT_DIR = CMakeFiles/src.dir
+  OBJECT_FILE_DIR = CMakeFiles/src.dir/Ti-OCSSD/MemoryTier
+
+build CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.o: CXX_COMPILER__src_Debug /home/TiOCS/src/Ti-OCSSD/MemoryTier/MemTier.cpp || cmake_object_order_depends_target_src
+  DEP_FILE = CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.o.d
+  FLAGS = -fopenmp -g -std=gnu++14
+  INCLUDES = -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include
+  OBJECT_DIR = CMakeFiles/src.dir
+  OBJECT_FILE_DIR = CMakeFiles/src.dir/Ti-OCSSD/MemoryTier
+
+build CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o: CXX_COMPILER__src_Debug /home/TiOCS/src/Ti-OCSSD/utility/types.cpp || cmake_object_order_depends_target_src
+  DEP_FILE = CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o.d
+  FLAGS = -fopenmp -g -std=gnu++14
+  INCLUDES = -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include
+  OBJECT_DIR = CMakeFiles/src.dir
+  OBJECT_FILE_DIR = CMakeFiles/src.dir/Ti-OCSSD/utility
+
+build CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o: CXX_COMPILER__src_Debug /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.cpp || cmake_object_order_depends_target_src
+  DEP_FILE = CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o.d
+  FLAGS = -fopenmp -g -std=gnu++14
+  INCLUDES = -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include
+  OBJECT_DIR = CMakeFiles/src.dir
+  OBJECT_FILE_DIR = CMakeFiles/src.dir/Ti-OCSSD/StoreTier
+
+build CMakeFiles/src.dir/Ti-OCSSD/StoreTier/io_manager.cpp.o: CXX_COMPILER__src_Debug /home/TiOCS/src/Ti-OCSSD/StoreTier/io_manager.cpp || cmake_object_order_depends_target_src
+  DEP_FILE = CMakeFiles/src.dir/Ti-OCSSD/StoreTier/io_manager.cpp.o.d
+  FLAGS = -fopenmp -g -std=gnu++14
+  INCLUDES = -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include
+  OBJECT_DIR = CMakeFiles/src.dir
+  OBJECT_FILE_DIR = CMakeFiles/src.dir/Ti-OCSSD/StoreTier
+
+build CMakeFiles/src.dir/LRU/lru.cpp.o: CXX_COMPILER__src_Debug /home/TiOCS/src/LRU/lru.cpp || cmake_object_order_depends_target_src
+  DEP_FILE = CMakeFiles/src.dir/LRU/lru.cpp.o.d
+  FLAGS = -fopenmp -g -std=gnu++14
+  INCLUDES = -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include
+  OBJECT_DIR = CMakeFiles/src.dir
+  OBJECT_FILE_DIR = CMakeFiles/src.dir/LRU
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target src
@@ -134,7 +183,7 @@ build CMakeFiles/src.dir/Auxizilary/pre_definition.cpp.o: CXX_COMPILER__src_Debu
 #############################################
 # Link the executable src
 
-build src: CXX_EXECUTABLE_LINKER__src_Debug CMakeFiles/src.dir/main.cpp.o CMakeFiles/src.dir/LOCS/locs.cpp.o CMakeFiles/src.dir/LOCS/buffer.cpp.o CMakeFiles/src.dir/LOCS/level.cpp.o CMakeFiles/src.dir/LOCS/merge.cpp.o CMakeFiles/src.dir/LOCS/run.cpp.o CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o CMakeFiles/src.dir/LOCS/allocation.cpp.o CMakeFiles/src.dir/LOCS/global_variables.cpp.o CMakeFiles/src.dir/LOCS/io_scheduler.cpp.o CMakeFiles/src.dir/Auxizilary/pre_definition.cpp.o
+build src: CXX_EXECUTABLE_LINKER__src_Debug CMakeFiles/src.dir/main.cpp.o CMakeFiles/src.dir/LOCS/locs.cpp.o CMakeFiles/src.dir/LOCS/buffer.cpp.o CMakeFiles/src.dir/LOCS/level.cpp.o CMakeFiles/src.dir/LOCS/merge.cpp.o CMakeFiles/src.dir/LOCS/run.cpp.o CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o CMakeFiles/src.dir/LOCS/allocation.cpp.o CMakeFiles/src.dir/LOCS/global_variables.cpp.o CMakeFiles/src.dir/LOCS/io_scheduler.cpp.o CMakeFiles/src.dir/Auxizilary/pre_definition.cpp.o CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.o CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.o CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o CMakeFiles/src.dir/Ti-OCSSD/StoreTier/io_manager.cpp.o CMakeFiles/src.dir/LRU/lru.cpp.o
   FLAGS = -fopenmp -g
   LINK_LIBRARIES = -Wl,-rpath,/home/spdk/build/lib:/home/spdk/dpdk/build/lib:/home/spdk/isa-l/.libs  -Wl,--whole-archive  -Wl,-Bstatic  -lspdk_log  -lspdk_env_dpdk  -lspdk_nvme  -lspdk_util  -lspdk_sock  -lspdk_json  -lspdk_vfio_user  -lspdk_rpc  -lspdk_jsonrpc  -lspdk_trace  -Wl,-Bdynamic  -Wl,--no-whole-archive  -Wl,-Bstatic  -lrte_eal  -lrte_mempool  -lrte_telemetry  -lrte_ring  -lrte_kvargs  -lrte_bus_pci  -lrte_pci  -lrte_vhost  -lrte_power  -lisal  -Wl,-Bdynamic  -luuid  -lnuma  -ldl  -lrt
   LINK_PATH = -L/home/spdk/build/lib   -L/home/spdk/dpdk/build/lib   -L/home/spdk/isa-l/.libs

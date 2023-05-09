@@ -19,6 +19,7 @@
 #include "../utility/types.h"
 #include "../StoreTier/syncstore.h"
 #include "../../Auxizilary/SysOutput.h"
+#include "../../Debug/debug_micros.h"
 
 #define N 9999
 
@@ -29,12 +30,17 @@ using namespace std;
  *  =================Node initialization module==================== 
  **/
 
-bool LocalGeneration(GlobalHashNode * globalNode)
+bool LocalGeneration(GlobalHashNode *globalNode, int initialLocalDepth=0) 
 {
-
-    TNCSkiplist * localHead = TskiplistCreate();
-    
-    localHead->depth  = Globaldepth;
+    TNCSkiplist *localHead = TskiplistCreate();
+    if( initialLocalDepth != 0)
+    {
+        localHead->depth = initialLocalDepth;
+    }
+    else
+    {
+        localHead->depth = Globaldepth+1;
+    }
 
     globalNode->local = localHead;
 
@@ -54,22 +60,23 @@ bool LocalGeneration(GlobalHashNode * globalNode)
     }
     else
         return false;
-    
 #endif
+
     return true;
 }
 
 /*
  * Methods belong to Special-Hash-Table.
  */
-bool DoubleHashtable()
+bool DoubleHashtable() 
 {
-    int nex = global.empty()?2:(int)global.size();
+    int nex = global.empty() ? 2 : (int)global.size();
+    int initialLocalDepth = global.empty() ? 1 : 0;
 
-    for(int i=0; i<nex; ++i)
+    for (int i = 0; i < nex; ++i) 
     {
-        auto * globalNode = (GlobalHashNode*) malloc(GLOBAL_HASH_SIZE);
-        if(!LocalGeneration(globalNode))
+        auto *globalNode = (GlobalHashNode *)malloc(GLOBAL_HASH_SIZE);
+        if (!LocalGeneration(globalNode, initialLocalDepth))
             return false;
         global.push_back(globalNode);
     }
@@ -77,6 +84,18 @@ bool DoubleHashtable()
 
     return true;
 }
+
+uint64_t big_endian2little_endian(const char *big_endian, size_t len)
+{
+    uint64_t result = 0;
+    for (size_t i = 0; i < len; ++i) 
+	{
+        result |= (static_cast<uint64_t>(static_cast<unsigned char>(big_endian[i])) << (8 * (len - 1 - i)));
+    }
+    return result;
+
+}
+
 
 
 /**
@@ -101,31 +120,236 @@ int RandomLevel()
 
 }
 
-/*LocalHeadNode * NodeSplit(LocalHeadNode * head)
+void  NodeSplit(size_t bucket_index)
 {
+    TNCSkiplist *old_bucket = global[bucket_index]->local;
 
+    if (old_bucket->depth < Globaldepth) 
+    {
+        
+        int new_index = bucket_index | (1 << old_bucket->depth );
+#ifdef TIOCS_DEBUG
+        printf("new_index: %d\n", new_index);
+#endif
+        
+        old_bucket->depth++;
+    } 
+    else 
+    {
+        if (!DoubleHashtable()) {
+            printf("Failed to double the hash table!");
+            exit(5735);
+        }
+        old_bucket->depth++;
+    }
 
-}*/
+    
+    uint64_t split_boundary = 1 << (old_bucket->depth - 1);
 
-int InsertNode(SKey hashkey, SValue hashvalue)
+    
+    TSkiplistNode *node = old_bucket->head->forward[0];
+    TSkiplistNode *next;
+
+    for(int i = 0; i < old_bucket->head->maxLevel; i++) 
+    {
+        old_bucket->head->forward[i] = NULL;
+    }
+    old_bucket->number = 0;
+    old_bucket->level = 0;
+
+    while (node) 
+    {
+        next = node->forward[0];
+
+        uint64_t hash_key = big_endian2little_endian(node->key, KEY_SIZE);
+
+#ifdef TIOCS_DEBUG
+        printf("Processing hash_key: %lu\n", hash_key);
+#endif
+        if (hash_key & split_boundary) 
+        {
+            int new_index = bucket_index | split_boundary;
+            TNCSkiplist *new_bucket = global[new_index]->local;
+#ifdef TIOCS_DEBUG
+            printf("Inserting hash_key %lu into new bucket %d\n", hash_key, new_index);
+#endif
+            InsertNode(node->key, node->offset, node->flag, new_index);
+        } 
+        else 
+        {
+#ifdef TIOCS_DEBUG
+            printf("Inserting hash_key %lu back into old bucket %zu\n", hash_key, bucket_index);
+#endif
+            InsertNode(node->key, node->offset, node->flag, bucket_index);
+        }
+        node = next;
+    }
+}
+
+int InsertNode(const char* hashkey, uint32_t offset, uint8_t flag, int bucket_id)
 {
 
     /*  Insert the hash value into special skip-list. */
-    TNCSkiplist * Head = global[hashkey & (1<<Globaldepth)-1]->local;
+
+    TNCSkiplist * Head = global[bucket_id]->local;
     TSkiplistNode * temp = Head->head;
     TSkiplistNode * update[MAX_LEVEL1];
 
-
     for(int i=Head->level; i>=0; i--)
     {
-        while(temp->forward[i] && temp->forward[i]->key < hashkey)
+        while(temp->forward[i] && memcmp(temp->forward[i]->key,hashkey,KEY_SIZE)<0)
         {
             temp = temp->forward[i];
         }
         update[i] = temp;
     }
 
-    if(temp->key == hashkey)
+    
+    int v=RandomLevel();
+    if(v > Head->level)
+    {
+        for(int i=Head->level; i<v; ++i )
+        {
+                update[i] = Head->head;
+        }
+        Head->level = v;
+    }
+    ++Head->number;
+
+#ifdef TIOCS_DEBUG
+    printf("Inserting new node with hash_key: %.*s, offset: %u, flag: %u, level: %d\n",KEY_SIZE, hashkey, offset, flag, v);
+#endif
+    
+    TSkiplistNode* tsl = TskiplistNodeCreat(hashkey,offset,v);
+    tsl->flag = flag;
+    if( big_endian2little_endian(hashkey,KEY_SIZE) == 117334)
+    {
+        printf(" offset in insertnode: %d\n", tsl->offset);
+        
+    }
+    for(int i=0;i<v;++i)
+    {
+        tsl->forward[i] = update[i]->forward[i];
+        update[i]->forward[i] = tsl;
+    }
+    
+
+
+#ifdef FastSkiplist 
+    LocalHeadNode * head = global[hashkey & (1<<Globaldepth)-1]->local;
+    LocalHashNode * temp = head->HashNode;
+    LocalHashNode * update[MaxLevel];
+
+    int curLevel = head->CurrentLevel-1;
+
+    for(int i=curLevel; i>=0; --i)
+    {
+        while(temp->next[i]->Hashkey < hashvalue)
+        {
+            temp = temp->next[i];
+        }
+        update[i] = temp;
+    }
+    temp = temp->next[0];
+
+    if(temp->Hashkey == hashvalue)
+    {
+        if(temp->flag == 1)
+        {
+            return 0;
+        }
+        else
+        {
+            temp->flag =1;
+            // write into disk
+            temp->offset = SyncWrite(hashkey,hashvalue); //printf("%u\n",temp->offset);
+            ++head->Nodenumber;
+            return 0;
+        }
+    }
+    else
+    {
+        int v=RandomLevel();
+        if(v > curLevel )
+        {
+            for(int i=curLevel+1; i<v; ++i )
+            {
+                update[i] = head->HashNode;
+            }
+            head->CurrentLevel = v+1;
+        }
+        //write into disk
+        uint_32 offset1 = SyncWrite(hashkey,hashvalue);  //printf("%u\n",temp->offset);
+        ++head->Nodenumber;
+        temp = Initialization(hashvalue,offset1);
+        if(temp == nullptr)
+            return -1;
+        for(int i=0;i<v;++i)
+        {
+            temp->next[i] = update[i]->next[i];
+            update[i]->next[i] = temp;
+        }
+    }
+#endif
+    return 0;
+}
+
+void PrintHashTable() 
+{
+    printf("==== Hash Table Content ====\n");
+    for (int i = 0; i < (1 << Globaldepth); i++) 
+    {
+        TNCSkiplist *bucket = global[i]->local;
+        printf("Bucket %d (depth: %d):\n", i, bucket->depth);
+        TSkiplistNode *node = bucket->head->forward[0];
+
+        while (node) 
+        {
+            printf(" -Node with hash_key: %lu, offset: %u, flag: %u, level: %d\n", big_endian2little_endian(node->key, KEY_SIZE), node->offset, node->flag, node->maxLevel);
+            node = node->forward[0];
+        }
+    }
+    printf("=============================\n");
+}
+
+int InsertNode(const char* hashkey, const char* hashvalue)
+{
+
+    /*  Insert the hash value into special skip-list. */
+    uint64_t hashkey1 = big_endian2little_endian(hashkey,KEY_SIZE);
+    int bucket_index = hashkey1 & (1<<Globaldepth)-1;
+    TNCSkiplist * Head = global[hashkey1 & (1<<Globaldepth)-1]->local;
+    TSkiplistNode * temp = Head->head;
+    TSkiplistNode * update[MAX_LEVEL1];
+    bool flag= false;
+    if(hashkey1 == 117334)
+    {
+        flag = true;
+    }
+
+    if (Head->number >= max_bucket_size) 
+    {
+#ifdef TIOCS_DEBUG
+        printf("Bucket %d is full, calling NodeSplit()\n", bucket_index);
+        PrintHashTable();
+#endif
+        NodeSplit(bucket_index);
+#ifdef TIOCS_DEBUG
+        PrintHashTable();
+#endif
+    }
+
+
+    for(int i=Head->level; i>=0; i--)
+    {
+        while(temp->forward[i] && memcmp(temp->forward[i]->key,hashkey,KEY_SIZE)<0)
+        {
+            temp = temp->forward[i];
+        }
+        update[i] = temp;
+    }
+
+    if(memcmp(temp->key, hashkey, KEY_SIZE)==0)
     {
         if(temp->flag == 1)
         {
@@ -155,13 +379,17 @@ int InsertNode(SKey hashkey, SValue hashvalue)
         uint_32 offset1 = SyncWrite(hashkey,hashvalue);  //printf("%u\n",temp->offset);
         ++Head->number;
         TSkiplistNode* tsl = TskiplistNodeCreat(hashkey,offset1,v);
+        if(flag)
+        {
+            printf("offset in insert: %d \n", tsl->offset);
+        }
         for(int i=0;i<v;++i)
         {
             tsl->forward[i] = update[i]->forward[i];
             update[i]->forward[i] = tsl;
         }
     }
-    
+
 #ifdef FastSkiplist 
     LocalHeadNode * head = global[hashkey & (1<<Globaldepth)-1]->local;
     LocalHashNode * temp = head->HashNode;
@@ -230,14 +458,32 @@ int InsertNode(SKey hashkey, SValue hashvalue)
  * 3. return value if data is in the physical block   
  **/
 
-TSkiplistNode * SearchNode(TNCSkiplist * Head,SKey hashkey)
+TSkiplistNode * SearchNode(TNCSkiplist * Head,const char* hashkey)
 {
 
-    TSkiplistNode*node = Head->head ;
+    TSkiplistNode*node = Head->head;
+
+    printf("Bucket (depth: %d):\n", Head->depth);
+    TSkiplistNode *node2 = Head->head->forward[0];
+    int i=910;
+    while(i--)
+    {
+        node2 = node2->forward[0];
+    }
+    i=10;
+    while (node2 && i--) 
+    {
+        printf(" -Node with hash_key: %lu, offset: %u, flag: %u, level: %d\n", big_endian2little_endian(node2->key, KEY_SIZE), node2->offset, node2->flag, node2->maxLevel);
+        node2 = node2->forward[0];
+    }
+    printf("hashkey: %lu\n",big_endian2little_endian(hashkey,KEY_SIZE));
+
     for(int i=Head->level-1; i>=0; i--)
     {
-        while(node->forward[i] && node->forward[i]->key < hashkey)
+        printf("for test ");
+        while(node->forward[i] && memcmp(node->forward[i]->key,hashkey,KEY_SIZE)<0)
         {
+            printf("dnjv");
             node = node->forward[i];
         }
     }
@@ -246,40 +492,56 @@ TSkiplistNode * SearchNode(TNCSkiplist * Head,SKey hashkey)
     return node;
 }
 
-SValue Search(SKey key1)
+SValue Search(const char* key1)
 {
 
     TNCEntry entry;
-    TNCSkiplist * head = global[key1 & (1<<Globaldepth)-1]->local;
+    uint64_t key2 = big_endian2little_endian(key1,KEY_SIZE);
+    
+    TNCSkiplist * head = global[key2 & (1<<Globaldepth)-1]->local;
+    printf("index: %lu\n", key2 & (1<<Globaldepth)-1);
     TSkiplistNode * node =  SearchNode(head, key1);
+
     if(node == nullptr || node->flag == 0)
     {
         return UINT64_MAX;
     }
-
-    entry = SyncRead(node->offset);
-    //printf("Key: %lu  ReadKey:%lu \n",key1,entry.key);
-    if(entry.key == key1)
+    else
     {
-        return entry.val;
+        printf("Search - key1: %lu\n", big_endian2little_endian(key1, KEY_SIZE));
+        printf("Search - node->key: %lu\n", big_endian2little_endian(node->key, KEY_SIZE));
+        printf("Search - node->offset: %u (Block: %u, Page: %u, Position: %u)\n",
+               node->offset,
+               (node->offset >> 24),
+               ((node->offset >> 12) & 0xFFF),
+               (node->offset & 0x00000FFF));
+        entry = SyncRead(node->offset);
+        return big_endian2little_endian(entry.val,KEY_SIZE);
     }
-    // else
-    // {
-    //     printf("key1: %lu offset: %u entry.key: %lu Value: %lu\n",key1,node->offset,entry.key,entry.val);
-    //     exit(0);
-    // }
 
-    return UINT64_MAX;
+    // //printf("Key: %lu  ReadKey:%lu \n",key1,entry.key);
+    // if(memcmp(entry.key,key1,KEY_SIZE) ==0)
+    // {
+    //     return big_endian2little_endian(entry.val,KEY_SIZE);
+    // }
+    // // else
+    // // {
+    // //     printf("key1: %lu offset: %u entry.key: %lu Value: %lu\n",key1,node->offset,entry.key,entry.val);
+    // //     exit(0);
+    // // }
+
+    // return UINT64_MAX;
 }
 
 
 /**  
  * ================= update module ====================  
  **/
-int Update(SKey key1, SValue val)
+int Update(const char* key1, const char* val)
 {
     int err = 0;
-    TNCSkiplist * head = global[key1 & (1<<Globaldepth)-1]->local;
+    uint64_t key2 = big_endian2little_endian(key1,KEY_SIZE);
+    TNCSkiplist * head = global[key2 & (1<<Globaldepth)-1]->local;
     TSkiplistNode * node = SearchNode(head, key1);
 
     if(node == nullptr){
@@ -307,8 +569,9 @@ int Update(SKey key1, SValue val)
  *   =================Node deletion module====================  
  **/
 
-bool DeleteValue(TNCSkiplist * Head, SKey hashkey)
+bool DeleteValue(TNCSkiplist * Head, const char* hashkey)
 {
+
     TSkiplistNode * node = SearchNode(Head,hashkey);
     if(node->flag==1)
     {
@@ -319,9 +582,10 @@ bool DeleteValue(TNCSkiplist * Head, SKey hashkey)
     return true;
 }
 
-int Delete(SKey key1)
+int Delete(const char* key1)
 {
-    TNCSkiplist * head = global[key1 & (1<<Globaldepth)-1]->local;
+    uint64_t key2 = big_endian2little_endian(key1,KEY_SIZE);
+    TNCSkiplist * head = global[key2 & (1<<Globaldepth)-1]->local;
     bool flag = DeleteValue(head, key1);
     if(!flag)
     {
@@ -338,14 +602,14 @@ int ExtendHashTableInitialize()
 {
 
     /* Initialize a special hash table and SSD backend processor! */
-    for(int i=0;i<20;i++)
+   
+
+    if(! DoubleHashtable() )
     {
-        if(! DoubleHashtable() )
-        {
-            printf("Memory tier of TNC-tree initialized failure!");
-            exit(5735);
-        }
+        printf("Memory tier of TNC-tree initialized failure!");
+        exit(5735);
     }
+    
 
     /**
      * printf("============== TEST & DEBUG: ==============\n");

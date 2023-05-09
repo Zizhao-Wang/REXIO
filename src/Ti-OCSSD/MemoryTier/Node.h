@@ -12,6 +12,7 @@
 #define EXPERIMENT1_HASHBLOCK_H
 
 #include "../../Backend/backend_variables.h"
+#include "../../Auxizilary/pre_definition.h"
 
 #define LOCAL_HASH_SIZE  sizeof (LocalHashNode)
 #define GLOBAL_HASH_SIZE sizeof (GlobalHashNode)
@@ -20,6 +21,7 @@
 
 const int MAX_LEVEL1 = 32;
 const int P_FACTOR1 = RAND_MAX >> 2;
+const int max_bucket_size = 32768;
 
 /*
  * Local hash table node.
@@ -44,11 +46,17 @@ typedef struct LocalHeadNode
     LocalHashNode * HashNode;
 }LocalHeadNode;
 
-// ============  another Skiplist implementation =========
+
+
+/** 
+ *  @author: zz.wang
+ *  @date:   7/5/2023
+ *  ============  another Skiplist implementation =========
+ **/ 
 
 typedef struct TSkiplistNode 
 {
-    uint64_t key;
+    char key[KEY_SIZE];
     uint8_t flag;
     uint32_t offset;
     int maxLevel;
@@ -62,7 +70,7 @@ typedef struct
     int number;
     int level;
     int depth;
-} TNCSkiplist;
+}TNCSkiplist;
 
 /*
  * Global hash table node.
@@ -80,15 +88,17 @@ typedef struct GlobalHashNode
 //     LocalHeadNode * local;
 // }GlobalHashNode;
 
+
+
 /**
  *  Definition of key-value pair
  **/
+
 typedef struct TNCEntry
 {
-    SKey key;
-    SValue val;
+    char key[KEY_SIZE];
+    char val[VAL_SIZE];
 }TNCEntry;
-
 
 
 
@@ -98,7 +108,7 @@ typedef struct TNCEntry
     /*
      * Some methods of initialization.
      */
-TSkiplistNode * TskiplistNodeCreat(uint64_t key,uint32_t offset, int maxLevel);
+TSkiplistNode * TskiplistNodeCreat(const char* key,uint32_t offset, int maxLevel);
 
 TNCSkiplist *  TskiplistCreate();
 

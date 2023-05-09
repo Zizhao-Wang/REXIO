@@ -29,4 +29,6 @@ int sub_process_init(void);
 
 void TiOCSInit(void);
 
+void TiOCS_close(void);
+
 #endif //EXPERIMENT1_FRONTMAIN_H

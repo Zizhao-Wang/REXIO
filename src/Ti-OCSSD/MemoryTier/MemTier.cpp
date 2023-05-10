@@ -221,12 +221,7 @@ int InsertNode(const char* hashkey, uint32_t offset, uint8_t flag, int bucket_id
 #endif
     
     TSkiplistNode* tsl = TskiplistNodeCreat(hashkey,offset,v);
-    tsl->flag = flag;
-    if( big_endian2little_endian(hashkey,KEY_SIZE) == 117334)
-    {
-        printf(" offset in insertnode: %d\n", tsl->offset);
-        
-    }
+    tsl->flag = flag;  
     for(int i=0;i<v;++i)
     {
         tsl->forward[i] = update[i]->forward[i];
@@ -322,10 +317,6 @@ int InsertNode(const char* hashkey, const char* hashvalue)
     TSkiplistNode * temp = Head->head;
     TSkiplistNode * update[MAX_LEVEL1];
     bool flag= false;
-    if(hashkey1 == 117334)
-    {
-        flag = true;
-    }
 
     if (Head->number >= max_bucket_size) 
     {
@@ -460,36 +451,34 @@ int InsertNode(const char* hashkey, const char* hashvalue)
 
 TSkiplistNode * SearchNode(TNCSkiplist * Head,const char* hashkey)
 {
-
+  
     TSkiplistNode*node = Head->head;
-
-    printf("Bucket (depth: %d):\n", Head->depth);
-    TSkiplistNode *node2 = Head->head->forward[0];
-    int i=910;
-    while(i--)
-    {
-        node2 = node2->forward[0];
-    }
-    i=10;
-    while (node2 && i--) 
-    {
-        printf(" -Node with hash_key: %lu, offset: %u, flag: %u, level: %d\n", big_endian2little_endian(node2->key, KEY_SIZE), node2->offset, node2->flag, node2->maxLevel);
-        node2 = node2->forward[0];
-    }
-    printf("hashkey: %lu\n",big_endian2little_endian(hashkey,KEY_SIZE));
-
     for(int i=Head->level-1; i>=0; i--)
-    {
-        printf("for test ");
+    { 
         while(node->forward[i] && memcmp(node->forward[i]->key,hashkey,KEY_SIZE)<0)
         {
-            printf("dnjv");
             node = node->forward[i];
         }
     }
 
     node = node->forward[0];
     return node;
+
+    // printf("Bucket (depth: %d):\n", Head->depth);
+    // TSkiplistNode *node2 = Head->head->forward[0];
+    // int i=910;
+    // while(i--)
+    // {
+    //     node2 = node2->forward[0];
+    // }
+    // i=10;
+    // while (node2 && i--) 
+    // {
+    //     printf(" -Node with hash_key: %lu, offset: %u, flag: %u, level: %d\n", big_endian2little_endian(node2->key, KEY_SIZE), node2->offset, node2->flag, node2->maxLevel);
+    //     node2 = node2->forward[0];
+    // }
+    // printf("hashkey: %lu\n",big_endian2little_endian(hashkey,KEY_SIZE));
+  
 }
 
 SValue Search(const char* key1)
@@ -497,9 +486,7 @@ SValue Search(const char* key1)
 
     TNCEntry entry;
     uint64_t key2 = big_endian2little_endian(key1,KEY_SIZE);
-    
     TNCSkiplist * head = global[key2 & (1<<Globaldepth)-1]->local;
-    printf("index: %lu\n", key2 & (1<<Globaldepth)-1);
     TSkiplistNode * node =  SearchNode(head, key1);
 
     if(node == nullptr || node->flag == 0)
@@ -508,6 +495,10 @@ SValue Search(const char* key1)
     }
     else
     {
+        entry = SyncRead(node->offset);
+
+#ifdef TIOCS_READ_DEBUG
+        printf("key from data: %lu\n",big_endian2little_endian(entry.val,KEY_SIZE));
         printf("Search - key1: %lu\n", big_endian2little_endian(key1, KEY_SIZE));
         printf("Search - node->key: %lu\n", big_endian2little_endian(node->key, KEY_SIZE));
         printf("Search - node->offset: %u (Block: %u, Page: %u, Position: %u)\n",
@@ -515,22 +506,10 @@ SValue Search(const char* key1)
                (node->offset >> 24),
                ((node->offset >> 12) & 0xFFF),
                (node->offset & 0x00000FFF));
-        entry = SyncRead(node->offset);
+#endif
+        
         return big_endian2little_endian(entry.val,KEY_SIZE);
     }
-
-    // //printf("Key: %lu  ReadKey:%lu \n",key1,entry.key);
-    // if(memcmp(entry.key,key1,KEY_SIZE) ==0)
-    // {
-    //     return big_endian2little_endian(entry.val,KEY_SIZE);
-    // }
-    // // else
-    // // {
-    // //     printf("key1: %lu offset: %u entry.key: %lu Value: %lu\n",key1,node->offset,entry.key,entry.val);
-    // //     exit(0);
-    // // }
-
-    // return UINT64_MAX;
 }
 
 
@@ -548,7 +527,8 @@ int Update(const char* key1, const char* val)
         return -1;
     }
 
-    if(node->flag == 1){
+    if(node->flag == 1)
+    {
         //printf("key: %lu ",key1);
         err = SyncDelete(node->offset);
     }
@@ -557,10 +537,10 @@ int Update(const char* key1, const char* val)
     {
         EMessageOutput("Update failure!",5899);
     }
+
     node->offset = SyncWrite(key1,val);
 
     return 0;
-
 }
 
 

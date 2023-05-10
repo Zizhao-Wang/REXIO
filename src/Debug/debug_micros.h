@@ -29,4 +29,6 @@
 // #define BIG_TO_LITTLE_ENDIAN
 
 
+// #define TIOCS_READ_DEBUG
+
 #endif

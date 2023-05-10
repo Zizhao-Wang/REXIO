@@ -46,9 +46,19 @@ int print_init_info(void)
      }
 
      sectors_per_page = geometry.ws_opt;
-
      buffer_size = sectors_per_page * geometry.clba / (KEY_SIZE+VAL_SIZE);
+
+     for (uint64_t i = 0; i < geometry.num_grp*geometry.num_pu*geometry.num_chk; ++i) 
+     {
+          BlockWritePointers[i] = 0;
+     }
+
      buffer_init();
+
+     size_t kv_pairs_per_page = sectors_per_page*geometry.clba/(KEY_SIZE+VAL_SIZE);
+     size_t logs_per_page = sectors_per_page*geometry.clba/(sizeof(uint32_t));
+     size_t pages_per_block = geometry.clba/sectors_per_page;
+     num_data_page = pages_per_block - (pages_per_block)/(logs_per_page/kv_pairs_per_page +1);
 
      if(ctrlr == NULL)
 	{
@@ -79,19 +89,14 @@ void bench_testing(void)
 {
      clock_t startTime,endTime;                        // Definition of timestamp
      /* workload a: insert only*/
-     uint64_t written_data_size = 10000000*16;
+     uint64_t written_data_size = 100000000*16;
      uint64_t written_data_num = written_data_size /(KEY_SIZE+VAL_SIZE);
      uint64_t record_point = written_data_num / 10;
-
      // printf("written_data_size:%lu, written_data_num:%lu record_point: %lu\n",written_data_size, written_data_num, record_point);
-     
 
      startTime = clock();
-
      char key_buffer[KEY_SIZE];
      char value_buffer[VAL_SIZE];
-     
-
      for(SKey i=1;i<=written_data_num;i++)
      {
           if(i%record_point==0)
@@ -184,138 +189,215 @@ void bench_testing(void)
           // }
           // endTime = clock();
           // printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
-          // std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
-
-          
+          // std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";     
 
      /* workload c: read only, 50% in it, 50% not in it */
      startTime = clock();
-     // reads = 0;
-     // writes = 0;
-     // erases = 0;
+     reads = 0;
+     writes = 0;
+     resets = 0;
      
      uint64_t b;
-     for(uint64_t i=1;i<=10;i++)
+     record_point = written_data_num/10/10;
+     for(uint64_t i=1;i<=written_data_num/10;i++)
      {
           memset(key_buffer, 0, KEY_SIZE);
           srand48(time(NULL));
+          
+          if(i%100<=20)
+          {
+               SKey k = 1+(rand()%written_data_num);
+               for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
+               {
+                    key_buffer[KEY_SIZE - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
+               }
+
+               b = k;
+#ifdef TIOCS_READ_DEBUG
+          printf("key: %lu\n", k);
+#endif         
+               if(b != Search(key_buffer))
+               {
+                    printf("Error in search\n");
+                    exit(0);
+               }
+          }
+          else
+          {
+               SKey k = written_data_num+(rand()%written_data_num);
+               for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
+               {
+                    key_buffer[KEY_SIZE - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
+               }
+#ifdef TIOCS_READ_DEBUG
+          printf("key: %lu\n", k);
+#endif         
+               Search(key_buffer);
+          }
+          
+          if(i%record_point==0)
+          {
+               printf("Read count:%d write:%d erase:%d\n",reads,writes,resets);
+               endTime = clock();
+               std::cout << "Total Time of "<<i<<" in workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+          } 
+     }
+     endTime = clock();
+     printf("Read count:%d write:%d erase:%d\n",reads,writes,resets);
+     std::cout << "Total Time of workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
+          
+
+     /* workload d: update heavy workload, 50% read, 50% update */
+     startTime = clock();
+     record_point = written_data_num/2/10;
+     for(uint64_t i=1;i<=written_data_num/2;i++)
+     {
+          srand48(time(NULL));
+          memset(key_buffer, 0, KEY_SIZE);
+          memset(value_buffer,0, VAL_SIZE);
           SKey k = 1+(rand()%written_data_num);
-          k=117334;
-          printf("K:%lu\n",k);
+          if(i%2==0)
+          {
+               for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
+               {
+                    key_buffer[KEY_SIZE - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
+               }
+
+               if(k!=Search(key_buffer) && k+1 != Search(key_buffer) )
+               {
+                    printf("Error in search!\n");
+                    exit(0);
+               }
+          }
+          else
+          {
+               for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
+               {
+                    key_buffer[KEY_SIZE - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
+               }
+               for (size_t j = 0; j < sizeof(uint64_t) && j < VAL_SIZE; ++j)
+               {
+                    value_buffer[KEY_SIZE - 1 - j] = static_cast<char>((k+1 >> (8 * j)) & 0xFF);
+               }
+               Update(key_buffer,value_buffer);
+          }
+          if(i%record_point==0)
+          {
+               printf("Read count:%d write:%d erase:%d\n",reads,writes,resets);
+               endTime = clock();
+               std::cout << "Total Time of "<<i<<" in workload D: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+          } 
+     }
+     printf("Read count:%d write:%d erase:%d\n",reads,writes,resets);
+     endTime = clock();
+     std::cout << "Total Time of workload D: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
+
+     /* workload E: read mostly workload, 95% read, 5% update */
+     startTime = clock();
+     record_point = written_data_num/2/10;
+     for(int i=1;i<=written_data_num/2;i++)
+     {
+          srand48(time(NULL));
+          memset(key_buffer, 0, KEY_SIZE);
+          memset(value_buffer,0, VAL_SIZE);
+          if(i%100<95)
+          {
+               SKey k = 1+(rand()%written_data_num);
+               for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
+               {
+                    key_buffer[KEY_SIZE - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
+               }
+               Search(key_buffer);
+          }
+          else
+          {
+               SKey k = 1+(rand()%written_data_num);
+               for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
+               {
+                    key_buffer[KEY_SIZE - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
+               }
+               for (size_t j = 0; j < sizeof(uint64_t) && j < VAL_SIZE; ++j)
+               {
+                    value_buffer[KEY_SIZE - 1 - j] = static_cast<char>((k+1 >> (8 * j)) & 0xFF);
+               }
+               Update(key_buffer,value_buffer);
+          }
+          if(i%record_point==0 )
+          {
+               printf("Read count:%d write:%d erase:%d\n",reads,writes,resets);
+               endTime = clock();
+               std::cout << "Total Time of "<<i<<" in workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+          } 
+     }
+     printf("Read count:%d write:%d erase:%d\n",reads,writes,resets);
+     endTime = clock();
+     std::cout << "Total Time of workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
+
+     /* workload F: read latest workload, 95% read, 5% insert */
+     startTime = clock();
+     record_point = written_data_num/2/10;
+     for(int i=1;i<=written_data_num/2;i++)
+     {
+          srand48(time(NULL));
+          memset(key_buffer, 0, KEY_SIZE);
+          memset(value_buffer,0, VAL_SIZE);
+          if(i%100<95)
+          {
+               SKey k = 1+(rand()%written_data_num);
+               for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
+               {
+                    key_buffer[KEY_SIZE - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
+               }
+               Search(key_buffer);
+          }
+          else
+          {
+               SKey k = written_data_num+(rand()%written_data_num);
+
+               for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
+               {
+                    key_buffer[KEY_SIZE - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
+               }
+
+               for (size_t j = 0; j < sizeof(uint64_t) && j < VAL_SIZE; ++j)
+               {
+                    value_buffer[KEY_SIZE - 1 - j] = static_cast<char>((k+1 >> (8 * j)) & 0xFF);
+               }
+               InsertNode(key_buffer,value_buffer);
+          }
+          if(i%record_point==0)
+          {
+               printf("Read count:%d write:%d erase:%d\n",reads,writes,resets);
+               endTime = clock();
+               std::cout << "Total Time of "<<i<<" in workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+          } 
+     }
+     printf("Read count:%d write:%d erase:%d\n",reads,writes,resets);
+     endTime = clock();
+     std::cout << "Total Time of workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
+
+     /* workload G: delete workload, 100% delete*/
+     startTime = clock();
+     record_point = written_data_num/5/10;
+     for(int i=1;i<=written_data_num/5;i++)
+     {
+          srand48(time(NULL));
+          SKey k = 1+(rand()%written_data_num);
           for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
           {
                key_buffer[KEY_SIZE - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
           }
-
-          b = k;
-          if(b != Search(key_buffer))
+          Delete(key_buffer);
+          if(i%record_point==0)
           {
-               printf("Error in search\n");
-               exit(0);
-          }
-        
+               printf("Read count:%d write:%d erase:%d\n",reads,writes,resets);
+               endTime = clock();
+               std::cout << "Total Time of "<<i<<" in workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+          }  
      }
+     printf("Read count:%d write:%d erase:%d\n",reads,writes,resets);
      endTime = clock();
-     // printf("Read count:%d write:%d erase:%d\n",reads,writes,erases);
-     std::cout << "Total Time of workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
-          
-
-     // /* workload d: update heavy workload, 50% read, 50% update */
-     // startTime = clock();
-     // for(int i=1;i<=1000000;i++)
-     // {
-     //      srand48(time(NULL));
-     //      if(i%2==0)
-     //      {
-     //           SKey k = 1+(rand()%40000000);
-     //           Search(k);
-     //      }
-     //      else
-     //      {
-     //           SKey k = 1+(rand()%40000000);
-     //           Update(k,k+1);
-     //      }
-     //      if(i%100000==0 || i==10000)
-     //      {
-     //           printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
-     //           endTime = clock();
-     //           std::cout << "Total Time of "<<i<<" in workload D: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
-     //      } 
-     // }
-     // printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
-     // endTime = clock();
-     // std::cout << "Total Time of workload d: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-
-     // /* workload E: read mostly workload, 95% read, 5% update */
-     // startTime = clock();
-     // for(int i=1;i<=1000000;i++)
-     // {
-     //      srand48(time(NULL));
-     //      if(i%100<95)
-     //      {
-     //           SKey k = 1+(rand()%40000000);
-     //           Search(k);
-     //      }
-     //      else
-     //      {
-     //           SKey k = 1+(rand()%40000000);
-     //           Update(k,k+1);
-     //      }
-     //      if(i%100000==0 || i==10000)
-     //      {
-     //           printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
-     //           endTime = clock();
-     //           std::cout << "Total Time of "<<i<<" in workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
-     //      } 
-     // }
-     // printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
-     // endTime = clock();
-     // std::cout << "Total Time of workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-
-     // /* workload F: read latest workload, 95% read, 5% insert */
-     // startTime = clock();
-     // for(int i=1;i<=1000000;i++)
-     // {
-     //      srand48(time(NULL));
-     //      if(i%100<95)
-     //      {
-     //           SKey k = 1+(rand()%40000000);
-     //           Search(k);
-     //      }
-     //      else
-     //      {
-     //           SKey k = 40000000+(rand()%40000000);
-     //           InsertNode(i+40000000,i+40000000);
-     //      }
-     //      if(i%100000==0 || i==10000)
-     //      {
-     //           printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
-     //           endTime = clock();
-     //           std::cout << "Total Time of "<<i<<" in workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
-     //      } 
-     // }
-     // printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
-     // endTime = clock();
-     // std::cout << "Total Time of workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-
-     // /* workload G: delete workload, 100% delete*/
-     // startTime = clock();
-     // for(int i=1;i<=1000000;i++)
-     // {
-     //      srand48(time(NULL));
-     //      SKey k = 1+(rand()%40000000);
-     //      Delete(k);
-     //      if(i%100000==0 || i==10000)
-     //      {
-     //           printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
-     //           endTime = clock();
-     //           std::cout << "Total Time of "<<i<<" in workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
-     //      }  
-     // }
-     // printf("Read count:%d write:%d erase:%d\n",reads,write,erase);
-     // endTime = clock();
-     // std::cout << "Total Time of workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-     
+     std::cout << "Total Time of workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
 
 }
 
@@ -436,5 +518,7 @@ void TiOCSInit(void)
 void TiOCS_close(void)
 {
      spdk_nvme_ctrlr_free_io_qpair(qpair);
+
+     buffer_cleanup();
 
 }

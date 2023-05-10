@@ -41,15 +41,7 @@ int InfoRenew(size_t scale, PageType LogPointer=0, bool flag=false)
     }
     else
     {
-        chunkusage[DataPagePointer/4096]= chunkusage[DataPagePointer/4096] + scale;
-        if(ChunkData[DataPagePointer/4096].size()>=820)
-        {
-            DataPagePointer += (4096-(DataPagePointer%4096));
-        }
-        else
-        {
-            DataPagePointer += scale;
-        } 
+        
     } 
     return 0;
 

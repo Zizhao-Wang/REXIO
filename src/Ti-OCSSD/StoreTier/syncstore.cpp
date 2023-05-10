@@ -10,6 +10,7 @@ int indexs=0;
 uint32_t offset = 0;
 uint64_t sectors_per_page = 8;
 TNCEntry * Pagedata = nullptr;
+
 size_t buffer_size = 0;
 PageType WBufferId = 0;
 int buffernumber =0;
@@ -26,6 +27,7 @@ void buffer_init()
         printf("Failed to allocate memory for Pagedata.\n");
     }
     WBufferId = page_pointer;
+
 }
 
 void buffer_cleanup() 
@@ -35,6 +37,7 @@ void buffer_cleanup()
 
 uint32_t SyncWrite(const char* hashkey, const char* hashvalue)
 {
+    
     /* Returned offset */
     // printf("SyncWrite hashkey: %lu\n", big_endian2little_endian(hashkey, KEY_SIZE));
     if (indexs >= buffer_size)
@@ -54,7 +57,7 @@ uint32_t SyncWrite(const char* hashkey, const char* hashvalue)
     memcpy(Pagedata[indexs].key, hashkey, KEY_SIZE);
     memcpy(Pagedata[indexs].val, hashvalue, VAL_SIZE);
     
-    if(big_endian2little_endian(hashkey, KEY_SIZE) == 117334)
+    if(big_endian2little_endian(hashkey, KEY_SIZE) == 0)
     {
         printf("SyncWrite hashkey: %lu\n", big_endian2little_endian(hashkey, KEY_SIZE));
         printf("SyncWrite offset: %u (Block: %u, Page: %u, Position: %u), page_pointer: %lu, indexs: %d\n",
@@ -77,28 +80,33 @@ uint32_t SyncWrite(const char* hashkey, const char* hashvalue)
 
 int  SyncDelete(uint32_t offset)
 { 
-    // char temp;
-    
-    // uint64_t BlockId = offset>>24;
-    // //printf("BlockID: %lu\n",BlockId);
+    char temp;
+    char* LogDataBuffer = (char *)spdk_dma_malloc(sectors_per_page * geometry.clba, 0x1000, NULL);
+    if (LogDataBuffer == NULL)
+    {
+        printf("Failed to allocate memory for LogDataBuffer!\n");
+        exit(-1);
+    }
 
-    // int i =4;
-    // while(i--)
-    // {
-    //     temp = (char)(offset & 0XFF);
-    //     offset = offset >> 8;
-    //     BufferLog[BlockId].emplace_back(temp);
-    // }
+    uint64_t BlockId = offset >> 24;
+    int i = 4;
+    while (i--)
+    {
+        temp = (char)(offset & 0XFF);
+        offset = offset >> 8;
+        BufferLog[BlockId].emplace_back(temp);
+    }
 
-    // //printf("=========\n");
-    // if(BufferLog[BlockId].size() >= CalculatePageCapacity(sizeof(char)))
-    // {
-    //     PageLogWrite(BlockId);
-    //     if(BufferLog[BlockId].size()!=0)
-    //         BufferLog[BlockId].clear();  
-    // }
-    // //printf("=========\n");
-    // return 0;
+    if (BufferLog[BlockId].size() >= (sectors_per_page * geometry.clba / sizeof(char)))
+    {
+        memcpy(LogDataBuffer, BufferLog[BlockId].data(), BufferLog[BlockId].size());
+        write_queue(LogDataBuffer, BlockId);
+        BufferLog[BlockId].clear();
+    }
+
+    spdk_dma_free(LogDataBuffer);
+
+    return 0;
 }
 
 TNCEntry Read4Buffer(size_t pos)
@@ -112,21 +120,18 @@ TNCEntry  SyncRead(uint32_t offset)
     uint64_t PageId = (offset>>24)*geometry.clba+ offsetpage;
     size_t Position = (offset & 0x00000FFF)-1;
 
-    printf("SyncRead offset: %u (Block: %u, Page: %u, Position: %u), PageId: %lu, Position: %zu\n", offset, (offset >> 24), ((offset >> 12) & 0xFFF), (offset & 0x00000FFF), PageId,Position);
+    // printf("SyncRead offset: %u (Block: %u, Page: %u, Position: %u), PageId: %lu, Position: %zu\n", offset, (offset >> 24), ((offset >> 12) & 0xFFF), (offset & 0x00000FFF), PageId,Position);
 
     if(PageId == WBufferId)
     {
         return Read4Buffer(Position);
     }
-    // TNCEntry* ReadData = TNCEntryRead(PageId);
-    // TNCEntry a{ReadData[Position].key};
-    // delete(ReadData);
-    // return a;
+
     bool IsFlag = lrucache.IsLRUPage(PageId);
-    if(!IsFlag)
+    if(true)
     {
         //printf("Not Found!,Cache size:%lu\n",lrucache.cache.size());
-        // buffernumber++;
+        buffernumber++;
         // ReadNode temp;
         TNCEntry* ReadData = read_queue(PageId);
         // temp.data = ReadData;
@@ -135,16 +140,20 @@ TNCEntry  SyncRead(uint32_t offset)
         TNCEntry tem1;
         memcpy(tem1.key,ReadData[Position].key,KEY_SIZE);
         memcpy(tem1.val,ReadData[Position].val,VAL_SIZE);
+        spdk_dma_free(ReadData);
+#ifdef TIOCS_READ_DEBUG
         printf("ReadData[Position].key: %lu ", big_endian2little_endian(ReadData[Position].key, KEY_SIZE));
         printf("ReadData[Position].val: %lu\n",big_endian2little_endian(ReadData[Position].val, KEY_SIZE));
+#endif
         return tem1;    
     }
     else
     {
-        //printf("Founded!Cache size:%lu\n",lrucache.cache.size());
+        // printf("Founded!Cache size:%lu\n",lrucache.cache.size());
         TNCEntry *values = lrucache.get(PageId);
         TNCEntry tem;
         memcpy(tem.key,values[Position].key,KEY_SIZE);
+        memcpy(tem.val,values[Position].val,VAL_SIZE);
         return tem;
     }
 #ifdef LRU

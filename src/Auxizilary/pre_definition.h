@@ -25,9 +25,11 @@ typedef uint64_t VAL_t;
 #define VAL_MIN 0
 
 #define PAGE_MAX 4294967295
- 
-#define VAL_SIZE 8
-#define KEY_SIZE 56
+
+
+#define KEY_SIZE 8
+#define VAL_SIZE 120
+
 
 typedef struct entry 
 {

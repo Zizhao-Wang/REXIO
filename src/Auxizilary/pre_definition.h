@@ -28,7 +28,7 @@ typedef uint64_t VAL_t;
 
 
 #define KEY_SIZE 8
-#define VAL_SIZE 120
+#define VAL_SIZE 248
 
 
 typedef struct entry 

@@ -80,10 +80,13 @@ void locs_run::PutValue(entry_t entry)
     
     if(Rundata.size() == max_io_size && Size != 0)
     {
-        int err = RunDataWrite();
+        int err =  RunDataWrite();
+        char * key =new char[KEY_SIZE];
+        memcpy(key,entry.key,KEY_SIZE);
+        FencePointers.emplace_back(key);
         if(err==0)
         {
-            assert(Rundata.size() == 0); 
+           //
         }
         else
         {
@@ -99,7 +102,10 @@ void locs_run::PutValue(entry_t entry)
 }
 
 
-
+bool compare_keys(const char *a, const char* b) 
+{
+    return memcmp(a, b, KEY_SIZE) < 0;
+}
 
 const char * locs_run::GetValue(const char* key)  
 {
@@ -116,31 +122,41 @@ const char * locs_run::GetValue(const char* key)
             return nullptr;
         }
     }
-    
-    // // std::vector<uint64_t>::iterator it = lower_bound(FencePointers.begin(),FencePointers.end(),key);
-    // size_t PageIndex = it->FencePointers.begin();
+    printf("key in get in run: %lu\n", test(key));
+    std::vector<char*>::iterator it = lower_bound(FencePointers.begin(),FencePointers.end(),key,compare_keys);
+    size_t PageIndex = it-FencePointers.begin();
 
-    // if(PageIndex < chunk_pointers.size() && chunk_pointers[PageIndex]!=UINT64_MAX)
-    // {
-    //     // reads = RunReadFromPage(PagePointers[PageIndex]);;
-    //     // std::vector<entry_t>::iterator get;
-    //     // get = find(reads.begin(),reads.end(),entry_t{key,0});
-    //     // if(get!=reads.end())
-    //     // {
-    //     //     *value = (*get).val;
-    //     //     return value; 
-    //     // }
-    // }
-    // else
-    // {
-    //     // std::vector<entry_t>::iterator get;
-    //     // get = find(Rundata.begin(),Rundata.end(),entry_t{key,0});
-    //     // if(get!=reads.end())
-    //     // {
-    //     //     value = (*get).val;
-    //     //     return value; 
-    //     // }
-    // }
+    entry_t search_example;
+    memcpy(search_example.key,key,KEY_SIZE);
+    memset(search_example.val,0,VAL_SIZE);
+
+    uint64_t max_io_chunk = (geometry.num_chk /SPDK_NVME_OCSSD_MAX_LBAL_ENTRIES);
+
+    if(PageIndex < chunk_pointers.size() && chunk_pointers[PageIndex]!=UINT64_MAX)
+    {
+        printf(" ");
+        reads = select_read_queue(chunk_pointers[PageIndex/max_io_chunk]+(PageIndex%max_io_chunk)*max_io_chunk, OCSSD_READ);
+        
+        std::vector<entry_t>::iterator get;
+
+        get = find(reads.begin(),reads.end(),search_example);
+        if(get!=reads.end())
+        {
+            value = (*get).val;
+            return value; 
+        }
+    }
+    else
+    {
+        std::vector<entry_t>::iterator get;
+        get = find(Rundata.begin(),Rundata.end(),search_example);
+        if(get!=reads.end())
+        {
+            value = (*get).val;
+            return value; 
+        }
+    }
+    
     delete(value);
     return nullptr;
 }
@@ -198,8 +214,12 @@ std::vector<uint64_t> locs_run::GetPagePointers(void)
     return chunk_pointers;
 }
 
-std::vector<KEY_t> locs_run::GetFencePointers(void)
+std::vector<char*> locs_run::GetFencePointers(void)
 {
+    // for(size_t k=0;k<FencePointers.size();k++)
+    // {
+    //     printf("  %lu in FlushInto ", test(FencePointers[k]));
+    // }
     return FencePointers;
 }
 
@@ -222,20 +242,13 @@ int locs_run::set_chunk_pointers(std::vector<PageType> pointers)
     return 0;
 }
 
-int locs_run::SetFencePointers(std::vector<uint64_t> pointers)
+int locs_run::SetFencePointers(std::vector<char*> pointers)
 {
 
-    // for(size_t i=0;i<pointers.size();++i)
-    // {
-    //     FencePointers.emplace_back(pointers[i]);
-    //     max_key = max(max_key,pointers[i]);
-    // }
-
-    // if(pointers.size()*CalculatePageCapacity(sizeof(entry_t))!=MaxSize/2 )
-    // {
-    //     return -1;
-    // }
-
+    for(size_t i=0;i<pointers.size();++i)
+    {
+        FencePointers.emplace_back(pointers[i]);
+    }
     return 0;
 }
 
@@ -373,9 +386,7 @@ void locs_run::chunk_reset()
 	while (buf_size > 0) 
     {
 		xfer_size = min(buf_size, xfer_size);
-		if (spdk_nvme_ctrlr_cmd_get_log_page(ctrlr, SPDK_OCSSD_LOG_CHUNK_INFO,
-						     nsid, (void *) (chunks + buf_offset),
-						     xfer_size, buf_offset, get_log_page_completion, NULL) == 0) 
+		if (spdk_nvme_ctrlr_cmd_get_log_page(ctrlr, SPDK_OCSSD_LOG_CHUNK_INFO,nsid, (void *) (chunks + buf_offset),xfer_size, buf_offset, get_log_page_completion, NULL) == 0) 
         {
 			outstanding_commands++;
 		} 
@@ -384,25 +395,20 @@ void locs_run::chunk_reset()
 			printf("get_ocssd_chunk_info_log_page() failed\n");
 			return ;
 		}
-
 		buf_size -= xfer_size;
 		buf_offset += xfer_size;
 	}
-    // printf("outstanding_commands:%d\n",outstanding_commands);
+
+
 	while (outstanding_commands) 
     {
 		spdk_nvme_ctrlr_process_admin_completions(ctrlr);
 	}
-    int err = 0;
 
-    
+    int err = 0;
 
     for (auto pointer: chunk_pointers)
     {
-        if( pointer == 129)
-        {
-            print_ocssd_chunk_info(chunks, pointer);
-        }
         err = insert_erase_queue(pointer, &chunks[pointer]);
         if(err !=0)
         {
@@ -414,7 +420,7 @@ void locs_run::chunk_reset()
 
 void locs_run::status_display(void)
 {
-    printf("Size:%lu,MaxSize:%lu,chunk_pointers size:%lu,,max_key:%lu,min_key:%lu",Size,MaxSize,chunk_pointers.size(),max_key,min_key);
+    printf("Size:%lu,MaxSize:%lu,chunk_pointers size:%lu,,max_key:%lu,min_key:%lu",Size,MaxSize,chunk_pointers.size(), test(max_key), test(min_key));
 }
 
 bool locs_run::Isfull(void)

@@ -106,6 +106,7 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
 
     /* Take over runs from current!*/
     std::vector<PageType> page_poniters;
+    std::vector<char*> fence_pointers;
     char maxkey[KEY_SIZE];
     char minkey[KEY_SIZE];
     memset(maxkey, 0, KEY_SIZE);
@@ -116,8 +117,12 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
 
     for (int i = 0;i<current->Runs.size();++i) 
     {
+        
         std::vector<PageType> temp = current->Runs[i].GetPagePointers();
+        std::vector<char*> temp2 = current->Runs[i].GetFencePointers();
         page_poniters.insert(page_poniters.end(),temp.begin(),temp.end());
+
+        fence_pointers.insert(fence_pointers.end(),temp2.begin(),temp2.end());
         if(memcmp(current->Runs[i].get_max_key(),maxkey, KEY_SIZE) > 0)
         {
             memcpy(maxkey, current->Runs[i].get_max_key(), KEY_SIZE);
@@ -127,17 +132,23 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
         {
             memcpy(minkey, current->Runs[i].get_min_key(), KEY_SIZE);
         }
-        
         count_size += current->Runs[i].GetNowSize();
         current->Runs[i].Reset();
+
     }
 
+    // for(size_t k=0;k<fence_pointers.size();k++)
+    // {
+    //     printf("  %lu in FlushInto ", test(fence_pointers[k]));
+    // }
+    // exit(0);
     if(next->Runs[0].status() == FULL_EMPTY)
     {
         next->Runs[0].set_chunk_pointers(page_poniters); 
         next->Runs[0].set_max_key(maxkey);
         next->Runs[0].set_min_key(minkey);
         next->Runs[0].set_current_size(count_size);
+        next->Runs[0].SetFencePointers(fence_pointers);
     }
     else
     {
@@ -225,7 +236,7 @@ int LOCS::PutValue(const char* key, const char* value)
         
         char deleted_val[KEY_SIZE];
         memset(deleted_val, 0, KEY_SIZE);
-        printf("mergeon size:%lu\n",mergecon.get_size());
+        // printf("mergeon size:%lu\n",mergecon.get_size());
         while(!mergecon.IsEmpty())
         {
             entry_t entry = mergecon.Contextpop1();
@@ -247,7 +258,7 @@ int LOCS::PutValue(const char* key, const char* value)
     buffer.AllClear();
     assert(buffer.PutValue(key, value));
 
-#ifdef DEBUG
+#ifdef DEBUG1
     for (auto level_it = Levels.begin(); level_it != Levels.end(); ++level_it) 
     {
         if (level_it->IsEmpty()) 
@@ -329,56 +340,25 @@ const char* LOCS::GetValue(const char* key)
     const char *level_val = nullptr;
     for(int i=0;i<Levels.size();++i)
     {
-        //printf("Search in Level %d\n",i);
+
+#ifdef DEBUG_SEARCH
+        printf("Search in Level %d\n",i);
+#endif
+
         level_val = Levels[i].GetValue(key);
         if(level_val!=nullptr)
         {
             return level_val;
         }
-        //printf("==============\n");
+
+#ifdef DEBUG_SEARCH
+        printf("==============\n");
+#endif
+
     }
     
     delete level_val;
     return nullptr; 
-     
-//         int current_run;
-//         Run *run;
-//         
-//          counter = 0;
-//          latest_run = -1;
-//         current_run = counter++;
-
-//         if (latest_run >= 0 || (run = get_run(current_run)) == nullptr) 
-//         {
-//             // Stop search if we discovered a key in another run, or
-//             // if there are no more runs to search
-//             return;
-//         } 
-//         else if ((current_val = run->get(key)) == nullptr) 
-//         {
-//             // Couldn't find the key in the current run, so we need
-//             // to keep searching.
-//             search();
-//         } else 
-//         {
-//             // Update val if the run is more recent than the
-//             // last, then stop searching since there's no need
-//             // to search later runs.
-//             lock.lock();
-
-//             if (latest_run < 0 || current_run < latest_run) 
-//             {
-//                 latest_run = current_run;
-//                 latest_val = *current_val;
-//             }
-
-//             lock.unlock();
-//             delete current_val;
-//         }
-//     };
-
-//     if (latest_run >= 0 && latest_val != VAL_TOMBSTONE) cout << latest_val;
-//     cout << endl;
 }
 
 // void LSMTree::GetRange(KEY_t start, KEY_t end) 
@@ -486,6 +466,12 @@ void LOCS::display()
 void locs_init(void)
 {
 
+
+    /* workload a: insert only*/
+    
+    // printf("written_data_size:%lu, written_data_num:%lu record_point: %lu\n",written_data_size, written_data_num, record_point);
+
+
 	clock_t startTime,endTime;          // Definition of timestamp
     LOCS locs(2,7);                  // Initialize the memory part of LOCS
 
@@ -494,13 +480,18 @@ void locs_init(void)
     char key_buffer[KEY_SIZE];
     char value_buffer[VAL_SIZE];
 
-    for(SKey i=1;i<=100000000;i++)
+    uint64_t written_data_size = 100000000*16;
+    uint64_t written_data_num = written_data_size /(KEY_SIZE+VAL_SIZE);
+    uint64_t record_point = written_data_num / 10;
+
+    for(SKey i=1;i<=written_data_num;i++)
     {
-        if(i%10000000==0)
+
+        if(i%record_point==0)
         {
             endTime = clock();
             std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-            // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
+            // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,resets);
         }
         memset(key_buffer, 0, KEY_SIZE);
         memset(value_buffer, 0, VAL_SIZE);
@@ -513,68 +504,78 @@ void locs_init(void)
         {
             value_buffer[KEY_SIZE - 1 - j] = static_cast<char>((i >> (8 * j)) & 0xFF);
         }
-        
+
         locs.PutValue(key_buffer, value_buffer);
+
     }
-    // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
+    // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,resets);
     endTime = clock();
-    std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+    std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
 
 
     /* workload b: read only, all in it */
     startTime = clock();
-     for(int i=1;i<=1;i++)
-     {
+    record_point = written_data_num/10/10;
+    for(int i=1;i<=written_data_num/10;i++)
+    {
 
         srand48(time(NULL));
-        SKey k = 1+(rand()%100);
+        SKey k = 1+(rand()%written_data_num);
 
         memset(key_buffer, 0, KEY_SIZE);
         for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
         {
             key_buffer[KEY_SIZE - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
         }
+
         const char* value = locs.GetValue(key_buffer);
+
         if(value==nullptr)
         {
             printf("key:%lu Not Found!\n",k);
         }
-        // printf("\n");
-        if(i==10000 || i%100000==0)
+
+        if(i%record_point==0)
         {
             endTime = clock();
             std::cout << "Total Time of "<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-            // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);   
+            printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,resets);   
         }
-     }
+    }
     endTime = clock();
-    // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
-    std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+    printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,resets);
+    std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
 
-    //  /* workload c: read only, 50% in it, 50% not in it */
-    //  startTime = clock();
+     /* workload c: read only, 50% in it, 50% not in it */
+     startTime = clock();
      
     // for(int i=1;i<=1000000;i++)
     // {
+    //     memset(key_buffer, 0, KEY_SIZE);
     //     srand48(time(NULL));
+    //     SKey k = 0;
     //     if(i%100<50)
     //     {
-    //         SKey k = 1+(rand()%40000000);
-    //         locs.GetValue(k);
+    //         k = 1+(rand()%written_data_num);
     //     }
     //     else
     //     {
-    //         SKey k = 40000000+(rand()%40000000);
-    //         locs.GetValue(k);
+    //         k = written_data_num+(rand()%written_data_num);
     //     }
+
+    //     for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
+    //     {
+    //         key_buffer[KEY_SIZE - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
+    //     }
+    //     locs.GetValue(key_buffer);
     //     if(i%100000==0 || i==10000)
     //     {
     //         endTime = clock();
     //         std::cout << "Total Time of "<<i<<" in workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-    //         printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
+    //         printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,resets);
     //     }
     // }
-    // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
+    // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,resets);
     // endTime = clock();
     // std::cout << "Total Time of workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
@@ -597,10 +598,10 @@ void locs_init(void)
     //     {
     //         endTime = clock();
     //         std::cout << "Total Time of "<<i<<" in workload D: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-    //         printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
+    //         printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,resets);
     //     } 
     // }
-    // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
+    // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,resets);
     // endTime = clock();
     // std::cout << "Total Time of workload d: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
@@ -623,10 +624,10 @@ void locs_init(void)
     //     {
     //         endTime = clock();
     //         std::cout << "Total Time of "<<i<<" in workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-    //        printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
+    //        printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,resets);
     //     } 
     // }
-    // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
+    // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,resets);
     // endTime = clock();
     // std::cout << "Total Time of workload E: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
@@ -649,10 +650,10 @@ void locs_init(void)
     //     {
     //         endTime = clock();
     //         std::cout << "Total Time of "<<i<<" in workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n"; 
-    //         printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
+    //         printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,resets);
     //     } 
     // }
-    // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
+    // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,resets);
     // endTime = clock();
     // std::cout << "Total Time of workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
@@ -667,10 +668,10 @@ void locs_init(void)
     //     {
     //         endTime = clock();
     //         std::cout << "Total Time of "<<i<<" in workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";  
-    //         printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
+    //         printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,resets);
     //     }  
     // }
-    // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
+    // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,resets);
     // endTime = clock();
     // std::cout << "Total Time of workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 

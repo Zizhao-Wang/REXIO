@@ -16,28 +16,37 @@
  **/
 
 // global variables for define spdk environment 
-extern struct spdk_ocssd_geometry_data geometry;
+extern int reads;
+
+extern int writes;
+
+extern int resets;
 
 extern int backend_commands;
 
+extern struct spdk_nvme_ns * ns;
+
 extern struct spdk_env_opts opts; //environment options
-    
+
 extern struct spdk_nvme_ctrlr *ctrlr; // pointer that point to the controller
 
 extern struct spdk_nvme_transport_id trid; //transport id
 
-extern struct spdk_nvme_ns * ns;
+extern struct spdk_ocssd_geometry_data geometry;
  
-extern struct spdk_nvme_detach_ctx *g_detach_ctx; //detach context
+extern struct spdk_nvme_detach_ctx  * g_detach_ctx; //detach context
+
 
 // global varibales for define LOCS variables 
-extern uint32_t chunk_capacity; // maximum data entries of a chunk
-
 extern uint64_t page_size;  // bytes of a page/sector
+
+extern bool geometry_completed;
+
+extern uint32_t chunk_capacity; // maximum data entries of a chunk
 
 extern struct channels_io *channels;
 
-extern bool geometry_completed;
+
 
 
 

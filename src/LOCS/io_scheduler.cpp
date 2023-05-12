@@ -57,7 +57,6 @@ void erase_complete(void *arg, const struct spdk_nvme_cpl *completion)
 	{
         printf("OCSSD vector write failed with status 0x%x\n", completion->status.sct);
     }
-	printf("Erase completed!\n");
 	erase_outstanding_commands--;
 	
 }
@@ -259,23 +258,23 @@ int select_write_queue(std::vector<entry_t>& data, int mode)
 			channels[current_channel].used_chunk++;
 			channels[current_channel].chunk_type[last_written_block-(current_channel*geometry.num_chk*geometry.num_pu)] = DATA_CHUNK;
 			// check_if_erase(current_channel);
-			printf("current channel: %lu last written block: %lu write_count: %lu curren_channel.current_writer_point: %lu \n", current_channel, last_written_block, write_count,channels[current_channel].current_writer_point);
+			// printf("current channel: %lu last written block: %lu write_count: %lu curren_channel.current_writer_point: %lu \n", current_channel, last_written_block, write_count,channels[current_channel].current_writer_point);
 			if(channels[current_channel].current_writer_point == (current_channel+1)*(geometry.num_chk*geometry.num_pu*geometry.clba))
 			{
-				printf("channels[%lu].current_writer_point = %lu\n", current_channel, channels[current_channel].current_writer_point);
+				// printf("channels[%lu].current_writer_point = %lu\n", current_channel, channels[current_channel].current_writer_point);
 				channels[current_channel].current_writer_point = current_channel*geometry.num_pu*geometry.num_chk*geometry.clba;
-				printf("channels[%lu].current_writer_point = %lu\n", current_channel, channels[current_channel].current_writer_point);
-				for(size_t i = 0; i<10;i++)
-				{
-					if(channels[current_channel].chunk_type[i] == DATA_CHUNK)
-					{
-						printf("channels[%lu].chunk_type[%lu] = %d\n", current_channel, i, channels[current_channel].chunk_type[i]);
-					}
-					else
-					{
-						printf("channels[%lu].chunk_type[%lu] = %d\n", current_channel, i, channels[current_channel].chunk_type[i]);
-					}
-				}
+				// printf("channels[%lu].current_writer_point = %lu\n", current_channel, channels[current_channel].current_writer_point);
+				// for(size_t i = 0; i<10;i++)
+				// {
+				// 	if(channels[current_channel].chunk_type[i] == DATA_CHUNK)
+				// 	{
+				// 		printf("channels[%lu].chunk_type[%lu] = %d\n", current_channel, i, channels[current_channel].chunk_type[i]);
+				// 	}
+				// 	else
+				// 	{
+				// 		printf("channels[%lu].chunk_type[%lu] = %d\n", current_channel, i, channels[current_channel].chunk_type[i]);
+				// 	}
+				// }
 			}
 			current_channel = (current_channel + 1) % geometry.num_grp;
 			// printf("current channel: %lu last written block: %lu write_count: %lu\n", current_channel, last_written_block, write_count);

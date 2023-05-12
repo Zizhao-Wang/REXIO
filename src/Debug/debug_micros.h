@@ -12,16 +12,18 @@
 #define TIOCS_DEBUG_H
 
 /* define whether printf debug information */
-#define DEBUG   
+// #define DEBUG   
 
 
-
+// #define DEBUG1
 
 /* define first level of LSM-tree */
 // #define SKIPLIST
 
 #define RED_BLACK_TREE
 
+
+// #define DEBUG_SEARCH
 
 // #define TIOCS_DEBUG
 

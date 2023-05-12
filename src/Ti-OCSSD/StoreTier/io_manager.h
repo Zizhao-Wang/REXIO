@@ -17,12 +17,6 @@
 /**
  *  ================= I/O records====================  
  **/
-extern int reads;
-
-extern int writes;
-
-extern int resets;
-
 extern int out_stand;
 
 extern size_t num_data_page;

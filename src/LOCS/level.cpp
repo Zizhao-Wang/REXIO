@@ -42,7 +42,10 @@ const char* locs_level ::GetValue(const char* key)
     const char *val = nullptr;
     for(int i=0;i<Runs.size();i++)
     {  
-       // printf("Search in Run %d, Run has %lu\n",i,Runs[i].GetNowSize());
+        
+#ifdef DEBUG_SEARCH
+       printf("Search in Run %d, Run has %lu\n",i,Runs[i].GetNowSize());
+#endif
         if(!Runs[i].IsEmpty())
         {
             val = Runs[i].GetValue(key);

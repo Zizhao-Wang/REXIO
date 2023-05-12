@@ -12,6 +12,7 @@
 #include "../Backend/SSDRead/reader.h"
 #include "global_variables.h"
 #include "io_scheduler.h"
+#include "../Debug/debug_micros.h"
 
 vector<int> a;
 
@@ -107,6 +108,25 @@ bool compare_keys(const char *a, const char* b)
     return memcmp(a, b, KEY_SIZE) < 0;
 }
 
+std::vector<char*>::iterator lowerBoundManual(std::vector<char*>& vec, const char* key, int key_len) 
+{
+    int l = 0;
+    int r = vec.size();
+    while (l < r) 
+    {
+        int mid = l + (r - l) / 2;
+        if (memcmp(vec[mid], key, key_len) < 0) 
+        {
+            l = mid + 1;
+        }
+        else 
+        {
+            r = mid;
+        }
+    }
+    return vec.begin() + l;
+}
+
 const char * locs_run::GetValue(const char* key)  
 {
     if(Size == 0)
@@ -122,29 +142,45 @@ const char * locs_run::GetValue(const char* key)
             return nullptr;
         }
     }
-    printf("key in get in run: %lu\n", test(key));
-    std::vector<char*>::iterator it = lower_bound(FencePointers.begin(),FencePointers.end(),key,compare_keys);
-    size_t PageIndex = it-FencePointers.begin();
 
+#ifdef DEBUG_SEARCH
+    printf("key in get in FencePointers: \n");
+    for (const auto& ptr : FencePointers) 
+    {
+        if (ptr != nullptr) 
+        {
+            printf(" %lu ", test(ptr));
+        }
+    }
+    printf("======\n");
+#endif
+
+    std::vector<char*>::iterator it = lowerBoundManual(FencePointers,key,KEY_SIZE);
+    size_t PageIndex = it-FencePointers.begin();
+    
     entry_t search_example;
     memcpy(search_example.key,key,KEY_SIZE);
     memset(search_example.val,0,VAL_SIZE);
 
-    uint64_t max_io_chunk = (geometry.num_chk /SPDK_NVME_OCSSD_MAX_LBAL_ENTRIES);
-
-    if(PageIndex < chunk_pointers.size() && chunk_pointers[PageIndex]!=UINT64_MAX)
+    uint64_t max_io_chunk = (geometry.clba /SPDK_NVME_OCSSD_MAX_LBAL_ENTRIES);
+    if( PageIndex/max_io_chunk < chunk_pointers.size() )
     {
-        printf(" ");
-        reads = select_read_queue(chunk_pointers[PageIndex/max_io_chunk]+(PageIndex%max_io_chunk)*max_io_chunk, OCSSD_READ);
         
-        std::vector<entry_t>::iterator get;
+        reads = select_read_queue(chunk_pointers[PageIndex/max_io_chunk]*geometry.clba+(PageIndex%max_io_chunk)*max_io_chunk, OCSSD_READ);
 
+#ifdef DEBUG_SEARCH
+        /* printf debug parameters*/
+        printf("chunk_pointers[PageIndex/max_io_chunk]+(PageIndex%max_io_chunk)*max_io_chunk %lu\n",chunk_pointers[PageIndex/max_io_chunk]+(PageIndex%max_io_chunk)*max_io_chunk);
+#endif
+
+        std::vector<entry_t>::iterator get;
         get = find(reads.begin(),reads.end(),search_example);
         if(get!=reads.end())
         {
             value = (*get).val;
             return value; 
         }
+        
     }
     else
     {
@@ -256,7 +292,9 @@ void locs_run::Reset()
 {
     if(FencePointers.size()!=0)
         FencePointers.clear();
+
     Size = 0;
+
     if(Rundata.size()!=0)
         Rundata.clear();
 
@@ -270,8 +308,10 @@ void locs_run::Reset()
         }
         chunk_pointers.clear();
     }
+
     memset(max_key, 0, KEY_SIZE);
     memset(min_key, 0xFF, KEY_SIZE);
+
     io_count = 0;
 }
 

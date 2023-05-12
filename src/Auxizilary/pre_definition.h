@@ -38,27 +38,31 @@ typedef struct entry
 
     bool operator <(const entry& other) const
     {
-        int key_comparison_result = memcmp(key, other.key, KEY_SIZE);
-        if (key_comparison_result == 0)
-        {
-            return memcmp(val, other.val, VAL_SIZE) < 0;
-        }
-        return key_comparison_result < 0;
+        // int key_comparison_result = memcmp(key, other.key, KEY_SIZE);
+        // if (key_comparison_result == 0)
+        // {
+        //     return memcmp(val, other.val, VAL_SIZE) < 0;
+        // }
+        // return key_comparison_result < 0;
+
+        return memcmp(key, other.key, KEY_SIZE) <0 ;
     }
 
     bool operator >(const entry& other) const
     {
-        int key_comparison_result = memcmp(key, other.key, KEY_SIZE);
-        if (key_comparison_result == 0)
-        {
-            return memcmp(val, other.val, VAL_SIZE) > 0;
-        }
-        return key_comparison_result > 0;
+        // int key_comparison_result = memcmp(key, other.key, KEY_SIZE);
+        // if (key_comparison_result == 0)
+        // {
+        //     return memcmp(val, other.val, VAL_SIZE) > 0;
+        // }
+        // return key_comparison_result > 0;
+
+        return memcmp(key, other.key, KEY_SIZE) > 0 ;
     }
 
-    bool operator ==(const entry& other) const
+    bool operator == (const entry& other) const
     {
-        return memcmp(key, other.key, KEY_SIZE) == 0 && memcmp(val, other.val, VAL_SIZE) == 0;
+        return memcmp(key, other.key, KEY_SIZE) == 0 ;
     }
 
 }entry_t;

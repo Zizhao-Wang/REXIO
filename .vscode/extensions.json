@@ -1,6 +1,5 @@
 {
     "recommendations": [
-        "ms-vscode.cpptools-themes",
-        "github.copilot"
+        "ms-vscode.cpptools-themes"
     ]
 }

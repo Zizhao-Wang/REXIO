@@ -17,7 +17,7 @@ struct spdk_nvme_ns * ns = nullptr;
 
 struct spdk_nvme_detach_ctx *g_detach_ctx = NULL;
 
-uint32_t chunk_capacity;
+uint64_t chunk_capacity;
 
 uint64_t page_size;
 

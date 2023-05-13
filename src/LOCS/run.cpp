@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <fcntl.h>
 #include <cstdlib>
+#include <pthread.h>
 #include <cstring>
 #include <cmath>
 #include "../Backend/IODisk/WriteDisk.h"
@@ -23,6 +24,10 @@ locs_run::locs_run(unsigned long maxsize)
     memset(this->min_key, 0xFF, KEY_SIZE);
     this->Size = 0;
     this->io_count = 0;
+    Rundata.push_back(std::vector<entry_t>());
+    this->max_entries_per_vector = geometry.clba * page_size / sizeof(entry_t);
+    this->current_vector_index = 0;
+    this->thread_num = geometry.num_grp;
 }
 
 void locs_run::PointersDisplay()
@@ -33,9 +38,9 @@ void locs_run::PointersDisplay()
     }
 }
 
-int locs_run::RunDataWrite(void)
+int locs_run::RunDataWrite(size_t index)
 {
-    select_write_queue(Rundata, OCSSD_WRITE);
+    select_write_queue(Rundata[index], OCSSD_WRITE);
     Rundata.clear();
     io_count++;
     return 0;  
@@ -63,7 +68,12 @@ std::vector<entry_t> locs_run::SingleRunRead()
 void locs_run::PutValue(entry_t entry) 
 {
     assert(Size < MaxSize);
-    Rundata.emplace_back(entry);
+    if (Rundata[current_vector_index].size() >= max_entries_per_vector)
+    {
+        Rundata.push_back(std::vector<entry_t>());
+        current_vector_index++;
+    }
+    Rundata[current_vector_index].emplace_back(entry);
     
     if (memcmp(entry.key, max_key, KEY_SIZE) > 0) 
     {
@@ -76,8 +86,43 @@ void locs_run::PutValue(entry_t entry)
     }
 
     Size++;
-   
     
+    if (Size == MaxSize) 
+    {
+        std::vector<pthread_t> threads(max_concurrent_writes);
+        for (size_t i = 0; i < std::min(max_concurrent_writes, Rundata.size()); i++) 
+        {
+            std::pair<locs_run*, size_t> *args = new std::pair<locs_run*, size_t>(this, i);
+            int result = pthread_create(&threads[i], nullptr, RunDataWrite, args);
+            if (result != 0) 
+            {
+                // 处理错误...
+            }
+        }
+
+        std::vector<std::thread> threads;
+        for (size_t i = 0; i < std::min(max_concurrent_writes, Rundata.size()); i++) 
+        {
+            threads.emplace_back(&locs_run::RunDataWrite, this, i);
+        }
+            
+            // 等待所有线程完成
+        for (auto& thread : threads) 
+        {
+            if (thread.joinable()) 
+            {
+                thread.join();
+            }
+        }
+            
+        // 清空Rundata和Size
+        Rundata.clear();
+        Rundata.push_back(std::vector<entry_t>());
+        current_vector_index = 0;
+        Size = 0;
+    }
+
+
     if(Rundata.size() == max_io_size && Size != 0)
     {
         int err = RunDataWrite();

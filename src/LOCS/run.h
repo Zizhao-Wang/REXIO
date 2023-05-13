@@ -26,16 +26,17 @@
 class locs_run 
 {
 private:
-    uint64_t Size, MaxSize, max_io_size, io_count;
+    uint64_t Size, MaxSize, max_io_size, io_count, max_entries_per_vector,current_vector_index;
+    uint64_t thread_num;
     char max_key[KEY_SIZE];
     char min_key[KEY_SIZE];
     std::vector<uint64_t> chunk_pointers;
-    std::vector<entry_t> Rundata;
+    std::vector<std::vector<entry_t>> Rundata; // 改变了这里
     std::vector<KEY_t> FencePointers;
-    
+   
 public:
     locs_run(uint64_t);
-    int  RunDataWrite();
+    int  RunDataWrite(size_t index);
     void PointersDisplay();
     void PutValue(entry_t entry);
     std::vector<entry_t> RunValuesRead(uint64_t PageNum);

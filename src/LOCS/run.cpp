@@ -68,13 +68,15 @@ std::vector<entry_t> locs_run::SingleRunRead()
 void* parallel_data_write(void* arg) 
 {
     // 强制转换arg为指向我们需要的类型
-    auto data = static_cast<std::pair<locs_run*, size_t>*>(arg);
-    locs_run* object = data->first;
-    size_t index = data->second;
+    thread_params* params = static_cast<thread_params*>(arg);
+    locs_run* object = params->object;
+    size_t index = params->index;
     
     // 调用成员函数
-    object->RunDataWrite(index);
-    
+    uint64_t result = object->RunDataWrite(index);
+
+    // 返回结果
+    params->result = result;
     return nullptr;
 }
 
@@ -102,40 +104,52 @@ void locs_run::PutValue(entry_t entry)
     }
 
     Size++;
-    
+
+    if(Size == max_io_size && Size != 0)
+    {
+        char fence_key [KEY_SIZE];
+        memcpy(fence_key, entry.key, KEY_SIZE);
+        FencePointers.emplace_back(fence_key);
+    }
+
     if (Size == MaxSize) 
     {
-        std::vector<pthread_t> threads(geometry.num_grp);
         size_t max_concurrent_writes = geometry.num_grp;
-        for (size_t i = 0; i < std::min(max_concurrent_writes, Rundata.size()); i++) 
+        size_t total_vectors = Rundata.size();
+
+        // 外层循环，每次处理max_concurrent_writes个vector
+        for (size_t start = 0; start < total_vectors; start += max_concurrent_writes) 
         {
-            std::pair<locs_run*, size_t> *args = new std::pair<locs_run*, size_t>(this, i);
-            int result = pthread_create(&threads[i], nullptr, parallel_data_write, args);
-            if (result != 0) 
+            size_t end = std::min(start + max_concurrent_writes, total_vectors);
+
+            std::vector<pthread_t> threads(end - start);
+
+            // 内层循环，创建一批线程
+            for (size_t i = start; i < end; i++) 
             {
-                printf("Error creating thread in loop %lu\n", i);
+                thread_params* args = new thread_params{this, i,UINT64_MAX};
+                int result = pthread_create(&threads[i - start], nullptr, parallel_data_write, args);
+                if (result != 0) 
+                {
+                    printf("Error creating thread in loop %lu\n", i);
+                }
+            }
+
+            // 等待所有线程结束并获取返回值
+            for (auto& thread : threads) 
+            {
+                void* result;
+                pthread_join(thread, &result);
+                chunk_pointers.emplace_back(reinterpret_cast<uint64_t>(result));
             }
         }
-            
+
         // 清空Rundata和Size
         Rundata.clear();
         Rundata.push_back(std::vector<entry_t>());
         current_vector_index = 0;
         Size = 0;
-
-        chunk_pointers.emplace_back(last_written_block);
     }
-
-
-    if(Size == max_io_size && Size != 0)
-    {
-
-        char *fence_key = new char[KEY_SIZE];
-        memcpy(fence_key, entry.key, KEY_SIZE);
-        FencePointers.emplace_back(fence_key);
-        
-    }
-
 }
 
 
@@ -238,7 +252,7 @@ std::vector<uint64_t> locs_run::GetPagePointers(void)
     return chunk_pointers;
 }
 
-std::vector<KEY_t> locs_run::GetFencePointers(void)
+std::vector<char*> locs_run::GetFencePointers(void)
 {
     return FencePointers;
 }
@@ -262,7 +276,7 @@ int locs_run::set_chunk_pointers(std::vector<PageType> pointers)
     return 0;
 }
 
-int locs_run::SetFencePointers(std::vector<uint64_t> pointers)
+int locs_run::SetFencePointers(std::vector<char*> pointers)
 {
 
     // for(size_t i=0;i<pointers.size();++i)

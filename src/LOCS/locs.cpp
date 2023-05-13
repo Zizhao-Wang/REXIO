@@ -494,7 +494,7 @@ void locs_init(void)
     char key_buffer[KEY_SIZE];
     char value_buffer[VAL_SIZE];
 
-    for(SKey i=1;i<=100000000;i++)
+    for(SKey i=1;i<=2097153;i++)
     {
         if(i%10000000==0)
         {

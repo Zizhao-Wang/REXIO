@@ -65,14 +65,30 @@ std::vector<entry_t> locs_run::SingleRunRead()
     return entries1;
 }
 
+void* parallel_data_write(void* arg) 
+{
+    // 强制转换arg为指向我们需要的类型
+    auto data = static_cast<std::pair<locs_run*, size_t>*>(arg);
+    locs_run* object = data->first;
+    size_t index = data->second;
+    
+    // 调用成员函数
+    object->RunDataWrite(index);
+    
+    return nullptr;
+}
+
+
 void locs_run::PutValue(entry_t entry) 
 {
     assert(Size < MaxSize);
+    
     if (Rundata[current_vector_index].size() >= max_entries_per_vector)
     {
         Rundata.push_back(std::vector<entry_t>());
         current_vector_index++;
     }
+
     Rundata[current_vector_index].emplace_back(entry);
     
     if (memcmp(entry.key, max_key, KEY_SIZE) > 0) 
@@ -89,29 +105,15 @@ void locs_run::PutValue(entry_t entry)
     
     if (Size == MaxSize) 
     {
-        std::vector<pthread_t> threads(max_concurrent_writes);
+        std::vector<pthread_t> threads(geometry.num_grp);
+        size_t max_concurrent_writes = geometry.num_grp;
         for (size_t i = 0; i < std::min(max_concurrent_writes, Rundata.size()); i++) 
         {
             std::pair<locs_run*, size_t> *args = new std::pair<locs_run*, size_t>(this, i);
-            int result = pthread_create(&threads[i], nullptr, RunDataWrite, args);
+            int result = pthread_create(&threads[i], nullptr, parallel_data_write, args);
             if (result != 0) 
             {
-                // 处理错误...
-            }
-        }
-
-        std::vector<std::thread> threads;
-        for (size_t i = 0; i < std::min(max_concurrent_writes, Rundata.size()); i++) 
-        {
-            threads.emplace_back(&locs_run::RunDataWrite, this, i);
-        }
-            
-            // 等待所有线程完成
-        for (auto& thread : threads) 
-        {
-            if (thread.joinable()) 
-            {
-                thread.join();
+                printf("Error creating thread in loop %lu\n", i);
             }
         }
             
@@ -120,25 +122,18 @@ void locs_run::PutValue(entry_t entry)
         Rundata.push_back(std::vector<entry_t>());
         current_vector_index = 0;
         Size = 0;
+
+        chunk_pointers.emplace_back(last_written_block);
     }
 
 
-    if(Rundata.size() == max_io_size && Size != 0)
+    if(Size == max_io_size && Size != 0)
     {
-        int err = RunDataWrite();
-        if(err==0)
-        {
-            assert(Rundata.size() == 0); 
-        }
-        else
-        {
-            EMessageOutput("Run failed!",104);
-        }
-        if(io_count % 64 ==0 && io_count!=0)
-        {
-            chunk_pointers.emplace_back(last_written_block);
-            // printf("page pointer:%lu io_count:%lu pagepointer.size:%lu \n",last_written_block,io_count,chunk_pointers.size());
-        }
+
+        char *fence_key = new char[KEY_SIZE];
+        memcpy(fence_key, entry.key, KEY_SIZE);
+        FencePointers.emplace_back(fence_key);
+        
     }
 
 }

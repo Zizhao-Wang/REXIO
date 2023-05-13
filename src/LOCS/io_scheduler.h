@@ -3,7 +3,6 @@
 #include <vector>
 #include <spdk/nvme_ocssd.h>
 
-
 #ifndef LOCS_IO_SCHEDULER_H
 #define LOCS_IO_SCHEDULER_H
 

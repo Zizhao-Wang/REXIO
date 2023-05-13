@@ -32,7 +32,7 @@ private:
     char min_key[KEY_SIZE];
     std::vector<uint64_t> chunk_pointers;
     std::vector<std::vector<entry_t>> Rundata; // 改变了这里
-    std::vector<KEY_t> FencePointers;
+    std::vector<char*> FencePointers;
    
 public:
     locs_run(uint64_t);
@@ -44,11 +44,11 @@ public:
     const char * GetValue(const char* key);
     std::vector<entry_t> * GetRange(KEY_t, KEY_t);
     std::vector<uint64_t> GetPagePointers(void);
-    std::vector<KEY_t> GetFencePointers(void);
+    std::vector<char*> GetFencePointers(void);
     const char * get_max_key(void);
     const char * get_min_key(void);
     int set_chunk_pointers(std::vector<uint64_t>);
-    int SetFencePointers(std::vector<KEY_t>);
+    int SetFencePointers(std::vector<char*>);
     void Reset();
     void set_max_key(const char* key);
     void set_min_key(const char* key);
@@ -61,6 +61,13 @@ public:
     void status_display(void);
     bool Isfull(void);
     bool IsEmpty(void);
+};
+
+struct thread_params 
+{
+    locs_run* object;
+    size_t index;
+    uint64_t result;
 };
 
 #endif

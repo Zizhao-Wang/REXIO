@@ -204,10 +204,10 @@ uint64_t test1(const char* buffer)
     return result;
 }
 
-int insert_write_queue(std::vector<entry_t>& data, uint64_t channel_id, size_t start, size_t end)
-{
 
-    char *buffer = (char *)spdk_dma_malloc((end - start) * sizeof(entry_t), 0x1000, NULL);
+int insert_write_queue(std::vector<entry_t>& data, uint64_t channel_id, size_t start, size_t end, char *buffer, uint64_t *lbalist)
+{
+    // Fill the buffer
     for (size_t i = start, j = 0; i < end; i++)
     {
         memcpy(buffer + j, data[i].key, KEY_SIZE);
@@ -216,13 +216,13 @@ int insert_write_queue(std::vector<entry_t>& data, uint64_t channel_id, size_t s
         memcpy(buffer + j, data[i].val, VAL_SIZE);
         j += VAL_SIZE;
     }
-    
-	uint64_t *lbalist = (uint64_t*)spdk_dma_malloc(sizeof(uint64_t) * 64, 0x1000, NULL);
-	for(uint32_t j = 0;j<64;j++)
-	{
-		lbalist[j] = channels[channel_id].current_writer_point;
-		channels[channel_id].current_writer_point++;
-	}
+
+    // Fill lbalist
+    for(uint32_t j = 0;j<SPDK_NVME_OCSSD_MAX_LBAL_ENTRIES;j++)
+    {
+        lbalist[j] = channels[channel_id].current_writer_point;
+        channels[channel_id].current_writer_point++;
+    }
 
 	if (spdk_nvme_ocssd_ns_cmd_vector_write(ns,channels[channel_id].qpair,(void *)buffer,lbalist,64,write_complete, &channel_id,0) == 0)
 	{
@@ -240,9 +240,7 @@ int insert_write_queue(std::vector<entry_t>& data, uint64_t channel_id, size_t s
 		// printf("Waiting for outstanding_commands: %d\n", outstanding_commands);
 		spdk_nvme_qpair_process_completions(channels[channel_id].qpair, 0);
 	}
-
-	spdk_dma_free(buffer);
-	spdk_dma_free(lbalist);	
+	
 	channels[channel_id].write_count++;
 	channels[channel_id].LWQL += 7500 * 64;
 
@@ -268,12 +266,19 @@ int select_write_queue(std::vector<entry_t>& data, int mode, uint64_t& last_writ
 
 		size_t offset_of_vector = SPDK_NVME_OCSSD_MAX_LBAL_ENTRIES*page_size/(sizeof(entry_t));
 
+		char *buffer = (char *)spdk_dma_malloc(offset_of_vector * sizeof(entry_t), 0x1000, NULL);
+        uint64_t *lbalist = (uint64_t*)spdk_dma_malloc(sizeof(uint64_t) *SPDK_NVME_OCSSD_MAX_LBAL_ENTRIES , 0x1000, NULL);
+
 		for (size_t i = 0; i < data.size(); i += offset_of_vector)
         {
             size_t end = std::min(i + offset_of_vector, data.size());
-            // std::cout << "In select_write_queue loop with i = " << i << ", end = " << end << std::endl;
-            insert_write_queue(data, channel_id, i, end);
+            insert_write_queue(data, channel_id, i, end, buffer, lbalist);
         }
+
+        // Free buffer and lbalist after all insert_write_queue calls
+        spdk_dma_free(buffer);
+        spdk_dma_free(lbalist);
+
 
 		// std::cout << "Leaving select_write_queue\n" << std::endl;
 	

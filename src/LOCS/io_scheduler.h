@@ -23,6 +23,8 @@ extern uint64_t count;
 
 
 
+
+
 /* create I/O queues for multi-channel OCSSD */
 int create_queue();
 
@@ -40,10 +42,10 @@ int insert_erase_queue(uint64_t chunk_id);
 /* *
  * Insert write request into appropriate queue 
  * */
-int insert_write_queue(std::vector<entry_t>& data, uint64_t channel_id);
 
 int select_write_queue(std::vector<entry_t>& data, int mode);
 
+int insert_write_queue(std::vector<entry_t>& data, uint64_t channel_id, size_t start, size_t end, char *buffer, uint64_t *lbalist);
 
 /* *
  * Insert read request into appropriate queue 

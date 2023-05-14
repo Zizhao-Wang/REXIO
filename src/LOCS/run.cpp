@@ -117,7 +117,10 @@ void locs_run::PutValue(entry_t entry)
         FencePointers.emplace_back(fence_key);
     }
     
-
+    // auto start_time = std::chrono::high_resolution_clock::now();
+    // auto end_time = std::chrono::high_resolution_clock::now();
+    // auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    // std::cout << "Total I/O time for clear data: " << duration.count() << "ms\n";
     // if (Size == MaxSize) 
     // {
     //     // printf("MaxSize:%lu Size:%lu\n",MaxSize,Size);
@@ -125,13 +128,14 @@ void locs_run::PutValue(entry_t entry)
     //     size_t total_vectors = Rundata.size();
     //     // printf("total_vectors:%lu\n",total_vectors);
     //     // printf("max_concurrent_writes:%lu\n",max_concurrent_writes);
+
     //     for (size_t start = 0; start < total_vectors; start += max_concurrent_writes) 
     //     {
     //         size_t end = std::min(start + max_concurrent_writes, total_vectors);
 
     //         std::vector<pthread_t> threads(end - start);
 
-    //         auto start_time = std::chrono::high_resolution_clock::now();
+            
     //         // threads create
     //         for (size_t i = start; i < end; i++) 
     //         {
@@ -150,14 +154,19 @@ void locs_run::PutValue(entry_t entry)
     //             pthread_join(thread, &result);
     //             chunk_pointers.emplace_back(reinterpret_cast<uint64_t>(result));
     //         }
-    //         auto end_time = std::chrono::high_resolution_clock::now();
-    //         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
-    //         std::cout << "Total I/O time for current batch of threads: " << duration.count() << "ms\n";
+            
     //     }
+    //     auto end_time = std::chrono::high_resolution_clock::now();
+    //     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    //     std::cout << "Total I/O time for current batch of threads: " << duration.count() << "ms\n";
 
     //     Rundata.clear();
     //     Rundata.push_back(std::vector<entry_t>());
     //     current_vector_index = 0;
+
+    //     end_time = std::chrono::high_resolution_clock::now();
+    //     duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    //     std::cout << "Total I/O time for clear data: " << duration.count() << "ms\n";
     // }
 }
 

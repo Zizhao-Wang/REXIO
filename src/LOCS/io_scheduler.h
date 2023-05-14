@@ -45,14 +45,14 @@ int insert_erase_queue(uint64_t chunk_id);
 
 int select_write_queue(std::vector<entry_t>& data, int mode);
 
-int insert_write_queue(std::vector<entry_t>& data, uint64_t channel_id, size_t start, size_t end, char *buffer, uint64_t *lbalist);
+int insert_write_queue(entry_t* data, uint64_t channel_id, size_t start, size_t end, char *buffer, uint64_t *lbalist);
 
 /* *
  * Insert read request into appropriate queue 
  * */
 char* insert_read_queue(uint64_t start_address);
 
-int select_write_queue(std::vector<entry_t>& data, int mode, uint64_t& last_written_block_temp);
+int select_write_queue(entry_t* data, size_t data_size, int mode, uint64_t& last_written_block_temp);
 
 std::vector<entry_t> select_read_queue(uint64_t start_address, int mode);
 

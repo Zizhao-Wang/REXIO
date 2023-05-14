@@ -205,7 +205,8 @@ uint64_t test1(const char* buffer)
 }
 
 
-int insert_write_queue(std::vector<entry_t>& data, uint64_t channel_id, size_t start, size_t end, char *buffer, uint64_t *lbalist)
+
+int insert_write_queue(entry_t* data, uint64_t channel_id, size_t start, size_t end, char *buffer, uint64_t *lbalist)
 {
     // Fill the buffer
     for (size_t i = start, j = 0; i < end; i++)
@@ -224,10 +225,10 @@ int insert_write_queue(std::vector<entry_t>& data, uint64_t channel_id, size_t s
         channels[channel_id].current_writer_point++;
     }
 
+
 	if (spdk_nvme_ocssd_ns_cmd_vector_write(ns,channels[channel_id].qpair,(void *)buffer,lbalist,64,write_complete, &channel_id,0) == 0)
 	{
 		channels[channel_id].current_request_num++;
-		write_count += 64;
 	}
 	else
 	{
@@ -251,7 +252,7 @@ int insert_write_queue(std::vector<entry_t>& data, uint64_t channel_id, size_t s
 }
 
 
-int select_write_queue(std::vector<entry_t>& data, int mode, uint64_t& last_written_block_temp)
+int select_write_queue(entry_t* data, size_t data_size, int mode, uint64_t& last_written_block_temp)
 {
 
 	// std::cout << "Entering select_write_queue with data size = " << data.size() << std::endl;
@@ -260,7 +261,6 @@ int select_write_queue(std::vector<entry_t>& data, int mode, uint64_t& last_writ
     {
         mtx.lock();  
         uint64_t channel_id = current_channel;
-		// printf("Current channel is %lu\n", channel_id);
         current_channel = (current_channel + 1) % geometry.num_grp;
         mtx.unlock();  
 
@@ -269,16 +269,15 @@ int select_write_queue(std::vector<entry_t>& data, int mode, uint64_t& last_writ
 		char *buffer = (char *)spdk_dma_malloc(offset_of_vector * sizeof(entry_t), 0x1000, NULL);
         uint64_t *lbalist = (uint64_t*)spdk_dma_malloc(sizeof(uint64_t) *SPDK_NVME_OCSSD_MAX_LBAL_ENTRIES , 0x1000, NULL);
 
-		for (size_t i = 0; i < data.size(); i += offset_of_vector)
+		for (size_t i = 0; i < data_size; i += offset_of_vector)
         {
-            size_t end = std::min(i + offset_of_vector, data.size());
+            size_t end = std::min(i + offset_of_vector, data_size);
             insert_write_queue(data, channel_id, i, end, buffer, lbalist);
         }
 
         // Free buffer and lbalist after all insert_write_queue calls
         spdk_dma_free(buffer);
         spdk_dma_free(lbalist);
-
 
 		// std::cout << "Leaving select_write_queue\n" << std::endl;
 	

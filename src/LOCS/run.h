@@ -31,7 +31,8 @@ private:
     char max_key[KEY_SIZE];
     char min_key[KEY_SIZE];
     std::vector<uint64_t> chunk_pointers;
-    std::vector<std::vector<entry_t>> Rundata; // 改变了这里
+    std::vector<std::vector<entry_t>> Rundata; 
+    entry_t **data;
     std::vector<char*> FencePointers;
    
 public:

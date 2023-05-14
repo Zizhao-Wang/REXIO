@@ -33,6 +33,8 @@ extern struct spdk_nvme_detach_ctx *g_detach_ctx; //detach context
 // global varibales for define LOCS variables 
 extern uint64_t chunk_capacity; // maximum data entries of a chunk
 
+extern uint64_t max_data_entries_per_io; // maximum data entries of a io
+
 extern uint64_t page_size;  // bytes of a page/(sector)
 
 extern struct channels_io *channels;

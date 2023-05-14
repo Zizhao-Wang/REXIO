@@ -19,6 +19,8 @@ struct spdk_nvme_detach_ctx *g_detach_ctx = NULL;
 
 uint64_t chunk_capacity;
 
+uint64_t max_data_entries_per_io;
+
 uint64_t page_size;
 
 bool geometry_completed = false;
@@ -71,6 +73,7 @@ void print_ocssd_geometry(struct spdk_ocssd_geometry_data *geometry_data)
  int variables_init()
  {
 	chunk_capacity = (geometry.clba * page_size) / sizeof(entry_t);
+	max_data_entries_per_io = SPDK_NVME_OCSSD_MAX_LBAL_ENTRIES*page_size/sizeof(entry_t) ;
 	printf("---- SSD Information Initialized Successfully! \n");
 	return 0;
  }

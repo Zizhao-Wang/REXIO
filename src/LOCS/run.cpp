@@ -84,6 +84,9 @@ void locs_run::PutValue(entry_t entry)
     {
         auto start_time = std::chrono::high_resolution_clock::now();
         int err =  RunDataWrite();
+        auto end_time = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+        std::cout << "Total I/O time for current batch of threads: " << duration.count() << "ms\n";
         char * key =new char[KEY_SIZE];
         memcpy(key,entry.key,KEY_SIZE);
         FencePointers.emplace_back(key);

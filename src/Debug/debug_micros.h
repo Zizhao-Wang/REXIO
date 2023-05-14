@@ -11,6 +11,9 @@
 #ifndef TIOCS_DEBUG_H
 #define TIOCS_DEBUG_H
 
+#include <algorithm>
+#include <chrono>
+
 /* define whether printf debug information */
 // #define DEBUG   
 

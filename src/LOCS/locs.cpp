@@ -211,7 +211,8 @@ int LOCS::PutValue(const char* key, const char* value)
 
 #endif
 
-
+    auto start_time = std::chrono::high_resolution_clock::now();
+    
     if(Levels[0].IsEmpty())
     {
         for(auto& kv : bufferdata)
@@ -257,6 +258,10 @@ int LOCS::PutValue(const char* key, const char* value)
     
     buffer.AllClear();
     assert(buffer.PutValue(key, value));
+
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    std::cout << "Total I/O time for clear data: " << duration.count() << "ms\n";
 
 #ifdef DEBUG1
     for (auto level_it = Levels.begin(); level_it != Levels.end(); ++level_it) 

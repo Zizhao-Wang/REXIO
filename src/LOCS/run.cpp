@@ -38,7 +38,7 @@ void locs_run::PointersDisplay()
 
 int locs_run::RunDataWrite(void)
 {
-    // select_write_queue(Rundata, OCSSD_WRITE);
+    select_write_queue(Rundata, OCSSD_WRITE);
     Rundata.clear();
     io_count++;
     return 0;  
@@ -83,11 +83,11 @@ void locs_run::PutValue(entry_t entry)
     
     if(Rundata.size() == max_io_size && Size != 0)
     {
-        auto start_time = std::chrono::high_resolution_clock::now();
+        // auto start_time = std::chrono::high_resolution_clock::now();
         int err =  RunDataWrite();
-        auto end_time = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
-        std::cout << "Total I/O time for current batch of threads: " << duration.count() << "ms\n";
+        // auto end_time = std::chrono::high_resolution_clock::now();
+        // auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+        // std::cout << "Total I/O time for current batch of threads: " << duration.count() << "ms\n";
         char * key =new char[KEY_SIZE];
         memcpy(key,entry.key,KEY_SIZE);
         FencePointers.emplace_back(key);

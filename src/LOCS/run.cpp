@@ -36,7 +36,7 @@ void locs_run::PointersDisplay()
 
 int locs_run::RunDataWrite(void)
 {
-    select_write_queue(Rundata, OCSSD_WRITE);
+    // select_write_queue(Rundata, OCSSD_WRITE);
     Rundata.clear();
     io_count++;
     return 0;  

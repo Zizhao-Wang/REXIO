@@ -256,7 +256,7 @@ int insert_write_queue(std::vector<entry_t>& data, uint64_t channel_id, size_t s
 int select_write_queue(std::vector<entry_t>& data, int mode, uint64_t& last_written_block_temp)
 {
 
-	std::cout << "Entering select_write_queue with data size = " << data.size() << std::endl;
+	// std::cout << "Entering select_write_queue with data size = " << data.size() << std::endl;
 
     if(mode == OCSSD_WRITE)
     {
@@ -275,7 +275,7 @@ int select_write_queue(std::vector<entry_t>& data, int mode, uint64_t& last_writ
             insert_write_queue(data, channel_id, i, end);
         }
 
-		std::cout << "Leaving select_write_queue\n" << std::endl;
+		// std::cout << "Leaving select_write_queue\n" << std::endl;
 	
 		// if(write_count % geometry.clba == 0 && write_count != 0)
 		// {

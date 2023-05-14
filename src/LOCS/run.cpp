@@ -75,10 +75,13 @@ void* parallel_data_write(void* arg)
     auto data = static_cast<thread_params*>(arg);
     locs_run* object = data->object;
     size_t index = data->index;
-    
+    auto start_time = std::chrono::high_resolution_clock::now();
     uint64_t last_written_block_temp = object->RunDataWrite(index);
     data->write_count = last_written_block_temp;
-    
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    std::cout << "Total I/O time for this thread: " << duration.count() << "ms\n";
+
     return &data->write_count;
 }
 
@@ -115,43 +118,47 @@ void locs_run::PutValue(entry_t entry)
     }
     
 
-    if (Size == MaxSize) 
-    {
-        printf("MaxSize:%lu Size:%lu\n",MaxSize,Size);
-        size_t max_concurrent_writes = geometry.num_grp;
-        size_t total_vectors = Rundata.size();
-        printf("total_vectors:%lu\n",total_vectors);
-        printf("max_concurrent_writes:%lu\n",max_concurrent_writes);
-        for (size_t start = 0; start < total_vectors; start += max_concurrent_writes) 
-        {
-            size_t end = std::min(start + max_concurrent_writes, total_vectors);
+    // if (Size == MaxSize) 
+    // {
+    //     // printf("MaxSize:%lu Size:%lu\n",MaxSize,Size);
+    //     size_t max_concurrent_writes = geometry.num_grp;
+    //     size_t total_vectors = Rundata.size();
+    //     // printf("total_vectors:%lu\n",total_vectors);
+    //     // printf("max_concurrent_writes:%lu\n",max_concurrent_writes);
+    //     for (size_t start = 0; start < total_vectors; start += max_concurrent_writes) 
+    //     {
+    //         size_t end = std::min(start + max_concurrent_writes, total_vectors);
 
-            std::vector<pthread_t> threads(end - start);
-            
-            // threads create
-            for (size_t i = start; i < end; i++) 
-            {
-                thread_params* args = new thread_params{this,i,UINT64_MAX};
-                int result = pthread_create(&threads[i - start], nullptr, parallel_data_write, args);
-                if (result != 0) 
-                {
-                    printf("Error creating thread in loop %lu\n", i);
-                }
-            }
+    //         std::vector<pthread_t> threads(end - start);
 
-            // threads join
-            for (auto& thread : threads) 
-            {
-                void* result;
-                pthread_join(thread, &result);
-                chunk_pointers.emplace_back(reinterpret_cast<uint64_t>(result));
-            }
-        }
+    //         auto start_time = std::chrono::high_resolution_clock::now();
+    //         // threads create
+    //         for (size_t i = start; i < end; i++) 
+    //         {
+    //             thread_params* args = new thread_params{this,i,UINT64_MAX};
+    //             int result = pthread_create(&threads[i - start], nullptr, parallel_data_write, args);
+    //             if (result != 0) 
+    //             {
+    //                 printf("Error creating thread in loop %lu\n", i);
+    //             }
+    //         }
 
-        Rundata.clear();
-        Rundata.push_back(std::vector<entry_t>());
-        current_vector_index = 0;
-    }
+    //         // threads join
+    //         for (auto& thread : threads) 
+    //         {
+    //             void* result;
+    //             pthread_join(thread, &result);
+    //             chunk_pointers.emplace_back(reinterpret_cast<uint64_t>(result));
+    //         }
+    //         auto end_time = std::chrono::high_resolution_clock::now();
+    //         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    //         std::cout << "Total I/O time for current batch of threads: " << duration.count() << "ms\n";
+    //     }
+
+    //     Rundata.clear();
+    //     Rundata.push_back(std::vector<entry_t>());
+    //     current_vector_index = 0;
+    // }
 }
 
 

@@ -82,7 +82,7 @@ void locs_run::PutValue(entry_t entry)
     
     if(Rundata.size() == max_io_size && Size != 0)
     {
-        auto 
+        auto start_time = std::chrono::high_resolution_clock::now();
         int err =  RunDataWrite();
         char * key =new char[KEY_SIZE];
         memcpy(key,entry.key,KEY_SIZE);

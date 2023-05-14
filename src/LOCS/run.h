@@ -27,6 +27,7 @@ class locs_run
 {
 private:
     uint64_t Size, MaxSize, max_io_size, io_count;
+    size_t io_time_reord;
     char max_key[KEY_SIZE];
     char min_key[KEY_SIZE];
     std::vector<uint64_t> chunk_pointers;

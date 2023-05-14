@@ -24,6 +24,7 @@ locs_run::locs_run(unsigned long maxsize)
     memset(this->min_key, 0xFF, KEY_SIZE);
     this->Size = 0;
     this->io_count = 0;
+    this->io_time_reord = 0;
 }
 
 void locs_run::PointersDisplay()
@@ -81,6 +82,7 @@ void locs_run::PutValue(entry_t entry)
     
     if(Rundata.size() == max_io_size && Size != 0)
     {
+        auto 
         int err =  RunDataWrite();
         char * key =new char[KEY_SIZE];
         memcpy(key,entry.key,KEY_SIZE);

@@ -10,6 +10,8 @@ uint64_t last_written_block = 0;
 int outstanding_commands = 0;
 int erase_outstanding_commands = 0;
 uint64_t counts = 0;
+std::mutex mtx;
+
 
 int create_queue()
 {
@@ -176,7 +178,10 @@ void write_complete(void *arg, const struct spdk_nvme_cpl *completion)
 	{
         printf("OCSSD vector write failed with status 0x%x\n", completion->status.sct);
     }
-	channels[current_channel].current_request_num--;  
+
+	uint64_t *channel_id_ptr = (uint64_t *)arg;
+    uint64_t channel_id = *channel_id_ptr;
+	channels[channel_id].current_request_num--;  
 }
 
 uint64_t big_to_little_endian(const char *buffer, size_t size) 
@@ -189,7 +194,7 @@ uint64_t big_to_little_endian(const char *buffer, size_t size)
     return result;
 }
 
-uint64_t test1(const char* buffer )
+uint64_t test1(const char* buffer)
 {
     uint64_t result = 0;
     for (size_t j = 0; j < 8; ++j) 
@@ -198,6 +203,108 @@ uint64_t test1(const char* buffer )
     }
     return result;
 }
+
+int insert_write_queue(std::vector<entry_t>& data, uint64_t channel_id, size_t start, size_t end)
+{
+
+    char *buffer = (char *)spdk_dma_malloc((end - start) * sizeof(entry_t), 0x1000, NULL);
+    for (size_t i = start, j = 0; i < end; i++)
+    {
+        memcpy(buffer + j, data[i].key, KEY_SIZE);
+        j += KEY_SIZE;
+
+        memcpy(buffer + j, data[i].val, VAL_SIZE);
+        j += VAL_SIZE;
+    }
+    
+	uint64_t *lbalist = (uint64_t*)spdk_dma_malloc(sizeof(uint64_t) * 64, 0x1000, NULL);
+	for(uint32_t j = 0;j<64;j++)
+	{
+		lbalist[j] = channels[channel_id].current_writer_point;
+		channels[channel_id].current_writer_point++;
+	}
+
+	if (spdk_nvme_ocssd_ns_cmd_vector_write(ns,channels[channel_id].qpair,(void *)buffer,lbalist,64,write_complete, &channel_id,0) == 0)
+	{
+		channels[channel_id].current_request_num++;
+		write_count += 64;
+	}
+	else
+	{
+		printf("Failed to write data to OCSSD!\n");
+		return -1;
+	}
+
+	while (channels[channel_id].current_request_num) 
+	{
+		// printf("Waiting for outstanding_commands: %d\n", outstanding_commands);
+		spdk_nvme_qpair_process_completions(channels[channel_id].qpair, 0);
+	}
+
+	spdk_dma_free(buffer);
+	spdk_dma_free(lbalist);	
+	channels[channel_id].write_count++;
+	channels[channel_id].LWQL += 7500 * 64;
+
+	// std::cout << "Leaving insert_write_queue" << std::endl;
+
+	return 0;
+
+}
+
+
+int select_write_queue(std::vector<entry_t>& data, int mode, uint64_t& last_written_block_temp)
+{
+
+	std::cout << "Entering select_write_queue with data size = " << data.size() << std::endl;
+
+    if(mode == OCSSD_WRITE)
+    {
+        mtx.lock();  
+        uint64_t channel_id = current_channel;
+		// printf("Current channel is %lu\n", channel_id);
+        current_channel = (current_channel + 1) % geometry.num_grp;
+        mtx.unlock();  
+
+		size_t offset_of_vector = SPDK_NVME_OCSSD_MAX_LBAL_ENTRIES*page_size/(sizeof(entry_t));
+
+		for (size_t i = 0; i < data.size(); i += offset_of_vector)
+        {
+            size_t end = std::min(i + offset_of_vector, data.size());
+            // std::cout << "In select_write_queue loop with i = " << i << ", end = " << end << std::endl;
+            insert_write_queue(data, channel_id, i, end);
+        }
+
+		std::cout << "Leaving select_write_queue\n" << std::endl;
+	
+		// if(write_count % geometry.clba == 0 && write_count != 0)
+		// {
+		// 	last_written_block = (channels[channel_id].current_writer_point/geometry.clba) -1;
+		// 	channels[channel_id].used_chunk++;
+		// 	channels[channel_id].chunk_type[last_written_block-(channel_id*geometry.num_chk*geometry.num_pu)] = DATA_CHUNK;
+			
+		// 	if(channels[channel_id].current_writer_point == (channel_id+1)*(geometry.num_chk*geometry.num_pu*geometry.clba))
+		// 	{   
+		// 		channels[channel_id].current_writer_point = channel_id*geometry.num_pu*geometry.num_chk*geometry.clba;
+		// 	}
+		// 	last_written_block_temp = last_written_block;
+		// }
+		// else
+		// {
+		// 	last_written_block_temp = last_written_block;
+		// }
+
+    }
+    else if(mode == OCSSD_ERASE)
+    {
+        mtx.lock();  // 获取锁
+        current_channel = (current_channel + 1) % geometry.num_grp;
+        mtx.unlock();  // 释放锁
+    }
+
+    return 0;
+}
+
 
 int insert_write_queue(std::vector<entry_t>& data, uint64_t channel_id)
 {
@@ -243,48 +350,33 @@ int insert_write_queue(std::vector<entry_t>& data, uint64_t channel_id)
 	return 0;
 }
 
-
-
 int select_write_queue(std::vector<entry_t>& data, int mode)
 {
-	// printf("list[0] = %lu %lu\n", data[0].key, data[0].val);
 	if(mode == OCSSD_WRITE)
 	{
-		insert_write_queue(data, current_channel);
+		mtx.lock();  
+		uint64_t channel_id = current_channel;
+		current_channel = (current_channel + 1) % geometry.num_grp;
+		mtx.unlock();  
+		insert_write_queue(data, channel_id);
+
 		if(write_count % geometry.clba == 0 && write_count != 0)
 		{
-			// printf("=======\n");
-			// printf("current channel: %lu last written block: %lu write_count: %lu\n", current_channel, last_written_block, write_count);
 			last_written_block = (channels[current_channel].current_writer_point/geometry.clba) -1;
 			channels[current_channel].used_chunk++;
 			channels[current_channel].chunk_type[last_written_block-(current_channel*geometry.num_chk*geometry.num_pu)] = DATA_CHUNK;
-			// check_if_erase(current_channel);
-			printf("current channel: %lu last written block: %lu write_count: %lu curren_channel.current_writer_point: %lu \n", current_channel, last_written_block, write_count,channels[current_channel].current_writer_point);
+			
 			if(channels[current_channel].current_writer_point == (current_channel+1)*(geometry.num_chk*geometry.num_pu*geometry.clba))
-			{
-				printf("channels[%lu].current_writer_point = %lu\n", current_channel, channels[current_channel].current_writer_point);
+			{	
 				channels[current_channel].current_writer_point = current_channel*geometry.num_pu*geometry.num_chk*geometry.clba;
-				printf("channels[%lu].current_writer_point = %lu\n", current_channel, channels[current_channel].current_writer_point);
-				for(size_t i = 0; i<10;i++)
-				{
-					if(channels[current_channel].chunk_type[i] == DATA_CHUNK)
-					{
-						printf("channels[%lu].chunk_type[%lu] = %d\n", current_channel, i, channels[current_channel].chunk_type[i]);
-					}
-					else
-					{
-						printf("channels[%lu].chunk_type[%lu] = %d\n", current_channel, i, channels[current_channel].chunk_type[i]);
-					}
-				}
 			}
-			current_channel = (current_channel + 1) % geometry.num_grp;
-			// printf("current channel: %lu last written block: %lu write_count: %lu\n", current_channel, last_written_block, write_count);
-			// printf("=======\n");
 		}
 	}
 	else if(mode == OCSSD_ERASE)
 	{
+		mtx.lock();  // 获取锁
 		current_channel = (current_channel + 1) % geometry.num_grp;
+		mtx.unlock();  // 释放锁
 	}
 
 	return 0;

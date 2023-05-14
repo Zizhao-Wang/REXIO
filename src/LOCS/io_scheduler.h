@@ -1,12 +1,16 @@
 #include "global_variables.h"
 #include <pthread.h>
 #include <vector>
+#include <mutex>
 #include <spdk/nvme_ocssd.h>
 
 #ifndef LOCS_IO_SCHEDULER_H
 #define LOCS_IO_SCHEDULER_H
 
 /* I/O queues */
+
+extern std::mutex mtx;
+
 extern struct channels_io *channels;
 
 extern uint64_t write_count;
@@ -45,6 +49,8 @@ int select_write_queue(std::vector<entry_t>& data, int mode);
  * Insert read request into appropriate queue 
  * */
 char* insert_read_queue(uint64_t start_address);
+
+int select_write_queue(std::vector<entry_t>& data, int mode, uint64_t& last_written_block_temp);
 
 std::vector<entry_t> select_read_queue(uint64_t start_address, int mode);
 

@@ -36,7 +36,7 @@ private:
    
 public:
     locs_run(uint64_t);
-    int  RunDataWrite(size_t index);
+    uint64_t  RunDataWrite(size_t index);
     void PointersDisplay();
     void PutValue(entry_t entry);
     std::vector<entry_t> RunValuesRead(uint64_t PageNum);
@@ -63,11 +63,12 @@ public:
     bool IsEmpty(void);
 };
 
-struct thread_params 
+struct thread_params
 {
     locs_run* object;
     size_t index;
-    uint64_t result;
+    uint64_t write_count;
 };
+
 
 #endif

@@ -11,11 +11,43 @@ int outstanding_commands = 0;
 int erase_outstanding_commands = 0;
 uint64_t counts = 0;
 
+std::map<int, ThreadInfo> thread_map;
+
+
+void create_threads() 
+{
+	
+    for (int i = 0; i < spdk_env_get_core_count(); i++) 
+	{
+        spdk_cpuset cpumask;
+        spdk_cpuset_zero(&cpumask);
+        spdk_cpuset_set_cpu(&cpumask, i, true);
+
+        char thread_name[20];
+        snprintf(thread_name, sizeof(thread_name), "thread_%d", i);
+
+        spdk_thread *thread = spdk_thread_create(thread_name, &cpumask);
+
+        if (!thread) 
+		{
+            fprintf(stderr, "failed to create spdk thread\n");
+            exit(-1);
+        }
+		
+		ThreadInfo info = {thread};
+        thread_map[i] = info;
+    }
+}
+
+
 int create_queue()
 {
 
 	uint16_t nchannels = geometry.num_grp; 
 	channels = new struct channels_io[nchannels];
+
+	create_threads();
+	
 	for(uint64_t i = 0;i<nchannels;i++ )
 	{
 		struct channels_io channel;
@@ -63,6 +95,7 @@ void erase_complete(void *arg, const struct spdk_nvme_cpl *completion)
 
 int insert_erase_queue(uint64_t chunk_id, spdk_ocssd_chunk_information_entry *chunk_info)
 {
+	spdk_thread * threads;
 	uint64_t channel_id = chunk_id / (geometry.num_pu*geometry.num_chk);
 	if(channels[channel_id].chunk_type[chunk_id - (channel_id*geometry.num_chk*geometry.num_pu)] == FREE_CHUNK)
 	{
@@ -210,7 +243,7 @@ int insert_write_queue(std::vector<entry_t>& data, uint64_t channel_id)
 		memcpy(buffer + j, data[i].val, VAL_SIZE);
         j += VAL_SIZE;
 	}
-	
+
 	uint64_t *lbalist = (uint64_t*)spdk_dma_malloc(sizeof(uint64_t) * 64, 0x1000, NULL);
 	for(uint32_t j = 0;j<64;j++)
 	{

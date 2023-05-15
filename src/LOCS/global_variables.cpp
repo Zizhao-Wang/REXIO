@@ -102,7 +102,7 @@ int environment_init()
 	/* initialize spdk_environment_options */
 	spdk_env_opts_init(&opts);
     opts.name = "TiOCS";
-    opts.core_mask = "0x1";
+    opts.core_mask = "0x3";
 	opts.shm_id = 0;
 
     /* initialize transport id */

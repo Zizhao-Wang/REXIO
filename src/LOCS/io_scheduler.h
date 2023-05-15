@@ -2,6 +2,8 @@
 #include <pthread.h>
 #include <vector>
 #include <spdk/nvme_ocssd.h>
+#include "spdk/thread.h"
+#include <map>
 
 
 #ifndef LOCS_IO_SCHEDULER_H
@@ -18,6 +20,15 @@ extern uint64_t last_written_block;
 
 extern uint64_t count;
 
+
+
+struct ThreadInfo 
+{
+    spdk_thread *thread;
+};
+
+
+extern std::map<int, ThreadInfo> thread_map;
 
 
 /* create I/O queues for multi-channel OCSSD */

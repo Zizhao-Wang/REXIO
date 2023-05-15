@@ -53,6 +53,7 @@ target_link_libraries(src
                     spdk_rpc.a 
                     spdk_jsonrpc.a 
                     spdk_trace.a
+                    spdk_thread
                     -Wl,--no-whole-archive
                     rte_eal.a 
                     rte_mempool.a 

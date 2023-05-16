@@ -86,29 +86,75 @@ void locs_run::PutValue(entry_t entry)
         memcpy(key,entry.key,KEY_SIZE);
         FencePointers.emplace_back(key);
     }
-    
-    if(Rundata.size() == max_io_size && Size != 0)
+
+    if (Size == MaxSize) 
     {
-        // auto start_time = std::chrono::high_resolution_clock::now();
-        int err =  RunDataWrite();
+        // printf("MaxSize:%lu Size:%lu\n",MaxSize,Size);
+        size_t max_concurrent_writes = geometry.num_grp;
+        size_t total_vectors = MaxSize unk_capacity;
+        // printf("total_vectors:%lu\n",total_vectors);
+        // printf("max_concurrent_writes:%lu\n",max_concurrent_writes);
+
+        for (size_t start = 0; start < total_vectors; start += max_concurrent_writes) 
+        {
+            size_t end = std::min(start + max_concurrent_writes, total_vectors);
+
+            std::vector<pthread_t> threads(end - start);
+
+            
+            // threads create
+            for (size_t i = start; i < end; i++) 
+            {
+                thread_params* args = new thread_params{this,i,UINT64_MAX};
+                int result = pthread_create(&threads[i - start], nullptr, parallel_data_write, args);
+                if (result != 0) 
+                {
+                    printf("Error creating thread in loop %lu\n", i);
+                }
+            }
+
+            // threads join
+            for (auto& thread : threads) 
+            {
+                void* result;
+                pthread_join(thread, &result);
+                chunk_pointers.emplace_back(reinterpret_cast<uint64_t>(result));
+            }
+        }
         // auto end_time = std::chrono::high_resolution_clock::now();
         // auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
         // std::cout << "Total I/O time for current batch of threads: " << duration.count() << "ms\n";
-        
-        if(err==0)
-        {
-           //
-        }
-        else
-        {
-            EMessageOutput("Run failed!",104);
-        }
-        if(io_count % 64 ==0 && io_count!=0)
-        {
-            chunk_pointers.emplace_back(last_written_block);
-            // printf("page pointer:%lu io_count:%lu pagepointer.size:%lu \n",last_written_block,io_count,chunk_pointers.size());
-        }
+
+        current_vector_index = 0;
+
+        // end_time = std::chrono::high_resolution_clock::now();
+        // duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+        // std::cout << "Total I/O time for clear data: " << duration.count() << "ms\n";
     }
+
+    
+    // if(Rundata.size() == max_io_size && Size != 0)
+    // {
+    //     // auto start_time = std::chrono::high_resolution_clock::now();
+    //     int err =  RunDataWrite();
+    //     // auto end_time = std::chrono::high_resolution_clock::now();
+    //     // auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    //     // std::cout << "Total I/O time for current batch of threads: " << duration.count() << "ms\n";
+        
+    //     if(err==0)
+    //     {
+    //        //
+    //     }
+    //     else
+    //     {
+    //         EMessageOutput("Run failed!",104);
+    //     }
+    //     if(io_count % 64 ==0 && io_count!=0)
+    //     {
+    //         chunk_pointers.emplace_back(last_written_block);
+    //         // printf("page pointer:%lu io_count:%lu pagepointer.size:%lu \n",last_written_block,io_count,chunk_pointers.size());
+    //     }
+    // }
 
 }
 

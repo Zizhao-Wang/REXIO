@@ -212,7 +212,7 @@ int LOCS::PutValue(const char* key, const char* value)
 
 #endif
 
-    auto start_time = std::chrono::high_resolution_clock::now();
+    // auto start_time = std::chrono::high_resolution_clock::now();
     
     if(Levels[0].IsEmpty())
     {
@@ -495,7 +495,7 @@ void locs_init(void)
         if(i%record_point==0)
         {
             endTime = clock();
-            std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+            std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC <<" IO TIME: "<<time_record<< "s\n";
             // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,resets);
         }
         memset(key_buffer, 0, KEY_SIZE);
@@ -515,7 +515,7 @@ void locs_init(void)
     }
     // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,resets);
     endTime = clock();
-    std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
+    std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC <<" IO TIME: "<<time_record<< "s\n\n";
 
 
     // /* workload b: read only, all in it */

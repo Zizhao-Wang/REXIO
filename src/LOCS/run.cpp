@@ -100,6 +100,7 @@ void locs_run::PutValue(entry_t entry)
         FencePointers.emplace_back(key);
     }
 
+    auto start_time = std::chrono::high_resolution_clock::now();
     if (Size == MaxSize) 
     {
 
@@ -120,9 +121,9 @@ void locs_run::PutValue(entry_t entry)
         Rundata.emplace_back(std::vector<entry_t>());
     }
 
-    // end_time = std::chrono::high_resolution_clock::now();
-    // duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
-    // std::cout << "Total I/O time for clear data: " << duration.count() << "ms\n";
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    time_record += duration.count();
 
 }
 

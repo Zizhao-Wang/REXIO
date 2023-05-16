@@ -10,6 +10,7 @@ uint64_t last_written_block = 0;
 int outstanding_commands = 0;
 int erase_outstanding_commands = 0;
 uint64_t counts = 0;
+uint64_t time_record = 0;
 
 std::map<int, ThreadInfo> thread_map;
 

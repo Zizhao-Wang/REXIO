@@ -496,6 +496,10 @@ void locs_init(void)
     LOCS locs(2,7);                  // Initialize the memory part of LOCS
 
     /* workload a: insert only*/
+
+    
+
+
     startTime = clock();
     char key_buffer[KEY_SIZE];
     char value_buffer[VAL_SIZE];

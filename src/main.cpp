@@ -29,7 +29,7 @@ int GlobalInitialize(int argc, char **argv)
         return -1;
     }
 
-    if(create_queue()!=0)
+    if(create_threads()!=0)
     {
         printf("I/O queue initialization failure!\n");
         return -1;
@@ -38,12 +38,11 @@ int GlobalInitialize(int argc, char **argv)
 
 }
 
-
-
 int main(int argc, char **argv)
 {
-    
-	/* initialize some global variables and SSD components initialization. */ 
+
+
+    /* initialize some global variables and SSD components initialization. */ 
     int result = GlobalInitialize(argc,argv);
     if(result != 0)
     {
@@ -51,7 +50,10 @@ int main(int argc, char **argv)
         exit(101);
     }
     /* select different indexes. line 49- */
+    printf("Initialization success!\n");
 
+
+    exit(0);
     locs_init();
     
     locs_close();
@@ -64,3 +66,5 @@ int main(int argc, char **argv)
 
     return 0;
 }
+
+

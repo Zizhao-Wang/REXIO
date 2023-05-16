@@ -105,10 +105,10 @@ int environment_init()
 	/* initialize spdk_environment_options */
 	spdk_env_opts_init(&opts);
     opts.name = "TiOCS";
-    opts.core_mask = "0x1";
+    opts.core_mask = "0xF";
 	opts.shm_id = 0;
 
-    /* initialize transport id */
+    // /* initialize transport id */
 	spdk_nvme_trid_populate_transport(&trid, SPDK_NVME_TRANSPORT_PCIE);
 	snprintf(trid.subnqn, sizeof(trid.subnqn), "%s", SPDK_NVMF_DISCOVERY_NQN);
     strcpy(trid.traddr, "0000:00:05.0");
@@ -123,7 +123,7 @@ int environment_init()
 		return -1;
 	}
 
-	assert(strlen(trid.traddr) != 0); 
+	// assert(strlen(trid.traddr) != 0); 
 	
 	spdk_nvme_ctrlr_get_default_ctrlr_opts(&ctrlr_opts, sizeof(ctrlr_opts));
 	memcpy(ctrlr_opts.hostnqn, g_hostnqn, sizeof(ctrlr_opts.hostnqn));
@@ -133,25 +133,25 @@ int environment_init()
 		printf("Failed to connect to NVMe controller\n");
 		return -1;
 	}
-    nsid = spdk_nvme_ctrlr_get_first_active_ns(ctrlr);
-    ns = spdk_nvme_ctrlr_get_ns(ctrlr, nsid);
+    // nsid = spdk_nvme_ctrlr_get_first_active_ns(ctrlr);
+    // ns = spdk_nvme_ctrlr_get_ns(ctrlr, nsid);
 
-	/* initialize global variables for LOCS write/read/reset */
-	page_size = spdk_nvme_ns_get_sector_size(ns);
-    if(spdk_nvme_ctrlr_is_ocssd_supported(ctrlr))
-    {
-        spdk_nvme_ocssd_ctrlr_cmd_geometry(ctrlr, nsid, &geometry, sizeof(geometry),get_ocssd_geometry_completion,NULL);
-    }
-    else
-    {
-        printf("Not support OCSSD\n");
-		return -1;
-    }
+	// /* initialize global variables for LOCS write/read/reset */
+	// page_size = spdk_nvme_ns_get_sector_size(ns);
+    // if(spdk_nvme_ctrlr_is_ocssd_supported(ctrlr))
+    // {
+    //     spdk_nvme_ocssd_ctrlr_cmd_geometry(ctrlr, nsid, &geometry, sizeof(geometry),get_ocssd_geometry_completion,NULL);
+    // }
+    // else
+    // {
+    //     printf("Not support OCSSD\n");
+	// 	return -1;
+    // }
 
-	while (!geometry_completed)
-    {
-		spdk_nvme_ctrlr_process_admin_completions(ctrlr);
-    }
+	// while (!geometry_completed)
+    // {
+	// 	spdk_nvme_ctrlr_process_admin_completions(ctrlr);
+    // }
 
 	printf("---- SPDK Environment Initialized Successfully!\n");
 	return 0;

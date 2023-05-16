@@ -47,12 +47,20 @@ target_link_libraries(src
                     spdk_env_dpdk.a 
                     spdk_nvme.a 
                     spdk_util.a 
-                    spdk_sock.a 
+                    spdk_event.a
+                    spdk_sock.a
+                    spdk_rpc.a
                     spdk_json.a
                     spdk_vfio_user.a 
-                    spdk_rpc.a 
-                    spdk_jsonrpc.a 
+                    spdk_jsonrpc.a
+                    spdk_nvmf.a 
                     spdk_trace.a
+                    spdk_dma.a
+                    spdk_bdev.a
+                    spdk_accel.a
+                    spdk_notify.a
+                    spdk_init.a
+                    spdk_thread.a
                     -Wl,--no-whole-archive
                     rte_eal.a 
                     rte_mempool.a 

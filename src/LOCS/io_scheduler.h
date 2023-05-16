@@ -2,7 +2,9 @@
 #include <pthread.h>
 #include <vector>
 #include <mutex>
+#include <map>
 #include <spdk/nvme_ocssd.h>
+#include "spdk/thread.h"
 
 #ifndef LOCS_IO_SCHEDULER_H
 #define LOCS_IO_SCHEDULER_H
@@ -21,11 +23,32 @@ extern uint64_t last_written_block;
 
 extern uint64_t count;
 
+struct ThreadInfo 
+{
+    spdk_thread *thread;
+    spdk_nvme_qpair *qpair;
 
+};
+
+struct WriteArgs 
+{
+    struct spdk_nvme_ns *ns;
+    struct spdk_nvme_qpair *qpair;
+    void *buffer;
+    uint64_t *lbalist;
+    uint32_t lba_count;
+    spdk_nvme_cmd_cb cb_fn;
+    void *cb_arg;
+    uint32_t io_flags;
+};
+
+extern std::map<int, ThreadInfo> thread_map;
 
 
 
 /* create I/O queues for multi-channel OCSSD */
+int create_threads();
+
 int create_queue();
 
 extern int outstanding_commands;

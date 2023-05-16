@@ -45,15 +45,13 @@ void locs_run::PointersDisplay()
 
 uint64_t locs_run::RunDataWrite(size_t index)
 {
-    select_write_queue(Rundata[index], OCSSD_WRITE);
-    io_count++;
-    return 0;  
+    return select_write_queue(Rundata[index], OCSSD_WRITE); 
 }
 
 std::vector<entry_t> locs_run::SingleRunRead()
 {
     std::vector<entry_t> entries1; 
-
+    
     for(size_t i=0; i<chunk_pointers.size();i++)
     {
         for(size_t j=chunk_pointers[i]*geometry.clba;j<chunk_pointers[i]*geometry.clba+geometry.clba;j+=64)
@@ -104,15 +102,14 @@ void locs_run::PutValue(entry_t entry)
 
     if (Size == MaxSize) 
     {
-        printf("MaxSize:%lu Size:%lu\n",MaxSize,Size);
 
         size_t total_vectors = Rundata.size();
-        printf("total_vectors:%lu\n",total_vectors);
+      
 
         for (size_t start = 0; start < total_vectors; start++) 
         {
-            RunDataWrite(start);
-            printf("size of every vector:%lu\n",Rundata[start].size());
+            uint64_t pointer =  RunDataWrite(start);
+            chunk_pointers.emplace_back(pointer);
         }
         // auto end_time = std::chrono::high_resolution_clock::now();
         // auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
@@ -120,35 +117,12 @@ void locs_run::PutValue(entry_t entry)
 
         current_vector_index = 0;
         Rundata.clear();
+        Rundata.emplace_back(std::vector<entry_t>());
     }
 
     // end_time = std::chrono::high_resolution_clock::now();
     // duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
     // std::cout << "Total I/O time for clear data: " << duration.count() << "ms\n";
-
-    
-    // if(Rundata.size() == max_io_size && Size != 0)
-    // {
-    //     // auto start_time = std::chrono::high_resolution_clock::now();
-    //     int err =  RunDataWrite();
-    //     // auto end_time = std::chrono::high_resolution_clock::now();
-    //     // auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
-    //     // std::cout << "Total I/O time for current batch of threads: " << duration.count() << "ms\n";
-        
-    //     if(err==0)
-    //     {
-    //        //
-    //     }
-    //     else
-    //     {
-    //         EMessageOutput("Run failed!",104);
-    //     }
-    //     if(io_count % 64 ==0 && io_count!=0)
-    //     {
-    //         chunk_pointers.emplace_back(last_written_block);
-    //         // printf("page pointer:%lu io_count:%lu pagepointer.size:%lu \n",last_written_block,io_count,chunk_pointers.size());
-    //     }
-    // }
 
 }
 
@@ -344,9 +318,13 @@ void locs_run::Reset()
         FencePointers.clear();
 
     Size = 0;
-
+    
     if(Rundata.size()!=0)
+    {
         Rundata.clear();
+        Rundata.emplace_back(std::vector<entry_t>());
+    }
+        
 
     if(chunk_pointers.size()!=0)
     {
@@ -363,6 +341,8 @@ void locs_run::Reset()
     memset(min_key, 0xFF, KEY_SIZE);
 
     io_count = 0;
+
+    current_vector_index = 0;
 }
 
 void locs_run::set_max_key(const char* key)

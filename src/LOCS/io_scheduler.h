@@ -48,9 +48,9 @@ int insert_erase_queue(uint64_t chunk_id);
 /* *
  * Insert write request into appropriate queue 
  * */
-int insert_write_queue(std::vector<entry_t>& data, uint64_t channel_id);
+int insert_write_queue(std::vector<entry_t>& data, uint64_t channel_id, size_t start, size_t end);
 
-int select_write_queue(std::vector<entry_t>& data, int mode);
+uint64_t select_write_queue(std::vector<entry_t>& data, int mode);
 
 
 /* *

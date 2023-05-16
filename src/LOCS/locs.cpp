@@ -132,6 +132,7 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
         {
             memcpy(minkey, current->Runs[i].get_min_key(), KEY_SIZE);
         }
+
         count_size += current->Runs[i].GetNowSize();
         current->Runs[i].Reset();
 
@@ -228,7 +229,6 @@ int LOCS::PutValue(const char* key, const char* value)
         {
             if(Levels[0].Runs[i].GetNowSize()!= 0)
             {
-                // printf("Run size: %ld from GetNowSize()\n",Levels[0].Runs[i].GetNowSize());
                 mergecon.Insert(Levels[0].Runs[i].SingleRunRead());
                 Levels[0].Runs[i].chunk_reset();
                 Levels[0].Runs[i].Reset();
@@ -253,15 +253,15 @@ int LOCS::PutValue(const char* key, const char* value)
                 // }
             }
         }
-        // printf("i:%d\n",i);
+
     }
     
     buffer.AllClear();
     assert(buffer.PutValue(key, value));
 
-    auto end_time = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
-    std::cout << "Total I/O time for clear data: " << duration.count() << "ms\n";
+    // auto end_time = std::chrono::high_resolution_clock::now();
+    // auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    // std::cout << "Total I/O time for clear data: " << duration.count() << "ms\n";
 
 #ifdef DEBUG1
     for (auto level_it = Levels.begin(); level_it != Levels.end(); ++level_it) 
@@ -489,7 +489,7 @@ void locs_init(void)
     uint64_t written_data_num = written_data_size /(KEY_SIZE+VAL_SIZE);
     uint64_t record_point = written_data_num / 10;
 
-    for(SKey i=1;i<=16385;i++)
+    for(SKey i=1;i<=written_data_num;i++)
     {
 
         if(i%record_point==0)

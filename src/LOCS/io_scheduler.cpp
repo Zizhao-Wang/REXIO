@@ -231,11 +231,11 @@ uint64_t test1(const char* buffer )
     return result;
 }
 
-int insert_write_queue(std::vector<entry_t>& data, uint64_t channel_id)
+int insert_write_queue(std::vector<entry_t>& data, uint64_t channel_id, size_t start, size_t end)
 {
-	char *buffer = (char *)spdk_dma_malloc(data.size() *sizeof(entry_t), 0x1000, NULL);
+	char *buffer = (char *)spdk_dma_malloc((end-start) *sizeof(entry_t), 0x1000, NULL);
 
-	for(uint64_t i = 0,j=0;i<data.size();i++)
+	for(uint64_t i = start,j=0;i<end;i++)
 	{
 		memcpy(buffer + j, data[i].key, KEY_SIZE);
 		j += KEY_SIZE;
@@ -277,42 +277,51 @@ int insert_write_queue(std::vector<entry_t>& data, uint64_t channel_id)
 
 
 
-int select_write_queue(std::vector<entry_t>& data, int mode)
+uint64_t select_write_queue(std::vector<entry_t>& data, int mode)
 {
 	// printf("list[0] = %lu %lu\n", data[0].key, data[0].val);
 	if(mode == OCSSD_WRITE)
 	{
+		uint64_t channel_id = current_channel;
+		
+		size_t offset_of_vector = SPDK_NVME_OCSSD_MAX_LBAL_ENTRIES*page_size/(sizeof(entry_t));
+
+		for (size_t i = 0; i < data.size(); i += offset_of_vector)
+        {
+            size_t end = std::min(i + offset_of_vector,data.size());
+            insert_write_queue(data, channel_id, i, end);
+        }
+
+		last_written_block = (channels[current_channel].current_writer_point/geometry.clba) -1;
+		channels[current_channel].used_chunk++;
+		channels[current_channel].chunk_type[last_written_block-(current_channel*geometry.num_chk*geometry.num_pu)] = DATA_CHUNK;
+
+		if(channels[current_channel].current_writer_point == (current_channel+1)*(geometry.num_chk*geometry.num_pu*geometry.clba))
+		{
+			channels[current_channel].current_writer_point = current_channel*geometry.num_pu*geometry.num_chk*geometry.clba;
+		}
+
+		current_channel = (current_channel + 1) % geometry.num_grp;
+		return last_written_block;
+		/*
 		insert_write_queue(data, current_channel);
 		if(write_count % geometry.clba == 0 && write_count != 0)
 		{
-			// printf("=======\n");
-			// printf("current channel: %lu last written block: %lu write_count: %lu\n", current_channel, last_written_block, write_count);
+			printf("=======\n");
+			printf("current channel: %lu last written block: %lu write_count: %lu\n", current_channel, last_written_block, write_count);
 			last_written_block = (channels[current_channel].current_writer_point/geometry.clba) -1;
 			channels[current_channel].used_chunk++;
 			channels[current_channel].chunk_type[last_written_block-(current_channel*geometry.num_chk*geometry.num_pu)] = DATA_CHUNK;
 			// check_if_erase(current_channel);
-			// printf("current channel: %lu last written block: %lu write_count: %lu curren_channel.current_writer_point: %lu \n", current_channel, last_written_block, write_count,channels[current_channel].current_writer_point);
 			if(channels[current_channel].current_writer_point == (current_channel+1)*(geometry.num_chk*geometry.num_pu*geometry.clba))
 			{
-				// printf("channels[%lu].current_writer_point = %lu\n", current_channel, channels[current_channel].current_writer_point);
 				channels[current_channel].current_writer_point = current_channel*geometry.num_pu*geometry.num_chk*geometry.clba;
-				// printf("channels[%lu].current_writer_point = %lu\n", current_channel, channels[current_channel].current_writer_point);
-				// for(size_t i = 0; i<10;i++)
-				// {
-				// 	if(channels[current_channel].chunk_type[i] == DATA_CHUNK)
-				// 	{
-				// 		printf("channels[%lu].chunk_type[%lu] = %d\n", current_channel, i, channels[current_channel].chunk_type[i]);
-				// 	}
-				// 	else
-				// 	{
-				// 		printf("channels[%lu].chunk_type[%lu] = %d\n", current_channel, i, channels[current_channel].chunk_type[i]);
-				// 	}
-				// }
 			}
 			current_channel = (current_channel + 1) % geometry.num_grp;
-			// printf("current channel: %lu last written block: %lu write_count: %lu\n", current_channel, last_written_block, write_count);
-			// printf("=======\n");
+			printf("current channel: %lu last written block: %lu write_count: %lu\n", current_channel, last_written_block, write_count);
+			printf("=======\n");
 		}
+		*/
 	}
 	else if(mode == OCSSD_ERASE)
 	{

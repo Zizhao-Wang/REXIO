@@ -185,6 +185,7 @@ int LOCS::PutValue(const char* key, const char* value)
 #ifdef DEBUG
     printf("=== Level Debug Information Begin: ===\n");
 #endif
+
     /* Step 2: Flush the buffer to level 0 */
     FlushInto(Levels.begin());  //check whether level 1 is full and flush it if level 1 is full 
 
@@ -526,35 +527,35 @@ void locs_init(void)
     std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
 
-    /* workload b: read only, all in it */
-    startTime = clock();
-     for(int i=1;i<=1;i++)
-     {
+    // /* workload b: read only, all in it */
+    // startTime = clock();
+    //  for(int i=1;i<=1;i++)
+    //  {
 
-        srand48(time(NULL));
-        SKey k = 1+(rand()%100);
+    //     srand48(time(NULL));
+    //     SKey k = 1+(rand()%100);
 
-        memset(key_buffer, 0, KEY_SIZE);
-        for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
-        {
-            key_buffer[KEY_SIZE - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
-        }
-        const char* value = locs.GetValue(key_buffer);
-        if(value==nullptr)
-        {
-            printf("key:%lu Not Found!\n",k);
-        }
-        // printf("\n");
-        if(i==10000 || i%100000==0)
-        {
-            endTime = clock();
-            std::cout << "Total Time of "<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-            // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);   
-        }
-     }
-    endTime = clock();
-    // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
-    std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+    //     memset(key_buffer, 0, KEY_SIZE);
+    //     for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
+    //     {
+    //         key_buffer[KEY_SIZE - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
+    //     }
+    //     const char* value = locs.GetValue(key_buffer);
+    //     if(value==nullptr)
+    //     {
+    //         printf("key:%lu Not Found!\n",k);
+    //     }
+    //     // printf("\n");
+    //     if(i==10000 || i%100000==0)
+    //     {
+    //         endTime = clock();
+    //         std::cout << "Total Time of "<<i<<" in workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+    //         // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);   
+    //     }
+    //  }
+    // endTime = clock();
+    // // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
+    // std::cout << "Total Time of workload B: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
 
     //  /* workload c: read only, 50% in it, 50% not in it */
     //  startTime = clock();

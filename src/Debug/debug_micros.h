@@ -12,7 +12,7 @@
 #define TIOCS_DEBUG_H
 
 /* define whether printf debug information */
-// #define DEBUG   
+#define DEBUG   
 
 
 

@@ -21,35 +21,34 @@ int create_threads()
 		printf("create_queue failed!\n");
 		return -1;
 	}
-	printf("core count: %d\n",spdk_env_get_core_count());
+	
 	uint32_t main_core = spdk_env_get_current_core();
-	printf("main core: %d\n",main_core);
 
-	struct spdk_cpuset	*tmp_cpumask;
-	tmp_cpumask = spdk_cpuset_alloc();
-	spdk_cpuset_zero(tmp_cpumask);
-	spdk_cpuset_set_cpu(tmp_cpumask, 0, true);
+	// struct spdk_cpuset	*tmp_cpumask;
+	// tmp_cpumask = spdk_cpuset_alloc();
+	// spdk_cpuset_zero(tmp_cpumask);
+	// spdk_cpuset_set_cpu(tmp_cpumask, 0, true);
 
 	
 
-	struct spdk_thread *thread = spdk_thread_create(NULL, NULL);
+	// struct spdk_thread *thread = spdk_thread_create(NULL, NULL);
 
-    // if (!thread) 
+    // // if (!thread) 
+	// // {
+    // //     fprintf(stderr, "failed to create spdk thread\n");
+    // //     exit(-1);
+    // // }
+
+    // for (int i = 0; i < 1; i++) 
 	// {
-    //     fprintf(stderr, "failed to create spdk thread\n");
-    //     exit(-1);
-    // }
-
-    for (int i = 0; i < 1; i++) 
-	{
      
-			char thread_name[32];
-    		snprintf(thread_name, sizeof(thread_name), "thread_%d", i);
+	// 		char thread_name[32];
+    // 		snprintf(thread_name, sizeof(thread_name), "thread_%d", i);
         
 		
-	// 	ThreadInfo info = {thread,channels[i].qpair};
-    //     thread_map[i] = info;
-    }
+	// // 	ThreadInfo info = {thread,channels[i].qpair};
+    // //     thread_map[i] = info;
+    // }
 
 	return 0;
 }
@@ -274,38 +273,40 @@ int insert_write_queue(entry_t* data, uint64_t channel_id, size_t start, size_t 
     // Fill lbalist
     for(uint32_t j = 0;j<SPDK_NVME_OCSSD_MAX_LBAL_ENTRIES;j++)
     {
-        lbalist[j] = channels[channel_id].current_writer_point;
-        channels[channel_id].current_writer_point++;
+        lbalist[j] = channels[channel_id].current_writer_point++;
     }
 
-	struct WriteArgs *args = (struct WriteArgs *)malloc(sizeof(struct WriteArgs));
-    if (!args) 
+	if (spdk_nvme_ocssd_ns_cmd_vector_write(ns, channels[channel_id].qpair, buffer, lbalist, 64, write_complete, &channel_id,  0) == 0) 
 	{
-        fprintf(stderr, "Failed to allocate WriteArgs\n");
-        return -1;
+		channels[channel_id].current_request_num++;
     }
-
-    args->ns = ns;
-    args->qpair = thread_map[channel_id].qpair;
-    args->buffer = buffer;
-    args->lbalist = lbalist;
-    args->lba_count = 64;
-    args->cb_fn = write_complete;
-    args->cb_arg = &channel_id;
-    args->io_flags = 0;
-
-    spdk_thread_send_msg(thread_map[channel_id].thread, write_cmd, args);
 
 
 	while (channels[channel_id].current_request_num) 
 	{
-		// printf("Waiting for outstanding_commands: %d\n", outstanding_commands);
 		spdk_nvme_qpair_process_completions(channels[channel_id].qpair, 0);
 	}
+
 	
 	channels[channel_id].write_count++;
 	channels[channel_id].LWQL += 7500 * 64;
 
+
+	// struct WriteArgs *args = (struct WriteArgs *)malloc(sizeof(struct WriteArgs));
+    // if (!args) 
+	// {
+    //     fprintf(stderr, "Failed to allocate WriteArgs\n");
+    //     return -1;
+    // }
+    // args->ns = ns;
+    // args->qpair = thread_map[channel_id].qpair;
+    // args->buffer = buffer;
+    // args->lbalist = lbalist;
+    // args->lba_count = 64;
+    // args->cb_fn = write_complete;
+    // args->cb_arg = &channel_id;
+    // args->io_flags = 0;
+    // spdk_thread_send_msg(thread_map[channel_id].thread, write_cmd, args);
 	// std::cout << "Leaving insert_write_queue" << std::endl;
 
 	return 0;
@@ -313,11 +314,10 @@ int insert_write_queue(entry_t* data, uint64_t channel_id, size_t start, size_t 
 }
 
 
-int select_write_queue(entry_t* data, size_t data_size, int mode, uint64_t& last_written_block_temp)
+int select_write_queue(entry_t* data, size_t data_size, int mode)
 {
 
-	std::cout << "Entering select_write_queue with data size = " << data_size << std::endl;
-
+	// std::cout << "Entering select_write_queue with data size = " << data_size << std::endl;
     if(mode == OCSSD_WRITE)
     {
         mtx.lock();  
@@ -333,31 +333,26 @@ int select_write_queue(entry_t* data, size_t data_size, int mode, uint64_t& last
 		for (size_t i = 0; i < data_size; i += offset_of_vector)
         {
             size_t end = std::min(i + offset_of_vector, data_size);
-            // insert_write_queue(data, channel_id, i, end, buffer, lbalist);
+            insert_write_queue(data, channel_id, i, end, buffer, lbalist);
         }
 
         // Free buffer and lbalist after all insert_write_queue calls
         spdk_dma_free(buffer);
         spdk_dma_free(lbalist);
 
-		std::cout << "Leaving select_write_queue\n" << std::endl;
-	
-		// if(write_count % geometry.clba == 0 && write_count != 0)
-		// {
-		// 	last_written_block = (channels[channel_id].current_writer_point/geometry.clba) -1;
-		// 	channels[channel_id].used_chunk++;
-		// 	channels[channel_id].chunk_type[last_written_block-(channel_id*geometry.num_chk*geometry.num_pu)] = DATA_CHUNK;
-			
-		// 	if(channels[channel_id].current_writer_point == (channel_id+1)*(geometry.num_chk*geometry.num_pu*geometry.clba))
-		// 	{   
-		// 		channels[channel_id].current_writer_point = channel_id*geometry.num_pu*geometry.num_chk*geometry.clba;
-		// 	}
-		// 	last_written_block_temp = last_written_block;
-		// }
-		// else
-		// {
-		// 	last_written_block_temp = last_written_block;
-		// }
+		// std::cout << "Leaving select_write_queue" << std::endl;
+
+		uint64_t last_written_block_temp = (channels[channel_id].current_writer_point/geometry.clba) -1;
+
+		temp_pointers.emplace_back(last_written_block_temp);
+
+		channels[channel_id].used_chunk++;
+		channels[channel_id].chunk_type[last_written_block-(channel_id*geometry.num_chk*geometry.num_pu)] = DATA_CHUNK;
+
+		if(channels[channel_id].current_writer_point == (channel_id+1)*(geometry.num_chk*geometry.num_pu*geometry.clba))
+		{   
+			channels[channel_id].current_writer_point = channel_id*geometry.num_pu*geometry.num_chk*geometry.clba;
+		}
 
     }
     else if(mode == OCSSD_ERASE)

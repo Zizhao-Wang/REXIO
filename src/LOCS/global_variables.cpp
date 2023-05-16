@@ -1,4 +1,5 @@
 #include "global_variables.h"
+#include <vector>
 #include "../Auxizilary/pre_definition.h"
 
 
@@ -14,6 +15,8 @@ struct spdk_nvme_ctrlr *ctrlr = nullptr; // pointer that point to the controller
 struct spdk_nvme_transport_id trid;
 
 struct spdk_nvme_ns * ns = nullptr;
+
+std::vector<uint64_t> temp_pointers;
 
 struct spdk_nvme_detach_ctx *g_detach_ctx = NULL;
 
@@ -133,25 +136,26 @@ int environment_init()
 		printf("Failed to connect to NVMe controller\n");
 		return -1;
 	}
-    // nsid = spdk_nvme_ctrlr_get_first_active_ns(ctrlr);
-    // ns = spdk_nvme_ctrlr_get_ns(ctrlr, nsid);
+    nsid = spdk_nvme_ctrlr_get_first_active_ns(ctrlr);
+    ns = spdk_nvme_ctrlr_get_ns(ctrlr, nsid);
 
-	// /* initialize global variables for LOCS write/read/reset */
-	// page_size = spdk_nvme_ns_get_sector_size(ns);
-    // if(spdk_nvme_ctrlr_is_ocssd_supported(ctrlr))
-    // {
-    //     spdk_nvme_ocssd_ctrlr_cmd_geometry(ctrlr, nsid, &geometry, sizeof(geometry),get_ocssd_geometry_completion,NULL);
-    // }
-    // else
-    // {
-    //     printf("Not support OCSSD\n");
-	// 	return -1;
-    // }
+	/* initialize global variables for LOCS write/read/reset */
+	page_size = spdk_nvme_ns_get_sector_size(ns);
+    if(spdk_nvme_ctrlr_is_ocssd_supported(ctrlr))
+    {
+        spdk_nvme_ocssd_ctrlr_cmd_geometry(ctrlr, nsid, &geometry, sizeof(geometry),get_ocssd_geometry_completion,NULL);
+    }
+    else
+    {
+        printf("Not support OCSSD\n");
+		return -1;
+    }
 
-	// while (!geometry_completed)
-    // {
-	// 	spdk_nvme_ctrlr_process_admin_completions(ctrlr);
-    // }
+	while (!geometry_completed)
+    {
+		spdk_nvme_ctrlr_process_admin_completions(ctrlr);
+    }
+
 
 	printf("---- SPDK Environment Initialized Successfully!\n");
 	return 0;

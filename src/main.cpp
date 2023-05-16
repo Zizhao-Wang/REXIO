@@ -50,10 +50,8 @@ int main(int argc, char **argv)
         exit(101);
     }
     /* select different indexes. line 49- */
-    printf("Initialization success!\n");
 
 
-    exit(0);
     locs_init();
     
     locs_close();

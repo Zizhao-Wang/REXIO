@@ -17,6 +17,7 @@
 
 #include <vector>
 #include <queue>
+#include <map>
 #include "../Auxizilary/pre_definition.h"
 #include "../Auxizilary/SysOutput.h"
 
@@ -33,6 +34,7 @@ private:
     std::vector<uint64_t> chunk_pointers;
     std::vector<std::vector<entry_t>> Rundata; 
     entry_t **data;
+    std::map<size_t, uint64_t> results;
     std::vector<char*> FencePointers;
    
 public:

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include <spdk/nvme.h> //  other project's .h files SPDK's .h files 
 #include <spdk/env.h>
 #include <spdk/log.h>
@@ -27,6 +28,8 @@ extern struct spdk_nvme_ctrlr *ctrlr; // pointer that point to the controller
 extern struct spdk_nvme_transport_id trid; //transport id
 
 extern struct spdk_nvme_ns * ns;
+
+extern std::vector<uint64_t> temp_pointers;
  
 extern struct spdk_nvme_detach_ctx *g_detach_ctx; //detach context
 

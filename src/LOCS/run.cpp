@@ -73,11 +73,8 @@ std::vector<entry_t> locs_run::SingleRunRead()
 
 uint64_t locs_run::RunDataWrite(size_t index)
 {
-    uint64_t last_written_block_temp = 0;
-    select_write_queue(data[index], max_entries_per_vector, OCSSD_WRITE, last_written_block_temp);
-    // select_write_queue(Rundata[index], OCSSD_WRITE, last_written_block_temp);
-    io_count++;
-    return last_written_block_temp;  
+    select_write_queue(data[index], max_entries_per_vector, OCSSD_WRITE);
+    return 0;  
 }
 
 void* parallel_data_write(void* arg) 
@@ -87,16 +84,16 @@ void* parallel_data_write(void* arg)
     locs_run* object = data->object;
     size_t index = data->index;
 
-    // auto start_time = std::chrono::high_resolution_clock::now();
+    auto start_time = std::chrono::high_resolution_clock::now();
 
-    uint64_t last_written_block_temp = object->RunDataWrite(index);
-    data->write_count = last_written_block_temp;
+    object->RunDataWrite(index);
 
-    // auto end_time = std::chrono::high_resolution_clock::now();
-    // auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
-    // std::cout << "Total I/O time for this thread: " << duration.count() << "ms\n";
 
-    return &data->write_count;
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    std::cout << "Total I/O time for this thread: " << duration.count() << "ms\n";
+
+    return nullptr;
 }
 
 
@@ -105,7 +102,6 @@ void locs_run::PutValue(entry_t entry)
     assert(Size < MaxSize);
 
     data[Size/max_entries_per_vector][Size%max_entries_per_vector] = entry;
-    
     
     if (memcmp(entry.key, max_key, KEY_SIZE) > 0) 
     {
@@ -129,19 +125,12 @@ void locs_run::PutValue(entry_t entry)
     auto start_time = std::chrono::high_resolution_clock::now();
     if (Size == MaxSize) 
     {
-        // printf("MaxSize:%lu Size:%lu\n",MaxSize,Size);
         size_t max_concurrent_writes = geometry.num_grp;
         size_t total_vectors = MaxSize /chunk_capacity;
-        // printf("total_vectors:%lu\n",total_vectors);
-        // printf("max_concurrent_writes:%lu\n",max_concurrent_writes);
-
         for (size_t start = 0; start < total_vectors; start += max_concurrent_writes) 
         {
             size_t end = std::min(start + max_concurrent_writes, total_vectors);
-
             std::vector<pthread_t> threads(end - start);
-
-            
             // threads create
             for (size_t i = start; i < end; i++) 
             {
@@ -152,24 +141,21 @@ void locs_run::PutValue(entry_t entry)
                     printf("Error creating thread in loop %lu\n", i);
                 }
             }
-
             // threads join
-            for (auto& thread : threads) 
+            for (size_t i=0;i<threads.size();i++) 
             {
                 void* result;
-                pthread_join(thread, &result);
-                chunk_pointers.emplace_back(reinterpret_cast<uint64_t>(result));
+                pthread_join(threads[i], &result);
             }
+
+            for (size_t i = 0; i < geometry.num_grp; i++) 
+            {
+                chunk_pointers.emplace_back(temp_pointers[i]);
+            }
+
+            temp_pointers.clear();
+
         }
-        // auto end_time = std::chrono::high_resolution_clock::now();
-        // auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
-        // std::cout << "Total I/O time for current batch of threads: " << duration.count() << "ms\n";
-
-        current_vector_index = 0;
-
-        // end_time = std::chrono::high_resolution_clock::now();
-        // duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
-        // std::cout << "Total I/O time for clear data: " << duration.count() << "ms\n";
     }
 }
 

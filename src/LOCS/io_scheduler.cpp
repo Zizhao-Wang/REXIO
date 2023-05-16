@@ -46,7 +46,7 @@ int create_queue()
 	uint16_t nchannels = geometry.num_grp; 
 	channels = new struct channels_io[nchannels];
 
-	create_threads();
+	// create_threads();
 	
 	for(uint64_t i = 0;i<nchannels;i++ )
 	{

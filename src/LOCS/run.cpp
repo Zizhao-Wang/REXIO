@@ -26,6 +26,12 @@ locs_run::locs_run(unsigned long maxsize)
     this->Size = 0;
     this->io_count = 0;
     this->io_time_reord = 0;
+
+    this->max_entries_per_vector = geometry.clba * page_size / sizeof(entry_t);
+    this->current_vector_index = 0;
+
+    size_t num_vectors = MaxSize /chunk_capacity;
+    Rundata.emplace_back(std::vector<entry_t>());
 }
 
 void locs_run::PointersDisplay()
@@ -36,10 +42,10 @@ void locs_run::PointersDisplay()
     }
 }
 
-int locs_run::RunDataWrite(void)
+
+uint64_t locs_run::RunDataWrite(size_t index)
 {
-    select_write_queue(Rundata, OCSSD_WRITE);
-    Rundata.clear();
+    select_write_queue(Rundata[index], OCSSD_WRITE);
     io_count++;
     return 0;  
 }
@@ -66,8 +72,17 @@ std::vector<entry_t> locs_run::SingleRunRead()
 void locs_run::PutValue(entry_t entry) 
 {
     assert(Size < MaxSize);
-    Rundata.emplace_back(entry);
+
+    if(Rundata[current_vector_index].size() == max_entries_per_vector)
+    {
+        current_vector_index++;
+        Rundata.emplace_back(std::vector<entry_t>());
+    }
+
+    Rundata[current_vector_index].emplace_back(entry);
     
+    
+
     if (memcmp(entry.key, max_key, KEY_SIZE) > 0) 
     {
         memcpy(max_key, entry.key, KEY_SIZE);
@@ -89,48 +104,27 @@ void locs_run::PutValue(entry_t entry)
 
     if (Size == MaxSize) 
     {
-        // printf("MaxSize:%lu Size:%lu\n",MaxSize,Size);
-        size_t max_concurrent_writes = geometry.num_grp;
-        size_t total_vectors = MaxSize unk_capacity;
-        // printf("total_vectors:%lu\n",total_vectors);
-        // printf("max_concurrent_writes:%lu\n",max_concurrent_writes);
+        printf("MaxSize:%lu Size:%lu\n",MaxSize,Size);
 
-        for (size_t start = 0; start < total_vectors; start += max_concurrent_writes) 
+        size_t total_vectors = Rundata.size();
+        printf("total_vectors:%lu\n",total_vectors);
+
+        for (size_t start = 0; start < total_vectors; start++) 
         {
-            size_t end = std::min(start + max_concurrent_writes, total_vectors);
-
-            std::vector<pthread_t> threads(end - start);
-
-            
-            // threads create
-            for (size_t i = start; i < end; i++) 
-            {
-                thread_params* args = new thread_params{this,i,UINT64_MAX};
-                int result = pthread_create(&threads[i - start], nullptr, parallel_data_write, args);
-                if (result != 0) 
-                {
-                    printf("Error creating thread in loop %lu\n", i);
-                }
-            }
-
-            // threads join
-            for (auto& thread : threads) 
-            {
-                void* result;
-                pthread_join(thread, &result);
-                chunk_pointers.emplace_back(reinterpret_cast<uint64_t>(result));
-            }
+            RunDataWrite(start);
+            printf("size of every vector:%lu\n",Rundata[start].size());
         }
         // auto end_time = std::chrono::high_resolution_clock::now();
         // auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
         // std::cout << "Total I/O time for current batch of threads: " << duration.count() << "ms\n";
 
         current_vector_index = 0;
-
-        // end_time = std::chrono::high_resolution_clock::now();
-        // duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
-        // std::cout << "Total I/O time for clear data: " << duration.count() << "ms\n";
+        Rundata.clear();
     }
+
+    // end_time = std::chrono::high_resolution_clock::now();
+    // duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    // std::cout << "Total I/O time for clear data: " << duration.count() << "ms\n";
 
     
     // if(Rundata.size() == max_io_size && Size != 0)
@@ -241,12 +235,12 @@ const char * locs_run::GetValue(const char* key)
     else
     {
         std::vector<entry_t>::iterator get;
-        get = find(Rundata.begin(),Rundata.end(),search_example);
-        if(get!=reads.end())
-        {
-            value = (*get).val;
-            return value; 
-        }
+        // get = find(Rundata.begin(),Rundata.end(),search_example);
+        // if(get!=reads.end())
+        // {
+        //     value = (*get).val;
+        //     return value; 
+        // }
     }
     
     delete(value);

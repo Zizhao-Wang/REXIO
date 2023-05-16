@@ -79,7 +79,13 @@ void locs_run::PutValue(entry_t entry)
     }
 
     Size++;
-   
+    
+    if(Size% max_io_size ==0 && Size!=0)
+    {
+        char * key =new char[KEY_SIZE];
+        memcpy(key,entry.key,KEY_SIZE);
+        FencePointers.emplace_back(key);
+    }
     
     if(Rundata.size() == max_io_size && Size != 0)
     {
@@ -88,9 +94,7 @@ void locs_run::PutValue(entry_t entry)
         // auto end_time = std::chrono::high_resolution_clock::now();
         // auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
         // std::cout << "Total I/O time for current batch of threads: " << duration.count() << "ms\n";
-        char * key =new char[KEY_SIZE];
-        memcpy(key,entry.key,KEY_SIZE);
-        FencePointers.emplace_back(key);
+        
         if(err==0)
         {
            //

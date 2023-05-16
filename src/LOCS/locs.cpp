@@ -66,7 +66,6 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
             if(current->Runs[i].GetNowSize() != 0)
             {
                 mergecon.Insert(current->Runs[i].SingleRunRead());
-                current->Runs[i].chunk_reset();
                 current->Runs[i].Reset(); 
             }
         }
@@ -77,7 +76,6 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
             if(next->Runs[i].GetNowSize() != 0)
             {
                 mergecon.Insert(next->Runs[i].SingleRunRead());
-                next->Runs[i].chunk_reset();
                 next->Runs[i].Reset();
             }
         }
@@ -220,7 +218,6 @@ int LOCS::PutValue(const char* key, const char* value)
             {
                 // printf("Run size: %ld from GetNowSize()\n",Levels[0].Runs[i].GetNowSize());
                 mergecon.Insert(Levels[0].Runs[i].SingleRunRead());
-                Levels[0].Runs[i].chunk_reset();
                 Levels[0].Runs[i].Reset();
             }
         }
@@ -510,7 +507,7 @@ void locs_init(void)
         if(i%record_point==0)
         {
             endTime = clock();
-            std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+            std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC <<" IO TIME: "<<time_record<< "s\n";
             // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
         }
         memset(key_buffer, 0, KEY_SIZE);
@@ -529,7 +526,7 @@ void locs_init(void)
     }
     // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
     endTime = clock();
-    std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+    std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC <<" IO TIME: "<<time_record<< "s\n";
 
 
     // /* workload b: read only, all in it */

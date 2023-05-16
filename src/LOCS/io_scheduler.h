@@ -23,7 +23,7 @@ extern uint64_t last_written_block;
 
 extern uint64_t count;
 
-
+extern uint64_t time_record;
 
 struct ThreadInfo 
 {

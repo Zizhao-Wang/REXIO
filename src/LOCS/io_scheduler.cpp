@@ -12,6 +12,7 @@ int erase_outstanding_commands = 0;
 uint64_t counts = 0;
 std::mutex mtx;
 std::map<int, ThreadInfo> thread_map;
+uint64_t time_record = 0;
 
 int create_threads() 
 {
@@ -183,6 +184,47 @@ int insert_erase_queue(uint64_t chunk_id)
 	return 0;
 }
 
+int insert_erase_queue(uint64_t start, uint64_t chunk_id)
+{
+	uint64_t channel_id = chunk_id / (geometry.num_pu*geometry.num_chk);
+
+	uint64_t *lbalist = (uint64_t*)spdk_dma_malloc(sizeof(uint64_t), 0x10, NULL);
+	lbalist[0] = chunk_id;
+
+	spdk_ocssd_chunk_information_entry *erased_chunk_info =  (spdk_ocssd_chunk_information_entry *)spdk_dma_malloc(sizeof(spdk_ocssd_chunk_information_entry), 0x40, NULL);
+
+	erased_chunk_info->cnlb = 4096;
+	erased_chunk_info->wp = 4096;
+	erased_chunk_info->slba = chunk_id *4096;
+	erased_chunk_info->wli = chunk_id;
+
+
+	if(spdk_nvme_ocssd_ns_cmd_vector_reset(ns, channels[channel_id].qpair,lbalist,1,erased_chunk_info,erase_complete, NULL) == 0) 
+	{
+		channels[channel_id].current_request_num++;
+	}
+	else
+	{
+		printf("Failed to submit erase request!\n");
+		return -1;
+	}
+
+	while (channels[channel_id].current_request_num)
+	{
+		spdk_nvme_qpair_process_completions(channels[channel_id].qpair, 0);
+	}
+	
+	channels[channel_id].chunk_type[chunk_id - (channel_id*geometry.num_chk*geometry.num_pu)] = FREE_CHUNK;
+
+	channels[channel_id].used_chunk--;
+
+	spdk_dma_free(lbalist);
+
+	spdk_dma_free(erased_chunk_info);
+
+	return 0;
+}
+
 
 
 
@@ -193,36 +235,16 @@ int insert_erase_queue(uint64_t chunk_id)
 void check_if_erase(uint64_t channel_id)
 {
 	double free_percent = 1- (double)channels[channel_id].used_chunk / (double)channels[channel_id].all_chunk_count;
-	while(free_percent < 0.2)
+	while(free_percent < 0.1)
 	{
 		printf("Channel %lu is full, start to erase!\n", channel_id);
-		for(uint64_t i = 0;i<geometry.num_chk*geometry.num_pu;i++)
-		{
-			if(channels[channel_id].chunk_type[i] == FREE_CHUNK)
-			{
-				printf("Chunk %lu is free\n", i);
-			}
-			else if(channels[channel_id].chunk_type[i] == DATA_CHUNK)
-			{
-				printf("Chunk %lu is USED\n", i);
-			}
-			else if(channels[channel_id].chunk_type[i] == DISUSED_CHUNK)
-			{
-				printf("Chunk %lu is disused\n", i);
-			}
-			else
-			{
-				printf("Chunk %lu is unknown\n", i);
-			}
-		}
-		exit(0);
 		uint64_t chunk_id = 0;
 		for(uint64_t i = 0;i<geometry.num_chk*geometry.num_pu;i++)
 		{
 			if(channels[channel_id].chunk_type[i] == DISUSED_CHUNK)
 			{
 				chunk_id = i+(channel_id*geometry.num_pu*geometry.num_chk);
-				printf("		Chunk %lu is disused, start to erase!\n", chunk_id);
+				printf("Chunk %lu is disused, start to erase!\n", chunk_id);
 				insert_erase_queue(chunk_id);
 			}
 		}
@@ -369,13 +391,15 @@ int select_write_queue(entry_t* data, size_t data_size, int mode)
 		mtx.lock();
 		temp_pointers.emplace_back(last_written_block_temp);
 		mtx.unlock();
+
 		channels[channel_id].used_chunk++;
-		channels[channel_id].chunk_type[last_written_block-(channel_id*geometry.num_chk*geometry.num_pu)] = DATA_CHUNK;
+		channels[channel_id].chunk_type[last_written_block_temp-(channel_id*geometry.num_chk*geometry.num_pu)] = DATA_CHUNK;
 		
 		check_if_erase(channel_id);
 
 		if(channels[channel_id].current_writer_point == (channel_id+1)*(geometry.num_chk*geometry.num_pu*geometry.clba))
-		{   
+		{
+			printf("Channel %lu is full!\n", channel_id);
 			channels[channel_id].current_writer_point = channel_id*geometry.num_pu*geometry.num_chk*geometry.clba;
 		}
 
@@ -403,6 +427,7 @@ int insert_write_queue(std::vector<entry_t>& data, uint64_t channel_id)
 		lbalist[j] = channels[channel_id].current_writer_point;
 		channels[channel_id].current_writer_point++;
 	}
+
 	if (spdk_nvme_ocssd_ns_cmd_vector_write(ns,channels[channel_id].qpair,(void *)buffer,lbalist,64,write_complete, NULL,0) == 0)
 	{
 		channels[channel_id].current_request_num++;

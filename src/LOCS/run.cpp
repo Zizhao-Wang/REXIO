@@ -128,6 +128,7 @@ void locs_run::PutValue(entry_t entry)
     auto start_time = std::chrono::high_resolution_clock::now();
     if (Size == MaxSize) 
     {
+        auto end_time = std::chrono::high_resolution_clock::now();
         size_t max_concurrent_writes = geometry.num_grp;
         size_t total_vectors = MaxSize /chunk_capacity;
         for (size_t start = 0; start < total_vectors; start += max_concurrent_writes) 
@@ -160,6 +161,9 @@ void locs_run::PutValue(entry_t entry)
             temp_pointers.clear();
         }
     }
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    time_record += duration.count();
 }
 
 

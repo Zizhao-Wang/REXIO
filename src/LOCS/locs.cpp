@@ -227,7 +227,7 @@ int LOCS::PutValue(const char* key, const char* value)
         
         char deleted_val[KEY_SIZE];
         memset(deleted_val, 0, KEY_SIZE);
-        printf("mergeon size:%lu\n",mergecon.get_size());
+        // printf("mergeon size:%lu\n",mergecon.get_size());
         while(!mergecon.IsEmpty())
         {
             entry_t entry = mergecon.Contextpop1();
@@ -249,9 +249,9 @@ int LOCS::PutValue(const char* key, const char* value)
     buffer.AllClear();
     assert(buffer.PutValue(key, value));
 
-    auto end_time = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
-    std::cout << "Total I/O time for clear data: " << duration.count() << "ms\n";
+    // auto end_time = std::chrono::high_resolution_clock::now();
+    // auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    // std::cout << "Total I/O time for clear data: " << duration.count() << "ms\n";
 
 #ifdef DEBUG
     for (auto level_it = Levels.begin(); level_it != Levels.end(); ++level_it) 
@@ -496,17 +496,18 @@ void locs_init(void)
     LOCS locs(2,7);                  // Initialize the memory part of LOCS
 
     /* workload a: insert only*/
-
     
-
+    uint64_t written_data_size = 100000000*16;
+    uint64_t written_data_num = written_data_size /(KEY_SIZE+VAL_SIZE);
+    uint64_t record_point = written_data_num / 10;
 
     startTime = clock();
     char key_buffer[KEY_SIZE];
     char value_buffer[VAL_SIZE];
 
-    for(SKey i=1;i<=16385;i++)
+    for(SKey i=1;i<= written_data_num;i++)
     {
-        if(i%10000000==0)
+        if(i%record_point==0)
         {
             endTime = clock();
             std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";

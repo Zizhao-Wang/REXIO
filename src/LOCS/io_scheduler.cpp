@@ -195,11 +195,30 @@ void check_if_erase(uint64_t channel_id)
 	double free_percent = 1- (double)channels[channel_id].used_chunk / (double)channels[channel_id].all_chunk_count;
 	while(free_percent < 0.2)
 	{
-		printf("		Channel %lu is full, start to erase!\n", channel_id);
+		printf("Channel %lu is full, start to erase!\n", channel_id);
+		for(uint64_t i = 0;i<geometry.num_chk*geometry.num_pu;i++)
+		{
+			if(channels[channel_id].chunk_type[i] == FREE_CHUNK)
+			{
+				printf("Chunk %lu is free\n", i);
+			}
+			else if(channels[channel_id].chunk_type[i] == DATA_CHUNK)
+			{
+				printf("Chunk %lu is USED\n", i);
+			}
+			else if(channels[channel_id].chunk_type[i] == DISUSED_CHUNK)
+			{
+				printf("Chunk %lu is disused\n", i);
+			}
+			else
+			{
+				printf("Chunk %lu is unknown\n", i);
+			}
+		}
+		exit(0);
 		uint64_t chunk_id = 0;
 		for(uint64_t i = 0;i<geometry.num_chk*geometry.num_pu;i++)
 		{
-			
 			if(channels[channel_id].chunk_type[i] == DISUSED_CHUNK)
 			{
 				chunk_id = i+(channel_id*geometry.num_pu*geometry.num_chk);
@@ -208,7 +227,7 @@ void check_if_erase(uint64_t channel_id)
 			}
 		}
 		free_percent = (double)channels[channel_id].used_chunk / (double)channels[channel_id].all_chunk_count;
-		printf("		Channel %lu is %lf percent free!\n", channel_id, free_percent);
+		printf("Channel %lu is %lf percent free!\n", channel_id, free_percent);
 	}
 }
 
@@ -220,9 +239,9 @@ void write_complete(void *arg, const struct spdk_nvme_cpl *completion)
         printf("OCSSD vector write failed with status 0x%x\n", completion->status.sct);
     }
 
-	uint64_t *channel_id_ptr = (uint64_t *)arg;
-    uint64_t channel_id = *channel_id_ptr;
-	channels[channel_id].current_request_num--;  
+	uint64_t *local_request_num_ptr = (uint64_t *)arg;
+    (*local_request_num_ptr)--;
+	// channels[channel_id].current_request_num--;  
 }
 
 uint64_t big_to_little_endian(const char *buffer, size_t size) 
@@ -276,13 +295,15 @@ int insert_write_queue(entry_t* data, uint64_t channel_id, size_t start, size_t 
         lbalist[j] = channels[channel_id].current_writer_point++;
     }
 
-	if (spdk_nvme_ocssd_ns_cmd_vector_write(ns, channels[channel_id].qpair, buffer, lbalist, 64, write_complete, &channel_id,  0) == 0) 
+	uint64_t local_request_num = 1;
+
+	if (spdk_nvme_ocssd_ns_cmd_vector_write(ns, channels[channel_id].qpair, buffer, lbalist, 64, write_complete, &local_request_num,  0) != 0) 
 	{
-		channels[channel_id].current_request_num++;
-    }
+		printf("Failed to submit write request!\n");
+		return -1;
+	}
 
-
-	while (channels[channel_id].current_request_num) 
+	while (local_request_num) 
 	{
 		spdk_nvme_qpair_process_completions(channels[channel_id].qpair, 0);
 	}
@@ -324,6 +345,8 @@ int select_write_queue(entry_t* data, size_t data_size, int mode)
         uint64_t channel_id = current_channel;
         current_channel = (current_channel + 1) % geometry.num_grp;
         mtx.unlock();  
+		
+		// printf("Channel %lu is selected!\n", channel_id);
 
 		size_t offset_of_vector = SPDK_NVME_OCSSD_MAX_LBAL_ENTRIES*page_size/(sizeof(entry_t));
 
@@ -336,18 +359,20 @@ int select_write_queue(entry_t* data, size_t data_size, int mode)
             insert_write_queue(data, channel_id, i, end, buffer, lbalist);
         }
 
-        // Free buffer and lbalist after all insert_write_queue calls
-        spdk_dma_free(buffer);
+        
+        spdk_dma_free(buffer);   // Free buffer and lbalist after all insert_write_queue calls
         spdk_dma_free(lbalist);
 
 		// std::cout << "Leaving select_write_queue" << std::endl;
 
 		uint64_t last_written_block_temp = (channels[channel_id].current_writer_point/geometry.clba) -1;
-
+		mtx.lock();
 		temp_pointers.emplace_back(last_written_block_temp);
-
+		mtx.unlock();
 		channels[channel_id].used_chunk++;
 		channels[channel_id].chunk_type[last_written_block-(channel_id*geometry.num_chk*geometry.num_pu)] = DATA_CHUNK;
+		
+		check_if_erase(channel_id);
 
 		if(channels[channel_id].current_writer_point == (channel_id+1)*(geometry.num_chk*geometry.num_pu*geometry.clba))
 		{   
@@ -355,13 +380,6 @@ int select_write_queue(entry_t* data, size_t data_size, int mode)
 		}
 
     }
-    else if(mode == OCSSD_ERASE)
-    {
-        mtx.lock();  // 获取锁
-        current_channel = (current_channel + 1) % geometry.num_grp;
-        mtx.unlock();  // 释放锁
-    }
-
     return 0;
 }
 

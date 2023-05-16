@@ -67,6 +67,9 @@ std::vector<entry_t> locs_run::SingleRunRead()
                 entries1.insert(entries1.end(),temp.begin(),temp.end());
             }
         }
+
+        uint64_t channel_id = chunk_pointers[i] / (geometry.num_chk * geometry.num_pu);
+        channels[channel_id].chunk_type[chunk_pointers[i] % (geometry.num_chk * geometry.num_pu)] = DISUSED_CHUNK;
     }
     return entries1;
 }
@@ -84,14 +87,14 @@ void* parallel_data_write(void* arg)
     locs_run* object = data->object;
     size_t index = data->index;
 
-    auto start_time = std::chrono::high_resolution_clock::now();
+    // auto start_time = std::chrono::high_resolution_clock::now();
 
     object->RunDataWrite(index);
 
 
-    auto end_time = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
-    std::cout << "Total I/O time for this thread: " << duration.count() << "ms\n";
+    // auto end_time = std::chrono::high_resolution_clock::now();
+    // auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    // std::cout << "Total I/O time for this thread: " << duration.count() << "ms\n";
 
     return nullptr;
 }
@@ -131,6 +134,7 @@ void locs_run::PutValue(entry_t entry)
         {
             size_t end = std::min(start + max_concurrent_writes, total_vectors);
             std::vector<pthread_t> threads(end - start);
+            
             // threads create
             for (size_t i = start; i < end; i++) 
             {
@@ -141,6 +145,7 @@ void locs_run::PutValue(entry_t entry)
                     printf("Error creating thread in loop %lu\n", i);
                 }
             }
+
             // threads join
             for (size_t i=0;i<threads.size();i++) 
             {
@@ -152,9 +157,7 @@ void locs_run::PutValue(entry_t entry)
             {
                 chunk_pointers.emplace_back(temp_pointers[i]);
             }
-
             temp_pointers.clear();
-
         }
     }
 }
@@ -303,21 +306,17 @@ int locs_run::SetFencePointers(std::vector<char*> pointers)
 void locs_run::Reset()
 {
     if(FencePointers.size()!=0)
+    {
         FencePointers.clear();
+    }
+
     Size = 0;
-    if(Rundata.size()!=0)
-        Rundata.clear();
 
     if(chunk_pointers.size()!=0)
     {
-        uint64_t channel_id  = 0;
-        for(size_t i=0;i<chunk_pointers.size();++i)
-        {
-            channel_id = chunk_pointers[i] / (geometry.num_chk * geometry.num_pu);
-            channels[channel_id].chunk_type[chunk_pointers[i] % (geometry.num_chk * geometry.num_pu)] = DISUSED_CHUNK;
-        }
         chunk_pointers.clear();
     }
+
     memset(max_key, 0, KEY_SIZE);
     memset(min_key, 0xFF, KEY_SIZE);
     io_count = 0;
@@ -417,60 +416,7 @@ print_ocssd_chunk_info(struct spdk_ocssd_chunk_information_entry *chk_info, int 
 
 void locs_run::chunk_reset()
 {
-    
-	int nsid = spdk_nvme_ns_get_id(ns);
-	uint32_t num_entry = 256;
-	uint32_t xfer_size = spdk_nvme_ns_get_max_io_xfer_size(ns);
-	uint32_t buf_size = 0;
-	uint64_t buf_offset = 0;
-	outstanding_commands = 0;
 
-	assert(num_entry != 0);
-
-	spdk_ocssd_chunk_information_entry * chunks = (spdk_ocssd_chunk_information_entry *)spdk_dma_malloc(num_entry*sizeof(spdk_ocssd_chunk_information_entry), 0x40, NULL);
-	assert(chunks != NULL);
-
-	buf_size = num_entry * sizeof(struct spdk_ocssd_chunk_information_entry);
-	while (buf_size > 0) 
-    {
-		xfer_size = min(buf_size, xfer_size);
-		if (spdk_nvme_ctrlr_cmd_get_log_page(ctrlr, SPDK_OCSSD_LOG_CHUNK_INFO,
-						     nsid, (void *) (chunks + buf_offset),
-						     xfer_size, buf_offset, get_log_page_completion, NULL) == 0) 
-        {
-			outstanding_commands++;
-		} 
-        else 
-        {
-			printf("get_ocssd_chunk_info_log_page() failed\n");
-			return ;
-		}
-
-		buf_size -= xfer_size;
-		buf_offset += xfer_size;
-	}
-    // printf("outstanding_commands:%d\n",outstanding_commands);
-	while (outstanding_commands) 
-    {
-		spdk_nvme_ctrlr_process_admin_completions(ctrlr);
-	}
-    int err = 0;
-
-    
-
-    for (auto pointer: chunk_pointers)
-    {
-        if( pointer == 129)
-        {
-            print_ocssd_chunk_info(chunks, pointer);
-        }
-        err = insert_erase_queue(pointer, &chunks[pointer]);
-        if(err !=0)
-        {
-            printf("Erase failed!");
-        }
-    }
-    spdk_dma_free(chunks);
 }
 
 void locs_run::status_display(void)

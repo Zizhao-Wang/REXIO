@@ -71,12 +71,14 @@ int create_queue()
 			printf("ctrlr is NULL!\n");
 			return -1;
 		}
+
 		channel.qpair = spdk_nvme_ctrlr_alloc_io_qpair(ctrlr, NULL, 0);
 		if (channel.qpair == NULL) 
 		{
 			printf("Failed to allocate I/O qpair for channel %lu\n", i);
 			return -1;  
 		}
+
 		channel.read_count = 0;
 		channel.write_count = 0;
 		channel.LWQL = 0;
@@ -85,7 +87,7 @@ int create_queue()
 		channels[i] = channel;
 
 		channels[i].chunk_type = new uint8_t[geometry.num_chk*geometry.num_pu];
-		memset(channels[i].chunk_type, FREE_CHUNK, sizeof(uint8_t));
+		memset(channels[i].chunk_type, FREE_CHUNK, geometry.num_chk * geometry.num_pu * sizeof(uint8_t));
 
 		channels[i].all_chunk_count = geometry.num_chk*geometry.num_pu;
 		channels[i].used_chunk = 0;
@@ -231,29 +233,83 @@ int insert_erase_queue(uint64_t start, uint64_t chunk_id)
 
 
 /* *
- * Insert write request into appropriate queue 
+ *  ================= Insert write request into appropriate queue ==================== 
  * */
-
-void check_if_erase(uint64_t channel_id)
+void printf_chunk_info(uint64_t channel_id)
 {
-	double free_percent = 1- (double)channels[channel_id].used_chunk / (double)channels[channel_id].all_chunk_count;
-	while(free_percent < 0.1)
+	
+	printf("Channel %lu: \n", channel_id);
+	for(uint64_t i = 0; i < geometry.num_chk*geometry.num_pu; i++)
 	{
-		printf("Channel %lu is full, start to erase!\n", channel_id);
-		uint64_t chunk_id = 0;
-		for(uint64_t i = 0;i<geometry.num_chk*geometry.num_pu;i++)
+		if(channels[channel_id].chunk_type[i] == FREE_CHUNK)
 		{
-			if(channels[channel_id].chunk_type[i] == DISUSED_CHUNK)
-			{
-				chunk_id = i+(channel_id*geometry.num_pu*geometry.num_chk);
-				printf("Chunk %lu is disused, start to erase!\n", chunk_id);
-				insert_erase_queue(chunk_id);
-			}
+			printf("chunk %lu CHANNEL %lu FREE CHUNK\n", i,channel_id);
 		}
-		free_percent = (double)channels[channel_id].used_chunk / (double)channels[channel_id].all_chunk_count;
-		printf("Channel %lu is %lf percent free!\n", channel_id, free_percent);
+		else if (channels[channel_id].chunk_type[i] == DISUSED_CHUNK)
+		{
+			printf("chunk %lu CHANNEL %lu DISUSED CHUNK\n", i,channel_id);
+		}
+		else if (channels[channel_id].chunk_type[i] == DATA_CHUNK)
+		{
+			printf("chunk %lu CHANNEL %lu USED CHUNK\n", i,channel_id);
+		}
+	}
+	printf("\n");
+	
+}
+void check_if_erase()
+{
+	int falsg = 0;
+    for(uint64_t channel_id = 0; channel_id < geometry.num_grp; channel_id++)
+    {
+        double free_percent = 1 - (double)channels[channel_id].used_chunk / (double)channels[channel_id].all_chunk_count;
+        if(free_percent < 0.1)
+        {
+            printf("Channel %lu is full, start to erase!\n", channel_id);
+            uint64_t start_chunk_id = 0;
+            uint64_t end_chunk_id = 0;
+            bool is_erasing = false;
+			printf_chunk_info(channel_id);
+            for(uint64_t i = 0; i < geometry.num_chk*geometry.num_pu; i++)
+            {
+                if(channels[channel_id].chunk_type[i] == DISUSED_CHUNK)
+                {
+                    if (!is_erasing) 
+                    {
+                        start_chunk_id = i ;
+                        is_erasing = true;
+                    }
+                    end_chunk_id = i;
+                }
+                else
+                {
+                    if (is_erasing)  
+                    {
+                        printf("Chunks from %lu to %lu are disused, start to erase!\n", start_chunk_id, end_chunk_id);
+                        insert_erase_queue(start_chunk_id+(channel_id*geometry.num_pu*geometry.num_chk), end_chunk_id+(channel_id*geometry.num_pu*geometry.num_chk));
+                        is_erasing = false;
+                    }
+                }
+            }
+
+            if (is_erasing)
+            {
+                printf("Chunks from %lu to %lu are disused, start to erase!\n", start_chunk_id, end_chunk_id);
+                // insert_erase_queue(chunk_id);    
+            }
+
+            free_percent = (double)channels[channel_id].used_chunk / (double)channels[channel_id].all_chunk_count;
+            printf("Channel %lu is %lf percent free!\n", channel_id, free_percent);
+
+			falsg ++;
+        }
+    }
+	if(falsg == 2)
+	{
+		exit(0);
 	}
 }
+
 
 
 void write_complete(void *arg, const struct spdk_nvme_cpl *completion)
@@ -274,16 +330,6 @@ uint64_t big_to_little_endian(const char *buffer, size_t size)
     for (size_t i = 0; i < size; ++i) 
 	{
         result |= (static_cast<uint64_t>(static_cast<unsigned char>(buffer[i])) << (8 * (size - 1 - i)));
-    }
-    return result;
-}
-
-uint64_t test1(const char* buffer)
-{
-    uint64_t result = 0;
-    for (size_t j = 0; j < 8; ++j) 
-    {
-        result |= (static_cast<uint64_t>(static_cast<unsigned char>(buffer[KEY_SIZE-1-j])) << (8 * j));
     }
     return result;
 }
@@ -383,25 +429,19 @@ int select_write_queue(entry_t* data, size_t data_size, int mode)
             insert_write_queue(data, channel_id, i, end, buffer, lbalist);
         }
 
-        
         spdk_dma_free(buffer);   // Free buffer and lbalist after all insert_write_queue calls
         spdk_dma_free(lbalist);
 
 		// std::cout << "Leaving select_write_queue" << std::endl;
 
 		uint64_t last_written_block_temp = (channels[channel_id].current_writer_point/geometry.clba) -1;
-		mtx.lock();
 		temp_pointers.emplace_back(last_written_block_temp);
-		mtx.unlock();
 
 		channels[channel_id].used_chunk++;
 		channels[channel_id].chunk_type[last_written_block_temp-(channel_id*geometry.num_chk*geometry.num_pu)] = DATA_CHUNK;
 		
-		check_if_erase(channel_id);
-
 		if(channels[channel_id].current_writer_point == (channel_id+1)*(geometry.num_chk*geometry.num_pu*geometry.clba))
 		{
-			printf("Channel %lu is full!\n", channel_id);
 			channels[channel_id].current_writer_point = channel_id*geometry.num_pu*geometry.num_chk*geometry.clba;
 		}
 
@@ -457,6 +497,7 @@ int insert_write_queue(std::vector<entry_t>& data, uint64_t channel_id)
 
 int select_write_queue(std::vector<entry_t>& data, int mode)
 {
+	printf("call this function\n");
 	if(mode == OCSSD_WRITE)
 	{
 		mtx.lock();  
@@ -489,8 +530,9 @@ int select_write_queue(std::vector<entry_t>& data, int mode)
 
 
 /* *
- * Insert read request into appropriate queue 
+ * ================= Insert read request into appropriate queue ====================  
  * */
+
 void read_complete(void *arg, const struct spdk_nvme_cpl *completion)
 {
     if (spdk_nvme_cpl_is_error(completion)) 
@@ -525,7 +567,6 @@ char* insert_read_queue(uint64_t start_address)
 
 	while (outstanding_commands) 
 	{
-		// printf("Waiting for outstanding_commands: %d\n", outstanding_commands);
 		spdk_nvme_qpair_process_completions(channels[channel_id].qpair, 0);
 	}
 
@@ -535,7 +576,6 @@ char* insert_read_queue(uint64_t start_address)
 	channels[channel_id].LWQL += 7500 * 4096;
 	return buffer;
 }
-
 
 std::vector<entry_t> select_read_queue(uint64_t start_address, int mode)
 {

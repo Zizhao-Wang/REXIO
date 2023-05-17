@@ -88,9 +88,7 @@ void* parallel_data_write(void* arg)
     size_t index = data->index;
 
     auto start_time = std::chrono::high_resolution_clock::now();
-
     object->RunDataWrite(index);
-
 
     auto end_time = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);

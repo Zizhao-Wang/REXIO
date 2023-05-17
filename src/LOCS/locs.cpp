@@ -1,13 +1,17 @@
+#include "locs.h"
+
+#include <map>
 #include <cassert>
 #include <fstream>
 #include <iostream>
-#include <map>
-#include <spdk/nvme.h> //  other project's .h files SPDK's .h files 
-#include <spdk/env.h>
+
+#include <spdk/env.h>  //  other project's .h files SPDK's .h files 
 #include <spdk/log.h>
+#include <spdk/nvme.h>
 #include <spdk/nvme_ocssd.h>
 #include <spdk/nvme_ocssd_spec.h>
-#include "locs.h"
+
+#include "io_scheduler.h"
 #include "global_variables.h"
 #include "../Debug/debug_micros.h"
 #include "../Backend/SSDWrite/writer.h"
@@ -245,7 +249,8 @@ int LOCS::PutValue(const char* key, const char* value)
 
     buffer.AllClear();
     assert(buffer.PutValue(key, value));
-
+    check_if_erase();
+    
     // auto end_time = std::chrono::high_resolution_clock::now();
     // auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
     // std::cout << "Total I/O time for clear data: " << duration.count() << "ms\n";
@@ -283,6 +288,8 @@ int LOCS::PutValue(const char* key, const char* value)
     }
     printf("=== Level Debug Information End ===\n\n");
 #endif
+
+    
 
     return 0;
     

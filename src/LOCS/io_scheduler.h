@@ -13,20 +13,28 @@
 
 extern std::mutex mtx;
 
-extern struct channels_io *channels;
+extern uint64_t count;
 
 extern uint64_t write_count;
-
-extern uint64_t current_channel;
-
-extern uint64_t last_written_block;
-
-extern uint64_t count;
 
 extern uint64_t time_record;
 
 extern uint64_t time_record2;
 
+extern uint64_t current_channel;
+
+extern int outstanding_commands;
+
+extern uint64_t last_written_block;
+
+extern struct channels_io *channels;
+
+extern int erase_outstanding_commands;
+
+
+/* *
+ *  I/O Thread information and thread parameters  
+ * */
 struct ThreadInfo 
 {
     spdk_thread *thread;
@@ -49,37 +57,41 @@ struct WriteArgs
 extern std::map<int, ThreadInfo> thread_map;
 
 
-
-/* create I/O queues for multi-channel OCSSD */
-int create_threads();
-
+/* *
+ * ================= create I/O queues for multi-channel OCSSD  ==================== 
+ * */
 int create_queue();
 
-extern int outstanding_commands;
-extern int erase_outstanding_commands;
+int create_threads();
+
+
 
 /* *
- * Insert erase request into appropriate queue 
+ * ================= Insert erase request into appropriate queue  ==================== 
  * */
 int insert_erase_queue(uint64_t chunk_id, spdk_ocssd_chunk_information_entry *chunk_info);
 
 int insert_erase_queue(uint64_t chunk_id);
 
 
-/* *
- * Insert write request into appropriate queue 
- * */
 
-int select_write_queue(std::vector<entry_t>& data, int mode);
+/* *
+ *  ================= Insert write request into appropriate queue ==================== 
+ * */
+void check_if_erase();
 
 int insert_write_queue(entry_t* data, uint64_t channel_id, size_t start, size_t end, char *buffer, uint64_t *lbalist);
 
+int select_write_queue(entry_t* data, size_t data_size, int mode);
+
+int select_write_queue(std::vector<entry_t>& data, int mode);
+
+
+
 /* *
- * Insert read request into appropriate queue 
+ * ================= Insert read request into appropriate queue ====================  
  * */
 char* insert_read_queue(uint64_t start_address);
-
-int select_write_queue(entry_t* data, size_t data_size, int mode);
 
 std::vector<entry_t> select_read_queue(uint64_t start_address, int mode);
 

@@ -18,10 +18,12 @@
 
 
 /* define first level of LSM-tree */
+
 // #define SKIPLIST
 
 #define RED_BLACK_TREE
 
+#define DEFAULT_THREAD_COUNT 2          
 
 // #define TIOCS_DEBUG
 

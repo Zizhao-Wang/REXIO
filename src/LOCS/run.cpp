@@ -14,7 +14,6 @@
 #include "global_variables.h"
 #include "io_scheduler.h"
 
-vector<int> a;
 
 locs_run::locs_run(unsigned long maxsize)
 {
@@ -76,6 +75,7 @@ std::vector<entry_t> locs_run::SingleRunRead()
 
 uint64_t locs_run::RunDataWrite(size_t index)
 {
+    // printf("index:%lu\n",index);
     select_write_queue(data[index], max_entries_per_vector, OCSSD_WRITE);
     return 0;  
 }
@@ -87,14 +87,14 @@ void* parallel_data_write(void* arg)
     locs_run* object = data->object;
     size_t index = data->index;
 
-    // auto start_time = std::chrono::high_resolution_clock::now();
+    auto start_time = std::chrono::high_resolution_clock::now();
 
     object->RunDataWrite(index);
 
 
-    // auto end_time = std::chrono::high_resolution_clock::now();
-    // auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
-    // std::cout << "Total I/O time for this thread: " << duration.count() << "ms\n";
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    time_record2 += duration.count();
 
     return nullptr;
 }
@@ -134,30 +134,24 @@ void locs_run::PutValue(entry_t entry)
         for (size_t start = 0; start < total_vectors; start += max_concurrent_writes) 
         {
             size_t end = std::min(start + max_concurrent_writes, total_vectors);
-            std::vector<pthread_t> threads(end - start);
             
             // threads create
             for (size_t i = start; i < end; i++) 
             {
-                thread_params* args = new thread_params{this,i,UINT64_MAX};
-                int result = pthread_create(&threads[i - start], nullptr, parallel_data_write, args);
-                if (result != 0) 
-                {
-                    printf("Error creating thread in loop %lu\n", i);
-                }
+                thread_params* args = new thread_params{this, i, UINT64_MAX};
+                pool.add_task(i % geometry.num_grp, parallel_data_write, args);
             }
 
-            // threads join
-            for (size_t i=0;i<threads.size();i++) 
-            {
-                void* result;
-                pthread_join(threads[i], &result);
-            }
+            // // threads join
+            // printf("waitting for join!\n");
+            pool.wait_for_all_tasks();
+            // printf("join finished!\n");
 
             for (size_t i = 0; i < geometry.num_grp; i++) 
             {
                 chunk_pointers.emplace_back(temp_pointers[i]);
             }
+
             temp_pointers.clear();
         }
     }

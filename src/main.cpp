@@ -11,11 +11,14 @@
 #include "LOCS/locs.h"
 #include "LOCS/global_variables.h"
 #include "LOCS/io_scheduler.h"
+#include "Debug/debug_micros.h"
 #include "Backend/backend_variables.h"
 
 
 /* Define some global variables. */
 #define DEBUG00 
+
+ThreadPool pool(2);
 
 int GlobalInitialize(int argc, char **argv)
 {

@@ -25,6 +25,8 @@ extern uint64_t count;
 
 extern uint64_t time_record;
 
+extern uint64_t time_record2;
+
 struct ThreadInfo 
 {
     spdk_thread *thread;

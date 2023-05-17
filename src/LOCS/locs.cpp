@@ -502,12 +502,12 @@ void locs_init(void)
     char key_buffer[KEY_SIZE];
     char value_buffer[VAL_SIZE];
 
-    for(SKey i=1;i<= written_data_num;i++)
+    for(SKey i=1;i<=written_data_num;i++)
     {
         if(i%record_point==0)
         {
             endTime = clock();
-            std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC <<" IO TIME: "<<time_record<< "s\n";
+            std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC <<" IO TIME: "<<time_record<<"  "<<time_record2 << "s\n";
             // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
         }
         memset(key_buffer, 0, KEY_SIZE);
@@ -526,7 +526,7 @@ void locs_init(void)
     }
     // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
     endTime = clock();
-    std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC <<" IO TIME: "<<time_record<< "s\n";
+    std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC <<" End IO TIME: "<<time_record<<"  "<<time_record2 <<  "s\n";
 
 
     // /* workload b: read only, all in it */

@@ -188,19 +188,22 @@ int insert_erase_queue(uint64_t chunk_id)
 	return 0;
 }
 
-int insert_erase_queue(uint64_t start, uint64_t chunk_id)
+void get_chunk_log()
 {
-	uint64_t channel_id = chunk_id / (geometry.num_pu*geometry.num_chk);
+	
+}
 
-	uint64_t *lbalist = (uint64_t*)spdk_dma_malloc(sizeof(uint64_t), 0x10, NULL);
-	lbalist[0] = chunk_id;
+
+int insert_erase_queue(uint64_t start_chunk_id, uint64_t end_chunk_id,uint64_t size, uint64_t channel_id)
+{
+
+	uint64_t *lbalist = (uint64_t*)spdk_dma_malloc(size*sizeof(uint64_t), 0x10, NULL);
+	for(uint64_t i = 0; i < size; i++)
+	{
+		lbalist[i] = start_chunk_id + i;
+	}
 
 	spdk_ocssd_chunk_information_entry *erased_chunk_info =  (spdk_ocssd_chunk_information_entry *)spdk_dma_malloc(sizeof(spdk_ocssd_chunk_information_entry), 0x40, NULL);
-
-	erased_chunk_info->cnlb = 4096;
-	erased_chunk_info->wp = 4096;
-	erased_chunk_info->slba = chunk_id *4096;
-	erased_chunk_info->wli = chunk_id;
 
 
 	if(spdk_nvme_ocssd_ns_cmd_vector_reset(ns, channels[channel_id].qpair,lbalist,1,erased_chunk_info,erase_complete, NULL) == 0) 

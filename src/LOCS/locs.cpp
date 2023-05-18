@@ -74,6 +74,7 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
             }
         }
 
+        
         for(int i=0;i<next->Runs.size();i++)
         {
             //printf("Run has %lu items in next level %ld!\n",next->Runs[i].GetNowSize(),next->GetLevelNumber());
@@ -84,6 +85,8 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
             }
         }
 
+        check_if_erase();
+
         while(!mergecon.IsEmpty())
         {
             entry_t entry = mergecon.Contextpop1();
@@ -93,6 +96,7 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
                 next->PutValue(entry);
             }
         }
+        
         return 0;
     }
 
@@ -223,6 +227,7 @@ int LOCS::PutValue(const char* key, const char* value)
                 // printf("Run size: %ld from GetNowSize()\n",Levels[0].Runs[i].GetNowSize());
                 mergecon.Insert(Levels[0].Runs[i].SingleRunRead());
                 Levels[0].Runs[i].Reset();
+                check_if_erase();
             }
         }
         
@@ -249,7 +254,6 @@ int LOCS::PutValue(const char* key, const char* value)
 
     buffer.AllClear();
     assert(buffer.PutValue(key, value));
-    check_if_erase();
     
     // auto end_time = std::chrono::high_resolution_clock::now();
     // auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
@@ -509,7 +513,7 @@ void locs_init(void)
     char key_buffer[KEY_SIZE];
     char value_buffer[VAL_SIZE];
 
-    for(SKey i=1;i<=written_data_num;i++)
+    for(SKey i=1;i<=written_data_num ;i++)
     {
         if(i%record_point==0)
         {
@@ -702,4 +706,6 @@ void locs_close()
     }
 
     spdk_nvme_detach_async(ctrlr, &g_detach_ctx);
+
+    spdk_dma_free(chunks);
 }

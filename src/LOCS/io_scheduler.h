@@ -31,6 +31,7 @@ extern struct channels_io *channels;
 
 extern int erase_outstanding_commands;
 
+extern spdk_ocssd_chunk_information_entry * chunks;
 
 /* *
  *  I/O Thread information and thread parameters  

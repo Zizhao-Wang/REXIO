@@ -1,4 +1,4 @@
-# TiOCS: A novel two-layer index for key-value stores on open channel SSD
+# SFOCS: Space-Friendly Indexing for Key-Value Store on Open Channel Solid State Drives
 
 ## A brief description
 This repo has open-source code of **TiOCS**, which is a novel two-layer index for solving **_cascaded write amplification problem_** on **_Open Channel Solid State Drive based DataBase System_**.

@@ -19,10 +19,12 @@ This repo has open-source code of **TiOCS**, which is a novel two-layer index fo
 - [License](#license)
 
 ## Preliminaries
+### SPDK
+https://github.com/spdk/spdk<sup>[1]</sup>
 ### Lightnvm
-<http://lightnvm.io/> <sup>[1]</sup>
+<http://lightnvm.io/> <sup>[2]</sup>
 ### FEMU
-<https://github.com/vtess/FEMU> <sup>[2]</sup>
+<https://github.com/vtess/FEMU> <sup>[3]</sup>
 ## Citing
 
 ## Install

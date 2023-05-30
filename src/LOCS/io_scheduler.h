@@ -21,6 +21,8 @@ extern uint64_t time_record;
 
 extern uint64_t time_record2;
 
+extern uint64_t time_record3;
+
 extern uint64_t current_channel;
 
 extern int outstanding_commands;

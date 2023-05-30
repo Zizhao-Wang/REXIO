@@ -100,6 +100,9 @@ void* parallel_data_write(void* arg)
 
 void locs_run::PutValue(entry_t entry) 
 {
+
+    // auto start_time0 = std::chrono::high_resolution_clock::now();
+
     assert(Size < MaxSize);
 
     data[Size/max_entries_per_vector][Size%max_entries_per_vector] = entry;
@@ -122,7 +125,13 @@ void locs_run::PutValue(entry_t entry)
         memcpy(fence_key, entry.key, KEY_SIZE);
         FencePointers.emplace_back(fence_key);
     }
+
+    // auto end_time0 = std::chrono::high_resolution_clock::now();
+    // auto duration0 = std::chrono::duration_cast<std::chrono::milliseconds>(end_time0 - start_time0);
+    // time_record3 += duration0.count();
+    // printf("PutValue time:%lu\n",duration0.count());
     
+
     auto start_time = std::chrono::high_resolution_clock::now();
     if (Size == MaxSize) 
     {

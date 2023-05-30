@@ -86,6 +86,8 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
         }
 
         check_if_erase();
+        
+        
 
         while(!mergecon.IsEmpty())
         {
@@ -227,7 +229,7 @@ int LOCS::PutValue(const char* key, const char* value)
                 // printf("Run size: %ld from GetNowSize()\n",Levels[0].Runs[i].GetNowSize());
                 mergecon.Insert(Levels[0].Runs[i].SingleRunRead());
                 Levels[0].Runs[i].Reset();
-                check_if_erase();
+                
             }
         }
         
@@ -251,6 +253,8 @@ int LOCS::PutValue(const char* key, const char* value)
         }
         // printf("i:%d\n",i);
     }
+
+    check_if_erase();
 
     buffer.AllClear();
     assert(buffer.PutValue(key, value));
@@ -538,7 +542,7 @@ void locs_init(void)
     // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
     endTime = clock();
     std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC <<" End IO TIME: "<<time_record<<"  "<<time_record2 <<  "s\n";
-
+    std::cout<<"Total IO Time3: "<< time_record3 <<"s\n";
 
     // /* workload b: read only, all in it */
     // startTime = clock();

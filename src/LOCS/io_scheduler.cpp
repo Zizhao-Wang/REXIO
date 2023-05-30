@@ -14,6 +14,7 @@ std::mutex mtx;
 std::map<int, ThreadInfo> thread_map;
 uint64_t time_record = 0;
 uint64_t time_record2 = 0;
+uint64_t time_record3 = 0;
 spdk_ocssd_chunk_information_entry * chunks = nullptr;
 
 int create_threads() 

@@ -78,6 +78,16 @@ uint32_t SyncWrite(const char* hashkey, const char* hashvalue)
     return offset;
 }
 
+int countBits(uint32_t n) 
+{
+    int count = 0;
+    while (n) 
+    {
+        n >>= 1;
+        ++count;
+    }
+    return count;
+}
 
 int  SyncDelete(uint32_t offset)
 { 
@@ -88,8 +98,10 @@ int  SyncDelete(uint32_t offset)
         printf("Failed to allocate memory for LogDataBuffer!\n");
         exit(-1);
     }
-
     uint64_t BlockId = offset >> 24;
+
+#ifdef FIXED_LOG
+    
     int i = 4;
     while (i--)
     {
@@ -104,6 +116,13 @@ int  SyncDelete(uint32_t offset)
         write_queue(LogDataBuffer, BlockId);
         BufferLog[BlockId].clear();
     }
+#endif
+
+#ifdef VARIABLE_LOG
+    
+
+
+#endif
 
     spdk_dma_free(LogDataBuffer);
 

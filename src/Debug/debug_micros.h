@@ -33,4 +33,6 @@
 
 // #define TIOCS_READ_DEBUG
 
+#define FIXED_LOG
+
 #endif

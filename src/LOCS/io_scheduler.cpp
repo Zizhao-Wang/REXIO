@@ -340,7 +340,7 @@ void check_if_erase()
         double free_percent = 1 - (double)channels[channel_id].used_chunk / (double)channels[channel_id].all_chunk_count;
         if(free_percent < 0.2)
         {
-            // printf("Channel %lu is full, start to erase!\n", channel_id);
+            printf("Channel %lu is full, start to erase!\n", channel_id);
             uint64_t start_chunk_id = 0;
             uint64_t end_chunk_id = 0;
             bool is_erasing = false;

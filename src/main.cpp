@@ -55,13 +55,13 @@ int main(int argc, char **argv)
     /* select different indexes. line 49- */
 
 
-    locs_init();
+    // locs_init();
     
-    locs_close();
+    // locs_close();
 
-    // TiOCSInit();
+    TiOCSInit();
 
-	// TiOCS_close();
+	TiOCS_close();
     
 
 

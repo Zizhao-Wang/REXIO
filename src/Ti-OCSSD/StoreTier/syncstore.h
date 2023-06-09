@@ -24,17 +24,27 @@
 
 /* Global variable declaration! */
 extern int indexs;
+
 extern uint32_t offset;
-extern uint64_t sectors_per_page;
-extern TNCEntry* Pagedata;
+
 extern size_t buffer_size;
-extern PageType WBufferId;
-extern std::unordered_map<uint64_t, std::vector<char>> BufferLog;  //Log buffer 
-extern LRUCache lrucache;
-extern std::unordered_map<uint64_t, uint64_t> LogIndex;
+
 extern int buffernumber;
-// extern LRUCache lrucache;
+
+extern LRUCache lrucache;
+
+extern PageType WBufferId;
+
+extern TNCEntry* Pagedata;
+
 extern FIFOCache fifocache;
+
+extern uint64_t sectors_per_page;
+
+extern std::unordered_map<uint64_t, uint64_t> LogIndex;
+
+extern std::unordered_map<uint64_t, std::vector<char>> BufferLog;  //Log buffer 
+
 
 /**
  *  ================= buffer manager module====================  

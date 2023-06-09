@@ -15,6 +15,7 @@ size_t buffer_size = 0;
 PageType WBufferId = 0;
 int buffernumber =0;
 std::unordered_map<uint64_t, std::vector<char>> BufferLog;
+
 LRUCache lrucache(2048);
 // FIFOCache fifocache(0);
 

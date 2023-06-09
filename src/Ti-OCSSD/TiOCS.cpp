@@ -46,7 +46,7 @@ int print_init_info(void)
      }
 
      sectors_per_page = geometry.ws_opt;
-     buffer_size = sectors_per_page * geometry.clba / (KEY_SIZE+VAL_SIZE);
+     buffer_capacity = sectors_per_page * geometry.clba / (KEY_SIZE+VAL_SIZE);
 
      for (uint64_t i = 0; i < geometry.num_grp*geometry.num_pu*geometry.num_chk; ++i) 
      {

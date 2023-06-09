@@ -27,7 +27,7 @@ extern int indexs;
 
 extern uint32_t offset;
 
-extern size_t buffer_size;
+extern size_t buffer_capacity;
 
 extern int buffernumber;
 
@@ -36,6 +36,12 @@ extern LRUCache lrucache;
 extern PageType WBufferId;
 
 extern TNCEntry* Pagedata;
+
+extern char* key_buffer;
+
+extern char* value_buffer;
+
+extern uint64_t block_allocator;
 
 extern FIFOCache fifocache;
 

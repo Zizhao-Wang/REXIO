@@ -173,20 +173,32 @@ void  NodeSplit(size_t bucket_index)
 #ifdef TIOCS_DEBUG
             printf("Inserting hash_key %lu into new bucket %d\n", hash_key, new_index);
 #endif
-            InsertNode(node->key, node->offset, node->flag, new_index);
+#ifdef NOT_SEPARATE_KV
+            InsertNode(node->key, node->offset, node->flag, bucket_index);
+#else
+            InsertNode(node->key, node->offset, node->flag,node->block, bucket_index);
+#endif
         } 
         else 
         {
 #ifdef TIOCS_DEBUG
             printf("Inserting hash_key %lu back into old bucket %zu\n", hash_key, bucket_index);
 #endif
+#ifdef NOT_SEPARATE_KV
             InsertNode(node->key, node->offset, node->flag, bucket_index);
+#else
+            InsertNode(node->key, node->offset, node->flag,node->block, bucket_index);
+#endif
         }
         node = next;
     }
 }
 
+#ifdef NOT_SEPARATE_KV
 int InsertNode(const char* hashkey, uint32_t offset, uint8_t flag, int bucket_id)
+#else
+int InsertNode(const char* hashkey, uint32_t offset, uint8_t flag,uint8_t block, int bucket_id)
+#endif
 {
 
     /*  Insert the hash value into special skip-list. */
@@ -210,7 +222,7 @@ int InsertNode(const char* hashkey, uint32_t offset, uint8_t flag, int bucket_id
     {
         for(int i=Head->level; i<v; ++i )
         {
-                update[i] = Head->head;
+            update[i] = Head->head;
         }
         Head->level = v;
     }
@@ -219,8 +231,12 @@ int InsertNode(const char* hashkey, uint32_t offset, uint8_t flag, int bucket_id
 #ifdef TIOCS_DEBUG
     printf("Inserting new node with hash_key: %.*s, offset: %u, flag: %u, level: %d\n",KEY_SIZE, hashkey, offset, flag, v);
 #endif
-    
+
+#ifdef NOT_SEPARATE_KV
     TSkiplistNode* tsl = TskiplistNodeCreat(hashkey,offset,v);
+#else
+    TSkiplistNode* tsl = TskiplistNodeCreat(hashkey,offset,block,v);
+#endif
     tsl->flag = flag;  
     for(int i=0;i<v;++i)
     {
@@ -228,8 +244,6 @@ int InsertNode(const char* hashkey, uint32_t offset, uint8_t flag, int bucket_id
         update[i]->forward[i] = tsl;
     }
     
-
-
 #ifdef FastSkiplist 
     LocalHeadNode * head = global[hashkey & (1<<Globaldepth)-1]->local;
     LocalHashNode * temp = head->HashNode;
@@ -350,7 +364,13 @@ int InsertNode(const char* hashkey, const char* hashvalue)
         {
             temp->flag =1;
             // write into disk
+#ifdef NOT_SEPARATE_KV
             temp->offset = SyncWrite(hashkey,hashvalue); //printf("%u\n",temp->offset);
+#else
+            uint8_t block_id = 0;
+            temp->offset = SyncvseparateWrite(hashvalue,block_id);
+            temp->block = block_id;
+#endif
             ++Head->number;
             return 0;
         }
@@ -367,9 +387,19 @@ int InsertNode(const char* hashkey, const char* hashvalue)
             Head->level = v;
         }
         //write into disk
-        uint_32 offset1 = SyncWrite(hashkey,hashvalue);  //printf("%u\n",temp->offset);
+#ifdef NOT_SEPARATE_KV
+        uint32_t offset1 = SyncWrite(hashkey,hashvalue); //printf("%u\n",temp->offset);
+#else
+        uint8_t block_id = 0;
+        uint32_t offset1 = SynckvseparateWrite(hashkey,hashvalue,block_id);
+#endif
         ++Head->number;
+
+#ifdef NOT_SEPARATE_KV
         TSkiplistNode* tsl = TskiplistNodeCreat(hashkey,offset1,v);
+#else
+        TSkiplistNode* tsl = TskiplistNodeCreat(hashkey,offset1,block_id,v);
+#endif
         if(flag)
         {
             printf("offset in insert: %d \n", tsl->offset);

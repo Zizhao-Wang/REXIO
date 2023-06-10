@@ -13,6 +13,7 @@
 
 #include "../../Backend/backend_variables.h"
 #include "../../Auxizilary/pre_definition.h"
+#include "../../Debug/debug_micros.h"
 
 #define LOCAL_HASH_SIZE  sizeof (LocalHashNode)
 #define GLOBAL_HASH_SIZE sizeof (GlobalHashNode)
@@ -59,6 +60,9 @@ typedef struct TSkiplistNode
     char key[KEY_SIZE];
     uint8_t flag;
     uint32_t offset;
+#ifndef NOT_SEPARATE_KV
+    uint8_t block;
+#endif
     int maxLevel;
     struct TSkiplistNode **forward;
 } TSkiplistNode;
@@ -108,7 +112,16 @@ typedef struct TNCEntry
     /*
      * Some methods of initialization.
      */
-TSkiplistNode * TskiplistNodeCreat(const char* key,uint32_t offset, int maxLevel);
+#ifdef NOT_SEPARATE_KV
+
+TSkiplistNode *TskiplistNodeCreat(const char* key,uint32_t offset, int maxLevel);
+
+#else
+
+TSkiplistNode *TskiplistNodeCreat(const char* key,uint32_t offset,uint8_t block1, int maxLevel);
+
+#endif
+
 
 TNCSkiplist *  TskiplistCreate();
 

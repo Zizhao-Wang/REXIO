@@ -52,18 +52,29 @@ extern std::unordered_map<uint64_t, uint64_t> LogIndex;
 extern std::unordered_map<uint64_t, std::vector<char>> BufferLog;  //Log buffer 
 
 
+
 /**
  *  ================= buffer manager module====================  
  **/
 void buffer_init();
 
+void kv_buffer_init();
+
 void buffer_cleanup();
+
+void kv_buffer_cleanup();
 
 
 /**
  *  ================= Synchronous write module====================  
  **/
 uint32_t SyncWrite(const char* hashkey, const char* hashvalue);
+
+uint32_t SynckvseparateWrite(const char* hashkey, const char* hashvalue, uint8_t& block);
+
+uint32_t SyncvseparateWrite(const char* hashvalue, uint8_t& block);
+
+uint32_t SynckseparateWrite(const char* hashkey,uint8_t& block);
 
 /**
  *  ================= Synchronous delete module====================  

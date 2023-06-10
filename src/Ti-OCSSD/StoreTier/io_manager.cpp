@@ -6,11 +6,21 @@ int reads = 0;
 
 int writes = 0;
 
+int writes_ram = 0;
+
+int writes_io = 0;
+
 int resets = 0;
 
 int out_stand = 0;
 
+size_t block_id_allocator = 0;
+
 size_t num_data_page = 0;;
+
+size_t key_num_data_page = 0;
+
+size_t value_num_data_page = 0;
 
 uint64_t page_pointer = 0;
 
@@ -22,6 +32,7 @@ std::unordered_map<uint64_t,std::vector<uint64_t>> ChunkData;
 
 std::unordered_map<uint64_t, uint64_t> BlockWritePointers;
 
+std::unordered_map<uint64_t, std::pair<int,int>> block_information;
 
 int pointer_Renew(int mode, uint64_t log_pointer = 0)
 {
@@ -41,6 +52,35 @@ int pointer_Renew(int mode, uint64_t log_pointer = 0)
 	else if(mode == OCSSD_LOG_WRITE_TIOCS)
 	{
 		page_pointer += (log_pointer/geometry.clba == page_pointer/geometry.clba)?sectors_per_page:0;
+        BlockWritePointers[log_pointer/geometry.clba]= BlockWritePointers[log_pointer/geometry.clba] + sectors_per_page;
+	}
+   
+    return 0;
+}
+
+int pointer_Renew(int mode, uint64_t current_write_pointer,uint64_t& block_id, uint64_t log_pointer = 0)
+{
+	
+
+
+	if(mode == KEY_OCSDD_DATA_WRITE && log_pointer == 0)
+	{
+		BlockWritePointers[current_write_pointer/geometry.clba]= BlockWritePointers[current_write_pointer/geometry.clba] + sectors_per_page;
+        if(ChunkData[current_write_pointer/geometry.clba].size()>=num_data_page)
+        {
+            block_id = UINT64_MAX;
+        }
+	}
+	else if(mode == VALUE_OCSDD_DATA_WRITE && log_pointer == 0)
+	{
+		BlockWritePointers[current_write_pointer/geometry.clba]= BlockWritePointers[current_write_pointer/geometry.clba] + sectors_per_page;
+		if(ChunkData[current_write_pointer/geometry.clba].size()>=num_data_page)
+		{
+			block_id = UINT64_MAX;
+		}
+	}
+	else if(mode == OCSSD_LOG_WRITE_TIOCS)
+	{
         BlockWritePointers[log_pointer/geometry.clba]= BlockWritePointers[log_pointer/geometry.clba] + sectors_per_page;
 	}
    
@@ -100,6 +140,68 @@ int write_queue()
 	return 0;
 }
 
+void kv_page_write_complete(void *arg, const struct spdk_nvme_cpl *completion)
+{
+    if (spdk_nvme_cpl_is_error(completion)) 
+	{
+        printf("OCSSD vector write failed with status 0x%x\n", completion->status.sct);
+		return ;
+    }
+	writes++;
+	out_stand--;
+}
+
+int kv_write_queue(char *write_buffer, uint64_t& block_id)
+{
+
+	if(block_id == UINT64_MAX)
+	{
+		block_id = block_id_allocator++;
+	}
+	uint64_t current_writer_pointer = BlockWritePointers[block_id] + block_id*geometry.clba;
+
+	uint64_t *lbalist = (uint64_t*)spdk_dma_malloc(sizeof(uint64_t) *sectors_per_page, 0x1000, NULL);
+	if(lbalist == NULL)
+	{
+		printf("Failed to allocate memory for lbalist!\n");
+		exit(-1);
+	}
+	for(uint32_t j = 0; j<sectors_per_page; j++)
+	{
+		lbalist[j] = current_writer_pointer+j;
+	}
+
+	if (spdk_nvme_ocssd_ns_cmd_vector_write(ns,qpair,write_buffer,lbalist,sectors_per_page,kv_page_write_complete, NULL,0) == 0)
+	{
+		out_stand++;
+		// printf("Write data to OCSSD successfully!\n");
+	}
+	else
+	{
+		printf("Failed to write data to OCSSD!\n");
+		return -1;
+	}
+
+	while (out_stand)
+	{
+		spdk_nvme_qpair_process_completions(qpair, 0);
+	}
+	
+
+	ChunkData[current_writer_pointer/geometry.clba].emplace_back(current_writer_pointer);
+	pointer_Renew(OCSSD_DATA_WRITE_TIOCS,current_writer_pointer,block_id);
+
+	spdk_dma_free(lbalist);
+
+	if(block_id == UINT64_MAX)
+	{
+		block_id = block_id_allocator++;
+	}
+
+	return 0;
+}
+
+
 
 
 /**  
@@ -121,7 +223,7 @@ void log_write_complete(void *arg, const struct spdk_nvme_cpl *completion)
 
 int write_queue(char *write_buffer, uint64_t block_id)
 {
-
+	
 	uint64_t current_writer_pointer = BlockWritePointers[block_id] + block_id*geometry.clba;
 	// printf("current_writer_pointer:%lu BlockWritePointers[block_id]:%lu block_id:%lu\n", current_writer_pointer,BlockWritePointers[block_id],block_id);
 
@@ -210,4 +312,23 @@ TNCEntry* read_queue(uint64_t page_id)
 	spdk_dma_free(lbalist);	
 	
 	return (TNCEntry*)buffer;
+}
+
+
+
+
+void printBlockInformation() 
+{
+    for (const auto& element : block_information) 
+	{
+        uint64_t key = element.first;
+        std::pair<int,int> value = element.second;
+		if(value.first!=0 && value.second!=0)
+		{
+			if(value.second/value.first > 0.93)
+			{
+				printf("Key: %lu, Value: %.3f\n", key, (float)value.second/value.first);
+			}
+		}
+    }
 }

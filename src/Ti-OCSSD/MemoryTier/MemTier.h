@@ -35,7 +35,11 @@ int RandomLevel();
 
 void NodeSplit(size_t bucket_index);
 
+#ifdef NOT_SEPARATE_KV
 int InsertNode(const char* hashkey, uint32_t offset, uint8_t flag, int bucket_id);
+#else
+int InsertNode(const char* hashkey, uint32_t offset, uint8_t flag,uint8_t block, int bucket_id);
+#endif
 
 int InsertNode(const char* hashkey, const char* hashvalue);
 

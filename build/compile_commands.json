@@ -86,6 +86,11 @@
 },
 {
   "directory": "/home/TiOCS/build",
+  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/StoreTier/assistant.cpp.o -c /home/TiOCS/src/Ti-OCSSD/StoreTier/assistant.cpp",
+  "file": "/home/TiOCS/src/Ti-OCSSD/StoreTier/assistant.cpp"
+},
+{
+  "directory": "/home/TiOCS/build",
   "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LRU/lru.cpp.o -c /home/TiOCS/src/LRU/lru.cpp",
   "file": "/home/TiOCS/src/LRU/lru.cpp"
 }

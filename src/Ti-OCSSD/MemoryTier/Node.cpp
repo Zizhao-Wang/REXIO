@@ -12,13 +12,19 @@
 #include <cstdlib>
 #include <climits>
 
-
+#ifdef NOT_SEPARATE_KV
 TSkiplistNode *TskiplistNodeCreat(const char* key,uint32_t offset, int maxLevel)
+#else
+TSkiplistNode *TskiplistNodeCreat(const char* key,uint32_t offset,uint8_t block1, int maxLevel)
+#endif
 {
     TSkiplistNode *obj = (TSkiplistNode *)malloc(sizeof(TSkiplistNode));
     memcpy(obj->key, key, KEY_SIZE);
     obj->offset = offset;
     obj->flag = 1;
+#ifndef NOT_SEPARATE_KV
+    obj->block = block1;
+#endif
     obj->maxLevel = maxLevel;
     obj->forward = (TSkiplistNode **)malloc(sizeof(TSkiplistNode *) * maxLevel);
     for (int i = 0; i < maxLevel; i++) 
@@ -33,7 +39,11 @@ TNCSkiplist * TskiplistCreate()
     TNCSkiplist *obj = (TNCSkiplist *)malloc(sizeof(TNCSkiplist));
     char key[KEY_SIZE];
     memset(key, 0, KEY_SIZE); 
+#ifdef NOT_SEPARATE_KV
     obj->head = TskiplistNodeCreat(key,0, MAX_LEVEL1);
+#else
+     obj->head = TskiplistNodeCreat(key,0,0, MAX_LEVEL1);
+#endif
     obj->level = 0;
     obj->number = 0;
     srand(time(NULL));

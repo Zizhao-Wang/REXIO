@@ -36,7 +36,8 @@ add_executable(src main.cpp
                     Ti-OCSSD/MemoryTier/MemTier.h Ti-OCSSD/MemoryTier/MemTier.cpp Ti-OCSSD/utility/types.h
                     Ti-OCSSD/utility/types.cpp Ti-OCSSD/StoreTier/syncstore.h Ti-OCSSD/StoreTier/syncstore.cpp
                     Ti-OCSSD/utility/types.cpp Ti-OCSSD/StoreTier/syncstore.h Ti-OCSSD/StoreTier/syncstore.cpp
-                    Ti-OCSSD/StoreTier/io_manager.h Ti-OCSSD/StoreTier/io_manager.cpp
+                    Ti-OCSSD/StoreTier/io_manager.h Ti-OCSSD/StoreTier/io_manager.cpp Ti-OCSSD/StoreTier/assistant.h
+                    Ti-OCSSD/StoreTier/assistant.cpp
                     LRU/lru.h LRU/lru.cpp)
                     
 #                     

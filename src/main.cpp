@@ -7,11 +7,6 @@
 #include <cstring>
 #include <cstdlib>
 #include <liblightnvm.h> // other project's .h files
-#include <spdk/nvme.h> // SPDK's .h files
-#include <spdk/env.h>
-#include <spdk/log.h>
-#include <spdk/nvme_ocssd.h>
-#include <spdk/nvme_ocssd_spec.h>
 #include "Ti-OCSSD/TiOCS.h"//your project's .h files
 #include "LSMTree-NoFTL/StorageManager.h"
 #include "MultiHash/ExtendibleHash/ExHash.h"
@@ -26,14 +21,15 @@
 /* Define some global variables. */
 std::unordered_map<uint64_t,uint64_t> chunkusage;
 
-static char g_hostnqn[SPDK_NVMF_NQN_MAX_LEN + 1];
-static int g_controllers_found = 0;
-struct spdk_nvme_transport_id trid; //transport id
-static struct spdk_nvme_detach_ctx *g_detach_ctx = NULL;
+// static char g_hostnqn[SPDK_NVMF_NQN_MAX_LEN + 1];
+// static int g_controllers_found = 0;
+// struct spdk_nvme_transport_id trid; //transport id
+// static struct spdk_nvme_detach_ctx *g_detach_ctx = NULL;
 
 int GlobalInitialize(int argc, char **argv)
 {
 
+#ifdef USE_SPDK
 	struct spdk_env_opts opts; //environment options
     
     struct spdk_nvme_ctrlr *ctrlr; // pointer that point to the controller
@@ -60,9 +56,6 @@ int GlobalInitialize(int argc, char **argv)
 		fprintf(stderr, "Unable to initialize SPDK env\n");
 		return 1;
 	}
-
-	
-
 	
 	strcpy(trid.traddr, "0000:00:05.0");
 	printf("trtype: %u, traddr: %s, subnqn: %s\n", trid.trtype, trid.traddr, trid.subnqn);
@@ -82,7 +75,7 @@ int GlobalInitialize(int argc, char **argv)
 		g_controllers_found++;
 		spdk_nvme_detach_async(ctrlr, &g_detach_ctx);
 	}
-
+#endif
 
 #ifdef USE_LIGHTNVM
     /* Initialize device information */
@@ -175,9 +168,9 @@ int main(int argc, char **argv)
 
     // EXHashing1();
 
-    // TiOCSInit();
+    TiOCSInit();
 
-    NoFTLKVInit();
+    // NoFTLKVInit();
 
     // LHashPort();
 
@@ -187,6 +180,4 @@ int main(int argc, char **argv)
 
     return 0;
 
-    
-        return 0;
 }

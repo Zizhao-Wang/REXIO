@@ -12,7 +12,9 @@
 #define EXPERIMENT1_DEBUG_H
 
 
+#define USE_LIGHTNVM 1
 
+// #define USE_SPDK 1
 
 
 #endif

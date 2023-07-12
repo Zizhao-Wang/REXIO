@@ -88,13 +88,45 @@ bool DoubleHashtable()
 uint64_t big_endian2little_endian(const char *big_endian, size_t len)
 {
     uint64_t result = 0;
+    len = len > 8 ? 8 : len;
     for (size_t i = 0; i < len; ++i) 
 	{
         result |= (static_cast<uint64_t>(static_cast<unsigned char>(big_endian[i])) << (8 * (len - 1 - i)));
     }
     return result;
-
 }
+
+// uint64_t big_endian2little_endian(const char *big_endian, size_t len)
+// {
+//     uint64_t result = 0;
+//     size_t start_index = 0;
+//     if (len > 8) {
+//         start_index = len - 8;
+//     }
+
+//     for (size_t i = start_index; i < len; ++i) 
+//     {
+//         result |= (static_cast<uint64_t>(static_cast<unsigned char>(big_endian[i])) << (8 * (i - start_index)));
+//     }
+//     return result;
+// }
+// uint64_t big_endian2little_endian(const char *big_endian, size_t len)
+// {
+//     uint64_t result = 0;
+//     size_t start_index = len > 8 ? len - 8 : 0;
+//     size_t actual_len = len > 8 ? 8 : len;
+
+//     for (size_t i = 0; i < (len - start_index); ++i)
+//     {
+//         result |= (static_cast<uint64_t>(static_cast<unsigned char>(big_endian[start_index + i])) << (8 * (actual_len-1-i)));
+//     }
+
+//     return result;
+// }
+
+
+
+
 
 
 
@@ -173,10 +205,15 @@ void  NodeSplit(size_t bucket_index)
 #ifdef TIOCS_DEBUG
             printf("Inserting hash_key %lu into new bucket %d\n", hash_key, new_index);
 #endif
+
 #ifdef NOT_SEPARATE_KV
-            InsertNode(node->key, node->offset, node->flag, bucket_index);
-#else
-            InsertNode(node->key, node->offset, node->flag,node->block, bucket_index);
+            InsertNode(node->key, node->offset, node->flag, new_index);
+#elif defined(NOT_SEPARATE_KV_variable)
+            InsertNode(node->key, node->offset, node->flag, new_index);
+#elif defined(SEPARATE_KV_FIXED_LOG)
+            InsertNode(node->key, node->offset, node->flag,node->block, new_index);
+#elif defined(SEPARATE_KV_VARIABLE_LOG)
+            InsertNode(node->key, node->offset, node->flag,node->block, new_index);
 #endif
         } 
         else 
@@ -184,9 +221,14 @@ void  NodeSplit(size_t bucket_index)
 #ifdef TIOCS_DEBUG
             printf("Inserting hash_key %lu back into old bucket %zu\n", hash_key, bucket_index);
 #endif
+
 #ifdef NOT_SEPARATE_KV
             InsertNode(node->key, node->offset, node->flag, bucket_index);
-#else
+#elif defined(NOT_SEPARATE_KV_variable)
+            InsertNode(node->key, node->offset, node->flag, bucket_index);
+#elif defined(SEPARATE_KV_FIXED_LOG)
+            InsertNode(node->key, node->offset, node->flag,node->block, bucket_index);
+#elif defined(SEPARATE_KV_VARIABLE_LOG)
             InsertNode(node->key, node->offset, node->flag,node->block, bucket_index);
 #endif
         }
@@ -194,10 +236,16 @@ void  NodeSplit(size_t bucket_index)
     }
 }
 
+
+
 #ifdef NOT_SEPARATE_KV
 int InsertNode(const char* hashkey, uint32_t offset, uint8_t flag, int bucket_id)
-#else
-int InsertNode(const char* hashkey, uint32_t offset, uint8_t flag,uint8_t block, int bucket_id)
+#elif defined(NOT_SEPARATE_KV_variable)
+int InsertNode(const char* hashkey, uint32_t offset, uint8_t flag, int bucket_id)
+#elif defined(SEPARATE_KV_FIXED_LOG)
+int InsertNode(const char* hashkey, uint32_t offset, uint8_t flag,uint32_t block, int bucket_id)
+#elif defined(SEPARATE_KV_VARIABLE_LOG)
+int InsertNode(const char* hashkey, uint32_t offset, uint8_t flag,uint32_t block, int bucket_id)
 #endif
 {
 
@@ -234,9 +282,18 @@ int InsertNode(const char* hashkey, uint32_t offset, uint8_t flag,uint8_t block,
 
 #ifdef NOT_SEPARATE_KV
     TSkiplistNode* tsl = TskiplistNodeCreat(hashkey,offset,v);
-#else
+#elif defined(NOT_SEPARATE_KV_variable)
+    TSkiplistNode* tsl = TskiplistNodeCreat(hashkey,offset,v);
+#elif defined(SEPARATE_KV_FIXED_LOG)
+    TSkiplistNode* tsl = TskiplistNodeCreat(hashkey,offset,block,v);
+#elif defined(SEPARATE_KV_VARIABLE_LOG)
     TSkiplistNode* tsl = TskiplistNodeCreat(hashkey,offset,block,v);
 #endif
+
+    // if(big_endian2little_endian(hashkey,KEY_SIZE)==3525946)
+    // {
+    //     printf("offset in insert: %d \n", tsl->offset);
+    // }
     tsl->flag = flag;  
     for(int i=0;i<v;++i)
     {
@@ -323,7 +380,6 @@ void PrintHashTable()
 
 int InsertNode(const char* hashkey, const char* hashvalue)
 {
-
     /*  Insert the hash value into special skip-list. */
     uint64_t hashkey1 = big_endian2little_endian(hashkey,KEY_SIZE);
     int bucket_index = hashkey1 & (1<<Globaldepth)-1;
@@ -364,13 +420,21 @@ int InsertNode(const char* hashkey, const char* hashvalue)
         {
             temp->flag =1;
             // write into disk
+
 #ifdef NOT_SEPARATE_KV
             temp->offset = SyncWrite(hashkey,hashvalue); //printf("%u\n",temp->offset);
-#else
-            uint8_t block_id = 0;
+#elif defined(NOT_SEPARATE_KV_variable)
+            temp->offset = SyncWrite(hashkey,hashvalue); //printf("%u\n",temp->offset);
+#elif defined(SEPARATE_KV_FIXED_LOG)
+            uint32_t block_id = 0;
             temp->offset = SyncvseparateWrite(hashvalue,block_id);
             temp->block = block_id;
+#elif defined(SEPARATE_KV_VARIABLE_LOG)
+            uint32_t block_id = 0;
+            temp->offset = SyncvvariableseparateWrite(hashvalue,block_id);
+            temp->block = block_id;
 #endif
+
             ++Head->number;
             return 0;
         }
@@ -389,17 +453,28 @@ int InsertNode(const char* hashkey, const char* hashvalue)
         //write into disk
 #ifdef NOT_SEPARATE_KV
         uint32_t offset1 = SyncWrite(hashkey,hashvalue); //printf("%u\n",temp->offset);
-#else
-        uint8_t block_id = 0;
+#elif defined(NOT_SEPARATE_KV_variable)
+        uint32_t offset1 = SyncWrite(hashkey,hashvalue); //printf("%u\n",temp->offset);
+#elif defined(SEPARATE_KV_FIXED_LOG)
+        uint32_t block_id = 0;
         uint32_t offset1 = SynckvseparateWrite(hashkey,hashvalue,block_id);
+#elif defined(SEPARATE_KV_VARIABLE_LOG)
+        uint32_t block_id = 0;
+        uint32_t offset1 = SynckvvariableseparateWrite(hashkey,hashvalue,block_id); 
 #endif
+
         ++Head->number;
 
 #ifdef NOT_SEPARATE_KV
         TSkiplistNode* tsl = TskiplistNodeCreat(hashkey,offset1,v);
-#else
+#elif defined(NOT_SEPARATE_KV_variable)
+        TSkiplistNode* tsl = TskiplistNodeCreat(hashkey,offset1,v);
+#elif defined(SEPARATE_KV_FIXED_LOG)
+        TSkiplistNode* tsl = TskiplistNodeCreat(hashkey,offset1,block_id,v);
+#elif defined(SEPARATE_KV_VARIABLE_LOG)
         TSkiplistNode* tsl = TskiplistNodeCreat(hashkey,offset1,block_id,v);
 #endif
+
         if(flag)
         {
             printf("offset in insert: %d \n", tsl->offset);
@@ -543,6 +618,8 @@ SValue Search(const char* key1)
 }
 
 
+
+
 /**  
  * ================= update module ====================  
  **/
@@ -560,15 +637,41 @@ int Update(const char* key1, const char* val)
     if(node->flag == 1)
     {
         //printf("key: %lu ",key1);
+        // printf("offset: %u\n",node->offset);
+#ifdef NOT_SEPARATE_KV
         err = SyncDelete(node->offset);
+#elif defined(NOT_SEPARATE_KV_variable)
+        err = SyncvariableDelete(node->offset);
+#elif defined(SEPARATE_KV_FIXED_LOG)
+        // int a = node->offset>>24;
+        // if(big_endian2little_endian(key1,KEY_SIZE) == 8456562)
+        // {
+        //     printf("key1 :%lu offset:%u\n block:%u \n",big_endian2little_endian(node->key,KEY_SIZE),node->offset,node->block);
+        // }
+        err = SynckvDelete(node->offset);
+        // if(big_endian2little_endian(key1,KEY_SIZE) == 8456562)
+        // {
+        //     printf("over=====\n");
+        // }
+#elif defined(SEPARATE_KV_VARIABLE_LOG)
+        err = SynckvvariableDelete(node->offset);
+#endif
     }
     
     if(err != 0 )
     {
         EMessageOutput("Update failure!",5899);
     }
-
+    // printf("node->block:%d\n",node->block);
+#ifdef NOT_SEPARATE_KV
     node->offset = SyncWrite(key1,val);
+#elif defined(NOT_SEPARATE_KV_variable)
+    node->offset = SyncWrite(key1,val);
+#elif defined(SEPARATE_KV_FIXED_LOG)
+    node->offset = SyncvseparateWrite(val,node->block);
+#elif defined(SEPARATE_KV_VARIABLE_LOG)
+    node->offset = SyncvvariableseparateWrite(val,node->block);
+#endif
 
     return 0;
 }
@@ -583,9 +686,30 @@ bool DeleteValue(TNCSkiplist * Head, const char* hashkey)
 {
 
     TSkiplistNode * node = SearchNode(Head,hashkey);
+
+    if(node==nullptr)
+    {
+        return false;
+    }
+    if (node->flag == 0)
+    {
+        printf("The key is 0 in the TNC-tree!\n");
+        return false;
+    }
+    
+
     if(node->flag==1)
     {
-        SyncDelete(node->offset);   //write into disk(meta data).
+#ifdef NOT_SEPARATE_KV
+        SyncDelete(node->offset);
+#elif defined(NOT_SEPARATE_KV_variable)
+        SyncvariableDelete(node->offset);
+#elif defined(SEPARATE_KV_FIXED_LOG)
+        SynckvDelete(node->offset);
+#elif defined(SEPARATE_KV_VARIABLE_LOG)
+        SynckvvariableDelete(node->offset);
+#endif
+        //write into disk(meta data).
         node->flag=0;
     }
 
@@ -600,6 +724,7 @@ int Delete(const char* key1)
     if(!flag)
     {
         EMessageOutput("Delete value failure in TNC-tree!",1578);
+        exit(1578);
     }
     return 0;
 }

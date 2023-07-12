@@ -49,6 +49,14 @@ void merge_context::Insert(std::vector<entry_t> entries)
     //printf("priority_queue size: %lu \n",queue.size());
 
 }
+void merge_context::Insert(entry_t entrie)
+{
+    merge_entry MergeItem;
+    MergeItem.SingleEntry = entrie;
+    queue.push(MergeItem);
+}
+
+
 
 entry_t merge_context::Contextpop(void) 
 {
@@ -83,15 +91,14 @@ entry_t merge_context::Contextpop1()
         queue.pop();
     }
 
+    return current.SingleEntry;
+}
+
     // uint64_t key_value = test(current.SingleEntry.key);
     // if (key_value == 1 || key_value == 2097152 || key_value == 1048576 || key_value == 1572864)
     // {
     //     printf("Popped key: %lu\n", key_value);
     // }
-
-    return current.SingleEntry;
-}
-
 
 bool merge_context::IsEmpty(void) const 
 {
@@ -101,4 +108,12 @@ bool merge_context::IsEmpty(void) const
 size_t merge_context::get_size(void) const 
 {
     return queue.size();
+}
+
+void  merge_context::clear(void)
+{
+    while (!queue.empty())
+    {
+        queue.pop();
+    }
 }

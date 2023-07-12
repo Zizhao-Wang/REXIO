@@ -16,7 +16,7 @@ struct spdk_nvme_transport_id trid;
 
 struct spdk_nvme_ns * ns = nullptr;
 
-std::vector<uint64_t> temp_pointers;
+std::map<pthread_t,uint64_t> temp_pointers;
 
 struct spdk_nvme_detach_ctx *g_detach_ctx = NULL;
 

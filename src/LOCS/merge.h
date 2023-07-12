@@ -45,16 +45,17 @@ class merge_context
 {
 private:
 
-    std::priority_queue<merge_entry, std::vector<merge_entry>, std::less<merge_entry> > queue;
+    std::priority_queue<merge_entry, std::vector<merge_entry>, std::less<merge_entry>> queue;
 
 public:
     void Insert(entry_t *, size_t);
     void Insert(std::vector<entry_t> entries); 
+    void Insert(entry_t entries); 
     entry_t Contextpop(void);
     entry_t Contextpop1(); 
     bool IsEmpty(void) const;
     size_t get_size(void) const;
-    
+    void clear(void);
 };
 
 #endif

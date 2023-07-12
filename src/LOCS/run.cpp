@@ -49,8 +49,6 @@ void locs_run::PointersDisplay()
     }
 }
 
-
-
 std::vector<entry_t> locs_run::SingleRunRead()
 {
     std::vector<entry_t> entries1; 
@@ -130,7 +128,9 @@ void locs_run::PutValue(entry_t entry)
     // auto duration0 = std::chrono::duration_cast<std::chrono::milliseconds>(end_time0 - start_time0);
     // time_record3 += duration0.count();
     // printf("PutValue time:%lu\n",duration0.count());
-    
+
+
+#ifdef MULTI_THREAD_IO
 
     auto start_time = std::chrono::high_resolution_clock::now();
     if (Size == MaxSize) 
@@ -149,22 +149,26 @@ void locs_run::PutValue(entry_t entry)
                 pool.add_task(i % geometry.num_grp, parallel_data_write, args);
             }
 
-            // // threads join
+            // threads join
             // printf("waitting for join!\n");
             pool.wait_for_all_tasks();
             // printf("join finished!\n");
 
             for (size_t i = 0; i < geometry.num_grp; i++) 
             {
-                chunk_pointers.emplace_back(temp_pointers[i]);
+                chunk_pointers.emplace_back(temp_pointers[pool.threads[i]]);
             }
-
-            temp_pointers.clear();
         }
     }
     auto end_time = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
     time_record += duration.count();
+    
+#elif defined(SINGLE_THREAD_IO)
+
+#endif
+
+
 }
 
 

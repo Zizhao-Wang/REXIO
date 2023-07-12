@@ -96,3 +96,20 @@ long locs_level ::GetLevelNumber(void) const
 {
     return LevelNumber;
 }
+
+uint64_t locs_level ::GetNowSize(void)
+{
+    uint64_t size = 0;
+    for (int i=0;i<Runs.size();i++)
+    {
+        size += Runs[i].GetNowSize();
+    }
+    
+    return size;
+}
+
+uint64_t locs_level ::GetMaxSize(void)
+{
+    
+    return MaxRuns*MaxRunSize;
+}

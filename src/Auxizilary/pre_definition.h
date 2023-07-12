@@ -14,27 +14,39 @@
 #include <iostream>
 #include <cstring>
 
-typedef uint64_t KEY_t;
-typedef uint64_t VAL_t;
 
 #define KEY_MAX 18446744073709551615
 #define KEY_MIN 0
 
-
 #define VAL_MAX 18446744073709551615
 #define VAL_MIN 0
 
-#define PAGE_MAX 4294967295
-
+#define PAGE_MAX 429 967295
 
 #define KEY_SIZE 8
 #define VAL_SIZE 8
+
+typedef uint64_t KEY_t;
+typedef uint64_t VAL_t;
+
+
+extern int reads_io;  // read I/Os
+
+extern int writes_io; // write I/Os
+
+extern int resets; 
+
+extern int io_resets; // 
+
+extern int writes_ram; 
+
 
 
 typedef struct entry 
 {
     char key[KEY_SIZE];
     char val[VAL_SIZE];
+    // char timestamp[8];
 
     bool operator <(const entry& other) const
     {
@@ -64,7 +76,10 @@ typedef struct entry
 }entry_t;
 
 
-uint64_t test(const char* buffer );
+// gloabl functions
+uint64_t test(const char* buffer);
+
+void write_data(const std::string& file_path, const std::string& experiment_num, const std::string& workload_num, int count_point);
 
 
 #endif  // EXPERIMENT1_VARIABLESTYPES_H

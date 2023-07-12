@@ -61,7 +61,7 @@ typedef struct TSkiplistNode
     uint8_t flag;
     uint32_t offset;
 #ifndef NOT_SEPARATE_KV
-    uint8_t block;
+    uint32_t block;
 #endif
     int maxLevel;
     struct TSkiplistNode **forward;
@@ -113,13 +113,13 @@ typedef struct TNCEntry
      * Some methods of initialization.
      */
 #ifdef NOT_SEPARATE_KV
-
-TSkiplistNode *TskiplistNodeCreat(const char* key,uint32_t offset, int maxLevel);
-
-#else
-
-TSkiplistNode *TskiplistNodeCreat(const char* key,uint32_t offset,uint8_t block1, int maxLevel);
-
+    TSkiplistNode *TskiplistNodeCreat(const char* key,uint32_t offset, int maxLevel);
+#elif defined(NOT_SEPARATE_KV_variable)
+    TSkiplistNode *TskiplistNodeCreat(const char* key,uint32_t offset, int maxLevel);
+#elif defined(SEPARATE_KV_FIXED_LOG)
+    TSkiplistNode *TskiplistNodeCreat(const char* key,uint32_t offset,uint32_t block1, int maxLevel);
+#elif defined(SEPARATE_KV_VARIABLE_LOG)
+    TSkiplistNode *TskiplistNodeCreat(const char* key,uint32_t offset,uint32_t block1, int maxLevel);
 #endif
 
 

@@ -15,10 +15,6 @@
 #include <vector>
 
 
-extern int writes;
-extern int reads;
-extern int erases;
-
 extern size_t ws_min;
 
 

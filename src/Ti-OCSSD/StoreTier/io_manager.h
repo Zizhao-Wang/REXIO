@@ -17,16 +17,6 @@
 /**
  *  ================= I/O records====================  
  **/
-extern int reads;
-
-extern int writes;
-
-extern int writes_ram;
-
-extern int writes_io;
-
-extern int resets;
-
 extern int out_stand;
 
 extern size_t block_id_allocator;
@@ -63,12 +53,14 @@ extern std::unordered_map<uint64_t, std::pair<int,int>> block_information;
 #define VALUE_OCSDD_LOG_WRITE  6
 
 
+
+
 /**  
  * ================= DATA WRITE(I/O)  module ====================  
  **/
 int write_queue();
 
-int kv_write_queue(char *write_buffer, uint64_t& block_id);
+int kv_write_queue(char *write_buffer, uint64_t& block_id,int mode=KEY_OCSDD_DATA_WRITE);
 
 /**  
  * ================= LOG WRITE(I/O) module ====================  
@@ -76,6 +68,7 @@ int kv_write_queue(char *write_buffer, uint64_t& block_id);
 int write_queue(char *write_buffer, uint64_t block_id);
 
 
+int kv_log_queue(char *write_buffer, uint64_t block_id);
 
 /**  
  * ================= READ(I/O) module ====================  

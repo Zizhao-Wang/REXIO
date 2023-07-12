@@ -62,7 +62,7 @@ void* parallel_write_into_pu(void *args)
         if(err == 0) 
         {
             //printf("Page %lu writing success \n",page_num);
-            writes++;
+            writes_io++;
         }
         else
         {
@@ -88,7 +88,7 @@ void* parallel_write_into_pu(void *args)
         if(err == 0) 
         {
             //printf("Page %lu reading success \n",page_num);
-            reads++;
+            reads_io++;
         }
         else
         {
@@ -137,7 +137,7 @@ void* parallel_read_from_pu(void *args)
         if(err == 0) 
         {
             //printf("Page %lu reading success \n",page_num);
-            reads++;
+            reads_io++;
         }
         else
         {
@@ -373,7 +373,7 @@ void* parallel_coordinator(std::vector<entry_t> run_data, uint64_t num_pug, int 
                 EMessageOutput("Thread join failed in"+ std::to_string(j)+"creation!", 4598);
             }
         }
-        printf("%d pages have been read from CHANNEL %lu \n", reads, num_pug);
+        printf("%d pages have been read from CHANNEL %lu \n", reads_io, num_pug);
         return  (void*)buffer;   
     }
     else

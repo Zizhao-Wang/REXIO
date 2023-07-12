@@ -13,7 +13,7 @@ locs_buffer::locs_buffer(size_t max_chunks)
 
     this->MaxSize = (max_chunks * geometry.clba * page_size) / sizeof(entry_t);
     // this->MaxSize = 4;
-    // printf("MaxSize:%lu\n",MaxSize);
+    printf("MaxSize:%lu\n",MaxSize);
     size = 0;
     //printf("key:%lu \n\n",Head->head->key);
 }

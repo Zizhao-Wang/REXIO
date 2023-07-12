@@ -78,10 +78,12 @@ struct thread_params
 
 class ThreadPool 
 {
+public:
+    std::vector<pthread_t> threads;
+
 
 private:
     std::vector<std::queue<std::pair<void* (*)(void*), void*>>> tasks;
-    std::vector<pthread_t> threads;
     std::vector<sem_t> semaphores;
     sem_t tasks_completed_semaphore[2];
     int total_tasks = 0;
@@ -91,7 +93,7 @@ private:
         pthread_t current_thread = pthread_self();
         for (size_t i = 0; i < threads.size(); ++i)
         {
-            if (pthread_equal(current_thread, threads[i]))
+            if(pthread_equal(current_thread, threads[i]))
             {
                 return i;
             }

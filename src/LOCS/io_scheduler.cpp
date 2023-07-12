@@ -1,6 +1,7 @@
 #include "io_scheduler.h"
 #include <iostream>
 #include <queue>
+#include <sys/syscall.h>
 #include "global_variables.h"
 
 struct channels_io *channels = nullptr;
@@ -113,6 +114,7 @@ void erase_complete(void *arg, const struct spdk_nvme_cpl *completion)
     }
 	// printf("Erase completed!\n");
 	erase_outstanding_commands--;
+	io_resets++; 
 }
 
 
@@ -381,20 +383,6 @@ void check_if_erase()
     }
 }
 
-
-
-void write_complete(void *arg, const struct spdk_nvme_cpl *completion)
-{
-    if (spdk_nvme_cpl_is_error(completion)) 
-	{
-        printf("OCSSD vector write failed with status 0x%x\n", completion->status.sct);
-    }
-
-	uint64_t *local_request_num_ptr = (uint64_t *)arg;
-    (*local_request_num_ptr)--;
-	// channels[channel_id].current_request_num--;  
-}
-
 uint64_t big_to_little_endian(const char *buffer, size_t size) 
 {
     uint64_t result = 0;
@@ -417,6 +405,20 @@ void write_cmd(void *ctx)
     free(args);
 }
 
+void write_complete(void *arg, const struct spdk_nvme_cpl *completion)
+{
+
+    if (spdk_nvme_cpl_is_error(completion)) 
+	{
+        printf("OCSSD vector write failed with status 0x%x\n", completion->status.sct);
+    }
+
+	uint64_t *local_request_num_ptr = (uint64_t *)arg;
+    (*local_request_num_ptr)--;
+	writes_io++;
+	// channels[channel_id].current_request_num--;  
+
+}
 
 int insert_write_queue(entry_t* data, uint64_t channel_id, size_t start, size_t end, char *buffer, uint64_t *lbalist)
 {
@@ -438,7 +440,7 @@ int insert_write_queue(entry_t* data, uint64_t channel_id, size_t start, size_t 
 
 	uint64_t local_request_num = 1;
 
-	if (spdk_nvme_ocssd_ns_cmd_vector_write(ns, channels[channel_id].qpair, buffer, lbalist, 64, write_complete, &local_request_num,  0) != 0) 
+	if(spdk_nvme_ocssd_ns_cmd_vector_write(ns, channels[channel_id].qpair, buffer, lbalist, 64, write_complete, &local_request_num,  0) != 0)
 	{
 		printf("Failed to submit write request!\n");
 		return -1;
@@ -449,30 +451,10 @@ int insert_write_queue(entry_t* data, uint64_t channel_id, size_t start, size_t 
 		spdk_nvme_qpair_process_completions(channels[channel_id].qpair, 0);
 	}
 
-	
 	channels[channel_id].write_count++;
 	channels[channel_id].LWQL += 7500 * 64;
 
-
-	// struct WriteArgs *args = (struct WriteArgs *)malloc(sizeof(struct WriteArgs));
-    // if (!args) 
-	// {
-    //     fprintf(stderr, "Failed to allocate WriteArgs\n");
-    //     return -1;
-    // }
-    // args->ns = ns;
-    // args->qpair = thread_map[channel_id].qpair;
-    // args->buffer = buffer;
-    // args->lbalist = lbalist;
-    // args->lba_count = 64;
-    // args->cb_fn = write_complete;
-    // args->cb_arg = &channel_id;
-    // args->io_flags = 0;
-    // spdk_thread_send_msg(thread_map[channel_id].thread, write_cmd, args);
-	// std::cout << "Leaving insert_write_queue" << std::endl;
-
 	return 0;
-
 }
 
 
@@ -502,7 +484,7 @@ int select_write_queue(entry_t* data, size_t data_size, int mode)
 			block = (block+1) % 128;
 			// printf("channel_id = %lu, block = %lu channels[channel_id].current_writer_point %lu \n", channel_id, block, channels[channel_id].current_writer_point);
 		}
-		channels[channel_id].current_writer_point = ( block + channel_id*geometry.num_chk*geometry.num_pu) *geometry.clba;
+		channels[channel_id].current_writer_point = (block + channel_id*geometry.num_chk*geometry.num_pu) *geometry.clba;
 
 		for (size_t i = 0; i < data_size; i += offset_of_vector)
         {
@@ -515,15 +497,17 @@ int select_write_queue(entry_t* data, size_t data_size, int mode)
 
 		// std::cout << "Leaving select_write_queue" << std::endl;
 
+		
+		// printf("Thread %d write %lu\n", id, data_size);
 		uint64_t last_written_block_temp = (channels[channel_id].current_writer_point/geometry.clba) -1;
-		temp_pointers.emplace_back(last_written_block_temp);
+		temp_pointers [pthread_self()] = last_written_block_temp;
+
 
 		channels[channel_id].used_chunk++;
 		channels[channel_id].chunk_type[last_written_block_temp-(channel_id*geometry.num_chk*geometry.num_pu)] = DATA_CHUNK;
 		
 		if(channels[channel_id].current_writer_point == (channel_id+1)*(geometry.num_chk*geometry.num_pu*geometry.clba))
 		{
-
 			channels[channel_id].current_writer_point = channel_id*geometry.num_pu*geometry.num_chk*geometry.clba;
 			// printf("Channel %lu is full!\n", channel_id);
 		}
@@ -622,7 +606,8 @@ void read_complete(void *arg, const struct spdk_nvme_cpl *completion)
 	{
         printf("OCSSD vector write failed with status 0x%x\n", completion->status.sct);
     }
-	outstanding_commands--;  
+	outstanding_commands--;
+	reads_io++;  
 }
 
 

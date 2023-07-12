@@ -39,6 +39,8 @@ public:
     bool IsFull (void);
     long GetMRunSize(void) const;
     long GetLevelNumber(void) const;
+    uint64_t GetNowSize(void);
+    uint64_t GetMaxSize(void);
 
 };
 

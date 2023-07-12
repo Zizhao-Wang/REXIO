@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <map>
 #include <spdk/nvme.h> //  other project's .h files SPDK's .h files 
 #include <spdk/env.h>
 #include <spdk/log.h>
@@ -17,32 +18,35 @@
  **/
 
 // global variables for define spdk environment 
-extern struct spdk_ocssd_geometry_data geometry;
 
 extern int backend_commands;
 
-extern struct spdk_env_opts opts; //environment options
-    
+extern struct spdk_nvme_ns * ns;
+
+extern struct spdk_env_opts opts;  //environment options
+
 extern struct spdk_nvme_ctrlr *ctrlr; // pointer that point to the controller
 
 extern struct spdk_nvme_transport_id trid; //transport id
 
-extern struct spdk_nvme_ns * ns;
+extern std::map<pthread_t,uint64_t> temp_pointers;
 
-extern std::vector<uint64_t> temp_pointers;
+extern struct spdk_ocssd_geometry_data geometry;
  
 extern struct spdk_nvme_detach_ctx *g_detach_ctx; //detach context
 
-// global varibales for define LOCS variables 
+
+
+/* global varibales for define LOCS variables */ 
+extern uint64_t page_size;  // bytes of a page/(sector)
+
 extern uint64_t chunk_capacity; // maximum data entries of a chunk
 
-extern uint64_t max_data_entries_per_io; // maximum data entries of a io
-
-extern uint64_t page_size;  // bytes of a page/(sector)
+extern bool geometry_completed;
 
 extern struct channels_io *channels;
 
-extern bool geometry_completed;
+extern uint64_t max_data_entries_per_io; // maximum data entries of a io
 
 
 

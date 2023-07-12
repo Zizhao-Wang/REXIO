@@ -8,7 +8,7 @@
 
 int SinglePageRead(uint64_t pageno)
 {
-    reads++;
+    reads_io++;
     int err;
     struct nvm_addr addrs_chunk = nvm_addr_dev2gen(bp->dev, pageno);
     size_t ws_min = nvm_dev_get_ws_min(bp->dev);

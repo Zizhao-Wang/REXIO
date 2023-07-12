@@ -1,4 +1,6 @@
 #include "syncstore.h"
+#include <iostream>
+#include <fstream>
 #include "../../Backend/SSDWrite/writer.h"
 #include "../../Backend/SSDRead/reader.h"
 #include "../../Backend/IODisk/WriteDisk.h"
@@ -8,28 +10,34 @@
 #include "assistant.h"
 
 int indexs=0;
-uint32_t offset = 0;
+
+uint32_t offset5 = 0;
+uint32_t offset2 = 0; 
 uint64_t sectors_per_page = 4;
 TNCEntry * Pagedata = nullptr;
 char* key_buffer =nullptr;
 char* value_buffer = nullptr;
-
+char* log_data_buffer = nullptr;
 size_t key_buffer_position = 0;
 size_t value_buffer_position = 0;
-
+char *temp  = nullptr; 
 size_t key_block_id = UINT64_MAX;
-
+int callCount = 0;
 size_t value_block_id =  UINT64_MAX;
 
 size_t buffer_capacity = 0;
 size_t buffer_size = 0;
 PageType WBufferId = 0;
 int buffernumber =0;
+std::unordered_map<uint64_t, int> block_type_record;
 std::unordered_map<uint64_t, std::vector<char>> BufferLog;
 std::unordered_map<uint64_t, std::vector<unsigned char>> BufferLog2;
 LRUCache lrucache(2048);
 // FIFOCache fifocache(0);
 
+/**
+ *  ================= buffer manager module====================  
+ **/
 
 void buffer_init() 
 {
@@ -61,111 +69,42 @@ void kv_buffer_init()
         printf("Failed to allocate memory for Pagedata.\n");
     }
 
-    if(key_block_id == UINT64_MAX)
+    log_data_buffer = (char *)spdk_dma_malloc(buffer_size, 0x1000, NULL);
+    if (log_data_buffer  == NULL)
     {
-        key_block_id = block_id_allocator++;
+        printf("Failed to allocate memory for LogDataBuffer!\n");
+        exit(-1);
     }
+
 
     if(value_block_id == UINT64_MAX)
     {
         value_block_id = block_id_allocator++;
+        block_type_record[value_block_id] = 1;
+        offset5 = (offset5 & 0x00FFFFFF) | (value_block_id << 24);
     }
+
+    if(key_block_id == UINT64_MAX)
+    {
+        key_block_id = block_id_allocator++;
+        block_type_record[key_block_id] = 0;
+        offset2 = (offset2 & 0x00FFFFFF) | (key_block_id << 24);
+    }
+
+    temp = (char *)spdk_dma_malloc(sizeof(uint32_t), 0x1000, NULL);
+
 }
 
 void kv_buffer_cleanup() 
 {
     spdk_dma_free(key_buffer);
     spdk_dma_free(value_buffer);
+    spdk_dma_free(log_data_buffer);
 }
 
-uint32_t SynckvseparateWrite(const char* hashkey, const char* hashvalue, uint8_t& block)
-{
-
-    if (value_buffer_position+VAL_SIZE > buffer_size) 
-    {
-
-        kv_write_queue(value_buffer,value_block_id);
-
-        uint64_t pages_point = BlockWritePointers[value_block_id] + value_block_id*geometry.clba;
-
-        WBufferId = pages_point;
-        offset += pages_point % geometry.clba == 0 ? 0x1000000 : 0x00000000;
-
-        offset = offset & 0xFF000FFF;
-        offset += ((pages_point % geometry.clba) << 12);
-
-        offset = offset & 0xFFFFF000;
-        indexs = 0;
-
-        value_buffer_position = 0;
-    }
-
-    memcpy(value_buffer + value_buffer_position, hashvalue, VAL_SIZE);
-    value_buffer_position += VAL_SIZE;
-
-    offset++;
-
-    
-    if (key_buffer_position+KEY_SIZE > buffer_size) 
-    {
-        kv_write_queue(key_buffer,key_block_id);
-        key_buffer_position = 0;
-    }
-
-    memcpy(key_buffer + key_buffer_position, hashkey, KEY_SIZE);
-    key_buffer_position += KEY_SIZE;
-
-    block = key_block_id;
-
-    return offset;
-}
-
-
-uint32_t SyncvseparateWrite(const char* hashvalue, uint8_t& block)
-{
-
-    if (value_buffer_position+VAL_SIZE > buffer_size) 
-    {
-
-        kv_write_queue(value_buffer,value_block_id);
-
-        uint64_t pages_point = BlockWritePointers[value_block_id] + value_block_id*geometry.clba;
-
-        WBufferId = pages_point;
-        offset += pages_point % geometry.clba == 0 ? 0x1000000 : 0x00000000;
-
-        offset = offset & 0xFF000FFF;
-        offset += ((pages_point % geometry.clba) << 12);
-
-        offset = offset & 0xFFFFF000;
-        indexs = 0;
-
-        value_buffer_position = 0;
-    }
-
-    memcpy(value_buffer + value_buffer_position, hashvalue, VAL_SIZE);
-    value_buffer_position += VAL_SIZE;
-
-    offset++;
-    return offset;
-}
-
-uint32_t SynckseparateWrite(const char* hashkey,uint8_t& block)
-{
-    if (key_buffer_position+KEY_SIZE > buffer_size) 
-    {
-        kv_write_queue(key_buffer,key_block_id);
-        key_buffer_position = 0;
-    }
-
-    memcpy(key_buffer + key_buffer_position, hashkey, KEY_SIZE);
-    key_buffer_position += KEY_SIZE;
-
-    block = key_block_id;
-
-    return offset;
-}
-
+/**
+ *  ================= Synchronous write module====================  
+ **/
 
 uint32_t SyncWrite(const char* hashkey, const char* hashvalue)
 {
@@ -177,12 +116,12 @@ uint32_t SyncWrite(const char* hashkey, const char* hashvalue)
         write_queue();
 
         WBufferId = page_pointer;
-        offset += page_pointer % geometry.clba == 0 ? 0x1000000 : 0x00000000;
+        offset5 += page_pointer % geometry.clba == 0 ? 0x1000000 : 0x00000000;
 
-        offset = offset & 0xFF000FFF;
-        offset += ((page_pointer % 4096) << 12);
+        offset5 = offset5 & 0xFF000FFF;
+        offset5 += ((page_pointer % 4096/4) << 12);
 
-        offset = offset & 0xFFFFF000;
+        offset5 = offset5 & 0xFFFFF000;
         indexs = 0;
     }
 
@@ -190,44 +129,407 @@ uint32_t SyncWrite(const char* hashkey, const char* hashvalue)
     memcpy(Pagedata[indexs].val, hashvalue, VAL_SIZE);
 
     ++indexs;
-    block_information[offset>>24].first++;
-    offset++;
+    block_information[offset5>>24].first++;
+    offset5++;
 
-    return offset;
+    return offset5;
 }
 
-int countBits(uint32_t n) 
+uint32_t SynckvseparateWrite(const char* hashkey, const char* hashvalue, uint32_t& block)
 {
-    int count = 0;
-    while (n) 
+    writes_ram++;
+    if (value_buffer_position+VAL_SIZE > buffer_size) 
     {
-        n >>= 1;
-        ++count;
+        uint64_t previous_block = value_block_id;
+        kv_write_queue(value_buffer,value_block_id,VALUE_OCSDD_DATA_WRITE);
+
+        uint64_t pages_point = BlockWritePointers[previous_block] + previous_block*geometry.clba;
+        uint64_t page = BlockWritePointers[previous_block];
+
+        // printf("key:%lu previous_block: %lu, pages_point: %lu, page: %lu\n",big_endian2little_endian(hashkey,KEY_SIZE),previous_block, pages_point, page);
+        WBufferId = pages_point;
+        // offset += pages_point == num_data_page*sectors_per_page? 0x1000000 : 0x00000000;
+        if (page == num_data_page * sectors_per_page) 
+        {
+            offset5 = (offset5 & 0x00FFFFFF) | (value_block_id << 24);
+            // printf("SynckvseparateWrite offset: %lu,offse:%d \n", big_endian2little_endian(hashkey,KEY_SIZE),offset5>>24);
+        } 
+
+        offset5 = offset5 & 0xFF000FFF;
+        offset5 += ((page/4) << 12);
+
+        offset5 = offset5 & 0xFFFFF000;
+
+        value_buffer_position = 0;
     }
-    return count;
+
+    memcpy(value_buffer + value_buffer_position, hashvalue, VAL_SIZE);
+    value_buffer_position += VAL_SIZE;
+
+    offset5++;
+    block_information[offset5>>24].first++;
+
+    if(key_buffer_position+KEY_SIZE+sizeof(uint32_t) > buffer_size) 
+    {
+        uint64_t previous_block = key_block_id;
+        kv_write_queue(key_buffer,key_block_id,KEY_OCSDD_DATA_WRITE);
+        uint64_t pages_point = BlockWritePointers[previous_block] + previous_block*geometry.clba;
+        uint64_t page = BlockWritePointers[previous_block];
+        WBufferId = pages_point;
+        if (page == num_data_page * sectors_per_page) 
+        {
+            offset2 = (offset2 & 0x00FFFFFF) | (key_block_id << 24);
+        }
+
+        offset2 = offset2 & 0xFF000FFF;
+        offset2 += ((page/4) << 12);
+
+        offset2 = offset2 & 0xFFFFF000;
+        key_buffer_position = 0;
+    }
+
+    memcpy(key_buffer + key_buffer_position, hashkey, KEY_SIZE);
+    key_buffer_position += KEY_SIZE;
+
+    memcpy(key_buffer + key_buffer_position, &offset5, sizeof(uint32_t));
+    key_buffer_position += sizeof(uint32_t);
+
+    offset2++;
+    block = offset2;
+    block_information[offset2>>24].first++;
+#ifdef IO_DEBUG
+    // if(big_endian2little_endian(hashkey,KEY_SIZE) == 8456562)
+    // {
+    //     printf("offset5: %u,offset2:%u\n", offset5,offset2);
+    // }
+#endif
+    return offset5;
 }
 
+
+uint32_t SynckvvariableseparateWrite(const char* hashkey, const char* hashvalue, uint32_t& block)
+{
+
+    if (value_buffer_position+VAL_SIZE > buffer_size) 
+    {
+        uint64_t previous_block = value_block_id;
+        kv_write_queue(value_buffer,value_block_id,VALUE_OCSDD_DATA_WRITE);
+        uint64_t pages_point = BlockWritePointers[previous_block] + previous_block*geometry.clba;
+        uint64_t page = BlockWritePointers[previous_block];
+        // printf("key:%lu previous_block: %lu, pages_point: %lu, page: %lu\n",big_endian2little_endian(hashkey,KEY_SIZE),previous_block, pages_point, page);
+        WBufferId = pages_point;
+        // offset += pages_point == num_data_page*sectors_per_page? 0x1000000 : 0x00000000;
+        if (page == num_data_page * sectors_per_page) 
+        {
+            offset5 = (offset5 & 0x00FFFFFF) | (value_block_id << 24);
+            // printf("SynckvseparateWrite offset: %lu,offse:%d \n", big_endian2little_endian(hashkey,KEY_SIZE),offset5>>24);
+        } 
+        offset5 = offset5 & 0xFF000FFF;
+        offset5 += ((page/4) << 12);
+        offset5 = offset5 & 0xFFFFF000;
+        value_buffer_position = 0; 
+    }
+
+    memcpy(value_buffer + value_buffer_position, hashvalue, VAL_SIZE);
+    value_buffer_position += VAL_SIZE;
+
+    offset5++;
+    block_information[offset5>>24].first++;
+
+    if(big_endian2little_endian(hashkey,KEY_SIZE) == 1655)
+    {
+        printf("offset5: %u\n", offset5);
+    }
+
+    uint32_t BlockId = offset5 >> 24;
+    uint32_t data = offset5 & 0xFFFFFF;
+
+    uint32_t pageID = data >> 12;  
+    uint32_t offsetInPage = data & 0xFFF;  
+    data = BlockId* pageID * (buffer_size/VAL_SIZE) + offsetInPage;
+    
+
+    int length = EncodeLength(data);
+    for (int i = length ; i > 0; i--) 
+    {
+        char encoded = data & 0x7F; 
+        data >>= 7;  
+        if (i == 1)
+        {
+            encoded |= 0x80;
+        }
+        temp[length-i] = encoded; 
+    }
+    
+
+    if (key_buffer_position+KEY_SIZE+length > buffer_size) 
+    {
+        uint64_t previous_block = key_block_id;
+        kv_write_queue(key_buffer,key_block_id,KEY_OCSDD_DATA_WRITE);
+        uint64_t page = BlockWritePointers[previous_block];
+        if (page == num_data_page * sectors_per_page) 
+        {
+            offset2 = (offset2 & 0x00FFFFFF) | (key_block_id << 24);
+            // printf("SynckvseparateWrite offset: %lu,offse:%d \n", big_endian2little_endian(hashkey,KEY_SIZE),offset2>>24);
+        }
+        offset2 = offset2 & 0xFF000000;
+        key_buffer_position = 0;
+    }
+
+    block_information[key_block_id].first++;
+    memcpy(key_buffer + key_buffer_position, hashkey, KEY_SIZE);
+    key_buffer_position += KEY_SIZE;
+
+    memcpy(key_buffer + key_buffer_position,temp, length);
+    key_buffer_position += length;
+
+    offset2++;
+
+    block = offset2;
+    writes_ram += (KEY_SIZE+VAL_SIZE+length);
+
+    return offset5;
+}
+
+uint32_t SyncvseparateWrite(const char* hashvalue, uint32_t block)
+{
+    int i = 3;
+    char temp;
+    uint32_t off =0;
+    writes_ram++;
+
+    if (value_buffer_position+VAL_SIZE > buffer_size) 
+    {
+        uint64_t previous_block = value_block_id;
+        kv_write_queue(value_buffer,value_block_id,VALUE_OCSDD_DATA_WRITE);
+        uint64_t pages_point = BlockWritePointers[previous_block] + previous_block*geometry.clba;
+        uint64_t page = BlockWritePointers[previous_block];
+        if (pages_point == num_data_page * sectors_per_page) 
+        {
+            offset5 = (offset5 & 0x00FFFFFF) | (value_block_id << 24);
+        }
+        offset5 = offset5 & 0xFF000FFF;
+        offset5 += ((page/4) << 12);
+        offset5 = offset5 & 0xFFFFF000;
+        value_buffer_position = 0;
+    }
+
+    memcpy(value_buffer + value_buffer_position, hashvalue, VAL_SIZE);
+    value_buffer_position += VAL_SIZE;
+
+    offset5++;
+    block_information[offset5>>24].first++;
+    
+    uint64_t BlockId = block>>24;
+    block_information[BlockId].second++;
+    
+    if (BufferLog[BlockId].size()+7 > buffer_size)
+    {
+        // printf("BufferLog[BlockId].size(): %lu offset:%d\n", BufferLog[BlockId].size(),block);
+        memcpy(log_data_buffer, BufferLog[BlockId].data(), BufferLog[BlockId].size());
+        // printf("BlockId:%lu\n",BlockId);
+        kv_log_queue(log_data_buffer, BlockId);
+        BufferLog[BlockId].clear();
+    }
+
+    block = block >> 8;
+    while (i--)
+    {
+        temp = (char)(block & 0XFF);
+        block = block >> 8;
+        BufferLog[BlockId].emplace_back(temp);
+    }
+
+    i=4;
+    off = offset5;
+    while (i--)
+    {
+        temp = (char)(off & 0XFF);
+        off = off >> 8;
+        BufferLog[BlockId].emplace_back(temp);
+    }
+
+    return offset5;
+}
+
+
+uint32_t SyncvvariableseparateWrite(const char* hashvalue, uint32_t block)
+{
+
+    if (value_buffer_position+VAL_SIZE > buffer_size) 
+    {
+        uint64_t previous_block = value_block_id;
+        kv_write_queue(value_buffer,value_block_id,VALUE_OCSDD_DATA_WRITE);
+        uint64_t pages_point = BlockWritePointers[previous_block] + previous_block*geometry.clba;
+        uint64_t page = BlockWritePointers[previous_block];
+        WBufferId = pages_point;
+        if (pages_point == num_data_page * sectors_per_page) 
+        {
+            offset5 = (offset5 & 0x00FFFFFF) | (value_block_id << 24);
+        }
+        offset5 = offset5 & 0xFF000FFF;
+        offset5 += ((page/4)<<12);
+        offset5 = offset5 & 0xFFFFF000;
+        value_buffer_position = 0;
+    }
+
+    memcpy(value_buffer + value_buffer_position, hashvalue, VAL_SIZE);
+    value_buffer_position += VAL_SIZE;
+
+    offset5++;
+    block_information[offset5>>24].first++;
+
+    
+    uint64_t BlockId = offset5 >> 24;
+    uint32_t data = offset5 & 0x00FFFFFF;
+    uint32_t pageID = data >> 12;  
+    uint32_t offsetInPage = data & 0xFFF;  
+    data = BlockId* pageID * (buffer_size/VAL_SIZE) + offsetInPage;
+    block_information[BlockId].first++;
+    int length = EncodeLength(data);
+
+    uint64_t block_id = block>>24;
+    block = block & 0x00FFFFFF;
+    int length2 = EncodeLength(block);
+    writes_ram += (VAL_SIZE+length+length2);
+    int len = length+length2;
+    if (BufferLog[block_id].size()+ len > buffer_size)
+    {
+        memcpy(log_data_buffer, BufferLog[block_id].data(), BufferLog[block_id].size());
+        kv_log_queue(log_data_buffer, block_id);
+        BufferLog[block_id].clear();
+    }
+
+    for (int i = length2; i > 0; i--) 
+    {
+        char encoded = block & 0x7F; 
+        block >>= 7;  
+        if (i == 0) 
+        {
+            encoded |= 0x80;
+        }
+        BufferLog[block_id].emplace_back(encoded);
+    }
+
+    for (int i = length; i > 0; i--) 
+    {
+        char encoded = data & 0x7F; 
+        data >>= 7;  
+        if (i == 0) 
+        {
+            encoded |= 0x80;
+        }
+        BufferLog[block_id].emplace_back(encoded);
+    }
+
+    return offset5;
+}
+
+void write_file(const std::string& file_path, const uint32_t offset) 
+{
+    std::ofstream outfile1(file_path, std::ios_base::app);
+
+    if (!outfile1) 
+    {
+        std::cerr << "Can not open the file " << file_path << "\n";
+        return;
+    }
+    outfile1 << offset << "\n";
+}
 
 
 /**
  *  ================= Synchronous delete module====================  
  **/
+int  SynckvvariableDelete(uint32_t offset)
+{ 
+    if(test11)
+        write_file("/home/TiOCS/src/data/delete_test.txt", offset);
+    uint64_t BlockId = offset >> 24;
+    uint32_t data = offset & 0x00FFFFFF;
+    uint32_t pageID = data >> 12;  
+    uint32_t offsetInPage = data & 0xFFF;  
+    data = pageID * (buffer_size/VAL_SIZE) + offsetInPage;  
+    block_information[BlockId].second++;
+        
+    int length = EncodeLength(data);
+    if(length>3)
+    {
+        printf("length:%d\n",length);
+        printf("offset:%u\n",offset);
+        exit(-1);
+    }
+    char encoded;
+    resets += length;
+    
+    if(BufferLog[BlockId].size() + length > buffer_size) 
+    {
+        // printf("BufferLog[BlockId].size(): %lu offset:%d\n", BufferLog[BlockId].size(),offset>>24);
+        reads_io++;
+        memcpy(log_data_buffer, BufferLog[BlockId].data(), BufferLog[BlockId].size());
+        kv_log_queue(log_data_buffer, BlockId);
+        BufferLog[BlockId].clear();
+    }
+
+    for (int i = length - 1; i >= 0; i--) 
+    {
+        encoded = data & 0x7F; 
+        data >>= 7;  
+        if (i == 0) 
+        {
+            encoded |= 0x80;
+        }
+        BufferLog[BlockId].emplace_back(encoded);
+    }
+
+    return 0;
+}
+
 int  SynckvDelete(uint32_t offset)
 { 
-    
-    int position = 0;
+     if(test11)
+        write_file("/home/TiOCS/src/data/delete_test1.txt", offset);
+    resets++;
+    char temp;
+    int i = 3;
+    uint64_t BlockId = offset >> 24;
+    block_information[BlockId].second++;
 
+    if (BufferLog[BlockId].size()+i > buffer_size)
+    { 
+        // printf("BufferLog[BlockId].size(): %lu offset:%d\n", BufferLog[BlockId].size(),offset>>24);
+        reads_io++;
+        memcpy(log_data_buffer, BufferLog[BlockId].data(), BufferLog[BlockId].size());
+        kv_log_queue(log_data_buffer, BlockId);
+        BufferLog[BlockId].clear();
+    }
+    
+    // offset = offset >> 8;
+    while (i--)
+    {
+        temp = (char)(offset & 0XFF);
+        offset = offset >> 8;
+        BufferLog[BlockId].emplace_back(temp);
+    }
+    
+    return 0;
+}
+
+int SyncvariableDelete(uint32_t offset)
+{ 
+    
     uint64_t BlockId = offset >> 24;
     uint32_t data = offset & 0xFFFFFF;
 
     uint32_t pageID = data >> 12;  
     uint32_t offsetInPage = data & 0xFFF;  
-    data = pageID * (buffer_size/VAL_SIZE) + offsetInPage;  
+    data = pageID * (buffer_size/VAL_SIZE) + offsetInPage;
+    int length = EncodeLength(data);  
+    block_information[BlockId].second++;
+    
+    resets += length;
 
-        
-    int length = EncodeLength(data);
-
-    if( BufferLog2[BlockId].size() + length > buffer_size) 
+    if(BufferLog[BlockId].size() + length > buffer_size) 
     {
         char* LogDataBuffer = (char *)spdk_dma_malloc(sectors_per_page * geometry.clba, 0x1000, NULL);
         if (LogDataBuffer == NULL)
@@ -240,19 +542,19 @@ int  SynckvDelete(uint32_t offset)
         BufferLog[BlockId].clear();
         spdk_dma_free(LogDataBuffer);
     }
-
         
     for (int i = length - 1; i >= 0; i--) 
     {
-        unsigned char encoded = data & 0x7F; 
+        char encoded = data & 0x7F; 
         data >>= 7;  
         if (i == 0) 
         {
             encoded |= 0x80;
         }
-        BufferLog2[BlockId].push_back(encoded);
+        BufferLog[BlockId].emplace_back(encoded);
     }
-   
+    return 0;
+
 }
 
 
@@ -263,29 +565,30 @@ int SyncDelete(uint32_t offset)
     char temp;
     
     uint64_t BlockId = offset >> 24;
-    // block_information[BlockId].second++;
+    block_information[BlockId].second++;
     
     int i = 4;
-    // while (i--)
-    // {
-    //     temp = (char)(offset & 0XFF);
-    //     offset = offset >> 8;
-    //     BufferLog[BlockId].emplace_back(temp);
-    // }
+    while (i--)
+    {
+        temp = (char)(offset & 0XFF);
+        offset = offset >> 8;
+        BufferLog[BlockId].emplace_back(temp);
+    }
 
-    // if (BufferLog[BlockId].size() >= (sectors_per_page * geometry.clba ))
-    // {
-    //     char* LogDataBuffer = (char *)spdk_dma_malloc(sectors_per_page * geometry.clba, 0x1000, NULL);
-    //     if (LogDataBuffer == NULL)
-    //     {
-    //         printf("Failed to allocate memory for LogDataBuffer!\n");
-    //         exit(-1);
-    //     }
-    //     memcpy(LogDataBuffer, BufferLog[BlockId].data(), BufferLog[BlockId].size());
-    //     write_queue(LogDataBuffer, BlockId);
-    //     BufferLog[BlockId].clear();
-    //     spdk_dma_free(LogDataBuffer);
-    // }
+    if (BufferLog[BlockId].size() >= (sectors_per_page * geometry.clba ))
+    {
+        char* LogDataBuffer = (char *)spdk_dma_malloc(sectors_per_page * geometry.clba, 0x1000, NULL);
+        if (LogDataBuffer == NULL)
+        {
+            printf("Failed to allocate memory for LogDataBuffer!\n");
+            exit(-1);
+        }
+        memcpy(LogDataBuffer, BufferLog[BlockId].data(), BufferLog[BlockId].size());
+        write_queue(LogDataBuffer, BlockId);
+        BufferLog[BlockId].clear();
+        spdk_dma_free(LogDataBuffer);
+    }
+    
     return 0;
 }
 
@@ -360,4 +663,22 @@ TNCEntry  SyncRead(uint32_t offset)
     }
 #endif
 
+}
+
+void clearBufferLog() 
+{
+    for (auto& item : BufferLog) 
+    {
+        item.second.clear();
+    }
+}
+
+void countBufferLog()
+{
+    int a = 0;
+    for (auto& item : BufferLog) 
+    {
+        a += item.second.size();
+    }
+    printf("BufferLog size: %d\n", a);
 }

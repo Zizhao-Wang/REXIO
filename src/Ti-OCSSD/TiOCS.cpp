@@ -14,6 +14,8 @@
 #include <ctime>
 #include <iostream>
 #include <fstream>
+#include <set>
+#include <sstream>
 #include <vector>
 #include "../Auxizilary/SysOutput.h"
 #include "../LOCS/global_variables.h"
@@ -26,6 +28,8 @@
 #include "StoreTier/io_manager.h"
 
 #define MAX_MSG_SIZE 1024
+
+bool test11 = false;
 
 volatile int msgid;
 
@@ -61,7 +65,8 @@ int print_init_info(void)
      size_t kv_pairs_per_page = sectors_per_page*geometry.clba/(KEY_SIZE+VAL_SIZE);
      size_t logs_per_page = sectors_per_page*geometry.clba/(sizeof(uint32_t));
      size_t pages_per_block = geometry.clba/sectors_per_page;
-     num_data_page = pages_per_block - (pages_per_block)/(logs_per_page/kv_pairs_per_page +1);
+     // num_data_page = (pages_per_block - (pages_per_block)/(logs_per_page/kv_pairs_per_page +1))-240;
+     num_data_page = 600;
 
      size_t keys_per_page = sectors_per_page*geometry.clba/(KEY_SIZE);
      key_num_data_page = num_data_page*kv_pairs_per_page;
@@ -94,18 +99,30 @@ int print_init_info(void)
 
 }
 
+
 void bench_testing(void)
 {
+
      clock_t startTime,endTime;                        // Definition of timestamp
      /* workload a: insert only*/
      uint64_t written_data_size = 100000000*16;
      uint64_t written_data_num = written_data_size /(KEY_SIZE+VAL_SIZE);
      uint64_t record_point = written_data_num / 10;
-     // printf("written_data_size:%lu, written_data_num:%lu record_point: %lu\n",written_data_size, written_data_num, record_point);
+     // printf("written_data_size:%lu, written_data_num:%lu record_point: %lu\n",written_data_size, written_data_num, record_point); 
+     // uint64_t teste = 6299703;
+     // char key_buffer_test[KEY_SIZE];
+     // memset(key_buffer_test, 0, KEY_SIZE);
+     // printf("teste:%lu\n",teste);
+     // for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
+     // {
+     //      key_buffer_test[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((teste >> (8 * j)) & 0xFF);
+     // }
 
      startTime = clock();
      char key_buffer[KEY_SIZE];
      char value_buffer[VAL_SIZE];
+     int error_bound = KEY_SIZE > 8 ? 8 : 0;
+
      for(SKey i=1;i<=written_data_num;i++)
      {
           
@@ -114,12 +131,12 @@ void bench_testing(void)
 
           for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
           {
-               key_buffer[KEY_SIZE - 1 - j] = static_cast<char>((i >> (8 * j)) & 0xFF);
+               key_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((i >> (8 * j)) & 0xFF);
           }
 
           for (size_t j = 0; j < sizeof(uint64_t) && j < VAL_SIZE; ++j)
           {
-               value_buffer[KEY_SIZE - 1 - j] = static_cast<char>((i >> (8 * j)) & 0xFF);
+               value_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((i >> (8 * j)) & 0xFF);
           }
 
           InsertNode(key_buffer, value_buffer);
@@ -127,17 +144,36 @@ void bench_testing(void)
           if(i%record_point==0)
           {
                endTime = clock();
-               printf("Read count:%d io_write:%d write2:%d erase:%d\n",reads,writes,writes_ram,resets);
+               printf("Read count:%d io_write:%d write2:%d erase:%d block resets:%d\n",reads_io,writes_io,writes_ram,resets,io_resets);
                std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+               printBlockInformation();
+#ifdef NOT_SEPARATE_KV
+               std::string experiment_name = "NOT_SEPARATE_FIXED_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
+#elif defined(NOT_SEPARATE_KV_variable)
+               std::string experiment_name = "NOT_SEPARATE_VARIABLE_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
+#elif defined(SEPARATE_KV_FIXED_LOG)
+               std::string experiment_name = "SEPARATE_FIXED_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
+#elif defined(SEPARATE_KV_VARIABLE_LOG)
+               std::string experiment_name = "SEPARATE_VARIABLE_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
+#endif
+               write_data( "/home/TiOCS/src/data/Experiment3.txt", experiment_name, "workload_A", i);
+               io_resets = 0; 
           }
      }
      endTime = clock();
-     printf("Read count:%d io_write:%d write2:%d erase:%d\n",reads,writes,writes_ram,resets);
+     printf("Read count:%d io_write:%d write2:%d erase:%d block resets:%d\n",reads_io,writes_io,writes_ram,resets,io_resets);
      std::cout << "Total Time of workload A: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
 
      // for(int i=0;i<255;i++)
      // {
-     //      printf("block:%d: pointer:%lu\n",i,BlockWritePointers[i]/4);
+     //      if(block_type_record[i]==0)
+     //      {
+     //           printf("key block:%d: pointer:%lu\n",i,BlockWritePointers[i]/4);
+     //      }
+     //      else
+     //      {
+     //           printf("value block:%d: pointer:%lu\n",i,BlockWritePointers[i]/4);
+     //      }
      // }
 
      // uint64_t workb[1000010];
@@ -262,16 +298,46 @@ void bench_testing(void)
 //      printf("Read count:%d write:%d write2:%d erase:%d\n",reads,writes,writefs,resets);
 //      std::cout << "Total Time of workload C: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
           
-
+     reads_io = 0;
+     writes_io = 0;
+     writes_ram = 0;
+     resets = 0;
+     io_resets = 0;
+     uint64_t* workd = new uint64_t[written_data_num/2+10];
+     string x;
+     int index1=0;
+     ifstream inFile;
+     std::ostringstream filenameStream;
+     filenameStream << "/home/TiOCS/src/data/update_" << KEY_SIZE << "_" << VAL_SIZE << ".txt";
+     std::string filename = filenameStream.str();
+     std::cout << "update Filename: " << filename << std::endl;
+     inFile.open(filename.c_str());
+     if (!inFile) 
+     {
+          std::cerr << "Unable to open file datafile.txt";
+          exit(1);   // call system to stop
+     }
+     while (getline(inFile,x))     
+     {
+          workd[index1++] = atoi(x.c_str());
+     }
+     inFile.close();
      /* workload d: update heavy workload, 50% read, 50% update */
      startTime = clock();
      record_point = written_data_num/2/10;
+     
      for(uint64_t i=1;i<=written_data_num/2;i++)
      {
           srand48(time(NULL));
           memset(key_buffer, 0, KEY_SIZE);
           memset(value_buffer,0, VAL_SIZE);
-          SKey k = 1+(rand()%written_data_num);
+          SKey k =  workd[i-1];
+          // if(k == 8456562 )
+          // {
+          //      printf("get!!!!!!");
+          // }
+          // printf("Test: \n");
+          // printf("key:%lu\n",k);
           // if(i%2==0)
           // {
           //      for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
@@ -288,22 +354,35 @@ void bench_testing(void)
           
           for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
           {
-               key_buffer[KEY_SIZE - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
+               key_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
           }
           for (size_t j = 0; j < sizeof(uint64_t) && j < VAL_SIZE; ++j)
           {
-               value_buffer[KEY_SIZE - 1 - j] = static_cast<char>((k+1 >> (8 * j)) & 0xFF);
+               value_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((k+1 >> (8 * j)) & 0xFF);
           }
+
           Update(key_buffer,value_buffer);
           
           if(i%record_point==0)
           {
-               printf("Read count:%d io_write:%d write2:%d erase:%d\n",reads,writes,writes_ram,resets);
+               printf("Read count:%d io_write:%d write2:%d erase:%d block resets:%d\n",reads_io,writes_io,writes_ram,resets,io_resets);
                endTime = clock();
-               std::cout << "Total Time of "<<i<<" in workload D: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
-          } 
+               std::cout << "Total Time of "<<i<<" in workload D: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+               printBlockInformation();
+#ifdef NOT_SEPARATE_KV
+               std::string experiment_name = "NOT_SEPARATE_FIXED_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
+#elif defined(NOT_SEPARATE_KV_variable)
+               std::string experiment_name = "NOT_SEPARATE_VARIABLE_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
+#elif defined(SEPARATE_KV_FIXED_LOG)
+               std::string experiment_name = "SEPARATE_FIXED_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
+#elif defined(SEPARATE_KV_VARIABLE_LOG)
+               std::string experiment_name = "SEPARATE_VARIABLE_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
+#endif
+               write_data("/home/TiOCS/src/data/Experiment3.txt", experiment_name, "workload_D", i);
+               io_resets = 0;      
+          }
      }
-     printf("Read count:%d io_write:%d write2:%d erase:%d\n",reads,writes,writes_ram,resets);
+     printf("Read count:%d io_write:%d write2:%d erase:%d block resets:%d\n",reads_io,writes_io,writes_ram,resets,io_resets);
      endTime = clock();
      std::cout << "Total Time of workload D: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
      printBlockInformation();
@@ -391,30 +470,76 @@ void bench_testing(void)
      // printf("Read count:%d write:%d write2:%d erase:%d\n",reads,writes,writefs,resets);
      // endTime = clock();
      // std::cout << "Total Time of workload F: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
-
+     test11 = true;
+     reads_io = 0;
+     writes_io = 0;
+     writes_ram = 0;
+     resets = 0;
+     io_resets = 0;
+     uint64_t* workg = new uint64_t[written_data_num+10];
+     printf("wrriten_data_num:%lu wrritten_data_num:%lu\n",written_data_num,written_data_num/5+10);
+     index1=0;
+     clearBufferLog();
+     filenameStream.str("");
+     filenameStream.clear();
+     filenameStream << "/home/TiOCS/src/data/delete_" << KEY_SIZE << "_" << VAL_SIZE << ".txt";
+     filename = filenameStream.str();
+     std::cout << "delete Filename: " << filename << std::endl;
+     inFile.open(filename.c_str());
+     // inFile.open("/home/TiOCS/src/data/delete.txt");
+     if (!inFile) 
+     {
+          std::cerr << "Unable to open file datafile.txt"<<endl;
+          exit(1);   // call system to stop
+     }
+     while (getline(inFile,x))     
+     {
+          workg[index1++] = atoi(x.c_str());
+     }
+     printf("index1:%d\n",index1);
+     inFile.close();
      /* workload G: delete workload, 100% delete*/
      startTime = clock();
      record_point = written_data_num/5/10;
      for(int i=1;i<=written_data_num/5;i++)
      {
           srand48(time(NULL));
-          SKey k = 1+(rand()%written_data_num);
+          SKey k = workg[i-1];
+          // printf("key:%lu\n",k);
+          memset(key_buffer, 0, KEY_SIZE);
           for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
           {
-               key_buffer[KEY_SIZE - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
+               key_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
           }
+          // printf("key_buffer:%lu\n",big_endian2little_endian(key_buffer,KEY_SIZE));
           Delete(key_buffer);
           if(i%record_point==0)
           {
-               printf("Read count:%d io_write:%d write2:%d erase:%d\n",reads,writes,writes_ram,resets);
+               printf("Read count:%d io_write:%d write2:%d erase:%d block resets:%d\n",reads_io,writes_io,writes_ram,resets,io_resets);
                endTime = clock();
-               std::cout << "Total Time of "<<i<<" in workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";     
+               std::cout << "Total Time of "<<i<<" in workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
+               printBlockInformation();
+#ifdef NOT_SEPARATE_KV
+               std::string experiment_name = "NOT_SEPARATE_FIXED_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
+#elif defined(NOT_SEPARATE_KV_variable)
+               std::string experiment_name = "NOT_SEPARATE_VARIABLE_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
+#elif defined(SEPARATE_KV_FIXED_LOG)
+               std::string experiment_name = "SEPARATE_FIXED_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
+#elif defined(SEPARATE_KV_VARIABLE_LOG)
+               std::string experiment_name = "SEPARATE_VARIABLE_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
+#endif
+               write_data("/home/TiOCS/src/data/Experiment3.txt", experiment_name, "workload_G", i);
+               io_resets = 0;     
           }  
      }
-     printf("Read count:%d io_write:%d write2:%d erase:%d\n",reads,writes,writes_ram,resets);
+     printf("Read count:%d io_write:%d write2:%d erase:%d block resets:%d\n",reads_io,writes_io,writes_ram,resets,io_resets);
      endTime = clock();
      std::cout << "Total Time of workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n\n";
      printBlockInformation();
+     delete [] workg;
+     delete [] workd;
+     countBufferLog();
+     printf("It's over!\n");
      
 }
 

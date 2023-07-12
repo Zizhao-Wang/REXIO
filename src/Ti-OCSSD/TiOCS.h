@@ -22,6 +22,8 @@
 
 extern volatile int msqid;
 
+extern bool test11;
+
 /* ================= 2-Tier None-Coupling module ==================== */
 
 int sub_process_init(void);

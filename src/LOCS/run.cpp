@@ -24,7 +24,8 @@ locs_run::locs_run(unsigned long maxsize)
     this->Size = 0;
     this->io_count = 0;
 
-    this->max_entries_per_vector = geometry.clba * page_size / sizeof(entry_t);
+    this->max_entries_per_vector = (geometry.clba/64)*(( SPDK_NVME_OCSSD_MAX_LBAL_ENTRIES* page_size) / sizeof(entry_t));
+    // printf("max_entries_per_vector:%lu\n",max_entries_per_vector);
     this->current_vector_index = 0;
     this->thread_num = geometry.num_grp;
 
@@ -34,10 +35,10 @@ locs_run::locs_run(unsigned long maxsize)
     {
         data[i] = new entry_t[max_entries_per_vector];
     }
-
+    // printf("max size:%lu\n",MaxSize);
     // printf("max_entries_per_vector:%lu\n",max_entries_per_vector);
     // printf("num_vectors:%lu\n",num_vectors);
-    
+
     
 }
 
@@ -51,29 +52,58 @@ void locs_run::PointersDisplay()
 
 std::vector<entry_t> locs_run::SingleRunRead()
 {
-    std::vector<entry_t> entries1; 
-
-    for(size_t i=0; i<chunk_pointers.size();i++)
+    if(Size < MaxSize)
     {
-        for(size_t j=chunk_pointers[i]*geometry.clba;j<chunk_pointers[i]*geometry.clba+geometry.clba;j+=64)
+        std::vector<entry_t> datas;
+        int count = 0;
+        for (int i = 0; i < MaxSize /chunk_capacity; ++i) 
         {
-            std::vector<entry_t> temp;
-            temp = select_read_queue(j, OCSSD_READ);
-            if(temp.size()!=0)
+            for (int j = 0; j < max_entries_per_vector; ++j) 
             {
-                entries1.insert(entries1.end(),temp.begin(),temp.end());
+                if (count < Size) 
+                {
+                    datas.push_back(data[i][j]);
+                    count++;
+                } 
+                else 
+                {
+                    break;
+                }
+            }
+            if (count >= Size) 
+            {
+                break;
             }
         }
-
-        uint64_t channel_id = chunk_pointers[i] / (geometry.num_chk * geometry.num_pu);
-        channels[channel_id].chunk_type[chunk_pointers[i] % (geometry.num_chk * geometry.num_pu)] = DISUSED_CHUNK;
+        return datas;
     }
-    return entries1;
+    else
+    {
+        AssertCondition(Size == MaxSize);
+        std::vector<entry_t> entries1; 
+        for(size_t i=0; i<chunk_pointers.size();i++)
+        {
+            for(size_t j=chunk_pointers[i]*geometry.clba;j<chunk_pointers[i]*geometry.clba+geometry.clba;j+=64)
+            {
+                std::vector<entry_t> temp;
+                temp = select_read_queue(j, OCSSD_READ);
+                if(temp.size()!=0)
+                {
+                    entries1.insert(entries1.end(),temp.begin(),temp.end());
+                }
+            }
+
+            uint64_t channel_id = chunk_pointers[i] / (geometry.num_chk * geometry.num_pu);
+            channels[channel_id].chunk_type[chunk_pointers[i] % (geometry.num_chk * geometry.num_pu)] = DISUSED_CHUNK;
+        }
+        return entries1;
+    }
 }
 
 uint64_t locs_run::RunDataWrite(size_t index)
 {
     // printf("index:%lu\n",index);
+    // printf("max_entries_per_vector:%lu\n",max_entries_per_vector);
     select_write_queue(data[index], max_entries_per_vector, OCSSD_WRITE);
     return 0;  
 }
@@ -102,7 +132,7 @@ void locs_run::PutValue(entry_t entry)
     // auto start_time0 = std::chrono::high_resolution_clock::now();
 
     assert(Size < MaxSize);
-
+    // printf("Size:%lu==================\n",Size);
     data[Size/max_entries_per_vector][Size%max_entries_per_vector] = entry;
     
     if (memcmp(entry.key, max_key, KEY_SIZE) > 0) 
@@ -116,7 +146,7 @@ void locs_run::PutValue(entry_t entry)
     }
 
     Size++;
-
+    
     if(Size % max_io_size==0 && Size != 0)
     {
         char fence_key [KEY_SIZE];
@@ -166,9 +196,19 @@ void locs_run::PutValue(entry_t entry)
     
 #elif defined(SINGLE_THREAD_IO)
 
+    if (Size == MaxSize) 
+    {
+        size_t total_vectors = MaxSize / chunk_capacity;
+
+        for (size_t i = 0; i < total_vectors; i++) 
+        {
+            RunDataWrite(i);
+            chunk_pointers.emplace_back(temp_pointers);
+            // printf("temp_pointers:%lu\n",temp_pointers);
+        }
+    }
+    
 #endif
-
-
 }
 
 

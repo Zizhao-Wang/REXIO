@@ -1,97 +1,97 @@
 [
 {
-  "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/main.cpp.o -c /home/TiOCS/src/main.cpp",
-  "file": "/home/TiOCS/src/main.cpp"
+  "directory": "/home/SFOCS/build",
+  "command": "/usr/bin/g++ -I/home/SFOCS/src/../../spdk/include -I/home/SFOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/main.cpp.o -c /home/SFOCS/src/main.cpp",
+  "file": "/home/SFOCS/src/main.cpp"
 },
 {
-  "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/locs.cpp.o -c /home/TiOCS/src/LOCS/locs.cpp",
-  "file": "/home/TiOCS/src/LOCS/locs.cpp"
+  "directory": "/home/SFOCS/build",
+  "command": "/usr/bin/g++ -I/home/SFOCS/src/../../spdk/include -I/home/SFOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/locs.cpp.o -c /home/SFOCS/src/LOCS/locs.cpp",
+  "file": "/home/SFOCS/src/LOCS/locs.cpp"
 },
 {
-  "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/buffer.cpp.o -c /home/TiOCS/src/LOCS/buffer.cpp",
-  "file": "/home/TiOCS/src/LOCS/buffer.cpp"
+  "directory": "/home/SFOCS/build",
+  "command": "/usr/bin/g++ -I/home/SFOCS/src/../../spdk/include -I/home/SFOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/buffer.cpp.o -c /home/SFOCS/src/LOCS/buffer.cpp",
+  "file": "/home/SFOCS/src/LOCS/buffer.cpp"
 },
 {
-  "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/level.cpp.o -c /home/TiOCS/src/LOCS/level.cpp",
-  "file": "/home/TiOCS/src/LOCS/level.cpp"
+  "directory": "/home/SFOCS/build",
+  "command": "/usr/bin/g++ -I/home/SFOCS/src/../../spdk/include -I/home/SFOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/level.cpp.o -c /home/SFOCS/src/LOCS/level.cpp",
+  "file": "/home/SFOCS/src/LOCS/level.cpp"
 },
 {
-  "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/merge.cpp.o -c /home/TiOCS/src/LOCS/merge.cpp",
-  "file": "/home/TiOCS/src/LOCS/merge.cpp"
+  "directory": "/home/SFOCS/build",
+  "command": "/usr/bin/g++ -I/home/SFOCS/src/../../spdk/include -I/home/SFOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/merge.cpp.o -c /home/SFOCS/src/LOCS/merge.cpp",
+  "file": "/home/SFOCS/src/LOCS/merge.cpp"
 },
 {
-  "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/run.cpp.o -c /home/TiOCS/src/LOCS/run.cpp",
-  "file": "/home/TiOCS/src/LOCS/run.cpp"
+  "directory": "/home/SFOCS/build",
+  "command": "/usr/bin/g++ -I/home/SFOCS/src/../../spdk/include -I/home/SFOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/run.cpp.o -c /home/SFOCS/src/LOCS/run.cpp",
+  "file": "/home/SFOCS/src/LOCS/run.cpp"
 },
 {
-  "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o -c /home/TiOCS/src/AuxizilaryImplement/SysOutput.cpp",
-  "file": "/home/TiOCS/src/AuxizilaryImplement/SysOutput.cpp"
+  "directory": "/home/SFOCS/build",
+  "command": "/usr/bin/g++ -I/home/SFOCS/src/../../spdk/include -I/home/SFOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/AuxizilaryImplement/SysOutput.cpp.o -c /home/SFOCS/src/AuxizilaryImplement/SysOutput.cpp",
+  "file": "/home/SFOCS/src/AuxizilaryImplement/SysOutput.cpp"
 },
 {
-  "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/allocation.cpp.o -c /home/TiOCS/src/LOCS/allocation.cpp",
-  "file": "/home/TiOCS/src/LOCS/allocation.cpp"
+  "directory": "/home/SFOCS/build",
+  "command": "/usr/bin/g++ -I/home/SFOCS/src/../../spdk/include -I/home/SFOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/allocation.cpp.o -c /home/SFOCS/src/LOCS/allocation.cpp",
+  "file": "/home/SFOCS/src/LOCS/allocation.cpp"
 },
 {
-  "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/global_variables.cpp.o -c /home/TiOCS/src/LOCS/global_variables.cpp",
-  "file": "/home/TiOCS/src/LOCS/global_variables.cpp"
+  "directory": "/home/SFOCS/build",
+  "command": "/usr/bin/g++ -I/home/SFOCS/src/../../spdk/include -I/home/SFOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/global_variables.cpp.o -c /home/SFOCS/src/LOCS/global_variables.cpp",
+  "file": "/home/SFOCS/src/LOCS/global_variables.cpp"
 },
 {
-  "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/io_scheduler.cpp.o -c /home/TiOCS/src/LOCS/io_scheduler.cpp",
-  "file": "/home/TiOCS/src/LOCS/io_scheduler.cpp"
+  "directory": "/home/SFOCS/build",
+  "command": "/usr/bin/g++ -I/home/SFOCS/src/../../spdk/include -I/home/SFOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LOCS/io_scheduler.cpp.o -c /home/SFOCS/src/LOCS/io_scheduler.cpp",
+  "file": "/home/SFOCS/src/LOCS/io_scheduler.cpp"
 },
 {
-  "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Auxizilary/pre_definition.cpp.o -c /home/TiOCS/src/Auxizilary/pre_definition.cpp",
-  "file": "/home/TiOCS/src/Auxizilary/pre_definition.cpp"
+  "directory": "/home/SFOCS/build",
+  "command": "/usr/bin/g++ -I/home/SFOCS/src/../../spdk/include -I/home/SFOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Auxizilary/pre_definition.cpp.o -c /home/SFOCS/src/Auxizilary/pre_definition.cpp",
+  "file": "/home/SFOCS/src/Auxizilary/pre_definition.cpp"
 },
 {
-  "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o -c /home/TiOCS/src/Ti-OCSSD/TiOCS.cpp",
-  "file": "/home/TiOCS/src/Ti-OCSSD/TiOCS.cpp"
+  "directory": "/home/SFOCS/build",
+  "command": "/usr/bin/g++ -I/home/SFOCS/src/../../spdk/include -I/home/SFOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/TiOCS.cpp.o -c /home/SFOCS/src/Ti-OCSSD/TiOCS.cpp",
+  "file": "/home/SFOCS/src/Ti-OCSSD/TiOCS.cpp"
 },
 {
-  "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.o -c /home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.cpp",
-  "file": "/home/TiOCS/src/Ti-OCSSD/MemoryTier/Node.cpp"
+  "directory": "/home/SFOCS/build",
+  "command": "/usr/bin/g++ -I/home/SFOCS/src/../../spdk/include -I/home/SFOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/Node.cpp.o -c /home/SFOCS/src/Ti-OCSSD/MemoryTier/Node.cpp",
+  "file": "/home/SFOCS/src/Ti-OCSSD/MemoryTier/Node.cpp"
 },
 {
-  "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.o -c /home/TiOCS/src/Ti-OCSSD/MemoryTier/MemTier.cpp",
-  "file": "/home/TiOCS/src/Ti-OCSSD/MemoryTier/MemTier.cpp"
+  "directory": "/home/SFOCS/build",
+  "command": "/usr/bin/g++ -I/home/SFOCS/src/../../spdk/include -I/home/SFOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/MemoryTier/MemTier.cpp.o -c /home/SFOCS/src/Ti-OCSSD/MemoryTier/MemTier.cpp",
+  "file": "/home/SFOCS/src/Ti-OCSSD/MemoryTier/MemTier.cpp"
 },
 {
-  "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o -c /home/TiOCS/src/Ti-OCSSD/utility/types.cpp",
-  "file": "/home/TiOCS/src/Ti-OCSSD/utility/types.cpp"
+  "directory": "/home/SFOCS/build",
+  "command": "/usr/bin/g++ -I/home/SFOCS/src/../../spdk/include -I/home/SFOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/utility/types.cpp.o -c /home/SFOCS/src/Ti-OCSSD/utility/types.cpp",
+  "file": "/home/SFOCS/src/Ti-OCSSD/utility/types.cpp"
 },
 {
-  "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o -c /home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.cpp",
-  "file": "/home/TiOCS/src/Ti-OCSSD/StoreTier/syncstore.cpp"
+  "directory": "/home/SFOCS/build",
+  "command": "/usr/bin/g++ -I/home/SFOCS/src/../../spdk/include -I/home/SFOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/StoreTier/syncstore.cpp.o -c /home/SFOCS/src/Ti-OCSSD/StoreTier/syncstore.cpp",
+  "file": "/home/SFOCS/src/Ti-OCSSD/StoreTier/syncstore.cpp"
 },
 {
-  "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/StoreTier/io_manager.cpp.o -c /home/TiOCS/src/Ti-OCSSD/StoreTier/io_manager.cpp",
-  "file": "/home/TiOCS/src/Ti-OCSSD/StoreTier/io_manager.cpp"
+  "directory": "/home/SFOCS/build",
+  "command": "/usr/bin/g++ -I/home/SFOCS/src/../../spdk/include -I/home/SFOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/StoreTier/io_manager.cpp.o -c /home/SFOCS/src/Ti-OCSSD/StoreTier/io_manager.cpp",
+  "file": "/home/SFOCS/src/Ti-OCSSD/StoreTier/io_manager.cpp"
 },
 {
-  "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/StoreTier/assistant.cpp.o -c /home/TiOCS/src/Ti-OCSSD/StoreTier/assistant.cpp",
-  "file": "/home/TiOCS/src/Ti-OCSSD/StoreTier/assistant.cpp"
+  "directory": "/home/SFOCS/build",
+  "command": "/usr/bin/g++ -I/home/SFOCS/src/../../spdk/include -I/home/SFOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/Ti-OCSSD/StoreTier/assistant.cpp.o -c /home/SFOCS/src/Ti-OCSSD/StoreTier/assistant.cpp",
+  "file": "/home/SFOCS/src/Ti-OCSSD/StoreTier/assistant.cpp"
 },
 {
-  "directory": "/home/TiOCS/build",
-  "command": "/usr/bin/g++ -I/home/TiOCS/src/../../spdk/include -I/home/TiOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LRU/lru.cpp.o -c /home/TiOCS/src/LRU/lru.cpp",
-  "file": "/home/TiOCS/src/LRU/lru.cpp"
+  "directory": "/home/SFOCS/build",
+  "command": "/usr/bin/g++ -I/home/SFOCS/src/../../spdk/include -I/home/SFOCS/src/../spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/src.dir/LRU/lru.cpp.o -c /home/SFOCS/src/LRU/lru.cpp",
+  "file": "/home/SFOCS/src/LRU/lru.cpp"
 }
 ]

@@ -30,6 +30,9 @@
  * @bf_bits_per_entry
  */
 
+
+bool debug_flag = false;
+
 LOCS::LOCS(size_t BufferSize,int levelnum):buffer(BufferSize)
 {
     for(uint32_t i=0;i<levelnum;i++)
@@ -66,7 +69,7 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
         FlushInto(next);
         assert(next->IsEmpty());
     }
-
+    printf("  === Level %d  Debug Information in LOCS::FlushInto (Call ) ===\n", next->GetLevelNumber());
     /**
     * Merge operation:
     * Merage all runs in the current level into the first run of next level.
@@ -77,9 +80,9 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
     **/
     if(!next->IsFull() && !next->IsEmpty())
     {
-
-        char deleted_val[KEY_SIZE];
-        memset(deleted_val, 0, KEY_SIZE);
+        printf("  === Level %d is merging (Call ) ===\n", next->GetLevelNumber());
+        char deleted_val[VAL_SIZE];
+        memset(deleted_val, 0, VAL_SIZE);
         for(int i=0;i<current->Runs.size();i++)
         {
             //printf("Run has %lu items in current level %ld\n",current->Runs[i].GetNowSize(),current->GetLevelNumber());
@@ -101,13 +104,15 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
             }
         }
 
+        printf("  === Reading done!\n");
+
         check_if_erase();
 
         while(!mergecon.IsEmpty())
         {
-            entry_t entry = mergecon.Contextpop1();
+            entry_t entry = mergecon.Contextpop();
             uint64_t key_value = test(entry.key);
-            if (memcmp(entry.val, deleted_val,KEY_SIZE)!=0) 
+            if (memcmp(entry.val, deleted_val, VAL_SIZE)!=0) 
             {
                 next->PutValue(entry);
             }
@@ -116,6 +121,9 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
                 FlushInto(next);
             }
         }
+
+        printf("  === Merging Level %d done! ===\n", next->GetLevelNumber());
+
         return 0;
     }
 
@@ -176,7 +184,6 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
 
     printf("\n");
     printf("  === Flush Into Debug Information End (Call %d) ===\n", call_count);
-
 #endif
 
     return 0;
@@ -220,10 +227,11 @@ int LOCS::PutValue(const char* key, const char* value)
     }
     else
     {
+
         merge_context mergecon;
         char deleted_val[KEY_SIZE];
         memset(deleted_val, 0, KEY_SIZE);
-
+        // printf("start!\n");
         for(int i=0;i<Levels[0].Runs.size();i++)
         {
             if(Levels[0].Runs[i].GetNowSize()!= 0)
@@ -234,20 +242,34 @@ int LOCS::PutValue(const char* key, const char* value)
             }
         }
         mergecon.Insert(bufferdata);   
-        
+        // printf("Run size: %ld from bufferdata\n",bufferdata.size());
+        int i=0;
         while(!mergecon.IsEmpty())
         {
-            entry_t entry = mergecon.Contextpop1();
+            entry_t entry = mergecon.Contextpop();
             uint64_t key_value = test(entry.key);
+            // printf("key_value: %lu\n", key_value);
             if (memcmp(entry.val, deleted_val,KEY_SIZE)!=0) 
             {
+                // printf("start put!\n");
                 Levels[0].PutValue(entry);
+                // printf("end put!\n");
+                i++;
             }
             if(Levels[0].IsFull())
             {
+                if(key_value == 1051845 && debug_flag == true)
+                {
+                    printf("start DEBUG!\n");
+                }
+                // printf("start flush!\n");
+                // printf("key_value: %lu\n", key_value);
+                // printf("Run size: %ld from IsFull()\n",Levels[0].Runs[0].GetNowSize());
                 FlushInto(Levels.begin());
+                // printf("end flush!\n");
             }
         }
+        // printf("End!\n");
     }
 
     check_if_erase();
@@ -469,7 +491,9 @@ const char* LOCS::GetValue(const char* key)
 void LOCS::DeleteValue(const char* key) 
 {
     resets++;
-    PutValue(key, 0);
+    char deleted_val[KEY_SIZE];
+    memset(deleted_val, 0, KEY_SIZE);
+    PutValue(key, deleted_val);
 }
 
 void LOCS::display()
@@ -502,7 +526,7 @@ void locs_init(void)
     LOCS locs(2,7);                  // Initialize the memory part of LOCS
 
     /* workload a: insert only*/
-    uint64_t written_data_size = 10000000*16;
+    uint64_t written_data_size = 100000000*16;
     uint64_t written_data_num = written_data_size /(KEY_SIZE+VAL_SIZE);
     uint64_t record_point = written_data_num / 10;
 
@@ -514,12 +538,7 @@ void locs_init(void)
 
     for(SKey i=1;i<=written_data_num;i++)
     {
-        if(i%record_point==0)
-        {
-            endTime = clock();
-            std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC <<" IO TIME: "<<time_record<<"  "<<time_record2 << "s\n";
-            // printf("Read count:%d Write count:%u Erase Count:%d \n",reads,writes,erases);
-        }
+
         memset(key_buffer, 0, KEY_SIZE);
         memset(value_buffer, 0, VAL_SIZE);
 
@@ -531,7 +550,7 @@ void locs_init(void)
         {
             value_buffer[KEY_SIZE - 1 - j] = static_cast<char>((i >> (8 * j)) & 0xFF);
         }
-        
+
         locs.PutValue(key_buffer, value_buffer);
 
         if(i%record_point==0)
@@ -539,19 +558,9 @@ void locs_init(void)
             endTime = clock();
             printf("Read count:%d io_write:%d write2:%d erase:%d block resets:%d\n",reads_io,writes_io,writes_ram,resets,io_resets);
             std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
-#ifdef NOT_SEPARATE_KV
-            std::string experiment_name = "NOT_SEPARATE_FIXED_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
-            write_data( "/home/data/Experiment3.txt", experiment_name, "workload_A", i);
-#elif defined(NOT_SEPARATE_KV_variable)
-            std::string experiment_name = "NOT_SEPARATE_VARIABLE_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
-            write_data( "/home/data/Experiment3.txt", experiment_name, "workload_A", i);
-#elif defined(SEPARATE_KV_FIXED_LOG)
-            std::string experiment_name = "SEPARATE_FIXED_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
-            write_data( "/home/data/NoFTL-KV_Experiment3.txt", experiment_name, "workload_A", i);
-#elif defined(SEPARATE_KV_VARIABLE_LOG)
-            std::string experiment_name = "SEPARATE_VARIABLE_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
-            write_data( "/home/data/Experiment3.txt", experiment_name, "workload_A", i);
-#endif
+            std::string experiment_name = "KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
+            write_data( "/home/data/NOFTL_KV_Experiment.txt", experiment_name, "workload_A", i);
+
             io_resets = 0; 
         }
     }
@@ -635,15 +644,15 @@ void locs_init(void)
         std::cerr << "Unable to open file datafile.txt";
         exit(1);   // call system to stop
     }
-    while (getline(inFile,x))     
+    while (getline(inFile,x) && index1 < (written_data_num/2+10))     
     {
-          workd[index1++] = atoi(x.c_str());
+        workd[index1++] = atoi(x.c_str());
     }
     inFile.close();
     /* workload d: update heavy workload, 50% read, 50% update */
     startTime = clock();
     record_point = written_data_num/2/10;
-     
+    debug_flag = true;
     for(uint64_t i=1;i<=written_data_num/2;i++)
     {
         memset(key_buffer, 0, KEY_SIZE);
@@ -658,7 +667,6 @@ void locs_init(void)
         {
             value_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((k+1 >> (8 * j)) & 0xFF);
         }
-
         locs.UpdateValue(key_buffer,value_buffer);
           
         if(i%record_point==0)
@@ -667,19 +675,8 @@ void locs_init(void)
             endTime = clock();
             std::cout << "Total Time of "<<i<<" in workload D: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
             // printBlockInformation();
-#ifdef NOT_SEPARATE_KV
-            std::string experiment_name = "NOT_SEPARATE_FIXED_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
-            write_data("/home/data/Experiment1.txt", experiment_name, "workload_D", i);
-#elif defined(NOT_SEPARATE_KV_variable)
-            std::string experiment_name = "NOT_SEPARATE_VARIABLE_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
-            write_data("/home/data/Experiment2.txt", experiment_name, "workload_D", i);
-#elif defined(SEPARATE_KV_FIXED_LOG)
-            std::string experiment_name = "SEPARATE_FIXED_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
-            write_data("/home/data/Experiment3.txt", experiment_name, "workload_D", i);
-#elif defined(SEPARATE_KV_VARIABLE_LOG)
-            std::string experiment_name = "SEPARATE_VARIABLE_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
-            write_data("/home/data/Experiment4.txt", experiment_name, "workload_D", i);
-#endif
+            std::string experiment_name = "KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
+            write_data( "/home/data/NOFTL_KV_Experiment.txt", experiment_name, "workload_D", i);
             io_resets = 0;      
         }
     }
@@ -755,13 +752,12 @@ void locs_init(void)
     filename = filenameStream.str();
     std::cout << "delete Filename: " << filename << std::endl;
     inFile.open(filename.c_str());
-    // inFile.open("/home/TiOCS/src/data/delete.txt");
     if (!inFile) 
     {
         std::cerr << "Unable to open file datafile.txt"<<endl;
         exit(1);   // call system to stop
     }
-    while (getline(inFile,x))     
+    while (getline(inFile,x) && index1<(written_data_num+10))     
     {
         workg[index1++] = atoi(x.c_str());
     }
@@ -787,19 +783,8 @@ void locs_init(void)
             endTime = clock();
             std::cout << "Total Time of "<<i<<" in workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
             // printBlockInformation();
-#ifdef NOT_SEPARATE_KV
-            std::string experiment_name = "NOT_SEPARATE_FIXED_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
-            write_data("/home/data/Experiment1.txt", experiment_name, "workload_G", i);
-#elif defined(NOT_SEPARATE_KV_variable)
-            std::string experiment_name = "NOT_SEPARATE_VARIABLE_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
-            write_data("/home/data/Experiment2.txt", experiment_name, "workload_G", i);
-#elif defined(SEPARATE_KV_FIXED_LOG)
-            std::string experiment_name = "SEPARATE_FIXED_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
-            write_data("/home/data/Experiment3.txt", experiment_name, "workload_G", i);
-#elif defined(SEPARATE_KV_VARIABLE_LOG)
-            std::string experiment_name = "SEPARATE_VARIABLE_KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
-            write_data("/home/data/Experiment4.txt", experiment_name, "workload_G", i);
-#endif
+            std::string experiment_name = "KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
+            write_data( "/home/data/NOFTL_KV_Experiment.txt", experiment_name, "workload_G", i);
             io_resets = 0;     
         }  
     }

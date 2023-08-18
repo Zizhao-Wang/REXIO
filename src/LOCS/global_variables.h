@@ -7,6 +7,7 @@
 #include <spdk/nvme_ocssd.h>
 #include <spdk/nvme_ocssd_spec.h>
 #include "../Auxizilary/pre_definition.h"
+#include "../Debug/debug_micros.h"
 
 
 #ifndef LOCS_GLOBALVARIABLE_H
@@ -29,7 +30,11 @@ extern struct spdk_nvme_ctrlr *ctrlr; // pointer that point to the controller
 
 extern struct spdk_nvme_transport_id trid; //transport id
 
+#ifdef MULTI_THREAD_IO
 extern std::map<pthread_t,uint64_t> temp_pointers;
+#elif defined(SINGLE_THREAD_IO)
+extern uint64_t temp_pointers;
+#endif
 
 extern struct spdk_ocssd_geometry_data geometry;
  

@@ -3,6 +3,7 @@
 #include <queue>
 #include <sys/syscall.h>
 #include "global_variables.h"
+#include "../Auxizilary/pre_definition.h"
 
 struct channels_io *channels = nullptr;
 uint64_t current_channel = 0;
@@ -340,9 +341,9 @@ void check_if_erase()
     for(uint64_t channel_id = 0; channel_id < geometry.num_grp; channel_id++)
     {
         double free_percent = 1 - (double)channels[channel_id].used_chunk / (double)channels[channel_id].all_chunk_count;
-        if(free_percent < 0.2)
+        if(free_percent < 0.3)
         {
-            printf("Channel %lu is full, start to erase!\n", channel_id);
+            // printf("Channel %lu is full, start to erase!\n", channel_id);
             uint64_t start_chunk_id = 0;
             uint64_t end_chunk_id = 0;
             bool is_erasing = false;
@@ -367,6 +368,7 @@ void check_if_erase()
                         // printf("Chunks from %lu to %lu are disused, start to erase!\n", start_chunk_id, end_chunk_id);
 						insert_erase_queue(start_chunk_id+(channel_id*geometry.num_pu*geometry.num_chk), end_chunk_id+(channel_id*geometry.num_pu*geometry.num_chk),end_chunk_id-start_chunk_id+1,channel_id);
                         is_erasing = false;
+						resets += (end_chunk_id-start_chunk_id+1);
                     }
                 }
             }
@@ -374,6 +376,7 @@ void check_if_erase()
             {
                 // printf("Chunks from %lu to %lu are disused, start to erase!\n", start_chunk_id, end_chunk_id);
                 insert_erase_queue((i-1)+(channel_id*geometry.num_pu*geometry.num_chk), (i-1)+(channel_id*geometry.num_pu*geometry.num_chk),1,channel_id);    
+				resets += 1;
             }
 
             free_percent = (double)channels[channel_id].used_chunk / (double)channels[channel_id].all_chunk_count;
@@ -432,11 +435,15 @@ int insert_write_queue(entry_t* data, uint64_t channel_id, size_t start, size_t 
         j += VAL_SIZE;
     }
 
+
+	// printf("channel_id:%lu current_writer_point: %lu\n",channel_id,channels[channel_id].current_writer_point);
     // Fill lbalist
     for(uint32_t j = 0;j<SPDK_NVME_OCSSD_MAX_LBAL_ENTRIES;j++)
     {
         lbalist[j] = channels[channel_id].current_writer_point++;
     }
+	
+	
 
 	uint64_t local_request_num = 1;
 
@@ -464,11 +471,14 @@ int select_write_queue(entry_t* data, size_t data_size, int mode)
 	// std::cout << "Entering select_write_queue with data size = " << data_size << std::endl;
     if(mode == OCSSD_WRITE)
     {
-        mtx.lock();  
+#ifdef MULTI_THREAD_IO
+		mtx.lock();
+#endif
         uint64_t channel_id = current_channel;
         current_channel = (current_channel + 1) % geometry.num_grp;
-        mtx.unlock();  
-		
+#ifdef MULTI_THREAD_IO
+		mtx.unlock(); 
+#endif
 		// printf("Channel %lu is selected!\n", channel_id);
 
 		size_t offset_of_vector = SPDK_NVME_OCSSD_MAX_LBAL_ENTRIES*page_size/(sizeof(entry_t));
@@ -486,6 +496,7 @@ int select_write_queue(entry_t* data, size_t data_size, int mode)
 		}
 		channels[channel_id].current_writer_point = (block + channel_id*geometry.num_chk*geometry.num_pu) *geometry.clba;
 
+		// printf("Test!!!!!!!!!!");
 		for (size_t i = 0; i < data_size; i += offset_of_vector)
         {
             size_t end = std::min(i + offset_of_vector, data_size);
@@ -500,8 +511,12 @@ int select_write_queue(entry_t* data, size_t data_size, int mode)
 		
 		// printf("Thread %d write %lu\n", id, data_size);
 		uint64_t last_written_block_temp = (channels[channel_id].current_writer_point/geometry.clba) -1;
+		// printf("last_written_block_temp %lu\n", last_written_block_temp);
+#ifdef MULTI_THREAD_IO
 		temp_pointers [pthread_self()] = last_written_block_temp;
-
+#elif defined(SINGLE_THREAD_IO)
+		temp_pointers = last_written_block_temp;
+#endif
 
 		channels[channel_id].used_chunk++;
 		channels[channel_id].chunk_type[last_written_block_temp-(channel_id*geometry.num_chk*geometry.num_pu)] = DATA_CHUNK;
@@ -622,7 +637,7 @@ char* insert_read_queue(uint64_t start_address)
 	{
 		lbalist[j] = start_address+j;
 	}
-
+	// printf("start_address %lu\n", start_address);
 	if (spdk_nvme_ocssd_ns_cmd_vector_read(ns,channels[channel_id].qpair,(void *)buffer,lbalist,64,read_complete, NULL,0) == 0)
 	{
 		outstanding_commands++;
@@ -654,8 +669,11 @@ std::vector<entry_t> select_read_queue(uint64_t start_address, int mode)
 	if(mode == OCSSD_READ)
 	{
 		temp_data = insert_read_queue(start_address);
-		
-		for(uint64_t j=0;j<page_size*64;)
+		// Calculate the number of key-value pairs that fit into one I/O read
+		uint64_t kv_pairs_per_io = (page_size * 64) / (KEY_SIZE + VAL_SIZE);
+		// Calculate the valid data size for each I/O read
+		uint64_t valid_data_size = kv_pairs_per_io * (KEY_SIZE + VAL_SIZE);
+		for(uint64_t j=0;j<valid_data_size;)
 		{
 			memcpy(entry.key, temp_data + j, KEY_SIZE);
         	j += KEY_SIZE;

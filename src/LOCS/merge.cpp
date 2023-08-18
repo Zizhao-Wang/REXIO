@@ -58,7 +58,7 @@ void merge_context::Insert(entry_t entrie)
 
 
 
-entry_t merge_context::Contextpop(void) 
+entry_t merge_context::Contextpop() 
 {
     // printf("priority_queue.top():%lu",queue.top().SingleEntry.key);
     // exit(0);
@@ -67,9 +67,8 @@ entry_t merge_context::Contextpop(void)
 
     current = queue.top();
     next = current;
-    int i = 0;
 
-    while (next.SingleEntry.key == current.SingleEntry.key && !queue.empty())  // Only release the most recent value for a given key
+    while ( test(next.SingleEntry.key) == test(current.SingleEntry.key) && !queue.empty())  // Only release the most recent value for a given key
     {
         queue.pop();
         next = queue.top();
@@ -93,12 +92,6 @@ entry_t merge_context::Contextpop1()
 
     return current.SingleEntry;
 }
-
-    // uint64_t key_value = test(current.SingleEntry.key);
-    // if (key_value == 1 || key_value == 2097152 || key_value == 1048576 || key_value == 1572864)
-    // {
-    //     printf("Popped key: %lu\n", key_value);
-    // }
 
 bool merge_context::IsEmpty(void) const 
 {

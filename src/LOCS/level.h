@@ -37,6 +37,7 @@ public:
     void PutEntries(std::vector<entry_t>);
     bool IsEmpty(void);
     bool IsFull (void);
+    void PrintLevel(void);
     long GetMRunSize(void) const;
     long GetLevelNumber(void) const;
     uint64_t GetNowSize(void);

@@ -16,7 +16,11 @@ struct spdk_nvme_transport_id trid;
 
 struct spdk_nvme_ns * ns = nullptr;
 
-std::map<pthread_t,uint64_t> temp_pointers;
+#ifdef MULTI_THREAD_IO
+std::map<pthread_t,uint64_t> temp_pointers;	
+#elif defined(SINGLE_THREAD_IO)
+uint64_t temp_pointers;
+#endif
 
 struct spdk_nvme_detach_ctx *g_detach_ctx = NULL;
 
@@ -75,7 +79,7 @@ void print_ocssd_geometry(struct spdk_ocssd_geometry_data *geometry_data)
 
  int variables_init()
  {
-	chunk_capacity = (geometry.clba * page_size) / sizeof(entry_t);
+	chunk_capacity = (geometry.clba/64)*(( SPDK_NVME_OCSSD_MAX_LBAL_ENTRIES* page_size) / sizeof(entry_t));
 	max_data_entries_per_io = SPDK_NVME_OCSSD_MAX_LBAL_ENTRIES*page_size/sizeof(entry_t) ;
 	printf("---- SSD Information Initialized Successfully! \n");
 	return 0;

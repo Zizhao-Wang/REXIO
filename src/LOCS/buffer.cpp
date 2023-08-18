@@ -11,7 +11,7 @@ const int P_FACTOR = RAND_MAX >> 2;
 locs_buffer::locs_buffer(size_t max_chunks)
 {
 
-    this->MaxSize = (max_chunks * geometry.clba * page_size) / sizeof(entry_t);
+    this->MaxSize =max_chunks * ((geometry.clba/64)*(( SPDK_NVME_OCSSD_MAX_LBAL_ENTRIES* page_size) / sizeof(entry_t)));
     // this->MaxSize = 4;
     printf("MaxSize:%lu\n",MaxSize);
     size = 0;

@@ -1,3 +1,3 @@
-/home/TiOCS/build/CMakeFiles/src.dir
-/home/TiOCS/build/CMakeFiles/edit_cache.dir
-/home/TiOCS/build/CMakeFiles/rebuild_cache.dir
+/home/SFOCS/build/CMakeFiles/src.dir
+/home/SFOCS/build/CMakeFiles/edit_cache.dir
+/home/SFOCS/build/CMakeFiles/rebuild_cache.dir

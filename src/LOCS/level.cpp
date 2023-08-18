@@ -113,3 +113,12 @@ uint64_t locs_level ::GetMaxSize(void)
     
     return MaxRuns*MaxRunSize;
 }
+
+void locs_level ::PrintLevel(void)
+{
+    printf("Level %ld:\n",LevelNumber);
+    for(int i=0;i<Runs.size();i++)
+    {
+        printf("Run %d: size: %ld\n ",i,Runs[i].GetNowSize());
+    }
+}

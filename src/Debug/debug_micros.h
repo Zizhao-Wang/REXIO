@@ -57,6 +57,6 @@
  */
 // #define SINGLE_THREAD_IO
 
-#define MULTI_THREAD_IO
-
+// #define MULTI_THREAD_IO
+#define SINGLE_THREAD_IO
 #endif // TIOCS_DEBUG_H

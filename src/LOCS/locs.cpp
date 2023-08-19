@@ -70,8 +70,6 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
         assert(next->IsEmpty());
     }
 
-    printf("  === Level %ld  Debug Information in LOCS::FlushInto (Call ) ===\n", next->GetLevelNumber());
-
     /**
     * Merge operation:
     * Merage all runs in the current level into the first run of next level.
@@ -122,8 +120,6 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
                 FlushInto(next);
             }
         }
-
-        printf("  === Merging Level %ld done! ===\n", next->GetLevelNumber());
 
         return 0;
     }
@@ -554,7 +550,7 @@ void locs_init(void)
             printf("Read count:%d io_write:%d write2:%d erase:%d block resets:%d\n",reads_io,writes_io,writes_ram,resets,io_resets);
             std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
             std::string experiment_name = "KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
-            write_data( "/home/data/NOFTL_KV_Experiment.txt", experiment_name, "workload_A", i);
+            write_data( "/home/data/NOFTL_KV.txt", experiment_name, "workload_A", i);
 
             io_resets = 0; 
         }
@@ -671,7 +667,7 @@ void locs_init(void)
             std::cout << "Total Time of "<<i<<" in workload D: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
             // printBlockInformation();
             std::string experiment_name = "KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
-            write_data( "/home/data/NOFTL_KV_Experiment.txt", experiment_name, "workload_D", i);
+            write_data( "/home/data/NOFTL_KV.txt", experiment_name, "workload_D", i);
             io_resets = 0;      
         }
     }
@@ -779,7 +775,7 @@ void locs_init(void)
             std::cout << "Total Time of "<<i<<" in workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
             // printBlockInformation();
             std::string experiment_name = "KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
-            write_data( "/home/data/NOFTL_KV_Experiment.txt", experiment_name, "workload_G", i);
+            write_data( "/home/data/NOFTL_KV.txt", experiment_name, "workload_G", i);
             io_resets = 0;     
         }  
     }

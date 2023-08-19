@@ -361,6 +361,10 @@ void locs_run::Reset()
 
     Size = 0;
 
+#ifdef DIRECT_ERASE
+    chunk_reset();
+#endif
+
     if(chunk_pointers.size()!=0)
     {
         chunk_pointers.clear();
@@ -370,9 +374,7 @@ void locs_run::Reset()
     memset(min_key, 0xFF, KEY_SIZE);
     io_count = 0;
 
-#ifdef DIRECT_ERASE
-    chunk_reset();
-#endif
+
 
 }
 
@@ -511,9 +513,11 @@ void locs_run::chunk_reset()
     for (auto pointer: chunk_pointers)
     {
         err = insert_erase_queue(pointer, &chunks[pointer]);
+        printf("pointer:%lu will be erased!\n",pointer);
         if(err !=0)
         {
             printf("Erase failed!");
+            exit(-1);
         }
     }
     spdk_dma_free(chunks);

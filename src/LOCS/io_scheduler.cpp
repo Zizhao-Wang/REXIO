@@ -113,9 +113,9 @@ void erase_complete(void *arg, const struct spdk_nvme_cpl *completion)
 	{
         printf("OCSSD vector write failed with status 0x%x\n", completion->status.sct);
     }
-	// printf("Erase completed!\n");
 	erase_outstanding_commands--;
 	io_resets++; 
+	printf("io_resets %d\n", io_resets);
 }
 
 
@@ -158,7 +158,6 @@ int insert_erase_queue(uint64_t chunk_id, spdk_ocssd_chunk_information_entry *ch
 	}
 	
 	channels[channel_id].chunk_type[chunk_id - (channel_id*geometry.num_chk*geometry.num_pu)] = FREE_CHUNK;
-
 	channels[channel_id].used_chunk--;
 
 	spdk_dma_free(lbalist);
@@ -330,6 +329,8 @@ void printf_chunk_info(uint64_t channel_id)
 	printf("\n");
 	
 }
+
+
 void check_if_erase()
 {
 	int falsg = 0;

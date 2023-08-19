@@ -52,7 +52,7 @@
 
 #define DIRECT_ERASE
 
-#define DELAYED_ERASE
+// #define DELAYED_ERASE
 
 
 

@@ -470,7 +470,53 @@ print_ocssd_chunk_info(struct spdk_ocssd_chunk_information_entry *chk_info, int 
 
 void locs_run::chunk_reset()
 {
+    
+	int nsid = spdk_nvme_ns_get_id(ns);
+	uint32_t num_entry = 256;
+	uint32_t xfer_size = spdk_nvme_ns_get_max_io_xfer_size(ns);
+	uint32_t buf_size = 0;
+	uint64_t buf_offset = 0;
+	outstanding_commands = 0;
 
+	assert(num_entry != 0);
+
+	spdk_ocssd_chunk_information_entry * chunks = (spdk_ocssd_chunk_information_entry *)spdk_dma_malloc(num_entry*sizeof(spdk_ocssd_chunk_information_entry), 0x40, NULL);
+	assert(chunks != NULL);
+
+	buf_size = num_entry * sizeof(struct spdk_ocssd_chunk_information_entry);
+	while (buf_size > 0) 
+    {
+		xfer_size = min(buf_size, xfer_size);
+		if (spdk_nvme_ctrlr_cmd_get_log_page(ctrlr, SPDK_OCSSD_LOG_CHUNK_INFO,nsid, (void *) (chunks + buf_offset),xfer_size, buf_offset, get_log_page_completion, NULL) == 0) 
+        {
+			outstanding_commands++;
+		} 
+        else 
+        {
+			printf("get_ocssd_chunk_info_log_page() failed\n");
+			return ;
+		}
+		buf_size -= xfer_size;
+		buf_offset += xfer_size;
+	}
+
+
+	while (outstanding_commands) 
+    {
+		spdk_nvme_ctrlr_process_admin_completions(ctrlr);
+	}
+
+    int err = 0;
+
+    for (auto pointer: chunk_pointers)
+    {
+        err = insert_erase_queue(pointer, &chunks[pointer]);
+        if(err !=0)
+        {
+            printf("Erase failed!");
+        }
+    }
+    spdk_dma_free(chunks);
 }
 
 void locs_run::status_display(void)

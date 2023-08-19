@@ -136,6 +136,7 @@ int insert_erase_queue(uint64_t chunk_id, spdk_ocssd_chunk_information_entry *ch
 		printf("Chunk is already free!\n");
 		return -1;
 	}
+
 	uint64_t *lbalist = (uint64_t*)spdk_dma_malloc(sizeof(uint64_t), 0x10, NULL);
 	lbalist[0] = chunk_id * geometry.clba;
 	erase_outstanding_commands = 0;
@@ -289,12 +290,6 @@ int insert_erase_queue(uint64_t start_chunk_id, uint64_t end_chunk_id,uint64_t s
         remaining_size -= current_size;
         current_start_chunk_id += current_size;
     }
-
-	// get_chunk_log();
-	// for(int i = 0; i < 256; i++)
-    // {
-    //     printf("chunks[%d].wli %x\n", i, *(uint8_t *) & (chunks[i].cs));
-    // }
 
 	spdk_dma_free(lbalist);
 

@@ -217,7 +217,9 @@ int LOCS::PutValue(const char* key, const char* value)
     // Step 3
     std::vector<entry_t> bufferdata = buffer.GetEntries();
 
+#ifdef TIME_RECORDING_ON
     auto start_time = std::chrono::high_resolution_clock::now();
+#endif
    
     if(Levels[0].IsEmpty())
     {
@@ -228,7 +230,6 @@ int LOCS::PutValue(const char* key, const char* value)
     }
     else
     {
-
         merge_context mergecon;
         char deleted_val[KEY_SIZE];
         memset(deleted_val, 0, KEY_SIZE);
@@ -252,22 +253,12 @@ int LOCS::PutValue(const char* key, const char* value)
             // printf("key_value: %lu\n", key_value);
             if (memcmp(entry.val, deleted_val,KEY_SIZE)!=0) 
             {
-                // printf("start put!\n");
                 Levels[0].PutValue(entry);
-                // printf("end put!\n");
                 i++;
             }
             if(Levels[0].IsFull())
             {
-                if(key_value == 1051845 && debug_flag == true)
-                {
-                    printf("start DEBUG!\n");
-                }
-                // printf("start flush!\n");
-                // printf("key_value: %lu\n", key_value);
-                // printf("Run size: %ld from IsFull()\n",Levels[0].Runs[0].GetNowSize());
                 FlushInto(Levels.begin());
-                // printf("end flush!\n");
             }
         }
     }

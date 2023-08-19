@@ -369,6 +369,11 @@ void locs_run::Reset()
     memset(max_key, 0, KEY_SIZE);
     memset(min_key, 0xFF, KEY_SIZE);
     io_count = 0;
+
+#ifdef DIRECT_ERASE
+    chunk_reset();
+#endif
+
 }
 
 void locs_run::set_max_key(const char* key)

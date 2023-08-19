@@ -50,6 +50,10 @@
 
 #define IO_DEBUG
 
+#define DIRECT_ERASE
+
+#define DELAYED_ERASE
+
 
 
 /**

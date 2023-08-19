@@ -69,7 +69,9 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
         FlushInto(next);
         assert(next->IsEmpty());
     }
-    printf("  === Level %d  Debug Information in LOCS::FlushInto (Call ) ===\n", next->GetLevelNumber());
+
+    printf("  === Level %ld  Debug Information in LOCS::FlushInto (Call ) ===\n", next->GetLevelNumber());
+
     /**
     * Merge operation:
     * Merage all runs in the current level into the first run of next level.
@@ -80,7 +82,6 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
     **/
     if(!next->IsFull() && !next->IsEmpty())
     {
-        printf("  === Level %d is merging (Call ) ===\n", next->GetLevelNumber());
         char deleted_val[VAL_SIZE];
         memset(deleted_val, 0, VAL_SIZE);
         for(int i=0;i<current->Runs.size();i++)
@@ -104,9 +105,9 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
             }
         }
 
-        printf("  === Reading done!\n");
-
+#ifdef DELAYED_ERASE
         check_if_erase();
+#endif
 
         while(!mergecon.IsEmpty())
         {
@@ -122,7 +123,7 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
             }
         }
 
-        printf("  === Merging Level %d done! ===\n", next->GetLevelNumber());
+        printf("  === Merging Level %ld done! ===\n", next->GetLevelNumber());
 
         return 0;
     }
@@ -269,17 +270,20 @@ int LOCS::PutValue(const char* key, const char* value)
                 // printf("end flush!\n");
             }
         }
-        // printf("End!\n");
     }
 
+#ifdef DELAYED_ERASE
     check_if_erase();
+#endif
 
     buffer.AllClear();
     assert(buffer.PutValue(key, value));
     
-    // auto end_time = std::chrono::high_resolution_clock::now();
-    // auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
-    // std::cout << "Total I/O time for clear data: " << duration.count() << "ms\n";
+#ifdef TIME_RECORDING_ON
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    std::cout << "Total I/O time for clear data: " << duration.count() << "ms\n";
+#endif
 
 #ifdef DEBUG
     for (auto level_it = Levels.begin(); level_it != Levels.end(); ++level_it) 

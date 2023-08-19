@@ -88,7 +88,11 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
             if(current->Runs[i].GetNowSize() != 0)
             {
                 mergecon.Insert(current->Runs[i].SingleRunRead());
+#ifdef DIRECT_ERASE
+                current->Runs[i].chunk_reset();
+#endif
                 current->Runs[i].Reset(); 
+
             }
         }
 
@@ -99,6 +103,9 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
             if(next->Runs[i].GetNowSize() != 0)
             {
                 mergecon.Insert(next->Runs[i].SingleRunRead());
+#ifdef DIRECT_ERASE
+                next->Runs[i].chunk_reset();
+#endif                
                 next->Runs[i].Reset();
             }
         }
@@ -236,6 +243,9 @@ int LOCS::PutValue(const char* key, const char* value)
             {
                 // printf("Run size: %ld from GetNowSize()\n",Levels[0].Runs[i].GetNowSize());
                 mergecon.Insert(Levels[0].Runs[i].SingleRunRead());
+#ifdef DIRECT_ERASE
+                Levels[0].Runs[i].chunk_reset();
+#endif
                 Levels[0].Runs[i].Reset(); 
             }
         }

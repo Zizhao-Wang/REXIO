@@ -18,9 +18,8 @@
 #include <stdint.h>
 #include <vector>
 #include <unordered_map>
-#include <liblightnvm.h>
 #include "../BlockManage/BlockInfo.h"
-#include "../../Auxizilary/pre_definition.h"
+// #include "../../Auxizilary/pre_definition.h"
 #include "../../Auxizilary/SysOutput.h"
 #include "../../Auxizilary/GlobalVariable.h"
 #include "../../Backend/backend_variables.h"

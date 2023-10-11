@@ -8,6 +8,7 @@
  **/
 
 #include "merge.h" // Related header file
+#include "../Ti-OCSSD/MemoryTier/MemTier.h" // Related header file
 #include <iostream>
 
 
@@ -38,7 +39,7 @@ void merge_context::Insert(std::vector<entry_t> entries)
         queue.push(MergeItem);
         index++;
 
-        uint64_t key_value = test(MergeItem.SingleEntry.key);
+        uint64_t key_value = big_endian2little_endian(MergeItem.SingleEntry.key,KEY_SIZE);
 #ifdef BIG_TO_LITTLE_ENDIAN        
         if (index == 1 || index == entries.size() || key_value == 1048576 || key_value == 1572864)
         {
@@ -61,19 +62,20 @@ void merge_context::Insert(entry_t entrie)
 entry_t merge_context::Contextpop() 
 {
     // printf("priority_queue.top():%lu",queue.top().SingleEntry.key);
-    // exit(0);
     merge_entry current, next;
     entry_t entry;
 
+
     current = queue.top();
     next = current;
-
-    while ( test(next.SingleEntry.key) == test(current.SingleEntry.key) && !queue.empty())  // Only release the most recent value for a given key
+    // int i = 0;
+    while (!queue.empty() &&  big_endian2little_endian(next.SingleEntry.key,KEY_SIZE) == big_endian2little_endian(current.SingleEntry.key,KEY_SIZE))  // Only release the most recent value for a given key
     {
         queue.pop();
         next = queue.top();
+        // i++;
     }
-
+    // printf("i: %d in pop\n", i);
     return current.SingleEntry;
 }
 

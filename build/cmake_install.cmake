@@ -1,4 +1,4 @@
-# Install script for directory: /home/SFOCS/src
+# Install script for directory: /wzz/SFOCS/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/SFOCS/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/wzz/SFOCS/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

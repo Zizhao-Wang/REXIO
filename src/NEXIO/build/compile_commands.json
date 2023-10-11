@@ -1,0 +1,80 @@
+[
+{
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -I/wzz/SFOCS/src/NEXIO -I/wzz/spdk/include -I/wzz/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/NEXIO.dir/main.cpp.o -c /wzz/SFOCS/src/NEXIO/main.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/main.cpp",
+  "output": "CMakeFiles/NEXIO.dir/main.cpp.o"
+},
+{
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -I/wzz/SFOCS/src/NEXIO -I/wzz/spdk/include -I/wzz/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/MemTier.cpp.o -c /wzz/SFOCS/src/NEXIO/memlayer/MemTier.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/memlayer/MemTier.cpp",
+  "output": "memlayer/CMakeFiles/Memlayer.dir/MemTier.cpp.o"
+},
+{
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -I/wzz/SFOCS/src/NEXIO -I/wzz/spdk/include -I/wzz/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/asyncstore.cpp.o -c /wzz/SFOCS/src/NEXIO/memlayer/asyncstore.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/memlayer/asyncstore.cpp",
+  "output": "memlayer/CMakeFiles/Memlayer.dir/asyncstore.cpp.o"
+},
+{
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -I/wzz/SFOCS/src/NEXIO -I/wzz/spdk/include -I/wzz/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/buffer_manager/FIFO.cpp.o -c /wzz/SFOCS/src/NEXIO/memlayer/buffer_manager/FIFO.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/memlayer/buffer_manager/FIFO.cpp",
+  "output": "memlayer/CMakeFiles/Memlayer.dir/buffer_manager/FIFO.cpp.o"
+},
+{
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -I/wzz/SFOCS/src/NEXIO -I/wzz/spdk/include -I/wzz/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/buffer_manager/lru.cpp.o -c /wzz/SFOCS/src/NEXIO/memlayer/buffer_manager/lru.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/memlayer/buffer_manager/lru.cpp",
+  "output": "memlayer/CMakeFiles/Memlayer.dir/buffer_manager/lru.cpp.o"
+},
+{
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -I/wzz/SFOCS/src/NEXIO -I/wzz/spdk/include -I/wzz/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/node.cpp.o -c /wzz/SFOCS/src/NEXIO/memlayer/node.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/memlayer/node.cpp",
+  "output": "memlayer/CMakeFiles/Memlayer.dir/node.cpp.o"
+},
+{
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -I/wzz/SFOCS/src/NEXIO -I/wzz/spdk/include -I/wzz/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/parameters.cpp.o -c /wzz/SFOCS/src/NEXIO/memlayer/parameters.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/memlayer/parameters.cpp",
+  "output": "memlayer/CMakeFiles/Memlayer.dir/parameters.cpp.o"
+},
+{
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -I/wzz/SFOCS/src/NEXIO -I/wzz/spdk/include -I/wzz/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/spdk_env_init.cpp.o -c /wzz/SFOCS/src/NEXIO/memlayer/spdk_env_init.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/memlayer/spdk_env_init.cpp",
+  "output": "memlayer/CMakeFiles/Memlayer.dir/spdk_env_init.cpp.o"
+},
+{
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -I/wzz/SFOCS/src/NEXIO -I/wzz/spdk/include -I/wzz/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/syncstore.cpp.o -c /wzz/SFOCS/src/NEXIO/memlayer/syncstore.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/memlayer/syncstore.cpp",
+  "output": "memlayer/CMakeFiles/Memlayer.dir/syncstore.cpp.o"
+},
+{
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -I/wzz/SFOCS/src/NEXIO -I/wzz/spdk/include -I/wzz/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o disklayer/CMakeFiles/Disklayer.dir/io_manager.cpp.o -c /wzz/SFOCS/src/NEXIO/disklayer/io_manager.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/disklayer/io_manager.cpp",
+  "output": "disklayer/CMakeFiles/Disklayer.dir/io_manager.cpp.o"
+},
+{
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -I/wzz/SFOCS/src/NEXIO -I/wzz/spdk/include -I/wzz/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o disklayer/CMakeFiles/Disklayer.dir/io_manager/io_thread.cpp.o -c /wzz/SFOCS/src/NEXIO/disklayer/io_manager/io_thread.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/disklayer/io_manager/io_thread.cpp",
+  "output": "disklayer/CMakeFiles/Disklayer.dir/io_manager/io_thread.cpp.o"
+},
+{
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -I/wzz/SFOCS/src/NEXIO -I/wzz/spdk/include -I/wzz/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o disklayer/CMakeFiles/Disklayer.dir/write_buffer.cpp.o -c /wzz/SFOCS/src/NEXIO/disklayer/write_buffer.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/disklayer/write_buffer.cpp",
+  "output": "disklayer/CMakeFiles/Disklayer.dir/write_buffer.cpp.o"
+},
+{
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -I/wzz/SFOCS/src/NEXIO -I/wzz/spdk/include -I/wzz/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o utility/CMakeFiles/Utility.dir/types.cpp.o -c /wzz/SFOCS/src/NEXIO/utility/types.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/utility/types.cpp",
+  "output": "utility/CMakeFiles/Utility.dir/types.cpp.o"
+}
+]

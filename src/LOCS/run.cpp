@@ -129,8 +129,10 @@ void* parallel_data_write(void* arg)
 void locs_run::PutValue(entry_t entry) 
 {
 
-    // auto start_time0 = std::chrono::high_resolution_clock::now();
-
+#ifdef TIME_RECORDING_ON
+    auto start_time0 = std::chrono::high_resolution_clock::now();
+#endif
+    
     assert(Size < MaxSize);
     // printf("Size:%lu==================\n",Size);
     data[Size/max_entries_per_vector][Size%max_entries_per_vector] = entry;
@@ -154,15 +156,21 @@ void locs_run::PutValue(entry_t entry)
         FencePointers.emplace_back(fence_key);
     }
 
-    // auto end_time0 = std::chrono::high_resolution_clock::now();
-    // auto duration0 = std::chrono::duration_cast<std::chrono::milliseconds>(end_time0 - start_time0);
-    // time_record3 += duration0.count();
-    // printf("PutValue time:%lu\n",duration0.count());
+#ifdef TIME_RECORDING_ON
+    auto end_time0 = std::chrono::high_resolution_clock::now();
+    auto duration0 = std::chrono::duration_cast<std::chrono::milliseconds>(end_time0 - start_time0);
+    time_record3 += duration0.count();
+    printf("PutValue time:%lu\n",duration0.count());
+#endif
+    
 
 
 #ifdef MULTI_THREAD_IO
 
+#ifdef TIME_RECORDING_ON
     auto start_time = std::chrono::high_resolution_clock::now();
+#endif
+    
     if (Size == MaxSize) 
     {
         auto end_time = std::chrono::high_resolution_clock::now();
@@ -190,9 +198,13 @@ void locs_run::PutValue(entry_t entry)
             }
         }
     }
+
+#ifdef TIME_RECORDING_ON
     auto end_time = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
     time_record += duration.count();
+#endif
+    
     
 #elif defined(SINGLE_THREAD_IO)
 
@@ -361,10 +373,6 @@ void locs_run::Reset()
 
     Size = 0;
 
-#ifdef DIRECT_ERASE
-    chunk_reset();
-#endif
-
     if(chunk_pointers.size()!=0)
     {
         chunk_pointers.clear();
@@ -454,18 +462,15 @@ print_ocssd_chunk_info(struct spdk_ocssd_chunk_information_entry *chk_info, int 
 
 	printf("OCSSD Chunk Info Glance\n");
 	printf("======================\n");
-
-	
-
-		printf("------------\n");
-		printf("Chunk index:                    %d\n", chk_num);
-		printf("Chunk state:                    %s(0x%x)\n", cs_str, *(uint8_t *) & (chk_info[chk_num].cs));
-		printf("Chunk type (write mode):        %s\n", ct_str);
-		printf("Chunk type (size_deviate):      %s\n", chk_info[chk_num].ct.size_deviate ? "Yes" : "No");
-		printf("Wear-level Index:               %d\n", chk_info[chk_num].wli);
-		printf("Starting LBA:                   %" PRIu64 "\n", chk_info[chk_num].slba);
-		printf("Number of blocks in chunk:      %" PRIu64 "\n", chk_info[chk_num].cnlb);
-		printf("Write Pointer:                  %" PRIu64 "\n", chk_info[chk_num].wp);
+	printf("------------\n");
+	printf("Chunk index:                    %d\n", chk_num);
+	printf("Chunk state:                    %s(0x%x)\n", cs_str, *(uint8_t *) & (chk_info[chk_num].cs));
+	printf("Chunk type (write mode):        %s\n", ct_str);
+	printf("Chunk type (size_deviate):      %s\n", chk_info[chk_num].ct.size_deviate ? "Yes" : "No");
+	printf("Wear-level Index:               %d\n", chk_info[chk_num].wli);
+	printf("Starting LBA:                   %" PRIu64 "\n", chk_info[chk_num].slba);
+	printf("Number of blocks in chunk:      %" PRIu64 "\n", chk_info[chk_num].cnlb);
+	printf("Write Pointer:                  %" PRIu64 "\n", chk_info[chk_num].wp);
 	
 }
 
@@ -495,7 +500,7 @@ void locs_run::chunk_reset()
 		} 
         else 
         {
-			printf("get_ocssd_chunk_info_log_page() failed\n");
+			// printf("get_ocssd_chunk_info_log_page() failed\n");
 			return ;
 		}
 		buf_size -= xfer_size;

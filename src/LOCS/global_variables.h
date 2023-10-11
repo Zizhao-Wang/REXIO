@@ -6,8 +6,8 @@
 #include <spdk/log.h>
 #include <spdk/nvme_ocssd.h>
 #include <spdk/nvme_ocssd_spec.h>
-#include "../Auxizilary/pre_definition.h"
-#include "../Debug/debug_micros.h"
+#include "include/pre_definition.h"
+#include "include/micros.h"
 
 
 #ifndef LOCS_GLOBALVARIABLE_H

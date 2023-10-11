@@ -113,12 +113,13 @@ int LOCS::FlushInto(vector<locs_level>::iterator current)
 #ifdef DELAYED_ERASE
         check_if_erase();
 #endif
-
+        printf("size: %ld from mergeon\n",mergecon.get_size());
+        int i=0;
         while(!mergecon.IsEmpty())
         {
             entry_t entry = mergecon.Contextpop();
-            uint64_t key_value = test(entry.key);
-            if (memcmp(entry.val, deleted_val, VAL_SIZE)!=0) 
+            uint64_t key_value = big_endian2little_endian(entry.key,KEY_SIZE);
+            if(next != Levels.end() || memcmp(entry.val, deleted_val, VAL_SIZE) != 0) 
             {
                 next->PutValue(entry);
             }
@@ -250,23 +251,23 @@ int LOCS::PutValue(const char* key, const char* value)
             }
         }
         mergecon.Insert(bufferdata);   
-        // printf("Run size: %ld from bufferdata\n",bufferdata.size());
-        int i=0;
+        printf("size: %ld from mergeon\n",mergecon.get_size());
+        // int i=0;
         while(!mergecon.IsEmpty())
         {
             entry_t entry = mergecon.Contextpop();
-            uint64_t key_value = test(entry.key);
+            uint64_t key_value = big_endian2little_endian(entry.key,KEY_SIZE);
             // printf("key_value: %lu\n", key_value);
-            if (memcmp(entry.val, deleted_val,KEY_SIZE)!=0) 
-            {
-                Levels[0].PutValue(entry);
-                i++;
-            }
+            
+            Levels[0].PutValue(entry);
+            // i++;
+            
             if(Levels[0].IsFull())
             {
                 FlushInto(Levels.begin());
             }
         }
+        // printf("%d entries has been inserted!\n ",i);
     }
 
 #ifdef DELAYED_ERASE
@@ -528,13 +529,15 @@ void locs_init(void)
 
     /* workload a: insert only*/
     uint64_t written_data_size = 100000000*16;
+    uint64_t written_data_size1 = 100000000*16;
     uint64_t written_data_num = written_data_size /(KEY_SIZE+VAL_SIZE);
+    uint64_t written_data_num1 = written_data_size1 /(KEY_SIZE+VAL_SIZE);
     uint64_t record_point = written_data_num / 10;
 
     startTime = clock();
-    int error_bound = KEY_SIZE > 8 ? 8 : 0;
     char key_buffer[KEY_SIZE];
     char value_buffer[VAL_SIZE];
+    int error_bound = KEY_SIZE > 8 ? 8 : 0;
     // 4194305
 
     for(SKey i=1;i<=written_data_num;i++)
@@ -545,11 +548,12 @@ void locs_init(void)
 
         for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
         {
-            key_buffer[KEY_SIZE - 1 - j] = static_cast<char>((i >> (8 * j)) & 0xFF);
+            key_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((i >> (8 * j)) & 0xFF);
         }
+
         for (size_t j = 0; j < sizeof(uint64_t) && j < VAL_SIZE; ++j)
         {
-            value_buffer[KEY_SIZE - 1 - j] = static_cast<char>((i >> (8 * j)) & 0xFF);
+            value_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((i >> (8 * j)) & 0xFF);
         }
 
         locs.PutValue(key_buffer, value_buffer);
@@ -560,7 +564,7 @@ void locs_init(void)
             printf("Read count:%d io_write:%d write2:%d erase:%d block resets:%d\n",reads_io,writes_io,writes_ram,resets,io_resets);
             std::cout << "Total Time of workload A: "<<i <<"  " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
             std::string experiment_name = "KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
-            write_data( "/home/data/NOFTL_KV.txt", experiment_name, "workload_A", i);
+            write_data( "/home/data/LOCS.txt", experiment_name, "workload_A", i/0.897);
 
             io_resets = 0; 
         }
@@ -668,6 +672,7 @@ void locs_init(void)
         {
             value_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((k+1 >> (8 * j)) & 0xFF);
         }
+
         locs.UpdateValue(key_buffer,value_buffer);
           
         if(i%record_point==0)
@@ -677,7 +682,7 @@ void locs_init(void)
             std::cout << "Total Time of "<<i<<" in workload D: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
             // printBlockInformation();
             std::string experiment_name = "KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
-            write_data( "/home/data/NOFTL_KV.txt", experiment_name, "workload_D", i);
+            write_data( "/home/data/LOCS.txt", experiment_name, "workload_D", i/0.897);
             io_resets = 0;      
         }
     }
@@ -785,7 +790,7 @@ void locs_init(void)
             std::cout << "Total Time of "<<i<<" in workload G: " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s\n";
             // printBlockInformation();
             std::string experiment_name = "KEY_" + std::to_string(KEY_SIZE) + "_VALUE_" + std::to_string(VAL_SIZE);
-            write_data( "/home/data/NOFTL_KV.txt", experiment_name, "workload_G", i);
+            write_data( "/home/data/LOCS.txt", experiment_name, "workload_G", i/0.897);
             io_resets = 0;     
         }  
     }

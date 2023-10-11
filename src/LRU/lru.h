@@ -15,12 +15,12 @@
 #include <unordered_map>
 #include <list>
 #include <cassert>
-#include "../Ti-OCSSD/MemoryTier/Node.h"
+#include "include/node.h"
 
 
 typedef struct ReadNode
 {
-	PageType   PageId;
+	page_num_type   PageId;
 	TNCEntry * data;
 }ReadNode;
 
@@ -41,9 +41,9 @@ public:
         this->capacity = cap; 
     }
     
-    TNCEntry* get(PageType page); 
-    void put(PageType page, ReadNode node);
-	bool IsLRUPage(PageType);
+    TNCEntry* get(page_num_type page); 
+    void put(page_num_type page, ReadNode node);
+	bool IsLRUPage(page_num_type);
     void ClearaReset(size_t cap);
 
 };

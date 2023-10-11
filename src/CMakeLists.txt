@@ -6,14 +6,14 @@ project(src)
 set(CMAKE_CXX_STANDARD 14)
 
 set(SPDK_INCLUDE_DIR "../../spdk/include")
-set(SPDK_LIB_DIR "/home/spdk/build/lib")
-set(DPDK_LIB_DIR "/home/spdk/dpdk/build/lib")
+set(SPDK_LIB_DIR "/wzz/spdk/build/lib")
+set(DPDK_LIB_DIR "/wzz/spdk/dpdk/build/lib")
 set(DPDK_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/../spdk/dpdk/build/include")
-set(LIB_LIGHTNVM_DIR "/home/liblightnvm/build")
+# set(LIB_LIGHTNVM_DIR "/home/liblightnvm/build")
 
 include_directories(${SPDK_INCLUDE_DIR}  ${DPDK_INCLUDE_DIR} )
 
-link_directories(${SPDK_LIB_DIR} ${DPDK_LIB_DIR} "/home/spdk/isa-l/.libs" )
+link_directories(${SPDK_LIB_DIR} ${DPDK_LIB_DIR} "/wzz/spdk/isa-l/.libs" )
 
 FIND_PACKAGE( OpenMP REQUIRED)
 if(OPENMP_FOUND)

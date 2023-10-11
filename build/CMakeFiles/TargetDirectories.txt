@@ -1,3 +1,3 @@
-/home/SFOCS/build/CMakeFiles/src.dir
-/home/SFOCS/build/CMakeFiles/edit_cache.dir
-/home/SFOCS/build/CMakeFiles/rebuild_cache.dir
+/wzz/SFOCS/build/CMakeFiles/src.dir
+/wzz/SFOCS/build/CMakeFiles/edit_cache.dir
+/wzz/SFOCS/build/CMakeFiles/rebuild_cache.dir

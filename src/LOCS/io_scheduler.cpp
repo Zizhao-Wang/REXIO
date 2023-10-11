@@ -115,7 +115,7 @@ void erase_complete(void *arg, const struct spdk_nvme_cpl *completion)
     }
 	erase_outstanding_commands--;
 	io_resets++; 
-	printf("io_resets %d\n", io_resets);
+	// printf("io_resets %d\n", io_resets);
 }
 
 

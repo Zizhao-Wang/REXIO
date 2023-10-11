@@ -15,12 +15,9 @@
 #include <stdint.h>
 #include <vector>
 #include <unordered_map>
-#include <liblightnvm.h>
-#include "../../Ti-OCSSD/MemoryTier/Node.h"
-#include "../../Auxizilary/pre_definition.h"
-#include "../../Auxizilary/SysOutput.h"
-#include "../../Auxizilary/GlobalVariable.h"
-#include "../../Ti-OCSSD/StoreTier/syncstore.h"
+#include "include/pre_definition.h"
+#include "include/SysOutput.h"
+#include "include/GlobalVariable.h"
 #include "../../MultiHash/LinearHash/node.h"
 #include "../../MultiHash/LinearHash/LiHash.h"
 #include "../../MultiHash/ExtendibleHash/ExNode.h"

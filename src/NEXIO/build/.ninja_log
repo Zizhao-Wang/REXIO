@@ -1,0 +1,15 @@
+# ninja log v5
+1045	1079	1697016885219503066	disklayer/libDisklayer.a	f04ea28d5c8483bd
+4	618	1696956717240626659	memlayer/CMakeFiles/Memlayer.dir/buffer_manager/FIFO.cpp.o	fa3cc11cbbd20d4f
+7	613	1697016450571482287	disklayer/CMakeFiles/Disklayer.dir/io_manager/io_thread.cpp.o	885ac30cd50c44c3
+8	624	1697016450583482287	disklayer/CMakeFiles/Disklayer.dir/write_buffer.cpp.o	c553baf58625121d
+5	474	1697016793511498681	memlayer/CMakeFiles/Memlayer.dir/asyncstore.cpp.o	d49ea5ed33357585
+8	345	1697010014631174608	utility/CMakeFiles/Utility.dir/types.cpp.o	bd91cab9482ae9ee
+2	30	1696956716652626630	CMakeFiles/NEXIO.dir/main.cpp.o	53612247a3832af3
+5	736	1697012737339304771	memlayer/CMakeFiles/Memlayer.dir/syncstore.cpp.o	984fd6d26b09fd8e
+4	606	1697012518303294300	memlayer/CMakeFiles/Memlayer.dir/MemTier.cpp.o	489bef821ab67b44
+4	629	1696956717252626659	memlayer/CMakeFiles/Memlayer.dir/buffer_manager/lru.cpp.o	9779d5c899dcd410
+6	17	1697010540999199772	utility/libUtility.a	2c1d43d0250fe44a
+474	503	1697016793539498683	memlayer/libMemlayer.a	66fac3734abba797
+5	1045	1697016885179503064	disklayer/CMakeFiles/Disklayer.dir/io_manager.cpp.o	66f3e0d849be3a5c
+4	297	1696956716920626643	memlayer/CMakeFiles/Memlayer.dir/node.cpp.o	b8a70300c20d7328

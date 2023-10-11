@@ -8,7 +8,6 @@
  * IDENTIFICATION:
  *          src/global_variables/global_variables.h
  **/
-#include <liblightnvm.h>
 
 /**
  *  global variables for all processes (threads). 

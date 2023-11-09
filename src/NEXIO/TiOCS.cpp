@@ -19,7 +19,6 @@
 #include <vector>
 #include <pthread.h>
 #include "include/SysOutput.h"
-// #include "../LOCS/global_variables.h"
 #include "memlayer/MemTier.h"
 #include "memlayer/syncstore.h"
 #include "disklayer/io_manager.h"
@@ -37,9 +36,6 @@ struct mymsgbuf
      long mtype;  
      char mtext[MAX_MSG_SIZE];  
 };  
-
-
-
 
 void bench_testing(void)
 {

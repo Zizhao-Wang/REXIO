@@ -9,5 +9,5 @@ file(GLOB_RECURSE CURRENT_DIR_SRC
 # If this subdirectory is a library
 add_library(Memlayer ${CURRENT_DIR_SRC})
 
-# If there are other libraries to link
+
 

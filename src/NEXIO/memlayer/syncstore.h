@@ -35,9 +35,6 @@ extern LRUCache lrucache;
 extern key_value_entry* Pagedata;
 
 
-
-
-
 extern FIFOCache fifocache;
 
 extern uint64_t sectors_per_page;
@@ -90,7 +87,7 @@ int  SyncDelete(uint32_t offset);
  **/
 key_value_entry Read4Buffer(size_t Position);
 
-key_value_entry   SyncRead(uint32_t offset);
+key_value_entry SyncRead(uint32_t offset);
 
 void clearBufferLog();
 

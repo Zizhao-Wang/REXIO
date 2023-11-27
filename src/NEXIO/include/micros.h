@@ -18,6 +18,9 @@
 
 
 
+
+
+
 /**
  * Define micros first level of LSM-tree 
  **/
@@ -35,6 +38,12 @@
 
 #define FIXED_LOG
 
+
+#ifdef TIOCS_DEBUG
+#define DEBUG_PRINT(...) printf(__VA_ARGS__)
+#else
+#define DEBUG_PRINT(...)
+#endif
 
 
 /**

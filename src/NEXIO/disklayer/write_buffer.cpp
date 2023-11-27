@@ -1,13 +1,13 @@
 #include "write_buffer.h"
 #include "include/buffer.h"
+#include "include/spdk_env_init.h"
 
 // ==========================
 // Offset and buffer related 
 // ==========================
 uint32_t offset5 = 0;
 uint32_t offset2 = 0; 
-size_t buffer_capacity;
-
+write_io_controller my_controller;
 // ========================
 // Separated key-value store
 // ========================
@@ -25,10 +25,9 @@ size_t block_id_allocator = 0;
 // ==========
 // Log buffer
 // ==========
-char *log_data_buffer = nullptr;
 size_t log_block_id_allocator = 0;
 std::unordered_map<uint64_t, int> block_type_tracker;
-
+std::unordered_map<uint64_t, std::vector<char>> log_buffer;
 
 // ======================
 // Combined key-value store
@@ -41,7 +40,7 @@ page_num_type combined_kv_page_num = 0;
 // ==========================
 pthread_mutex_t write_buffer_mutex;
 pthread_cond_t buffer_full_cond_var;
-int current_buffer_position = 0;
+int current_buffer_position;
 
 
 // ==========
@@ -55,75 +54,75 @@ void initialize_write_buffer_variables()
 {
     // Initialize write buffer mutex
     if (pthread_mutex_init(&write_buffer_mutex, NULL) != 0) {
-        printf("\033[1;31mError: Failed to initialize write buffer mutex.\033[0m\n");
+        printf("\033[0;31m[ERROR]\033[0m Failed to initialize write buffer mutex.\n");
         return;
     }
-    printf("\033[1;32mSuccessfully initialized write buffer mutex.\033[0m\n");
+    printf("\033[1;32m[SUCCESS]\033[0m Successfully initialized write buffer mutex.\n");
 
     // Initialize buffer full condition variable
     if (pthread_cond_init(&buffer_full_cond_var, NULL) != 0) {
-        printf("\033[1;31mError: Failed to initialize buffer full condition variable.\033[0m\n");
+        printf("\033[0;31m[ERROR]\033[0m Failed to initialize buffer full condition variable.\n");
         return;
     }
-    printf("\033[1;32mSuccessfully initialized buffer full condition variable.\033[0m\n");
+    my_controller.buffer_capacity = (SPDK_LBAs_IN_NEXIO_WRITE_BUFFER*device_info->ns_info_array[0].lba_size) / sizeof(key_value_entry);
+    // printf("%lu\n", my_controller.buffer_capacity);
+    my_controller.nexio_write_uint =  SPDK_LBAs_IN_NEXIO_WRITE_BUFFER; //default: The nexio block contains 2 lbas
+    my_controller.nexio_lba_uint = SPDK_LBAs_IN_NEXIO_LBA;
+    my_controller.write_buffer_size = SPDK_LBAs_IN_NEXIO_WRITE_BUFFER*device_info->ns_info_array[0].lba_size;
+    current_buffer_position = 0;
+    printf("\033[1;32m[SUCCESS]\033[0m Successfully initialized buffer full condition variable.\n");
 }
 
 void combined_kv_buffer_init()
 {
-    combined_kv_buffer = (key_value_entry*)spdk_dma_malloc(sizeof(key_value_entry) * buffer_capacity, 0x1000, NULL);
-    
+    initialize_write_buffer_variables();
+    combined_kv_buffer = (key_value_entry*)spdk_dma_malloc(sizeof(key_value_entry)*my_controller.buffer_capacity, 0x1000, NULL);
     if (combined_kv_buffer == NULL) {
-        printf("\033[1;31mError: Failed to allocate memory for combined KV buffer.\033[0m\n");
+        printf("\033[0;31m[ERROR]\033[0m Failed to allocate memory for combined KV buffer.\n");
         return;
     }
-    printf("\033[1;32mSuccessfully allocated memory for combined KV buffer.\033[0m\n");
+    printf("\033[1;32m[SUCCESS]\033[0m Successfully allocated memory for combined KV buffer.\n");
 }
 
 void combined_kv_buffer_cleanup() 
 {
     spdk_dma_free(combined_kv_buffer);
-    printf("\033[1;32mSuccessfully deallocated memory for combined KV buffer.\033[0m\n");
+    fprintf(stdout, "\033[1;32m[SUCCESS]\033[0m Successfully deallocated memory for combined KV buffer.\n");
 }
+
 
 
 
 void kv_buffer_init() 
 {
-    size_t key_buffer_size = 0;
-    size_t value_buffer_size = 0;
+
     size_t log_buffer_size = 0;
 
-    key_separated_buffer = (char*)spdk_dma_malloc(key_buffer_size, 0x1000, NULL);
+    key_separated_buffer = (char*)spdk_dma_malloc(my_controller.write_buffer_size, 0x1000, NULL);
     if (key_separated_buffer == NULL) 
     {
         printf("\033[1;31mError: Failed to allocate memory for KeySeparatedBuffer.\033[0m\n");
     }
 
-    value_separated_buffer = (char*)spdk_dma_malloc(value_buffer_size, 0x1000, NULL);
-    if (value_separated_buffer == NULL) 
-    {
+    value_separated_buffer = (char*)spdk_dma_malloc(my_controller.write_buffer_size, 0x1000, NULL);
+    if (value_separated_buffer == NULL){
         printf("\033[1;31mError: Failed to allocate memory for ValueSeparatedBuffer.\033[0m\n");
     }
 
-    log_data_buffer = (char *)spdk_dma_malloc(log_buffer_size, 0x1000, NULL);
-    if (log_data_buffer  == NULL)
-    {
-        printf("\033[1;31mError: Failed to allocate memory for LogDataBuffer!\033[0m\n");
-        exit(-1);
-    }
+    
 
     if(value_block_id == UINT64_MAX)
     {
         value_block_id = block_id_allocator++;
         block_type_tracker[value_block_id] = VALUE_BLOCK;
-        offset5 = (offset5 & 0x00FFFFFF) | (value_block_id << 24);
+        offset5 = (offset5 & 0x0000000000FFFFFF) | (value_block_id << 24);
     }
 
     if(key_block_id == UINT64_MAX)
     {
         key_block_id = block_id_allocator++;
         block_type_tracker[key_block_id] = KEY_BLOCK;
-        offset2 = (offset2 & 0x00FFFFFF) | (key_block_id << 24);
+        offset2 = (offset2 & 0x0000000000FFFFFF) | (key_block_id << 24);
     }
 
     temp = (char *)spdk_dma_malloc(sizeof(uint32_t), 0x1000, NULL);
@@ -135,7 +134,6 @@ void kv_buffer_cleanup()
 {
     spdk_dma_free(key_separated_buffer);
     spdk_dma_free(value_separated_buffer);
-    spdk_dma_free(log_data_buffer);
 }
 
 

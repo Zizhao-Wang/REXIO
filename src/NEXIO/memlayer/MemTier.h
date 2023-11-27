@@ -36,13 +36,13 @@ int RandomLevel();
 void NodeSplit(size_t bucket_index);
 
 #ifdef NOT_SEPARATE_KV
-int InsertNode(const char* hashkey, uint32_t offset, uint8_t flag, int bucket_id);
+int InsertNode(const char* hashkey, uint64_t offset, uint8_t flag, int bucket_id);
 #elif defined(NOT_SEPARATE_KV_variable)
-int InsertNode(const char* hashkey, uint32_t offset, uint8_t flag, int bucket_id);
+int InsertNode(const char* hashkey, uint64_t offset, uint8_t flag, int bucket_id);
 #elif defined(SEPARATE_KV_FIXED_LOG)
-int InsertNode(const char* hashkey, uint32_t offset, uint8_t flag,uint32_t block, int bucket_id);
+int InsertNode(const char* hashkey, uint64_t offset, uint8_t flag,uint64_t block, int bucket_id);
 #elif defined(SEPARATE_KV_VARIABLE_LOG)
-int InsertNode(const char* hashkey, uint32_t offset, uint8_t flag,uint32_t block, int bucket_id);
+int InsertNode(const char* hashkey, uint64_t offset, uint8_t flag,uint64_t block, int bucket_id);
 #endif
 
 int InsertNode(const char* hashkey, const char* hashvalue);
@@ -75,5 +75,7 @@ int Delete(const char* key1);
  **/
 int ExtendHashTableInitialize();
 
+
+void PrintHashTable();
 
 #endif //EXPERIMENT1_HASHTABLE_H

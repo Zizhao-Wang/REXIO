@@ -8,9 +8,10 @@
  *          src/TNCTree/MemoryTier/Node.h
  */
 
-#ifndef EXPERIMENT1_HASHBLOCK_H
-#define EXPERIMENT1_HASHBLOCK_H
+#ifndef EXPERIMENT1_INCLUDE_NODE_H
+#define EXPERIMENT1_INCLUDE_NODE_H
 
+#include <bitset>
 #include "pre_definition.h"
 #include "micros.h"
 
@@ -19,9 +20,9 @@
 #define LOCAL_HEAD_SIZE  sizeof (LocalHeadNode)
 #define MaxLevel 20
 
-const int MAX_LEVEL1 = 32;
-const int P_FACTOR1 = RAND_MAX >> 2;
-const int max_bucket_size = 32768;
+const int MAX_LEVEL1 = 20; 
+const double P_FACTOR1 = 0.5;
+const int max_bucket_size = 130177;
 
 /*
  * Local hash table node.
@@ -58,9 +59,9 @@ typedef struct TSkiplistNode
 {
     char key[KEY_SIZE];
     uint8_t flag;
-    uint32_t offset;
+    uint64_t offset;  // 40-bit bitset for offset
 #ifndef NOT_SEPARATE_KV
-    uint32_t block;
+    uint64_t block;   // 40-bit bitset for block
 #endif
     int maxLevel;
     struct TSkiplistNode **forward;
@@ -112,19 +113,17 @@ typedef struct key_value_entry
      * Some methods of initialization.
      */
 #ifdef NOT_SEPARATE_KV
-    TSkiplistNode *TskiplistNodeCreat(const char* key,uint32_t offset, int maxLevel);
+    TSkiplistNode *TskiplistNodeCreat(const char* key,uint64_t offset, int maxLevel);
 #elif defined(NOT_SEPARATE_KV_variable)
-    TSkiplistNode *TskiplistNodeCreat(const char* key,uint32_t offset, int maxLevel);
+    TSkiplistNode *TskiplistNodeCreat(const char* key,uint64_t offset, int maxLevel);
 #elif defined(SEPARATE_KV_FIXED_LOG)
-    TSkiplistNode *TskiplistNodeCreat(const char* key,uint32_t offset,uint32_t block1, int maxLevel);
+    TSkiplistNode *TskiplistNodeCreat(const char* key,uint64_t offset,uint64_t block1, int maxLevel);
 #elif defined(SEPARATE_KV_VARIABLE_LOG)
-    TSkiplistNode *TskiplistNodeCreat(const char* key,uint32_t offset,uint32_t block1, int maxLevel);
+    TSkiplistNode *TskiplistNodeCreat(const char* key,uint64_t offset,uint64_t block1, int maxLevel);
 #endif
 
 
 TNCSkiplist *  TskiplistCreate();
-
-
 
 LocalHashNode * NILInitialize();
 
@@ -135,4 +134,4 @@ LocalHashNode * Initialization();
 
 
 
-#endif //EXPERIMENT1_HASHBLOCK_H
+#endif 

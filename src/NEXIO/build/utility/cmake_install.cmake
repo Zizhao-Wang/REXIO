@@ -1,4 +1,4 @@
-# Install script for directory: /wzz/SFOCS/src/NEXIO/utility
+# Install script for directory: /home/NEXIO/utility
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

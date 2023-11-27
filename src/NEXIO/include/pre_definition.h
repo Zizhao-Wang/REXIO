@@ -23,7 +23,7 @@
 
 #define PAGE_MAX 429 967295
 
-#define KEY_SIZE 8
+#define KEY_SIZE 16
 #define VAL_SIZE 8
 
 typedef uint64_t key_type;
@@ -34,7 +34,7 @@ typedef uint64_t page_num_type;
 
 extern int reads_io;  // read I/Os
 
-extern int writes_io; // write I/Os
+extern uint64_t total_write_bytes; // write I/Os
 
 extern int resets; 
 

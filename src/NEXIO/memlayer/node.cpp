@@ -11,15 +11,22 @@
 #include "include/node.h"
 #include <cstdlib>
 #include <climits>
+#include <cstdint>
+
+
+uint64_t total_write_bytes = 0; // write I/Os
+
+
+
 
 #ifdef NOT_SEPARATE_KV
-    TSkiplistNode *TskiplistNodeCreat(const char* key,uint32_t offset, int maxLevel)
+    TSkiplistNode *TskiplistNodeCreat(const char* key,uint64_t offset, int maxLevel)
 #elif defined(NOT_SEPARATE_KV_variable)
-    TSkiplistNode *TskiplistNodeCreat(const char* key,uint32_t offset, int maxLevel)
+    TSkiplistNode *TskiplistNodeCreat(const char* key,uint64_t offset, int maxLevel)
 #elif defined(SEPARATE_KV_FIXED_LOG)
-    TSkiplistNode *TskiplistNodeCreat(const char* key,uint32_t offset,uint32_t block1, int maxLevel)
+    TSkiplistNode *TskiplistNodeCreat(const char* key,uint64_t offset,uint64_t block1, int maxLevel)
 #elif defined(SEPARATE_KV_VARIABLE_LOG)
-    TSkiplistNode *TskiplistNodeCreat(const char* key,uint32_t offset,uint32_t block1, int maxLevel)
+    TSkiplistNode *TskiplistNodeCreat(const char* key,uint64_t offset,uint64_t block1, int maxLevel)
 #endif
 {
     TSkiplistNode *obj = (TSkiplistNode *)malloc(sizeof(TSkiplistNode));
@@ -35,6 +42,10 @@
 
     obj->maxLevel = maxLevel;
     obj->forward = (TSkiplistNode **)malloc(sizeof(TSkiplistNode *) * maxLevel);
+    if(obj->forward == NULL){
+        fprintf(stderr, "malloc failed when creating the node in skiplist.\n");
+        exit(1);
+    }
     for (int i = 0; i < maxLevel; i++) 
     {
         obj->forward[i] = NULL;
@@ -60,9 +71,7 @@ TNCSkiplist * TskiplistCreate()
 
     obj->level = 0;
     obj->number = 0;
-    srand(time(NULL));
     return obj;
-
 }
 
 

@@ -8,9 +8,6 @@
 
 int indexs=0;
 
-
-
-uint64_t sectors_per_page = 4;
 key_value_entry * Pagedata = nullptr; 
 int callCount = 0;
 
@@ -37,37 +34,37 @@ LRUCache lrucache(2048);
  *  ================= Synchronous write module====================  
  **/
 
-// uint32_t SyncWrite(const char* hashkey, const char* hashvalue)
-// {
-//     writes_ram++;
-//     /* Returned offset */
-//     // printf("SyncWrite hashkey: %lu\n", big_endian2little_endian(hashkey, KEY_SIZE));
-//     if (indexs >= buffer_capacity)
-//     {
-//         write_queue();
+uint32_t SyncWrite(const char* hashkey, const char* hashvalue)
+{
+    // writes_ram++;
+    // /* Returned offset */
+    // // printf("SyncWrite hashkey: %lu\n", big_endian2little_endian(hashkey, KEY_SIZE));
+    // if (indexs >= buffer_capacity)
+    // {
+    //     write_queue();
 
-//         WBufferId = page_pointer;
-//         offset5 += page_pointer % geometry.clba == 0 ? 0x1000000 : 0x00000000;
+    //     WBufferId = page_pointer;
+    //     offset5 += page_pointer % geometry.clba == 0 ? 0x1000000 : 0x00000000;
 
-//         offset5 = offset5 & 0xFF000FFF;
-//         offset5 += ((page_pointer % 4096/4) << 12);
+    //     offset5 = offset5 & 0xFF000FFF;
+    //     offset5 += ((page_pointer % 4096/4) << 12);
 
-//         offset5 = offset5 & 0xFFFFF000;
-//         indexs = 0;
-//     }
+    //     offset5 = offset5 & 0xFFFFF000;
+    //     indexs = 0;
+    // }
 
-//     memcpy(Pagedata[indexs].key, hashkey, KEY_SIZE);
-//     memcpy(Pagedata[indexs].val, hashvalue, VAL_SIZE);
+    // memcpy(Pagedata[indexs].key, hashkey, KEY_SIZE);
+    // memcpy(Pagedata[indexs].val, hashvalue, VAL_SIZE);
 
-//     ++indexs;
-//     block_information[offset5>>24].first++;
-//     offset5++;
+    // ++indexs;
+    // block_information[offset5>>24].first++;
+    // offset5++;
 
-//     return offset5;
-// }
+    // return offset5;
+}
 
-// uint32_t SynckvseparateWrite(const char* hashkey, const char* hashvalue, uint32_t& block)
-// {
+uint32_t SynckvseparateWrite(const char* hashkey, const char* hashvalue, uint32_t& block)
+{
 //     writes_ram++;
 //     if (value_buffer_position+VAL_SIZE > buffer_size) 
 //     {
@@ -135,11 +132,11 @@ LRUCache lrucache(2048);
 //     // }
 // #endif
 //     return offset5;
-// }
+}
 
 
-// uint32_t SynckvvariableseparateWrite(const char* hashkey, const char* hashvalue, uint32_t& block)
-// {
+uint32_t SynckvvariableseparateWrite(const char* hashkey, const char* hashvalue, uint32_t& block)
+{
 
 //     if (value_buffer_position+VAL_SIZE > buffer_size) 
 //     {
@@ -220,10 +217,10 @@ LRUCache lrucache(2048);
 //     writes_ram += (KEY_SIZE+VAL_SIZE+length);
 
 //     return offset5;
-// }
+}
 
-// uint32_t SyncvseparateWrite(const char* hashvalue, uint32_t block)
-// {
+uint32_t SyncvseparateWrite(const char* hashvalue, uint32_t block)
+{
 //     int i = 3;
 //     char temp;
 //     uint32_t off =0;
@@ -281,11 +278,11 @@ LRUCache lrucache(2048);
 //     }
 
 //     return offset5;
-// }
+}
 
 
-// uint32_t SyncvvariableseparateWrite(const char* hashvalue, uint32_t block)
-// {
+uint32_t SyncvvariableseparateWrite(const char* hashvalue, uint32_t block)
+{
 
 //     if (value_buffer_position+VAL_SIZE > buffer_size) 
 //     {
@@ -354,10 +351,10 @@ LRUCache lrucache(2048);
 //     }
 
 //     return offset5;
-// }
+}
 
-// void write_file(const std::string& file_path, const uint32_t offset) 
-// {
+void write_file(const std::string& file_path, const uint32_t offset) 
+{
 //     std::ofstream outfile1(file_path, std::ios_base::app);
 
 //     if (!outfile1) 
@@ -366,14 +363,14 @@ LRUCache lrucache(2048);
 //         return;
 //     }
 //     outfile1 << offset << "\n";
-// }
+}
 
 
-// /**
-//  *  ================= Synchronous delete module====================  
-//  **/
-// int  SynckvvariableDelete(uint32_t offset)
-// { 
+/**
+ *  ================= Synchronous delete module====================  
+ **/
+int  SynckvvariableDelete(uint32_t offset)
+{ 
 //     if(test11)
 //         write_file("/home/TiOCS/src/data/delete_test.txt", offset);
 //     uint64_t BlockId = offset >> 24;
@@ -414,10 +411,10 @@ LRUCache lrucache(2048);
 //     }
 
 //     return 0;
-// }
+}
 
-// int  SynckvDelete(uint32_t offset)
-// { 
+int  SynckvDelete(uint32_t offset)
+{ 
 //      if(test11)
 //         write_file("/home/TiOCS/src/data/delete_test1.txt", offset);
 //     resets++;
@@ -444,10 +441,10 @@ LRUCache lrucache(2048);
 //     }
     
 //     return 0;
-// }
+}
 
-// int SyncvariableDelete(uint32_t offset)
-// { 
+int SyncvariableDelete(uint32_t offset)
+{ 
     
 //     uint64_t BlockId = offset >> 24;
 //     uint32_t data = offset & 0xFFFFFF;
@@ -486,12 +483,12 @@ LRUCache lrucache(2048);
 //     }
 //     return 0;
 
-// }
+}
 
 
 
-// int SyncDelete(uint32_t offset)
-// { 
+int SyncDelete(uint32_t offset)
+{ 
 //     resets++;
 //     char temp;
     
@@ -521,20 +518,20 @@ LRUCache lrucache(2048);
 //     }
     
 //     return 0;
-// }
+}
 
 
 
 // /**
 //  *  ================= Synchronous read module====================  
 //  **/
-// key_value_entry Read4Buffer(size_t pos)
-// {
+key_value_entry Read4Buffer(size_t pos)
+{
 //     return Pagedata[pos];
-// }
+}
 
-// key_value_entry  SyncRead(uint32_t offset)
-// {
+key_value_entry  SyncRead(uint32_t offset)
+{
 //     uint64_t offsetpage = ((offset>>12)&0xFFF) ;
 //     uint64_t PageId = (offset>>24)*geometry.clba+ offsetpage;
 //     size_t Position = (offset & 0x00000FFF)-1;
@@ -594,22 +591,22 @@ LRUCache lrucache(2048);
 //     }
 // #endif
 
-// }
+}
 
-// void clearBufferLog() 
-// {
-//     for (auto& item : BufferLog) 
-//     {
-//         item.second.clear();
-//     }
-// }
+void clearBufferLog() 
+{
+    // for (auto& item : BufferLog) 
+    // {
+    //     item.second.clear();
+    // }
+}
 
-// void countBufferLog()
-// {
-//     int a = 0;
-//     for (auto& item : BufferLog) 
-//     {
-//         a += item.second.size();
-//     }
-//     printf("BufferLog size: %d\n", a);
-// }
+void countBufferLog()
+{
+    // int a = 0;
+    // for (auto& item : BufferLog) 
+    // {
+    //     a += item.second.size();
+    // }
+    // printf("BufferLog size: %d\n", a);
+}

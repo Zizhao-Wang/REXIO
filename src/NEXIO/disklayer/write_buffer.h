@@ -13,18 +13,32 @@
 
 #include <iostream>
 #include <unordered_map>
+#include <vector>
 #include "include/node.h"
 
 
 #define VALUE_BLOCK 1
 #define KEY_BLOCK   0
+#define SPDK_LBAs_IN_NEXIO_WRITE_BUFFER 20
+#define SPDK_LBAs_IN_NEXIO_LBA          512
 
 // ==========================
 // Offset and buffer related 
 // ==========================
 extern uint32_t offset5;
 extern uint32_t offset2;
-extern size_t buffer_capacity;
+
+typedef struct write_io_controller
+{
+    uint64_t buffer_capacity;
+    uint64_t nexio_lba_uint;
+    uint64_t nexio_write_uint;
+    uint64_t current_write_lba_num;
+    uint64_t write_buffer_size;
+}write_io_controller;
+extern write_io_controller my_controller;
+
+
 
 // ========================
 // Separated key-value store
@@ -54,9 +68,9 @@ extern pthread_cond_t buffer_full_cond_var;
 // ==========
 // Log buffer
 // ==========
-extern char *log_data_buffer;
 extern size_t log_block_id_allocator;
 extern std::unordered_map<uint64_t, int> block_type_tracker;
+extern std::unordered_map<uint64_t, std::vector<char>> log_buffer;
 
 // ==========
 // Temp storage

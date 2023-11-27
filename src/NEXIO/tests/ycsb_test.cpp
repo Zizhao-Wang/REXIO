@@ -5,7 +5,8 @@
 
 #include "nexio_test.h"
 #include "memlayer/MemTier.h"
-#include "uniform_generator.h"
+#include "data_distribution.h"
+#include "utility/types.h"
 
 
 void ycsb_testing(void)
@@ -257,13 +258,13 @@ void ycsb_read_only(uint64_t modified_data_num) {
 
 void ycsb_read_latest(size_t operationsCount) 
 { 
-     UniformGenerator keyGenerator(1, operationsCount);
+     TraceUniform keyGenerator(1, operationsCount);
      std::deque<uint64_t> recentKeys;
-     uint64_t data_point = keyGenerator.next();
+     uint64_t data_point = keyGenerator.Next();
      for (size_t i = 0; i < operationsCount/2; ++i){
           memset(key_buffer, 0, KEY_SIZE);
           memset(value_buffer, 0, VAL_SIZE);
-          data_point= keyGenerator.next();
+          data_point= keyGenerator.Next();
           for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j){
                key_buffer[KEY_SIZE - 1 - j] = static_cast<char>((data_point >> (8 * j)) & 0xFF);
           }
@@ -301,7 +302,7 @@ void ycsb_read_latest(size_t operationsCount)
                     uint64_t value = Search(key_buffer); 
                }
           }else {
-               data_point = keyGenerator.next();
+               data_point = keyGenerator.Next();
                InsertNode(key_buffer, value_buffer);
                recentKeys.push_back(data_point);
                if (recentKeys.size() > operationsCount) {

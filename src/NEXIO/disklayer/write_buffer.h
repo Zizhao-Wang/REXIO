@@ -19,8 +19,8 @@
 
 #define VALUE_BLOCK 1
 #define KEY_BLOCK   0
-#define SPDK_LBAs_IN_NEXIO_WRITE_BUFFER 20
-#define SPDK_LBAs_IN_NEXIO_LBA          512
+#define SPDK_LBAs_IN_NEXIO_WRITE_BUFFER 32      // page size: 16KB
+#define SPDK_LBAs_IN_NEXIO_LBA          1024   //block size: 1M
 
 // ==========================
 // Offset and buffer related 

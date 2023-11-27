@@ -1,28 +1,16 @@
-#include "uniform_generator.h"
+#include "data_distribution.h"
 
-UniformGenerator::UniformGenerator(uint64_t minVal, uint64_t maxVal, bool writeToFile, const std::string &defaultFilename) 
-    : minVal(minVal), maxVal(maxVal), writeToFile(writeToFile), defaultFilename(defaultFilename), distribution(minVal, maxVal) {
-    if (writeToFile) {
-        outFile.open(defaultFilename);
-    }
+// uniform
+TraceUniform::TraceUniform(int seed, uint64_t minimum, uint64_t maximum):
+    Trace(seed) {
+    gi_ = new GenInfo();
+    gi_->gen.uniform.min = minimum;
+    gi_->gen.uniform.max = maximum;
+    gi_->gen.uniform.interval = (double)(maximum - minimum);
+    gi_->type = GEN_UNIFORM;
 }
 
-UniformGenerator::~UniformGenerator() {
-    if (writeToFile) {
-        outFile.close();
-    }
-}
-
-void UniformGenerator::closeFile() {
-    if (writeToFile && outFile.is_open()) {
-        outFile.close();
-    }
-}
-
-uint64_t UniformGenerator::next() {
-    uint64_t value = distribution(generator);
-    if (writeToFile && outFile.is_open()) {
-        outFile << value << "\n";
-    }
-    return value;
+uint64_t TraceUniform::Next() {
+    const uint64_t off = (uint64_t)(RandomDouble() * gi_->gen.uniform.interval);
+    return gi_->gen.uniform.min + off;
 }

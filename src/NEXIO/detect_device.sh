@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Check devices bound to uio_pci_generic driver
-uio_devices=$(ls /sys/bus/pci/drivers/uio_pci_generic/ | grep -E "^[0-9a-f]{4}:")
+# Check for NVMe devices in the system using lspci command
+nvme_devices=$(lspci | grep -i "Non-Volatile memory controller")
 
-# If uio_devices has content, a device has been setup by setup.sh
-if [[ ! -z "$uio_devices" ]]; then
-    echo "1"   # Device is setup by setup.sh
+# If nvme_devices variable is not empty, it means NVMe devices are present
+if [[ ! -z "$nvme_devices" ]]; then
+    echo "1"   # NVMe device(s) found in the system
 else
-    echo "0"   # No device has been setup by setup.sh
+    echo "0"   # No NVMe device found in the system
 fi

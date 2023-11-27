@@ -24,7 +24,7 @@
 #define PAGE_MAX 429 967295
 
 #define KEY_SIZE 16
-#define VAL_SIZE 8
+#define VAL_SIZE 128
 
 typedef uint64_t key_type;
 typedef uint64_t value_type;

@@ -22,7 +22,7 @@
 
 const int MAX_LEVEL1 = 20; 
 const double P_FACTOR1 = 0.5;
-const int max_bucket_size = 130177;
+const int max_bucket_size = 16384;
 
 /*
  * Local hash table node.

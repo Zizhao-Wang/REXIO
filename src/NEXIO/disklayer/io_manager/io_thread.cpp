@@ -60,9 +60,9 @@ void add_io_task(write_task_paramaters* task) {
 void add_separation_io_task(separation_write_task_paramaters* task) {
     pthread_mutex_lock(&io_mutex);
     separation_io_tasks.push(task);
-    fprintf(stderr, "\033[1;33m[INFO]\033[0m Added a new separation I/O task.                 \n");
+    // fprintf(stderr, "\033[1;33m[INFO]\033[0m Added a new separation I/O task.                 \n");
     pthread_cond_signal(&io_cond);
-    fprintf(stderr, "\033[1;33m[INFO]\033[0m Signaled io_cond after adding a separation I/O task.\n");
+    // fprintf(stderr, "\033[1;33m[INFO]\033[0m Signaled io_cond after adding a separation I/O task.\n");
     pthread_mutex_unlock(&io_mutex);
 }
 
@@ -122,7 +122,7 @@ void* io_management(void* arg)
                     return NULL;
                 }
                 pthread_cond_wait(&io_cond, &io_mutex); 
-                fprintf(stderr, "\033[0;33m[WAIT]\033[0m Waiting for an I/O task.\n");
+                // fprintf(stderr, "\033[0;33m[WAIT]\033[0m Waiting for an I/O task.\n");
             }
 
             if (!io_tasks.empty()) {
@@ -147,20 +147,20 @@ void* io_management(void* arg)
                 separation_io_tasks.pop();
                 if(sep_task->taskType == IOTaskType::SEPARATION_KEY_WRITE_TASK || sep_task->taskType == IOTaskType::SEPARATION_VAL_WRITE_TASK)
                 {
-                    fprintf(stderr,"\033[1;33m[INFO]\033[0m Popped a separation I/O task (DATA) for processing.\n");
+                    // fprintf(stderr,"\033[1;33m[INFO]\033[0m Popped a separation I/O task (DATA) for processing.\n");
                     kv_write_queue((char*)sep_task->buffer, sep_task->block_id, sep_task->mode);
                     spdk_dma_free(sep_task->buffer);
                     free(sep_task);
                 }
                 else if(sep_task->taskType == IOTaskType::SEPARATION_LOG_TASK)
                 {
-                    fprintf(stderr, "\033[1;33m[INFO]\033[0m Popped a separation I/O task (LOG) for processing.\n");
+                    // fprintf(stderr, "\033[1;33m[INFO]\033[0m Popped a separation I/O task (LOG) for processing.\n");
                     kv_log_queue((char*)sep_task->buffer, sep_task->block_id);
                     spdk_dma_free(sep_task->buffer);
                     free(sep_task);
                 }
 
-                fprintf(stderr,"\033[1;33m[INFO]\033[0m Freed memory for the buffer of the processed separation task.\n");
+                // fprintf(stderr,"\033[1;33m[INFO]\033[0m Freed memory for the buffer of the processed separation task.\n");
             }
             pthread_mutex_unlock(&io_mutex);
         }

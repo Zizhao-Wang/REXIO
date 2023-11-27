@@ -31,21 +31,10 @@ find_package(gflags REQUIRED)
 
 
 # Add the source files
-set(TEST_SOURCES
-    test_main.cpp
-    nexio_test.cpp
-    uniform_generator.cpp
-    zipf_generator.cpp
-    ycsb_test.cpp
-)
+file(GLOB TEST_SOURCES "*.cpp")
 
 # Add the header files (optional, for clarity)
-set(TEST_HEADERS
-    nexio_test.h
-    zipf_generator.h
-    uniform_generator.h
-    ycsb_test.h
-)
+file(GLOB TEST_HEADERS "*.h")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 

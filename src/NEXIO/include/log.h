@@ -30,9 +30,9 @@ private:
     level logLevel;  // Current log level
     std::map<std::string, std::ofstream> logFiles;  // Map of log files
 
-    const std::string defaultLogFilePath = "/home/NEXIO/nexio.log";  // Default log file path
-    const std::string keyLogFilePath = "/home/NEXIO/nexio_key.log";  // Key log file path
-    const std::string valLogFilePath = "/home/NEXIO/nexio_val.log";  // Value log file path
+    const std::string defaultLogFilePath = "../../../nexio.log";  // Default log file path
+    const std::string keyLogFilePath = "../../../nexio_key.log";  // Key log file path
+    const std::string valLogFilePath = "../../../nexio_val.log";  // Value log file path
 };
 
 

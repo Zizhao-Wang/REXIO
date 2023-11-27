@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 
     /* initialize some global variables and SSD components initialization. */ 
     logo_print();
-
+    exit(0);
     logger.log(nexio_logger::info, "Start to initialize the SSD components.");    
 
     TiOCSInit();

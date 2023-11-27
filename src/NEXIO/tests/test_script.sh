@@ -3,7 +3,7 @@ echo fb0-=0-= | sudo -S bash -c 'echo 800000 > /proc/sys/fs/file-max'
 ulimit -n 800000
 
 BASE_VALUE_SIZE=128
-billion=20000000
+billion=1000000000
 range_dividers=(1 4 8)
 
 # Script path
@@ -42,9 +42,9 @@ convert_to_billion_format() {
     fi
 }
 
-for i in {1..1}; do
+for i in {2..2}; do
     base_num=$(($billion * $i))
-    dir1="${i}B"
+    dir1="${i}B_nexio"
     if [ ! -d "$dir1" ]; then
         mkdir $dir1
     fi
@@ -79,9 +79,10 @@ for i in {1..1}; do
             --num=$num_entries \
             --value_size=$value_size \
             --range=$current_range \
-            --benchmarks=fillrandom\
-            # | tee $log_file  \
-            # | awk -v n="$num_format" -v r="$divider" -v v="$value_size" '{print n, r, v, $0}' >> ../../../../write_amplification.txt
+            --benchmarks=fillseq \
+            --pci_address=0000:81:00.0 \
+            | tee $log_file  \
+            | awk -v n="$num_format" -v r="$divider" -v v="$value_size" '{print n, r, v, $0}' >> ../../../../write_amplification.txt
             cd ../../..
         done
     done

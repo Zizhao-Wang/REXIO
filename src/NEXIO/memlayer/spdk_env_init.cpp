@@ -243,7 +243,7 @@ int nvme_ssd_environment_init()
     /* Initialize transport id */
     spdk_nvme_trid_populate_transport(&trid, SPDK_NVME_TRANSPORT_PCIE);
     snprintf(trid.subnqn, sizeof(trid.subnqn), "%s", SPDK_NVMF_DISCOVERY_NQN);
-    strcpy(trid.traddr, "0000:00:05.0");
+    strcpy(trid.traddr, "0000:81:00.0");
 
     if (trid.trtype != SPDK_NVME_TRANSPORT_PCIE) 
     {
@@ -264,7 +264,7 @@ int nvme_ssd_environment_init()
         return -1;
     }
 
-    // print_nvme_geometry(ctrlr);
+    print_nvme_geometry(ctrlr);
     nsid = spdk_nvme_ctrlr_get_first_active_ns(ctrlr);
     ns = spdk_nvme_ctrlr_get_ns(ctrlr, nsid);
     const struct spdk_nvme_ns_data *nsdata = spdk_nvme_ns_get_data(ns);

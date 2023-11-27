@@ -127,17 +127,17 @@ void lba_update(int mode, uint64_t current_write_pointer, uint64_t block_id, uin
 {
 
 	block_current_write_pointers[block_id] += my_controller.nexio_write_uint;
-	// if(mode == NVME_SSD_DATA_LOG_WRITE)
-	// {
+	if(mode == NVME_SSD_DATA_LOG_WRITE)
+	{
 		
-	// }
-	// else 
-	// {
-	// 	if(block_current_write_pointers[block_id] >= my_controller.nexio_lba_uint){
-	// 		logger.log(nexio_logger::error, "Execeed the block size!\n");
-	// 	}
-    //     block_current_write_pointers[block_id] += my_controller.nexio_write_uint;
-	// }
+	}
+	else 
+	{
+		if(block_current_write_pointers[block_id] >= my_controller.nexio_lba_uint){
+			logger.log(nexio_logger::error, "Execeed the block size!\n");
+		}
+        block_current_write_pointers[block_id] += my_controller.nexio_write_uint;
+	}
 }
 
 
@@ -310,8 +310,8 @@ int kv_write_queue(void* write_buffer, uint64_t block_id, int mode)
         logger.log(nexio_logger::debug, "Updated block bitmap from index: " + std::to_string(start_index) + " for LBA Count: " + std::to_string(lba_count) + " bit setted: " + std::to_string(block_bitmaps[block_num].count()),"val");
     }
     
-	lba_update(mode, lba_start ,block_id,0);
-
+    // update pointers within a block 
+    block_current_write_pointers[block_id] += my_controller.nexio_write_uint;
 
 	return 0;
 }

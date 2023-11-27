@@ -1,11 +1,11 @@
 #include "nexio_test.h"
-#include "zipf_generator.h"
 #include "include/pre_definition.h"
 #include "memlayer/MemTier.h"
 #include "disklayer/io_manager.h"
 #include "memlayer/asyncstore.h"
 #include "memlayer/syncstore.h"
 #include "ycsb_test.h"
+#include "data_distribution.h"
 
 
 
@@ -35,18 +35,21 @@ DEFINE_bool(histogram,        false,    "Print histogram of operation timings");
 DEFINE_bool(print_wa,         false,    "Print write amplification every stats interval");
 DEFINE_int64(write_buffer_size, 2097152,"Number of bytes to buffer in all memtables before compacting");
 DEFINE_int32(block_size,      4096,     "Approximate size of user data packed per block before compression.");
+DEFINE_int32(buckets,      8,     "number of buckets in hashing table");
 DEFINE_int64(cache_size,      8 << 20,  "Number of bytes to use as a cache of uncompressed data,Negative means use default settings");
 DEFINE_int32(stats_interval,  1000000,  "Interval that print status");
 DEFINE_int32(log_buffer_size, 65536,    "");
 DEFINE_double(zipf_exponent, 1.0, "exponent parameter for the Zipf distribution");
-
+DEFINE_string(pci_address, "0000:81:00.0", "SSD address in PCIe port");
 
 
 void bench_testing(void)
 {
+     Trace * trace = new TraceUniform(1000 + 1* 345);
 
-     // ZipfGenerator generator(FLAGS_num, FLAGS_zipf_exponent);
-    
+     uint64_t done_ops = 0; 
+     uint64_t next_report = 100; 
+
      clock_t startTime,endTime;                        // Definition of timestamp
      /* workload a: insert only*/
      uint64_t written_data_size = 100000000*16;
@@ -62,11 +65,12 @@ void bench_testing(void)
      startTime = clock();
      memset(key_buffer, 0, KEY_SIZE);
      memset(value_buffer, 0, VAL_SIZE);
+     fprintf(stderr, "start benchmark:\n");
      for(uint64_t i=1;i<=FLAGS_num;i++)
      {
           memset(key_buffer, 0, KEY_SIZE);
           memset(value_buffer, 0, VAL_SIZE);
-          data_point = is_random?(generator.next()%FLAGS_range):i;
+          data_point = is_random?(trace->Next()%FLAGS_range):i;
           for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
           {
                key_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((data_point >> (8 * j)) & 0xFF);
@@ -79,11 +83,9 @@ void bench_testing(void)
 
           user_input_bytes += (KEY_SIZE + VAL_SIZE);
           uint64_t operation_start_time = clock();
-
           DEBUG_PRINT("data point:%lu  key:%lu \n",data_point,big_endian2little_endian(key_buffer,KEY_SIZE));
           // printf("%lu  datapoint:%lu \n",i,data_point);
           InsertNode(key_buffer, value_buffer);
-
           uint64_t operation_end_time = clock();
           double current_latency = (double)(operation_end_time - operation_start_time) / CLOCKS_PER_SEC;
           total_latency += current_latency;
@@ -94,12 +96,24 @@ void bench_testing(void)
                min_latency = current_latency;
           } 
           total_operation_time += current_latency;
-          
-          if(i%record_point==0)
-          {
-               printBlockInformation();
-               printf("%d million has been completed!\n",j);
-               j++;
+
+          if (current_latency*1000000 > 20000) {
+               fprintf(stderr, "long op: %.1f micros%30s\r", current_latency*1e6, "");
+               fflush(stderr);
+          }
+
+          done_ops++;
+          if (done_ops >= next_report) {
+               fprintf(stderr, "... finished %llu ops%30s\r", (unsigned long long)done_ops, ""); 
+               fflush(stderr);
+
+               if      (next_report < 1000)   next_report += 100;
+               else if (next_report < 5000)   next_report += 500;
+               else if (next_report < 10000)  next_report += 1000;
+               else if (next_report < 50000)  next_report += 5000;
+               else if (next_report < 100000) next_report += 10000;
+               else if (next_report < 500000) next_report += 50000;
+               else                           next_report += 100000;
           }
 
           if(i % FLAGS_stats_interval == 0 )
@@ -110,9 +124,10 @@ void bench_testing(void)
                char timeStr[100];
                time_t now = time(NULL);
                strftime(timeStr, sizeof(timeStr), "%Y-%m-%d %H:%M:%S", localtime(&now));
-               fprintf(stdout,"\n\033[1;34mStore Performance Metrics:\033[0m\n");
+               fprintf(stdout,"\nStore Performance Metrics\n");
                fprintf(stdout,"------------------------------\n");
                fprintf(stdout,"[%s] ",timeStr);
+               fprintf(stdout, "(%lu,%lu) ops ", i-FLAGS_stats_interval, i);
                fprintf(stdout,"Total execution time: %0.3lf s\n", total_operation_time);
                fprintf(stdout,"Data Throughput (MB/s): %0.3lf ops/sec  ", throughput);
                throughput2 = (user_input_bytes / 1024.0 / 1024.0) / total_operation_time;
@@ -132,9 +147,10 @@ void bench_testing(void)
      char timeStr[100];
      time_t now = time(NULL);
      strftime(timeStr, sizeof(timeStr), "%Y-%m-%d %H:%M:%S", localtime(&now));
-     fprintf(stdout,"\n\033[1;34m Overall Performance of database \033[0m\n");
+     fprintf(stdout,"\n Overall Performance of database\n");
      fprintf(stdout,"------------------------------\n");
      fprintf(stdout,"[%s] ",timeStr);
+     fprintf(stdout, "(1,%lu) ops ", FLAGS_num);
      fprintf(stdout,"Total execution time: %0.3lf s\n", total_operation_time);
      fprintf(stdout,"Data Throughput (MB/s): %0.3lf ops/sec  ", throughput);
      throughput2 = (user_input_bytes / 1024.0 / 1024.0) / total_operation_time;
@@ -337,3 +353,5 @@ void bench_testing(void)
 //      countBufferLog();
 //      printf("It's over!\n");
 }
+
+

@@ -15,6 +15,13 @@
 
 #include "include/node.h"
 #include <vector>
+#include "tests/nexio_test.h"
+
+
+DECLARE_string(benchmarks);
+DECLARE_int64(num);
+DECLARE_int32(buckets);
+
 
 #define LOCAL_TABLE_SIZE 100000
 

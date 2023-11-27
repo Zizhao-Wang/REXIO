@@ -759,12 +759,14 @@ int ExtendHashTableInitialize()
 
     /* Initialize a special hash table and SSD backend processor! */
    
-
-    if(! DoubleHashtable() )
+    for(int i=0; i<20;i++)
     {
-        printf("Memory tier of TNC-tree initialized failure!");
-        exit(5735);
+        if(!DoubleHashtable()){
+            printf("Memory tier of TNC-tree initialized failure!");
+            exit(5735);
+        }
     }
+    
     
 
     /**

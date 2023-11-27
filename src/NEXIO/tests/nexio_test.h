@@ -31,8 +31,6 @@ extern double throughput2;
 extern double average_latency ;
 
 
-DECLARE_string(benchmarks);
-DECLARE_int64(num);
 
 
 

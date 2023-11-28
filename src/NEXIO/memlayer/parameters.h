@@ -24,6 +24,6 @@ void initialize_global_parameters();
 void set_global_var1(int value);
 double compute_and_set_global_var2(double param1, double param2);
 
-int initialize_system(void);
+int initialize_system();
 
 #endif // PARAMETERS_H

@@ -7,8 +7,6 @@
 #include "utility/types.h"
 
 int indexs=0;
-
-key_value_entry * Pagedata = nullptr; 
 int callCount = 0;
 
 size_t buffer_size = 0;
@@ -525,12 +523,12 @@ int SyncDelete(uint32_t offset)
 // /**
 //  *  ================= Synchronous read module====================  
 //  **/
-key_value_entry Read4Buffer(size_t pos)
+char* Read4Buffer(size_t pos)
 {
 //     return Pagedata[pos];
 }
 
-key_value_entry  SyncRead(uint32_t offset)
+char*  SyncRead(uint32_t offset)
 {
 //     uint64_t offsetpage = ((offset>>12)&0xFFF) ;
 //     uint64_t PageId = (offset>>24)*geometry.clba+ offsetpage;

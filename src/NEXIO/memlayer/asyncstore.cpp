@@ -14,14 +14,14 @@ const int block_bits_count = 24;
 /**
  *  ================= Asynchronous write module====================  
  **/
-key_value_entry* allocate_task_buffer()
+char* allocate_task_buffer()
 {
-    key_value_entry* task_buffer = (key_value_entry*)spdk_dma_malloc(sizeof(key_value_entry) * my_controller.buffer_capacity, 0x1000, NULL);
+    char* task_buffer = (char*)spdk_dma_malloc((KEY_SIZE+value_size) * my_controller.buffer_capacity, 0x1000, NULL);
     if (!task_buffer) {
         logger.log(nexio_logger::info, "\033[0;31m[ERROR]\033[0m Failed to allocate memory for task_buffer.\n");
         exit(1);  // Note: consider returning NULL and handling error in the caller
     }
-    memcpy(task_buffer, combined_kv_buffer, sizeof(key_value_entry) * my_controller.buffer_capacity);
+    memcpy(task_buffer, combined_kv_buffer, sizeof((KEY_SIZE+value_size)) * my_controller.buffer_capacity);
     return task_buffer;
 }
 
@@ -33,10 +33,10 @@ uint64_t async_kv_write(const char* hashkey, const char* hashvalue)
     pthread_mutex_lock(&write_buffer_mutex);
 
     // Check if buffer is full and signal accordingly
-    if (current_buffer_position >= my_controller.buffer_capacity) 
+    if (current_buffer_position >= my_controller.write_buffer_size) 
     {
         logger.log(nexio_logger::info, "\033[0;33m[INFO]\033[0m Write buffer is full. Signaling for I/O operations.\n");
-        key_value_entry* task_buffer = allocate_task_buffer();
+        char* task_buffer = allocate_task_buffer();
         write_task_paramaters* task = create_io_task(task_buffer);
         uint64_t lba_num_within_block = my_controller.current_write_lba_num % my_controller.nexio_lba_uint;        
         offset5 += lba_num_within_block == 0 ? 0x1000000 : 0x00000000;
@@ -48,9 +48,9 @@ uint64_t async_kv_write(const char* hashkey, const char* hashvalue)
     }
 
     // Copy key-value pair to buffer
-    memcpy(combined_kv_buffer[current_buffer_position].key, hashkey, KEY_SIZE);
-    memcpy(combined_kv_buffer[current_buffer_position].val, hashvalue, VAL_SIZE);
-    current_buffer_position++;
+    memcpy(combined_kv_buffer+current_buffer_position, hashkey, KEY_SIZE);
+    memcpy(combined_kv_buffer+current_buffer_position, hashvalue, value_size);
+    current_buffer_position += (KEY_SIZE+value_size);
     offset5++;
 
     pthread_mutex_unlock(&write_buffer_mutex);
@@ -88,13 +88,13 @@ uint64_t async_kv_separate_write(const char* hashkey, const char* hashvalue, uin
     // Check if buffer is full and signal accordingly
     pthread_mutex_lock(&write_buffer_mutex);
 
-    if(value_position_in_buffer+VAL_SIZE >= my_controller.write_buffer_size) 
+    if(value_position_in_buffer+value_size >= my_controller.write_buffer_size) 
     {
         logger.log(nexio_logger::info, "Value buffer is full. Signaling for I/O operations.");
         
         void* task_buffer = allocate_and_copy_to_task_buffer(value_separated_buffer); // Quickly copy the current write buffer's content to a new buffer
         separation_write_task_paramaters* task = create_separation_io_task(task_buffer); // Create and initialize the write task parameters for separation write
-        if(block_bitmaps[value_block_id].count()+ my_controller.nexio_write_uint >= 500)
+        if(block_bitmaps[value_block_id].count()+ my_controller.nexio_write_uint >= num_data_page)
         {
             value_block_id = block_id_allocator++;
             block_type_tracker[value_block_id] = VALUE_BLOCK;
@@ -113,8 +113,8 @@ uint64_t async_kv_separate_write(const char* hashkey, const char* hashvalue, uin
         value_position_in_buffer = 0;
 
     }
-    memcpy(value_separated_buffer + value_position_in_buffer, hashvalue, VAL_SIZE);
-    value_position_in_buffer += VAL_SIZE;
+    memcpy(value_separated_buffer + value_position_in_buffer, hashvalue, value_size);
+    value_position_in_buffer += value_size;
     offset5++;
     block_information[offset5>>24].first++;
 
@@ -124,7 +124,7 @@ uint64_t async_kv_separate_write(const char* hashkey, const char* hashvalue, uin
         logger.log(nexio_logger::info, "Key buffer is full. Signaling for I/O operations.");
         void* task_key_buffer =  allocate_and_copy_to_task_buffer(key_separated_buffer);  
         separation_write_task_paramaters* key_task = create_separation_io_task(task_key_buffer);// Create and initialize the write task parameters for separation write
-        if(block_bitmaps[key_block_id].count()+ my_controller.nexio_write_uint >= 500)
+        if(block_bitmaps[key_block_id].count()+ my_controller.nexio_write_uint >= num_data_page)
         {
             key_block_id = block_id_allocator++;
             block_type_tracker[key_block_id] = KEY_BLOCK;
@@ -163,12 +163,12 @@ uint64_t async_kv_separate_write(const char* hashkey, const char* hashvalue, uin
 uint64_t async_kv_separate_variable_write(const char* hashkey, const char* hashvalue, uint64_t& block)
 {
     pthread_mutex_lock(&write_buffer_mutex);
-    if (value_position_in_buffer+VAL_SIZE > my_controller.write_buffer_size) 
+    if (value_position_in_buffer+value_size > my_controller.write_buffer_size) 
     {
         void* task_buffer = allocate_and_copy_to_task_buffer(value_separated_buffer); // Quickly copy the current write buffer's content to a new buffer
         separation_write_task_paramaters* task = create_separation_io_task(task_buffer); // Create and initialize the write task parameters for separation write
         
-        if(block_bitmaps[value_block_id].count()+ my_controller.nexio_write_uint >= 500)
+        if(block_bitmaps[value_block_id].count()+ my_controller.nexio_write_uint >= num_data_page)
         {
             value_block_id = block_id_allocator++;
             block_type_tracker[value_block_id] = VALUE_BLOCK;
@@ -189,8 +189,8 @@ uint64_t async_kv_separate_variable_write(const char* hashkey, const char* hashv
         value_position_in_buffer = 0; 
     }
 
-    memcpy(value_separated_buffer + value_position_in_buffer, hashvalue, VAL_SIZE);
-    value_position_in_buffer += VAL_SIZE;
+    memcpy(value_separated_buffer + value_position_in_buffer, hashvalue, value_size);
+    value_position_in_buffer += value_size;
 
     offset5++;
     block_information[offset5>>24].first++;
@@ -204,7 +204,7 @@ uint64_t async_kv_separate_variable_write(const char* hashkey, const char* hashv
     char temp[8];
     uint64_t page_id = offset5 >> 12;  
     uint64_t offsetInPage = offset5 & 0x0000000000000FFF;  
-    uint64_t data = BlockId* page_id * (my_controller.write_buffer_size/VAL_SIZE) + offsetInPage;
+    uint64_t data = BlockId* page_id * (my_controller.write_buffer_size/value_size) + offsetInPage;
     
 
     int length = EncodeLength(data);
@@ -226,7 +226,7 @@ uint64_t async_kv_separate_variable_write(const char* hashkey, const char* hashv
         void* task_buffer = allocate_and_copy_to_task_buffer(key_separated_buffer); // Quickly copy the current write buffer's content to a new buffer
         separation_write_task_paramaters* task = create_separation_io_task(task_buffer); // Create and initialize the write task parameters for separation write
         
-        if(block_bitmaps[key_block_id].count()+ my_controller.nexio_write_uint >= 500)
+        if(block_bitmaps[key_block_id].count()+ my_controller.nexio_write_uint >= num_data_page)
         {
             key_block_id = block_id_allocator++;
             block_type_tracker[key_block_id] = KEY_BLOCK;
@@ -286,7 +286,7 @@ uint64_t async_kv_separate_update(const char* new_hashvalue, uint64_t key_offset
     char temp;
     uint32_t off =0;
     pthread_mutex_lock(&write_buffer_mutex);
-    if(value_position_in_buffer+VAL_SIZE >= my_controller.write_buffer_size) 
+    if(value_position_in_buffer+value_size >= my_controller.write_buffer_size) 
     {
         logger.log(nexio_logger::info, "Value buffer now is full. Signaling for I/O operations.");
 
@@ -302,8 +302,8 @@ uint64_t async_kv_separate_update(const char* new_hashvalue, uint64_t key_offset
         value_position_in_buffer = 0;
     }
 
-    memcpy(value_separated_buffer + value_position_in_buffer, new_hashvalue, VAL_SIZE);
-    value_position_in_buffer += VAL_SIZE;
+    memcpy(value_separated_buffer + value_position_in_buffer, new_hashvalue, value_size);
+    value_position_in_buffer += value_size;
     offset5++;
     block_information[offset5>>24].first++;
     
@@ -345,7 +345,7 @@ uint64_t async_kv_separate_update(const char* new_hashvalue, uint64_t key_offset
 uint64_t async_kv_separate_variable_update(const char* new_hashvalue, uint64_t& block)
 {
     pthread_mutex_lock(&write_buffer_mutex);
-    if (value_position_in_buffer+VAL_SIZE > my_controller.write_buffer_size) 
+    if (value_position_in_buffer+value_size > my_controller.write_buffer_size) 
     {
         logger.log(nexio_logger::info, "Value buffer now is full. Signaling for I/O operations.");
         void* task_buffer = allocate_and_copy_to_task_buffer(value_separated_buffer);
@@ -360,8 +360,8 @@ uint64_t async_kv_separate_variable_update(const char* new_hashvalue, uint64_t& 
         offset5 = offset5 & 0xFFFFF000;
     }
 
-    memcpy(value_separated_buffer + value_position_in_buffer, new_hashvalue, VAL_SIZE);
-    value_position_in_buffer += VAL_SIZE;
+    memcpy(value_separated_buffer + value_position_in_buffer, new_hashvalue, value_size);
+    value_position_in_buffer += value_size;
 
     offset5++;
     block_information[offset5>>24].first++;
@@ -371,7 +371,7 @@ uint64_t async_kv_separate_variable_update(const char* new_hashvalue, uint64_t& 
     uint32_t data = offset5 & 0x00FFFFFF;
     uint32_t pageID = data >> 12;  
     uint32_t offsetInPage = data & 0xFFF;  
-    data = BlockId* pageID * (my_controller.write_buffer_size/VAL_SIZE) + offsetInPage;
+    data = BlockId* pageID * (my_controller.write_buffer_size/value_size) + offsetInPage;
     block_information[BlockId].first++;
     int length = EncodeLength(data);
 
@@ -458,7 +458,7 @@ int  async_kv_separte_variable_delete(uint64_t offset)
     uint32_t data = offset & 0x00FFFFFF;
     uint32_t pageID = data >> 12;  
     uint32_t offsetInPage = data & 0xFFF;  
-    data = pageID * (my_controller.write_buffer_size/VAL_SIZE) + offsetInPage;  
+    data = pageID * (my_controller.write_buffer_size/value_size) + offsetInPage;  
     block_information[BlockId].second++;
         
     int length = EncodeLength(data);
@@ -539,7 +539,7 @@ int async_kv_variable_Delete(uint32_t offset)
 
     uint32_t pageID = data >> 12;  
     uint32_t offsetInPage = data & 0xFFF;  
-    data = pageID * (my_controller.write_buffer_size/VAL_SIZE) + offsetInPage;
+    data = pageID * (my_controller.write_buffer_size/value_size) + offsetInPage;
     int length = EncodeLength(data);  
     block_information[BlockId].second++;
     
@@ -609,7 +609,7 @@ uint64_t async_kv_delete(uint64_t offset)
 
 
 
-key_value_entry  async_read(uint64_t offset)
+char*  async_read(uint64_t offset)
 {
     uint64_t offsetpage = ((offset>>12)&0xFFF) ;
     uint64_t PageId = (offset>>block_bits_count)*my_controller.nexio_lba_uint+ offsetpage;
@@ -628,28 +628,28 @@ key_value_entry  async_read(uint64_t offset)
         //printf("Not Found!,Cache size:%lu\n",lrucache.cache.size());
         // buffernumber++;
         // ReadNode temp;
-        key_value_entry* ReadData = read_queue(PageId);
+        // key_value_entry* ReadData = read_queue(PageId);
         // temp.data = ReadData;
         // temp.PageId = PageId;
         // lrucache.put(PageId, temp);
-        key_value_entry tem1;
-        memcpy(tem1.key,ReadData[Position].key,KEY_SIZE);
-        memcpy(tem1.val,ReadData[Position].val,VAL_SIZE);
-        spdk_dma_free(ReadData);
+        // key_value_entry tem1;
+        // memcpy(tem1.key,ReadData[Position].key,KEY_SIZE);
+        // memcpy(tem1.val,ReadData[Position].val,value_size);
+        // spdk_dma_free(ReadData);
 #ifdef TIOCS_READ_DEBUG
         printf("ReadData[Position].key: %lu ", big_endian2little_endian(ReadData[Position].key, KEY_SIZE));
         printf("ReadData[Position].val: %lu\n",big_endian2little_endian(ReadData[Position].val, KEY_SIZE));
 #endif
-        return tem1;    
+        return nullptr;    
     }
     else
     {
         // printf("Founded!Cache size:%lu\n",lrucache.cache.size());
-        key_value_entry *values = lrucache.get(PageId);
-        key_value_entry tem;
-        memcpy(tem.key,values[Position].key,KEY_SIZE);
-        memcpy(tem.val,values[Position].val,VAL_SIZE);
-        return tem;
+        // key_value_entry *values = lrucache.get(PageId);
+        // key_value_entry tem;
+        // memcpy(tem.key,values[Position].key,KEY_SIZE);
+        // memcpy(tem.val,values[Position].val,VAL_SIZE);
+        return nullptr;
     }
 #ifdef LRU
     bool IsFlag = fifocache.IsFIFOPage(PageId);

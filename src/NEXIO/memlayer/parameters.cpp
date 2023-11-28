@@ -15,6 +15,8 @@
 #include "include/buffer.h"
 #include "disklayer/write_buffer.h"
 #include "include/spdk_env_init.h"
+#include "utility/types.h"
+#include "tests/nexio_test.h"
 
 
 
@@ -41,17 +43,16 @@ int initialize_geometry_and_buffer_parameters()
     //     BlockWritePointers[i] = 0;
     //     block_information[i] = std::make_pair(0,0);
     // }
-
     
     combined_kv_buffer_init();
     init_io_manager();
     kv_buffer_init();
 
-    size_t kv_pairs_per_lba = device_info->ns_info_array[0].lba_size/(KEY_SIZE+VAL_SIZE);
+    size_t kv_pairs_per_lba = device_info->ns_info_array[0].lba_size/(KEY_SIZE+value_size);
     size_t logs_per_lba = device_info->ns_info_array[0].lba_size/(sizeof(uint32_t));
     size_t pages_per_block = my_controller.nexio_lba_uint;
     // // num_data_page = (pages_per_block - (pages_per_block)/(logs_per_page/kv_pairs_per_page +1))-240;
-    num_data_page = 500;
+    num_data_page = 896;
 
     // size_t keys_per_page = sectors_per_page*geometry.clba/(KEY_SIZE);
     // key_num_data_page = num_data_page*kv_pairs_per_page;

@@ -18,20 +18,27 @@
 #define LOCAL_HASH_SIZE  sizeof (LocalHashNode)
 #define GLOBAL_HASH_SIZE sizeof (GlobalHashNode)
 #define LOCAL_HEAD_SIZE  sizeof (LocalHeadNode)
-#define MaxLevel 20
+#define MaxLevel 32
+#define KEY_SIZE 16
 
-const int MAX_LEVEL1 = 20; 
+
+const int MAX_LEVEL1 = 32; 
 const double P_FACTOR1 = 0.5;
 const int max_bucket_size = 16384;
+
 
 /*
  * Local hash table node.
  */
 typedef struct LocalHashNode
 {
-    uint64_t Hashkey;
-    uint32_t offset;
+    char key[KEY_SIZE];
+    uint64_t offset;
     uint8_t flag;
+#ifndef NOT_SEPARATE_KV
+    uint64_t block;   // 40-bit bitset for block
+#endif
+    int maxLevel;
     LocalHashNode * next[MaxLevel];
 }LocalHashNode;
 
@@ -79,30 +86,24 @@ typedef struct
 /*
  * Global hash table node.
  */
+#ifdef FastSkiplist
+    typedef struct GlobalHashNode {
+        unsigned int bit;
+        LocalHeadNode *local;
+    } GlobalHashNode;
+#else
+    typedef struct GlobalHashNode {
+        unsigned int bit;
+        TNCSkiplist *local;
+    } GlobalHashNode;
+#endif
 
-typedef struct GlobalHashNode
-{
-    unsigned int bit;
-    TNCSkiplist * local;
-}GlobalHashNode;
-
-// typedef struct GlobalHashNode
-// {
-//     unsigned int bit;
-//     LocalHeadNode * local;
-// }GlobalHashNode;
 
 
 
 /**
  *  Definition of key-value pair
  **/
-
-typedef struct key_value_entry
-{
-    char key[KEY_SIZE];
-    char val[VAL_SIZE];
-}key_value_entry;
 
 
 
@@ -125,9 +126,21 @@ typedef struct key_value_entry
 
 TNCSkiplist *  TskiplistCreate();
 
+
+
+
+
 LocalHashNode * NILInitialize();
 
-LocalHashNode * Initialization(key_type hashkey, uint32_t offset);
+#ifdef NOT_SEPARATE_KV
+    LocalHashNode *Initialization(const char* hashkey,uint64_t offset, int maxLevel);
+#elif defined(NOT_SEPARATE_KV_variable)
+    LocalHashNode *Initialization(const char* hashkey,uint64_t offset, int maxLevel);
+#elif defined(SEPARATE_KV_FIXED_LOG)
+    LocalHashNode *Initialization(const char* hashkey,uint64_t offset,uint64_t block1, int maxLevel);
+#elif defined(SEPARATE_KV_VARIABLE_LOG)
+    LocalHashNode *Initialization(const char* hashkey,uint64_t offset,uint64_t block1, int maxLevel);
+#endif
 
 LocalHashNode * Initialization();
 

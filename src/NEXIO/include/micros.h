@@ -64,6 +64,8 @@
 #define DELAYED_ERASE
 
 
+// #define FastSkiplist 
+
 
 /**
  * NoFTL-KV MICRO

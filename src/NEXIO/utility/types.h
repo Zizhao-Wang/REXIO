@@ -9,18 +9,24 @@
  *   		src/FrontEnd/GlobalVar/FrontGlobalVar.h
  */
 
-#ifndef EXPERIMENT1_FRONTGLOBALVAR_H
-#define EXPERIMENT1_FRONTGLOBALVAR_H
+#ifndef EXPERIMENT1_UTILITY_TYPES_H
+#define EXPERIMENT1_UTILITY_TYPES_H
 
 
 #include "include/node.h"
 #include <vector>
+#include <chrono>
 #include "tests/nexio_test.h"
 
 
-DECLARE_string(benchmarks);
-DECLARE_int64(num);
-DECLARE_int32(buckets);
+extern std::chrono::duration<double, std::milli> convert_and_find_bucket_time;
+extern std::chrono::duration<double, std::milli> search_time;
+extern std::chrono::duration<double, std::milli> insert_and_write_time;
+extern std::chrono::duration<double, std::milli> split_time;
+
+
+
+
 
 
 #define LOCAL_TABLE_SIZE 100000
@@ -58,7 +64,16 @@ int EncodeLength(uint64_t data);
  * \param len The length of the byte sequence.
  * \return A 64-bit integer representing the little-endian representation of the number.
  */
-uint64_t big_endian2little_endian(const char *big_endian, size_t len);
+inline uint64_t big_endian2little_endian(const char *big_endian, size_t len)
+{
+    uint64_t result = 0;
+    len = len > 8 ? 8 : len;
+    for (size_t i = 0; i < len; ++i) 
+	{
+        result |= (static_cast<uint64_t>(static_cast<unsigned char>(big_endian[i])) << (8 * (len - 1 - i)));
+    }
+    return result;
+}
 
 
 

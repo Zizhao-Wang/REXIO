@@ -175,7 +175,7 @@ int kv_log_queue(char *write_buffer, uint64_t block_id);
 /**  
  * ================= READ(I/O) module ====================  
  **/
-key_value_entry* read_queue(uint64_t page_id);
+char* read_queue(uint64_t page_id);
 
 
 

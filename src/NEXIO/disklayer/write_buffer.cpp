@@ -1,6 +1,7 @@
 #include "write_buffer.h"
 #include "include/buffer.h"
 #include "include/spdk_env_init.h"
+#include "utility/types.h"
 
 // ==========================
 // Offset and buffer related 
@@ -32,7 +33,7 @@ std::unordered_map<uint64_t, std::vector<char>> log_buffer;
 // ======================
 // Combined key-value store
 // ======================
-key_value_entry *combined_kv_buffer;
+char* combined_kv_buffer;
 page_num_type combined_kv_page_num = 0;
 
 // ==========================
@@ -64,7 +65,7 @@ void initialize_write_buffer_variables()
         printf("\033[0;31m[ERROR]\033[0m Failed to initialize buffer full condition variable.\n");
         return;
     }
-    my_controller.buffer_capacity = (SPDK_LBAs_IN_NEXIO_WRITE_BUFFER*device_info->ns_info_array[0].lba_size) / sizeof(key_value_entry);
+    my_controller.buffer_capacity = (SPDK_LBAs_IN_NEXIO_WRITE_BUFFER*device_info->ns_info_array[0].lba_size) / sizeof(KEY_SIZE+FLAGS_value_size);
     // printf("%lu\n", my_controller.buffer_capacity);
     my_controller.nexio_write_uint =  SPDK_LBAs_IN_NEXIO_WRITE_BUFFER; //default: The nexio block contains 2 lbas
     my_controller.nexio_lba_uint = SPDK_LBAs_IN_NEXIO_LBA;
@@ -76,7 +77,7 @@ void initialize_write_buffer_variables()
 void combined_kv_buffer_init()
 {
     initialize_write_buffer_variables();
-    combined_kv_buffer = (key_value_entry*)spdk_dma_malloc(sizeof(key_value_entry)*my_controller.buffer_capacity, 0x1000, NULL);
+    combined_kv_buffer = (char*)spdk_dma_malloc((KEY_SIZE+value_size)*my_controller.buffer_capacity, 0x1000, NULL);
     if (combined_kv_buffer == NULL) {
         printf("\033[0;31m[ERROR]\033[0m Failed to allocate memory for combined KV buffer.\n");
         return;

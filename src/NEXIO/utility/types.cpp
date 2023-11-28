@@ -17,6 +17,8 @@
 
 int Globaldepth=0;
 
+uint64_t value_size = 128;
+
 std::vector<GlobalHashNode*> global;
 
 float pro=0.5;
@@ -34,16 +36,6 @@ int EncodeLength(uint64_t data)
     return length;
 }
 
-uint64_t big_endian2little_endian(const char *big_endian, size_t len)
-{
-    uint64_t result = 0;
-    len = len > 8 ? 8 : len;
-    for (size_t i = 0; i < len; ++i) 
-	{
-        result |= (static_cast<uint64_t>(static_cast<unsigned char>(big_endian[i])) << (8 * (len - 1 - i)));
-    }
-    return result;
-}
 
 void write_data(const std::string& file_path, const std::string& experiment_num, const std::string& workload_num, int count_point) 
 {

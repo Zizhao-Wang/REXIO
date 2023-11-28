@@ -33,7 +33,7 @@
  * 
  * @return A pointer to the allocated key_value_entry structure.
  */
-key_value_entry* allocate_task_buffer();
+char* allocate_task_buffer();
 
 /**
  * @brief Asynchronously writes key-value pairs.
@@ -185,7 +185,7 @@ int async_kv_variable_Delete(uint32_t offset);
  * 
  * @return A key_value_entry structure containing the retrieved key-value pair.
  */
-key_value_entry async_read(uint64_t offset);
+char* async_read(uint64_t offset);
 
 /** @} */ // End of ReadingOperations group
 

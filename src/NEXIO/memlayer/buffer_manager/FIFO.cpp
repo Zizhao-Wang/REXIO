@@ -2,19 +2,19 @@
 #include<cassert>
 
 
-key_value_entry* FIFOCache::get(page_num_type page)
-{
+// key_value_entry* FIFOCache::get(page_num_type page)
+// {
 
-    if(!IsFIFOPage(page))
-    {
-        return nullptr;
-    }
+//     if(!IsFIFOPage(page))
+//     {
+//         return nullptr;
+//     }
 			
-    FReadNode temp = *HashMap[page];
+//     FReadNode temp = *HashMap[page];
     
-    return temp.data; 
+//     return temp.data; 
 
-}
+// }
 
 void FIFOCache::put(page_num_type page, FReadNode node)
 {

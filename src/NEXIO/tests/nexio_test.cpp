@@ -1,4 +1,5 @@
 #include "nexio_test.h"
+#include <random> 
 #include "include/pre_definition.h"
 #include "memlayer/MemTier.h"
 #include "disklayer/io_manager.h"
@@ -6,13 +7,13 @@
 #include "memlayer/syncstore.h"
 #include "ycsb_test.h"
 #include "data_distribution.h"
+#include "utility/types.h"
 
 
 
 
 
-char key_buffer[KEY_SIZE];
-char value_buffer[VAL_SIZE];
+
 int error_bound = KEY_SIZE > 8 ? 8 : 0;
 uint64_t user_input_bytes = 0;
 double total_operation_time = 0.0;  
@@ -30,7 +31,7 @@ DEFINE_string(benchmarks, " ", "define the type of benchmark");
 DEFINE_int64(num,             1000000,  "Number of key/values to place in database");
 DEFINE_int64(range,           -1,       "key range space");
 DEFINE_int64(reads,           -1,       "Number of read operations to do.  If negative, do FLAGS_num reads.");
-DEFINE_int32(value_size,      100,      "Size of each value");
+DEFINE_int64(value_size,      100,      "Size of each value");
 DEFINE_bool(histogram,        false,    "Print histogram of operation timings");
 DEFINE_bool(print_wa,         false,    "Print write amplification every stats interval");
 DEFINE_int64(write_buffer_size, 2097152,"Number of bytes to buffer in all memtables before compacting");
@@ -49,11 +50,13 @@ void bench_testing(void)
 
      uint64_t done_ops = 0; 
      uint64_t next_report = 100; 
+     char key_buffer[KEY_SIZE];
+     char *value_buffer = new char[FLAGS_value_size];
 
      clock_t startTime,endTime;                        // Definition of timestamp
      /* workload a: insert only*/
      uint64_t written_data_size = 100000000*16;
-     uint64_t written_data_num = written_data_size /(KEY_SIZE+VAL_SIZE);
+     uint64_t written_data_num = written_data_size /(KEY_SIZE+FLAGS_value_size);
      uint64_t record_point = 1000000;
      FLAGS_stats_interval = FLAGS_num / 10;
      
@@ -63,31 +66,84 @@ void bench_testing(void)
           is_random = true;
      }
      startTime = clock();
-     memset(key_buffer, 0, KEY_SIZE);
-     memset(value_buffer, 0, VAL_SIZE);
      fprintf(stderr, "start benchmark:\n");
+
+     // uint64_t data_point2;
+     // std::mt19937 rng(std::random_device{}());
+     // std::uniform_int_distribution<uint64_t> dist(1, UINT64_MAX);
+     // for(uint64_t i =1;i<100;i++)
+     // {
+     //      data_point = dist(rng);
+     //      data_point2 = dist(rng);
+
+     //      for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) {
+     //           key_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((data_point >> (8 * j)) & 0xFF);
+     //      }
+
+     //      for (size_t j = 0; j < sizeof(uint64_t) && j < FLAGS_value_size; ++j){
+     //           value_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((data_point2 >> (8 * j)) & 0xFF);
+     //      }
+
+     //      int sse_result  = compareWithSSE(key_buffer, value_buffer, KEY_SIZE);
+     //      int memcmp_result = memcmp(key_buffer, value_buffer, KEY_SIZE);
+
+     //      if(memcmp_result<0)
+     //      {
+     //           if(sse_result<0)
+     //           {
+     //                printf("true!\n");
+     //           }
+     //           else{
+     //                printf("error\n");
+     //           }
+     //      }
+     //      if(memcmp_result>0){
+     //           if(sse_result>0)
+     //           {
+     //                printf("true!\n");
+     //           }
+     //           else{
+     //                printf("error\n");
+     //           }
+     //      }
+     //      if(memcmp_result==0){
+     //           if(sse_result==0)
+     //           {
+     //                printf("true!\n");
+     //           }
+     //           else{
+     //                printf("error\n");
+     //           }
+     //      }
+          
+     // }
+
+     // exit(0);
+
      for(uint64_t i=1;i<=FLAGS_num;i++)
      {
           memset(key_buffer, 0, KEY_SIZE);
-          memset(value_buffer, 0, VAL_SIZE);
+          memset(value_buffer, 0, value_size);
           data_point = is_random?(trace->Next()%FLAGS_range):i;
           for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
           {
                key_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((data_point >> (8 * j)) & 0xFF);
           }
 
-          for (size_t j = 0; j < sizeof(uint64_t) && j < VAL_SIZE; ++j)
+          for (size_t j = 0; j < sizeof(uint64_t) && j < value_size; ++j)
           {
                value_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((data_point >> (8 * j)) & 0xFF);
           }
 
-          user_input_bytes += (KEY_SIZE + VAL_SIZE);
-          uint64_t operation_start_time = clock();
+          user_input_bytes += (KEY_SIZE + value_size);
           DEBUG_PRINT("data point:%lu  key:%lu \n",data_point,big_endian2little_endian(key_buffer,KEY_SIZE));
-          // printf("%lu  datapoint:%lu \n",i,data_point);
+
+          uint64_t operation_start_time = clock();
           InsertNode(key_buffer, value_buffer);
           uint64_t operation_end_time = clock();
+
           double current_latency = (double)(operation_end_time - operation_start_time) / CLOCKS_PER_SEC;
+
           total_latency += current_latency;
           if(current_latency > max_latency){
                max_latency = current_latency;
@@ -137,6 +193,10 @@ void bench_testing(void)
                fprintf(stdout,"Min Latency: %0.3lf ms\n", min_latency * 1000);
                fprintf(stdout,"The Write Amplification: %0.3lf\n", (double)total_write_bytes/user_input_bytes); // Assuming you have a variable called write_amplification
                fprintf(stdout,"------------------------------\n");
+               std::cout << "Convert and Find Bucket Time: " << convert_and_find_bucket_time.count() << " ms\n";
+               std::cout << "Search Time: " << search_time.count() << " ms\n";
+               std::cout << "Insert and Write Time: " << insert_and_write_time.count() << " ms\n";
+               std::cout << "split Time: " << split_time.count() << " ms\n";
                fflush(stdout);
           }
      }
@@ -181,7 +241,7 @@ void bench_testing(void)
      {
           srand48(time(NULL));
           memset(key_buffer, 0, KEY_SIZE);
-          memset(value_buffer,0, VAL_SIZE);
+          memset(value_buffer,0, FLAGS_value_size);
           uint64_t k;
           printf("Test: \n");
           printf("key:%lu\n",k);
@@ -202,12 +262,12 @@ void bench_testing(void)
           {
                key_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
           }
-          for (size_t j = 0; j < sizeof(uint64_t) && j < VAL_SIZE; ++j)
+          for (size_t j = 0; j < sizeof(uint64_t) && j < FLAGS_value_size; ++j)
           {
                value_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((k+1 >> (8 * j)) & 0xFF);
           }
 
-          user_input_bytes = user_input_bytes +(KEY_SIZE + VAL_SIZE);
+          user_input_bytes = user_input_bytes +(KEY_SIZE + FLAGS_value_size);
           uint64_t operation_start_time = clock();
           Update(key_buffer,value_buffer);
 

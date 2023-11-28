@@ -14,8 +14,6 @@
 #include <gflags/gflags.h>
 #include "include/pre_definition.h"
 
-extern char key_buffer[KEY_SIZE];
-extern char value_buffer[VAL_SIZE];
 extern int error_bound;
 extern uint64_t user_input_bytes;
 extern double total_operation_time;
@@ -32,7 +30,10 @@ extern double average_latency ;
 
 
 
-
+DECLARE_string(benchmarks);
+DECLARE_int64(num);
+DECLARE_int32(buckets);
+DECLARE_int64(value_size);
 
 
 /**

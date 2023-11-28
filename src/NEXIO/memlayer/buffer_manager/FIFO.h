@@ -19,7 +19,7 @@
 typedef struct FReadNode
 {
 	page_num_type   PageId;
-	key_value_entry * data;
+	// key_value_entry * data;
 }FReadNode;
 
 
@@ -37,7 +37,7 @@ public:
         this->capacity = cap; 
     }
     
-    key_value_entry* get(page_num_type page); 
+    // key_value_entry* get(page_num_type page); 
     void put(page_num_type page, FReadNode node);
 	bool IsFIFOPage(page_num_type);
 	void Clear(size_t cap);

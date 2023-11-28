@@ -32,8 +32,6 @@ extern int buffernumber;
 
 extern LRUCache lrucache;
 
-extern key_value_entry* Pagedata;
-
 
 extern FIFOCache fifocache;
 
@@ -85,9 +83,9 @@ int  SyncDelete(uint32_t offset);
 /**
  *  ================= Synchronous read module====================  
  **/
-key_value_entry Read4Buffer(size_t Position);
+char* Read4Buffer(size_t Position);
 
-key_value_entry SyncRead(uint32_t offset);
+char* SyncRead(uint32_t offset);
 
 void clearBufferLog();
 

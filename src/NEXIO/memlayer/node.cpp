@@ -18,7 +18,6 @@ uint64_t total_write_bytes = 0; // write I/Os
 
 
 
-
 #ifdef NOT_SEPARATE_KV
     TSkiplistNode *TskiplistNodeCreat(const char* key,uint64_t offset, int maxLevel)
 #elif defined(NOT_SEPARATE_KV_variable)
@@ -69,6 +68,14 @@ TNCSkiplist * TskiplistCreate()
     obj->head = TskiplistNodeCreat(key,0,0, MAX_LEVEL1);
 #endif
 
+    auto * nil =(TSkiplistNode *) malloc(sizeof(TSkiplistNode));
+    memset(nil->key, 0xFF, KEY_SIZE); 
+
+    for(int i=0;i<MaxLevel;i++)
+    {
+        obj->head->forward[i]=nil;
+    }
+
     obj->level = 0;
     obj->number = 0;
     return obj;
@@ -85,8 +92,14 @@ TNCSkiplist * TskiplistCreate()
 LocalHashNode * NILInitialize()
 {
     auto * nil =(LocalHashNode *) malloc(sizeof LOCAL_HASH_SIZE);
-    if(nil!= nullptr)
-        nil->Hashkey=UINT64_MAX;
+
+    char key[KEY_SIZE];
+    memset(key, 0xFF, KEY_SIZE); 
+
+    if(nil!= nullptr){
+        memcpy(nil->key, key, KEY_SIZE);
+    }
+        
     return nil;
 }
 
@@ -95,14 +108,31 @@ LocalHashNode * NILInitialize()
  * Local node initialization.
  */
 
-LocalHashNode * Initialization(key_type hashkey, uint32_t offset)
+#ifdef NOT_SEPARATE_KV
+    LocalHashNode *Initialization(const char* hashkey,uint64_t offset, int maxLevel)
+#elif defined(NOT_SEPARATE_KV_variable)
+    LocalHashNode *Initialization(const char* hashkey,uint64_t offset, int maxLevel)
+#elif defined(SEPARATE_KV_FIXED_LOG)
+    LocalHashNode *Initialization(const char* hashkey,uint64_t offset,uint64_t block1, int maxLevel)
+#elif defined(SEPARATE_KV_VARIABLE_LOG)
+    LocalHashNode *Initialization(const char* hashkey,uint64_t offset,uint64_t block1, int maxLevel)
+#endif
 {
     auto * local =(LocalHashNode*) malloc(LOCAL_HASH_SIZE);
     if(local== nullptr)
+    {
+        fprintf(stdout,"can not request memory!\n");
+        fflush(stdout);
         exit(0);
-    local->Hashkey = hashkey;
+    }
+    memcpy(local->key, hashkey, KEY_SIZE);
     local->offset = offset;
     local->flag = 1;
+#ifdef SEPARATE_KV_FIXED_LOG
+    local->block = block1;
+#elif defined(SEPARATE_KV_VARIABLE_LOG)
+    local->block = block1;
+#endif
     return local;
 }
 
@@ -112,8 +142,11 @@ LocalHashNode * Initialization()
 
     auto *local = (LocalHashNode *) malloc(LOCAL_HASH_SIZE);
     if (local == nullptr)
+    {
+        fprintf(stdout,"request memory errror!\n");
         exit(0);
-
+    }
+    memset(local->key, 0, KEY_SIZE);
     auto * NIL = NILInitialize();
     for(int i=0;i<MaxLevel;i++)
     {

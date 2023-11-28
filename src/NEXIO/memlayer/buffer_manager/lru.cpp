@@ -1,21 +1,21 @@
 #include "lru.h"
 
-key_value_entry* LRUCache::get(page_num_type page)
-{
+// key_value_entry* LRUCache::get(page_num_type page)
+// {
 
-    if(!IsLRUPage(page))
-    {
-        return nullptr;
-    }
+//     if(!IsLRUPage(page))
+//     {
+//         return nullptr;
+//     }
 			
-    ReadNode temp = *HashMap[page];
-    cache.erase(HashMap[page]);
-    cache.push_front(temp);
+//     ReadNode temp = *HashMap[page];
+//     cache.erase(HashMap[page]);
+//     cache.push_front(temp);
     
-    HashMap[page] = cache.begin();
-    return temp.data; 
+//     HashMap[page] = cache.begin();
+//     return temp.data; 
 
-}
+// }
 
 void LRUCache::put(page_num_type page, ReadNode node)
 {

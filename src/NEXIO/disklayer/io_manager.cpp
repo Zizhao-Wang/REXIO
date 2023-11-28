@@ -171,8 +171,8 @@ int write_queue()
 
     uint64_t lba_start = 0;
     uint64_t lba_count = 0;
-
-    if (spdk_nvme_ns_cmd_write(ns, qpair, Pagedata, lba_start, lba_count, IO_write_complete, NULL, 0) == 0){
+    char *data =nullptr;
+    if (spdk_nvme_ns_cmd_write(ns, qpair, data, lba_start, lba_count, IO_write_complete, NULL, 0) == 0){
         out_stand++;
         logger.log(nexio_logger::info, "Successfully sent write request to OCSSD.");
         
@@ -412,7 +412,7 @@ void page_read_complete(void *arg, const struct spdk_nvme_cpl *completion) {
     out_stand--;
 }
 
-key_value_entry* read_queue(uint64_t page_id) {
+char* read_queue(uint64_t page_id) {
     char *buffer = (char *)spdk_dma_malloc(sectors_per_page , 0x1000, NULL);
     if(buffer == NULL) {
         logger.log(nexio_logger::error, "Failed to allocate buffer in read_queue!");
@@ -435,7 +435,7 @@ key_value_entry* read_queue(uint64_t page_id) {
         spdk_nvme_qpair_process_completions(qpair, 0);
     }
 
-    return (key_value_entry*)buffer;
+    return buffer;
 }
 
 

@@ -21,7 +21,7 @@
 typedef struct ReadNode
 {
 	page_num_type   PageId;
-	key_value_entry * data;
+	// key_value_entry * data;
 }ReadNode;
 
 
@@ -41,7 +41,7 @@ public:
         this->capacity = cap; 
     }
     
-    key_value_entry* get(page_num_type page); 
+    // key_value_entry* get(page_num_type page); 
     void put(page_num_type page, ReadNode node);
 	bool IsLRUPage(page_num_type);
     void ClearaReset(size_t cap);

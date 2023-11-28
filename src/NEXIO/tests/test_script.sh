@@ -44,7 +44,7 @@ convert_to_billion_format() {
 
 for i in {2..2}; do
     base_num=$(($billion * $i))
-    dir1="${i}B_nexio"
+    dir1="${i}B"
     if [ ! -d "$dir1" ]; then
         mkdir $dir1
     fi
@@ -79,7 +79,7 @@ for i in {2..2}; do
             --num=$num_entries \
             --value_size=$value_size \
             --range=$current_range \
-            --benchmarks=fillseq \
+            --benchmarks=fillrandom \
             --pci_address=0000:81:00.0 \
             | tee $log_file  \
             | awk -v n="$num_format" -v r="$divider" -v v="$value_size" '{print n, r, v, $0}' >> ../../../../write_amplification.txt

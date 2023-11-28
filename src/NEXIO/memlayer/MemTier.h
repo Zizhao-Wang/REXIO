@@ -12,6 +12,7 @@
 #define EXPERIMENT1_HASHTABLE_H
 
 #include <stdint.h>
+#include <emmintrin.h> // SSE2
 #include "include/GlobalVariable.h" 
 #include "include/node.h"
 
@@ -47,12 +48,48 @@ int InsertNode(const char* hashkey, uint64_t offset, uint8_t flag,uint64_t block
 
 int InsertNode(const char* hashkey, const char* hashvalue);
 
+inline int compareWithSSE(const char* a, const char* b, size_t size) {
+    const size_t sseWidth = 16; // SSE可以一次处理16个字节
+    size_t iterations = size / sseWidth;
+
+    for (size_t i = 0; i < iterations; ++i) {
+        __m128i v1 = _mm_loadu_si128(reinterpret_cast<const __m128i*>(a + i * sseWidth));
+        __m128i v2 = _mm_loadu_si128(reinterpret_cast<const __m128i*>(b + i * sseWidth));
+
+        __m128i result = _mm_cmpeq_epi8(v1, v2); 
+        int mask = _mm_movemask_epi8(result);
+
+        if (mask != 0xFFFF) {
+            for (size_t j = 0; j < sseWidth; ++j) {
+                if (a[i * sseWidth + j] != b[i * sseWidth + j]) {
+                    return (a[i * sseWidth + j] < b[i * sseWidth + j]) ? -1 : 1;
+                }
+            }
+        }
+    }
+
+    // 处理剩余的字节
+    for (size_t i = size - size % sseWidth; i < size; ++i) {
+        if (a[i] != b[i]) {
+            return (a[i] < b[i]) ? -1 : 1;
+        }
+    }
+
+    return 0;
+}
+
+
 
 /**
  *  =================  Search module  ==================== 
  **/
 
-TSkiplistNode * SearchNode(TNCSkiplist * Head, const char*  hashkey);
+#ifndef FastSkiplist
+TSkiplistNode * SearchNode(TNCSkiplist * Head,const char* hashkey);
+#endif
+#ifdef FastSkiplist
+LocalHashNode * SearchNode(LocalHeadNode * Head,const char* hashkey);
+#endif
 
 value_type Search(const char* );
 
@@ -66,7 +103,14 @@ int Update(const char* key1, const char* val);
 /**
  *  ================= deletion module====================  
  **/
-bool DeleteValue(TNCSkiplist * Head, const char* hashkey);
+#ifndef FastSkiplist
+    bool DeleteValue(TNCSkiplist * Head, const char* hashkey);
+#endif
+
+#ifdef FastSkiplist
+    bool DeleteValue(LocalHeadNode * Head, const char* hashkey);
+#endif
+
 int Delete(const char* key1);
 
 

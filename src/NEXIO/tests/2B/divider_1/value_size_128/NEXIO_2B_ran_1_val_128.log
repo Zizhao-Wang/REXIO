@@ -1,0 +1,95 @@
+[1;34m==============================================[0m
+[1;37m[44m                                          [0m
+[1;37m[44m  __   _   _____  __    __  _   _____   [0m
+[1;37m[44m |  \ | | | ____| \ \  / / | | /  _  \  [0m
+[1;37m[44m |   \| | | |__    \ \/ /  | | | | | |  [0m
+[1;37m[44m | |\   | |  __|    }  {   | | | | | |  [0m
+[1;37m[44m | | \  | | |___   / /\ \  | | | |_| |  [0m
+[1;37m[44m |_|  \_| |_____| /_/  \_\ |_| \_____/  [0m
+[1;37m[44m                                          [0m
+ _   _   _____       ___   _____        _____   _       ___   _____  
+| | | | /  ___|     /   | /  ___/      /  ___/ | |     /   | |_   _| 
+| | | | | |        / /| | | |___       | |___  | |    / /| |   | |   
+| | | | | |       / /_| | \___  \------\___  \ | |   / /_| |   | |   
+| |_| | | |___   / /  | |  ___| |       ___| | | |  / /  | |   | |   
+\_____/ \_____| /_/   |_| /_____/      /_____/ |_| /_/   |_|   |_|   
+                 ______  _   ______  _   _       ___   _____        _          __  ___   __   _   _____  
+                |___  / | | |___  / | | | |     /   | /  _  \      | |        / / /   | |  \ | | /  ___| 
+                   / /  | |    / /  | |_| |    / /| | | | | |      | |  __   / / / /| | |   \| | | |     
+                  / /   | |   / /   |  _  |   / /_| | | | | |      | | /  | / / / /_| | | |\   | | |  _  
+                 / /__  | |  / /__  | | | |  / /  | | | |_| |      | |/   |/ / / /  | | | | \  | | |_| | 
+                /_____| |_| /_____| |_| |_| /_/   |_| \_____/      |___/|___/ /_/   |_| |_|  \_| \_____/
+[1;32mWelcome to NEXIO![0m
+[1;36mNEXIO is an industry-leading key-value store, setting benchmarks in the realm of high-performance data storage solutions.
+Empowered by cutting-edge algorithms and innovative data structures, NEXIO provides unparalleled speed, reliability, and efficiency.
+It's not just about storing data, it's about accessing it swiftly and reliably, every single time.
+Whether it's real-time analytics, mission-critical databases, or everyday computing needs, NEXIO stands out as the preferred choice for modern storage needs.[0m
+[1;34m==============================================[0m
+[34m
+=============== NEXIO initialization start ===============[0m
+[1;32m[INFO][0m io_mutex initialized successfully.
+[1;32m[INFO][0m io_cond initialized successfully.
+[1;32m[SUCCESS][0m Mutexes and condition variables successfully initialized![0m
+[1;32m[SUCCESS][0m I/O Thread successfully created![0m
+[1;32m[SUCCESS][0m Extendible hash table initialized successfully!
+NVMe Device Geometry
+=======================
+Model Number:                   Samsung SSD 960 PRO 512GB               4B6QCXP78%
+Serial Number:                  S3EWNWAJ322640E     Samsung SSD 960 PRO 512GB               4B6QCXP78%
+Firmware Version:               4B6QCXP78%
+Max Data Transfer Size:         9
+
+Namespace ID: 1
+LBA Format 0:
+	Metadata Size: 0 bytes
+	Data Size: 512 bytes
+	Relative Performance: Best (0)
+
+[1;32m[SUCCESS][0m SPDK Environment Initialized Successfully!
+[1;32m[SUCCESS][0m NVMe controller and I/O qpair initialized successfully!
+[1;32m[SUCCESS][0m Successfully initialized write buffer mutex.
+[1;32m[SUCCESS][0m Successfully initialized buffer full condition variable.
+[1;32m[SUCCESS][0m Successfully allocated memory for combined KV buffer.
+[1;32m[SUCCESS][0m Geometry and buffer parameters initialized successfully!
+[1;32m[SUCCESS][0m All components in system successfully initialized![0m[34m
+=============== NEXIO Initialization completed ===============[0m
+
+Store Performance Metrics
+------------------------------
+[2023-11-28 14:41:34] (0,200000000) ops Total execution time: 986.669 s
+Data Throughput (MB/s): 202702.168 ops/sec  Operation Throughput (ops/sec): 27.837 MB/s
+Average Latency: 0.005 ms  Max Latency: 24.508 ms  Min Latency: 0.001 ms
+The Write Amplification: 1.034
+------------------------------
+
+Store Performance Metrics
+------------------------------
+[2023-11-28 15:05:43] (200000000,400000000) ops Total execution time: 2328.857 s
+Data Throughput (MB/s): 171758.073 ops/sec  Operation Throughput (ops/sec): 23.587 MB/s
+Average Latency: 0.006 ms  Max Latency: 59.393 ms  Min Latency: 0.001 ms
+The Write Amplification: 1.034
+------------------------------
+
+Store Performance Metrics
+------------------------------
+[2023-11-28 15:34:25] (400000000,600000000) ops Total execution time: 3942.317 s
+Data Throughput (MB/s): 152194.766 ops/sec  Operation Throughput (ops/sec): 20.901 MB/s
+Average Latency: 0.007 ms  Max Latency: 159.838 ms  Min Latency: 0.001 ms
+The Write Amplification: 1.034
+------------------------------
+
+Store Performance Metrics
+------------------------------
+[2023-11-28 16:07:54] (600000000,800000000) ops Total execution time: 5841.815 s
+Data Throughput (MB/s): 136943.750 ops/sec  Operation Throughput (ops/sec): 18.806 MB/s
+Average Latency: 0.007 ms  Max Latency: 159.838 ms  Min Latency: 0.001 ms
+The Write Amplification: 1.034
+------------------------------
+
+Store Performance Metrics
+------------------------------
+[2023-11-28 16:46:23] (800000000,1000000000) ops Total execution time: 8041.773 s
+Data Throughput (MB/s): 124350.686 ops/sec  Operation Throughput (ops/sec): 17.077 MB/s
+Average Latency: 0.008 ms  Max Latency: 159.838 ms  Min Latency: 0.001 ms
+The Write Amplification: 1.034
+------------------------------

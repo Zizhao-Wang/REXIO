@@ -16,29 +16,32 @@ void ycsb_testing(void)
     
      clock_t startTime,endTime;                        // Definition of timestamp
      uint64_t written_data_size = 100000000*16;
-     uint64_t written_data_num = written_data_size /(KEY_SIZE+VAL_SIZE);
+     uint64_t written_data_num = written_data_size /(KEY_SIZE+FLAGS_value_size);
      uint64_t record_point = 1000000;
      
+     char key_buffer[KEY_SIZE];
+     char *value_buffer = new char[FLAGS_value_size];
+
      uint64_t data_point = 0; 
      startTime = clock();
      memset(key_buffer, 0, KEY_SIZE);
-     memset(value_buffer, 0, VAL_SIZE);
+     memset(value_buffer, 0, FLAGS_value_size);
      for(uint64_t i=1;i<=FLAGS_num;i++)
      {
           memset(key_buffer, 0, KEY_SIZE);
-          memset(value_buffer, 0, VAL_SIZE);
+          memset(value_buffer, 0, FLAGS_value_size);
           data_point = i; // is_random?(generator.next()%FLAGS_range):i;
           for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
           {
                key_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((data_point >> (8 * j)) & 0xFF);
           }
 
-          for (size_t j = 0; j < sizeof(uint64_t) && j < VAL_SIZE; ++j)
+          for (size_t j = 0; j < sizeof(uint64_t) && j < FLAGS_value_size; ++j)
           {
                value_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((data_point >> (8 * j)) & 0xFF);
           }
 
-          user_input_bytes = user_input_bytes +(KEY_SIZE + VAL_SIZE);
+          user_input_bytes = user_input_bytes +(KEY_SIZE + FLAGS_value_size);
           uint64_t operation_start_time = clock();
 
           DEBUG_PRINT("data point:%lu  key:%lu \n",data_point,big_endian2little_endian(key_buffer,KEY_SIZE));
@@ -92,10 +95,13 @@ void ycsb_testing(void)
 
 
 void ycsb_update_heavy(uint64_t modified_data_num) {
-    total_latency = 0.0, max_latency = 0.0, min_latency = std::numeric_limits<double>::max();
-    total_write_bytes = 0, user_input_bytes = 0;
-    clock_t startTime = clock();
-    uint64_t record_point = modified_data_num / 2 / 10;
+
+     char key_buffer[KEY_SIZE];
+     char *value_buffer = new char[FLAGS_value_size];
+     total_latency = 0.0, max_latency = 0.0, min_latency = std::numeric_limits<double>::max();
+     total_write_bytes = 0, user_input_bytes = 0;
+     clock_t startTime = clock();
+     uint64_t record_point = modified_data_num / 2 / 10;
 
      uint64_t data_point = 0;
      for (uint64_t i = 1; i <= modified_data_num; i++){
@@ -112,11 +118,11 @@ void ycsb_update_heavy(uint64_t modified_data_num) {
                for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j){
                     key_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((data_point >> (8 * j)) & 0xFF);
                }
-               for (size_t j = 0; j < sizeof(uint64_t) && j < VAL_SIZE; ++j){
+               for (size_t j = 0; j < sizeof(uint64_t) && j < FLAGS_value_size; ++j){
                     value_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((data_point+1 >> (8 * j)) & 0xFF);
                }
 
-               user_input_bytes = user_input_bytes +(KEY_SIZE + VAL_SIZE);
+               user_input_bytes = user_input_bytes +(KEY_SIZE + FLAGS_value_size);
                uint64_t operation_start_time = clock();
                Update(key_buffer,value_buffer);
                uint64_t operation_end_time = clock();
@@ -150,11 +156,14 @@ void ycsb_update_heavy(uint64_t modified_data_num) {
 }
 
 
-void ycsb_read_heavy(uint64_t modified_data_num) {
-    total_latency = 0.0, max_latency = 0.0, min_latency = std::numeric_limits<double>::max();
-    total_write_bytes = 0, user_input_bytes = 0;
-    clock_t startTime = clock();
-    uint64_t record_point = modified_data_num / 2 / 10;
+void ycsb_read_heavy(uint64_t modified_data_num) 
+{
+     char key_buffer[KEY_SIZE];
+     char *value_buffer = new char[FLAGS_value_size];
+     total_latency = 0.0, max_latency = 0.0, min_latency = std::numeric_limits<double>::max();
+     total_write_bytes = 0, user_input_bytes = 0;
+     clock_t startTime = clock();
+     uint64_t record_point = modified_data_num / 2 / 10;
 
      uint64_t data_point =0;
      for (uint64_t i = 1; i <= modified_data_num; i++){
@@ -171,11 +180,11 @@ void ycsb_read_heavy(uint64_t modified_data_num) {
                for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j){
                     key_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((data_point >> (8 * j)) & 0xFF);
                }
-               for (size_t j = 0; j < sizeof(uint64_t) && j < VAL_SIZE; ++j){
+               for (size_t j = 0; j < sizeof(uint64_t) && j < FLAGS_value_size; ++j){
                     value_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((data_point+1 >> (8 * j)) & 0xFF);
                }
 
-               user_input_bytes = user_input_bytes +(KEY_SIZE + VAL_SIZE);
+               user_input_bytes = user_input_bytes +(KEY_SIZE + FLAGS_value_size);
                uint64_t operation_start_time = clock();
                Update(key_buffer,value_buffer);
                uint64_t operation_end_time = clock();
@@ -209,11 +218,14 @@ void ycsb_read_heavy(uint64_t modified_data_num) {
 }
 
 
-void ycsb_read_only(uint64_t modified_data_num) {
-    total_latency = 0.0, max_latency = 0.0, min_latency = std::numeric_limits<double>::max();
-    total_write_bytes = 0, user_input_bytes = 0;
-    clock_t startTime = clock();
-    uint64_t record_point = modified_data_num / 2 / 10;
+void ycsb_read_only(uint64_t modified_data_num) 
+{
+     char key_buffer[KEY_SIZE];
+     char *value_buffer = new char[FLAGS_value_size];
+     total_latency = 0.0, max_latency = 0.0, min_latency = std::numeric_limits<double>::max();
+     total_write_bytes = 0, user_input_bytes = 0;
+     clock_t startTime = clock();
+     uint64_t record_point = modified_data_num / 2 / 10;
 
      uint64_t data_point = 0;
      for (uint64_t i = 1; i <= modified_data_num; i++){
@@ -261,14 +273,18 @@ void ycsb_read_latest(size_t operationsCount)
      TraceUniform keyGenerator(1, operationsCount);
      std::deque<uint64_t> recentKeys;
      uint64_t data_point = keyGenerator.Next();
+     char key_buffer[KEY_SIZE];
+     char *value_buffer = new char[FLAGS_value_size];
+
+
      for (size_t i = 0; i < operationsCount/2; ++i){
           memset(key_buffer, 0, KEY_SIZE);
-          memset(value_buffer, 0, VAL_SIZE);
+          memset(value_buffer, 0, FLAGS_value_size);
           data_point= keyGenerator.Next();
           for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j){
                key_buffer[KEY_SIZE - 1 - j] = static_cast<char>((data_point >> (8 * j)) & 0xFF);
           }
-          for(size_t j = 0; j < sizeof(uint64_t) && j < VAL_SIZE; ++j){
+          for(size_t j = 0; j < sizeof(uint64_t) && j < FLAGS_value_size; ++j){
                value_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((data_point+1 >> (8 * j)) & 0xFF);
           }
           if(rand() % 100 < 50){
@@ -289,7 +305,7 @@ void ycsb_read_latest(size_t operationsCount)
 
 
           memset(key_buffer, 0, KEY_SIZE);
-          memset(value_buffer, 0, VAL_SIZE);
+          memset(value_buffer, 0, FLAGS_value_size);
 
           if ((rand() % 100) < 95) {
                if (!recentKeys.empty()) 

@@ -292,6 +292,8 @@ uint64_t async_kv_separate_update(const char* new_hashvalue, uint64_t key_offset
 
         void* task_buffer = allocate_and_copy_to_task_buffer(value_separated_buffer);
         separation_write_task_paramaters* task = create_separation_io_task(task_buffer); // Create and initialize the write task parameters for separation write
+        task->block_id = value_block_id;
+        task->mode = NVME_SSD_DATA_VALUE_WRITE;
         task->taskType = IOTaskType::SEPARATION_VAL_WRITE_TASK;
         add_separation_io_task(task);  // Add the I/O task and signal
     
@@ -350,6 +352,11 @@ uint64_t async_kv_separate_variable_update(const char* new_hashvalue, uint64_t& 
         logger.log(nexio_logger::info, "Value buffer now is full. Signaling for I/O operations.");
         void* task_buffer = allocate_and_copy_to_task_buffer(value_separated_buffer);
         separation_write_task_paramaters* task = create_separation_io_task(task_buffer); // Create and initialize the write task parameters for separation write
+        if(block_bitmaps[value_block_id].count()+ my_controller.nexio_write_uint >= num_data_page)
+        {
+            value_block_id = block_id_allocator++;
+            block_type_tracker[value_block_id] = VALUE_BLOCK;
+        }
         task->taskType = IOTaskType::SEPARATION_VAL_WRITE_TASK;
         add_separation_io_task(task);  // Add the I/O task and signal
         value_position_in_buffer = 0;
@@ -384,6 +391,11 @@ uint64_t async_kv_separate_variable_update(const char* new_hashvalue, uint64_t& 
 
         char* task_buffer= allocate_and_copy_to_buffer(log_buffer[block_id]);
         separation_write_task_paramaters* task = create_separation_io_task(task_buffer);
+        if(block_bitmaps[key_block_id].count()+ my_controller.nexio_write_uint >= num_data_page)
+        {
+            key_block_id = block_id_allocator++;
+            block_type_tracker[key_block_id] = KEY_BLOCK;
+        } 
         task->block_id = block_id;
         task->mode = NVME_SSD_DATA_LOG_WRITE;
         task->taskType = IOTaskType::SEPARATION_LOG_TASK;

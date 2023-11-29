@@ -537,12 +537,7 @@ int InsertNode(const char* hashkey, const char* hashvalue)
     start = std::chrono::high_resolution_clock::now();
     if(memcmp(temp->key, hashkey, KEY_SIZE)==0)
     {
-        if(temp->flag == 1)
-        {
-            return 0;
-        }
-        else
-        {
+
             temp->flag =1;
             // write into disk
 
@@ -559,9 +554,7 @@ int InsertNode(const char* hashkey, const char* hashvalue)
             temp->offset =  async_kv_separate_variable_update(hashvalue,block_id);
             temp->block = block_id;
 #endif
-            ++Head->number;
             return 0;
-        }
     }
     else
     {

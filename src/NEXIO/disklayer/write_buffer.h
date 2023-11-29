@@ -21,6 +21,7 @@
 #define KEY_BLOCK   0
 #define SPDK_LBAs_IN_NEXIO_WRITE_BUFFER 128     // page size: 16KB
 #define SPDK_LBAs_IN_NEXIO_LBA          1024   //block size: 1M
+#define SPDK_LBAs_IN_NEXIO_LOG_BUFFER   16
 
 // ==========================
 // Offset and buffer related 
@@ -35,6 +36,7 @@ typedef struct write_io_controller
     uint64_t nexio_write_uint;
     uint64_t current_write_lba_num;
     uint64_t write_buffer_size;
+    uint64_t nexio_log_unit;
 }write_io_controller;
 extern write_io_controller my_controller;
 

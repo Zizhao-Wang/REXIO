@@ -325,7 +325,7 @@ int kv_write_queue(void* write_buffer, uint64_t block_id, int mode)
 
 void log_write_complete(void *arg, const struct spdk_nvme_cpl *completion) {
     if (spdk_nvme_cpl_is_error(completion)) {
-        logger.log(nexio_logger::error, "OCSSD log write failed with status 0x" + std::to_string(completion->status.sct));
+        logger.log(nexio_logger::error, "SSD log write failed with status 0x" + std::to_string(completion->status.sct));
         return;
     }
     out_stand--;
@@ -366,19 +366,28 @@ int write_queue(char *write_buffer, uint64_t block_id)
 int kv_log_queue(char *write_buffer, uint64_t block_id)
 {
 	
-	// uint64_t current_writer_pointer = BlockWritePointers[block_id] + block_id*geometry.clba;
-	
-	// printf("current_writer_pointer:%lu BlockWritePointers[block_id]:%lu block_id:%lu in kv_log_queue\n", current_writer_pointer,BlockWritePointers[block_id],block_id);
-#ifdef IO_DEBUG
-	// if(block_id)
-	// {
-		// printf("current_writer_pointer:%lu BlockWritePointers[block_id]:%lu block_id:%lu in kv_log_queue\n", current_writer_pointer,BlockWritePointers[block_id],block_id);
-	// }
-#endif
-    uint64_t lba_start = 0;
-	uint64_t lba_count = 0;
 
-    if (spdk_nvme_ns_cmd_write(ns, qpair, write_buffer, lba_start, lba_count, log_write_complete, NULL, 0) == 0) {
+    if (out_stand >= IO_QUEUE_THRESHOLD){
+		while(out_stand>0){
+			spdk_nvme_qpair_process_completions(qpair, 0);
+		}
+		assert(out_stand == 0);
+    }
+	uint64_t current_log_writer_pointer = block_current_write_pointers[block_id] + block_id*my_controller.nexio_lba_uint;
+// 	printf("current_writer_pointer:%lu BlockWritePointers[block_id]:%lu block_id:%lu in kv_log_queue\n", current_log_writer_pointer,block_current_write_pointers[block_id],block_id);
+// #ifdef IO_DEBUG
+// 	// if(block_id)
+// 	// {
+// 		// printf("current_writer_pointer:%lu BlockWritePointers[block_id]:%lu block_id:%lu in kv_log_queue\n", current_writer_pointer,BlockWritePointers[block_id],block_id);
+// 	// }
+// #endif
+    uint64_t lba_start = current_log_writer_pointer;
+	uint64_t lba_count = my_controller.nexio_log_unit;
+
+    IO_context* context = new IO_context;
+    context->io_size = lba_count*device_info->ns_info_array[0].lba_size;
+
+    if (spdk_nvme_ns_cmd_write(ns, qpair, write_buffer, lba_start, lba_count, log_write_complete, context, 0) == 0) {
     	out_stand++;
 	} else {
     	logger.log(nexio_logger::error, "Failed to write data to OCSSD!");
@@ -386,14 +395,12 @@ int kv_log_queue(char *write_buffer, uint64_t block_id)
 	}
 
 
-    while (out_stand)
-	{
-		spdk_nvme_qpair_process_completions(qpair, 0);
-	}
-	uint64_t a;
-
-	// pointer_Renew(OCSSD_LOG_WRITE_TIOCS, current_writer_pointer,block_id,current_writer_pointer);
-
+    size_t start_index = lba_start % my_controller.nexio_lba_uint;
+    size_t block_num = lba_start / my_controller.nexio_lba_uint;
+    for (size_t i = start_index; i < start_index + lba_count && i < block_bitmaps[block_num].size(); ++i){
+        block_bitmaps[block_num][i] = 1;
+    }
+    block_current_write_pointers[block_id] += my_controller.nexio_log_unit;
 
     return 0;
 }

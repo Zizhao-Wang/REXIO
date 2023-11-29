@@ -65,3 +65,51 @@ Convert and Find Bucket Time: 25551.7 ms
 Search Time: 78563 ms
 Insert and Write Time: 47036.2 ms
 split Time: 1112.41 ms
+
+Store Performance Metrics
+------------------------------
+[2023-11-29 02:47:32] (50000000,100000000) ops Total execution time: 478.433 s
+Data Throughput (MB/s): 209015.673 ops/sec  Operation Throughput (ops/sec): 105.248 MB/s
+Average Latency: 0.005 ms  Max Latency: 19.102 ms  Min Latency: 0.001 ms
+The Write Amplification: 0.935
+------------------------------
+Convert and Find Bucket Time: 50181.7 ms
+Search Time: 206460 ms
+Insert and Write Time: 91028 ms
+split Time: 2225.41 ms
+
+Store Performance Metrics
+------------------------------
+[2023-11-29 02:52:43] (100000000,150000000) ops Total execution time: 761.008 s
+Data Throughput (MB/s): 197106.954 ops/sec  Operation Throughput (ops/sec): 99.251 MB/s
+Average Latency: 0.005 ms  Max Latency: 45.493 ms  Min Latency: 0.001 ms
+The Write Amplification: 0.899
+------------------------------
+Convert and Find Bucket Time: 74993.1 ms
+Search Time: 360138 ms
+Insert and Write Time: 131770 ms
+split Time: 3341.83 ms
+
+Store Performance Metrics
+------------------------------
+[2023-11-29 02:58:12] (150000000,200000000) ops Total execution time: 1058.910 s
+Data Throughput (MB/s): 188873.384 ops/sec  Operation Throughput (ops/sec): 95.105 MB/s
+Average Latency: 0.005 ms  Max Latency: 45.493 ms  Min Latency: 0.001 ms
+The Write Amplification: 0.864
+------------------------------
+Convert and Find Bucket Time: 99741.1 ms
+Search Time: 532539 ms
+Insert and Write Time: 170334 ms
+split Time: 4459.47 ms
+
+Store Performance Metrics
+------------------------------
+[2023-11-29 03:03:56] (200000000,250000000) ops Total execution time: 1371.151 s
+Data Throughput (MB/s): 182328.520 ops/sec  Operation Throughput (ops/sec): 91.810 MB/s
+Average Latency: 0.005 ms  Max Latency: 45.493 ms  Min Latency: 0.001 ms
+The Write Amplification: 0.831
+------------------------------
+Convert and Find Bucket Time: 124698 ms
+Search Time: 722324 ms
+Insert and Write Time: 205790 ms
+split Time: 5609.43 ms

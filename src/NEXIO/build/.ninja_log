@@ -1,4 +1,5 @@
 # ninja log v5
+<<<<<<< HEAD
 2	615	1701198560148456997	memlayer/CMakeFiles/Memlayer.dir/node.cpp.o	63784b2a31eedb09
 4	626	1701198560160457156	utility/CMakeFiles/Utility.dir/log.cpp.o	526032fc084c81e6
 4	681	1701198560216457894	utility/CMakeFiles/Utility.dir/sys_output.cpp.o	b6b68590023d39ee
@@ -98,3 +99,31 @@
 1182	1206	1701239189419406309	disklayer/libDisklayer.a	f1f490fc63639b08
 1206	1534	1701239189743414524	NEXIO	c38c1167afa0388b
 1206	1536	1701239189743414524	/wzz/SFOCS/src/NEXIO/tests/TestNEXIO	e4f00fd572dfea3a
+=======
+2	352	1701103294552349469	memlayer/CMakeFiles/Memlayer.dir/node.cpp.o	63784b2a31eedb09
+3	589	1701103294792352966	memlayer/CMakeFiles/Memlayer.dir/spdk_env_init.cpp.o	f27cb23c9402a5dc
+6	603	1701103294804353140	tests/CMakeFiles/TestNEXIO.dir/zipf_generator.cpp.o	42b2aba8b6fdc375
+2	661	1701103294864354015	memlayer/CMakeFiles/Memlayer.dir/buffer_manager/FIFO.cpp.o	189c8f9ab672a47b
+4	676	1701103294876354190	utility/CMakeFiles/Utility.dir/sys_output.cpp.o	b6b68590023d39ee
+2	744	1701103294944355180	memlayer/CMakeFiles/Memlayer.dir/buffer_manager/lru.cpp.o	da6cb4bd3a7466b5
+6	767	1701103294968355530	tests/CMakeFiles/TestNEXIO.dir/ycsb_test.cpp.o	18b0d4a4c46608b8
+5	801	1701103295004356054	utility/CMakeFiles/Utility.dir/types.cpp.o	15e01a065d9ba2d6
+3	824	1701103295028356404	memlayer/CMakeFiles/Memlayer.dir/parameters.cpp.o	e4b5584807840cd
+4	852	1701103295052356754	disklayer/CMakeFiles/Disklayer.dir/write_buffer.cpp.o	1724a5893b6ca714
+6	854	1701103295056356812	tests/CMakeFiles/TestNEXIO.dir/uniform_generator.cpp.o	da663367756b7cfd
+5	861	1701103295064356929	tests/CMakeFiles/TestNEXIO.dir/test_main.cpp.o	d8348b00e86430d4
+4	867	1701103295068356987	disklayer/CMakeFiles/Disklayer.dir/read_buffer.cpp.o	b82ebfffca1c0295
+4	954	1701103295156358269	utility/CMakeFiles/Utility.dir/log.cpp.o	526032fc084c81e6
+954	967	1701103295168358444	utility/libUtility.a	d83a2cffad692e63
+3	1012	1701103295212359085	memlayer/CMakeFiles/Memlayer.dir/syncstore.cpp.o	e0ff04f9ba7f173f
+4	1068	1701103295268359901	disklayer/CMakeFiles/Disklayer.dir/io_manager/io_thread.cpp.o	3f3fd0df874cd5a0
+1	1121	1701103295324360716	CMakeFiles/NEXIO.dir/main.cpp.o	b990c15c18553c9f
+1	1154	1701103295356361182	memlayer/CMakeFiles/Memlayer.dir/MemTier.cpp.o	c29120b114372a8c
+2	1205	1701103295408361940	memlayer/CMakeFiles/Memlayer.dir/init.cpp.o	35b989ffc4ebea66
+5	1216	1701103295416362057	tests/CMakeFiles/TestNEXIO.dir/nexio_test.cpp.o	67f028b9dc5df6a6
+3	1247	1701103295448362523	disklayer/CMakeFiles/Disklayer.dir/io_manager.cpp.o	1b13f4233f87edb2
+1247	1270	1701103295472362873	disklayer/libDisklayer.a	f1f490fc63639b08
+2	1585	1701103295788367477	memlayer/CMakeFiles/Memlayer.dir/asyncstore.cpp.o	da044ce5b6c1e28c
+1585	1617	1701103295820367943	memlayer/libMemlayer.a	97ca4b482647a558
+1617	1974	1701103296172373072	NEXIO	c38c1167afa0388b
+>>>>>>> 662de22cc738c1b044f87d9b7d16d7b3d33149af

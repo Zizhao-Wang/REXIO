@@ -5,7 +5,6 @@
 #include "include/log.h"
 #include "nexio_test.h"
 #include <gflags/gflags.h>
-
 #include "../memlayer/MemTier.h"
 
 
@@ -20,6 +19,7 @@ int main(int argc, char **argv)
     logger.log(nexio_logger::info, "Start to initialize the SSD components.");    
 
     value_size = FLAGS_value_size;
+    pci_address = FLAGS_pci_address;
 
     TiOCSInit();
 

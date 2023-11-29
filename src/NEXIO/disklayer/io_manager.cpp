@@ -247,7 +247,7 @@ void kv_page_write_complete(void *arg, const struct spdk_nvme_cpl *completion)
     }
 
     out_stand--;
-    total_write_bytes += context->io_size;
+    // total_write_bytes += context->io_size;
     delete context;  
 
     return ;
@@ -324,11 +324,17 @@ int kv_write_queue(void* write_buffer, uint64_t block_id, int mode)
  **/
 
 void log_write_complete(void *arg, const struct spdk_nvme_cpl *completion) {
+    IO_context* context = static_cast<IO_context*>(arg);
     if (spdk_nvme_cpl_is_error(completion)) {
-        logger.log(nexio_logger::error, "SSD log write failed with status 0x" + std::to_string(completion->status.sct));
+        
+        logger.log(nexio_logger::error, "SSD log vector write failed with status 0x" + std::to_string(completion->status.sct));
+        delete context; 
         return;
     }
+
     out_stand--;
+    // total_write_bytes += context->io_size;
+    delete context;  
 }
 
 

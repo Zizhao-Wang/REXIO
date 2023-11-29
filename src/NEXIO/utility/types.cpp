@@ -18,6 +18,7 @@
 int Globaldepth=0;
 
 uint64_t value_size = 128;
+std::string pci_address = "0000:81:00.0";
 
 std::vector<GlobalHashNode*> global;
 

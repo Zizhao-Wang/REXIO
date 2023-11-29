@@ -33,7 +33,7 @@ uint64_t async_kv_write(const char* hashkey, const char* hashvalue)
     pthread_mutex_lock(&write_buffer_mutex);
 
     // Check if buffer is full and signal accordingly
-    if (current_buffer_position >= my_controller.write_buffer_size) 
+    if ((current_buffer_position + (KEY_SIZE+value_size))>= my_controller.write_buffer_size) 
     {
         logger.log(nexio_logger::info, "\033[0;33m[INFO]\033[0m Write buffer is full. Signaling for I/O operations.\n");
         char* task_buffer = allocate_task_buffer();
@@ -94,7 +94,7 @@ uint64_t async_kv_separate_write(const char* hashkey, const char* hashvalue, uin
         
         void* task_buffer = allocate_and_copy_to_task_buffer(value_separated_buffer); // Quickly copy the current write buffer's content to a new buffer
         separation_write_task_paramaters* task = create_separation_io_task(task_buffer); // Create and initialize the write task parameters for separation write
-        if(block_bitmaps[value_block_id].count()+ my_controller.nexio_write_uint >= num_data_page)
+        if(block_bitmaps[value_block_id].count()+ my_controller.nexio_write_uint > num_data_page)
         {
             value_block_id = block_id_allocator++;
             block_type_tracker[value_block_id] = VALUE_BLOCK;
@@ -124,7 +124,7 @@ uint64_t async_kv_separate_write(const char* hashkey, const char* hashvalue, uin
         logger.log(nexio_logger::info, "Key buffer is full. Signaling for I/O operations.");
         void* task_key_buffer =  allocate_and_copy_to_task_buffer(key_separated_buffer);  
         separation_write_task_paramaters* key_task = create_separation_io_task(task_key_buffer);// Create and initialize the write task parameters for separation write
-        if(block_bitmaps[key_block_id].count()+ my_controller.nexio_write_uint >= num_data_page)
+        if(block_bitmaps[key_block_id].count()+ my_controller.nexio_write_uint > num_data_page)
         {
             key_block_id = block_id_allocator++;
             block_type_tracker[key_block_id] = KEY_BLOCK;
@@ -168,7 +168,7 @@ uint64_t async_kv_separate_variable_write(const char* hashkey, const char* hashv
         void* task_buffer = allocate_and_copy_to_task_buffer(value_separated_buffer); // Quickly copy the current write buffer's content to a new buffer
         separation_write_task_paramaters* task = create_separation_io_task(task_buffer); // Create and initialize the write task parameters for separation write
         
-        if(block_bitmaps[value_block_id].count()+ my_controller.nexio_write_uint >= num_data_page)
+        if(block_bitmaps[value_block_id].count()+ my_controller.nexio_write_uint > num_data_page)
         {
             value_block_id = block_id_allocator++;
             block_type_tracker[value_block_id] = VALUE_BLOCK;
@@ -191,7 +191,8 @@ uint64_t async_kv_separate_variable_write(const char* hashkey, const char* hashv
 
     memcpy(value_separated_buffer + value_position_in_buffer, hashvalue, value_size);
     value_position_in_buffer += value_size;
-
+    total_write_bytes += value_size;
+    fprintf(stdout, "=======size:%ld======\n",value_size);
     offset5++;
     block_information[offset5>>24].first++;
 
@@ -226,7 +227,7 @@ uint64_t async_kv_separate_variable_write(const char* hashkey, const char* hashv
         void* task_buffer = allocate_and_copy_to_task_buffer(key_separated_buffer); // Quickly copy the current write buffer's content to a new buffer
         separation_write_task_paramaters* task = create_separation_io_task(task_buffer); // Create and initialize the write task parameters for separation write
         
-        if(block_bitmaps[key_block_id].count()+ my_controller.nexio_write_uint >= num_data_page)
+        if(block_bitmaps[key_block_id].count()+ my_controller.nexio_write_uint > num_data_page)
         {
             key_block_id = block_id_allocator++;
             block_type_tracker[key_block_id] = KEY_BLOCK;
@@ -250,6 +251,7 @@ uint64_t async_kv_separate_variable_write(const char* hashkey, const char* hashv
 
     memcpy(key_separated_buffer + key_position_in_buffer,temp, length);
     key_position_in_buffer += length;
+    total_write_bytes += (length+KEY_SIZE);
 
     offset2++;
 
@@ -352,11 +354,12 @@ uint64_t async_kv_separate_variable_update(const char* new_hashvalue, uint64_t& 
         logger.log(nexio_logger::info, "Value buffer now is full. Signaling for I/O operations.");
         void* task_buffer = allocate_and_copy_to_task_buffer(value_separated_buffer);
         separation_write_task_paramaters* task = create_separation_io_task(task_buffer); // Create and initialize the write task parameters for separation write
-        if(block_bitmaps[value_block_id].count()+ my_controller.nexio_write_uint >= num_data_page)
+        if(block_bitmaps[value_block_id].count()+ my_controller.nexio_write_uint > num_data_page)
         {
             value_block_id = block_id_allocator++;
             block_type_tracker[value_block_id] = VALUE_BLOCK;
         }
+        task->block_id = value_block_id;
         task->taskType = IOTaskType::SEPARATION_VAL_WRITE_TASK;
         add_separation_io_task(task);  // Add the I/O task and signal
         value_position_in_buffer = 0;
@@ -369,7 +372,7 @@ uint64_t async_kv_separate_variable_update(const char* new_hashvalue, uint64_t& 
 
     memcpy(value_separated_buffer + value_position_in_buffer, new_hashvalue, value_size);
     value_position_in_buffer += value_size;
-
+    total_write_bytes += value_size;
     offset5++;
     block_information[offset5>>24].first++;
 
@@ -386,24 +389,18 @@ uint64_t async_kv_separate_variable_update(const char* new_hashvalue, uint64_t& 
     block = block & 0x0000000000FFFFFF;
     int length2 = EncodeLength(block);
     int len = length+length2;
-    if (log_buffer[block_id].size()+ len > my_controller.write_buffer_size)
+    total_write_bytes += len;
+    if (log_buffer[block_id].size()+ len > my_controller.nexio_log_buffer_size)
     {
-
         char* task_buffer= allocate_and_copy_to_buffer(log_buffer[block_id]);
         separation_write_task_paramaters* task = create_separation_io_task(task_buffer);
-        if(block_bitmaps[key_block_id].count()+ my_controller.nexio_write_uint >= num_data_page)
-        {
-            key_block_id = block_id_allocator++;
-            block_type_tracker[key_block_id] = KEY_BLOCK;
-        } 
         task->block_id = block_id;
         task->mode = NVME_SSD_DATA_LOG_WRITE;
         task->taskType = IOTaskType::SEPARATION_LOG_TASK;
         add_separation_io_task(task);  // Add the I/O task and signal
-
         log_buffer[block_id].clear();
-
     }
+    
 
     for (int i = length2; i > 0; i--) 
     {

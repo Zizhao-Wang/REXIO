@@ -243,7 +243,7 @@ int nvme_ssd_environment_init()
     /* Initialize transport id */
     spdk_nvme_trid_populate_transport(&trid, SPDK_NVME_TRANSPORT_PCIE);
     snprintf(trid.subnqn, sizeof(trid.subnqn), "%s", SPDK_NVMF_DISCOVERY_NQN);
-    strcpy(trid.traddr, "0000:81:00.0");
+    strcpy(trid.traddr, pci_address.c_str());
 
     if (trid.trtype != SPDK_NVME_TRANSPORT_PCIE) 
     {

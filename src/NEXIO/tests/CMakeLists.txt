@@ -6,16 +6,16 @@ set(CMAKE_CXX_STANDARD 14)
 
 
 
-
+set(SPDK_ROOT_DIR "/home")
 # Set default paths for SPDK and DPDK. Users can modify these using -DSPDK_INCLUDE_DIR=<path> etc.
-set(SPDK_INCLUDE_DIR "/home/spdk/include" CACHE PATH "Path to SPDK include directory")
-set(SPDK_LIB_DIR "/home/spdk/build/lib" CACHE PATH "Path to SPDK library directory")
-set(DPDK_LIB_DIR "/home/spdk/dpdk/build/lib" CACHE PATH "Path to DPDK library directory")
-set(DPDK_INCLUDE_DIR "/home/spdk/dpdk/build/include" CACHE PATH "Path to DPDK include directory")
+set(SPDK_INCLUDE_DIR "${SPDK_ROOT_DIR}/spdk/include" CACHE PATH "Path to SPDK include directory")
+set(SPDK_LIB_DIR "${SPDK_ROOT_DIR}/spdk/build/lib" CACHE PATH "Path to SPDK library directory")
+set(DPDK_LIB_DIR "${SPDK_ROOT_DIR}/spdk/dpdk/build/lib" CACHE PATH "Path to DPDK library directory")
+set(DPDK_INCLUDE_DIR "${SPDK_ROOT_DIR}/spdk/dpdk/build/include" CACHE PATH "Path to DPDK include directory")
 
 include_directories(${CMAKE_SOURCE_DIR})
 include_directories(${SPDK_INCLUDE_DIR} ${DPDK_INCLUDE_DIR})
-link_directories(${SPDK_LIB_DIR} ${DPDK_LIB_DIR} "/home/spdk/isa-l/.libs")
+link_directories(${SPDK_LIB_DIR} ${DPDK_LIB_DIR} "${SPDK_ROOT_DIR}/spdk/isa-l/.libs")
 
 
 # 添加OpenMP支持

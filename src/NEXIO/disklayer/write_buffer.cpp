@@ -71,6 +71,7 @@ void initialize_write_buffer_variables()
     my_controller.nexio_lba_uint = SPDK_LBAs_IN_NEXIO_LBA;
     my_controller.nexio_log_unit = SPDK_LBAs_IN_NEXIO_LOG_BUFFER;
     my_controller.write_buffer_size = SPDK_LBAs_IN_NEXIO_WRITE_BUFFER*device_info->ns_info_array[0].lba_size;
+    my_controller.nexio_log_buffer_size = SPDK_LBAs_IN_NEXIO_LOG_BUFFER*device_info->ns_info_array[0].lba_size;
     current_buffer_position = 0;
     printf("\033[1;32m[SUCCESS]\033[0m Successfully initialized buffer full condition variable.\n");
 }

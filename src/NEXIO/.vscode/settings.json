@@ -1,6 +1,6 @@
 {
     "search.followSymlinks": false,
-    "cmake.sourceDirectory": "/wzz/SFOCS/src/NEXIO",
+    "cmake.sourceDirectory": "/home/SFOCS/src/NEXIO",
     "C_Cpp.errorSquiggles": "Disabled",
     "files.associations": {
         "new": "cpp",

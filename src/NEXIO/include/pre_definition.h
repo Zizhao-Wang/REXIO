@@ -13,6 +13,7 @@
 
 #include <iostream>
 #include <cstring>
+#include <string>
 #include "node.h"
 
 
@@ -30,6 +31,8 @@ typedef uint64_t value_type;
 typedef uint64_t page_num_type;
 
 extern uint64_t value_size;
+
+extern std::string pci_address;
 
 extern int reads_io;  // read I/Os
 

@@ -49,7 +49,7 @@ void nexio_logger::log(level lvl, const std::string& message, const std::string&
 }
 
 void nexio_logger::addLogFile(const std::string& identifier, const std::string& filePath) {
-    logFiles[identifier] = std::ofstream(filePath, std::ios::trunc);
+    logFiles[identifier] = std::ofstream(filePath, std::ios::out | std::ios::trunc);
     if (!logFiles[identifier].is_open()) {
         std::cerr << "Failed to open log file: " << filePath << std::endl;
     }

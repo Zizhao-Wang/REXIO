@@ -9,11 +9,18 @@ set(CMAKE_CXX_STANDARD 14)
 
 
 # Set default paths for SPDK and DPDK. Users can modify these using -DSPDK_INCLUDE_DIR=<path> etc.
-set(SPDK_ROOT_DIR "/root/downloads")
+set(SPDK_ROOT_DIR "/home")
 set(SPDK_INCLUDE_DIR "${SPDK_ROOT_DIR}/spdk/include" CACHE PATH "Path to SPDK include directory")
 set(SPDK_LIB_DIR "${SPDK_ROOT_DIR}/spdk/build/lib" CACHE PATH "Path to SPDK library directory")
 set(DPDK_LIB_DIR "${SPDK_ROOT_DIR}/spdk/dpdk/build/lib" CACHE PATH "Path to DPDK library directory")
 set(DPDK_INCLUDE_DIR "${SPDK_ROOT_DIR}/spdk/dpdk/build/include" CACHE PATH "Path to DPDK include directory")
+
+# # 设置一个新的变量来指定你的工作路径
+# set(MY_PROJECT_DIR /home/SFOCS/src/NEXIO/to/your/new/work/directory)
+
+# # 使用这个新的变量代替 CMAKE_SOURCE_DIR
+# include_directories(${MY_PROJECT_DIR}/include)
+
 
 include_directories(${CMAKE_SOURCE_DIR})
 include_directories(${SPDK_INCLUDE_DIR} ${DPDK_INCLUDE_DIR})

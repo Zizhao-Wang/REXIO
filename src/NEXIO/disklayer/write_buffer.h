@@ -37,6 +37,7 @@ typedef struct write_io_controller
     uint64_t current_write_lba_num;
     uint64_t write_buffer_size;
     uint64_t nexio_log_unit;
+    uint64_t nexio_log_buffer_size;
 }write_io_controller;
 extern write_io_controller my_controller;
 

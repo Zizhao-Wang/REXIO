@@ -1,0 +1,729 @@
+0.125B 1 2048 [1;34m==============================================[0m
+0.125B 1 2048 [1;37m[44m                                          [0m
+0.125B 1 2048 [1;37m[44m  __   _   _____  __    __  _   _____   [0m
+0.125B 1 2048 [1;37m[44m |  \ | | | ____| \ \  / / | | /  _  \  [0m
+0.125B 1 2048 [1;37m[44m |   \| | | |__    \ \/ /  | | | | | |  [0m
+0.125B 1 2048 [1;37m[44m | |\   | |  __|    }  {   | | | | | |  [0m
+0.125B 1 2048 [1;37m[44m | | \  | | |___   / /\ \  | | | |_| |  [0m
+0.125B 1 2048 [1;37m[44m |_|  \_| |_____| /_/  \_\ |_| \_____/  [0m
+0.125B 1 2048 [1;37m[44m                                          [0m
+0.125B 1 2048  _   _   _____       ___   _____        _____   _       ___   _____  
+0.125B 1 2048 | | | | /  ___|     /   | /  ___/      /  ___/ | |     /   | |_   _| 
+0.125B 1 2048 | | | | | |        / /| | | |___       | |___  | |    / /| |   | |   
+0.125B 1 2048 | | | | | |       / /_| | \___  \------\___  \ | |   / /_| |   | |   
+0.125B 1 2048 | |_| | | |___   / /  | |  ___| |       ___| | | |  / /  | |   | |   
+0.125B 1 2048 \_____/ \_____| /_/   |_| /_____/      /_____/ |_| /_/   |_|   |_|   
+0.125B 1 2048                  ______  _   ______  _   _       ___   _____        _          __  ___   __   _   _____  
+0.125B 1 2048                 |___  / | | |___  / | | | |     /   | /  _  \      | |        / / /   | |  \ | | /  ___| 
+0.125B 1 2048                    / /  | |    / /  | |_| |    / /| | | | | |      | |  __   / / / /| | |   \| | | |     
+0.125B 1 2048                   / /   | |   / /   |  _  |   / /_| | | | | |      | | /  | / / / /_| | | |\   | | |  _  
+0.125B 1 2048                  / /__  | |  / /__  | | | |  / /  | | | |_| |      | |/   |/ / / /  | | | | \  | | |_| | 
+0.125B 1 2048                 /_____| |_| /_____| |_| |_| /_/   |_| \_____/      |___/|___/ /_/   |_| |_|  \_| \_____/
+0.125B 1 2048 [1;32mWelcome to NEXIO![0m
+0.125B 1 2048 [1;36mNEXIO is an industry-leading key-value store, setting benchmarks in the realm of high-performance data storage solutions.
+0.125B 1 2048 Empowered by cutting-edge algorithms and innovative data structures, NEXIO provides unparalleled speed, reliability, and efficiency.
+0.125B 1 2048 It's not just about storing data, it's about accessing it swiftly and reliably, every single time.
+0.125B 1 2048 Whether it's real-time analytics, mission-critical databases, or everyday computing needs, NEXIO stands out as the preferred choice for modern storage needs.[0m
+0.125B 1 2048 [1;34m==============================================[0m
+0.125B 1 2048 [34m
+0.125B 1 2048 =============== NEXIO initialization start ===============[0m
+0.125B 1 2048 [1;32m[INFO][0m io_mutex initialized successfully.
+0.125B 1 2048 [1;32m[INFO][0m io_cond initialized successfully.
+0.125B 1 2048 [1;32m[SUCCESS][0m Mutexes and condition variables successfully initialized![0m
+0.125B 1 2048 [1;32m[SUCCESS][0m I/O Thread successfully created![0m
+0.125B 1 2048 [1;32m[SUCCESS][0m Extendible hash table initialized successfully!
+2B 4 128 [1;34m==============================================[0m
+2B 4 128 [1;37m[44m                                          [0m
+2B 4 128 [1;37m[44m  __   _   _____  __    __  _   _____   [0m
+2B 4 128 [1;37m[44m |  \ | | | ____| \ \  / / | | /  _  \  [0m
+2B 4 128 [1;37m[44m |   \| | | |__    \ \/ /  | | | | | |  [0m
+2B 4 128 [1;37m[44m | |\   | |  __|    }  {   | | | | | |  [0m
+2B 4 128 [1;37m[44m | | \  | | |___   / /\ \  | | | |_| |  [0m
+2B 4 128 [1;37m[44m |_|  \_| |_____| /_/  \_\ |_| \_____/  [0m
+2B 4 128 [1;37m[44m                                          [0m
+2B 4 128  _   _   _____       ___   _____        _____   _       ___   _____  
+2B 4 128 | | | | /  ___|     /   | /  ___/      /  ___/ | |     /   | |_   _| 
+2B 4 128 | | | | | |        / /| | | |___       | |___  | |    / /| |   | |   
+2B 4 128 | | | | | |       / /_| | \___  \------\___  \ | |   / /_| |   | |   
+2B 4 128 | |_| | | |___   / /  | |  ___| |       ___| | | |  / /  | |   | |   
+2B 4 128 \_____/ \_____| /_/   |_| /_____/      /_____/ |_| /_/   |_|   |_|   
+2B 4 128                  ______  _   ______  _   _       ___   _____        _          __  ___   __   _   _____  
+2B 4 128                 |___  / | | |___  / | | | |     /   | /  _  \      | |        / / /   | |  \ | | /  ___| 
+2B 4 128                    / /  | |    / /  | |_| |    / /| | | | | |      | |  __   / / / /| | |   \| | | |     
+2B 4 128                   / /   | |   / /   |  _  |   / /_| | | | | |      | | /  | / / / /_| | | |\   | | |  _  
+2B 4 128                  / /__  | |  / /__  | | | |  / /  | | | |_| |      | |/   |/ / / /  | | | | \  | | |_| | 
+2B 4 128                 /_____| |_| /_____| |_| |_| /_/   |_| \_____/      |___/|___/ /_/   |_| |_|  \_| \_____/
+2B 4 128 [1;32mWelcome to NEXIO![0m
+2B 4 128 [1;36mNEXIO is an industry-leading key-value store, setting benchmarks in the realm of high-performance data storage solutions.
+2B 4 128 Empowered by cutting-edge algorithms and innovative data structures, NEXIO provides unparalleled speed, reliability, and efficiency.
+2B 4 128 It's not just about storing data, it's about accessing it swiftly and reliably, every single time.
+2B 4 128 Whether it's real-time analytics, mission-critical databases, or everyday computing needs, NEXIO stands out as the preferred choice for modern storage needs.[0m
+2B 4 128 [1;34m==============================================[0m
+2B 4 128 [34m
+2B 4 128 =============== NEXIO initialization start ===============[0m
+2B 4 128 [1;32m[INFO][0m io_mutex initialized successfully.
+2B 4 128 [1;32m[INFO][0m io_cond initialized successfully.
+2B 4 128 [1;32m[SUCCESS][0m Mutexes and condition variables successfully initialized![0m
+2B 4 128 [1;32m[SUCCESS][0m I/O Thread successfully created![0m
+2B 4 128 [1;32m[SUCCESS][0m Extendible hash table initialized successfully!
+1B 4 256 [1;34m==============================================[0m
+1B 4 256 [1;37m[44m                                          [0m
+1B 4 256 [1;37m[44m  __   _   _____  __    __  _   _____   [0m
+1B 4 256 [1;37m[44m |  \ | | | ____| \ \  / / | | /  _  \  [0m
+1B 4 256 [1;37m[44m |   \| | | |__    \ \/ /  | | | | | |  [0m
+1B 4 256 [1;37m[44m | |\   | |  __|    }  {   | | | | | |  [0m
+1B 4 256 [1;37m[44m | | \  | | |___   / /\ \  | | | |_| |  [0m
+1B 4 256 [1;37m[44m |_|  \_| |_____| /_/  \_\ |_| \_____/  [0m
+1B 4 256 [1;37m[44m                                          [0m
+1B 4 256  _   _   _____       ___   _____        _____   _       ___   _____  
+1B 4 256 | | | | /  ___|     /   | /  ___/      /  ___/ | |     /   | |_   _| 
+1B 4 256 | | | | | |        / /| | | |___       | |___  | |    / /| |   | |   
+1B 4 256 | | | | | |       / /_| | \___  \------\___  \ | |   / /_| |   | |   
+1B 4 256 | |_| | | |___   / /  | |  ___| |       ___| | | |  / /  | |   | |   
+1B 4 256 \_____/ \_____| /_/   |_| /_____/      /_____/ |_| /_/   |_|   |_|   
+1B 4 256                  ______  _   ______  _   _       ___   _____        _          __  ___   __   _   _____  
+1B 4 256                 |___  / | | |___  / | | | |     /   | /  _  \      | |        / / /   | |  \ | | /  ___| 
+1B 4 256                    / /  | |    / /  | |_| |    / /| | | | | |      | |  __   / / / /| | |   \| | | |     
+1B 4 256                   / /   | |   / /   |  _  |   / /_| | | | | |      | | /  | / / / /_| | | |\   | | |  _  
+1B 4 256                  / /__  | |  / /__  | | | |  / /  | | | |_| |      | |/   |/ / / /  | | | | \  | | |_| | 
+1B 4 256                 /_____| |_| /_____| |_| |_| /_/   |_| \_____/      |___/|___/ /_/   |_| |_|  \_| \_____/
+1B 4 256 [1;32mWelcome to NEXIO![0m
+1B 4 256 [1;36mNEXIO is an industry-leading key-value store, setting benchmarks in the realm of high-performance data storage solutions.
+1B 4 256 Empowered by cutting-edge algorithms and innovative data structures, NEXIO provides unparalleled speed, reliability, and efficiency.
+1B 4 256 It's not just about storing data, it's about accessing it swiftly and reliably, every single time.
+1B 4 256 Whether it's real-time analytics, mission-critical databases, or everyday computing needs, NEXIO stands out as the preferred choice for modern storage needs.[0m
+1B 4 256 [1;34m==============================================[0m
+1B 4 256 [34m
+1B 4 256 =============== NEXIO initialization start ===============[0m
+1B 4 256 [1;32m[INFO][0m io_mutex initialized successfully.
+1B 4 256 [1;32m[INFO][0m io_cond initialized successfully.
+1B 4 256 [1;32m[SUCCESS][0m Mutexes and condition variables successfully initialized![0m
+1B 4 256 [1;32m[SUCCESS][0m I/O Thread successfully created![0m
+1B 4 256 [1;32m[SUCCESS][0m Extendible hash table initialized successfully!
+0.5B 4 512 [1;34m==============================================[0m
+0.5B 4 512 [1;37m[44m                                          [0m
+0.5B 4 512 [1;37m[44m  __   _   _____  __    __  _   _____   [0m
+0.5B 4 512 [1;37m[44m |  \ | | | ____| \ \  / / | | /  _  \  [0m
+0.5B 4 512 [1;37m[44m |   \| | | |__    \ \/ /  | | | | | |  [0m
+0.5B 4 512 [1;37m[44m | |\   | |  __|    }  {   | | | | | |  [0m
+0.5B 4 512 [1;37m[44m | | \  | | |___   / /\ \  | | | |_| |  [0m
+0.5B 4 512 [1;37m[44m |_|  \_| |_____| /_/  \_\ |_| \_____/  [0m
+0.5B 4 512 [1;37m[44m                                          [0m
+0.5B 4 512  _   _   _____       ___   _____        _____   _       ___   _____  
+0.5B 4 512 | | | | /  ___|     /   | /  ___/      /  ___/ | |     /   | |_   _| 
+0.5B 4 512 | | | | | |        / /| | | |___       | |___  | |    / /| |   | |   
+0.5B 4 512 | | | | | |       / /_| | \___  \------\___  \ | |   / /_| |   | |   
+0.5B 4 512 | |_| | | |___   / /  | |  ___| |       ___| | | |  / /  | |   | |   
+0.5B 4 512 \_____/ \_____| /_/   |_| /_____/      /_____/ |_| /_/   |_|   |_|   
+0.5B 4 512                  ______  _   ______  _   _       ___   _____        _          __  ___   __   _   _____  
+0.5B 4 512                 |___  / | | |___  / | | | |     /   | /  _  \      | |        / / /   | |  \ | | /  ___| 
+0.5B 4 512                    / /  | |    / /  | |_| |    / /| | | | | |      | |  __   / / / /| | |   \| | | |     
+0.5B 4 512                   / /   | |   / /   |  _  |   / /_| | | | | |      | | /  | / / / /_| | | |\   | | |  _  
+0.5B 4 512                  / /__  | |  / /__  | | | |  / /  | | | |_| |      | |/   |/ / / /  | | | | \  | | |_| | 
+0.5B 4 512                 /_____| |_| /_____| |_| |_| /_/   |_| \_____/      |___/|___/ /_/   |_| |_|  \_| \_____/
+0.5B 4 512 [1;32mWelcome to NEXIO![0m
+0.5B 4 512 [1;36mNEXIO is an industry-leading key-value store, setting benchmarks in the realm of high-performance data storage solutions.
+0.5B 4 512 Empowered by cutting-edge algorithms and innovative data structures, NEXIO provides unparalleled speed, reliability, and efficiency.
+0.5B 4 512 It's not just about storing data, it's about accessing it swiftly and reliably, every single time.
+0.5B 4 512 Whether it's real-time analytics, mission-critical databases, or everyday computing needs, NEXIO stands out as the preferred choice for modern storage needs.[0m
+0.5B 4 512 [1;34m==============================================[0m
+0.5B 4 512 [34m
+0.5B 4 512 =============== NEXIO initialization start ===============[0m
+0.5B 4 512 [1;32m[INFO][0m io_mutex initialized successfully.
+0.5B 4 512 [1;32m[INFO][0m io_cond initialized successfully.
+0.5B 4 512 [1;32m[SUCCESS][0m Mutexes and condition variables successfully initialized![0m
+0.5B 4 512 [1;32m[SUCCESS][0m I/O Thread successfully created![0m
+0.5B 4 512 [1;32m[SUCCESS][0m Extendible hash table initialized successfully!
+0.125B 4 2048 [1;34m==============================================[0m
+0.125B 4 2048 [1;37m[44m                                          [0m
+0.125B 4 2048 [1;37m[44m  __   _   _____  __    __  _   _____   [0m
+0.125B 4 2048 [1;37m[44m |  \ | | | ____| \ \  / / | | /  _  \  [0m
+0.125B 4 2048 [1;37m[44m |   \| | | |__    \ \/ /  | | | | | |  [0m
+0.125B 4 2048 [1;37m[44m | |\   | |  __|    }  {   | | | | | |  [0m
+0.125B 4 2048 [1;37m[44m | | \  | | |___   / /\ \  | | | |_| |  [0m
+0.125B 4 2048 [1;37m[44m |_|  \_| |_____| /_/  \_\ |_| \_____/  [0m
+0.125B 4 2048 [1;37m[44m                                          [0m
+0.125B 4 2048  _   _   _____       ___   _____        _____   _       ___   _____  
+0.125B 4 2048 | | | | /  ___|     /   | /  ___/      /  ___/ | |     /   | |_   _| 
+0.125B 4 2048 | | | | | |        / /| | | |___       | |___  | |    / /| |   | |   
+0.125B 4 2048 | | | | | |       / /_| | \___  \------\___  \ | |   / /_| |   | |   
+0.125B 4 2048 | |_| | | |___   / /  | |  ___| |       ___| | | |  / /  | |   | |   
+0.125B 4 2048 \_____/ \_____| /_/   |_| /_____/      /_____/ |_| /_/   |_|   |_|   
+0.125B 4 2048                  ______  _   ______  _   _       ___   _____        _          __  ___   __   _   _____  
+0.125B 4 2048                 |___  / | | |___  / | | | |     /   | /  _  \      | |        / / /   | |  \ | | /  ___| 
+0.125B 4 2048                    / /  | |    / /  | |_| |    / /| | | | | |      | |  __   / / / /| | |   \| | | |     
+0.125B 4 2048                   / /   | |   / /   |  _  |   / /_| | | | | |      | | /  | / / / /_| | | |\   | | |  _  
+0.125B 4 2048                  / /__  | |  / /__  | | | |  / /  | | | |_| |      | |/   |/ / / /  | | | | \  | | |_| | 
+0.125B 4 2048                 /_____| |_| /_____| |_| |_| /_/   |_| \_____/      |___/|___/ /_/   |_| |_|  \_| \_____/
+0.125B 4 2048 [1;32mWelcome to NEXIO![0m
+0.125B 4 2048 [1;36mNEXIO is an industry-leading key-value store, setting benchmarks in the realm of high-performance data storage solutions.
+0.125B 4 2048 Empowered by cutting-edge algorithms and innovative data structures, NEXIO provides unparalleled speed, reliability, and efficiency.
+0.125B 4 2048 It's not just about storing data, it's about accessing it swiftly and reliably, every single time.
+0.125B 4 2048 Whether it's real-time analytics, mission-critical databases, or everyday computing needs, NEXIO stands out as the preferred choice for modern storage needs.[0m
+0.125B 4 2048 [1;34m==============================================[0m
+0.125B 4 2048 [34m
+0.125B 4 2048 =============== NEXIO initialization start ===============[0m
+0.125B 4 2048 [1;32m[INFO][0m io_mutex initialized successfully.
+0.125B 4 2048 [1;32m[INFO][0m io_cond initialized successfully.
+0.125B 4 2048 [1;32m[SUCCESS][0m Mutexes and condition variables successfully initialized![0m
+0.125B 4 2048 [1;32m[SUCCESS][0m I/O Thread successfully created![0m
+0.125B 4 2048 [1;32m[SUCCESS][0m Extendible hash table initialized successfully!
+2B 8 128 [1;34m==============================================[0m
+2B 8 128 [1;37m[44m                                          [0m
+2B 8 128 [1;37m[44m  __   _   _____  __    __  _   _____   [0m
+2B 8 128 [1;37m[44m |  \ | | | ____| \ \  / / | | /  _  \  [0m
+2B 8 128 [1;37m[44m |   \| | | |__    \ \/ /  | | | | | |  [0m
+2B 8 128 [1;37m[44m | |\   | |  __|    }  {   | | | | | |  [0m
+2B 8 128 [1;37m[44m | | \  | | |___   / /\ \  | | | |_| |  [0m
+2B 8 128 [1;37m[44m |_|  \_| |_____| /_/  \_\ |_| \_____/  [0m
+2B 8 128 [1;37m[44m                                          [0m
+2B 8 128  _   _   _____       ___   _____        _____   _       ___   _____  
+2B 8 128 | | | | /  ___|     /   | /  ___/      /  ___/ | |     /   | |_   _| 
+2B 8 128 | | | | | |        / /| | | |___       | |___  | |    / /| |   | |   
+2B 8 128 | | | | | |       / /_| | \___  \------\___  \ | |   / /_| |   | |   
+2B 8 128 | |_| | | |___   / /  | |  ___| |       ___| | | |  / /  | |   | |   
+2B 8 128 \_____/ \_____| /_/   |_| /_____/      /_____/ |_| /_/   |_|   |_|   
+2B 8 128                  ______  _   ______  _   _       ___   _____        _          __  ___   __   _   _____  
+2B 8 128                 |___  / | | |___  / | | | |     /   | /  _  \      | |        / / /   | |  \ | | /  ___| 
+2B 8 128                    / /  | |    / /  | |_| |    / /| | | | | |      | |  __   / / / /| | |   \| | | |     
+2B 8 128                   / /   | |   / /   |  _  |   / /_| | | | | |      | | /  | / / / /_| | | |\   | | |  _  
+2B 8 128                  / /__  | |  / /__  | | | |  / /  | | | |_| |      | |/   |/ / / /  | | | | \  | | |_| | 
+2B 8 128                 /_____| |_| /_____| |_| |_| /_/   |_| \_____/      |___/|___/ /_/   |_| |_|  \_| \_____/
+2B 8 128 [1;32mWelcome to NEXIO![0m
+2B 8 128 [1;36mNEXIO is an industry-leading key-value store, setting benchmarks in the realm of high-performance data storage solutions.
+2B 8 128 Empowered by cutting-edge algorithms and innovative data structures, NEXIO provides unparalleled speed, reliability, and efficiency.
+2B 8 128 It's not just about storing data, it's about accessing it swiftly and reliably, every single time.
+2B 8 128 Whether it's real-time analytics, mission-critical databases, or everyday computing needs, NEXIO stands out as the preferred choice for modern storage needs.[0m
+2B 8 128 [1;34m==============================================[0m
+2B 8 128 [34m
+2B 8 128 =============== NEXIO initialization start ===============[0m
+2B 8 128 [1;32m[INFO][0m io_mutex initialized successfully.
+2B 8 128 [1;32m[INFO][0m io_cond initialized successfully.
+2B 8 128 [1;32m[SUCCESS][0m Mutexes and condition variables successfully initialized![0m
+2B 8 128 [1;32m[SUCCESS][0m I/O Thread successfully created![0m
+2B 8 128 [1;32m[SUCCESS][0m Extendible hash table initialized successfully!
+1B 8 256 [1;34m==============================================[0m
+1B 8 256 [1;37m[44m                                          [0m
+1B 8 256 [1;37m[44m  __   _   _____  __    __  _   _____   [0m
+1B 8 256 [1;37m[44m |  \ | | | ____| \ \  / / | | /  _  \  [0m
+1B 8 256 [1;37m[44m |   \| | | |__    \ \/ /  | | | | | |  [0m
+1B 8 256 [1;37m[44m | |\   | |  __|    }  {   | | | | | |  [0m
+1B 8 256 [1;37m[44m | | \  | | |___   / /\ \  | | | |_| |  [0m
+1B 8 256 [1;37m[44m |_|  \_| |_____| /_/  \_\ |_| \_____/  [0m
+1B 8 256 [1;37m[44m                                          [0m
+1B 8 256  _   _   _____       ___   _____        _____   _       ___   _____  
+1B 8 256 | | | | /  ___|     /   | /  ___/      /  ___/ | |     /   | |_   _| 
+1B 8 256 | | | | | |        / /| | | |___       | |___  | |    / /| |   | |   
+1B 8 256 | | | | | |       / /_| | \___  \------\___  \ | |   / /_| |   | |   
+1B 8 256 | |_| | | |___   / /  | |  ___| |       ___| | | |  / /  | |   | |   
+1B 8 256 \_____/ \_____| /_/   |_| /_____/      /_____/ |_| /_/   |_|   |_|   
+1B 8 256                  ______  _   ______  _   _       ___   _____        _          __  ___   __   _   _____  
+1B 8 256                 |___  / | | |___  / | | | |     /   | /  _  \      | |        / / /   | |  \ | | /  ___| 
+1B 8 256                    / /  | |    / /  | |_| |    / /| | | | | |      | |  __   / / / /| | |   \| | | |     
+1B 8 256                   / /   | |   / /   |  _  |   / /_| | | | | |      | | /  | / / / /_| | | |\   | | |  _  
+1B 8 256                  / /__  | |  / /__  | | | |  / /  | | | |_| |      | |/   |/ / / /  | | | | \  | | |_| | 
+1B 8 256                 /_____| |_| /_____| |_| |_| /_/   |_| \_____/      |___/|___/ /_/   |_| |_|  \_| \_____/
+1B 8 256 [1;32mWelcome to NEXIO![0m
+1B 8 256 [1;36mNEXIO is an industry-leading key-value store, setting benchmarks in the realm of high-performance data storage solutions.
+1B 8 256 Empowered by cutting-edge algorithms and innovative data structures, NEXIO provides unparalleled speed, reliability, and efficiency.
+1B 8 256 It's not just about storing data, it's about accessing it swiftly and reliably, every single time.
+1B 8 256 Whether it's real-time analytics, mission-critical databases, or everyday computing needs, NEXIO stands out as the preferred choice for modern storage needs.[0m
+1B 8 256 [1;34m==============================================[0m
+1B 8 256 [34m
+1B 8 256 =============== NEXIO initialization start ===============[0m
+1B 8 256 [1;32m[INFO][0m io_mutex initialized successfully.
+1B 8 256 [1;32m[INFO][0m io_cond initialized successfully.
+1B 8 256 [1;32m[SUCCESS][0m Mutexes and condition variables successfully initialized![0m
+1B 8 256 [1;32m[SUCCESS][0m I/O Thread successfully created![0m
+1B 8 256 [1;32m[SUCCESS][0m Extendible hash table initialized successfully!
+0.5B 8 512 [1;34m==============================================[0m
+0.5B 8 512 [1;37m[44m                                          [0m
+0.5B 8 512 [1;37m[44m  __   _   _____  __    __  _   _____   [0m
+0.5B 8 512 [1;37m[44m |  \ | | | ____| \ \  / / | | /  _  \  [0m
+0.5B 8 512 [1;37m[44m |   \| | | |__    \ \/ /  | | | | | |  [0m
+0.5B 8 512 [1;37m[44m | |\   | |  __|    }  {   | | | | | |  [0m
+0.5B 8 512 [1;37m[44m | | \  | | |___   / /\ \  | | | |_| |  [0m
+0.5B 8 512 [1;37m[44m |_|  \_| |_____| /_/  \_\ |_| \_____/  [0m
+0.5B 8 512 [1;37m[44m                                          [0m
+0.5B 8 512  _   _   _____       ___   _____        _____   _       ___   _____  
+0.5B 8 512 | | | | /  ___|     /   | /  ___/      /  ___/ | |     /   | |_   _| 
+0.5B 8 512 | | | | | |        / /| | | |___       | |___  | |    / /| |   | |   
+0.5B 8 512 | | | | | |       / /_| | \___  \------\___  \ | |   / /_| |   | |   
+0.5B 8 512 | |_| | | |___   / /  | |  ___| |       ___| | | |  / /  | |   | |   
+0.5B 8 512 \_____/ \_____| /_/   |_| /_____/      /_____/ |_| /_/   |_|   |_|   
+0.5B 8 512                  ______  _   ______  _   _       ___   _____        _          __  ___   __   _   _____  
+0.5B 8 512                 |___  / | | |___  / | | | |     /   | /  _  \      | |        / / /   | |  \ | | /  ___| 
+0.5B 8 512                    / /  | |    / /  | |_| |    / /| | | | | |      | |  __   / / / /| | |   \| | | |     
+0.5B 8 512                   / /   | |   / /   |  _  |   / /_| | | | | |      | | /  | / / / /_| | | |\   | | |  _  
+0.5B 8 512                  / /__  | |  / /__  | | | |  / /  | | | |_| |      | |/   |/ / / /  | | | | \  | | |_| | 
+0.5B 8 512                 /_____| |_| /_____| |_| |_| /_/   |_| \_____/      |___/|___/ /_/   |_| |_|  \_| \_____/
+0.5B 8 512 [1;32mWelcome to NEXIO![0m
+0.5B 8 512 [1;36mNEXIO is an industry-leading key-value store, setting benchmarks in the realm of high-performance data storage solutions.
+0.5B 8 512 Empowered by cutting-edge algorithms and innovative data structures, NEXIO provides unparalleled speed, reliability, and efficiency.
+0.5B 8 512 It's not just about storing data, it's about accessing it swiftly and reliably, every single time.
+0.5B 8 512 Whether it's real-time analytics, mission-critical databases, or everyday computing needs, NEXIO stands out as the preferred choice for modern storage needs.[0m
+0.5B 8 512 [1;34m==============================================[0m
+0.5B 8 512 [34m
+0.5B 8 512 =============== NEXIO initialization start ===============[0m
+0.5B 8 512 [1;32m[INFO][0m io_mutex initialized successfully.
+0.5B 8 512 [1;32m[INFO][0m io_cond initialized successfully.
+0.5B 8 512 [1;32m[SUCCESS][0m Mutexes and condition variables successfully initialized![0m
+0.5B 8 512 [1;32m[SUCCESS][0m I/O Thread successfully created![0m
+0.5B 8 512 [1;32m[SUCCESS][0m Extendible hash table initialized successfully!
+0.25B 8 1024 [1;34m==============================================[0m
+0.25B 8 1024 [1;37m[44m                                          [0m
+0.25B 8 1024 [1;37m[44m  __   _   _____  __    __  _   _____   [0m
+0.25B 8 1024 [1;37m[44m |  \ | | | ____| \ \  / / | | /  _  \  [0m
+0.25B 8 1024 [1;37m[44m |   \| | | |__    \ \/ /  | | | | | |  [0m
+0.25B 8 1024 [1;37m[44m | |\   | |  __|    }  {   | | | | | |  [0m
+0.25B 8 1024 [1;37m[44m | | \  | | |___   / /\ \  | | | |_| |  [0m
+0.25B 8 1024 [1;37m[44m |_|  \_| |_____| /_/  \_\ |_| \_____/  [0m
+0.25B 8 1024 [1;37m[44m                                          [0m
+0.25B 8 1024  _   _   _____       ___   _____        _____   _       ___   _____  
+0.25B 8 1024 | | | | /  ___|     /   | /  ___/      /  ___/ | |     /   | |_   _| 
+0.25B 8 1024 | | | | | |        / /| | | |___       | |___  | |    / /| |   | |   
+0.25B 8 1024 | | | | | |       / /_| | \___  \------\___  \ | |   / /_| |   | |   
+0.25B 8 1024 | |_| | | |___   / /  | |  ___| |       ___| | | |  / /  | |   | |   
+0.25B 8 1024 \_____/ \_____| /_/   |_| /_____/      /_____/ |_| /_/   |_|   |_|   
+0.25B 8 1024                  ______  _   ______  _   _       ___   _____        _          __  ___   __   _   _____  
+0.25B 8 1024                 |___  / | | |___  / | | | |     /   | /  _  \      | |        / / /   | |  \ | | /  ___| 
+0.25B 8 1024                    / /  | |    / /  | |_| |    / /| | | | | |      | |  __   / / / /| | |   \| | | |     
+0.25B 8 1024                   / /   | |   / /   |  _  |   / /_| | | | | |      | | /  | / / / /_| | | |\   | | |  _  
+0.25B 8 1024                  / /__  | |  / /__  | | | |  / /  | | | |_| |      | |/   |/ / / /  | | | | \  | | |_| | 
+0.25B 8 1024                 /_____| |_| /_____| |_| |_| /_/   |_| \_____/      |___/|___/ /_/   |_| |_|  \_| \_____/
+0.25B 8 1024 [1;32mWelcome to NEXIO![0m
+0.25B 8 1024 [1;36mNEXIO is an industry-leading key-value store, setting benchmarks in the realm of high-performance data storage solutions.
+0.25B 8 1024 Empowered by cutting-edge algorithms and innovative data structures, NEXIO provides unparalleled speed, reliability, and efficiency.
+0.25B 8 1024 It's not just about storing data, it's about accessing it swiftly and reliably, every single time.
+0.25B 8 1024 Whether it's real-time analytics, mission-critical databases, or everyday computing needs, NEXIO stands out as the preferred choice for modern storage needs.[0m
+0.25B 8 1024 [1;34m==============================================[0m
+0.25B 8 1024 [34m
+0.25B 8 1024 =============== NEXIO initialization start ===============[0m
+0.25B 8 1024 [1;32m[INFO][0m io_mutex initialized successfully.
+0.25B 8 1024 [1;32m[INFO][0m io_cond initialized successfully.
+0.25B 8 1024 [1;32m[SUCCESS][0m Mutexes and condition variables successfully initialized![0m
+0.25B 8 1024 [1;32m[SUCCESS][0m I/O Thread successfully created![0m
+0.25B 8 1024 [1;32m[SUCCESS][0m Extendible hash table initialized successfully!
+0.125B 8 2048 [1;34m==============================================[0m
+0.125B 8 2048 [1;37m[44m                                          [0m
+0.125B 8 2048 [1;37m[44m  __   _   _____  __    __  _   _____   [0m
+0.125B 8 2048 [1;37m[44m |  \ | | | ____| \ \  / / | | /  _  \  [0m
+0.125B 8 2048 [1;37m[44m |   \| | | |__    \ \/ /  | | | | | |  [0m
+0.125B 8 2048 [1;37m[44m | |\   | |  __|    }  {   | | | | | |  [0m
+0.125B 8 2048 [1;37m[44m | | \  | | |___   / /\ \  | | | |_| |  [0m
+0.125B 8 2048 [1;37m[44m |_|  \_| |_____| /_/  \_\ |_| \_____/  [0m
+0.125B 8 2048 [1;37m[44m                                          [0m
+0.125B 8 2048  _   _   _____       ___   _____        _____   _       ___   _____  
+0.125B 8 2048 | | | | /  ___|     /   | /  ___/      /  ___/ | |     /   | |_   _| 
+0.125B 8 2048 | | | | | |        / /| | | |___       | |___  | |    / /| |   | |   
+0.125B 8 2048 | | | | | |       / /_| | \___  \------\___  \ | |   / /_| |   | |   
+0.125B 8 2048 | |_| | | |___   / /  | |  ___| |       ___| | | |  / /  | |   | |   
+0.125B 8 2048 \_____/ \_____| /_/   |_| /_____/      /_____/ |_| /_/   |_|   |_|   
+0.125B 8 2048                  ______  _   ______  _   _       ___   _____        _          __  ___   __   _   _____  
+0.125B 8 2048                 |___  / | | |___  / | | | |     /   | /  _  \      | |        / / /   | |  \ | | /  ___| 
+0.125B 8 2048                    / /  | |    / /  | |_| |    / /| | | | | |      | |  __   / / / /| | |   \| | | |     
+0.125B 8 2048                   / /   | |   / /   |  _  |   / /_| | | | | |      | | /  | / / / /_| | | |\   | | |  _  
+0.125B 8 2048                  / /__  | |  / /__  | | | |  / /  | | | |_| |      | |/   |/ / / /  | | | | \  | | |_| | 
+0.125B 8 2048                 /_____| |_| /_____| |_| |_| /_/   |_| \_____/      |___/|___/ /_/   |_| |_|  \_| \_____/
+0.125B 8 2048 [1;32mWelcome to NEXIO![0m
+0.125B 8 2048 [1;36mNEXIO is an industry-leading key-value store, setting benchmarks in the realm of high-performance data storage solutions.
+0.125B 8 2048 Empowered by cutting-edge algorithms and innovative data structures, NEXIO provides unparalleled speed, reliability, and efficiency.
+0.125B 8 2048 It's not just about storing data, it's about accessing it swiftly and reliably, every single time.
+0.125B 8 2048 Whether it's real-time analytics, mission-critical databases, or everyday computing needs, NEXIO stands out as the preferred choice for modern storage needs.[0m
+0.125B 8 2048 [1;34m==============================================[0m
+0.125B 8 2048 [34m
+0.125B 8 2048 =============== NEXIO initialization start ===============[0m
+0.125B 8 2048 [1;32m[INFO][0m io_mutex initialized successfully.
+0.125B 8 2048 [1;32m[INFO][0m io_cond initialized successfully.
+0.125B 8 2048 [1;32m[SUCCESS][0m Mutexes and condition variables successfully initialized![0m
+0.125B 8 2048 [1;32m[SUCCESS][0m I/O Thread successfully created![0m
+0.125B 8 2048 [1;32m[SUCCESS][0m Extendible hash table initialized successfully!
+2B 8 128 [1;34m==============================================[0m
+2B 8 128 [1;37m[44m                                          [0m
+2B 8 128 [1;37m[44m  __   _   _____  __    __  _   _____   [0m
+2B 8 128 [1;37m[44m |  \ | | | ____| \ \  / / | | /  _  \  [0m
+2B 8 128 [1;37m[44m |   \| | | |__    \ \/ /  | | | | | |  [0m
+2B 8 128 [1;37m[44m | |\   | |  __|    }  {   | | | | | |  [0m
+2B 8 128 [1;37m[44m | | \  | | |___   / /\ \  | | | |_| |  [0m
+2B 8 128 [1;37m[44m |_|  \_| |_____| /_/  \_\ |_| \_____/  [0m
+2B 8 128 [1;37m[44m                                          [0m
+2B 8 128  _   _   _____       ___   _____        _____   _       ___   _____  
+2B 8 128 | | | | /  ___|     /   | /  ___/      /  ___/ | |     /   | |_   _| 
+2B 8 128 | | | | | |        / /| | | |___       | |___  | |    / /| |   | |   
+2B 8 128 | | | | | |       / /_| | \___  \------\___  \ | |   / /_| |   | |   
+2B 8 128 | |_| | | |___   / /  | |  ___| |       ___| | | |  / /  | |   | |   
+2B 8 128 \_____/ \_____| /_/   |_| /_____/      /_____/ |_| /_/   |_|   |_|   
+2B 8 128                  ______  _   ______  _   _       ___   _____        _          __  ___   __   _   _____  
+2B 8 128                 |___  / | | |___  / | | | |     /   | /  _  \      | |        / / /   | |  \ | | /  ___| 
+2B 8 128                    / /  | |    / /  | |_| |    / /| | | | | |      | |  __   / / / /| | |   \| | | |     
+2B 8 128                   / /   | |   / /   |  _  |   / /_| | | | | |      | | /  | / / / /_| | | |\   | | |  _  
+2B 8 128                  / /__  | |  / /__  | | | |  / /  | | | |_| |      | |/   |/ / / /  | | | | \  | | |_| | 
+2B 8 128                 /_____| |_| /_____| |_| |_| /_/   |_| \_____/      |___/|___/ /_/   |_| |_|  \_| \_____/
+2B 8 128 [1;32mWelcome to NEXIO![0m
+2B 8 128 [1;36mNEXIO is an industry-leading key-value store, setting benchmarks in the realm of high-performance data storage solutions.
+2B 8 128 Empowered by cutting-edge algorithms and innovative data structures, NEXIO provides unparalleled speed, reliability, and efficiency.
+2B 8 128 It's not just about storing data, it's about accessing it swiftly and reliably, every single time.
+2B 8 128 Whether it's real-time analytics, mission-critical databases, or everyday computing needs, NEXIO stands out as the preferred choice for modern storage needs.[0m
+2B 8 128 [1;34m==============================================[0m
+2B 8 128 [34m
+2B 8 128 =============== NEXIO initialization start ===============[0m
+2B 8 128 [1;32m[INFO][0m io_mutex initialized successfully.
+2B 8 128 [1;32m[INFO][0m io_cond initialized successfully.
+2B 8 128 [1;32m[SUCCESS][0m Mutexes and condition variables successfully initialized![0m
+2B 8 128 [1;32m[SUCCESS][0m I/O Thread successfully created![0m
+2B 8 128 [1;32m[SUCCESS][0m Extendible hash table initialized successfully!
+1B 8 256 [1;34m==============================================[0m
+1B 8 256 [1;37m[44m                                          [0m
+1B 8 256 [1;37m[44m  __   _   _____  __    __  _   _____   [0m
+1B 8 256 [1;37m[44m |  \ | | | ____| \ \  / / | | /  _  \  [0m
+1B 8 256 [1;37m[44m |   \| | | |__    \ \/ /  | | | | | |  [0m
+1B 8 256 [1;37m[44m | |\   | |  __|    }  {   | | | | | |  [0m
+1B 8 256 [1;37m[44m | | \  | | |___   / /\ \  | | | |_| |  [0m
+1B 8 256 [1;37m[44m |_|  \_| |_____| /_/  \_\ |_| \_____/  [0m
+1B 8 256 [1;37m[44m                                          [0m
+1B 8 256  _   _   _____       ___   _____        _____   _       ___   _____  
+1B 8 256 | | | | /  ___|     /   | /  ___/      /  ___/ | |     /   | |_   _| 
+1B 8 256 | | | | | |        / /| | | |___       | |___  | |    / /| |   | |   
+1B 8 256 | | | | | |       / /_| | \___  \------\___  \ | |   / /_| |   | |   
+1B 8 256 | |_| | | |___   / /  | |  ___| |       ___| | | |  / /  | |   | |   
+1B 8 256 \_____/ \_____| /_/   |_| /_____/      /_____/ |_| /_/   |_|   |_|   
+1B 8 256                  ______  _   ______  _   _       ___   _____        _          __  ___   __   _   _____  
+1B 8 256                 |___  / | | |___  / | | | |     /   | /  _  \      | |        / / /   | |  \ | | /  ___| 
+1B 8 256                    / /  | |    / /  | |_| |    / /| | | | | |      | |  __   / / / /| | |   \| | | |     
+1B 8 256                   / /   | |   / /   |  _  |   / /_| | | | | |      | | /  | / / / /_| | | |\   | | |  _  
+1B 8 256                  / /__  | |  / /__  | | | |  / /  | | | |_| |      | |/   |/ / / /  | | | | \  | | |_| | 
+1B 8 256                 /_____| |_| /_____| |_| |_| /_/   |_| \_____/      |___/|___/ /_/   |_| |_|  \_| \_____/
+1B 8 256 [1;32mWelcome to NEXIO![0m
+1B 8 256 [1;36mNEXIO is an industry-leading key-value store, setting benchmarks in the realm of high-performance data storage solutions.
+1B 8 256 Empowered by cutting-edge algorithms and innovative data structures, NEXIO provides unparalleled speed, reliability, and efficiency.
+1B 8 256 It's not just about storing data, it's about accessing it swiftly and reliably, every single time.
+1B 8 256 Whether it's real-time analytics, mission-critical databases, or everyday computing needs, NEXIO stands out as the preferred choice for modern storage needs.[0m
+1B 8 256 [1;34m==============================================[0m
+1B 8 256 [34m
+1B 8 256 =============== NEXIO initialization start ===============[0m
+1B 8 256 [1;32m[INFO][0m io_mutex initialized successfully.
+1B 8 256 [1;32m[INFO][0m io_cond initialized successfully.
+1B 8 256 [1;32m[SUCCESS][0m Mutexes and condition variables successfully initialized![0m
+1B 8 256 [1;32m[SUCCESS][0m I/O Thread successfully created![0m
+1B 8 256 [1;32m[SUCCESS][0m Extendible hash table initialized successfully!
+0.5B 8 512 [1;34m==============================================[0m
+0.5B 8 512 [1;37m[44m                                          [0m
+0.5B 8 512 [1;37m[44m  __   _   _____  __    __  _   _____   [0m
+0.5B 8 512 [1;37m[44m |  \ | | | ____| \ \  / / | | /  _  \  [0m
+0.5B 8 512 [1;37m[44m |   \| | | |__    \ \/ /  | | | | | |  [0m
+0.5B 8 512 [1;37m[44m | |\   | |  __|    }  {   | | | | | |  [0m
+0.5B 8 512 [1;37m[44m | | \  | | |___   / /\ \  | | | |_| |  [0m
+0.5B 8 512 [1;37m[44m |_|  \_| |_____| /_/  \_\ |_| \_____/  [0m
+0.5B 8 512 [1;37m[44m                                          [0m
+0.5B 8 512  _   _   _____       ___   _____        _____   _       ___   _____  
+0.5B 8 512 | | | | /  ___|     /   | /  ___/      /  ___/ | |     /   | |_   _| 
+0.5B 8 512 | | | | | |        / /| | | |___       | |___  | |    / /| |   | |   
+0.5B 8 512 | | | | | |       / /_| | \___  \------\___  \ | |   / /_| |   | |   
+0.5B 8 512 | |_| | | |___   / /  | |  ___| |       ___| | | |  / /  | |   | |   
+0.5B 8 512 \_____/ \_____| /_/   |_| /_____/      /_____/ |_| /_/   |_|   |_|   
+0.5B 8 512                  ______  _   ______  _   _       ___   _____        _          __  ___   __   _   _____  
+0.5B 8 512                 |___  / | | |___  / | | | |     /   | /  _  \      | |        / / /   | |  \ | | /  ___| 
+0.5B 8 512                    / /  | |    / /  | |_| |    / /| | | | | |      | |  __   / / / /| | |   \| | | |     
+0.5B 8 512                   / /   | |   / /   |  _  |   / /_| | | | | |      | | /  | / / / /_| | | |\   | | |  _  
+0.5B 8 512                  / /__  | |  / /__  | | | |  / /  | | | |_| |      | |/   |/ / / /  | | | | \  | | |_| | 
+0.5B 8 512                 /_____| |_| /_____| |_| |_| /_/   |_| \_____/      |___/|___/ /_/   |_| |_|  \_| \_____/
+0.5B 8 512 [1;32mWelcome to NEXIO![0m
+0.5B 8 512 [1;36mNEXIO is an industry-leading key-value store, setting benchmarks in the realm of high-performance data storage solutions.
+0.5B 8 512 Empowered by cutting-edge algorithms and innovative data structures, NEXIO provides unparalleled speed, reliability, and efficiency.
+0.5B 8 512 It's not just about storing data, it's about accessing it swiftly and reliably, every single time.
+0.5B 8 512 Whether it's real-time analytics, mission-critical databases, or everyday computing needs, NEXIO stands out as the preferred choice for modern storage needs.[0m
+0.5B 8 512 [1;34m==============================================[0m
+0.5B 8 512 [34m
+0.5B 8 512 =============== NEXIO initialization start ===============[0m
+0.5B 8 512 [1;32m[INFO][0m io_mutex initialized successfully.
+0.5B 8 512 [1;32m[INFO][0m io_cond initialized successfully.
+0.5B 8 512 [1;32m[SUCCESS][0m Mutexes and condition variables successfully initialized![0m
+0.5B 8 512 [1;32m[SUCCESS][0m I/O Thread successfully created![0m
+0.5B 8 512 [1;32m[SUCCESS][0m Extendible hash table initialized successfully!
+0.25B 8 1024 [1;34m==============================================[0m
+0.25B 8 1024 [1;37m[44m                                          [0m
+0.25B 8 1024 [1;37m[44m  __   _   _____  __    __  _   _____   [0m
+0.25B 8 1024 [1;37m[44m |  \ | | | ____| \ \  / / | | /  _  \  [0m
+0.25B 8 1024 [1;37m[44m |   \| | | |__    \ \/ /  | | | | | |  [0m
+0.25B 8 1024 [1;37m[44m | |\   | |  __|    }  {   | | | | | |  [0m
+0.25B 8 1024 [1;37m[44m | | \  | | |___   / /\ \  | | | |_| |  [0m
+0.25B 8 1024 [1;37m[44m |_|  \_| |_____| /_/  \_\ |_| \_____/  [0m
+0.25B 8 1024 [1;37m[44m                                          [0m
+0.25B 8 1024  _   _   _____       ___   _____        _____   _       ___   _____  
+0.25B 8 1024 | | | | /  ___|     /   | /  ___/      /  ___/ | |     /   | |_   _| 
+0.25B 8 1024 | | | | | |        / /| | | |___       | |___  | |    / /| |   | |   
+0.25B 8 1024 | | | | | |       / /_| | \___  \------\___  \ | |   / /_| |   | |   
+0.25B 8 1024 | |_| | | |___   / /  | |  ___| |       ___| | | |  / /  | |   | |   
+0.25B 8 1024 \_____/ \_____| /_/   |_| /_____/      /_____/ |_| /_/   |_|   |_|   
+0.25B 8 1024                  ______  _   ______  _   _       ___   _____        _          __  ___   __   _   _____  
+0.25B 8 1024                 |___  / | | |___  / | | | |     /   | /  _  \      | |        / / /   | |  \ | | /  ___| 
+0.25B 8 1024                    / /  | |    / /  | |_| |    / /| | | | | |      | |  __   / / / /| | |   \| | | |     
+0.25B 8 1024                   / /   | |   / /   |  _  |   / /_| | | | | |      | | /  | / / / /_| | | |\   | | |  _  
+0.25B 8 1024                  / /__  | |  / /__  | | | |  / /  | | | |_| |      | |/   |/ / / /  | | | | \  | | |_| | 
+0.25B 8 1024                 /_____| |_| /_____| |_| |_| /_/   |_| \_____/      |___/|___/ /_/   |_| |_|  \_| \_____/
+0.25B 8 1024 [1;32mWelcome to NEXIO![0m
+0.25B 8 1024 [1;36mNEXIO is an industry-leading key-value store, setting benchmarks in the realm of high-performance data storage solutions.
+0.25B 8 1024 Empowered by cutting-edge algorithms and innovative data structures, NEXIO provides unparalleled speed, reliability, and efficiency.
+0.25B 8 1024 It's not just about storing data, it's about accessing it swiftly and reliably, every single time.
+0.25B 8 1024 Whether it's real-time analytics, mission-critical databases, or everyday computing needs, NEXIO stands out as the preferred choice for modern storage needs.[0m
+0.25B 8 1024 [1;34m==============================================[0m
+0.25B 8 1024 [34m
+0.25B 8 1024 =============== NEXIO initialization start ===============[0m
+0.25B 8 1024 [1;32m[INFO][0m io_mutex initialized successfully.
+0.25B 8 1024 [1;32m[INFO][0m io_cond initialized successfully.
+0.25B 8 1024 [1;32m[SUCCESS][0m Mutexes and condition variables successfully initialized![0m
+0.25B 8 1024 [1;32m[SUCCESS][0m I/O Thread successfully created![0m
+0.25B 8 1024 [1;32m[SUCCESS][0m Extendible hash table initialized successfully!
+0.125B 8 2048 [1;34m==============================================[0m
+0.125B 8 2048 [1;37m[44m                                          [0m
+0.125B 8 2048 [1;37m[44m  __   _   _____  __    __  _   _____   [0m
+0.125B 8 2048 [1;37m[44m |  \ | | | ____| \ \  / / | | /  _  \  [0m
+0.125B 8 2048 [1;37m[44m |   \| | | |__    \ \/ /  | | | | | |  [0m
+0.125B 8 2048 [1;37m[44m | |\   | |  __|    }  {   | | | | | |  [0m
+0.125B 8 2048 [1;37m[44m | | \  | | |___   / /\ \  | | | |_| |  [0m
+0.125B 8 2048 [1;37m[44m |_|  \_| |_____| /_/  \_\ |_| \_____/  [0m
+0.125B 8 2048 [1;37m[44m                                          [0m
+0.125B 8 2048  _   _   _____       ___   _____        _____   _       ___   _____  
+0.125B 8 2048 | | | | /  ___|     /   | /  ___/      /  ___/ | |     /   | |_   _| 
+0.125B 8 2048 | | | | | |        / /| | | |___       | |___  | |    / /| |   | |   
+0.125B 8 2048 | | | | | |       / /_| | \___  \------\___  \ | |   / /_| |   | |   
+0.125B 8 2048 | |_| | | |___   / /  | |  ___| |       ___| | | |  / /  | |   | |   
+0.125B 8 2048 \_____/ \_____| /_/   |_| /_____/      /_____/ |_| /_/   |_|   |_|   
+0.125B 8 2048                  ______  _   ______  _   _       ___   _____        _          __  ___   __   _   _____  
+0.125B 8 2048                 |___  / | | |___  / | | | |     /   | /  _  \      | |        / / /   | |  \ | | /  ___| 
+0.125B 8 2048                    / /  | |    / /  | |_| |    / /| | | | | |      | |  __   / / / /| | |   \| | | |     
+0.125B 8 2048                   / /   | |   / /   |  _  |   / /_| | | | | |      | | /  | / / / /_| | | |\   | | |  _  
+0.125B 8 2048                  / /__  | |  / /__  | | | |  / /  | | | |_| |      | |/   |/ / / /  | | | | \  | | |_| | 
+0.125B 8 2048                 /_____| |_| /_____| |_| |_| /_/   |_| \_____/      |___/|___/ /_/   |_| |_|  \_| \_____/
+0.125B 8 2048 [1;32mWelcome to NEXIO![0m
+0.125B 8 2048 [1;36mNEXIO is an industry-leading key-value store, setting benchmarks in the realm of high-performance data storage solutions.
+0.125B 8 2048 Empowered by cutting-edge algorithms and innovative data structures, NEXIO provides unparalleled speed, reliability, and efficiency.
+0.125B 8 2048 It's not just about storing data, it's about accessing it swiftly and reliably, every single time.
+0.125B 8 2048 Whether it's real-time analytics, mission-critical databases, or everyday computing needs, NEXIO stands out as the preferred choice for modern storage needs.[0m
+0.125B 8 2048 [1;34m==============================================[0m
+0.125B 8 2048 [34m
+0.125B 8 2048 =============== NEXIO initialization start ===============[0m
+0.125B 8 2048 [1;32m[INFO][0m io_mutex initialized successfully.
+0.125B 8 2048 [1;32m[INFO][0m io_cond initialized successfully.
+0.125B 8 2048 [1;32m[SUCCESS][0m Mutexes and condition variables successfully initialized![0m
+0.125B 8 2048 [1;32m[SUCCESS][0m I/O Thread successfully created![0m
+0.125B 8 2048 [1;32m[SUCCESS][0m Extendible hash table initialized successfully!
+2B 8 128 [1;34m==============================================[0m
+2B 8 128 [1;37m[44m                                          [0m
+2B 8 128 [1;37m[44m  __   _   _____  __    __  _   _____   [0m
+2B 8 128 [1;37m[44m |  \ | | | ____| \ \  / / | | /  _  \  [0m
+2B 8 128 [1;37m[44m |   \| | | |__    \ \/ /  | | | | | |  [0m
+2B 8 128 [1;37m[44m | |\   | |  __|    }  {   | | | | | |  [0m
+2B 8 128 [1;37m[44m | | \  | | |___   / /\ \  | | | |_| |  [0m
+2B 8 128 [1;37m[44m |_|  \_| |_____| /_/  \_\ |_| \_____/  [0m
+2B 8 128 [1;37m[44m                                          [0m
+2B 8 128  _   _   _____       ___   _____        _____   _       ___   _____  
+2B 8 128 | | | | /  ___|     /   | /  ___/      /  ___/ | |     /   | |_   _| 
+2B 8 128 | | | | | |        / /| | | |___       | |___  | |    / /| |   | |   
+2B 8 128 | | | | | |       / /_| | \___  \------\___  \ | |   / /_| |   | |   
+2B 8 128 | |_| | | |___   / /  | |  ___| |       ___| | | |  / /  | |   | |   
+2B 8 128 \_____/ \_____| /_/   |_| /_____/      /_____/ |_| /_/   |_|   |_|   
+2B 8 128                  ______  _   ______  _   _       ___   _____        _          __  ___   __   _   _____  
+2B 8 128                 |___  / | | |___  / | | | |     /   | /  _  \      | |        / / /   | |  \ | | /  ___| 
+2B 8 128                    / /  | |    / /  | |_| |    / /| | | | | |      | |  __   / / / /| | |   \| | | |     
+2B 8 128                   / /   | |   / /   |  _  |   / /_| | | | | |      | | /  | / / / /_| | | |\   | | |  _  
+2B 8 128                  / /__  | |  / /__  | | | |  / /  | | | |_| |      | |/   |/ / / /  | | | | \  | | |_| | 
+2B 8 128                 /_____| |_| /_____| |_| |_| /_/   |_| \_____/      |___/|___/ /_/   |_| |_|  \_| \_____/
+2B 8 128 [1;32mWelcome to NEXIO![0m
+2B 8 128 [1;36mNEXIO is an industry-leading key-value store, setting benchmarks in the realm of high-performance data storage solutions.
+2B 8 128 Empowered by cutting-edge algorithms and innovative data structures, NEXIO provides unparalleled speed, reliability, and efficiency.
+2B 8 128 It's not just about storing data, it's about accessing it swiftly and reliably, every single time.
+2B 8 128 Whether it's real-time analytics, mission-critical databases, or everyday computing needs, NEXIO stands out as the preferred choice for modern storage needs.[0m
+2B 8 128 [1;34m==============================================[0m
+2B 8 128 [34m
+2B 8 128 =============== NEXIO initialization start ===============[0m
+2B 8 128 [1;32m[INFO][0m io_mutex initialized successfully.
+2B 8 128 [1;32m[INFO][0m io_cond initialized successfully.
+2B 8 128 [1;32m[SUCCESS][0m Mutexes and condition variables successfully initialized![0m
+2B 8 128 [1;32m[SUCCESS][0m I/O Thread successfully created![0m
+2B 8 128 [1;32m[SUCCESS][0m Extendible hash table initialized successfully!
+1B 8 256 [1;34m==============================================[0m
+1B 8 256 [1;37m[44m                                          [0m
+1B 8 256 [1;37m[44m  __   _   _____  __    __  _   _____   [0m
+1B 8 256 [1;37m[44m |  \ | | | ____| \ \  / / | | /  _  \  [0m
+1B 8 256 [1;37m[44m |   \| | | |__    \ \/ /  | | | | | |  [0m
+1B 8 256 [1;37m[44m | |\   | |  __|    }  {   | | | | | |  [0m
+1B 8 256 [1;37m[44m | | \  | | |___   / /\ \  | | | |_| |  [0m
+1B 8 256 [1;37m[44m |_|  \_| |_____| /_/  \_\ |_| \_____/  [0m
+1B 8 256 [1;37m[44m                                          [0m
+1B 8 256  _   _   _____       ___   _____        _____   _       ___   _____  
+1B 8 256 | | | | /  ___|     /   | /  ___/      /  ___/ | |     /   | |_   _| 
+1B 8 256 | | | | | |        / /| | | |___       | |___  | |    / /| |   | |   
+1B 8 256 | | | | | |       / /_| | \___  \------\___  \ | |   / /_| |   | |   
+1B 8 256 | |_| | | |___   / /  | |  ___| |       ___| | | |  / /  | |   | |   
+1B 8 256 \_____/ \_____| /_/   |_| /_____/      /_____/ |_| /_/   |_|   |_|   
+1B 8 256                  ______  _   ______  _   _       ___   _____        _          __  ___   __   _   _____  
+1B 8 256                 |___  / | | |___  / | | | |     /   | /  _  \      | |        / / /   | |  \ | | /  ___| 
+1B 8 256                    / /  | |    / /  | |_| |    / /| | | | | |      | |  __   / / / /| | |   \| | | |     
+1B 8 256                   / /   | |   / /   |  _  |   / /_| | | | | |      | | /  | / / / /_| | | |\   | | |  _  
+1B 8 256                  / /__  | |  / /__  | | | |  / /  | | | |_| |      | |/   |/ / / /  | | | | \  | | |_| | 
+1B 8 256                 /_____| |_| /_____| |_| |_| /_/   |_| \_____/      |___/|___/ /_/   |_| |_|  \_| \_____/
+1B 8 256 [1;32mWelcome to NEXIO![0m
+1B 8 256 [1;36mNEXIO is an industry-leading key-value store, setting benchmarks in the realm of high-performance data storage solutions.
+1B 8 256 Empowered by cutting-edge algorithms and innovative data structures, NEXIO provides unparalleled speed, reliability, and efficiency.
+1B 8 256 It's not just about storing data, it's about accessing it swiftly and reliably, every single time.
+1B 8 256 Whether it's real-time analytics, mission-critical databases, or everyday computing needs, NEXIO stands out as the preferred choice for modern storage needs.[0m
+1B 8 256 [1;34m==============================================[0m
+1B 8 256 [34m
+1B 8 256 =============== NEXIO initialization start ===============[0m
+1B 8 256 [1;32m[INFO][0m io_mutex initialized successfully.
+1B 8 256 [1;32m[INFO][0m io_cond initialized successfully.
+1B 8 256 [1;32m[SUCCESS][0m Mutexes and condition variables successfully initialized![0m
+1B 8 256 [1;32m[SUCCESS][0m I/O Thread successfully created![0m
+1B 8 256 [1;32m[SUCCESS][0m Extendible hash table initialized successfully!
+1B 8 256 NVMe Device Geometry
+1B 8 256 =======================
+1B 8 256 Model Number:                   FEMU BlackBox-SSD Controller            1.0     
+1B 8 256 Serial Number:                  vSSD0               FEMU BlackBox-SSD Controller            1.0     
+1B 8 256 Firmware Version:               1.0     
+1B 8 256 Max Data Transfer Size:         10
+1B 8 256 
+1B 8 256 Namespace ID: 1
+1B 8 256 LBA Format 0:
+1B 8 256 	Metadata Size: 0 bytes
+1B 8 256 	Data Size: 512 bytes
+1B 8 256 	Relative Performance: Best (0)
+1B 8 256 LBA Format 1:
+1B 8 256 	Metadata Size: 0 bytes
+1B 8 256 	Data Size: 1024 bytes
+1B 8 256 	Relative Performance: Best (0)
+1B 8 256 LBA Format 2:
+1B 8 256 	Metadata Size: 0 bytes
+1B 8 256 	Data Size: 2048 bytes
+1B 8 256 	Relative Performance: Best (0)
+1B 8 256 LBA Format 3:
+1B 8 256 	Metadata Size: 0 bytes
+1B 8 256 	Data Size: 4096 bytes
+1B 8 256 	Relative Performance: Best (0)
+1B 8 256 LBA Format 4:
+1B 8 256 	Metadata Size: 0 bytes
+1B 8 256 	Data Size: 8192 bytes
+1B 8 256 	Relative Performance: Best (0)
+1B 8 256 
+1B 8 256 [1;32m[SUCCESS][0m SPDK Environment Initialized Successfully!
+1B 8 256 [1;32m[SUCCESS][0m NVMe controller and I/O qpair initialized successfully!
+1B 8 256 [1;32m[SUCCESS][0m Successfully initialized write buffer mutex.
+1B 8 256 [1;32m[SUCCESS][0m Successfully initialized buffer full condition variable.
+1B 8 256 [1;32m[SUCCESS][0m Successfully allocated memory for combined KV buffer.
+1B 8 256 [1;32m[SUCCESS][0m Geometry and buffer parameters initialized successfully!
+1B 8 256 [1;32m[SUCCESS][0m All components in system successfully initialized![0m[34m
+1B 8 256 =============== NEXIO Initialization completed ===============[0m
+1B 8 256 
+1B 8 256 Store Performance Metrics
+1B 8 256 ------------------------------
+1B 8 256 [2023-11-29 07:53:26] (0,10000000) ops Total execution time: 28.887 s
+1B 8 256 Data Throughput (MB/s): 346177.727 ops/sec  Operation Throughput (ops/sec): 89.798 MB/s
+1B 8 256 Average Latency: 0.003 ms  Max Latency: 5.094 ms  Min Latency: 0.001 ms
+1B 8 256 The Write Amplification: 0.997
+1B 8 256 ------------------------------
+1B 8 256 Convert and Find Bucket Time: 4083.01 ms
+1B 8 256 Search Time: 5415.51 ms
+1B 8 256 Insert and Write Time: 5280.07 ms
+1B 8 256 split Time: 259.101 ms
+0.5B 8 512 [1;34m==============================================[0m
+0.5B 8 512 [1;37m[44m                                          [0m
+0.5B 8 512 [1;37m[44m  __   _   _____  __    __  _   _____   [0m
+0.5B 8 512 [1;37m[44m |  \ | | | ____| \ \  / / | | /  _  \  [0m
+0.5B 8 512 [1;37m[44m |   \| | | |__    \ \/ /  | | | | | |  [0m
+0.5B 8 512 [1;37m[44m | |\   | |  __|    }  {   | | | | | |  [0m
+0.5B 8 512 [1;37m[44m | | \  | | |___   / /\ \  | | | |_| |  [0m
+0.5B 8 512 [1;37m[44m |_|  \_| |_____| /_/  \_\ |_| \_____/  [0m
+0.5B 8 512 [1;37m[44m                                          [0m
+0.5B 8 512  _   _   _____       ___   _____        _____   _       ___   _____  
+0.5B 8 512 | | | | /  ___|     /   | /  ___/      /  ___/ | |     /   | |_   _| 
+0.5B 8 512 | | | | | |        / /| | | |___       | |___  | |    / /| |   | |   
+0.5B 8 512 | | | | | |       / /_| | \___  \------\___  \ | |   / /_| |   | |   
+0.5B 8 512 | |_| | | |___   / /  | |  ___| |       ___| | | |  / /  | |   | |   
+0.5B 8 512 \_____/ \_____| /_/   |_| /_____/      /_____/ |_| /_/   |_|   |_|   
+0.5B 8 512                  ______  _   ______  _   _       ___   _____        _          __  ___   __   _   _____  
+0.5B 8 512                 |___  / | | |___  / | | | |     /   | /  _  \      | |        / / /   | |  \ | | /  ___| 
+0.5B 8 512                    / /  | |    / /  | |_| |    / /| | | | | |      | |  __   / / / /| | |   \| | | |     
+0.5B 8 512                   / /   | |   / /   |  _  |   / /_| | | | | |      | | /  | / / / /_| | | |\   | | |  _  
+0.5B 8 512                  / /__  | |  / /__  | | | |  / /  | | | |_| |      | |/   |/ / / /  | | | | \  | | |_| | 
+0.5B 8 512                 /_____| |_| /_____| |_| |_| /_/   |_| \_____/      |___/|___/ /_/   |_| |_|  \_| \_____/
+0.5B 8 512 [1;32mWelcome to NEXIO![0m
+0.5B 8 512 [1;36mNEXIO is an industry-leading key-value store, setting benchmarks in the realm of high-performance data storage solutions.
+0.5B 8 512 Empowered by cutting-edge algorithms and innovative data structures, NEXIO provides unparalleled speed, reliability, and efficiency.
+0.5B 8 512 It's not just about storing data, it's about accessing it swiftly and reliably, every single time.
+0.5B 8 512 Whether it's real-time analytics, mission-critical databases, or everyday computing needs, NEXIO stands out as the preferred choice for modern storage needs.[0m
+0.5B 8 512 [1;34m==============================================[0m
+0.5B 8 512 [34m
+0.5B 8 512 =============== NEXIO initialization start ===============[0m
+0.5B 8 512 [1;32m[INFO][0m io_mutex initialized successfully.
+0.5B 8 512 [1;32m[INFO][0m io_cond initialized successfully.
+0.5B 8 512 [1;32m[SUCCESS][0m Mutexes and condition variables successfully initialized![0m
+0.5B 8 512 [1;32m[SUCCESS][0m I/O Thread successfully created![0m
+0.5B 8 512 [1;32m[SUCCESS][0m Extendible hash table initialized successfully!
+0.25B 8 1024 [1;34m==============================================[0m
+0.25B 8 1024 [1;37m[44m                                          [0m
+0.25B 8 1024 [1;37m[44m  __   _   _____  __    __  _   _____   [0m
+0.25B 8 1024 [1;37m[44m |  \ | | | ____| \ \  / / | | /  _  \  [0m
+0.25B 8 1024 [1;37m[44m |   \| | | |__    \ \/ /  | | | | | |  [0m
+0.25B 8 1024 [1;37m[44m | |\   | |  __|    }  {   | | | | | |  [0m
+0.25B 8 1024 [1;37m[44m | | \  | | |___   / /\ \  | | | |_| |  [0m
+0.25B 8 1024 [1;37m[44m |_|  \_| |_____| /_/  \_\ |_| \_____/  [0m
+0.25B 8 1024 [1;37m[44m                                          [0m
+0.25B 8 1024  _   _   _____       ___   _____        _____   _       ___   _____  
+0.25B 8 1024 | | | | /  ___|     /   | /  ___/      /  ___/ | |     /   | |_   _| 
+0.25B 8 1024 | | | | | |        / /| | | |___       | |___  | |    / /| |   | |   
+0.25B 8 1024 | | | | | |       / /_| | \___  \------\___  \ | |   / /_| |   | |   
+0.25B 8 1024 | |_| | | |___   / /  | |  ___| |       ___| | | |  / /  | |   | |   
+0.25B 8 1024 \_____/ \_____| /_/   |_| /_____/      /_____/ |_| /_/   |_|   |_|   
+0.25B 8 1024                  ______  _   ______  _   _       ___   _____        _          __  ___   __   _   _____  
+0.25B 8 1024                 |___  / | | |___  / | | | |     /   | /  _  \      | |        / / /   | |  \ | | /  ___| 
+0.25B 8 1024                    / /  | |    / /  | |_| |    / /| | | | | |      | |  __   / / / /| | |   \| | | |     
+0.25B 8 1024                   / /   | |   / /   |  _  |   / /_| | | | | |      | | /  | / / / /_| | | |\   | | |  _  
+0.25B 8 1024                  / /__  | |  / /__  | | | |  / /  | | | |_| |      | |/   |/ / / /  | | | | \  | | |_| | 
+0.25B 8 1024                 /_____| |_| /_____| |_| |_| /_/   |_| \_____/      |___/|___/ /_/   |_| |_|  \_| \_____/
+0.25B 8 1024 [1;32mWelcome to NEXIO![0m
+0.25B 8 1024 [1;36mNEXIO is an industry-leading key-value store, setting benchmarks in the realm of high-performance data storage solutions.
+0.25B 8 1024 Empowered by cutting-edge algorithms and innovative data structures, NEXIO provides unparalleled speed, reliability, and efficiency.
+0.25B 8 1024 It's not just about storing data, it's about accessing it swiftly and reliably, every single time.
+0.25B 8 1024 Whether it's real-time analytics, mission-critical databases, or everyday computing needs, NEXIO stands out as the preferred choice for modern storage needs.[0m
+0.25B 8 1024 [1;34m==============================================[0m
+0.25B 8 1024 [34m
+0.25B 8 1024 =============== NEXIO initialization start ===============[0m
+0.25B 8 1024 [1;32m[INFO][0m io_mutex initialized successfully.
+0.25B 8 1024 [1;32m[INFO][0m io_cond initialized successfully.
+0.25B 8 1024 [1;32m[SUCCESS][0m Mutexes and condition variables successfully initialized![0m
+0.25B 8 1024 [1;32m[SUCCESS][0m I/O Thread successfully created![0m
+0.25B 8 1024 [1;32m[SUCCESS][0m Extendible hash table initialized successfully!
+0.125B 8 2048 [1;34m==============================================[0m
+0.125B 8 2048 [1;37m[44m                                          [0m
+0.125B 8 2048 [1;37m[44m  __   _   _____  __    __  _   _____   [0m
+0.125B 8 2048 [1;37m[44m |  \ | | | ____| \ \  / / | | /  _  \  [0m
+0.125B 8 2048 [1;37m[44m |   \| | | |__    \ \/ /  | | | | | |  [0m
+0.125B 8 2048 [1;37m[44m | |\   | |  __|    }  {   | | | | | |  [0m
+0.125B 8 2048 [1;37m[44m | | \  | | |___   / /\ \  | | | |_| |  [0m
+0.125B 8 2048 [1;37m[44m |_|  \_| |_____| /_/  \_\ |_| \_____/  [0m
+0.125B 8 2048 [1;37m[44m                                          [0m
+0.125B 8 2048  _   _   _____       ___   _____        _____   _       ___   _____  
+0.125B 8 2048 | | | | /  ___|     /   | /  ___/      /  ___/ | |     /   | |_   _| 
+0.125B 8 2048 | | | | | |        / /| | | |___       | |___  | |    / /| |   | |   
+0.125B 8 2048 | | | | | |       / /_| | \___  \------\___  \ | |   / /_| |   | |   
+0.125B 8 2048 | |_| | | |___   / /  | |  ___| |       ___| | | |  / /  | |   | |   
+0.125B 8 2048 \_____/ \_____| /_/   |_| /_____/      /_____/ |_| /_/   |_|   |_|   
+0.125B 8 2048                  ______  _   ______  _   _       ___   _____        _          __  ___   __   _   _____  
+0.125B 8 2048                 |___  / | | |___  / | | | |     /   | /  _  \      | |        / / /   | |  \ | | /  ___| 
+0.125B 8 2048                    / /  | |    / /  | |_| |    / /| | | | | |      | |  __   / / / /| | |   \| | | |     
+0.125B 8 2048                   / /   | |   / /   |  _  |   / /_| | | | | |      | | /  | / / / /_| | | |\   | | |  _  
+0.125B 8 2048                  / /__  | |  / /__  | | | |  / /  | | | |_| |      | |/   |/ / / /  | | | | \  | | |_| | 
+0.125B 8 2048                 /_____| |_| /_____| |_| |_| /_/   |_| \_____/      |___/|___/ /_/   |_| |_|  \_| \_____/
+0.125B 8 2048 [1;32mWelcome to NEXIO![0m
+0.125B 8 2048 [1;36mNEXIO is an industry-leading key-value store, setting benchmarks in the realm of high-performance data storage solutions.
+0.125B 8 2048 Empowered by cutting-edge algorithms and innovative data structures, NEXIO provides unparalleled speed, reliability, and efficiency.
+0.125B 8 2048 It's not just about storing data, it's about accessing it swiftly and reliably, every single time.
+0.125B 8 2048 Whether it's real-time analytics, mission-critical databases, or everyday computing needs, NEXIO stands out as the preferred choice for modern storage needs.[0m
+0.125B 8 2048 [1;34m==============================================[0m
+0.125B 8 2048 [34m
+0.125B 8 2048 =============== NEXIO initialization start ===============[0m
+0.125B 8 2048 [1;32m[INFO][0m io_mutex initialized successfully.
+0.125B 8 2048 [1;32m[INFO][0m io_cond initialized successfully.
+0.125B 8 2048 [1;32m[SUCCESS][0m Mutexes and condition variables successfully initialized![0m
+0.125B 8 2048 [1;32m[SUCCESS][0m I/O Thread successfully created![0m
+0.125B 8 2048 [1;32m[SUCCESS][0m Extendible hash table initialized successfully!

@@ -34,6 +34,7 @@ DECLARE_string(benchmarks);
 DECLARE_int64(num);
 DECLARE_int32(buckets);
 DECLARE_int64(value_size);
+DECLARE_string(pci_address);
 
 
 /**

@@ -53,9 +53,9 @@
 
 // #define NOT_SEPARATE_KV_variable
 
-// #define SEPARATE_KV_VARIABLE_LOG
+#define SEPARATE_KV_VARIABLE_LOG
 
-#define SEPARATE_KV_FIXED_LOG
+// #define SEPARATE_KV_FIXED_LOG
 
 #define IO_DEBUG
 
@@ -66,6 +66,9 @@
 
 
 #define  LRU_BUFFER 
+
+
+// #define DEBUG_READ_QUEUE
 
 // #define FastSkiplist 
 

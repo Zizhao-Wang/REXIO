@@ -153,24 +153,24 @@ void bench_testing(void)
           } 
           total_operation_time += current_latency;
 
-          if (current_latency*1000000 > 20000) {
-               fprintf(stderr, "long op: %.1f micros%30s\r", current_latency*1e6, "");
-               fflush(stderr);
-          }
+          // if (current_latency*1000000 > 20000) {
+          //      fprintf(stderr, "long op: %.1f micros%30s\r", current_latency*1e6, "");
+          //      fflush(stderr);
+          // }
 
           done_ops++;
-          if (done_ops >= next_report) {
-               fprintf(stderr, "... finished %llu ops%30s\r", (unsigned long long)done_ops, ""); 
-               fflush(stderr);
+          // if (done_ops >= next_report) {
+          //      fprintf(stderr, "... finished %llu ops%30s\r", (unsigned long long)done_ops, ""); 
+          //      fflush(stderr);
 
-               if      (next_report < 1000)   next_report += 100;
-               else if (next_report < 5000)   next_report += 500;
-               else if (next_report < 10000)  next_report += 1000;
-               else if (next_report < 50000)  next_report += 5000;
-               else if (next_report < 100000) next_report += 10000;
-               else if (next_report < 500000) next_report += 50000;
-               else                           next_report += 100000;
-          }
+          //      if      (next_report < 1000)   next_report += 100;
+          //      else if (next_report < 5000)   next_report += 500;
+          //      else if (next_report < 10000)  next_report += 1000;
+          //      else if (next_report < 50000)  next_report += 5000;
+          //      else if (next_report < 100000) next_report += 10000;
+          //      else if (next_report < 500000) next_report += 50000;
+          //      else                           next_report += 100000;
+          // }
 
           if(i % FLAGS_stats_interval == 0 )
           {
@@ -221,8 +221,8 @@ void bench_testing(void)
      fprintf(stdout,"The Write Amplification: %0.3lf\n", (double)total_write_bytes/user_input_bytes); // Assuming you have a variable called write_amplification
      fprintf(stdout,"------------------------------\n");
      fflush(stdout);
-
-
+     exit(0);
+     process_pending_spdk_io();
      // ycsb_read_heavy(FLAGS_num/10);
 
      // ycsb_read_only(FLAGS_num/10);
@@ -236,8 +236,11 @@ void bench_testing(void)
      user_input_bytes = 0;
      startTime = clock();
      record_point = FLAGS_num/2/10;
+     int found_count = 0; // Counter for the number of times the key is found
+     int not_found_count = 0; // Counter for the number of times the key is not found
+     int total_attempts = 0; // Total number of search attempts
      
-     for(uint64_t i=1;i<=FLAGS_num/2;i++)
+     for(uint64_t i=1;i<=FLAGS_num;i++)
      {
           memset(key_buffer, 0, KEY_SIZE);
           memset(value_buffer,0, FLAGS_value_size);
@@ -246,43 +249,31 @@ void bench_testing(void)
           {
                key_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
           }
+          k = Search(key_buffer);
 
-          if(k!=Search(key_buffer) && k+1 != Search(key_buffer) )
-          {
-               printf("Error in search!\n");
-               exit(0);
+          if (k == i) {
+               found_count++; 
+          } else {
+               printf("Error: key:%lu value:%lu\n", i, k);
+               exit(1);  
+               not_found_count++; 
           }
+          total_attempts++; 
           
-          for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
-          {
-               key_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
-          }
-          for (size_t j = 0; j < sizeof(uint64_t) && j < FLAGS_value_size; ++j)
-          {
-               value_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((k+1 >> (8 * j)) & 0xFF);
-          }
 
-          user_input_bytes = user_input_bytes +(KEY_SIZE + FLAGS_value_size);
-          uint64_t operation_start_time = clock();
-          // Update(key_buffer,value_buffer);
-
-          uint64_t operation_end_time = clock();
-          double current_latency = (double)(operation_end_time - operation_start_time) / CLOCKS_PER_SEC;
-          total_latency += current_latency;
-          if(current_latency > max_latency){
-               max_latency = current_latency;
-          }
-          if(current_latency < min_latency){
-               min_latency = current_latency;
-          } 
-          total_operation_time += current_latency;
-          
-          
           if(record_point!=0 && i%record_point==0)
           {
                printBlockInformation();     
           }
      }
+     // Calculate the find rate
+     double found_rate = (double)found_count / total_attempts * 100;
+
+     // Print the statistical results
+     printf("Found count: %d\n", found_count);
+     printf("Not found count: %d\n", not_found_count);
+     printf("Total attempts: %d\n", total_attempts);
+     printf("Find rate: %.2f%%\n", found_rate);
 
      endTime = clock();
      throughput = written_data_num / ((double)(endTime - startTime) / CLOCKS_PER_SEC);

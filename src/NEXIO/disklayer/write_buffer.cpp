@@ -6,8 +6,9 @@
 // ==========================
 // Offset and buffer related 
 // ==========================
-uint32_t offset5 = 0;
-uint32_t offset2 = 0; 
+uint64_t offset5 = 0;
+uint64_t offset2 = 0; 
+uint64_t num_data_page = 0;
 write_io_controller my_controller;
 // ========================
 // Separated key-value store
@@ -75,6 +76,9 @@ void initialize_write_buffer_variables()
     my_controller.nexio_log_unit = SPDK_LBAs_IN_NEXIO_LOG_BUFFER;
     my_controller.write_buffer_size = SPDK_LBAs_IN_NEXIO_WRITE_BUFFER*device_info->ns_info_array[0].lba_size;
     my_controller.nexio_log_buffer_size = SPDK_LBAs_IN_NEXIO_LOG_BUFFER*device_info->ns_info_array[0].lba_size;
+    my_controller.current_write_lba_num = 0;
+    my_controller.nexio_data_page_num_in_block = num_data_page /my_controller.nexio_write_uint;
+    my_controller.nexio_log_page_num_in_block = (my_controller.nexio_lba_uint - num_data_page)/my_controller.nexio_write_uint;
     current_buffer_position = 0;
     printf("\033[1;32m[SUCCESS]\033[0m Successfully initialized buffer full condition variable.\n");
 }
@@ -141,12 +145,4 @@ void kv_buffer_cleanup()
 {
     spdk_dma_free(key_separated_buffer);
     spdk_dma_free(value_separated_buffer);
-}
-
-
-
-
-char* read_form_write_Buffer(uint64_t pos)
-{
-    return value_separated_buffer + pos*(KEY_SIZE+value_size);
 }

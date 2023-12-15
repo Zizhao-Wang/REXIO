@@ -8,8 +8,6 @@
 
 int out_stand = 0;
 
-size_t num_data_page = 0;;
-
 size_t key_num_data_page = 0;
 
 size_t value_num_data_page = 0;
@@ -253,6 +251,19 @@ void kv_page_write_complete(void *arg, const struct spdk_nvme_cpl *completion)
     return ;
 }
 
+void process_pending_spdk_io() {
+
+    while (out_stand > 0) {
+        spdk_nvme_qpair_process_completions(qpair, 0);
+    }
+
+    assert(out_stand == 0);
+    
+    printf("All pending SPDK I/O operations have been processed.\n");
+}
+
+
+
 int kv_write_queue(void* write_buffer, uint64_t block_id, int mode)
 {
 
@@ -312,7 +323,6 @@ int kv_write_queue(void* write_buffer, uint64_t block_id, int mode)
     
     // update pointers within a block 
     block_current_write_pointers[block_id] += my_controller.nexio_write_uint;
-    my_controller.current_write_lba_num += my_controller.nexio_write_uint;
 
 	return 0;
 }
@@ -427,30 +437,58 @@ void page_read_complete(void *arg, const struct spdk_nvme_cpl *completion) {
 }
 
 char* read_queue(uint64_t page_id) {
-    char *buffer = (char *)spdk_dma_malloc(SPDK_LBAs_IN_NEXIO_LBA*512 , 0x1000, NULL);
-    if(buffer == NULL) {
-        logger.log(nexio_logger::error, "Failed to allocate buffer in read_queue!");
+
+    #ifdef DEBUG_READ_QUEUE
+    printf("Starting read queue, page_id: %lu\n", page_id);
+    #endif
+
+    char *buffer = (char *)spdk_dma_malloc(SPDK_LBAs_IN_NEXIO_WRITE_BUFFER*512, 0x1000, NULL);
+    if (buffer == NULL) {
+        logger.log(nexio_logger::error, "Failed to allocate buffer memory in read_queue!");
         return nullptr;
     }
+
+    #ifdef DEBUG_READ_QUEUE
+    printf("Buffer memory allocated successfully, size: %lu bytes\n", SPDK_LBAs_IN_NEXIO_WRITE_BUFFER * 512);
+    #endif
 
     uint64_t lba_start = page_id * SPDK_LBAs_IN_NEXIO_WRITE_BUFFER;
     uint64_t lba_count = SPDK_LBAs_IN_NEXIO_WRITE_BUFFER;
 
-    if (spdk_nvme_ns_cmd_read(ns, qpair, (void *)buffer, lba_start, lba_count, page_read_complete, NULL, 0) == 0) {
+    #ifdef DEBUG_READ_QUEUE
+    printf("LBA start position: %lu, LBA count: %lu\n", lba_start, lba_count);
+    #endif
+
+    int read_result = spdk_nvme_ns_cmd_read(ns, qpair, (void *)buffer, lba_start, lba_count, page_read_complete, NULL, 0);
+    if (read_result == 0) {
         out_stand++;
         logger.log(nexio_logger::info, "Successfully sent read request to SSD.");
     } else {
         logger.log(nexio_logger::error, "Failed to read data from SSD!");
         spdk_dma_free(buffer);
+
+        #ifdef DEBUG_READ_QUEUE
+        printf("Failed to read from SSD, error code: %d\n", read_result);
+        #endif
+
         return nullptr;
     }
+
+    #ifdef DEBUG_READ_QUEUE
+    printf("Waiting for SSD to complete read...\n");
+    #endif
 
     while (out_stand) {
         spdk_nvme_qpair_process_completions(qpair, 0);
     }
 
+    #ifdef DEBUG_READ_QUEUE
+    printf("SSD read completed.\n");
+    #endif
+
     return buffer;
 }
+
 
 
 

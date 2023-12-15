@@ -26,8 +26,11 @@
 // ==========================
 // Offset and buffer related 
 // ==========================
-extern uint32_t offset5;
-extern uint32_t offset2;
+extern uint64_t offset5;
+extern uint64_t offset2;
+
+
+extern uint64_t num_data_page;
 
 typedef struct write_io_controller
 {
@@ -38,6 +41,8 @@ typedef struct write_io_controller
     uint64_t write_buffer_size;
     uint64_t nexio_log_unit;
     uint64_t nexio_log_buffer_size;
+    uint64_t nexio_data_page_num_in_block;
+    uint64_t nexio_log_page_num_in_block;
 }write_io_controller;
 extern write_io_controller my_controller;
 
@@ -136,7 +141,10 @@ void kv_buffer_cleanup();
 
 
 
-char* read_form_write_Buffer(uint64_t pos);
+inline  char* read_form_write_Buffer(uint64_t pos)
+{
+    return value_separated_buffer + pos*(value_size);
+}
 
 
 

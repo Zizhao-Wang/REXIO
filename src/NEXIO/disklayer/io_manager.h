@@ -26,8 +26,6 @@ extern int out_stand;
 
 extern size_t block_id_allocator;
 
-extern size_t num_data_page;
-
 extern size_t key_num_data_page;
 
 extern size_t value_num_data_page;
@@ -161,6 +159,7 @@ int write_queue();
  */
 int write_queue(uint64_t lba_start, uint64_t lba_count, void* write_buffer);
 
+void process_pending_spdk_io();
 
 int kv_write_queue(void *write_buffer, uint64_t block_id,int mode);
 

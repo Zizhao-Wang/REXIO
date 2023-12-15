@@ -2,7 +2,7 @@
 
 
 # Load SPDK path from the config file
-source /path/to/spdk_config.sh
+source ./spdk_config.sh
 NVME_DEVICE="/dev/nvme0n1"
 
 # Find the mount point of the NVMe device

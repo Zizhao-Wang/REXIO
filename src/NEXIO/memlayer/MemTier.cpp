@@ -578,6 +578,10 @@ int InsertNode(const char* hashkey, const char* hashvalue)
 #elif defined(SEPARATE_KV_VARIABLE_LOG)
         uint64_t block_id = 0;
         uint64_t offset1 = async_kv_separate_variable_write(hashkey,hashvalue,block_id); 
+        if(hashkey1 == 3585)
+        {
+            printf(" === node->offset in hashing inser ===: %lu\n",offset1);
+        }
 #endif
 
         ++Head->number;
@@ -596,13 +600,19 @@ int InsertNode(const char* hashkey, const char* hashvalue)
             temp->forward[i] = update[i]->forward[i];
             update[i]->forward[i] = temp;
         }
+        
+        if(hashkey1 == 7137)
+        {
+            printf("[%lu] ->offset:%lu ", big_endian2little_endian(temp->key,KEY_SIZE),temp->offset);
+        }
+        
 
         // if (hashkey1 >0) {
         //     printf("查询 hashkey1=2\n");
         //     printf("Head Level: %d\n", Head->level);
         //     TSkiplistNode *node = Head->head;
         //     while (node ) {
-        //         printf("[%lu] -> ", big_endian2little_endian(node->key,KEY_SIZE));
+        //         
         //         node = node->forward[0];
         //     }
         //     printf("(停止在此)\n");
@@ -797,7 +807,13 @@ value_type Search(const char* key1)
     TSkiplistNode * node =  SearchNode(head, key1);
     char *searched_value;
 
-    // printf("key:%lu in search\n",key2);
+    if(key2 == 103393)
+    {
+        printf("key:%lu in search\n",key2);
+        printf("key from hashing data: %lu\n",big_endian2little_endian(node->key,KEY_SIZE));
+        printf("node->offset: %lu\n",node->offset);
+    }
+        
 
     if(node == nullptr || node->flag == 0)
     {
@@ -806,6 +822,8 @@ value_type Search(const char* key1)
     else
     {
         searched_value = async_read(node->offset);
+        if(searched_value == nullptr)
+            return UINT64_MAX;
 
 #ifdef TIOCS_READ_DEBUG
         printf("key from data: %lu\n",big_endian2little_endian(entry.val,KEY_SIZE));
@@ -818,7 +836,7 @@ value_type Search(const char* key1)
                (node->offset & 0x00000FFF));
 #endif
         
-        return  big_endian2little_endian(node->key,KEY_SIZE);
+        return  big_endian2little_endian(searched_value,KEY_SIZE);
     }
 
 #endif

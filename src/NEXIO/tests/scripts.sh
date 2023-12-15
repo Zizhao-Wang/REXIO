@@ -3,7 +3,7 @@ echo fb0-=0-= | sudo -S bash -c 'echo 800000 > /proc/sys/fs/file-max'
 ulimit -n 800000
 
 BASE_VALUE_SIZE=128
-billion=1000000
+billion=10000000
 range_dividers=(1)
 
 # Script path
@@ -44,7 +44,7 @@ convert_to_billion_format() {
 
 # cgexec -g memory:kv256
 
-for i in {2..2}; do
+for i in {1..1}; do
     base_num=$(($billion * $i))
     for divider in ${range_dividers[@]}; do
         for value_size in 128; do

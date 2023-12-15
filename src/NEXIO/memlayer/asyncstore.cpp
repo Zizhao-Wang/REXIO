@@ -108,7 +108,7 @@ uint64_t async_kv_separate_write(const char* hashkey, const char* hashvalue, uin
         
         offset5 = (offset5 & 0x0000000000FFFFFF) | (value_block_id << 24);  
         offset5 = offset5 & 0xFFFFFFFFFF000FFF;
-        offset5 += ((my_controller.current_write_lba_num % my_controller.nexio_lba_uint) << 12);
+        offset5 += ((my_controller.current_write_lba_num % my_controller.nexio_write_uint) << 12);
         offset5 = offset5 & 0xFFFFFFFFFFFFF000;
 
         value_position_in_buffer = 0;
@@ -165,43 +165,64 @@ uint64_t async_kv_separate_write(const char* hashkey, const char* hashvalue, uin
 uint64_t async_kv_separate_variable_write(const char* hashkey, const char* hashvalue, uint64_t& block)
 {
     pthread_mutex_lock(&write_buffer_mutex);
+    uint64_t debug = 44545;
     if (value_position_in_buffer+value_size > my_controller.write_buffer_size) 
     {
         void* task_buffer = allocate_and_copy_to_task_buffer(value_separated_buffer); // Quickly copy the current write buffer's content to a new buffer
         separation_write_task_paramaters* task = create_separation_io_task(task_buffer); // Create and initialize the write task parameters for separation write
-        
-        if(block_bitmaps[value_block_id].count()+ my_controller.nexio_write_uint > num_data_page)
+        uint64_t old_value_block_id = value_block_id;
+        if((my_controller.current_write_lba_num%my_controller.nexio_lba_uint) + my_controller.nexio_write_uint >= num_data_page)
         {
+            // printf("block_bitmaps[value_block_id].count(): %lu num_data_page:%lu my_controller.nexio_write_uint:%lu\n ", block_bitmaps[value_block_id].count(),num_data_page,my_controller.nexio_write_uint);
+            old_value_block_id = value_block_id;
             value_block_id = block_id_allocator++;
             block_type_tracker[value_block_id] = VALUE_BLOCK;
+            my_controller.current_write_lba_num = value_block_id * my_controller.nexio_lba_uint;
+            // printf("New value_block_id:%lu current_write_lba_num:%lu \n",value_block_id,my_controller.current_write_lba_num);
         }
 
-        task->block_id = value_block_id;
+        task->block_id = (old_value_block_id == value_block_id ? value_block_id : old_value_block_id);
         task->mode = NVME_SSD_DATA_VALUE_WRITE;
         task->taskType = IOTaskType::SEPARATION_VAL_WRITE_TASK;
         add_separation_io_task(task);  // Add the I/O task and signal
+        my_controller.current_write_lba_num += (old_value_block_id == value_block_id ? my_controller.nexio_write_uint:0);
 
         // printf("key:%lu previous_block: %lu, pages_point: %lu, page: %lu\n",big_endian2little_endian(hashkey,KEY_SIZE),previous_block, pages_point, page);
         // WBufferId = pages_point;
-
-        offset5 = (offset5 & 0x0000000000FFFFFF) | (value_block_id << 24); 
+        offset5 = 0;
+        offset5 = (offset5 & 0x0000000000FFFFFF) | (value_block_id << 24);
+        
+        if (big_endian2little_endian(hashkey, KEY_SIZE) == debug) {
+            printf("\n======offset5 in %lu diyici: %lu\n",debug, offset5);
+            // printf("value_block_id: %lu value_block:%lu ======\n", value_block_id,offset5>>24);
+        } 
+        // uint64_t old_page = (offset5 >> 12) & 0X00000000000000FFF;
         offset5 = offset5 & 0xFFFFFFFFFF000FFF;
-        offset5 += ((my_controller.current_write_lba_num%my_controller.nexio_lba_uint) << 12);
+        offset5 += (((my_controller.current_write_lba_num%my_controller.nexio_lba_uint) /my_controller.nexio_write_uint) << 12);
+        if (big_endian2little_endian(hashkey, KEY_SIZE) == debug) {
+            uint64_t old_page = (offset5 >> 12) & 0X00000000000000FFF;
+            printf("offset5 pages: %lu\n", old_page);
+            printf("\n======offset5 in %lu diyici: %lu\n",debug, offset5);
+            printf("value_block_id: %lu value_block:%lu ======\n", value_block_id,offset5>>24);
+        }
         offset5 = offset5 & 0xFFFFFFFFFFFFF000;
         value_position_in_buffer = 0; 
+        write_buffer_id = (offset5>>24) *(my_controller.nexio_log_page_num_in_block+my_controller.nexio_data_page_num_in_block) +(offset5>>12 & 0X00000000000000FFF);
+        // printf("New write_buffer_id:%lu\n",write_buffer_id);
+        
+        // printf("New current_write_lba_num:%lu\n",my_controller.current_write_lba_num);
     }
 
     memcpy(value_separated_buffer + value_position_in_buffer, hashvalue, value_size);
     value_position_in_buffer += value_size;
     total_write_bytes += value_size;
-    fprintf(stdout, "=======size:%ld======\n",value_size);
     offset5++;
     block_information[offset5>>24].first++;
 
-    // if(big_endian2little_endian(hashkey,KEY_SIZE) == 1655)
-    // {
-    //     printf("offset5: %u\n", offset5);
-    // }
+    if(big_endian2little_endian(hashkey,KEY_SIZE) == debug)
+    {
+        printf("\n======offset5 in %lu: %lu zheer======\n",debug, offset5);
+    }
 
     uint64_t BlockId = offset5 >> 24;
     char temp[8];
@@ -228,8 +249,8 @@ uint64_t async_kv_separate_variable_write(const char* hashkey, const char* hashv
     {
         void* task_buffer = allocate_and_copy_to_task_buffer(key_separated_buffer); // Quickly copy the current write buffer's content to a new buffer
         separation_write_task_paramaters* task = create_separation_io_task(task_buffer); // Create and initialize the write task parameters for separation write
-        
-        if(block_bitmaps[key_block_id].count()+ my_controller.nexio_write_uint > num_data_page)
+        uint64_t old_value_block_id = key_block_id;
+        if(block_bitmaps[key_block_id].count()+ my_controller.nexio_write_uint >= num_data_page)
         {
             key_block_id = block_id_allocator++;
             block_type_tracker[key_block_id] = KEY_BLOCK;
@@ -238,7 +259,7 @@ uint64_t async_kv_separate_variable_write(const char* hashkey, const char* hashv
         task->block_id = key_block_id;
         task->mode = NVME_SSD_DATA_KEY_WRITE;
         task->taskType = IOTaskType::SEPARATION_KEY_WRITE_TASK;
-        add_separation_io_task(task);  // Add the I/O task and signal
+        // add_separation_io_task(task);  // Add the I/O task and signal
 
         offset2 = (offset2 & 0x0000000000FFFFFF) | (key_block_id << 24); 
         offset2 = offset2 & 0xFFFFFFFFFF000FFF;
@@ -623,18 +644,25 @@ uint64_t async_kv_delete(uint64_t offset)
 char* async_read(uint64_t offset)
 {
     uint64_t offsetpage = ((offset>>12)&0xFFF) ;
-    uint64_t PageId = (offset>>block_bits_count)*my_controller.nexio_lba_uint+ offsetpage;
+    uint64_t PageId = (offset>>block_bits_count)*(my_controller.nexio_log_page_num_in_block+my_controller.nexio_data_page_num_in_block)+ offsetpage;
     size_t Position = (offset & 0x00000FFF)-1;
 
-    printf("SyncRead offset: %lu (Block: %lu, Page: %lu, Position: %lu), PageId: %lu, Position: %lu\n", offset, (offset >> 24), ((offset >> 12) & 0xFFF), (offset & 0x00000FFF), PageId,Position);
-
+    if(offset == 486560225)
+    {
+        printf("Async Read offset: %lu (Block: %lu, Page: %lu, Position: %lu), PageId: %lu, Position: %lu\n", offset, (offset >> 24), ((offset >> 12) & 0xFFF), (offset & 0xFFF), PageId,Position);
+    }
+    
     if(PageId == write_buffer_id)
     {
+        // printf("founded in write buffer!\n");
         return read_form_write_Buffer(Position);
     }
 
+    // return nullptr;
+
 #ifdef FIFO_BUFFER
     // FIFO 缓存策略
+
     bool IsFlag = fifocache.IsFIFOPage(PageId);
     if(!IsFlag)
     {
@@ -667,7 +695,7 @@ char* async_read(uint64_t offset)
         // key_value_entry tem1;
         // memcpy(tem1.key, ReadData[Position].key, KEY_SIZE);
         // memcpy(tem1.val, ReadData[Position].val, value_size);
-        memcpy(value_in_page, ReadData+Position*(KEY_SIZE+value_size)+value_size, value_size);
+        memcpy(value_in_page, ReadData+Position*(value_size), value_size);
         spdk_dma_free(ReadData);
         #ifdef TIOCS_READ_DEBUG
             printf("ReadData[Position].key: %lu ", big_endian2little_endian(ReadData[Position].key, KEY_SIZE));

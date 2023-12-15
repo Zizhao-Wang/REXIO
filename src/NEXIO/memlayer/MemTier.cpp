@@ -551,7 +551,7 @@ int InsertNode(const char* hashkey, const char* hashvalue)
             temp->block = block_id;
 #elif defined(SEPARATE_KV_VARIABLE_LOG)
             uint64_t block_id = 0;
-            temp->offset =  async_kv_separate_variable_update(hashvalue,block_id);
+            temp->offset = 0 ;//  async_kv_separate_variable_update(hashvalue,block_id);
             temp->block = block_id;
 #endif
             return 0;
@@ -577,7 +577,7 @@ int InsertNode(const char* hashkey, const char* hashvalue)
         uint64_t offset1 = async_kv_separate_write(hashkey,hashvalue,block_id);
 #elif defined(SEPARATE_KV_VARIABLE_LOG)
         uint64_t block_id = 0;
-        uint64_t offset1 = async_kv_separate_variable_write(hashkey,hashvalue,block_id); 
+        uint64_t offset1 = 0; //async_kv_separate_variable_write(hashkey,hashvalue,block_id); 
 #endif
 
         ++Head->number;

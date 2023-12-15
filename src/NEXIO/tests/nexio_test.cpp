@@ -223,13 +223,13 @@ void bench_testing(void)
      fflush(stdout);
 
 
-     ycsb_read_heavy(FLAGS_num/10);
+     // ycsb_read_heavy(FLAGS_num/10);
 
-     ycsb_read_only(FLAGS_num/10);
+     // ycsb_read_only(FLAGS_num/10);
 
-     ycsb_update_heavy(FLAGS_num/10);
+     // ycsb_update_heavy(FLAGS_num/10);
 
-     ycsb_read_latest(FLAGS_num/10);
+     // ycsb_read_latest(FLAGS_num/10);
 
      /* workload d: update heavy workload, 50% read, 50% update */
      total_write_bytes = 0;
@@ -249,7 +249,7 @@ void bench_testing(void)
           {
                for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
                {
-                    key_buffer[KEY_SIZE - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
+                    key_buffer[KEY_SIZE - error_bound- 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
                }
 
                if(k!=Search(key_buffer) && k+1 != Search(key_buffer) )
@@ -283,7 +283,7 @@ void bench_testing(void)
           total_operation_time += current_latency;
           
           
-          if(i%record_point==0)
+          if(record_point!=0 && i%record_point==0)
           {
                printBlockInformation();     
           }

@@ -1,112 +1,134 @@
 [
 {
-  "directory": "/home/SFOCS/src/NEXIO/build",
-  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/home/SFOCS/src/NEXIO -I/home/spdk/include -I/home/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/NEXIO.dir/main.cpp.o -c /home/SFOCS/src/NEXIO/main.cpp",
-  "file": "/home/SFOCS/src/NEXIO/main.cpp"
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/wzz/SFOCS/src/NEXIO -I/root/downloads/spdk/include -I/root/downloads/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o CMakeFiles/NEXIO.dir/main.cpp.o -c /wzz/SFOCS/src/NEXIO/main.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/main.cpp",
+  "output": "CMakeFiles/NEXIO.dir/main.cpp.o"
 },
 {
-  "directory": "/home/SFOCS/src/NEXIO/build",
-  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/home/SFOCS/src/NEXIO -I/home/spdk/include -I/home/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/MemTier.cpp.o -c /home/SFOCS/src/NEXIO/memlayer/MemTier.cpp",
-  "file": "/home/SFOCS/src/NEXIO/memlayer/MemTier.cpp"
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/wzz/SFOCS/src/NEXIO -I/root/downloads/spdk/include -I/root/downloads/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/MemTier.cpp.o -c /wzz/SFOCS/src/NEXIO/memlayer/MemTier.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/memlayer/MemTier.cpp",
+  "output": "memlayer/CMakeFiles/Memlayer.dir/MemTier.cpp.o"
 },
 {
-  "directory": "/home/SFOCS/src/NEXIO/build",
-  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/home/SFOCS/src/NEXIO -I/home/spdk/include -I/home/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/asyncstore.cpp.o -c /home/SFOCS/src/NEXIO/memlayer/asyncstore.cpp",
-  "file": "/home/SFOCS/src/NEXIO/memlayer/asyncstore.cpp"
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/wzz/SFOCS/src/NEXIO -I/root/downloads/spdk/include -I/root/downloads/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/asyncstore.cpp.o -c /wzz/SFOCS/src/NEXIO/memlayer/asyncstore.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/memlayer/asyncstore.cpp",
+  "output": "memlayer/CMakeFiles/Memlayer.dir/asyncstore.cpp.o"
 },
 {
-  "directory": "/home/SFOCS/src/NEXIO/build",
-  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/home/SFOCS/src/NEXIO -I/home/spdk/include -I/home/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/buffer_manager/FIFO.cpp.o -c /home/SFOCS/src/NEXIO/memlayer/buffer_manager/FIFO.cpp",
-  "file": "/home/SFOCS/src/NEXIO/memlayer/buffer_manager/FIFO.cpp"
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/wzz/SFOCS/src/NEXIO -I/root/downloads/spdk/include -I/root/downloads/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/buffer_manager/FIFO.cpp.o -c /wzz/SFOCS/src/NEXIO/memlayer/buffer_manager/FIFO.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/memlayer/buffer_manager/FIFO.cpp",
+  "output": "memlayer/CMakeFiles/Memlayer.dir/buffer_manager/FIFO.cpp.o"
 },
 {
-  "directory": "/home/SFOCS/src/NEXIO/build",
-  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/home/SFOCS/src/NEXIO -I/home/spdk/include -I/home/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/buffer_manager/lru.cpp.o -c /home/SFOCS/src/NEXIO/memlayer/buffer_manager/lru.cpp",
-  "file": "/home/SFOCS/src/NEXIO/memlayer/buffer_manager/lru.cpp"
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/wzz/SFOCS/src/NEXIO -I/root/downloads/spdk/include -I/root/downloads/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/buffer_manager/lru.cpp.o -c /wzz/SFOCS/src/NEXIO/memlayer/buffer_manager/lru.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/memlayer/buffer_manager/lru.cpp",
+  "output": "memlayer/CMakeFiles/Memlayer.dir/buffer_manager/lru.cpp.o"
 },
 {
-  "directory": "/home/SFOCS/src/NEXIO/build",
-  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/home/SFOCS/src/NEXIO -I/home/spdk/include -I/home/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/init.cpp.o -c /home/SFOCS/src/NEXIO/memlayer/init.cpp",
-  "file": "/home/SFOCS/src/NEXIO/memlayer/init.cpp"
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/wzz/SFOCS/src/NEXIO -I/root/downloads/spdk/include -I/root/downloads/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/init.cpp.o -c /wzz/SFOCS/src/NEXIO/memlayer/init.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/memlayer/init.cpp",
+  "output": "memlayer/CMakeFiles/Memlayer.dir/init.cpp.o"
 },
 {
-  "directory": "/home/SFOCS/src/NEXIO/build",
-  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/home/SFOCS/src/NEXIO -I/home/spdk/include -I/home/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/node.cpp.o -c /home/SFOCS/src/NEXIO/memlayer/node.cpp",
-  "file": "/home/SFOCS/src/NEXIO/memlayer/node.cpp"
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/wzz/SFOCS/src/NEXIO -I/root/downloads/spdk/include -I/root/downloads/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/node.cpp.o -c /wzz/SFOCS/src/NEXIO/memlayer/node.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/memlayer/node.cpp",
+  "output": "memlayer/CMakeFiles/Memlayer.dir/node.cpp.o"
 },
 {
-  "directory": "/home/SFOCS/src/NEXIO/build",
-  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/home/SFOCS/src/NEXIO -I/home/spdk/include -I/home/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/parameters.cpp.o -c /home/SFOCS/src/NEXIO/memlayer/parameters.cpp",
-  "file": "/home/SFOCS/src/NEXIO/memlayer/parameters.cpp"
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/wzz/SFOCS/src/NEXIO -I/root/downloads/spdk/include -I/root/downloads/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/parameters.cpp.o -c /wzz/SFOCS/src/NEXIO/memlayer/parameters.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/memlayer/parameters.cpp",
+  "output": "memlayer/CMakeFiles/Memlayer.dir/parameters.cpp.o"
 },
 {
-  "directory": "/home/SFOCS/src/NEXIO/build",
-  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/home/SFOCS/src/NEXIO -I/home/spdk/include -I/home/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/spdk_env_init.cpp.o -c /home/SFOCS/src/NEXIO/memlayer/spdk_env_init.cpp",
-  "file": "/home/SFOCS/src/NEXIO/memlayer/spdk_env_init.cpp"
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/wzz/SFOCS/src/NEXIO -I/root/downloads/spdk/include -I/root/downloads/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/spdk_env_init.cpp.o -c /wzz/SFOCS/src/NEXIO/memlayer/spdk_env_init.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/memlayer/spdk_env_init.cpp",
+  "output": "memlayer/CMakeFiles/Memlayer.dir/spdk_env_init.cpp.o"
 },
 {
-  "directory": "/home/SFOCS/src/NEXIO/build",
-  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/home/SFOCS/src/NEXIO -I/home/spdk/include -I/home/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/syncstore.cpp.o -c /home/SFOCS/src/NEXIO/memlayer/syncstore.cpp",
-  "file": "/home/SFOCS/src/NEXIO/memlayer/syncstore.cpp"
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/wzz/SFOCS/src/NEXIO -I/root/downloads/spdk/include -I/root/downloads/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o memlayer/CMakeFiles/Memlayer.dir/syncstore.cpp.o -c /wzz/SFOCS/src/NEXIO/memlayer/syncstore.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/memlayer/syncstore.cpp",
+  "output": "memlayer/CMakeFiles/Memlayer.dir/syncstore.cpp.o"
 },
 {
-  "directory": "/home/SFOCS/src/NEXIO/build",
-  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/home/SFOCS/src/NEXIO -I/home/spdk/include -I/home/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o disklayer/CMakeFiles/Disklayer.dir/io_manager.cpp.o -c /home/SFOCS/src/NEXIO/disklayer/io_manager.cpp",
-  "file": "/home/SFOCS/src/NEXIO/disklayer/io_manager.cpp"
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/wzz/SFOCS/src/NEXIO -I/root/downloads/spdk/include -I/root/downloads/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o disklayer/CMakeFiles/Disklayer.dir/io_manager.cpp.o -c /wzz/SFOCS/src/NEXIO/disklayer/io_manager.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/disklayer/io_manager.cpp",
+  "output": "disklayer/CMakeFiles/Disklayer.dir/io_manager.cpp.o"
 },
 {
-  "directory": "/home/SFOCS/src/NEXIO/build",
-  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/home/SFOCS/src/NEXIO -I/home/spdk/include -I/home/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o disklayer/CMakeFiles/Disklayer.dir/io_manager/io_thread.cpp.o -c /home/SFOCS/src/NEXIO/disklayer/io_manager/io_thread.cpp",
-  "file": "/home/SFOCS/src/NEXIO/disklayer/io_manager/io_thread.cpp"
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/wzz/SFOCS/src/NEXIO -I/root/downloads/spdk/include -I/root/downloads/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o disklayer/CMakeFiles/Disklayer.dir/io_manager/io_thread.cpp.o -c /wzz/SFOCS/src/NEXIO/disklayer/io_manager/io_thread.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/disklayer/io_manager/io_thread.cpp",
+  "output": "disklayer/CMakeFiles/Disklayer.dir/io_manager/io_thread.cpp.o"
 },
 {
-  "directory": "/home/SFOCS/src/NEXIO/build",
-  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/home/SFOCS/src/NEXIO -I/home/spdk/include -I/home/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o disklayer/CMakeFiles/Disklayer.dir/read_buffer.cpp.o -c /home/SFOCS/src/NEXIO/disklayer/read_buffer.cpp",
-  "file": "/home/SFOCS/src/NEXIO/disklayer/read_buffer.cpp"
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/wzz/SFOCS/src/NEXIO -I/root/downloads/spdk/include -I/root/downloads/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o disklayer/CMakeFiles/Disklayer.dir/read_buffer.cpp.o -c /wzz/SFOCS/src/NEXIO/disklayer/read_buffer.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/disklayer/read_buffer.cpp",
+  "output": "disklayer/CMakeFiles/Disklayer.dir/read_buffer.cpp.o"
 },
 {
-  "directory": "/home/SFOCS/src/NEXIO/build",
-  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/home/SFOCS/src/NEXIO -I/home/spdk/include -I/home/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o disklayer/CMakeFiles/Disklayer.dir/write_buffer.cpp.o -c /home/SFOCS/src/NEXIO/disklayer/write_buffer.cpp",
-  "file": "/home/SFOCS/src/NEXIO/disklayer/write_buffer.cpp"
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/wzz/SFOCS/src/NEXIO -I/root/downloads/spdk/include -I/root/downloads/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o disklayer/CMakeFiles/Disklayer.dir/write_buffer.cpp.o -c /wzz/SFOCS/src/NEXIO/disklayer/write_buffer.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/disklayer/write_buffer.cpp",
+  "output": "disklayer/CMakeFiles/Disklayer.dir/write_buffer.cpp.o"
 },
 {
-  "directory": "/home/SFOCS/src/NEXIO/build",
-  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/home/SFOCS/src/NEXIO -I/home/spdk/include -I/home/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o utility/CMakeFiles/Utility.dir/log.cpp.o -c /home/SFOCS/src/NEXIO/utility/log.cpp",
-  "file": "/home/SFOCS/src/NEXIO/utility/log.cpp"
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/wzz/SFOCS/src/NEXIO -I/root/downloads/spdk/include -I/root/downloads/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o utility/CMakeFiles/Utility.dir/log.cpp.o -c /wzz/SFOCS/src/NEXIO/utility/log.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/utility/log.cpp",
+  "output": "utility/CMakeFiles/Utility.dir/log.cpp.o"
 },
 {
-  "directory": "/home/SFOCS/src/NEXIO/build",
-  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/home/SFOCS/src/NEXIO -I/home/spdk/include -I/home/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o utility/CMakeFiles/Utility.dir/sys_output.cpp.o -c /home/SFOCS/src/NEXIO/utility/sys_output.cpp",
-  "file": "/home/SFOCS/src/NEXIO/utility/sys_output.cpp"
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/wzz/SFOCS/src/NEXIO -I/root/downloads/spdk/include -I/root/downloads/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o utility/CMakeFiles/Utility.dir/sys_output.cpp.o -c /wzz/SFOCS/src/NEXIO/utility/sys_output.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/utility/sys_output.cpp",
+  "output": "utility/CMakeFiles/Utility.dir/sys_output.cpp.o"
 },
 {
-  "directory": "/home/SFOCS/src/NEXIO/build",
-  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/home/SFOCS/src/NEXIO -I/home/spdk/include -I/home/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o utility/CMakeFiles/Utility.dir/types.cpp.o -c /home/SFOCS/src/NEXIO/utility/types.cpp",
-  "file": "/home/SFOCS/src/NEXIO/utility/types.cpp"
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -DNVME_SSD_CONTROLLER -I/wzz/SFOCS/src/NEXIO -I/root/downloads/spdk/include -I/root/downloads/spdk/dpdk/build/include  -fopenmp -g -std=gnu++14 -o utility/CMakeFiles/Utility.dir/types.cpp.o -c /wzz/SFOCS/src/NEXIO/utility/types.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/utility/types.cpp",
+  "output": "utility/CMakeFiles/Utility.dir/types.cpp.o"
 },
 {
-  "directory": "/home/SFOCS/src/NEXIO/build",
-  "command": "/usr/bin/g++ -DGFLAGS_IS_A_DLL=0 -DNVME_SSD_CONTROLLER -I/home/SFOCS/src/NEXIO -I/home/spdk/include -I/home/spdk/dpdk/build/include  -fopenmp -fopenmp -g -std=gnu++14 -o tests/CMakeFiles/TestNEXIO.dir/nexio_test.cpp.o -c /home/SFOCS/src/NEXIO/tests/nexio_test.cpp",
-  "file": "/home/SFOCS/src/NEXIO/tests/nexio_test.cpp"
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -DGFLAGS_IS_A_DLL=0 -DNVME_SSD_CONTROLLER -I/wzz/SFOCS/src/NEXIO -I/root/downloads/spdk/include -I/root/downloads/spdk/dpdk/build/include  -fopenmp -fopenmp -g -std=gnu++14 -o tests/CMakeFiles/TestNEXIO.dir/nexio_test.cpp.o -c /wzz/SFOCS/src/NEXIO/tests/nexio_test.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/tests/nexio_test.cpp",
+  "output": "tests/CMakeFiles/TestNEXIO.dir/nexio_test.cpp.o"
 },
 {
-  "directory": "/home/SFOCS/src/NEXIO/build",
-  "command": "/usr/bin/g++ -DGFLAGS_IS_A_DLL=0 -DNVME_SSD_CONTROLLER -I/home/SFOCS/src/NEXIO -I/home/spdk/include -I/home/spdk/dpdk/build/include  -fopenmp -fopenmp -g -std=gnu++14 -o tests/CMakeFiles/TestNEXIO.dir/test_main.cpp.o -c /home/SFOCS/src/NEXIO/tests/test_main.cpp",
-  "file": "/home/SFOCS/src/NEXIO/tests/test_main.cpp"
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -DGFLAGS_IS_A_DLL=0 -DNVME_SSD_CONTROLLER -I/wzz/SFOCS/src/NEXIO -I/root/downloads/spdk/include -I/root/downloads/spdk/dpdk/build/include  -fopenmp -fopenmp -g -std=gnu++14 -o tests/CMakeFiles/TestNEXIO.dir/test_main.cpp.o -c /wzz/SFOCS/src/NEXIO/tests/test_main.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/tests/test_main.cpp",
+  "output": "tests/CMakeFiles/TestNEXIO.dir/test_main.cpp.o"
 },
 {
-  "directory": "/home/SFOCS/src/NEXIO/build",
-  "command": "/usr/bin/g++ -DGFLAGS_IS_A_DLL=0 -DNVME_SSD_CONTROLLER -I/home/SFOCS/src/NEXIO -I/home/spdk/include -I/home/spdk/dpdk/build/include  -fopenmp -fopenmp -g -std=gnu++14 -o tests/CMakeFiles/TestNEXIO.dir/uniform_generator.cpp.o -c /home/SFOCS/src/NEXIO/tests/uniform_generator.cpp",
-  "file": "/home/SFOCS/src/NEXIO/tests/uniform_generator.cpp"
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -DGFLAGS_IS_A_DLL=0 -DNVME_SSD_CONTROLLER -I/wzz/SFOCS/src/NEXIO -I/root/downloads/spdk/include -I/root/downloads/spdk/dpdk/build/include  -fopenmp -fopenmp -g -std=gnu++14 -o tests/CMakeFiles/TestNEXIO.dir/uniform_generator.cpp.o -c /wzz/SFOCS/src/NEXIO/tests/uniform_generator.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/tests/uniform_generator.cpp",
+  "output": "tests/CMakeFiles/TestNEXIO.dir/uniform_generator.cpp.o"
 },
 {
-  "directory": "/home/SFOCS/src/NEXIO/build",
-  "command": "/usr/bin/g++ -DGFLAGS_IS_A_DLL=0 -DNVME_SSD_CONTROLLER -I/home/SFOCS/src/NEXIO -I/home/spdk/include -I/home/spdk/dpdk/build/include  -fopenmp -fopenmp -g -std=gnu++14 -o tests/CMakeFiles/TestNEXIO.dir/ycsb_test.cpp.o -c /home/SFOCS/src/NEXIO/tests/ycsb_test.cpp",
-  "file": "/home/SFOCS/src/NEXIO/tests/ycsb_test.cpp"
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -DGFLAGS_IS_A_DLL=0 -DNVME_SSD_CONTROLLER -I/wzz/SFOCS/src/NEXIO -I/root/downloads/spdk/include -I/root/downloads/spdk/dpdk/build/include  -fopenmp -fopenmp -g -std=gnu++14 -o tests/CMakeFiles/TestNEXIO.dir/ycsb_test.cpp.o -c /wzz/SFOCS/src/NEXIO/tests/ycsb_test.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/tests/ycsb_test.cpp",
+  "output": "tests/CMakeFiles/TestNEXIO.dir/ycsb_test.cpp.o"
 },
 {
-  "directory": "/home/SFOCS/src/NEXIO/build",
-  "command": "/usr/bin/g++ -DGFLAGS_IS_A_DLL=0 -DNVME_SSD_CONTROLLER -I/home/SFOCS/src/NEXIO -I/home/spdk/include -I/home/spdk/dpdk/build/include  -fopenmp -fopenmp -g -std=gnu++14 -o tests/CMakeFiles/TestNEXIO.dir/zipf_generator.cpp.o -c /home/SFOCS/src/NEXIO/tests/zipf_generator.cpp",
-  "file": "/home/SFOCS/src/NEXIO/tests/zipf_generator.cpp"
+  "directory": "/wzz/SFOCS/src/NEXIO/build",
+  "command": "/usr/bin/g++ -DGFLAGS_IS_A_DLL=0 -DNVME_SSD_CONTROLLER -I/wzz/SFOCS/src/NEXIO -I/root/downloads/spdk/include -I/root/downloads/spdk/dpdk/build/include  -fopenmp -fopenmp -g -std=gnu++14 -o tests/CMakeFiles/TestNEXIO.dir/zipf_generator.cpp.o -c /wzz/SFOCS/src/NEXIO/tests/zipf_generator.cpp",
+  "file": "/wzz/SFOCS/src/NEXIO/tests/zipf_generator.cpp",
+  "output": "tests/CMakeFiles/TestNEXIO.dir/zipf_generator.cpp.o"
 }
 ]

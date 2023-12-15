@@ -192,10 +192,10 @@ uint64_t async_kv_separate_variable_write(const char* hashkey, const char* hashv
         offset5 = 0;
         offset5 = (offset5 & 0x0000000000FFFFFF) | (value_block_id << 24);
         
-        if (big_endian2little_endian(hashkey, KEY_SIZE) == debug) {
-            printf("\n======offset5 in %lu diyici: %lu\n",debug, offset5);
+        // if (big_endian2little_endian(hashkey, KEY_SIZE) == debug) {
+            // printf("\n======offset5 in %lu diyici: %lu\n",debug, offset5);
             // printf("value_block_id: %lu value_block:%lu ======\n", value_block_id,offset5>>24);
-        } 
+        // } 
         // uint64_t old_page = (offset5 >> 12) & 0X00000000000000FFF;
         offset5 = offset5 & 0xFFFFFFFFFF000FFF;
         offset5 += (((my_controller.current_write_lba_num%my_controller.nexio_lba_uint) /my_controller.nexio_write_uint) << 12);
@@ -249,23 +249,27 @@ uint64_t async_kv_separate_variable_write(const char* hashkey, const char* hashv
     {
         void* task_buffer = allocate_and_copy_to_task_buffer(key_separated_buffer); // Quickly copy the current write buffer's content to a new buffer
         separation_write_task_paramaters* task = create_separation_io_task(task_buffer); // Create and initialize the write task parameters for separation write
-        uint64_t old_value_block_id = key_block_id;
-        if(block_bitmaps[key_block_id].count()+ my_controller.nexio_write_uint >= num_data_page)
+        uint64_t old_key_block_id = key_block_id;
+        if((my_controller.key_write_num%my_controller.nexio_lba_uint)+ my_controller.nexio_write_uint >= num_data_page)
         {
+            old_key_block_id = key_block_id;
             key_block_id = block_id_allocator++;
             block_type_tracker[key_block_id] = KEY_BLOCK;
+            my_controller.key_write_num = key_block_id * my_controller.nexio_write_uint;
         } 
 
-        task->block_id = key_block_id;
+        task->block_id = (old_key_block_id == key_block_id ? key_block_id : old_key_block_id);
         task->mode = NVME_SSD_DATA_KEY_WRITE;
         task->taskType = IOTaskType::SEPARATION_KEY_WRITE_TASK;
         // add_separation_io_task(task);  // Add the I/O task and signal
+        my_controller.current_write_lba_num += (old_key_block_id == key_block_id ? my_controller.nexio_write_uint:0);
 
         offset2 = (offset2 & 0x0000000000FFFFFF) | (key_block_id << 24); 
         offset2 = offset2 & 0xFFFFFFFFFF000FFF;
         offset2 += ((my_controller.current_write_lba_num%my_controller.nexio_lba_uint) << 12);
         offset2 = offset2 & 0xFFFFFFFFFFFFF000;
         key_position_in_buffer = 0;
+        
     }
 
     block_information[key_block_id].first++;

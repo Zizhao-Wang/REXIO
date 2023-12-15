@@ -221,7 +221,6 @@ void bench_testing(void)
      fprintf(stdout,"The Write Amplification: %0.3lf\n", (double)total_write_bytes/user_input_bytes); // Assuming you have a variable called write_amplification
      fprintf(stdout,"------------------------------\n");
      fflush(stdout);
-     exit(0);
      process_pending_spdk_io();
      // ycsb_read_heavy(FLAGS_num/10);
 

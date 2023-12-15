@@ -43,6 +43,7 @@ typedef struct write_io_controller
     uint64_t nexio_log_buffer_size;
     uint64_t nexio_data_page_num_in_block;
     uint64_t nexio_log_page_num_in_block;
+    uint64_t key_write_num;
 }write_io_controller;
 extern write_io_controller my_controller;
 

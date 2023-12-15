@@ -77,6 +77,7 @@ void initialize_write_buffer_variables()
     my_controller.write_buffer_size = SPDK_LBAs_IN_NEXIO_WRITE_BUFFER*device_info->ns_info_array[0].lba_size;
     my_controller.nexio_log_buffer_size = SPDK_LBAs_IN_NEXIO_LOG_BUFFER*device_info->ns_info_array[0].lba_size;
     my_controller.current_write_lba_num = 0;
+
     my_controller.nexio_data_page_num_in_block = num_data_page /my_controller.nexio_write_uint;
     my_controller.nexio_log_page_num_in_block = (my_controller.nexio_lba_uint - num_data_page)/my_controller.nexio_write_uint;
     current_buffer_position = 0;
@@ -128,6 +129,7 @@ void kv_buffer_init()
         offset5 = (offset5 & 0x0000000000FFFFFF) | (value_block_id << 24);
         write_buffer_id = 0;
     }
+    my_controller.current_write_lba_num = value_block_id * my_controller.nexio_lba_uint;
 
     if(key_block_id == UINT64_MAX)
     {
@@ -135,6 +137,7 @@ void kv_buffer_init()
         block_type_tracker[key_block_id] = KEY_BLOCK;
         offset2 = (offset2 & 0x0000000000FFFFFF) | (key_block_id << 24);
     }
+    my_controller.key_write_num = key_block_id * my_controller.nexio_lba_uint;
 
     temp = (char *)spdk_dma_malloc(sizeof(uint32_t), 0x1000, NULL);
 

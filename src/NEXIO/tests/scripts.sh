@@ -3,11 +3,11 @@ echo fb0-=0-= | sudo -S bash -c 'echo 800000 > /proc/sys/fs/file-max'
 ulimit -n 800000
 
 BASE_VALUE_SIZE=128
-billion=100000
+billion=1000000
 range_dividers=(1)
 
 # Script path
-SCRIPT_PATH="./binding_devices.sh"
+SCRIPT_PATH="./binding2_user.sh"
 
 # Check if the script exists
 if [ -f "$SCRIPT_PATH" ]; then
@@ -42,6 +42,8 @@ convert_to_billion_format() {
     fi
 }
 
+# cgexec -g memory:kv256
+
 for i in {2..2}; do
     base_num=$(($billion * $i))
     for divider in ${range_dividers[@]}; do
@@ -53,12 +55,12 @@ for i in {2..2}; do
             echo "num_entries: $num_entries"
             echo "current_range: $divider"
             echo "value_size:$value_size"
-            cgexec -g memory:kv256  ./TestNEXIO \
+              ./TestNEXIO \
             --num=$num_entries \
             --value_size=$value_size \
             --range=$current_range \
             --benchmarks=fillseq \
-            --pci_address=0000:81:00.0 
+            --pci_address=0000:00:05.0 
         done
     done
 done

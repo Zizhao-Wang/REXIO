@@ -45,6 +45,8 @@ void LRUCache::put(page_num_type page, ReadNode node)
 
 bool LRUCache::IsLRUPage(page_num_type page)
 {
+
+    return false;
     auto it = HashMap.find(page);
 
     if (it == HashMap.end())

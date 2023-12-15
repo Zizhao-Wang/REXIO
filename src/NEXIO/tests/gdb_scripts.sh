@@ -58,7 +58,7 @@ for i in {2..2}; do
             --value_size=$value_size \
             --range=$current_range \
             --benchmarks=fillseq \
-            --pci_address=0000:81:00.0 
+            --pci_address=0000:00:05.0 
         done
     done
 done

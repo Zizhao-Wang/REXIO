@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 
 # Set default paths for SPDK and DPDK. Users can modify these using -DSPDK_INCLUDE_DIR=<path> etc.
-set(SPDK_ROOT_DIR "/root/downloads")
+set(SPDK_ROOT_DIR "/home")
 set(SPDK_INCLUDE_DIR "${SPDK_ROOT_DIR}/spdk/include" CACHE PATH "Path to SPDK include directory")
 set(SPDK_LIB_DIR "${SPDK_ROOT_DIR}/spdk/build/lib" CACHE PATH "Path to SPDK library directory")
 set(DPDK_LIB_DIR "${SPDK_ROOT_DIR}/spdk/dpdk/build/lib" CACHE PATH "Path to DPDK library directory")

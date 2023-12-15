@@ -51,6 +51,9 @@ char *temp = nullptr;
 
 
 
+uint64_t write_buffer_id = 0;
+
+
 void initialize_write_buffer_variables() 
 {
     // Initialize write buffer mutex
@@ -119,6 +122,7 @@ void kv_buffer_init()
         value_block_id = block_id_allocator++;
         block_type_tracker[value_block_id] = VALUE_BLOCK;
         offset5 = (offset5 & 0x0000000000FFFFFF) | (value_block_id << 24);
+        write_buffer_id = 0;
     }
 
     if(key_block_id == UINT64_MAX)
@@ -142,3 +146,7 @@ void kv_buffer_cleanup()
 
 
 
+char* read_form_write_Buffer(uint64_t pos)
+{
+    return value_separated_buffer + pos*(KEY_SIZE+value_size);
+}

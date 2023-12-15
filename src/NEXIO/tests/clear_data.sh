@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Define the allowed PCI device and SPDK path
-PCI_ALLOWED="0000:81:00.0"
-SPDK_PATH="/root/downloads/spdk"
+
+# Load SPDK path from the config file
+source /path/to/spdk_config.sh
 NVME_DEVICE="/dev/nvme0n1"
 
 # Find the mount point of the NVMe device

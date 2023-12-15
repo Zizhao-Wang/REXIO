@@ -28,7 +28,7 @@ extern uint32_t offset;
 
 
 
-extern int buffernumber;
+
 
 extern LRUCache lrucache;
 

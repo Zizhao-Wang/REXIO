@@ -312,6 +312,7 @@ int kv_write_queue(void* write_buffer, uint64_t block_id, int mode)
     
     // update pointers within a block 
     block_current_write_pointers[block_id] += my_controller.nexio_write_uint;
+    my_controller.current_write_lba_num += my_controller.nexio_write_uint;
 
 	return 0;
 }
@@ -426,20 +427,20 @@ void page_read_complete(void *arg, const struct spdk_nvme_cpl *completion) {
 }
 
 char* read_queue(uint64_t page_id) {
-    char *buffer = (char *)spdk_dma_malloc(sectors_per_page , 0x1000, NULL);
+    char *buffer = (char *)spdk_dma_malloc(SPDK_LBAs_IN_NEXIO_LBA*512 , 0x1000, NULL);
     if(buffer == NULL) {
         logger.log(nexio_logger::error, "Failed to allocate buffer in read_queue!");
         return nullptr;
     }
 
-    uint64_t lba_start = 0;
-    uint64_t lba_count = 0;
+    uint64_t lba_start = page_id * SPDK_LBAs_IN_NEXIO_WRITE_BUFFER;
+    uint64_t lba_count = SPDK_LBAs_IN_NEXIO_WRITE_BUFFER;
 
     if (spdk_nvme_ns_cmd_read(ns, qpair, (void *)buffer, lba_start, lba_count, page_read_complete, NULL, 0) == 0) {
         out_stand++;
-        logger.log(nexio_logger::info, "Successfully sent read request to OCSSD.");
+        logger.log(nexio_logger::info, "Successfully sent read request to SSD.");
     } else {
-        logger.log(nexio_logger::error, "Failed to read data from OCSSD!");
+        logger.log(nexio_logger::error, "Failed to read data from SSD!");
         spdk_dma_free(buffer);
         return nullptr;
     }

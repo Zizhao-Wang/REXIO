@@ -80,8 +80,10 @@ extern std::unordered_map<uint64_t, std::vector<char>> log_buffer;
 // ==========
 extern char *temp_storage;
 
-
-
+// ==========
+// For read
+// ==========
+extern uint64_t write_buffer_id;
 
 /**
  * @brief Initializes the write buffer's mutex and condition variable.
@@ -132,6 +134,9 @@ void kv_buffer_cleanup();
 
 
 
+
+
+char* read_form_write_Buffer(uint64_t pos);
 
 
 

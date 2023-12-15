@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Set the path to SPDK
-SPDK_PATH="/root/downloads/spdk"
+# Load SPDK path from the config file
+source ./spdk_config.sh
 
 # Set the name of the NVMe device
 NVME_DEVICE_NAME="nvme0n1"
@@ -13,6 +13,7 @@ if lsblk | grep -q "$NVME_DEVICE_NAME"; then
     # Check if SPDK setup.sh script exists
     if [ -f "$SPDK_PATH/scripts/setup.sh" ]; then
         # Set HUGEMEM and execute the SPDK setup script
+        ./clear_data.sh
         HUGEMEM=8192 PCI_ALLOWED="0000:00:05.0"  $SPDK_PATH/scripts/setup.sh
         echo "SPDK setup script executed."
     else

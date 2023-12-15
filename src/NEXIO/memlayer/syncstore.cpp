@@ -10,8 +10,6 @@ int indexs=0;
 int callCount = 0;
 
 size_t buffer_size = 0;
-
-int buffernumber =0;
 std::unordered_map<uint64_t, std::vector<char>> BufferLog;
 std::unordered_map<uint64_t, std::vector<unsigned char>> BufferLog2;
 LRUCache lrucache(2048);

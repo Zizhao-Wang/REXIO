@@ -10,6 +10,7 @@
 
 
 const int block_bits_count = 24;
+uint32_t buffernumber =0;
 
 /**
  *  ================= Asynchronous write module====================  
@@ -111,7 +112,8 @@ uint64_t async_kv_separate_write(const char* hashkey, const char* hashvalue, uin
         offset5 = offset5 & 0xFFFFFFFFFFFFF000;
 
         value_position_in_buffer = 0;
-
+        write_buffer_id = (offset5>>24) *(my_controller.nexio_lba_uint/my_controller.nexio_write_uint) +(offset5>>12 & 0X00000000000000FFF);
+        printf("New write_buffer_id:%lu\n",write_buffer_id);
     }
     memcpy(value_separated_buffer + value_position_in_buffer, hashvalue, value_size);
     value_position_in_buffer += value_size;
@@ -618,49 +620,21 @@ uint64_t async_kv_delete(uint64_t offset)
 
 
 
-char*  async_read(uint64_t offset)
+char* async_read(uint64_t offset)
 {
     uint64_t offsetpage = ((offset>>12)&0xFFF) ;
     uint64_t PageId = (offset>>block_bits_count)*my_controller.nexio_lba_uint+ offsetpage;
     size_t Position = (offset & 0x00000FFF)-1;
 
-    // printf("SyncRead offset: %u (Block: %u, Page: %u, Position: %u), PageId: %lu, Position: %zu\n", offset, (offset >> 24), ((offset >> 12) & 0xFFF), (offset & 0x00000FFF), PageId,Position);
+    printf("SyncRead offset: %lu (Block: %lu, Page: %lu, Position: %lu), PageId: %lu, Position: %lu\n", offset, (offset >> 24), ((offset >> 12) & 0xFFF), (offset & 0x00000FFF), PageId,Position);
 
-    // if(PageId == WBufferId)
-    // {
-    //     return Read4Buffer(Position);
-    // }
+    if(PageId == write_buffer_id)
+    {
+        return read_form_write_Buffer(Position);
+    }
 
-    bool IsFlag = lrucache.IsLRUPage(PageId);
-    if(true)
-    {
-        //printf("Not Found!,Cache size:%lu\n",lrucache.cache.size());
-        // buffernumber++;
-        // ReadNode temp;
-        // key_value_entry* ReadData = read_queue(PageId);
-        // temp.data = ReadData;
-        // temp.PageId = PageId;
-        // lrucache.put(PageId, temp);
-        // key_value_entry tem1;
-        // memcpy(tem1.key,ReadData[Position].key,KEY_SIZE);
-        // memcpy(tem1.val,ReadData[Position].val,value_size);
-        // spdk_dma_free(ReadData);
-#ifdef TIOCS_READ_DEBUG
-        printf("ReadData[Position].key: %lu ", big_endian2little_endian(ReadData[Position].key, KEY_SIZE));
-        printf("ReadData[Position].val: %lu\n",big_endian2little_endian(ReadData[Position].val, KEY_SIZE));
-#endif
-        return nullptr;    
-    }
-    else
-    {
-        // printf("Founded!Cache size:%lu\n",lrucache.cache.size());
-        // key_value_entry *values = lrucache.get(PageId);
-        // key_value_entry tem;
-        // memcpy(tem.key,values[Position].key,KEY_SIZE);
-        // memcpy(tem.val,values[Position].val,VAL_SIZE);
-        return nullptr;
-    }
-#ifdef LRU
+#ifdef FIFO_BUFFER
+    // FIFO 缓存策略
     bool IsFlag = fifocache.IsFIFOPage(PageId);
     if(!IsFlag)
     {
@@ -677,6 +651,44 @@ char*  async_read(uint64_t offset)
         key_value_entry *values = fifocache.get(PageId);
         return values[Position];
     }
+#elif defined(LRU_BUFFER)
+    // LRU policy
+    bool IsFlag = lrucache.IsLRUPage(PageId);
+    if(!IsFlag)
+    {
+        // printf("Not Found!, Cache size: %lu\n", lrucache.cache.size());
+        buffernumber++;
+        ReadNode temp;
+        char* value_in_page = new char[value_size];
+        char* ReadData = read_queue(PageId);
+        // temp.data = ReadData;
+        // temp.PageId = PageId;
+        // lrucache.put(PageId, temp);
+        // key_value_entry tem1;
+        // memcpy(tem1.key, ReadData[Position].key, KEY_SIZE);
+        // memcpy(tem1.val, ReadData[Position].val, value_size);
+        memcpy(value_in_page, ReadData+Position*(KEY_SIZE+value_size)+value_size, value_size);
+        spdk_dma_free(ReadData);
+        #ifdef TIOCS_READ_DEBUG
+            printf("ReadData[Position].key: %lu ", big_endian2little_endian(ReadData[Position].key, KEY_SIZE));
+            printf("ReadData[Position].val: %lu\n", big_endian2little_endian(ReadData[Position].val, KEY_SIZE));
+        #endif
+        return value_in_page;
+    }
+    else
+    {
+        printf("Founded! Cache size: %lu\n", lrucache.cache.size());
+        // char *values = lrucache.get(PageId);
+        // key_value_entry tem;
+        // memcpy(tem.key, values[Position].key, KEY_SIZE);
+        // memcpy(tem.val, values[Position].val, VAL_SIZE);
+        return nullptr;
+    }
+#else
+    // 默认使用 LRU 缓存策略
+    bool IsFlag = lrucache.IsLRUPage(PageId);
+    // LRU 缓存的代码，同上...
 #endif
+
 
 }

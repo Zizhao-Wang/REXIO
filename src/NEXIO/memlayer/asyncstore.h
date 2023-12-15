@@ -17,6 +17,9 @@
 #include <iostream>
 #include "include/node.h"
 
+
+extern uint32_t buffernumber;
+
 // ==========================
 // WRITING OPERATIONS
 // ==========================

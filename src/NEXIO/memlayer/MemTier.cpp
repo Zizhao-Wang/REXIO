@@ -551,7 +551,7 @@ int InsertNode(const char* hashkey, const char* hashvalue)
             temp->block = block_id;
 #elif defined(SEPARATE_KV_VARIABLE_LOG)
             uint64_t block_id = 0;
-            temp->offset = 0 ;//  async_kv_separate_variable_update(hashvalue,block_id);
+            temp->offset = async_kv_separate_variable_update(hashvalue,block_id);
             temp->block = block_id;
 #endif
             return 0;
@@ -577,7 +577,7 @@ int InsertNode(const char* hashkey, const char* hashvalue)
         uint64_t offset1 = async_kv_separate_write(hashkey,hashvalue,block_id);
 #elif defined(SEPARATE_KV_VARIABLE_LOG)
         uint64_t block_id = 0;
-        uint64_t offset1 = 0; //async_kv_separate_variable_write(hashkey,hashvalue,block_id); 
+        uint64_t offset1 = async_kv_separate_variable_write(hashkey,hashvalue,block_id); 
 #endif
 
         ++Head->number;
@@ -790,12 +790,12 @@ LocalHashNode * SearchNode(LocalHeadNode * Head,const char* hashkey)
 value_type Search(const char* key1)
 {
 #ifndef FastSkiplist
-    char *entry1;
+    
     // entry_t entry(KEY_SIZE,FLAGS_value_size);
     uint64_t key2 = big_endian2little_endian(key1,KEY_SIZE);
     TNCSkiplist * head = global[key2 & (1<<Globaldepth)-1]->local;
     TSkiplistNode * node =  SearchNode(head, key1);
-
+    char *searched_value;
 
     // printf("key:%lu in search\n",key2);
 
@@ -805,7 +805,7 @@ value_type Search(const char* key1)
     }
     else
     {
-        // entry1 = SyncRead(node->offset);
+        searched_value = async_read(node->offset);
 
 #ifdef TIOCS_READ_DEBUG
         printf("key from data: %lu\n",big_endian2little_endian(entry.val,KEY_SIZE));

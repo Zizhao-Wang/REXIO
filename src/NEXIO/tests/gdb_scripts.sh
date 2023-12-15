@@ -3,7 +3,7 @@ echo fb0-=0-= | sudo -S bash -c 'echo 800000 > /proc/sys/fs/file-max'
 ulimit -n 800000
 
 BASE_VALUE_SIZE=128
-billion=10000000
+billion=5
 range_dividers=(1)
 
 # Script path
@@ -45,7 +45,7 @@ convert_to_billion_format() {
 for i in {2..2}; do
     base_num=$(($billion * $i))
     for divider in ${range_dividers[@]}; do
-        for value_size in 2048; do
+        for value_size in 128; do
             num_entries=$(($base_num * $BASE_VALUE_SIZE / $value_size))
             current_range=$(($num_entries / $divider))
 
@@ -57,8 +57,8 @@ for i in {2..2}; do
             --num=$num_entries \
             --value_size=$value_size \
             --range=$current_range \
-            --benchmarks=fillrandom \
-            --pci_address=0000:00:05.0 
+            --benchmarks=fillseq \
+            --pci_address=0000:81:00.0 
         done
     done
 done

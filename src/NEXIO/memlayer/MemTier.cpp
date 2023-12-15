@@ -591,16 +591,22 @@ int InsertNode(const char* hashkey, const char* hashvalue)
 #elif defined(SEPARATE_KV_VARIABLE_LOG)
         temp = TskiplistNodeCreat(hashkey,offset1,block_id,v);
 #endif
-
-        // if(flag)
-        // {
-        //     printf("offset in insert: %ld \n", tsl->offset);
-        // }
         for(int i=0;i<v;++i)
         {
             temp->forward[i] = update[i]->forward[i];
             update[i]->forward[i] = temp;
         }
+
+        // if (hashkey1 >0) {
+        //     printf("查询 hashkey1=2\n");
+        //     printf("Head Level: %d\n", Head->level);
+        //     TSkiplistNode *node = Head->head;
+        //     while (node ) {
+        //         printf("[%lu] -> ", big_endian2little_endian(node->key,KEY_SIZE));
+        //         node = node->forward[0];
+        //     }
+        //     printf("(停止在此)\n");
+        // }
     }
     end = std::chrono::high_resolution_clock::now();
     insert_and_write_time += (end - start);
@@ -790,13 +796,16 @@ value_type Search(const char* key1)
     TNCSkiplist * head = global[key2 & (1<<Globaldepth)-1]->local;
     TSkiplistNode * node =  SearchNode(head, key1);
 
+
+    // printf("key:%lu in search\n",key2);
+
     if(node == nullptr || node->flag == 0)
     {
         return UINT64_MAX;
     }
     else
     {
-        entry1 = SyncRead(node->offset);
+        // entry1 = SyncRead(node->offset);
 
 #ifdef TIOCS_READ_DEBUG
         printf("key from data: %lu\n",big_endian2little_endian(entry.val,KEY_SIZE));
@@ -809,7 +818,7 @@ value_type Search(const char* key1)
                (node->offset & 0x00000FFF));
 #endif
         
-        return 0; //big_endian2little_endian(entry.val,KEY_SIZE);
+        return  big_endian2little_endian(node->key,KEY_SIZE);
     }
 
 #endif

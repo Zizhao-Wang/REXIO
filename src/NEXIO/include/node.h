@@ -24,7 +24,7 @@
 
 const int MAX_LEVEL1 = 32; 
 const double P_FACTOR1 = 0.5;
-const int max_bucket_size = 16384;
+const int max_bucket_size = 1024;
 
 
 /*

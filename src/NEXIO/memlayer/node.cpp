@@ -68,13 +68,20 @@ TNCSkiplist * TskiplistCreate()
     obj->head = TskiplistNodeCreat(key,0,0, MAX_LEVEL1);
 #endif
 
-    auto * nil =(TSkiplistNode *) malloc(sizeof(TSkiplistNode));
+    auto * nil =TskiplistNodeCreat(key,0,0, MAX_LEVEL1);;
     memset(nil->key, 0xFF, KEY_SIZE); 
 
-    for(int i=0;i<MaxLevel;i++)
+    for(int i=0;i<MAX_LEVEL1;i++)
     {
         obj->head->forward[i]=nil;
     }
+
+    for(int i=0;i<MAX_LEVEL1;i++)
+    {
+        nil->forward[i]=NULL;
+    }
+
+
 
     obj->level = 0;
     obj->number = 0;

@@ -175,28 +175,28 @@ void bench_testing(void)
           if(i % FLAGS_stats_interval == 0 )
           {
                endTime = clock();
-               throughput = i / total_operation_time;
-               average_latency = total_latency / i;
-               char timeStr[100];
-               time_t now = time(NULL);
-               strftime(timeStr, sizeof(timeStr), "%Y-%m-%d %H:%M:%S", localtime(&now));
-               fprintf(stdout,"\nStore Performance Metrics\n");
-               fprintf(stdout,"------------------------------\n");
-               fprintf(stdout,"[%s] ",timeStr);
-               fprintf(stdout, "(%lu,%lu) ops ", i-FLAGS_stats_interval, i);
-               fprintf(stdout,"Total execution time: %0.3lf s\n", total_operation_time);
-               fprintf(stdout,"Data Throughput (MB/s): %0.3lf ops/sec  ", throughput);
-               throughput2 = (user_input_bytes / 1024.0 / 1024.0) / total_operation_time;
-               fprintf(stdout,"Operation Throughput (ops/sec): %0.3lf MB/s\n", throughput2);
-               fprintf(stdout,"Average Latency: %0.3lf ms  ", average_latency * 1000); // Convert to milliseconds for better readability
-               fprintf(stdout,"Max Latency: %0.3lf ms  ", max_latency * 1000);
-               fprintf(stdout,"Min Latency: %0.3lf ms\n", min_latency * 1000);
-               fprintf(stdout,"The Write Amplification: %0.3lf\n", (double)total_write_bytes/user_input_bytes); // Assuming you have a variable called write_amplification
-               fprintf(stdout,"------------------------------\n");
-               std::cout << "Convert and Find Bucket Time: " << convert_and_find_bucket_time.count() << " ms\n";
-               std::cout << "Search Time: " << search_time.count() << " ms\n";
-               std::cout << "Insert and Write Time: " << insert_and_write_time.count() << " ms\n";
-               std::cout << "split Time: " << split_time.count() << " ms\n";
+               // throughput = i / total_operation_time;
+               // average_latency = total_latency / i;
+               // char timeStr[100];
+               // time_t now = time(NULL);
+               // strftime(timeStr, sizeof(timeStr), "%Y-%m-%d %H:%M:%S", localtime(&now));
+               // fprintf(stdout,"\nStore Performance Metrics\n");
+               // fprintf(stdout,"------------------------------\n");
+               // fprintf(stdout,"[%s] ",timeStr);
+               // fprintf(stdout, "(%lu,%lu) ops ", i-FLAGS_stats_interval, i);
+               // fprintf(stdout,"Total execution time: %0.3lf s\n", total_operation_time);
+               // fprintf(stdout,"Data Throughput (MB/s): %0.3lf ops/sec  ", throughput);
+               // throughput2 = (user_input_bytes / 1024.0 / 1024.0) / total_operation_time;
+               // fprintf(stdout,"Operation Throughput (ops/sec): %0.3lf MB/s\n", throughput2);
+               // fprintf(stdout,"Average Latency: %0.3lf ms  ", average_latency * 1000); // Convert to milliseconds for better readability
+               // fprintf(stdout,"Max Latency: %0.3lf ms  ", max_latency * 1000);
+               // fprintf(stdout,"Min Latency: %0.3lf ms\n", min_latency * 1000);
+               // fprintf(stdout,"The Write Amplification: %0.3lf\n", (double)total_write_bytes/user_input_bytes); // Assuming you have a variable called write_amplification
+               // fprintf(stdout,"------------------------------\n");
+               // std::cout << "Convert and Find Bucket Time: " << convert_and_find_bucket_time.count() << " ms\n";
+               // std::cout << "Search Time: " << search_time.count() << " ms\n";
+               // std::cout << "Insert and Write Time: " << insert_and_write_time.count() << " ms\n";
+               // std::cout << "split Time: " << split_time.count() << " ms\n";
                fflush(stdout);
           }
      }
@@ -237,27 +237,22 @@ void bench_testing(void)
      startTime = clock();
      record_point = FLAGS_num/2/10;
      
-     for(uint64_t i=1;i<=written_data_num/2;i++)
+     for(uint64_t i=1;i<=FLAGS_num/2;i++)
      {
-          srand48(time(NULL));
           memset(key_buffer, 0, KEY_SIZE);
           memset(value_buffer,0, FLAGS_value_size);
-          uint64_t k;
-          printf("Test: \n");
-          printf("key:%lu\n",k);
-          if(i%2==0)
+          uint64_t k = i;
+          for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
           {
-               for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
-               {
-                    key_buffer[KEY_SIZE - error_bound- 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
-               }
-
-               if(k!=Search(key_buffer) && k+1 != Search(key_buffer) )
-               {
-                    printf("Error in search!\n");
-                    exit(0);
-               }
+               key_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
           }
+
+          if(k!=Search(key_buffer) && k+1 != Search(key_buffer) )
+          {
+               printf("Error in search!\n");
+               exit(0);
+          }
+          
           for (size_t j = 0; j < sizeof(uint64_t) && j < KEY_SIZE; ++j) 
           {
                key_buffer[KEY_SIZE - error_bound - 1 - j] = static_cast<char>((k >> (8 * j)) & 0xFF);
@@ -269,7 +264,7 @@ void bench_testing(void)
 
           user_input_bytes = user_input_bytes +(KEY_SIZE + FLAGS_value_size);
           uint64_t operation_start_time = clock();
-          Update(key_buffer,value_buffer);
+          // Update(key_buffer,value_buffer);
 
           uint64_t operation_end_time = clock();
           double current_latency = (double)(operation_end_time - operation_start_time) / CLOCKS_PER_SEC;

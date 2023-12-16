@@ -1,3 +1,3 @@
 # spdk_config.sh
-SPDK_PATH="/home/spdk"
-PCI_ALLOWED="0000:00:05.0"
+SPDK_PATH="/root/dowanloads"
+PCI_ALLOWED="0000:81:00.0"

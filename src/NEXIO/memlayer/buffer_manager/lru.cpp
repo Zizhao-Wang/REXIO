@@ -1,21 +1,23 @@
 #include "lru.h"
+#include "include/buffer.h"
 
-// key_value_entry* LRUCache::get(page_num_type page)
-// {
 
-//     if(!IsLRUPage(page))
-//     {
-//         return nullptr;
-//     }
+char* LRUCache::get(page_num_type page)
+{
+
+    if(!IsLRUPage(page))
+    {
+        return nullptr;
+    }
 			
-//     ReadNode temp = *HashMap[page];
-//     cache.erase(HashMap[page]);
-//     cache.push_front(temp);
+    ReadNode temp = *HashMap[page];
+    cache.erase(HashMap[page]);
+    cache.push_front(temp);
     
-//     HashMap[page] = cache.begin();
-//     return temp.data; 
+    HashMap[page] = cache.begin();
+    return temp.data; 
 
-// }
+}
 
 void LRUCache::put(page_num_type page, ReadNode node)
 {
@@ -23,14 +25,12 @@ void LRUCache::put(page_num_type page, ReadNode node)
 	{ 
         if (cache.size() == capacity) 
 		{
-            // cache 已满，删除尾部的键值对腾位置
-            // cache 和 map 中的数据都要删除
             auto lastPair = cache.back();
             page_num_type lastKey = lastPair.PageId;
+            spdk_dma_free(lastPair.data);  // 先释放节点的内存
             HashMap.erase(lastKey);
             cache.pop_back();
         }
-        // cache 没满，可以直接添加
         cache.push_front(node);
         HashMap[page] = cache.begin();
     }
@@ -39,14 +39,12 @@ void LRUCache::put(page_num_type page, ReadNode node)
         cache.erase(HashMap[page]);
         cache.push_front(node);
         HashMap[page] = cache.begin();
-    }
-     
+    } 
 }
 
 bool LRUCache::IsLRUPage(page_num_type page)
 {
 
-    return false;
     auto it = HashMap.find(page);
 
     if (it == HashMap.end())
@@ -66,4 +64,12 @@ void LRUCache::ClearaReset(size_t cap)
     assert(cache.size()==0);
 
     this->capacity = cap;
+}
+
+ void LRUCache::freeAllBuffers() {
+    for (auto &node : cache) {
+        spdk_dma_free(node.data); 
+    }
+    cache.clear();  
+    HashMap.clear();  
 }

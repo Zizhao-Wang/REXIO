@@ -1,4 +1,9 @@
 #include "io_manager.h"
+#include <iostream>
+#include <string>
+#include <chrono>
+#include <iomanip>
+#include <sstream>
 #include "memlayer/syncstore.h"
 #include "write_buffer.h"
 #include "include/buffer.h"
@@ -146,6 +151,15 @@ void lba_update(int mode, uint64_t current_write_pointer, uint64_t block_id, uin
  * ================= DATA WRITE(I/O)  module ====================  
  **/
 
+std::string getCurrentTimeString() {
+    auto now = std::chrono::system_clock::now();
+    auto now_c = std::chrono::system_clock::to_time_t(now);
+    std::stringstream ss;
+    ss << std::put_time(std::localtime(&now_c), "%Y-%m-%d %H:%M:%S");
+    return ss.str();
+}
+
+
 void IO_write_complete(void *arg, const struct spdk_nvme_cpl *completion)
 {
 
@@ -291,10 +305,16 @@ int kv_write_queue(void* write_buffer, uint64_t block_id, int mode)
 	if (flag == 0){
     	out_stand++;
         if(mode == NVME_SSD_DATA_KEY_WRITE){
-            logger.log(nexio_logger::info, "Successfully sent write request to OCSSD. LBA Start: " + std::to_string(lba_start) + ", LBA Count: " + std::to_string(lba_count), "key");
+            std::string currentTime = getCurrentTimeString();
+            logger.log(nexio_logger::info, 
+                "Time: " + currentTime + " - Successfully sent write request to OCSSD. LBA Start: " + std::to_string(lba_start) + ", LBA Count: " + std::to_string(lba_count), 
+                "key"); 
         }
         else if(mode == NVME_SSD_DATA_VALUE_WRITE){
-            logger.log(nexio_logger::info, "Successfully sent write request to OCSSD. LBA Start: " + std::to_string(lba_start) + ", LBA Count: " + std::to_string(lba_count),"val");
+            std::string currentTime = getCurrentTimeString();
+            logger.log(nexio_logger::info, 
+                "Time: " + currentTime + " - Successfully sent write request to OCSSD. LBA Start: " + std::to_string(lba_start) +" "+ std::to_string(lba_start/128)+ ", LBA Count: " + std::to_string(lba_count), 
+                "val");
         }
     } else {
         if(mode == NVME_SSD_DATA_KEY_WRITE){
@@ -487,6 +507,46 @@ char* read_queue(uint64_t page_id) {
     #endif
 
     return buffer;
+}
+
+
+void read_multiple_lbAs(uint64_t start_page_id, uint64_t num_pages) {
+
+    for (uint64_t i = 0; i < num_pages; ++i) {
+        uint64_t current_page_id = start_page_id + i;
+        char* buffer = read_queue(current_page_id);
+
+        if (buffer == nullptr) {
+            
+            logger.log(nexio_logger::error, "Failed to read page " + std::to_string(current_page_id));
+            continue; 
+        }
+
+         char* value_in_page = new char[value_size];
+         size_t count = 0; // 用于跟踪每行输出的值的数量
+        for (size_t offset = 0; offset < 128*512; offset += value_size) {
+            memcpy(value_in_page, buffer+offset, value_size);
+            uint64_t value = big_endian2little_endian(value_in_page, KEY_SIZE);
+
+            std::cout << value <<" ";
+            if (++count % 20 == 0) {
+                std::cout << std::endl;
+            }
+        }
+        if (count % 20 != 0) {
+            std::cout << std::endl; // 如果最后一行不足20个值，也添加换行符
+        }
+
+        printf("\n::::::::next:::::::::::\n");
+        
+        spdk_dma_free(buffer);
+
+        #ifdef DEBUG_READ_QUEUE
+        printf("Finished processing page: %lu\n", current_page_id);
+        #endif
+    }
+
+
 }
 
 

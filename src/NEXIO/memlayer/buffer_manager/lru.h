@@ -21,7 +21,7 @@
 typedef struct ReadNode
 {
 	page_num_type   PageId;
-	// key_value_entry * data;
+	char * data;
 }ReadNode;
 
 
@@ -29,7 +29,6 @@ class LRUCache
 {
 
 private:
-    
     
     std::unordered_map<int, std::list<ReadNode>::iterator> HashMap;
 
@@ -41,11 +40,16 @@ public:
         this->capacity = cap; 
     }
     
-    // key_value_entry* get(page_num_type page); 
+    ~LRUCache() {
+        freeAllBuffers();
+    }
+
+
+    void freeAllBuffers();
+    char* get(page_num_type page); 
     void put(page_num_type page, ReadNode node);
 	bool IsLRUPage(page_num_type);
     void ClearaReset(size_t cap);
-
 };
 
 

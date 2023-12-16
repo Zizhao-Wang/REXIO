@@ -30,7 +30,7 @@ extern uint32_t offset;
 
 
 
-extern LRUCache lrucache;
+
 
 
 extern FIFOCache fifocache;

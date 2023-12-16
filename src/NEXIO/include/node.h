@@ -65,6 +65,7 @@ typedef struct LocalHeadNode
 typedef struct TSkiplistNode 
 {
     char key[KEY_SIZE];
+    uint32_t ky;
     uint8_t flag;
     uint64_t offset;  // 40-bit bitset for offset
 #ifndef NOT_SEPARATE_KV

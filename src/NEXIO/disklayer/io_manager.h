@@ -180,4 +180,6 @@ char* read_queue(uint64_t page_id);
 
 void printBlockInformation();
 
+void read_multiple_lbAs(uint64_t start_page_id, uint64_t num_pages);
+
 #endif //TIOCS_TIOCSSD_IO_MANAGER_H

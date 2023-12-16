@@ -16,9 +16,12 @@
 #include <stdint.h>
 #include <iostream>
 #include "include/node.h"
+#include "buffer_manager/lru.h"
 
 
 extern uint32_t buffernumber;
+
+extern LRUCache lrucache;
 
 // ==========================
 // WRITING OPERATIONS

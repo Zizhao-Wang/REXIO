@@ -130,6 +130,7 @@ void kv_buffer_init()
         write_buffer_id = 0;
     }
     my_controller.current_write_lba_num = value_block_id * my_controller.nexio_lba_uint;
+    printf("First init::my_controller.current_write_lba_num:%lu....\n",my_controller.current_write_lba_num);
 
     if(key_block_id == UINT64_MAX)
     {

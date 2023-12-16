@@ -40,12 +40,12 @@ uint64_t total_write_bytes = 0; // write I/Os
 #endif
 
     obj->maxLevel = maxLevel;
-    obj->forward = (TSkiplistNode **)malloc(sizeof(TSkiplistNode *) * maxLevel);
+    obj->forward = (TSkiplistNode **)malloc(sizeof(TSkiplistNode *) * (maxLevel+1));
     if(obj->forward == NULL){
         fprintf(stderr, "malloc failed when creating the node in skiplist.\n");
         exit(1);
     }
-    for (int i = 0; i < maxLevel; i++) 
+    for (int i = 0; i <= maxLevel; i++) 
     {
         obj->forward[i] = NULL;
     }
@@ -70,18 +70,17 @@ TNCSkiplist * TskiplistCreate()
 
     auto * nil =TskiplistNodeCreat(key,0,0, MAX_LEVEL1);;
     memset(nil->key, 0xFF, KEY_SIZE); 
-
-    for(int i=0;i<MAX_LEVEL1;i++)
+    nil->ky = UINT32_MAX;
+    for(int i=0;i<=MAX_LEVEL1;i++)
     {
         obj->head->forward[i]=nil;
     }
+    obj->head->ky = 0;
 
-    for(int i=0;i<MAX_LEVEL1;i++)
+    for(int i=0;i<=MAX_LEVEL1;i++)
     {
         nil->forward[i]=NULL;
     }
-
-
 
     obj->level = 0;
     obj->number = 0;
